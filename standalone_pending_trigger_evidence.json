@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-11-11T13:14:34.385814+00:00",
+  "trader": "mammaster@mailinator.com",
+  "symbol": "BINANCE:BTCUSDT.P",
+  "total_scenarios": 2,
+  "passed_scenarios": 2,
+  "total_time_seconds": 3.0,
+  "results": [
+    {
+      "name": "BUY LIMIT Trigger Modification",
+      "order_id": "ord_9305739b1aaea96e04",
+      "initial_trigger": 73770.0,
+      "final_trigger": 73720,
+      "status": "PASS"
+    },
+    {
+      "name": "SELL LIMIT Trigger Modification",
+      "order_id": "ord_b53a3238994e462842",
+      "initial_trigger": 74070.0,
+      "final_trigger": 74140,
+      "status": "PASS"
+    }
+  ]
+}

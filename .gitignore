@@ -2,6 +2,11 @@
 .env
 *.env.local
 
+# Reference repos
+Wavexone testing 2/
+Wavexone testing 2
+
+
 # Python artifacts
 __pycache__/
 *.py[cod]
