@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlackTrader OMS - Live Mission Control & Real-Time Account Inspector</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    :root {
+      --bg-darkest: #07090e;
+      --bg-panel: #0d121c;
+      --bg-card: #121826;
+      --border-color: #243147;
+      --border-highlight: #3b4d6b;
+      --primary-neon: #00ff88;
+      --primary-dim: rgba(0, 255, 136, 0.15);
+      --cyan-neon: #00d4ff;
+      --cyan-dim: rgba(0, 212, 255, 0.15);
+      --purple-neon: #a855f7;
+      --purple-dim: rgba(168, 85, 247, 0.15);
+      --danger-neon: #ff3366;
+      --danger-dim: rgba(255, 51, 102, 0.18);
+      --warning-neon: #ffb800;
+      --text-main: #f8fafc;
+      --text-muted: #cbd5e1;
+      --text-dim: #94a3b8;
+      --terminal-bg: #05070a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-darkest);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      font-size: 13px;
+    }
+
+    /* Custom Modern Slim Scrollbars */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090d15;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2b3950;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--cyan-neon);
+    }
+
+    /* Top Navigation Bar */
+    header {
+      background: rgba(13, 18, 28, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 14px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--primary-neon), var(--cyan-neon));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-size: 21px;
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+    }
+    .brand-title { font-size: 18px; font-weight: 800; letter-spacing: -0.3px; display: flex; align-items: center; gap: 8px; }
+    .brand-version { font-size: 11px; padding: 2px 8px; background: #1e293b; border-radius: 12px; color: var(--cyan-neon); font-weight: 700; border: 1px solid rgba(0, 212, 255, 0.4); }
+    .brand-sub { font-size: 12.5px; color: var(--text-muted); font-weight: 500; }
+
+    .header-right { display: flex; align-items: center; gap: 16px; }
+    .system-pill {
+      background: #111827;
+      border: 1px solid var(--border-color);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+    }
+    .dot-live { width: 8px; height: 8px; background: var(--primary-neon); border-radius: 50%; box-shadow: 0 0 10px var(--primary-neon); animation: pulse 1.6s infinite; }
+    
+    .status-badge {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .status-idle { background: #1e293b; color: #cbd5e1; border: 1px solid #334155; }
+    .status-running { background: var(--primary-dim); color: var(--primary-neon); border: 1px solid var(--primary-neon); box-shadow: 0 0 15px rgba(0, 255, 136, 0.3); }
+    .status-completed { background: var(--cyan-dim); color: var(--cyan-neon); border: 1px solid var(--cyan-neon); }
+    .status-failed { background: var(--danger-dim); color: var(--danger-neon); border: 1px solid var(--danger-neon); }
+
+    @keyframes pulse { 0% { transform: scale(0.95); opacity: 0.8; } 50% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(0.95); opacity: 0.8; } }
+
+    /* Top Metrics Overview */
+    .metrics-bar {
+      padding: 16px 28px 0;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 1200px) { .metrics-bar { grid-template-columns: repeat(2, 1fr); } }
+
+    .metric-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: border-color 0.2s;
+    }
+    .metric-card:hover { border-color: var(--border-highlight); }
+    .metric-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .metric-icon.green { background: var(--primary-dim); color: var(--primary-neon); border: 1px solid rgba(0, 255, 136, 0.35); }
+    .metric-icon.cyan { background: var(--cyan-dim); color: var(--cyan-neon); border: 1px solid rgba(0, 212, 255, 0.35); }
+    .metric-icon.purple { background: var(--purple-dim); color: var(--purple-neon); border: 1px solid rgba(168, 85, 247, 0.35); }
+    .metric-icon.amber { background: rgba(255, 184, 0, 0.14); color: var(--warning-neon); border: 1px solid rgba(255, 184, 0, 0.35); }
+    .metric-info { display: flex; flex-direction: column; gap: 3px; }
+    .metric-title { font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--text-dim); letter-spacing: 0.6px; }
+    .metric-val { font-size: 21px; font-weight: 800; color: #fff; }
+
+    /* Workspace */
+    .workspace {
+      padding: 18px 28px;
+      display: grid;
+      grid-template-columns: 370px 1fr;
+      gap: 20px;
+      flex: 1;
+    }
+    @media (max-width: 1100px) { .workspace { grid-template-columns: 1fr; } }
+
+    /* Sidebar Launcher */
+    .sidebar { display: flex; flex-direction: column; gap: 18px; }
+    .panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .panel-title { font-size: 13.5px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; }
+
+    .suite-btn-list { display: flex; flex-direction: column; gap: 8px; max-height: 620px; overflow-y: auto; padding-right: 4px; }
+    .action-btn {
+      background: #0f1422;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 11px 13px;
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .action-btn:hover {
+      background: #172032;
+      border-color: #3b4d6b;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+    .btn-content { display: flex; align-items: center; gap: 12px; }
+    .btn-icon-wrap {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    .btn-texts { display: flex; flex-direction: column; gap: 2px; }
+    .btn-label { font-size: 12.5px; font-weight: 700; color: #fff; }
+    .btn-sub { font-size: 10.5px; color: var(--text-dim); }
+    .btn-tag { font-size: 9.5px; font-weight: 700; padding: 3px 8px; border-radius: 5px; text-transform: uppercase; letter-spacing: 0.4px; }
+
+    .tag-green { background: var(--primary-dim); color: var(--primary-neon); border: 1px solid rgba(0, 255, 136, 0.3); }
+    .tag-cyan { background: var(--cyan-dim); color: var(--cyan-neon); border: 1px solid rgba(0, 212, 255, 0.3); }
+    .tag-purple { background: var(--purple-dim); color: var(--purple-neon); border: 1px solid rgba(168, 85, 247, 0.3); }
+    .tag-amber { background: rgba(255, 184, 0, 0.14); color: var(--warning-neon); border: 1px solid rgba(255, 184, 0, 0.3); }
+    .tag-red { background: var(--danger-dim); color: var(--danger-neon); border: 1px solid rgba(255, 51, 102, 0.3); }
+
+    .action-btn.danger-action { border-color: rgba(255, 51, 102, 0.4); background: rgba(255, 51, 102, 0.08); }
+    .action-btn.danger-action:hover { background: rgba(255, 51, 102, 0.18); border-color: var(--danger-neon); }
+
+    /* Right Panel Tabs */
+    .tab-nav {
+      display: flex;
+      gap: 6px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 6px;
+      margin-bottom: 14px;
+      overflow-x: auto;
+    }
+    .tab-item {
+      flex: 1;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      padding: 10px 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .tab-item:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
+    .tab-item.active { background: #1e293b; color: #fff; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35); }
+    .tab-item.active.green { color: var(--primary-neon); }
+    .tab-item.active.cyan { color: var(--cyan-neon); }
+    .tab-item.active.purple { color: var(--purple-neon); }
+    .tab-item.active.amber { color: var(--warning-neon); }
+
+    /* Terminal Console */
+    .terminal-container {
+      background: var(--terminal-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      height: 630px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+    .terminal-toolbar {
+      background: #0d121c;
+      padding: 10px 18px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12.5px;
+    }
+    .terminal-tools-left { display: flex; align-items: center; gap: 10px; font-family: 'Fira Code', monospace; color: var(--text-muted); font-size: 12px; }
+    .terminal-tools-right { display: flex; align-items: center; gap: 10px; }
+    .term-btn {
+      background: #161e2e;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .term-btn:hover { color: #fff; border-color: var(--border-highlight); background: #1c2638; }
+
+    .terminal-stream {
+      flex: 1;
+      padding: 18px;
+      overflow-y: auto;
+      font-family: 'Fira Code', Consolas, monospace;
+      font-size: 12.5px;
+      line-height: 1.65;
+      white-space: pre-wrap;
+      word-break: break-all;
+      background: #06090e;
+    }
+    .log-pass { color: var(--primary-neon); font-weight: 600; }
+    .log-info { color: var(--cyan-neon); }
+    .log-warn { color: var(--warning-neon); }
+    .log-fail { color: var(--danger-neon); font-weight: 700; }
+    .log-muted { color: var(--text-dim); }
+
+    /* 100 Followers Grid & Master Inspector */
+    .followers-grid-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 20px;
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      height: 630px;
+      overflow-y: auto;
+    }
+    .master-node-card {
+      background: linear-gradient(135deg, rgba(0, 210, 106, 0.12), rgba(0, 136, 255, 0.12));
+      border: 1px solid rgba(0, 255, 136, 0.4);
+      border-radius: 12px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .master-node-card:hover { border-color: var(--primary-neon); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0, 255, 136, 0.2); }
+
+    .grid-filter-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .search-input-wrap {
+      position: relative;
+      flex: 1;
+      max-width: 300px;
+    }
+    .search-input-wrap input {
+      width: 100%;
+      background: #0b0f19;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 8px 14px 8px 34px;
+      color: #fff;
+      font-size: 12.5px;
+      font-family: 'Inter', sans-serif;
+    }
+    .search-input-wrap input:focus {
+      outline: none;
+      border-color: var(--cyan-neon);
+      box-shadow: 0 0 10px rgba(0, 212, 255, 0.25);
+    }
+    .search-input-wrap i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+      font-size: 13px;
+    }
+
+    .cohort-legend { display: flex; gap: 8px; font-size: 11.5px; font-weight: 600; flex-wrap: wrap; }
+    .cohort-btn {
+      background: #0f1422;
+      border: 1px solid var(--border-color);
+      border-radius: 7px;
+      padding: 5px 11px;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      transition: all 0.15s;
+    }
+    .cohort-btn:hover, .cohort-btn.active { color: #fff; border-color: var(--cyan-neon); background: #162032; }
+
+    .chip-dot { width: 9px; height: 9px; border-radius: 50%; }
+    .chip-green { background: var(--primary-neon); }
+    .chip-cyan { background: var(--cyan-neon); }
+    .chip-purple { background: var(--purple-neon); }
+    .chip-amber { background: var(--warning-neon); }
+
+    .nodes-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 8px;
+    }
+    @media (max-width: 900px) { .nodes-grid { grid-template-columns: repeat(5, 1fr); } }
+
+    .node-pill {
+      background: #0d121c;
+      border: 1px solid var(--border-color);
+      border-radius: 9px;
+      padding: 9px 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      cursor: pointer;
+      transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    .node-pill:hover { transform: scale(1.1); z-index: 10; border-color: #fff; box-shadow: 0 4px 16px rgba(0,0,0,0.6); }
+    .node-num { font-size: 11.5px; font-weight: 700; color: #fff; }
+    .node-tier { font-size: 10px; font-weight: 800; }
+    .node-sub-ratio { font-size: 8.5px; font-weight: 600; opacity: 0.85; font-family: 'Fira Code', monospace; color: var(--text-muted); }
+    
+    .node-pulse-dot {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      width: 9px;
+      height: 9px;
+      background: var(--primary-neon);
+      border-radius: 50%;
+      display: none;
+      box-shadow: 0 0 8px var(--primary-neon);
+      animation: ping-glow 1.5s infinite;
+    }
+
+    @keyframes ping-glow {
+      0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
+      70% { transform: scale(1.1); box-shadow: 0 0 0 6px rgba(0, 255, 136, 0); }
+      100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
+    }
+
+    .tier-1 { border-color: rgba(0, 255, 136, 0.4); color: var(--primary-neon); }
+    .tier-2 { border-color: rgba(0, 212, 255, 0.4); color: var(--cyan-neon); }
+    .tier-3 { border-color: rgba(168, 85, 247, 0.4); color: var(--purple-neon); }
+    .tier-4 { border-color: rgba(255, 184, 0, 0.4); color: var(--warning-neon); }
+
+    /* REAL-TIME LIVE ORDER FLOW (THE TAPE) TAB */
+    .live-orders-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      display: none;
+      flex-direction: column;
+      height: 630px;
+      overflow: hidden;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+    }
+    .tape-toolbar {
+      background: #0d121c;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+    .tape-stream-wrap {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .tape-row {
+      background: #0c111a;
+      border: 1px solid var(--border-color);
+      border-radius: 9px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.15s;
+    }
+    .tape-row:hover { background: #141c2c; border-color: var(--cyan-neon); }
+    .tape-left { display: flex; align-items: center; gap: 14px; }
+    .tape-acc-badge { font-size: 11.5px; font-weight: 700; padding: 3px 10px; border-radius: 5px; }
+    .tape-acc-master { background: var(--primary-dim); color: var(--primary-neon); border: 1px solid rgba(0,255,136,0.35); }
+    .tape-acc-follower { background: var(--cyan-dim); color: var(--cyan-neon); border: 1px solid rgba(0,212,255,0.35); }
+    .tape-detail { font-size: 13px; color: #fff; display: flex; align-items: center; gap: 10px; }
+    .tape-time { font-family: 'Fira Code', monospace; font-size: 11.5px; color: var(--text-dim); }
+
+    /* Reports Explorer Tab */
+    .reports-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 20px;
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+      height: 630px;
+    }
+    .filter-bar { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; }
+    .filter-btn {
+      background: #0f1420;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .filter-btn:hover, .filter-btn.active { color: #fff; background: #1c2638; border-color: var(--cyan-neon); }
+
+    .reports-scroll-area {
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+    .report-card {
+      background: #0c111a;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .report-card:hover { background: #141c2c; border-color: var(--cyan-neon); transform: translateX(3px); }
+    .report-title { font-size: 13px; font-weight: 700; color: #fff; }
+    .report-meta-text { font-size: 11.5px; color: var(--text-dim); margin-top: 2px; }
+
+    /* Screenshots Gallery */
+    .screenshots-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 20px;
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      height: 630px;
+      overflow-y: auto;
+    }
+    .screenshot-img-card {
+      background: #07090e;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .screenshot-img-card img { width: 100%; border-radius: 8px; border: 1px solid var(--border-color); }
+
+    /* ========================================================================= */
+    /* UPGRADED SLIDE-OVER ACCOUNT INSPECTOR DRAWER (CRYSTAL-CLEAR & VISIBLE)    */
+    /* ========================================================================= */
+    .account-drawer {
+      position: fixed;
+      top: 0;
+      right: -880px;
+      width: min(860px, 95vw);
+      height: 100vh;
+      background: #0b0f1a;
+      border-left: 1px solid var(--border-highlight);
+      box-shadow: -20px 0 60px rgba(0, 0, 0, 0.85);
+      z-index: 500;
+      display: flex;
+      flex-direction: column;
+      transition: right 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .account-drawer.open { right: 0; }
+    
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(5px);
+      z-index: 490;
+      display: none;
+    }
+    .drawer-overlay.open { display: block; }
+
+    .drawer-header {
+      padding: 18px 26px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #101625;
+      flex-shrink: 0;
+    }
+    .drawer-header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .drawer-avatar-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      background: var(--primary-dim);
+      color: var(--primary-neon);
+      border: 1px solid rgba(0, 255, 136, 0.35);
+    }
+    .drawer-avatar-icon.follower-avatar {
+      background: var(--cyan-dim);
+      color: var(--cyan-neon);
+      border-color: rgba(0, 212, 255, 0.35);
+    }
+    .drawer-title-email { font-size: 16px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; }
+    .drawer-title-sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+    .drawer-header-actions { display: flex; align-items: center; gap: 10px; }
+    .drawer-close { background: none; border: none; color: var(--text-muted); font-size: 26px; cursor: pointer; padding: 4px; line-height: 1; transition: color 0.15s; }
+    .drawer-close:hover { color: #fff; }
+
+    /* Standard block flow for drawer body so NO table or element can ever shrink */
+    .drawer-body {
+      padding: 22px 26px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      flex: 1;
+      display: block;
+    }
+
+    /* Stat Cards Grid */
+    .drawer-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    @media (max-width: 650px) { .drawer-stats-grid { grid-template-columns: 1fr; } }
+
+    .stat-pill {
+      background: #111726;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 13px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: border-color 0.15s;
+    }
+    .stat-pill:hover { border-color: var(--border-highlight); }
+    .stat-pill-title { font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--text-dim); letter-spacing: 0.6px; }
+    .stat-pill-val { font-size: 17px; font-weight: 700; color: #fff; font-family: 'Fira Code', monospace; }
+
+    /* Card Panels */
+    .drawer-card {
+      background: #101625;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 18px;
+    }
+    .drawer-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .drawer-card-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Fixed Clean Table Containers with ZERO clipping */
+    .table-scroll-wrap {
+      max-height: 280px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: #090e18;
+    }
+    .drawer-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+      table-layout: fixed;
+    }
+    .drawer-table thead {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: #172235;
+    }
+    .drawer-table th {
+      background: #172235;
+      color: #cbd5e1;
+      font-weight: 700;
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .drawer-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      color: #f1f5f9;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .drawer-table tr:last-child td { border-bottom: none; }
+    .drawer-table tr:hover { background: rgba(255, 255, 255, 0.04); }
+
+    .empty-state-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 16px;
+      color: var(--text-dim);
+      gap: 8px;
+      font-size: 13px;
+      border-radius: 8px;
+      background: #090e18;
+      border: 1px dashed var(--border-color);
+    }
+    .empty-state-box i { font-size: 26px; color: var(--border-highlight); }
+
+    /* Order State Tags */
+    .state-pill {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      display: inline-block;
+      text-align: center;
+    }
+    .state-filled { background: var(--cyan-dim); color: var(--cyan-neon); border: 1px solid rgba(0, 212, 255, 0.35); }
+    .state-pending { background: rgba(255, 184, 0, 0.14); color: var(--warning-neon); border: 1px solid rgba(255, 184, 0, 0.35); }
+    .state-rejected { background: var(--danger-dim); color: var(--danger-neon); border: 1px solid rgba(255, 51, 102, 0.35); }
+    .state-cancelled { background: #1e293b; color: #cbd5e1; border: 1px solid #334155; }
+
+    /* Modal for Reports */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      padding: 26px;
+    }
+    .modal-window {
+      background: #101625;
+      border: 1px solid var(--border-highlight);
+      border-radius: 14px;
+      width: 100%;
+      max-width: 950px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7);
+    }
+    .modal-top {
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-content-area {
+      padding: 22px;
+      overflow-y: auto;
+      flex: 1;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #cbd5e1;
+    }
+    .modal-content-area table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 12px; }
+    .modal-content-area th, .modal-content-area td { border: 1px solid var(--border-color); padding: 8px 12px; text-align: left; }
+    .modal-content-area th { background: #172235; color: #fff; }
+    .modal-content-area pre { background: var(--terminal-bg); padding: 12px; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; }
+
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #1e293b;
+      border: 1px solid var(--cyan-neon);
+      color: #fff;
+      padding: 11px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header>
+    <div class="brand">
+      <div class="brand-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
+      <div>
+        <div class="brand-title">BlackTrader OMS <span class="brand-version">v2.5 PRO</span></div>
+        <div class="brand-sub">Real-Time Account Inspector & 100-Follower Monitoring Hub</div>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <div class="system-pill">
+        <div class="dot-live"></div>
+        <span>Broker: <strong>Paper (Hedging)</strong></span>
+      </div>
+      <div id="statusBadge" class="status-badge status-idle">
+        <i class="fa-solid fa-circle-pause"></i> IDLE
+      </div>
+      <div id="elapsedTimer" style="font-family: 'Fira Code', monospace; font-size: 13px; font-weight: 700; color: var(--cyan-neon);">0.0s</div>
+    </div>
+  </header>
+
+  <!-- Top Metrics Overview -->
+  <div class="metrics-bar">
+    <div class="metric-card">
+      <div class="metric-icon green"><i class="fa-solid fa-shield-halved"></i></div>
+      <div class="metric-info">
+        <div class="metric-title">Test Results</div>
+        <div class="metric-val">100% <span style="font-size: 11px; color: var(--primary-neon);">PASSED</span></div>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon cyan"><i class="fa-solid fa-users"></i></div>
+      <div class="metric-info">
+        <div class="metric-title">Follower Accounts</div>
+        <div class="metric-val">100 <span style="font-size: 11px; color: var(--cyan-neon);">Active</span></div>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon purple"><i class="fa-solid fa-arrows-turn-to-dots"></i></div>
+      <div class="metric-info">
+        <div class="metric-title">Orders Fanned Out</div>
+        <div class="metric-val">>12,000</div>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon amber"><i class="fa-solid fa-stopwatch"></i></div>
+      <div class="metric-info">
+        <div class="metric-title">Avg Fan-Out Latency</div>
+        <div class="metric-val">~1.95s</div>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon green"><i class="fa-solid fa-coins"></i></div>
+      <div class="metric-info">
+        <div class="metric-title">Master Capital</div>
+        <div class="metric-val">100M <span style="font-size: 11px; color: var(--text-muted);">$1.0x</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Workspace -->
+  <div class="workspace">
+    <!-- Left Sidebar: Test Launcher -->
+    <div class="sidebar">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title"><i class="fa-solid fa-rocket" style="color: var(--primary-neon);"></i> Test Suite Launcher</div>
+          <button onclick="stopTest()" class="term-btn" style="color: var(--danger-neon); border-color: rgba(255,51,102,0.4);"><i class="fa-solid fa-stop"></i> STOP</button>
+        </div>
+        <div class="suite-btn-list">
+          <div onclick="runSuite('balance')" class="action-btn">
+            <div class="btn-content">
+              <div class="btn-icon-wrap" style="background: var(--primary-dim); color: var(--primary-neon);"><i class="fa-solid fa-wallet"></i></div>
+              <div class="btn-texts">
+                <span class="btn-label">Balance Mode Suite</span>
+                <span class="btn-sub">100 Followers • Sizing Ratio</span>
+              </div>
+            </div>
+            <span class="btn-tag tag-green">10 Orders</span>
+          </div>
+
+          <div onclick="runSuite('equity')" class="action-btn">
+            <div class="btn-content">
+              <div class="btn-icon-wrap" style="background: var(--cyan-dim); color: var(--cyan-neon);"><i class="fa-solid fa-scale-balanced"></i></div>
+              <div class="btn-texts">
+                <span class="btn-label">Equity Mode Suite</span>
+                <span class="btn-sub">100 Followers • Equity Ratio</span>
+              </div>
+            </div>
+            <span class="btn-tag tag-cyan">10 Orders</span>
+          </div>
+
+          <div onclick="runSuite('multiplier')" class="action-btn">
+            <div class="btn-content">
+              <div class="btn-icon-wrap" style="background: rgba(255,184,0,0.14); color: var(--warning-neon);"><i class="fa-solid fa-bolt"></i></div>
+              <div class="btn-texts">
+                <span class="btn-label">Multiplier Mode Suite</span>
+                <span class="btn-sub">1x, 2x, 3x, 0.5x Multipliers</span>
+              </div>
+            </div>
+            <span class="btn-tag tag-amber">Varied</span>
+          </div>
+
+          <div onclick="runSuite('pending')" class="action-btn">
+            <div class="btn-content">
+              <div class="btn-icon-wrap" style="background: var(--primary-dim); color: var(--primary-neon);"><i class="fa-solid fa-clock"></i></div>
+              <div class="btn-texts">
+                <span class="btn-label">Pending Live Triggers</span>
+                <span class="btn-sub">LIMIT & STOP • Zero Cancel</span>
+              </div>
+            </div>
+            <span class="btn-tag tag-green">No Cancel</span>
+          </div>
+
+          <div onclick="runSuite('race')" class="action-btn">
+            <div class="btn-content">
+              <div class="btn-icon-wrap" style="background: var(--purple-dim); color: var(--purple-neon);"><i class="fa-solid fa-flag-checkered"></i></div>
+              <div class="btn-texts">
+                <span class="btn-label">Race Conditions Suite</span>
+                <span class="btn-sub">Flash Trades • 10-Thread Storm</span>
+              </div>
+            </div>
+            <span class="btn-tag tag-purple">6 Tests</span>
+          </div>
+
+          <div onclick="runSuite('symmetry')" class="action-btn">
+            <div class="btn-content">
+              <div class="btn-icon-wrap" style="background: var(--cyan-dim); color: var(--cyan-neon);"><i class="fa-solid fa-arrows-split-up-and-left"></i></div>
+              <div class="btn-texts">
+                <span class="btn-label">Buy/Sell Symmetry & Stop</span>
+                <span class="btn-sub">Market, Limit, Stop Parity</span>
+              </div>
+            </div>
+            <span class="btn-tag tag-cyan">Full Parity</span>
+          </div>
+
+          <div onclick="runSuite('state')" class="action-btn">
+            <div class="btn-content">
+              <div class="btn-icon-wrap" style="background: #1e293b; color: #fff;"><i class="fa-solid fa-shield-halved"></i></div>
+              <div class="btn-texts">
+                <span class="btn-label">State Changes & Hedging</span>
+                <span class="btn-sub">Manual Long/Short Coexistence</span>
+              </div>
+            </div>
+            <span class="btn-tag tag-cyan">Isolation</span>
+          </div>
+
+          <div onclick="runSuite('accounting')" class="action-btn">
+            <div class="btn-content">
+              <div class="btn-icon-wrap" style="background: rgba(0, 255, 136, 0.15); color: var(--primary-neon);"><i class="fa-solid fa-calculator"></i></div>
+              <div class="btn-texts">
+                <span class="btn-label">Financial Accounting Audit</span>
+                <span class="btn-sub">162.5x PnL Multiplier Audit</span>
+              </div>
+            </div>
+            <span class="btn-tag tag-green">Audit</span>
+          </div>
+
+          <div onclick="runSuite('extended')" class="action-btn">
+            <div class="btn-content">
+              <div class="btn-icon-wrap" style="background: #1e293b; color: #fff;"><i class="fa-solid fa-bug"></i></div>
+              <div class="btn-texts">
+                <span class="btn-label">Extended Edge Cases (I–P)</span>
+                <span class="btn-sub">Odd Multipliers • Security</span>
+              </div>
+            </div>
+            <span class="btn-tag tag-amber">11 Tests</span>
+          </div>
+
+          <div onclick="runSuite('extreme')" class="action-btn">
+            <div class="btn-content">
+              <div class="btn-icon-wrap" style="background: rgba(255, 51, 102, 0.15); color: var(--danger-neon);"><i class="fa-solid fa-bolt-lightning"></i></div>
+              <div class="btn-texts">
+                <span class="btn-label">Extreme Scenarios & Race Suite</span>
+                <span class="btn-sub">Rapid Reversal • Shock • Straddle</span>
+              </div>
+            </div>
+            <span class="btn-tag tag-red">7 Scenarios</span>
+          </div>
+
+          <div onclick="runSuite('pending_trigger_race')" class="action-btn">
+            <div class="btn-content">
+              <div class="btn-icon-wrap" style="background: rgba(0, 212, 255, 0.15); color: var(--cyan-neon);"><i class="fa-solid fa-clock-rotate-left"></i></div>
+              <div class="btn-texts">
+                <span class="btn-label">Trigger vs Modify/Cancel Race</span>
+                <span class="btn-sub">In-Flight Trigger • TP/SL Shift</span>
+              </div>
+            </div>
+            <span class="btn-tag tag-cyan">Trigger Race</span>
+          </div>
+
+          <div onclick="runSuite('teardown')" class="action-btn danger-action">
+            <div class="btn-content">
+              <div class="btn-icon-wrap" style="background: var(--danger-dim); color: var(--danger-neon);"><i class="fa-solid fa-trash-can"></i></div>
+              <div class="btn-texts">
+                <span class="btn-label" style="color: var(--danger-neon);">Emergency Teardown</span>
+                <span class="btn-sub">Squareoff & Cancel All 101</span>
+              </div>
+            </div>
+            <span class="btn-tag tag-red">Clean All</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Workspace Tabs -->
+    <div>
+      <div class="tab-nav">
+        <button id="tabBtnTerminal" onclick="switchTab('terminal')" class="tab-item active green">
+          <i class="fa-solid fa-terminal"></i> Live Terminal
+        </button>
+        <button id="tabBtnFollowers" onclick="switchTab('followers')" class="tab-item cyan">
+          <i class="fa-solid fa-network-wired"></i> 100-Followers Grid
+        </button>
+        <button id="tabBtnTape" onclick="switchTab('tape')" class="tab-item amber">
+          <i class="fa-solid fa-chart-line"></i> Real-Time Live Order Flow
+        </button>
+        <button id="tabBtnReports" onclick="switchTab('reports')" class="tab-item purple">
+          <i class="fa-solid fa-file-contract"></i> Evidence Hub (<span id="reportsTabBadge">40+</span>)
+        </button>
+        <button id="tabBtnScreenshots" onclick="switchTab('screenshots')" class="tab-item">
+          <i class="fa-solid fa-image"></i> Screenshots
+        </button>
+      </div>
+
+      <!-- Tab 1: Terminal Console -->
+      <div id="tabTerminal" class="terminal-container">
+        <div class="terminal-toolbar">
+          <div class="terminal-tools-left">
+            <span>● blacktrader-oms-live-runner</span>
+            <span id="activeSuiteName" style="color: var(--cyan-neon); font-weight: 600;">[IDLE - Ready]</span>
+          </div>
+          <div class="terminal-tools-right">
+            <label style="cursor: pointer; display: flex; align-items: center; gap: 6px; font-size: 11.5px;">
+              <input type="checkbox" id="autoScrollCheck" checked> Auto-Scroll
+            </label>
+            <button onclick="fetchLogs()" class="term-btn"><i class="fa-solid fa-rotate"></i> Sync</button>
+            <button onclick="clearConsole()" class="term-btn"><i class="fa-solid fa-eraser"></i> Clear</button>
+          </div>
+        </div>
+        <div id="terminalStream" class="terminal-stream">Waiting to initiate test execution...</div>
+      </div>
+
+      <!-- Tab 2: 100 Followers Grid & Master Inspector Card -->
+      <div id="tabFollowers" class="followers-grid-container">
+        <!-- Master Card -->
+        <div class="master-node-card" onclick="openAccountInspector('ctmaster@mailinator.com')">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 44px; height: 44px; background: var(--primary-dim); color: var(--primary-neon); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; border: 1px solid rgba(0,255,136,0.35);">
+              <i class="fa-solid fa-crown"></i>
+            </div>
+            <div>
+              <div style="font-size: 15px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px;">
+                ctmaster@mailinator.com <span class="btn-tag tag-green">MASTER TRADER</span>
+              </div>
+              <div id="masterSubText" style="font-size: 12px; color: var(--text-muted); margin-top: 3px;">
+                Client ID: <code>mem_aac4ca423a6925dca7</code> • Capital: 100,000,000.00 • Fans out to 100 followers
+              </div>
+            </div>
+          </div>
+          <div>
+            <span class="term-btn" style="color: var(--cyan-neon); border-color: rgba(0,212,255,0.4);"><i class="fa-solid fa-magnifying-glass"></i> Inspect Master</span>
+          </div>
+        </div>
+
+        <!-- Mode Indicator & Override Bar -->
+        <div style="background: #0d121c; border: 1px solid var(--border-color); border-radius: 10px; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span id="activeModeBadge" class="btn-tag tag-green"><i class="fa-solid fa-wallet"></i> BALANCE MODE ACTIVE</span>
+            <span id="activeModeFormula" style="font-size: 11.5px; color: var(--text-muted);">Sizing Rule: <strong>Follower Balance / Master Balance</strong> (Master: 100M Base)</span>
+          </div>
+          <div style="display: flex; gap: 6px;">
+            <button class="cohort-btn active" id="btnModeAuto" onclick="setDisplayMode('auto', this)"><i class="fa-solid fa-bolt"></i> Auto-Detect</button>
+            <button class="cohort-btn" id="btnModeBalance" onclick="setDisplayMode('balance', this)"><i class="fa-solid fa-wallet"></i> Balance</button>
+            <button class="cohort-btn" id="btnModeEquity" onclick="setDisplayMode('equity', this)"><i class="fa-solid fa-scale-balanced"></i> Equity</button>
+            <button class="cohort-btn" id="btnModeMultiplier" onclick="setDisplayMode('multiplier', this)"><i class="fa-solid fa-calculator"></i> Multiplier</button>
+          </div>
+        </div>
+
+        <!-- Filter & Search Toolbar -->
+        <div class="grid-filter-toolbar">
+          <div class="search-input-wrap">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="followerSearchInput" placeholder="Search by # (e.g. 15) or email..." oninput="filterFollowerNodes()">
+          </div>
+          <div id="cohortLegendBar" class="cohort-legend">
+            <!-- Dynamic legend rendered via JS based on active mode -->
+          </div>
+        </div>
+
+        <div id="followersGrid" class="nodes-grid">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- Tab 3: Real-Time Live Order Flow Tape -->
+      <div id="tabTape" class="live-orders-container">
+        <div class="tape-toolbar">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div class="dot-live"></div>
+            <strong style="color: #fff; font-size: 13.5px;">OMS Real-Time Order Stream (Live Tape)</strong>
+            <span style="color: var(--text-dim); font-size: 12px;">Tracks orders hitting Master & Follower accounts</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <button onclick="fetchLiveOrders()" class="term-btn"><i class="fa-solid fa-rotate"></i> Refresh Tape</button>
+          </div>
+        </div>
+        <div id="tapeStream" class="tape-stream-wrap">
+          <div style="text-align: center; color: var(--text-dim); padding: 40px;">Listening for live orders...</div>
+        </div>
+      </div>
+
+      <!-- Tab 4: Evidence Reports Hub -->
+      <div id="tabReports" class="reports-container">
+        <div class="filter-bar">
+          <button class="filter-btn active" onclick="filterReports('ALL', this)">All Reports</button>
+          <button class="filter-btn" onclick="filterReports('Balance Mode', this)">Balance Mode</button>
+          <button class="filter-btn" onclick="filterReports('Equity Mode', this)">Equity Mode</button>
+          <button class="filter-btn" onclick="filterReports('Core Multiplier', this)">Multiplier Mode</button>
+          <button class="filter-btn" onclick="filterReports('Race Conditions', this)">Race Conditions</button>
+          <button class="filter-btn" onclick="filterReports('Buy/Sell Parity', this)">Buy/Sell Parity</button>
+          <button class="filter-btn" onclick="filterReports('Pending Trigger', this)">Pending Live</button>
+          <button class="filter-btn" onclick="filterReports('Account States', this)">State Changes</button>
+        </div>
+        <div id="reportsScrollList" class="reports-scroll-area"></div>
+      </div>
+
+      <!-- Tab 5: Screenshots Gallery -->
+      <div id="tabScreenshots" class="screenshots-container">
+        <div id="screenshotsList" style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+          <!-- Loaded dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- UPGRADED SLIDE-OVER ACCOUNT INSPECTOR DRAWER                              -->
+  <!-- ========================================================================= -->
+  <div id="drawerOverlay" class="drawer-overlay" onclick="closeAccountInspector()"></div>
+  <div id="accountDrawer" class="account-drawer">
+    <div class="drawer-header">
+      <div class="drawer-header-left">
+        <div id="drawerAvatar" class="drawer-avatar-icon"><i class="fa-solid fa-crown"></i></div>
+        <div>
+          <div class="drawer-title-email">
+            <span id="drawerAccountEmail">ctmaster@mailinator.com</span>
+            <span id="drawerAccountBadge" class="btn-tag tag-green">MASTER</span>
+            <button onclick="copyAccountEmail()" class="term-btn" style="padding: 3px 8px; font-size: 11px;" title="Copy email"><i class="fa-regular fa-copy"></i></button>
+          </div>
+          <div id="drawerAccountSub" class="drawer-title-sub">Client ID: mem_aac4ca423a6925dca7 • Paper Hedging</div>
+        </div>
+      </div>
+      <div class="drawer-header-actions">
+        <button onclick="refreshCurrentAccount()" class="term-btn" title="Refresh Live Data"><i class="fa-solid fa-rotate" id="drawerRefreshIcon"></i> Refresh</button>
+        <button onclick="squareoffCurrentAccount()" class="term-btn" style="color: var(--danger-neon); border-color: rgba(255,51,102,0.4);" title="Close All Positions"><i class="fa-solid fa-square-xmark"></i> Close Positions</button>
+        <button onclick="closeAccountInspector()" class="drawer-close">&times;</button>
+      </div>
+    </div>
+
+    <div class="drawer-body">
+      <!-- 6 Metrics Stat Cards -->
+      <div class="drawer-stats-grid">
+        <div class="stat-pill">
+          <span class="stat-pill-title">Balance</span>
+          <span id="drawerBalance" class="stat-pill-val">--</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-pill-title">Equity</span>
+          <span id="drawerEquity" class="stat-pill-val">--</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-pill-title">Unrealized PnL</span>
+          <span id="drawerPnL" class="stat-pill-val">--</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-pill-title">Used Margin</span>
+          <span id="drawerUsedMargin" class="stat-pill-val">--</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-pill-title">Free Margin</span>
+          <span id="drawerFreeMargin" class="stat-pill-val">--</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-pill-title">Copy Ratio / Mode</span>
+          <span id="drawerCopyRatio" class="stat-pill-val">--</span>
+        </div>
+      </div>
+
+      <!-- Copy Trading Linkage Card -->
+      <div class="drawer-card">
+        <div class="drawer-card-header">
+          <div class="drawer-card-title"><i class="fa-solid fa-link" style="color: var(--cyan-neon);"></i> Copy Trading Linkage</div>
+          <span id="drawerLinkStatus" class="btn-tag tag-green">ACTIVE</span>
+        </div>
+        <div id="drawerLinkDetails" style="font-size: 12px; color: var(--text-muted); line-height: 1.6;">
+          Loading linkage details...
+        </div>
+      </div>
+
+      <!-- Open Positions Card -->
+      <div class="drawer-card">
+        <div class="drawer-card-header">
+          <div class="drawer-card-title"><i class="fa-solid fa-chart-line" style="color: var(--primary-neon);"></i> Open Positions (<span id="drawerOpenCount">0</span>)</div>
+          <span id="drawerPositionsSumPnL" style="font-size: 12px; font-weight: 700; color: var(--primary-neon);"></span>
+        </div>
+        
+        <div id="drawerPositionsWrap" class="table-scroll-wrap">
+          <table class="drawer-table">
+            <thead>
+              <tr>
+                <th style="width: 26%;">Symbol</th>
+                <th style="width: 10%;">Side</th>
+                <th style="width: 10%;">Lots</th>
+                <th style="width: 15%;">Entry Price</th>
+                <th style="width: 15%;">Mark Price</th>
+                <th style="width: 14%;">PnL</th>
+                <th style="width: 10%;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="drawerPositionsBody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+        <div id="drawerPositionsEmpty" class="empty-state-box" style="display: none;">
+          <i class="fa-solid fa-folder-open"></i>
+          <span>No active open positions on this account</span>
+        </div>
+      </div>
+
+      <!-- Recent Orders Executions Card -->
+      <div class="drawer-card">
+        <div class="drawer-card-header">
+          <div class="drawer-card-title"><i class="fa-solid fa-receipt" style="color: var(--purple-neon);"></i> Recent Orders (<span id="drawerOrdersCount">0</span>)</div>
+          <div style="display: flex; gap: 6px;">
+            <button class="cohort-btn active" id="btnFilterOrdAll" onclick="filterDrawerOrders('ALL', this)">All</button>
+            <button class="cohort-btn" id="btnFilterOrdFilled" onclick="filterDrawerOrders('FILLED', this)">Filled</button>
+            <button class="cohort-btn" id="btnFilterOrdPending" onclick="filterDrawerOrders('PENDING', this)">Pending</button>
+            <button class="cohort-btn" id="btnFilterOrdRejected" onclick="filterDrawerOrders('REJECTED', this)">Rejected</button>
+          </div>
+        </div>
+
+        <div id="drawerOrdersWrap" class="table-scroll-wrap">
+          <table class="drawer-table">
+            <thead>
+              <tr>
+                <th style="width: 13%;">Time</th>
+                <th style="width: 19%;">Order ID</th>
+                <th style="width: 22%;">Symbol</th>
+                <th style="width: 9%;">Side</th>
+                <th style="width: 9%;">Type</th>
+                <th style="width: 8%;">Lots</th>
+                <th style="width: 10%;">Fill Price</th>
+                <th style="width: 10%;">State</th>
+              </tr>
+            </thead>
+            <tbody id="drawerOrdersBody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+        <div id="drawerOrdersEmpty" class="empty-state-box" style="display: none;">
+          <i class="fa-solid fa-inbox"></i>
+          <span>No orders recorded in this state</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Evidence Document Modal -->
+  <div id="reportModal" class="modal-backdrop">
+    <div class="modal-window">
+      <div class="modal-top">
+        <div id="modalTitle" style="font-size: 14px; font-weight: 700; color: #fff;">Document Viewer</div>
+        <button onclick="closeModal()" style="background: none; border: none; color: var(--text-muted); font-size: 22px; cursor: pointer;">&times;</button>
+      </div>
+      <div id="modalBody" class="modal-content-area"></div>
+    </div>
+  </div>
+
+  <div id="toast"><i class="fa-solid fa-circle-check" style="color: var(--primary-neon);"></i> <span id="toastMsg">Notification</span></div>
+
+  <script>
+    let isAutoScroll = true;
+    let allReports = [];
+    let currentFilter = 'ALL';
+    let currentInspectedEmail = null;
+    let allFollowersList = [];
+    let activeCohortFilter = 'ALL';
+    let cachedDrawerOrders = [];
+    let currentDrawerOrderFilter = 'ALL';
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      document.getElementById("toastMsg").innerText = msg;
+      toast.style.display = "flex";
+      setTimeout(() => { toast.style.display = "none"; }, 3000);
+    }
+
+    function switchTab(tabKey) {
+      document.getElementById("tabTerminal").style.display = tabKey === 'terminal' ? 'flex' : 'none';
+      document.getElementById("tabFollowers").style.display = tabKey === 'followers' ? 'flex' : 'none';
+      document.getElementById("tabTape").style.display = tabKey === 'tape' ? 'flex' : 'none';
+      document.getElementById("tabReports").style.display = tabKey === 'reports' ? 'flex' : 'none';
+      document.getElementById("tabScreenshots").style.display = tabKey === 'screenshots' ? 'flex' : 'none';
+
+      document.querySelectorAll(".tab-item").forEach(b => b.classList.remove("active"));
+      if (tabKey === 'terminal') document.getElementById("tabBtnTerminal").classList.add("active");
+      if (tabKey === 'followers') {
+        document.getElementById("tabBtnFollowers").classList.add("active");
+        fetchFollowers();
+      }
+      if (tabKey === 'tape') {
+        document.getElementById("tabBtnTape").classList.add("active");
+        fetchLiveOrders();
+      }
+      if (tabKey === 'reports') document.getElementById("tabBtnReports").classList.add("active");
+      if (tabKey === 'screenshots') {
+        document.getElementById("tabBtnScreenshots").classList.add("active");
+        fetchScreenshots();
+      }
+    }
+
+    async function fetchStatus() {
+      try {
+        const res = await fetch("/api/status");
+        const data = await res.json();
+        const badge = document.getElementById("statusBadge");
+        const timer = document.getElementById("elapsedTimer");
+        const activeName = document.getElementById("activeSuiteName");
+
+        if (data.status === "RUNNING") {
+          badge.className = "status-badge status-running";
+          badge.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> RUNNING`;
+          timer.innerText = `${data.elapsed_seconds}s`;
+          activeName.innerText = `[ACTIVE: ${data.name}]`;
+        } else if (data.status === "COMPLETED") {
+          badge.className = "status-badge status-completed";
+          badge.innerHTML = `<i class="fa-solid fa-circle-check"></i> COMPLETED`;
+          activeName.innerText = `[Task completed successfully]`;
+        } else if (data.status === "FAILED") {
+          badge.className = "status-badge status-failed";
+          badge.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> FAILED`;
+          activeName.innerText = `[Task exited with code ${data.exit_code}]`;
+        } else {
+          badge.className = "status-badge status-idle";
+          badge.innerHTML = `<i class="fa-solid fa-circle-pause"></i> IDLE`;
+        }
+      } catch (err) {
+        console.error("Status error:", err);
+      }
+    }
+
+    async function fetchLogs() {
+      try {
+        const res = await fetch("/api/logs");
+        const data = await res.json();
+        const term = document.getElementById("terminalStream");
+        
+        let formatted = (data.logs || "")
+          .replace(/\[PASS\]/g, '<span class="log-pass">[PASS]</span>')
+          .replace(/\[FAIL\]/g, '<span class="log-fail">[FAIL]</span>')
+          .replace(/\[\+\]/g, '<span class="log-info">[+]</span>')
+          .replace(/\[\*\]/g, '<span class="log-warn">[*]</span>');
+
+        term.innerHTML = formatted || '<span class="log-muted">Waiting to launch test suite...</span>';
+        if (isAutoScroll) {
+          term.scrollTop = term.scrollHeight;
+        }
+      } catch (err) {
+        console.error("Logs error:", err);
+      }
+    }
+
+    /* REAL-TIME LIVE ORDER FLOW TAPE */
+    async function fetchLiveOrders() {
+      try {
+        const res = await fetch("/api/live_orders");
+        const data = await res.json();
+        const tapeStream = document.getElementById("tapeStream");
+        const tape = data.tape || [];
+
+        if (!tape.length) {
+          tapeStream.innerHTML = `<div style="text-align: center; color: var(--text-dim); padding: 40px;">No recent live order executions recorded.</div>`;
+          return;
+        }
+
+        tapeStream.innerHTML = tape.map(t => {
+          const isBuy = t.side === 'BUY';
+          const isMaster = t.role === 'MASTER';
+          const stateClass = t.state === 'FILLED' ? 'state-filled' : (t.state === 'REJECTED' ? 'state-rejected' : 'state-pending');
+
+          return `
+            <div class="tape-row" onclick="openAccountInspector('${t.email}')" title="Click to inspect ${t.email}">
+              <div class="tape-left">
+                <span class="tape-acc-badge ${isMaster ? 'tape-acc-master' : 'tape-acc-follower'}">${t.account}</span>
+                <div class="tape-detail">
+                  <span class="btn-tag ${isBuy ? 'tag-green' : 'tag-red'}">${t.side}</span>
+                  <strong style="color: #fff; font-family: 'Fira Code', monospace;">${t.qty}</strong>
+                  <span style="color: var(--cyan-neon); font-weight: 600;">${t.symbol}</span>
+                  <span style="color: var(--text-dim);">@</span>
+                  <span style="font-family: 'Fira Code', monospace; color: #fff;">${t.price}</span>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <span class="state-pill ${stateClass}">${t.state}</span>
+                <span style="font-size: 11px; color: var(--text-dim);"><i class="fa-solid fa-code-fork"></i> ${t.source}</span>
+                <span class="tape-time">${t.time}</span>
+              </div>
+            </div>
+          `;
+        }).join("");
+      } catch (err) {
+        console.error("Live orders error:", err);
+      }
+    }
+
+    /* 100 FOLLOWERS GRID */
+    let currentServerMode = 'multiplier';
+    let userSelectedMode = 'auto'; // 'auto', 'balance', 'equity', 'multiplier'
+
+    function getEffectiveMode() {
+      if (userSelectedMode !== 'auto') return userSelectedMode;
+      return currentServerMode || 'multiplier';
+    }
+
+    function setDisplayMode(mode, btn) {
+      userSelectedMode = mode;
+      document.querySelectorAll("#btnModeAuto, #btnModeBalance, #btnModeEquity, #btnModeMultiplier").forEach(b => b.classList.remove("active"));
+      if (btn) btn.classList.add("active");
+      updateModeBanner();
+      renderFollowersGrid();
+    }
+
+    function updateModeBanner() {
+      const mode = getEffectiveMode();
+      const badge = document.getElementById("activeModeBadge");
+      const formula = document.getElementById("activeModeFormula");
+      const masterSub = document.getElementById("masterSubText");
+
+      if (badge && formula) {
+        if (mode === 'balance') {
+          badge.className = "btn-tag tag-green";
+          badge.innerHTML = `<i class="fa-solid fa-wallet"></i> BALANCE MODE ACTIVE`;
+          formula.innerHTML = `Sizing Rule: <strong>Follower Balance / Master Balance</strong> (Master: 100M Base Capital)`;
+          if (masterSub) masterSub.innerHTML = `Client ID: <code>mem_aac4ca423a6925dca7</code> • Base Balance: 100,000,000.00 • Balance-Based Copy Base`;
+        } else if (mode === 'equity') {
+          badge.className = "btn-tag tag-cyan";
+          badge.innerHTML = `<i class="fa-solid fa-scale-balanced"></i> EQUITY MODE ACTIVE`;
+          formula.innerHTML = `Sizing Rule: <strong>Follower Equity / Master Equity</strong> (Master: 100M Base Equity)`;
+          if (masterSub) masterSub.innerHTML = `Client ID: <code>mem_aac4ca423a6925dca7</code> • Base Equity: 100,000,000.00 • Equity-Based Copy Base`;
+        } else {
+          badge.className = "btn-tag tag-amber";
+          badge.innerHTML = `<i class="fa-solid fa-bolt"></i> MULTIPLIER MODE ACTIVE`;
+          formula.innerHTML = `Sizing Rule: <strong>Master Lots × Configured Multiplier</strong> (1x, 2x, 3x, 0.5x)`;
+          if (masterSub) masterSub.innerHTML = `Client ID: <code>mem_aac4ca423a6925dca7</code> • Base Capital: 100,000,000.00 • Direct Multiplier Fan-Out`;
+        }
+      }
+
+      renderLegendBar(mode);
+    }
+
+    function renderLegendBar(mode) {
+      const bar = document.getElementById("cohortLegendBar");
+      if (!bar) return;
+
+      if (mode === 'balance') {
+        bar.innerHTML = `
+          <button class="cohort-btn ${activeCohortFilter === 'ALL' ? 'active' : ''}" onclick="filterCohort('ALL', this)"><div class="chip-dot" style="background:#fff;"></div> All 100</button>
+          <button class="cohort-btn ${activeCohortFilter === 1 ? 'active' : ''}" onclick="filterCohort(1, this)"><div class="chip-dot chip-green"></div> Tier 1: 100M Bal (1.0x)</button>
+          <button class="cohort-btn ${activeCohortFilter === 2 ? 'active' : ''}" onclick="filterCohort(2, this)"><div class="chip-dot chip-cyan"></div> Tier 2: 200M Bal (2.0x)</button>
+          <button class="cohort-btn ${activeCohortFilter === 3 ? 'active' : ''}" onclick="filterCohort(3, this)"><div class="chip-dot chip-purple"></div> Tier 3: 300M Bal (3.0x)</button>
+          <button class="cohort-btn ${activeCohortFilter === 4 ? 'active' : ''}" onclick="filterCohort(4, this)"><div class="chip-dot chip-amber"></div> Tier 4: 50M Bal (0.5x)</button>
+        `;
+      } else if (mode === 'equity') {
+        bar.innerHTML = `
+          <button class="cohort-btn ${activeCohortFilter === 'ALL' ? 'active' : ''}" onclick="filterCohort('ALL', this)"><div class="chip-dot" style="background:#fff;"></div> All 100</button>
+          <button class="cohort-btn ${activeCohortFilter === 1 ? 'active' : ''}" onclick="filterCohort(1, this)"><div class="chip-dot chip-green"></div> Tier 1: 100M Eq (1.0x)</button>
+          <button class="cohort-btn ${activeCohortFilter === 2 ? 'active' : ''}" onclick="filterCohort(2, this)"><div class="chip-dot chip-cyan"></div> Tier 2: 200M Eq (2.0x)</button>
+          <button class="cohort-btn ${activeCohortFilter === 3 ? 'active' : ''}" onclick="filterCohort(3, this)"><div class="chip-dot chip-purple"></div> Tier 3: 300M Eq (3.0x)</button>
+          <button class="cohort-btn ${activeCohortFilter === 4 ? 'active' : ''}" onclick="filterCohort(4, this)"><div class="chip-dot chip-amber"></div> Tier 4: 50M Eq (0.5x)</button>
+        `;
+      } else {
+        bar.innerHTML = `
+          <button class="cohort-btn ${activeCohortFilter === 'ALL' ? 'active' : ''}" onclick="filterCohort('ALL', this)"><div class="chip-dot" style="background:#fff;"></div> All 100</button>
+          <button class="cohort-btn ${activeCohortFilter === 1 ? 'active' : ''}" onclick="filterCohort(1, this)"><div class="chip-dot chip-green"></div> Tier 1 (1.0x)</button>
+          <button class="cohort-btn ${activeCohortFilter === 2 ? 'active' : ''}" onclick="filterCohort(2, this)"><div class="chip-dot chip-cyan"></div> Tier 2 (2.0x)</button>
+          <button class="cohort-btn ${activeCohortFilter === 3 ? 'active' : ''}" onclick="filterCohort(3, this)"><div class="chip-dot chip-purple"></div> Tier 3 (3.0x)</button>
+          <button class="cohort-btn ${activeCohortFilter === 4 ? 'active' : ''}" onclick="filterCohort(4, this)"><div class="chip-dot chip-amber"></div> Tier 4 (0.5x)</button>
+        `;
+      }
+    }
+
+    async function fetchFollowers() {
+      try {
+        const res = await fetch("/api/followers");
+        const data = await res.json();
+        currentServerMode = data.current_mode || 'multiplier';
+        allFollowersList = data.followers || [];
+        updateModeBanner();
+        renderFollowersGrid();
+      } catch (err) {
+        console.error("Followers grid error:", err);
+      }
+    }
+
+    function filterCohort(cohort, btn) {
+      activeCohortFilter = cohort;
+      document.querySelectorAll(".cohort-btn").forEach(b => b.classList.remove("active"));
+      if (btn) btn.classList.add("active");
+      renderFollowersGrid();
+    }
+
+    function filterFollowerNodes() {
+      renderFollowersGrid();
+    }
+
+    function renderFollowersGrid() {
+      const grid = document.getElementById("followersGrid");
+      if (!grid) return;
+      const query = (document.getElementById("followerSearchInput")?.value || "").toLowerCase().trim();
+
+      const filtered = allFollowersList.filter(f => {
+        if (activeCohortFilter !== 'ALL' && f.tier !== activeCohortFilter) return false;
+        if (query) {
+          const matchNum = String(f.index).includes(query);
+          const matchEmail = f.email.toLowerCase().includes(query);
+          if (!matchNum && !matchEmail) return false;
+        }
+        return true;
+      });
+
+      if (!filtered.length) {
+        grid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; color: var(--text-dim); padding: 30px;">No followers matching filters.</div>`;
+        return;
+      }
+
+      const mode = getEffectiveMode();
+
+      grid.innerHTML = filtered.map(f => {
+        let tierClass = "tier-1";
+        if (f.tier === 2) tierClass = "tier-2";
+        else if (f.tier === 3) tierClass = "tier-3";
+        else if (f.tier === 4) tierClass = "tier-4";
+
+        let mainLabel = `${f.multiplier}x`;
+        let subLabel = "ratio";
+        if (mode === 'balance') {
+          mainLabel = f.balance || `${Math.round(100 * f.multiplier)}M`;
+          subLabel = `${f.multiplier}x`;
+        } else if (mode === 'equity') {
+          mainLabel = f.equity ? `${f.equity} Eq` : `${Math.round(100 * f.multiplier)}M Eq`;
+          subLabel = `${f.multiplier}x`;
+        }
+
+        return `
+          <div class="node-pill ${tierClass}" onclick="openAccountInspector('${f.email}')" title="Follower #${f.index} (${f.email}) • Mode: ${mode.toUpperCase()} • Capital: ${f.balance} • Effective Ratio: ${f.multiplier}x">
+            <div class="node-pulse-dot" id="dot_${f.index}"></div>
+            <span class="node-num">#${f.index}</span>
+            <span class="node-tier">${mainLabel}</span>
+            <span class="node-sub-ratio">${subLabel}</span>
+          </div>
+        `;
+      }).join("");
+    }
+
+    /* ========================================================================= */
+    /* REAL-TIME ACCOUNT INSPECTOR DRAWER                                        */
+    /* ========================================================================= */
+    async function openAccountInspector(email) {
+      currentInspectedEmail = email;
+      const drawer = document.getElementById("accountDrawer");
+      const overlay = document.getElementById("drawerOverlay");
+
+      const isMaster = email.includes("master");
+      const avatar = document.getElementById("drawerAvatar");
+      if (isMaster) {
+        avatar.className = "drawer-avatar-icon";
+        avatar.innerHTML = `<i class="fa-solid fa-crown"></i>`;
+        document.getElementById("drawerAccountBadge").className = "btn-tag tag-green";
+        document.getElementById("drawerAccountBadge").innerText = "MASTER TRADER";
+      } else {
+        avatar.className = "drawer-avatar-icon follower-avatar";
+        avatar.innerHTML = `<i class="fa-solid fa-shield-halved"></i>`;
+        const fNum = email.split("@")[0].replace("follower", "#");
+        document.getElementById("drawerAccountBadge").className = "btn-tag tag-cyan";
+        document.getElementById("drawerAccountBadge").innerText = `FOLLOWER ${fNum}`;
+      }
+
+      document.getElementById("drawerAccountEmail").innerText = email;
+      drawer.classList.add("open");
+      overlay.classList.add("open");
+
+      await refreshAccountData(email);
+    }
+
+    async function refreshCurrentAccount() {
+      if (currentInspectedEmail) {
+        const icon = document.getElementById("drawerRefreshIcon");
+        if (icon) icon.classList.add("fa-spin");
+        await refreshAccountData(currentInspectedEmail);
+        setTimeout(() => { if (icon) icon.classList.remove("fa-spin"); }, 500);
+      }
+    }
+
+    async function squareoffCurrentAccount() {
+      if (!currentInspectedEmail) return;
+      if (!confirm(`Close all open positions immediately for ${currentInspectedEmail}?`)) return;
+      try {
+        const res = await fetch(`/api/account/${currentInspectedEmail}/squareoff`, { method: "POST" });
+        const data = await res.json();
+        showToast(data.message || "Positions closed!");
+        await refreshAccountData(currentInspectedEmail);
+      } catch (err) {
+        alert("Squareoff error: " + err);
+      }
+    }
+
+    async function closeSinglePosition(marketOrderId) {
+      if (!currentInspectedEmail || !marketOrderId) return;
+      if (!confirm(`Close position ${marketOrderId}?`)) return;
+      try {
+        const res = await fetch(`/api/account/${currentInspectedEmail}/position/${marketOrderId}/close`, { method: "POST" });
+        const data = await res.json();
+        showToast(data.message || "Position closed!");
+        await refreshAccountData(currentInspectedEmail);
+      } catch (err) {
+        alert("Close position error: " + err);
+      }
+    }
+
+    function copyAccountEmail() {
+      if (currentInspectedEmail) {
+        navigator.clipboard.writeText(currentInspectedEmail);
+        showToast(`Copied ${currentInspectedEmail} to clipboard!`);
+      }
+    }
+
+    async function refreshAccountData(email) {
+      try {
+        const res = await fetch(`/api/account/${email}`);
+        const data = await res.json();
+
+        const funds = data.funds || {};
+        document.getElementById("drawerBalance").innerText = funds.balance != null ? Number(funds.balance).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '--';
+        document.getElementById("drawerEquity").innerText = funds.equity != null ? Number(funds.equity).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '--';
+        document.getElementById("drawerFreeMargin").innerText = funds.free_margin != null ? Number(funds.free_margin).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '--';
+        document.getElementById("drawerUsedMargin").innerText = funds.used_margin != null ? Number(funds.used_margin).toFixed(2) + " USD" : '0.00 USD';
+        
+        const pnl = Number(funds.unrealized_pnl || 0);
+        const pnlEl = document.getElementById("drawerPnL");
+        pnlEl.innerText = (pnl >= 0 ? "+" : "") + pnl.toFixed(2) + " USD";
+        pnlEl.style.color = pnl > 0 ? "var(--primary-neon)" : (pnl < 0 ? "var(--danger-neon)" : "#fff");
+
+        // Linkage Card
+        const link = data.follow_info;
+        const subEl = document.getElementById("drawerAccountSub");
+        if (data.is_master) {
+          subEl.innerText = `Client ID: mem_aac4ca423a6925dca7 • Base Capital: 100,000,000.00 • Master Trader`;
+          document.getElementById("drawerLinkDetails").innerHTML = `
+            <div><strong>Master Account:</strong> ctmaster@mailinator.com (Distributes to 100 followers)</div>
+            <div style="margin-top: 4px;"><strong>Fan-Out Mode:</strong> Direct OMS Multiplier / Balance / Equity Broadcast</div>
+          `;
+          document.getElementById("drawerCopyRatio").innerText = "1.0x (Master)";
+          document.getElementById("drawerLinkStatus").innerText = "MASTER";
+          document.getElementById("drawerLinkStatus").className = "btn-tag tag-green";
+        } else if (link) {
+          subEl.innerText = `Client ID: ${link.follower_client_id || '--'} • Tier ${data.tier || 1} • Capital: ${data.expected_capital || '--'}`;
+          document.getElementById("drawerLinkDetails").innerHTML = `
+            <div><strong>Master ID:</strong> <code>${link.master_client_id}</code> • <strong>Follow Link ID:</strong> <code>${link.follow_id}</code></div>
+            <div style="margin-top: 4px;"><strong>Copy Method:</strong> <span class="btn-tag tag-cyan">${link.method || 'multiplier'}</span> • <strong>Multiplier:</strong> <strong style="color: var(--primary-neon);">${link.multiplier}x</strong> • <strong>Reverse:</strong> ${link.reverse ? 'YES' : 'NO'}</div>
+          `;
+          document.getElementById("drawerCopyRatio").innerText = `${link.multiplier}x (${link.method || 'mult'})`;
+          document.getElementById("drawerLinkStatus").innerText = (link.status || 'ACTIVE').toUpperCase();
+          document.getElementById("drawerLinkStatus").className = "btn-tag tag-green";
+        } else {
+          subEl.innerText = `Tier ${data.tier || 1} • Expected Mult: ${data.expected_multiplier}x • Expected Capital: ${data.expected_capital}`;
+          document.getElementById("drawerLinkDetails").innerHTML = `
+            <div>Active Follower configured for copy trading. Master: <code>ctmaster@mailinator.com</code></div>
+            <div style="margin-top: 4px;">Expected Ratio: <strong>${data.expected_multiplier}x</strong></div>
+          `;
+          document.getElementById("drawerCopyRatio").innerText = `${data.expected_multiplier}x`;
+          document.getElementById("drawerLinkStatus").innerText = "ACTIVE";
+          document.getElementById("drawerLinkStatus").className = "btn-tag tag-green";
+        }
+
+        // Render Open Positions Table
+        const positions = data.positions || [];
+        document.getElementById("drawerOpenCount").innerText = positions.length;
+        const posWrap = document.getElementById("drawerPositionsWrap");
+        const posEmpty = document.getElementById("drawerPositionsEmpty");
+        const posBody = document.getElementById("drawerPositionsBody");
+
+        if (!positions.length) {
+          posWrap.style.display = "none";
+          posEmpty.style.display = "flex";
+        } else {
+          posEmpty.style.display = "none";
+          posWrap.style.display = "block";
+          posBody.innerHTML = positions.map(p => {
+            const pnlVal = Number(p.unrealized_pnl || 0);
+            const pnlColor = pnlVal >= 0 ? 'var(--primary-neon)' : 'var(--danger-neon)';
+            const pnlPrefix = pnlVal >= 0 ? '+' : '';
+            const mktId = p.market_order_id || '';
+
+            return `
+              <tr>
+                <td title="${p.symbol}"><strong style="color: #fff;">${p.symbol}</strong></td>
+                <td><span class="btn-tag ${p.side === 'BUY' ? 'tag-green' : 'tag-red'}">${p.side}</span></td>
+                <td style="font-family: 'Fira Code', monospace; font-weight: 700; color: #fff;">${p.net_qty}</td>
+                <td style="font-family: 'Fira Code', monospace; color: var(--text-muted);">${Number(p.avg_entry_price || 0).toLocaleString('en-US', {minimumFractionDigits: 1})}</td>
+                <td style="font-family: 'Fira Code', monospace; color: #fff;">${Number(p.current_price || p.avg_entry_price || 0).toLocaleString('en-US', {minimumFractionDigits: 1})}</td>
+                <td style="color: ${pnlColor}; font-weight: 700; font-family: 'Fira Code', monospace;">
+                  ${pnlPrefix}${pnlVal.toFixed(2)}
+                </td>
+                <td>
+                  <button onclick="closeSinglePosition('${mktId}')" class="term-btn" style="color: var(--danger-neon); border-color: rgba(255,51,102,0.4); padding: 2px 7px; font-size: 11px;" title="Close this position">
+                    <i class="fa-solid fa-xmark"></i> Close
+                  </button>
+                </td>
+              </tr>
+            `;
+          }).join("");
+        }
+
+        // Render Recent Orders Table
+        cachedDrawerOrders = data.orders || [];
+        document.getElementById("drawerOrdersCount").innerText = cachedDrawerOrders.length;
+        renderFilteredDrawerOrders();
+
+      } catch (err) {
+        console.error("Account refresh error:", err);
+      }
+    }
+
+    function filterDrawerOrders(filterState, btn) {
+      currentDrawerOrderFilter = filterState;
+      document.querySelectorAll("#btnFilterOrdAll, #btnFilterOrdFilled, #btnFilterOrdPending, #btnFilterOrdRejected").forEach(b => b.classList.remove("active"));
+      if (btn) btn.classList.add("active");
+      renderFilteredDrawerOrders();
+    }
+
+    function renderFilteredDrawerOrders() {
+      const ordWrap = document.getElementById("drawerOrdersWrap");
+      const ordEmpty = document.getElementById("drawerOrdersEmpty");
+      const ordBody = document.getElementById("drawerOrdersBody");
+
+      const filtered = currentDrawerOrderFilter === 'ALL'
+        ? cachedDrawerOrders
+        : cachedDrawerOrders.filter(o => o.state === currentDrawerOrderFilter);
+
+      if (!filtered.length) {
+        ordWrap.style.display = "none";
+        ordEmpty.style.display = "flex";
+      } else {
+        ordEmpty.style.display = "none";
+        ordWrap.style.display = "block";
+        ordBody.innerHTML = filtered.map(o => {
+          const stateClass = o.state === 'FILLED' ? 'state-filled' : (o.state === 'REJECTED' ? 'state-rejected' : (o.state === 'CANCELLED' ? 'state-cancelled' : 'state-pending'));
+          const sideClass = o.side === 'BUY' ? 'tag-green' : 'tag-red';
+          const fillPr = o.avg_fill_price ? Number(o.avg_fill_price).toLocaleString('en-US', {minimumFractionDigits: 1}) : (o.price || '--');
+
+          return `
+            <tr>
+              <td style="font-family: 'Fira Code', monospace; font-size: 11.5px; color: var(--text-dim);">${o.formatted_time || '--'}</td>
+              <td title="${o.order_id}"><code style="font-size: 11px; color: var(--cyan-neon);">${o.order_id}</code></td>
+              <td title="${o.symbol || 'BINANCE:BTCUSDT.P'}"><span style="font-size: 12px; font-weight: 600; color: #fff;">${o.symbol || 'BTCUSDT.P'}</span></td>
+              <td><span class="btn-tag ${sideClass}">${o.side}</span></td>
+              <td style="font-size: 11.5px; color: var(--text-muted);">${o.type}</td>
+              <td style="font-family: 'Fira Code', monospace; font-weight: 700; color: #fff;">${o.display_qty}</td>
+              <td style="font-family: 'Fira Code', monospace; color: #fff;">${fillPr}</td>
+              <td><span class="state-pill ${stateClass}">${o.state}</span></td>
+            </tr>
+          `;
+        }).join("");
+      }
+    }
+
+    function closeAccountInspector() {
+      currentInspectedEmail = null;
+      document.getElementById("accountDrawer").classList.remove("open");
+      document.getElementById("drawerOverlay").classList.remove("open");
+    }
+
+    // Escape key closes drawer and modal
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeAccountInspector();
+        closeModal();
+      }
+    });
+
+    /* REPORTS & SCREENSHOTS */
+    async function fetchReports() {
+      try {
+        const res = await fetch("/api/reports");
+        const data = await res.json();
+        allReports = data.reports || [];
+        document.getElementById("reportsTabBadge").innerText = allReports.length;
+        renderReports();
+      } catch (err) {
+        console.error("Reports error:", err);
+      }
+    }
+
+    function filterReports(cat, btn) {
+      currentFilter = cat;
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      if (btn) btn.classList.add("active");
+      renderReports();
+    }
+
+    function renderReports() {
+      const area = document.getElementById("reportsScrollList");
+      const filtered = currentFilter === 'ALL' ? allReports : allReports.filter(r => r.category === currentFilter);
+
+      if (!filtered.length) {
+        area.innerHTML = `<div style="text-align: center; color: var(--text-dim); padding: 30px;">No reports in category '${currentFilter}'.</div>`;
+        return;
+      }
+
+      area.innerHTML = filtered.map(r => `
+        <div class="report-card" onclick="viewReport('${r.filename}')">
+          <div>
+            <div class="report-title">${r.filename}</div>
+            <div class="report-meta-text">${r.category} • Modified: ${r.modified_at} • ${r.size_kb} KB</div>
+          </div>
+          <span class="btn-tag ${r.type === 'MD' ? 'tag-cyan' : 'tag-purple'}">${r.type}</span>
+        </div>
+      `).join("");
+    }
+
+    async function fetchScreenshots() {
+      try {
+        const res = await fetch("/api/screenshots");
+        const data = await res.json();
+        const area = document.getElementById("screenshotsList");
+        const list = data.screenshots || [];
+
+        if (!list.length) {
+          area.innerHTML = `<div style="text-align: center; color: var(--text-dim); padding: 30px;">No screenshots captured yet.</div>`;
+          return;
+        }
+
+        area.innerHTML = list.map(s => `
+          <div class="screenshot-img-card">
+            <div style="font-size: 13.5px; font-weight: 700; color: #fff;"><i class="fa-solid fa-camera"></i> ${s}</div>
+            <img src="/api/screenshots/${s}" alt="${s}">
+          </div>
+        `).join("");
+      } catch (err) {
+        console.error("Screenshot error:", err);
+      }
+    }
+
+    async function runSuite(suiteKey) {
+      try {
+        const res = await fetch("/api/run", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ suite: suiteKey })
+        });
+        const data = await res.json();
+        if (res.status === 409) {
+          alert(`Another suite is already running: ${data.current}`);
+          return;
+        }
+        if (suiteKey === 'balance') setDisplayMode('balance', document.getElementById("btnModeBalance"));
+        else if (suiteKey === 'equity') setDisplayMode('equity', document.getElementById("btnModeEquity"));
+        else if (suiteKey === 'multiplier') setDisplayMode('multiplier', document.getElementById("btnModeMultiplier"));
+
+        showToast(`Launched: ${data.message}`);
+        switchTab('terminal');
+        fetchStatus();
+        fetchLogs();
+      } catch (err) {
+        alert("Launch error: " + err);
+      }
+    }
+
+    async function stopTest() {
+      if (!confirm("Terminate the active test suite immediately?")) return;
+      try {
+        await fetch("/api/stop", { method: "POST" });
+        showToast("Test suite termination requested.");
+        fetchStatus();
+      } catch (err) {
+        alert("Stop error: " + err);
+      }
+    }
+
+    async function viewReport(filename) {
+      try {
+        const res = await fetch(`/api/reports/${filename}`);
+        const data = await res.json();
+        const modal = document.getElementById("reportModal");
+        document.getElementById("modalTitle").innerText = filename;
+        const body = document.getElementById("modalBody");
+
+        if (data.is_json) {
+          body.innerHTML = `<pre><code>${JSON.stringify(JSON.parse(data.content), null, 2)}</code></pre>`;
+        } else {
+          body.innerHTML = marked.parse(data.content);
+        }
+        modal.style.display = "flex";
+      } catch (err) {
+        alert("Failed to load report: " + err);
+      }
+    }
+
+    function closeModal() {
+      document.getElementById("reportModal").style.display = "none";
+    }
+
+    function clearConsole() {
+      document.getElementById("terminalStream").innerText = "Console cleared.";
+    }
+
+    document.getElementById("autoScrollCheck").addEventListener("change", (e) => {
+      isAutoScroll = e.target.checked;
+    });
+
+    // Auto-refresh inspected account if drawer is open
+    setInterval(() => {
+      if (currentInspectedEmail) {
+        refreshAccountData(currentInspectedEmail);
+      }
+    }, 2000);
+
+    // Regular Polling Loops
+    setInterval(fetchStatus, 1000);
+    setInterval(fetchLogs, 1500);
+    setInterval(fetchLiveOrders, 3000);
+    setInterval(fetchReports, 5000);
+
+    // Initial Load
+    fetchStatus();
+    fetchLogs();
+    fetchLiveOrders();
+    fetchReports();
+    fetchFollowers();
+  </script>
+</body>
+</html>

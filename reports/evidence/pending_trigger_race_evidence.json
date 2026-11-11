@@ -1,0 +1,33 @@
+{
+  "timestamp": "2026-11-11T13:00:15.592218+00:00",
+  "total_scenarios": 3,
+  "passed_scenarios": 3,
+  "total_time_seconds": 54.33,
+  "results": [
+    {
+      "name": "Cancel-at-Trigger Millisecond Collision",
+      "order_id": "ord_be79100d1c79bff5c8",
+      "master_final_state": "FILLED",
+      "master_has_position": true,
+      "followers_with_position": 100,
+      "split_brain_detected": false,
+      "race_winner": "EXECUTION",
+      "status": "PASS"
+    },
+    {
+      "name": "Trigger-Time Protection Modification Collision",
+      "market_order_id": "ord_f63cab0abfa980b63d",
+      "mod_time_ms": 129.45,
+      "mod_status_code": 200,
+      "followers_holding_position": 100,
+      "status": "PASS"
+    },
+    {
+      "name": "Multi-Threaded Pending Trigger Storm",
+      "num_orders": 5,
+      "storm_time_ms": 779.19,
+      "post_cleanup_master_positions": 0,
+      "status": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "suite_name": "BlackTrader Race Conditions & Concurrency Stress Test Suite",
+  "timestamp": "2026-11-11T12:48:46.108011+00:00",
+  "followers_count": 100,
+  "results": [
+    {
+      "name": "In-Flight Open-Close Race (Flash Trade)",
+      "status": "PASS",
+      "master_clean": true,
+      "orphan_followers_count": 0,
+      "orphan_details": {},
+      "open_duration_sec": 0.215,
+      "close_duration_sec": 0.247
+    },
+    {
+      "name": "Simultaneous Dual Master Orders (Zero-Delta Collision)",
+      "status": "PASS",
+      "both_placed": true,
+      "dual_ok_count": 100,
+      "total_followers": 100,
+      "dispatch_duration_sec": 0.273
+    },
+    {
+      "name": "Multi-Threaded HFT Storm (10 Parallel Threads)",
+      "status": "PASS",
+      "storm_orders_placed": 10,
+      "target_orders": 10,
+      "full_followers_count": 100,
+      "total_followers": 100,
+      "storm_duration_sec": 0.869
+    },
+    {
+      "name": "Mid-Flight Unfollow vs Order Placement Race",
+      "status": "PASS",
+      "control_cohort_passed": true,
+      "control_pass_count": 95,
+      "probe_cohort_count": 5,
+      "race_duration_sec": 0.103
+    },
+    {
+      "name": "Immediate TP/SL Protection Collision",
+      "status": "PASS",
+      "protected_count": 100,
+      "total_followers": 100,
+      "protection_latency_sec": 0.227
+    },
+    {
+      "name": "Final Teardown & Zero Orphan Verification",
+      "status": "PASS",
+      "orphan_count": 0
+    }
+  ]
+}

@@ -1,0 +1,271 @@
+{
+  "suite_name": "BlackTrader Copy Trading 100-Follower Test Suite",
+  "started_at": "2026-11-11T07:47:25.513717+00:00",
+  "completed_at": "2026-11-11T07:48:21.047537+00:00",
+  "master_email": "ctmaster@mailinator.com",
+  "master_id": "mem_aac4ca423a6925dca7",
+  "followers_count": 5,
+  "symbol": "BINANCE:BTCUSDT.P",
+  "lot_size": 0.1,
+  "instance": "paper",
+  "baseline_summary": {
+    "master_balance": 100000088.402,
+    "followers_count": 5,
+    "multiplier_distribution": {
+      "1.0x": "Followers 1-25",
+      "2.0x": "Followers 26-50",
+      "3.0x": "Followers 51-75",
+      "0.5x": "Followers 76-100"
+    }
+  },
+  "scenarios": [
+    {
+      "name": "Market BUY Fan-out & Lot Sizing",
+      "status": "PASS",
+      "pass_count": 5,
+      "total_followers": 5,
+      "master_order": {
+        "order_id": "ord_09f539aefdfdacb066",
+        "market_order_id": "ord_09f539aefdfdacb066",
+        "symbol": "BINANCE:BTCUSDT.P",
+        "side": "BUY",
+        "type": "MARKET",
+        "state": "FILLED",
+        "requested_qty": 0.1,
+        "filled_qty": 0.1,
+        "avg_fill_price": 73877,
+        "copy_ref": "ord_09f539aefdfdacb066",
+        "copy_kind": "master",
+        "created_at": "2026-11-11T07:47:31.205234689Z",
+        "updated_at": "2026-11-11T07:47:31.205234689Z"
+      },
+      "master_mkt_id": "ord_09f539aefdfdacb066",
+      "latencies": {
+        "min_ms": 64.37,
+        "avg_ms": 66.52,
+        "p95_ms": 68.22,
+        "max_ms": 68.22
+      },
+      "details": {
+        "follower1@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.1,
+          "actual_lot": 0.1,
+          "lot_match": true,
+          "entry_price": 73877,
+          "opened_at": "2026-11-11T07:47:31.272874Z"
+        },
+        "follower2@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.1,
+          "actual_lot": 0.1,
+          "lot_match": true,
+          "entry_price": 73877,
+          "opened_at": "2026-11-11T07:47:31.273457Z"
+        },
+        "follower3@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.1,
+          "actual_lot": 0.1,
+          "lot_match": true,
+          "entry_price": 73877,
+          "opened_at": "2026-11-11T07:47:31.272053Z"
+        },
+        "follower4@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.1,
+          "actual_lot": 0.1,
+          "lot_match": true,
+          "entry_price": 73877,
+          "opened_at": "2026-11-11T07:47:31.2708Z"
+        },
+        "follower5@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.1,
+          "actual_lot": 0.1,
+          "lot_match": true,
+          "entry_price": 73877,
+          "opened_at": "2026-11-11T07:47:31.269607Z"
+        }
+      }
+    },
+    {
+      "name": "Partial Close (Reduce Position)",
+      "status": "PASS",
+      "pass_count": 5,
+      "total_followers": 5,
+      "details": {
+        "follower1@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.05,
+          "actual_qty": 0.05,
+          "ok": true
+        },
+        "follower2@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.05,
+          "actual_qty": 0.05,
+          "ok": true
+        },
+        "follower3@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.05,
+          "actual_qty": 0.05,
+          "ok": true
+        },
+        "follower4@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.05,
+          "actual_qty": 0.05,
+          "ok": true
+        },
+        "follower5@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.05,
+          "actual_qty": 0.05,
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "Full Close & No-Orphan Verification",
+      "status": "PASS",
+      "pass_count": 5,
+      "orphan_count": 0,
+      "total_followers": 5,
+      "details": {
+        "follower1@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower2@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower3@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower4@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower5@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        }
+      }
+    },
+    {
+      "name": "Take Profit / Stop Loss Propagation & Modification",
+      "status": "PASS",
+      "pass_count": 5,
+      "total_followers": 5,
+      "details": {
+        "follower1@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower2@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower3@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower5@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower4@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "Pending Limit Order & Cancel",
+      "status": "PASS",
+      "pass_count": 5,
+      "total_followers": 5
+    },
+    {
+      "name": "Rapid Burst (5 orders)",
+      "status": "PASS",
+      "burst_count": 5,
+      "placed_count": 5,
+      "burst_duration_sec": 1.19
+    },
+    {
+      "name": "Market SELL Fan-out & Multiplier Sizing",
+      "status": "PASS",
+      "pass_count": 5,
+      "total_followers": 5,
+      "details": {
+        "follower1@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.1,
+          "actual_lot": 0.1,
+          "lot_match": true
+        },
+        "follower2@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.1,
+          "actual_lot": 0.1,
+          "lot_match": true
+        },
+        "follower3@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.1,
+          "actual_lot": 0.1,
+          "lot_match": true
+        },
+        "follower4@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.1,
+          "actual_lot": 0.1,
+          "lot_match": true
+        },
+        "follower5@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.1,
+          "actual_lot": 0.1,
+          "lot_match": true
+        }
+      }
+    },
+    {
+      "name": "Follower Manual Close Isolation",
+      "status": "PASS",
+      "probe_follower": "follower3@mailinator.com",
+      "probe_closed": true,
+      "master_still_open": true,
+      "peers_still_open": true
+    },
+    {
+      "name": "Follow Mid-Trade Isolation (No Retroactive Copying)",
+      "status": "PASS",
+      "retroactive_copied": false,
+      "summary": "No retroactive trade copied (Platform isolates historical trades)"
+    },
+    {
+      "name": "Unfollow Mid-Trade Behavior Probe",
+      "status": "OBSERVED",
+      "had_position_initially": true,
+      "open_after_unfollow": true,
+      "open_after_master_close": false,
+      "behavior_summary": "Position was closed on master close"
+    },
+    {
+      "name": "Final Teardown & Zero Orphan Verification",
+      "status": "PASS",
+      "orphan_count": 0
+    }
+  ]
+}
