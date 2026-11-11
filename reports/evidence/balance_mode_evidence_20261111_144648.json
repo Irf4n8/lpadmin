@@ -1,0 +1,271 @@
+{
+  "suite_name": "BlackTrader Balance-Based Copy Trading 100-Follower Test Suite",
+  "copy_mode": "balance",
+  "started_at": "2026-11-11T09:15:01.670098+00:00",
+  "completed_at": "2026-11-11T09:16:48.654078+00:00",
+  "master_email": "ctmaster@mailinator.com",
+  "master_id": "mem_aac4ca423a6925dca7",
+  "followers_count": 5,
+  "symbol": "BINANCE:BTCUSDT.P",
+  "lot_size": 0.1,
+  "orders_per_scenario": 10,
+  "instance": "paper",
+  "setup_summary": {
+    "unfollow_clean": false,
+    "successful_balance_sets": 5,
+    "successful_joins": 5,
+    "active_links_count": 100,
+    "all_balance_method": false,
+    "master_snapshot": {
+      "email": "ctmaster@mailinator.com",
+      "client_id": "mem_aac4ca423a6925dca7",
+      "balance": 100000000,
+      "equity": 100000000,
+      "open_positions": 0
+    },
+    "follower_snapshots_count": 5
+  },
+  "scenarios": [
+    {
+      "name": "Market BUY Fan-out (10 orders)",
+      "status": "PASS",
+      "pass_count": 5,
+      "total_followers": 5,
+      "orders_placed": 10,
+      "expected_orders": 10,
+      "master_mkt_ids": [
+        "ord_a7d64580dbac1f5b43",
+        "ord_2fe5ffa6855a36194d",
+        "ord_6c77297a9f9aa5eb4d",
+        "ord_f74249a3b96f1ef804",
+        "ord_a9e033f0cfabe63e1a",
+        "ord_1b673d6e5ca5ef488d",
+        "ord_8b28af5aad9a824a83",
+        "ord_79ba52291f74532c98",
+        "ord_a37f6d632ec97a6324",
+        "ord_c376a20ae012b65f9e"
+      ],
+      "latencies": {
+        "min_ms": 4028.58,
+        "avg_ms": 4033.01,
+        "p95_ms": 4037.39,
+        "max_ms": 4037.39
+      },
+      "details": {
+        "follower1@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower2@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower3@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower4@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower5@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        }
+      }
+    },
+    {
+      "name": "Partial Close (10 orders reduced)",
+      "status": "PASS",
+      "pass_count": 5,
+      "total_followers": 5,
+      "orders_reduced": 10,
+      "details": {
+        "follower1@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower2@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower3@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower4@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower5@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "Full Close (10 orders closed)",
+      "status": "PASS",
+      "pass_count": 5,
+      "orphan_count": 0,
+      "total_followers": 5,
+      "orders_closed": 10,
+      "details": {
+        "follower1@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower2@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower3@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower4@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower5@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        }
+      }
+    },
+    {
+      "name": "Take Profit / Stop Loss Propagation (10 orders)",
+      "status": "PASS",
+      "pass_count": 5,
+      "total_followers": 5,
+      "orders_count": 10,
+      "details": {
+        "follower3@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower1@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower2@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower5@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower4@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "Pending Limit Orders & Cancel (10 orders)",
+      "status": "PASS",
+      "pass_count": 5,
+      "total_followers": 5,
+      "pending_count": 10
+    },
+    {
+      "name": "Rapid Burst (10 orders)",
+      "status": "PASS",
+      "burst_count": 10,
+      "placed_count": 10,
+      "burst_duration_sec": 2.59
+    },
+    {
+      "name": "Market SELL Fan-out (10 orders)",
+      "status": "PASS",
+      "pass_count": 5,
+      "total_followers": 5,
+      "orders_placed": 10,
+      "details": {
+        "follower1@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower2@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower3@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower4@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower5@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "Follower Manual Close Isolation",
+      "status": "PASS",
+      "probe_follower": "follower3@mailinator.com",
+      "probe_closed": true,
+      "master_still_open": true,
+      "peers_still_open": true
+    },
+    {
+      "name": "Follow Mid-Trade Isolation (No Retroactive Copying)",
+      "status": "PASS",
+      "retroactive_copied": false,
+      "summary": "No retroactive trade copied (Platform isolates historical trades)"
+    },
+    {
+      "name": "Unfollow Mid-Trade Behavior Probe",
+      "status": "OBSERVED",
+      "had_position_initially": true,
+      "open_after_unfollow": true,
+      "open_after_master_close": false,
+      "behavior_summary": "Position was closed on master close"
+    },
+    {
+      "name": "Final Teardown & Zero Orphan Verification",
+      "status": "PASS",
+      "orphan_count": 0
+    }
+  ]
+}

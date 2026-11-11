@@ -1,0 +1,32 @@
+{
+  "suite_name": "Advanced Order Types & Execution Edge Cases",
+  "timestamp": "2026-11-11T09:55:24.272623+00:00",
+  "followers_count": 100,
+  "results": [
+    {
+      "name": "Multi-Symbol Simultaneous Fan-Out",
+      "status": "PASS",
+      "symbols_tested": [
+        "BINANCE:BTCUSDT.P",
+        "BINANCE:ETHUSDT.P",
+        "BINANCE:SOLUSDT.P",
+        "BINANCE:BNBUSDT.P"
+      ],
+      "placed_count": 4,
+      "pass_count": 100,
+      "total_followers": 100
+    },
+    {
+      "name": "Reverse Trade Execution (BUY to SELL)",
+      "status": "PASS",
+      "pass_count": 100,
+      "total_followers": 100
+    },
+    {
+      "name": "Order Boundary Rejection & Safety",
+      "status": "FAIL",
+      "invalid_tpsl_rejected": true,
+      "follower_orphans": 82492
+    }
+  ]
+}

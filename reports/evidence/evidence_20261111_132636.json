@@ -1,0 +1,3026 @@
+{
+  "suite_name": "BlackTrader Copy Trading 100-Follower Test Suite",
+  "started_at": "2026-11-11T07:54:49.697733+00:00",
+  "completed_at": "2026-11-11T07:56:36.824802+00:00",
+  "master_email": "ctmaster@mailinator.com",
+  "master_id": "mem_aac4ca423a6925dca7",
+  "followers_count": 100,
+  "symbol": "BINANCE:BTCUSDT.P",
+  "lot_size": 1.0,
+  "instance": "paper",
+  "baseline_summary": {
+    "master_balance": 100000082.60199995,
+    "followers_count": 100,
+    "multiplier_distribution": {
+      "1.0x": "Followers 1-25",
+      "2.0x": "Followers 26-50",
+      "3.0x": "Followers 51-75",
+      "0.5x": "Followers 76-100"
+    }
+  },
+  "scenarios": [
+    {
+      "name": "Market BUY Fan-out & Lot Sizing",
+      "status": "PASS",
+      "pass_count": 100,
+      "total_followers": 100,
+      "master_order": {
+        "order_id": "ord_feb29f6f8937ae859b",
+        "market_order_id": "ord_feb29f6f8937ae859b",
+        "symbol": "BINANCE:BTCUSDT.P",
+        "side": "BUY",
+        "type": "MARKET",
+        "state": "FILLED",
+        "requested_qty": 1,
+        "filled_qty": 1,
+        "avg_fill_price": 73941.1,
+        "copy_ref": "ord_feb29f6f8937ae859b",
+        "copy_kind": "master",
+        "created_at": "2026-11-11T07:55:17.733523562Z",
+        "updated_at": "2026-11-11T07:55:17.733523562Z"
+      },
+      "master_mkt_id": "ord_feb29f6f8937ae859b",
+      "latencies": {
+        "min_ms": 2.78,
+        "avg_ms": 35.57,
+        "p95_ms": 63.28,
+        "max_ms": 65.86
+      },
+      "details": {
+        "follower1@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.798596Z"
+        },
+        "follower2@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.79938Z"
+        },
+        "follower3@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.797624Z"
+        },
+        "follower4@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.797212Z"
+        },
+        "follower5@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.796807Z"
+        },
+        "follower6@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.796411Z"
+        },
+        "follower7@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.796007Z"
+        },
+        "follower8@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.795596Z"
+        },
+        "follower9@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.795185Z"
+        },
+        "follower10@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.794753Z"
+        },
+        "follower11@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.794227Z"
+        },
+        "follower12@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.793656Z"
+        },
+        "follower13@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.793025Z"
+        },
+        "follower14@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.792619Z"
+        },
+        "follower15@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.7922Z"
+        },
+        "follower16@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.791764Z"
+        },
+        "follower17@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.791218Z"
+        },
+        "follower18@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.790686Z"
+        },
+        "follower19@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.790216Z"
+        },
+        "follower20@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.789615Z"
+        },
+        "follower21@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.789217Z"
+        },
+        "follower22@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.788782Z"
+        },
+        "follower23@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.788144Z"
+        },
+        "follower24@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.787411Z"
+        },
+        "follower25@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.786781Z"
+        },
+        "follower26@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.786201Z"
+        },
+        "follower27@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.785624Z"
+        },
+        "follower28@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.784996Z"
+        },
+        "follower29@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.78461Z"
+        },
+        "follower30@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.784205Z"
+        },
+        "follower31@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.783767Z"
+        },
+        "follower32@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.78336Z"
+        },
+        "follower33@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.782914Z"
+        },
+        "follower34@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.782328Z"
+        },
+        "follower35@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.781005Z"
+        },
+        "follower36@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.780008Z"
+        },
+        "follower37@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.779099Z"
+        },
+        "follower38@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.778685Z"
+        },
+        "follower39@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.778222Z"
+        },
+        "follower40@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.777676Z"
+        },
+        "follower41@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.776999Z"
+        },
+        "follower42@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.776397Z"
+        },
+        "follower43@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.775544Z"
+        },
+        "follower44@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.774627Z"
+        },
+        "follower45@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.773672Z"
+        },
+        "follower46@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.772876Z"
+        },
+        "follower47@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.772425Z"
+        },
+        "follower48@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.771472Z"
+        },
+        "follower49@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.770772Z"
+        },
+        "follower50@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.770127Z"
+        },
+        "follower51@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.768938Z"
+        },
+        "follower52@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.767697Z"
+        },
+        "follower53@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.767249Z"
+        },
+        "follower54@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.766627Z"
+        },
+        "follower55@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.765441Z"
+        },
+        "follower56@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.764654Z"
+        },
+        "follower57@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.76417Z"
+        },
+        "follower58@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.763154Z"
+        },
+        "follower59@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.762394Z"
+        },
+        "follower60@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.76156Z"
+        },
+        "follower61@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.761048Z"
+        },
+        "follower62@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.760554Z"
+        },
+        "follower63@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.76Z"
+        },
+        "follower64@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.759368Z"
+        },
+        "follower65@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.758817Z"
+        },
+        "follower66@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.758237Z"
+        },
+        "follower67@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.757644Z"
+        },
+        "follower68@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.757233Z"
+        },
+        "follower69@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.756788Z"
+        },
+        "follower70@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.756313Z"
+        },
+        "follower71@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.755661Z"
+        },
+        "follower72@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.754711Z"
+        },
+        "follower73@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.753232Z"
+        },
+        "follower74@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.752533Z"
+        },
+        "follower75@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.751944Z"
+        },
+        "follower76@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.751337Z"
+        },
+        "follower77@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.750785Z"
+        },
+        "follower78@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.750366Z"
+        },
+        "follower79@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.749905Z"
+        },
+        "follower80@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.749496Z"
+        },
+        "follower81@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.748978Z"
+        },
+        "follower82@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.748354Z"
+        },
+        "follower83@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.747629Z"
+        },
+        "follower84@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.746969Z"
+        },
+        "follower85@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.746435Z"
+        },
+        "follower86@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.745709Z"
+        },
+        "follower87@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.744938Z"
+        },
+        "follower88@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.744491Z"
+        },
+        "follower89@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.743982Z"
+        },
+        "follower90@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.743347Z"
+        },
+        "follower91@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.742787Z"
+        },
+        "follower92@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.741908Z"
+        },
+        "follower93@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.741085Z"
+        },
+        "follower94@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.740337Z"
+        },
+        "follower95@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.739703Z"
+        },
+        "follower96@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.739143Z"
+        },
+        "follower97@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.7387Z"
+        },
+        "follower98@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.738189Z"
+        },
+        "follower99@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.737327Z"
+        },
+        "follower100@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true,
+          "entry_price": 73941.1,
+          "opened_at": "2026-11-11T07:55:17.736298Z"
+        }
+      }
+    },
+    {
+      "name": "Partial Close (Reduce Position)",
+      "status": "PASS",
+      "pass_count": 100,
+      "total_followers": 100,
+      "details": {
+        "follower1@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower2@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower3@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower4@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower5@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower6@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower7@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower8@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower9@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower10@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower11@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower12@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower13@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower14@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower15@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower16@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower17@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower18@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower19@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower20@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower21@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower22@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower23@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower24@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower25@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.5,
+          "actual_qty": 0.5,
+          "ok": true
+        },
+        "follower26@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower27@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower28@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower29@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower30@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower31@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower32@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower33@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower34@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower35@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower36@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower37@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower38@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower39@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower40@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower41@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower42@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower43@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower44@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower45@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower46@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower47@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower48@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower49@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower50@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.0,
+          "actual_qty": 1,
+          "ok": true
+        },
+        "follower51@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower52@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower53@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower54@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower55@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower56@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower57@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower58@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower59@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower60@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower61@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower62@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower63@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower64@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower65@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower66@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower67@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower68@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower69@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower70@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower71@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower72@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower73@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower74@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower75@mailinator.com": {
+          "found": true,
+          "expected_qty": 1.5,
+          "actual_qty": 1.5,
+          "ok": true
+        },
+        "follower76@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower77@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower78@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower79@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower80@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower81@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower82@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower83@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower84@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower85@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower86@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower87@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower88@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower89@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower90@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower91@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower92@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower93@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower94@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower95@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower96@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower97@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower98@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower99@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        },
+        "follower100@mailinator.com": {
+          "found": true,
+          "expected_qty": 0.25,
+          "actual_qty": 0.25,
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "Full Close & No-Orphan Verification",
+      "status": "PASS",
+      "pass_count": 100,
+      "orphan_count": 0,
+      "total_followers": 100,
+      "details": {
+        "follower1@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower2@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower3@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower4@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower5@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower6@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower7@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower8@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower9@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower10@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower11@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower12@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower13@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower14@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower15@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower16@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower17@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower18@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower19@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower20@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower21@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower22@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower23@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower24@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower25@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower26@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower27@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower28@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower29@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower30@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower31@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower32@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower33@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower34@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower35@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower36@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower37@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower38@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower39@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower40@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower41@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower42@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower43@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower44@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower45@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower46@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower47@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower48@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower49@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower50@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower51@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower52@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower53@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower54@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower55@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower56@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower57@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower58@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower59@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower60@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower61@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower62@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower63@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower64@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower65@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower66@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower67@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower68@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower69@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower70@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower71@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower72@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower73@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower74@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower75@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower76@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower77@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower78@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower79@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower80@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower81@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower82@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower83@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower84@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower85@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower86@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower87@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower88@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower89@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower90@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower91@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower92@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower93@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower94@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower95@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower96@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower97@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower98@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower99@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower100@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        }
+      }
+    },
+    {
+      "name": "Take Profit / Stop Loss Propagation & Modification",
+      "status": "PASS",
+      "pass_count": 100,
+      "total_followers": 100,
+      "details": {
+        "follower5@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower6@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower2@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower10@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower8@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower9@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower12@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower11@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower4@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower3@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower16@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower13@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower15@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower19@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower18@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower17@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower20@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower22@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower23@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower24@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower26@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower25@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower30@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower29@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower31@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower27@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower28@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower32@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower33@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower34@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower37@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower35@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower39@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower36@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower14@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower42@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower41@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower40@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower46@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower43@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower44@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower47@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower1@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower45@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower38@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower21@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower48@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower51@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower50@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower52@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower49@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower54@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower55@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower61@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower59@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower7@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower60@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower56@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower62@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower58@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower53@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower64@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower63@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower66@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower67@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower65@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower68@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower57@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower72@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower73@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower75@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower74@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower76@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower79@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower77@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower83@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower82@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower85@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower84@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower86@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower70@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower87@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower78@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower90@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower88@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower89@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower69@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower92@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower71@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower95@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower94@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower93@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower100@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower99@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower80@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower98@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower91@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower81@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower97@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        },
+        "follower96@mailinator.com": {
+          "has_tp": true,
+          "has_sl": true,
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "Pending Limit Order & Cancel",
+      "status": "PASS",
+      "pass_count": 100,
+      "total_followers": 100
+    },
+    {
+      "name": "Rapid Burst (5 orders)",
+      "status": "PASS",
+      "burst_count": 5,
+      "placed_count": 5,
+      "burst_duration_sec": 1.34
+    },
+    {
+      "name": "Market SELL Fan-out & Multiplier Sizing",
+      "status": "PASS",
+      "pass_count": 100,
+      "total_followers": 100,
+      "details": {
+        "follower1@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower2@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower3@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower4@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower5@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower6@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower7@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower8@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower9@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower10@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower11@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower12@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower13@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower14@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower15@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower16@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower17@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower18@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower19@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower20@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower21@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower22@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower23@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower24@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower25@mailinator.com": {
+          "found": true,
+          "expected_lot": 1.0,
+          "actual_lot": 1,
+          "lot_match": true
+        },
+        "follower26@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower27@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower28@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower29@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower30@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower31@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower32@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower33@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower34@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower35@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower36@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower37@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower38@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower39@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower40@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower41@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower42@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower43@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower44@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower45@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower46@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower47@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower48@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower49@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower50@mailinator.com": {
+          "found": true,
+          "expected_lot": 2.0,
+          "actual_lot": 2,
+          "lot_match": true
+        },
+        "follower51@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower52@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower53@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower54@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower55@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower56@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower57@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower58@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower59@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower60@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower61@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower62@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower63@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower64@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower65@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower66@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower67@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower68@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower69@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower70@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower71@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower72@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower73@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower74@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower75@mailinator.com": {
+          "found": true,
+          "expected_lot": 3.0,
+          "actual_lot": 3,
+          "lot_match": true
+        },
+        "follower76@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower77@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower78@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower79@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower80@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower81@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower82@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower83@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower84@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower85@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower86@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower87@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower88@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower89@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower90@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower91@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower92@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower93@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower94@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower95@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower96@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower97@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower98@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower99@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        },
+        "follower100@mailinator.com": {
+          "found": true,
+          "expected_lot": 0.5,
+          "actual_lot": 0.5,
+          "lot_match": true
+        }
+      }
+    },
+    {
+      "name": "Follower Manual Close Isolation",
+      "status": "PASS",
+      "probe_follower": "follower3@mailinator.com",
+      "probe_closed": true,
+      "master_still_open": true,
+      "peers_still_open": true
+    },
+    {
+      "name": "Follow Mid-Trade Isolation (No Retroactive Copying)",
+      "status": "PASS",
+      "retroactive_copied": false,
+      "summary": "No retroactive trade copied (Platform isolates historical trades)"
+    },
+    {
+      "name": "Unfollow Mid-Trade Behavior Probe",
+      "status": "OBSERVED",
+      "had_position_initially": true,
+      "open_after_unfollow": true,
+      "open_after_master_close": false,
+      "behavior_summary": "Position was closed on master close"
+    },
+    {
+      "name": "Final Teardown & Zero Orphan Verification",
+      "status": "PASS",
+      "orphan_count": 0
+    }
+  ]
+}

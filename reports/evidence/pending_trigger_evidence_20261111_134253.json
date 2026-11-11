@@ -1,0 +1,56 @@
+{
+  "suite_name": "BlackTrader Pending Orders Trigger & TP/SL Test Suite",
+  "started_at": "2026-11-11T08:11:23.247338+00:00",
+  "completed_at": "2026-11-11T08:12:53.802576+00:00",
+  "master_email": "ctmaster@mailinator.com",
+  "master_id": "mem_aac4ca423a6925dca7",
+  "followers_count": 100,
+  "symbol": "BINANCE:BTCUSDT.P",
+  "lot_size": 0.5,
+  "instance": "paper",
+  "scenarios": [
+    {
+      "name": "Pending BUY LIMIT Trigger (WITHOUT TP/SL)",
+      "status": "PASS",
+      "triggered": true,
+      "limit_price": 74044.9,
+      "pass_count": 100,
+      "total_followers": 100
+    },
+    {
+      "name": "Pending BUY LIMIT Trigger (WITH TP/SL)",
+      "status": "PASS",
+      "triggered": true,
+      "limit_price": 74039.9,
+      "tp_price": 77039.9,
+      "sl_price": 71039.9,
+      "pass_count": 100,
+      "tpsl_verified_count": 100,
+      "total_followers": 100
+    },
+    {
+      "name": "Pending SELL LIMIT Trigger (WITHOUT TP/SL)",
+      "status": "FAIL",
+      "triggered": false,
+      "limit_price": 74036.9,
+      "pass_count": 0,
+      "total_followers": 100
+    },
+    {
+      "name": "Pending SELL LIMIT Trigger (WITH TP/SL)",
+      "status": "PASS",
+      "triggered": true,
+      "limit_price": 74016.8,
+      "tp_price": 71016.8,
+      "sl_price": 77016.8,
+      "pass_count": 100,
+      "tpsl_verified_count": 100,
+      "total_followers": 100
+    },
+    {
+      "name": "Final Teardown & Zero Orphan Verification",
+      "status": "PASS",
+      "orphan_count": 0
+    }
+  ]
+}

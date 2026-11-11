@@ -1,0 +1,92 @@
+{
+  "suite_name": "BlackTrader Extended Copy Trading Test Suite (Categories I - P)",
+  "started_at": "2026-11-11T08:01:09.772467+00:00",
+  "completed_at": "2026-11-11T08:02:02.632550+00:00",
+  "master_email": "ctmaster@mailinator.com",
+  "master_id": "mem_aac4ca423a6925dca7",
+  "followers_count": 5,
+  "instance": "paper",
+  "scenarios": [
+    {
+      "name": "Multiplier Input Validation (Negative Blocked)",
+      "category": "I. Copy mode and multiplier variants",
+      "status": "PASS",
+      "negative_blocked": true,
+      "error_detail": "{\"error\":\"The multiplier can't be below 0.01.\"}\n"
+    },
+    {
+      "name": "Mid-Session Multiplier Change Isolation",
+      "category": "I. Copy mode and multiplier variants",
+      "status": "PASS",
+      "trade1_unchanged": true,
+      "new_trade_scaled_correctly": true,
+      "new_trade_actual_lot": 2.5
+    },
+    {
+      "name": "Hedged Positions Mirror (Simultaneous Long & Short)",
+      "category": "J. Order types and execution edge cases",
+      "status": "PASS",
+      "pass_count": 5,
+      "total_followers": 5
+    },
+    {
+      "name": "Multi-Symbol Concurrent Fan-Out",
+      "category": "J. Order types and execution edge cases",
+      "status": "PASS",
+      "pass_count": 5,
+      "total_followers": 5
+    },
+    {
+      "name": "Reverse Trade Sync (Long to Short Transition)",
+      "category": "J. Order types and execution edge cases",
+      "status": "PASS",
+      "pass_count": 5,
+      "total_followers": 5
+    },
+    {
+      "name": "Follower Account Disabled Isolation",
+      "category": "L. Follower state changes",
+      "status": "FAIL",
+      "disabled_follower": "follower5@mailinator.com",
+      "active_followers_unharmed": false
+    },
+    {
+      "name": "Follower Balance Change Mid-Trade",
+      "category": "L. Follower state changes",
+      "status": "PASS",
+      "position_preserved": true,
+      "qty_before": 0.1,
+      "qty_after": 0.1
+    },
+    {
+      "name": "Bulk Unfollow and Bulk Re-Follow",
+      "category": "L. Follower state changes",
+      "status": "FAIL",
+      "unfollowed_link_count": 100,
+      "refollowed_link_count": 100
+    },
+    {
+      "name": "Order ID Traceability & Copy Ref Mapping",
+      "category": "N. Data integrity and idempotency",
+      "status": "PASS",
+      "master_order_id": "ord_7fcb9c05ad6331e8d5",
+      "traceable_followers_count": 5,
+      "total_followers": 5
+    },
+    {
+      "name": "Security, Permissions, IDOR & Injection Defense",
+      "category": "P. Security and permissions",
+      "status": "PASS",
+      "no_token_rejected_401": true,
+      "invalid_token_rejected_401": true,
+      "follower_idor_blocked": true,
+      "sqli_injection_blocked": true
+    },
+    {
+      "name": "Final Teardown & Zero Orphan Verification",
+      "category": "Accounting & Teardown",
+      "status": "PASS",
+      "orphan_count": 0
+    }
+  ]
+}

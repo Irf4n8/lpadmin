@@ -1,0 +1,30 @@
+{
+  "suite_name": "Account State Changes & Hedging Isolation Suite",
+  "timestamp": "2026-11-11T10:33:17.809195+00:00",
+  "followers_count": 100,
+  "results": [
+    {
+      "name": "Pre-Existing Manual Trade Coexistence (BUY + BUY)",
+      "status": "PASS",
+      "coexistence_verified": true,
+      "manual_trade_survived": true
+    },
+    {
+      "name": "Opposing Direction Hedging (Manual SELL + Copied BUY)",
+      "status": "PASS",
+      "hedging_verified": true,
+      "manual_sell_survived": true
+    },
+    {
+      "name": "Follower Capital Adjustment Mid-Trade",
+      "status": "PASS",
+      "existing_lot_locked": true,
+      "trade2_executed": true
+    },
+    {
+      "name": "Final Teardown & Zero Orphan Verification",
+      "status": "PASS",
+      "orphan_count": 0
+    }
+  ]
+}
