@@ -1,0 +1,291 @@
+{
+ "suite": "Symbol Coverage",
+ "verdict": "PASS",
+ "timestamp": "2026-11-12T17:26:34.496879+00:00",
+ "started": "2026-11-12T22:53:34",
+ "duration_sec": 180.4,
+ "instance": "paper",
+ "symbol_source": "https://terminal.blacktrader.com/feed/symbol_list",
+ "universe": 3643,
+ "tested": 18,
+ "mode": "sample",
+ "followers_range": [
+  1,
+  100
+ ],
+ "followers_linked": 99,
+ "tally": {
+  "PASS": 12,
+  "FAIL": 0,
+  "WARN": 0,
+  "SKIP": 6
+ },
+ "groups": {
+  "CFD_247": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "CMDTY": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "CRYPTO/COMMODITY_PERP": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "CRYPTO/CRYPTO_PERP": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "CRYPTO/CRYPTO_PERP_COINM": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "CRYPTO/CRYPTO_SPOT": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "CRYPTO/STOCK_PERP": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "CRYPTO_CFD": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "EU_STOCKS": {
+   "PASS": 0,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 1
+  },
+  "FOREX": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "GREEKS": {
+   "PASS": 0,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 1
+  },
+  "IN_FUTURES": {
+   "PASS": 0,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 1
+  },
+  "IN_INDEX": {
+   "PASS": 0,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 1
+  },
+  "IN_OPTIONS": {
+   "PASS": 0,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 1
+  },
+  "IN_STOCKS": {
+   "PASS": 0,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 1
+  },
+  "METAL": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "SPOT_INDICES": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "US_STOCKS": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  }
+ },
+ "results": [
+  {
+   "symbol": "BINANCE:BTCUSDT.P",
+   "type": "CRYPTO",
+   "group": "CRYPTO/CRYPTO_PERP",
+   "qty": 0.002,
+   "status": "PASS",
+   "detail": "copied to 99 followers and closed",
+   "entry": 71852.9
+  },
+  {
+   "symbol": "BINANCE:AAOIUSDT.P",
+   "type": "CRYPTO",
+   "group": "CRYPTO/STOCK_PERP",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 99 followers and closed",
+   "entry": 53.7
+  },
+  {
+   "symbol": "BINANCE:BTCUSDT",
+   "type": "CRYPTO",
+   "group": "CRYPTO/CRYPTO_SPOT",
+   "qty": 2e-05,
+   "status": "PASS",
+   "detail": "copied to 99 followers and closed",
+   "entry": 71882.47
+  },
+  {
+   "symbol": "BINANCE:BTCUSD_PERP.P",
+   "type": "CRYPTO",
+   "group": "CRYPTO/CRYPTO_PERP_COINM",
+   "qty": 2.0,
+   "status": "PASS",
+   "detail": "copied to 99 followers and closed",
+   "entry": 71765.7
+  },
+  {
+   "symbol": "BINANCE:BZUSDT.P",
+   "type": "CRYPTO",
+   "group": "CRYPTO/COMMODITY_PERP",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 99 followers and closed",
+   "entry": 92.62
+  },
+  {
+   "symbol": "BLACK:AAPL.OQ",
+   "type": "US_STOCKS",
+   "group": "US_STOCKS",
+   "qty": 2.0,
+   "status": "PASS",
+   "detail": "copied to 99 followers and closed",
+   "entry": 356.45
+  },
+  {
+   "symbol": "BLACK:BTCUSD",
+   "type": "CRYPTO_CFD",
+   "group": "CRYPTO_CFD",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 99 followers and closed",
+   "entry": 71880.62
+  },
+  {
+   "symbol": "BLACK:ADSGn.DE",
+   "type": "EU_STOCKS",
+   "group": "EU_STOCKS",
+   "qty": 2.0,
+   "status": "SKIP",
+   "detail": "market closed"
+  },
+  {
+   "symbol": "BLACK:XAUUSD",
+   "type": "METAL",
+   "group": "METAL",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 99 followers and closed",
+   "entry": 3870.7
+  },
+  {
+   "symbol": "BLACK:EURUSD",
+   "type": "FOREX",
+   "group": "FOREX",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 99 followers and closed",
+   "entry": 1.10538
+  },
+  {
+   "symbol": "BLACK:US500cash-1",
+   "type": "SPOT_INDICES",
+   "group": "SPOT_INDICES",
+   "qty": 2.0,
+   "status": "PASS",
+   "detail": "copied to 99 followers and closed",
+   "entry": 7626.2
+  },
+  {
+   "symbol": "BLACK:BRENTcash-1",
+   "type": "CMDTY",
+   "group": "CMDTY",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 99 followers and closed",
+   "entry": 93.38
+  },
+  {
+   "symbol": "BLACK:GOLD.247",
+   "type": "CFD_247",
+   "group": "CFD_247",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 99 followers and closed",
+   "entry": 3877.7
+  },
+  {
+   "symbol": "NSE:NIFTY",
+   "type": "IN_INDEX",
+   "group": "IN_INDEX",
+   "qty": 2.0,
+   "status": "SKIP",
+   "detail": "market closed"
+  },
+  {
+   "symbol": "BSE:SENSEX 03DEC2026 76300 CE",
+   "type": "IN_OPTIONS",
+   "group": "IN_OPTIONS",
+   "qty": 40.0,
+   "status": "SKIP",
+   "detail": "market closed"
+  },
+  {
+   "symbol": "BSE:SENSEX DEC2026 FUT",
+   "type": "IN_FUTURES",
+   "group": "IN_FUTURES",
+   "qty": 40.0,
+   "status": "SKIP",
+   "detail": "market closed"
+  },
+  {
+   "symbol": "GX:1!BANKNIFTY@FAIR",
+   "type": "GREEKS",
+   "group": "GREEKS",
+   "qty": 2.0,
+   "status": "SKIP",
+   "detail": "market closed"
+  },
+  {
+   "symbol": "NSE:RELIANCE",
+   "type": "IN_STOCKS",
+   "group": "IN_STOCKS",
+   "qty": 2.0,
+   "status": "SKIP",
+   "detail": "market closed"
+  }
+ ]
+}

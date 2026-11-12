@@ -9,183 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js">
-    /* ========================================================================= */
-    /* MASTER ORDER DISPATCH & 100-FOLLOWER COMPARISON ENGINE                   */
-    /* ========================================================================= */
-    let currentDispatchSide = 'BUY';
-    let cachedComparisonResults = [];
-    let currentCompFilter = 'ALL';
-
-    function selectDispatchSide(side) {
-      currentDispatchSide = side;
-      const btnBuy = document.getElementById("btnSideBuy");
-      const btnSell = document.getElementById("btnSideSell");
-      if (side === 'BUY') {
-        btnBuy.style.background = "var(--ok-soft)";
-        btnBuy.style.color = "var(--ok)";
-        btnBuy.style.borderColor = "var(--ok)";
-        btnSell.style.background = "transparent";
-        btnSell.style.color = "var(--muted)";
-        btnSell.style.borderColor = "var(--border)";
-      } else {
-        btnSell.style.background = "var(--danger-soft)";
-        btnSell.style.color = "var(--danger)";
-        btnSell.style.borderColor = "var(--danger)";
-        btnBuy.style.background = "transparent";
-        btnBuy.style.color = "var(--muted)";
-        btnBuy.style.borderColor = "var(--border)";
-      }
-    }
-
-    function setDispatchQty(qty) {
-      const input = document.getElementById("dispatchQtyInput");
-      if (input) input.value = qty.toFixed(1);
-      document.querySelectorAll("#tabReplication .preset-pill").forEach(p => {
-        if (parseFloat(p.innerText) === qty) {
-          p.classList.add("active");
-        } else {
-          p.classList.remove("active");
-        }
-      });
-    }
-
-    async function executeMasterDispatchAndVerify() {
-      const btn = document.getElementById("btnExecuteDispatch");
-      const symbol = document.getElementById("dispatchSymbolInput")?.value || "BINANCE:BTCUSDT.P";
-      const type = document.getElementById("dispatchTypeInput")?.value || "MARKET";
-      const qty = parseFloat(document.getElementById("dispatchQtyInput")?.value || "1.0");
-
-      if (btn) {
-        btn.disabled = true;
-        btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Dispatching Master & Polling 100...`;
-      }
-
-      // Show in-progress placeholders
-      document.getElementById("cardMasterOrdId").innerText = "Executing...";
-      document.getElementById("cardReplicatedCount").innerText = "Polling...";
-      document.getElementById("cardMatchRate").innerText = "...";
-      document.getElementById("cardFanOutLatency").innerText = "...";
-      document.getElementById("comparisonTableBody").innerHTML = `
-        <tr>
-          <td colspan="9" style="text-align: center; color: var(--violet-ink); padding: 30px;">
-            <i class="fa-solid fa-spinner fa-spin" style="font-size: 20px; display: block; margin-bottom: 8px;"></i>
-            Master order sent to OMS! Polling 100 follower accounts to compare replication, lot sizes, and prices...
-          </td>
-        </tr>
-      `;
-
-      try {
-        const payload = {
-          symbol: symbol,
-          side: currentDispatchSide,
-          type: type,
-          qty: qty,
-          instance: currentInstance
-        };
-
-        const res = await fetch("/api/order/dispatch_and_verify", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
-        const data = await res.json();
-
-        if (res.status === 200 && data.success) {
-          const m = data.master_order || {};
-          const s = data.summary || {};
-
-          document.getElementById("cardMasterOrdId").innerHTML = `<code style="color:var(--ok);">${m.order_id}</code>`;
-          document.getElementById("cardMasterDetails").innerText = `${m.side} ${m.requested_qty} lots @ ${m.fill_price} USD`;
-          
-          document.getElementById("cardReplicatedCount").innerText = `${s.replicated_count} / ${s.total_followers}`;
-          document.getElementById("cardReplicatedSub").innerText = `${s.replicated_count} accounts received copy order`;
-
-          document.getElementById("cardMatchRate").innerText = `${s.pass_rate_pct}%`;
-          document.getElementById("cardMatchRateSub").innerText = `${s.perfect_match_count} / ${s.total_followers} exact sizing match`;
-
-          document.getElementById("cardFanOutLatency").innerText = `${s.total_elapsed_seconds}s`;
-          document.getElementById("cardFanOutSub").innerText = "Total fan-out verification time";
-
-          cachedComparisonResults = data.comparison || [];
-          renderComparisonTable();
-
-          showToast(`🚀 Order Verified! ${s.replicated_count}/100 Replicated (${s.pass_rate_pct}% Match Rate) in ${s.total_elapsed_seconds}s`);
-        } else {
-          alert("Dispatch error: " + (data.error || "Failed to dispatch"));
-        }
-      } catch (err) {
-        alert("Network error: " + err);
-      } finally {
-        if (btn) {
-          btn.disabled = false;
-          btn.innerHTML = `<i class="fa-solid fa-bolt"></i> Dispatch & Verify 100`;
-        }
-      }
-    }
-
-    function filterComparisonTable(filterKey, btn) {
-      currentCompFilter = filterKey;
-      document.querySelectorAll("#btnFilterCompAll, #btnFilterCompPassed, #btnFilterCompDiscrepancy").forEach(b => b.classList.remove("active"));
-      if (btn) btn.classList.add("active");
-      renderComparisonTable();
-    }
-
-    function renderComparisonTable() {
-      const tbody = document.getElementById("comparisonTableBody");
-      if (!tbody) return;
-
-      const filtered = currentCompFilter === 'ALL'
-        ? cachedComparisonResults
-        : (currentCompFilter === 'PASSED'
-          ? cachedComparisonResults.filter(r => r.passed)
-          : cachedComparisonResults.filter(r => !r.passed));
-
-      const filterBadge = document.getElementById("tableFollowerFilterBadge");
-      if (filterBadge) {
-        filterBadge.innerText = currentCompFilter === 'ALL' ? `Showing All 100 (${cachedComparisonResults.length})` : (currentCompFilter === 'PASSED' ? `Verified Matches (${filtered.length})` : `Discrepancies (${filtered.length})`);
-      }
-
-      if (!filtered.length) {
-        tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--faint); padding: 30px;">No followers matching the "${currentCompFilter}" filter.</td></tr>`;
-        return;
-      }
-
-      tbody.innerHTML = filtered.map(r => {
-        const repBadge = r.replicated 
-          ? `<span class="btn-tag tag-green"><i class="fa-solid fa-check"></i> REPLICATED</span>`
-          : `<span class="btn-tag tag-red"><i class="fa-solid fa-xmark"></i> MISSING</span>`;
-
-        const matchBadge = r.lots_match
-          ? `<span class="btn-tag tag-green"><i class="fa-solid fa-circle-check"></i> MATCH</span>`
-          : `<span class="btn-tag tag-red"><i class="fa-solid fa-triangle-exclamation"></i> MISMATCH</span>`;
-
-        const methodBadge = `<span class="btn-tag tag-cyan">${r.method.toUpperCase()} (${r.multiplier}x)</span>`;
-        const ordIdShort = r.order_id && r.order_id !== '--' ? (r.order_id.length > 15 ? r.order_id.substring(0, 15) + '...' : r.order_id) : '--';
-
-        return `
-          <tr onclick="openAccountInspector('${r.email}')" style="cursor: pointer;">
-            <td style="font-family: var(--mono); font-weight: 700; color: var(--text);">#${r.index}</td>
-            <td>
-              <strong style="color: var(--text);">${r.email}</strong>
-              <div style="font-size: 10px; color: var(--faint); font-family: var(--mono);">${ordIdShort}</div>
-            </td>
-            <td>${repBadge}</td>
-            <td>${methodBadge}</td>
-            <td style="font-family: var(--mono); font-weight: 700; color: var(--text);">${r.expected_lots} Lots</td>
-            <td style="font-family: var(--mono); font-weight: 700; color: ${r.lots_match ? 'var(--ok)' : 'var(--danger)'};">${r.actual_lots} Lots</td>
-            <td>${matchBadge}</td>
-            <td style="font-family: var(--mono); color: var(--text);">
-              ${r.fill_price}
-              <div style="font-size: 10px; color: var(--faint);">${r.slippage}</div>
-            </td>
-            <td style="font-family: var(--mono); font-weight: 700; color: var(--violet-ink);">${r.latency}</td>
-          </tr>
-        `;
-      }).join("");
-    }
-
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
   <style>
     /* Platform UI / UX Extensions maintaining 100% theme consistency */
     :root {
@@ -1256,6 +1080,38 @@
     .pill.COMPLETED { background: var(--ok-soft); color: var(--ok); }
     .pill.FAILED, .pill.TERMINATED { background: var(--danger-soft); color: var(--danger); }
     .pill.RUNNING { background: var(--violet-soft); color: var(--violet-ink); }
+    .pill.PASS { background: var(--ok-soft); color: var(--ok); }
+    .pill.WARN { background: var(--warn-soft); color: var(--warn); }
+    .pill.FAIL, .pill.ERROR { background: var(--danger-soft); color: var(--danger); }
+    .pill.SKIP { background: var(--surface-2); color: var(--muted); }
+    /* End-to-End report */
+    .e2e-verdict { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: var(--r-sm, 8px); border: 1px solid var(--hairline); background: var(--surface-2); }
+    .e2e-verdict.PASS { border-color: var(--ok-line); background: var(--ok-soft); }
+    .e2e-verdict.WARN { border-color: var(--warn-line); background: var(--warn-soft); }
+    .e2e-verdict.FAIL { border-color: var(--danger-line); background: var(--danger-soft); }
+    .e2e-verdict .big { font: 800 22px var(--mono); }
+    .e2e-verdict.PASS .big { color: var(--ok); } .e2e-verdict.WARN .big { color: var(--warn); } .e2e-verdict.FAIL .big { color: var(--danger); }
+    .e2e-meta { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 12.5px; color: var(--muted); }
+    .e2e-meta b { color: var(--text); font-weight: 650; }
+    .e2e-steps { display: grid; gap: 6px; margin-top: 12px; }
+    .e2e-step { border: 1px solid var(--hairline); border-radius: var(--r-sm, 8px); background: var(--card); }
+    .e2e-step > summary { display: grid; grid-template-columns: 44px 1fr auto auto; gap: 10px; align-items: center; padding: 9px 12px; cursor: pointer; list-style: none; font-size: 13px; }
+    .e2e-step > summary::-webkit-details-marker { display: none; }
+    .e2e-step > summary .sid { font: 700 12px var(--mono); color: var(--muted); }
+    .e2e-step > summary .secs { font: 12px var(--mono); color: var(--muted); }
+    .e2e-step.FAIL, .e2e-step.ERROR { border-color: var(--danger-line); }
+    .e2e-step.WARN { border-color: var(--warn-line); }
+    .e2e-body { padding: 4px 12px 12px 66px; font-size: 12.5px; display: grid; gap: 6px; }
+    .e2e-body .finding { line-height: 1.45; }
+    .e2e-body .finding b { font-family: var(--mono); font-size: 11px; margin-right: 6px; }
+    .e2e-body .sev-HIGH { color: var(--danger); } .e2e-body .sev-MED { color: var(--warn); } .e2e-body .sev-INFO { color: var(--muted); }
+    .e2e-body code { font: 11.5px var(--mono); white-space: pre-wrap; word-break: break-word; color: var(--muted); }
+    .e2e-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+    @media (max-width: 640px) {
+      .e2e-step > summary { grid-template-columns: 38px 1fr auto; }
+      .e2e-step > summary .secs { display: none; }
+      .e2e-body { padding-left: 12px; }
+    }
 
     .confirm-box { width: 460px; max-width: 94vw; padding: 20px; }
     .confirm-box h3 { margin: 0 0 6px; font-size: 16px; color: var(--danger); }
@@ -1433,6 +1289,12 @@
         <div class="tab-nav">
           <button id="tabBtnTerminal" onclick="switchTab('terminal')" class="tab-item active green">
             <i class="fa-solid fa-terminal"></i> Terminal
+          </button>
+          <button id="tabBtnE2E" onclick="switchTab('e2e')" class="tab-item green">
+            <i class="fa-solid fa-route"></i> E2E Report <span id="e2eTabBadge"></span>
+          </button>
+          <button id="tabBtnRegression" onclick="switchTab('regression')" class="tab-item purple">
+            <i class="fa-solid fa-list-ol"></i> Regression <span id="regTabBadge"></span>
           </button>
           <button id="tabBtnFollowers" onclick="switchTab('followers')" class="tab-item cyan">
             <i class="fa-solid fa-network-wired"></i> Followers
@@ -1699,11 +1561,10 @@
               <!-- Symbol -->
               <div>
                 <label style="font-size: 11px; font-weight: 700; color: var(--faint); text-transform: uppercase; margin-bottom: 5px; display: block;">Symbol</label>
-                <select id="dispatchSymbolInput" class="input sm" style="width: 100%; font-weight: 700;">
-                  <option value="BINANCE:BTCUSDT.P">BINANCE:BTCUSDT.P</option>
-                  <option value="BINANCE:ETHUSDT.P">BINANCE:ETHUSDT.P</option>
-                  <option value="BINANCE:SOLUSDT.P">BINANCE:SOLUSDT.P</option>
-                </select>
+                <input id="dispatchSymbolInput" class="input sm" list="dispatchSymbolList" value="BINANCE:BTCUSDT.P" autocomplete="off"
+                       oninput="onDispatchSymbol()" placeholder="Search any symbol…" style="width: 100%; font-weight: 700;" aria-label="Symbol">
+                <datalist id="dispatchSymbolList"></datalist>
+                <div id="dispatchSymbolInfo" style="font-size: 11px; color: var(--muted); margin-top: 4px; min-height: 14px;"></div>
               </div>
 
               <!-- Side -->
@@ -1718,10 +1579,26 @@
               <!-- Order Type -->
               <div>
                 <label style="font-size: 11px; font-weight: 700; color: var(--faint); text-transform: uppercase; margin-bottom: 5px; display: block;">Order Type</label>
-                <select id="dispatchTypeInput" class="input sm" style="width: 100%; font-weight: 600;">
+                <select id="dispatchTypeInput" class="input sm" style="width: 100%; font-weight: 600;" onchange="onDispatchType()">
                   <option value="MARKET">MARKET</option>
                   <option value="LIMIT">LIMIT</option>
+                  <option value="STOP">STOP</option>
                 </select>
+              </div>
+
+              <!-- Price (LIMIT / STOP) -->
+              <div id="dispatchPriceWrap" style="display: none;">
+                <label for="dispatchPriceInput" style="font-size: 11px; font-weight: 700; color: var(--faint); text-transform: uppercase; margin-bottom: 5px; display: block;">Price</label>
+                <input type="number" id="dispatchPriceInput" class="input sm" step="any" style="width: 100%; font-family: var(--mono);">
+              </div>
+
+              <!-- Optional TP / SL -->
+              <div>
+                <label style="font-size: 11px; font-weight: 700; color: var(--faint); text-transform: uppercase; margin-bottom: 5px; display: block;">TP / SL (optional)</label>
+                <div style="display: flex; gap: 6px;">
+                  <input type="number" id="dispatchTpInput" class="input sm" step="any" placeholder="TP" aria-label="Take profit" style="width: 50%; font-family: var(--mono);">
+                  <input type="number" id="dispatchSlInput" class="input sm" step="any" placeholder="SL" aria-label="Stop loss" style="width: 50%; font-family: var(--mono);">
+                </div>
               </div>
 
               <!-- Master Lots -->
@@ -1747,7 +1624,10 @@
               <!-- Dispatch Action Button -->
               <div>
                 <button type="button" onclick="executeMasterDispatchAndVerify()" id="btnExecuteDispatch" class="btn primary" style="width: 100%; font-weight: 800; height: 32px;">
-                  <i class="fa-solid fa-bolt"></i> Dispatch & Verify 100
+                  <i class="fa-solid fa-bolt"></i> Dispatch & Verify
+                </button>
+                <button type="button" onclick="closeMasterAndVerify()" id="btnCloseMaster" class="btn sm" style="width: 100%; margin-top: 6px; color: var(--danger); border-color: var(--danger-line);">
+                  <i class="fa-solid fa-xmark"></i> Close master & verify flat
                 </button>
               </div>
             </div>
@@ -1814,7 +1694,8 @@
                 <tr>
                   <td colspan="9" style="text-align: center; color: var(--faint); padding: 40px;">
                     <i class="fa-solid fa-circle-info" style="font-size: 22px; display: block; margin-bottom: 8px; opacity: 0.6;"></i>
-                    Click <strong>"Dispatch & Verify 100"</strong> above to place an order on Master and compare replication across all 100 followers in real time.
+                    Pick any symbol, then <strong>Dispatch & Verify</strong> places one master order and compares every linked follower's copy: size, side, price and copy latency.
+                    <strong>Close master & verify flat</strong> afterwards checks the close is copied too.
                   </td>
                 </tr>
               </tbody>
@@ -1844,8 +1725,112 @@
             <div class="step"><div><b>Install</b><br><code>pip install -r requirements.txt</code> <button class="ghost" onclick="copyText('pip install -r requirements.txt')">copy</button></div></div>
             <div class="step"><div><b>Configure</b> – copy <code>.env.example</code> to <code>.env</code> and fill in admin + member credentials, master email/id, and follower count.<br><code>cp .env.example .env</code></div></div>
             <div class="step"><div><b>Verify</b> – the checks above are the same as <code>python scripts/doctor.py</code>. All green means you're ready.</div></div>
-            <div class="step"><div><b>Run a safe first test</b> – 10 followers, paper only, about 6 minutes.<br><button class="cta" style="margin-top:6px" onclick="firstRun()"><i class="fa-solid fa-play"></i> Run Breakpoint Hunter on 10 followers</button></div></div>
+            <div class="step"><div><b>Run a safe first test</b> – the End-to-End test on 10 followers, paper only, about 2 minutes.<br><button class="cta" style="margin-top:6px" onclick="firstRun()"><i class="fa-solid fa-play"></i> Run End-to-End on 10 followers</button></div></div>
           </div>
+        </div>
+        <div class="panel-card">
+          <h2>Tester workflow</h2>
+          <p class="lead">The order to test a build in. Each step links to the part of the dashboard you need.</p>
+          <div class="step-list">
+            <div class="step"><div><b>Check the setup is green</b> – the list at the top of this tab. Fix anything red before testing; a red check makes every suite fail for the wrong reason.</div></div>
+            <div class="step"><div><b>Run the End-to-End test</b> – <a href="#" onclick="runE2E('quick');return false">Quick run</a> first (10 followers), then a
+              <a href="#" onclick="runE2E('full');return false">Full run</a> before sign-off. It covers the whole trade life cycle in about 3 minutes.</div></div>
+            <div class="step"><div><b>Read the result</b> in <a href="#" onclick="switchTab('e2e');return false">E2E Report</a>. Failed steps open automatically.
+              <b>Re-run this step</b> confirms a failure is repeatable; <b>Copy bug report</b> gives you a ready-to-paste ticket with the command to reproduce it.</div></div>
+            <div class="step"><div><b>Go deeper where it matters</b> – the launcher on the left has focused suites: copy modes, races, pending orders, accounting,
+              load (JMeter), security and browser UI. Run the ones related to what changed.</div></div>
+            <div class="step"><div><b>Before a release, run a regression</b> – <a href="#" onclick="switchTab('regression');return false">Regression</a> runs a preset (Smoke / Standard / Full)
+              of suites back to back and gives you one HTML report to download and share.</div></div>
+            <div class="step"><div><b>Spot-check by hand</b> – <a href="#" onclick="switchTab('replication');return false">Dispatch</a> sends one master order on <b>any symbol</b> (market, limit or stop, optional TP/SL),
+              shows every follower's copy side by side, and <b>Close master & verify flat</b> checks the close is copied too;
+              <a href="#" onclick="switchTab('followers');return false">Followers</a> opens any account's positions and orders.</div></div>
+            <div class="step"><div><b>If a run is stopped or crashes</b>, positions may stay open: run <b>Emergency Teardown</b> (bottom of the launcher) before the next test.
+              Never run two suites at once – they share the same accounts.</div></div>
+          </div>
+        </div>
+        <div class="panel-card">
+          <h2>What the End-to-End test checks</h2>
+          <p class="lead">Every step is asserted on the master and every follower that has an active copy link. Expected follower size = master size × the follower's multiplier.</p>
+          <table class="hist-table" style="white-space:normal">
+            <thead><tr><th>Step</th><th>What must be true</th></tr></thead>
+            <tbody>
+              <tr><td>E01–E04</td><td>Platform reachable; admin, master and followers can log in; copy links read; accounts start clean; balances recorded.</td></tr>
+              <tr><td>E05</td><td>A master market BUY is copied to every follower at master qty × multiplier; each copy references the master order.</td></tr>
+              <tr><td>E06–E07</td><td>TP/SL set and then changed on the master show up unchanged on every follower.</td></tr>
+              <tr><td>E08–E10</td><td>Partial close, adding to the position, a hedge SELL leg and closing just that leg are all mirrored.</td></tr>
+              <tr><td>E11</td><td>Master closes everything → every follower is flat with no margin still in use.</td></tr>
+              <tr><td>E12</td><td>Far LIMIT/STOP orders never open positions; cancelling them leaves no pending orders anywhere.</td></tr>
+              <tr><td>E13</td><td>One symbol of <b>every market group</b> the platform lists (crypto perp/spot, forex, metals, commodities, CFDs, US/EU stocks, indices, NSE/BSE stocks, futures, options) is opened, copied at the right size, closed everywhere, with correct PnL. Closed markets are reported, not failed. For <b>every</b> symbol use the <b>All Symbols</b> suite.</td></tr>
+              <tr><td>E14</td><td>Invalid orders (zero/negative qty, unknown symbol, bad side) are rejected with a 4xx and open nothing.</td></tr>
+              <tr><td>E15</td><td>Each closed trade's realized PnL = (exit − entry) × qty × contract size (e.g. 100 for gold, 100 000 for EURUSD), and each balance moved by exactly that PnL. Currency-converted pairs (USDJPY, EURGBP…) must have the right sign and the same PnL per unit on master and followers.</td></tr>
+              <tr><td>E16</td><td>After clean-up: 0 positions, 0 pending orders, 0 margin, equity = balance on every account.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab: End-to-End report -->
+      <div id="tabE2E" style="display: none; flex-direction: column; gap: 14px; margin-top: 10px;">
+        <div class="panel-card">
+          <div style="display:flex; align-items:flex-start; gap:12px; flex-wrap:wrap;">
+            <div style="flex:1; min-width:240px">
+              <h2>End-to-End Test</h2>
+              <p class="lead" style="margin-bottom:0">One run walks a copied trade through its whole life: open, TP/SL, partial close, hedge, close, pending orders,
+                bad input, accounting, and a final clean-up audit. Every step is checked on the master <b>and</b> every linked follower.</p>
+            </div>
+            <div class="e2e-actions">
+              <button class="cta" onclick="runE2E('quick')" title="Followers 1-10 on paper, about 2 minutes"><i class="fa-solid fa-play"></i> Quick run (10 followers)</button>
+              <button class="ghost" onclick="runE2E('full')" title="All configured followers on paper"><i class="fa-solid fa-users"></i> Full run (all followers)</button>
+            </div>
+          </div>
+        </div>
+        <div class="panel-card" id="e2eReport"><div class="empty-note">Loading the latest End-to-End result…</div></div>
+        <div class="panel-card">
+          <div style="display:flex; align-items:flex-start; gap:12px; flex-wrap:wrap;">
+            <div style="flex:1; min-width:240px">
+              <h2>Symbol coverage</h2>
+              <p class="lead" style="margin-bottom:0">Copy trading on the symbols the platform lists: the master opens, every follower must copy at the right size,
+                the master closes, everyone must be flat and PnL must match the contract size. Closed markets are skipped, not failed –
+                run again during their session (NSE/BSE 03:45–10:00 UTC, US stocks ~14:30–21:00 UTC).</p>
+            </div>
+            <div class="e2e-actions">
+              <button class="cta" onclick="runSymbols('symbols_sample')" title="One symbol per market group, about 2 minutes"><i class="fa-solid fa-globe"></i> Market types (18)</button>
+              <button class="ghost" onclick="runSymbols('symbols_all')" title="Every listed symbol, about an hour on 100 followers"><i class="fa-solid fa-list-check"></i> All symbols</button>
+            </div>
+          </div>
+          <div id="marketsNow" style="margin-top:12px"></div>
+          <div id="symReport" style="margin-top:12px"><div class="empty-note">Loading…</div></div>
+        </div>
+      </div>
+
+      <!-- Tab: Regression (several suites in a row + one report) -->
+      <div id="tabRegression" style="display: none; flex-direction: column; gap: 14px; margin-top: 10px;">
+        <div class="panel-card">
+          <h2>Regression run</h2>
+          <p class="lead">Runs several suites one after another on <b>paper</b> and produces one report you can download and share.
+            While it runs, other launches are blocked. Pick a preset or tick suites yourself.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:10px">
+            <span class="muted" style="font-size:12px">Preset:</span>
+            <button class="ghost" onclick="regPreset('smoke')">Smoke (~5 min)</button>
+            <button class="ghost" onclick="regPreset('standard')">Standard (~25 min)</button>
+            <button class="ghost" onclick="regPreset('full')">Full (~1 h)</button>
+            <span style="flex:1"></span>
+            <label for="regStart" style="font-size:12px" class="muted">Followers</label>
+            <input type="number" id="regStart" min="1" value="1" style="width:64px" class="input sm" aria-label="First follower">
+            <span class="muted" style="font-size:12px">to</span>
+            <input type="number" id="regEnd" min="1" value="10" style="width:64px" class="input sm" aria-label="Last follower">
+          </div>
+          <div id="regSuites" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:6px; font-size:13px"></div>
+          <div style="display:flex; gap:8px; margin-top:12px; align-items:center; flex-wrap:wrap">
+            <button class="cta" id="regStartBtn" onclick="startRegression()"><i class="fa-solid fa-play"></i> Start regression</button>
+            <button class="ghost" id="regStopBtn" onclick="stopRegression()" style="color:var(--danger)"><i class="fa-solid fa-stop"></i> Stop</button>
+            <span id="regEstimate" class="muted" style="font-size:12px"></span>
+          </div>
+        </div>
+        <div class="panel-card" id="regCurrent"><div class="empty-note">No regression has been run yet.</div></div>
+        <div class="panel-card">
+          <h2>Earlier regressions</h2>
+          <div id="regPast" style="display:flex; flex-wrap:wrap; gap:6px; margin-top:8px"><span class="muted" style="font-size:12px">None yet.</span></div>
         </div>
       </div>
 
@@ -3027,78 +3012,81 @@
       });
     }
 
-    async function executeMasterDispatchAndVerify() {
-      const btn = document.getElementById("btnExecuteDispatch");
-      const symbol = document.getElementById("dispatchSymbolInput")?.value || "BINANCE:BTCUSDT.P";
-      const type = document.getElementById("dispatchTypeInput")?.value || "MARKET";
-      const qty = parseFloat(document.getElementById("dispatchQtyInput")?.value || "1.0");
+    let SYMBOLS = null, SYMBOL_INDEX = {};
+    async function loadDispatchSymbols() {
+      if (SYMBOLS) return;
+      const { ok, data } = await api('/api/symbols/list');
+      if (!ok) { $('dispatchSymbolInfo').innerText = 'Symbol list unavailable – type the exact symbol.'; return; }
+      SYMBOLS = data.symbols || [];
+      SYMBOLS.forEach(s => SYMBOL_INDEX[s.sym] = s);
+      $('dispatchSymbolList').innerHTML = SYMBOLS.map(s => `<option value="${esc(s.sym)}">${esc(s.group)}</option>`).join('');
+      onDispatchSymbol();
+    }
+    function onDispatchSymbol() {
+      const s = SYMBOL_INDEX[$('dispatchSymbolInput').value.trim()];
+      $('dispatchSymbolInfo').innerHTML = s
+        ? `${esc(s.group)} · min ${s.min} · step ${s.step}${s.max ? ' · max ' + s.max : ''}${s.contract !== 1 ? ' · contract ×' + s.contract : ''}`
+        : (SYMBOLS ? `<span style="color:var(--warn)">Not in the platform's ${SYMBOLS.length} symbols</span>` : '');
+      if (s) { const q = $('dispatchQtyInput'); q.step = s.step; q.min = s.min; if (parseFloat(q.value) < s.min) q.value = s.min; }
+    }
+    function onDispatchType() { $('dispatchPriceWrap').style.display = $('dispatchTypeInput').value === 'MARKET' ? 'none' : 'block'; }
 
-      if (btn) {
-        btn.disabled = true;
-        btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Dispatching Master & Polling 100...`;
+    async function executeMasterDispatchAndVerify(confirmed = false) {
+      const btn = $('btnExecuteDispatch');
+      const num = id => { const v = $(id).value; return v === '' ? null : parseFloat(v); };
+      const payload = { symbol: $('dispatchSymbolInput').value.trim(), side: currentDispatchSide, type: $('dispatchTypeInput').value,
+                        qty: num('dispatchQtyInput'), price: num('dispatchPriceInput'), tp: num('dispatchTpInput'), sl: num('dispatchSlInput'),
+                        instance: currentInstance, confirm: confirmed };
+      if (!payload.symbol) { showToast('Pick a symbol', 'warn'); return; }
+      if (payload.type !== 'MARKET' && !payload.price) { showToast(`${payload.type} orders need a price`, 'warn'); return; }
+      if (currentInstance === 'real' && !confirmed) {
+        openConfirmAction('Send a REAL order?', `<li><b>${esc(payload.side)} ${esc(payload.qty)} ${esc(payload.symbol)}</b> (${esc(payload.type)}) from the master</li><li>Every linked follower will copy it with real money.</li>`,
+                          'REAL', () => executeMasterDispatchAndVerify(true));
+        return;
       }
-
-      // Show in-progress placeholders
-      document.getElementById("cardMasterOrdId").innerText = "Executing...";
-      document.getElementById("cardReplicatedCount").innerText = "Polling...";
-      document.getElementById("cardMatchRate").innerText = "...";
-      document.getElementById("cardFanOutLatency").innerText = "...";
-      document.getElementById("comparisonTableBody").innerHTML = `
-        <tr>
-          <td colspan="9" style="text-align: center; color: var(--violet-ink); padding: 30px;">
-            <i class="fa-solid fa-spinner fa-spin" style="font-size: 20px; display: block; margin-bottom: 8px;"></i>
-            Master order sent to OMS! Polling 100 follower accounts to compare replication, lot sizes, and prices...
-          </td>
-        </tr>
-      `;
-
+      btn.disabled = true; btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Placing & verifying…`;
+      $('cardMasterOrdId').innerText = 'Executing…'; $('cardReplicatedCount').innerText = 'Polling…';
+      $('cardMatchRate').innerText = '…'; $('cardFanOutLatency').innerText = '…';
+      $('comparisonTableBody').innerHTML = `<tr><td colspan="9" style="text-align:center;color:var(--violet-ink);padding:30px"><i class="fa-solid fa-spinner fa-spin"></i> Master order sent – waiting up to 20 s for every linked follower to copy it…</td></tr>`;
       try {
-        const payload = {
-          symbol: symbol,
-          side: currentDispatchSide,
-          type: type,
-          qty: qty,
-          instance: currentInstance
-        };
-
-        const res = await fetch("/api/order/dispatch_and_verify", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
-        const data = await res.json();
-
-        if (res.status === 200 && data.success) {
-          const m = data.master_order || {};
-          const s = data.summary || {};
-
-          document.getElementById("cardMasterOrdId").innerHTML = `<code style="color:var(--ok);">${m.order_id}</code>`;
-          document.getElementById("cardMasterDetails").innerText = `${m.side} ${m.requested_qty} lots @ ${m.fill_price} USD`;
-          
-          document.getElementById("cardReplicatedCount").innerText = `${s.replicated_count} / ${s.total_followers}`;
-          document.getElementById("cardReplicatedSub").innerText = `${s.replicated_count} accounts received copy order`;
-
-          document.getElementById("cardMatchRate").innerText = `${s.pass_rate_pct}%`;
-          document.getElementById("cardMatchRateSub").innerText = `${s.perfect_match_count} / ${s.total_followers} exact sizing match`;
-
-          document.getElementById("cardFanOutLatency").innerText = `${s.total_elapsed_seconds}s`;
-          document.getElementById("cardFanOutSub").innerText = "Total fan-out verification time";
-
-          cachedComparisonResults = data.comparison || [];
-          renderComparisonTable();
-
-          showToast(`🚀 Order Verified! ${s.replicated_count}/100 Replicated (${s.pass_rate_pct}% Match Rate) in ${s.total_elapsed_seconds}s`);
-        } else {
-          alert("Dispatch error: " + (data.error || "Failed to dispatch"));
+        const { ok, status, data } = await api('/api/order/dispatch_and_verify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+        if (!ok || !data.success) {
+          $('cardMasterOrdId').innerText = 'Rejected'; $('cardReplicatedCount').innerText = '–'; $('cardMatchRate').innerText = '–'; $('cardFanOutLatency').innerText = '–';
+          $('comparisonTableBody').innerHTML = `<tr><td colspan="9" style="text-align:center;color:var(--danger);padding:24px">${esc(data.error || ('HTTP ' + status))}</td></tr>`;
+          showToast(data.error || 'Dispatch failed', 'err'); return;
         }
+        const m = data.master_order || {}, s = data.summary || {};
+        $('cardMasterOrdId').innerHTML = `<code style="color:var(--ok)">${esc(m.order_id)}</code>`;
+        $('cardMasterDetails').innerText = `${m.side} ${m.requested_qty} ${m.symbol} @ ${m.fill_price ?? '–'} (${m.status || m.type})`;
+        $('cardReplicatedCount').innerText = `${s.replicated_count} / ${s.total_followers}`;
+        $('cardReplicatedSub').innerText = `linked followers that received a copy` + (s.not_linked ? ` · ${s.not_linked} not linked` : '');
+        $('cardMatchRate').innerText = `${s.pass_rate_pct}%`;
+        $('cardMatchRateSub').innerText = `${s.perfect_match_count} / ${s.total_followers} exact size & side`;
+        $('cardFanOutLatency').innerText = s.max_copy_latency_s != null ? `${s.max_copy_latency_s}s` : `${s.total_elapsed_seconds}s`;
+        $('cardFanOutSub').innerText = s.max_copy_latency_s != null ? 'slowest copy (server time, master → follower)' : 'total verification time';
+        cachedComparisonResults = data.comparison || [];
+        renderComparisonTable();
+        showToast(`${s.perfect_match_count}/${s.total_followers} linked followers copied correctly (${s.pass_rate_pct}%)`, s.pass_rate_pct === 100 ? 'ok' : 'err');
       } catch (err) {
-        alert("Network error: " + err);
+        showToast('Network error: ' + err, 'err');
       } finally {
-        if (btn) {
-          btn.disabled = false;
-          btn.innerHTML = `<i class="fa-solid fa-bolt"></i> Dispatch & Verify 100`;
-        }
+        btn.disabled = false; btn.innerHTML = `<i class="fa-solid fa-bolt"></i> Dispatch & Verify`;
       }
+    }
+
+    async function closeMasterAndVerify(confirmed = false) {
+      if (currentInstance === 'real' && !confirmed) {
+        openConfirmAction('Close the master on REAL?', '<li>Cancels the master\'s pending orders and closes all its REAL positions.</li><li>Followers copy the close.</li>', 'REAL', () => closeMasterAndVerify(true));
+        return;
+      }
+      const b = $('btnCloseMaster'); b.disabled = true; b.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Closing…';
+      const { ok, data } = await api('/api/order/close_master', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ instance: currentInstance, confirm: confirmed }) });
+      b.disabled = false; b.innerHTML = '<i class="fa-solid fa-xmark"></i> Close master & verify flat';
+      if (!ok) { showToast(data.error || 'Close failed', 'err'); return; }
+      showToast(data.ok ? `Master closed – all ${data.followers_checked} linked followers flat` + (data.master_pending_cancelled ? `, pending copies cancelled (checked ${data.pending_checked} sample followers)` : '') + ` (${data.seconds}s)`
+                        : [data.followers_still_open ? `${data.followers_still_open} follower(s) still hold positions: ${data.still_open.join(', ')}` : '',
+                           data.followers_with_pending ? `${data.followers_with_pending} still have pending orders: ${data.still_pending.join(', ')}` : ''].filter(Boolean).join(' · '),
+                data.ok ? 'ok' : 'err');
     }
 
     function filterComparisonTable(filterKey, btn) {
@@ -3109,57 +3097,28 @@
     }
 
     function renderComparisonTable() {
-      const tbody = document.getElementById("comparisonTableBody");
-      if (!tbody) return;
-
-      const filtered = currentCompFilter === 'ALL'
-        ? cachedComparisonResults
-        : (currentCompFilter === 'PASSED'
-          ? cachedComparisonResults.filter(r => r.passed)
-          : cachedComparisonResults.filter(r => !r.passed));
-
-      const filterBadge = document.getElementById("tableFollowerFilterBadge");
-      if (filterBadge) {
-        filterBadge.innerText = currentCompFilter === 'ALL' ? `Showing All 100 (${cachedComparisonResults.length})` : (currentCompFilter === 'PASSED' ? `Verified Matches (${filtered.length})` : `Discrepancies (${filtered.length})`);
-      }
-
-      if (!filtered.length) {
-        tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--faint); padding: 30px;">No followers matching the "${currentCompFilter}" filter.</td></tr>`;
-        return;
-      }
-
+      const tbody = $('comparisonTableBody'); if (!tbody) return;
+      const all = cachedComparisonResults;
+      const filtered = currentCompFilter === 'ALL' ? all : currentCompFilter === 'PASSED' ? all.filter(r => r.passed === true) : all.filter(r => r.passed === false);
+      const badge = $('tableFollowerFilterBadge');
+      if (badge) badge.innerText = currentCompFilter === 'ALL' ? `All followers (${all.length})` : currentCompFilter === 'PASSED' ? `Correct copies (${filtered.length})` : `Problems (${filtered.length})`;
+      if (!filtered.length) { tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;color:var(--faint);padding:30px">Nothing to show for this filter.</td></tr>`; return; }
       tbody.innerHTML = filtered.map(r => {
-        const repBadge = r.replicated 
-          ? `<span class="btn-tag tag-green"><i class="fa-solid fa-check"></i> REPLICATED</span>`
-          : `<span class="btn-tag tag-red"><i class="fa-solid fa-xmark"></i> MISSING</span>`;
-
-        const matchBadge = r.lots_match
-          ? `<span class="btn-tag tag-green"><i class="fa-solid fa-circle-check"></i> MATCH</span>`
-          : `<span class="btn-tag tag-red"><i class="fa-solid fa-triangle-exclamation"></i> MISMATCH</span>`;
-
-        const methodBadge = `<span class="btn-tag tag-cyan">${r.method.toUpperCase()} (${r.multiplier}x)</span>`;
-        const ordIdShort = r.order_id && r.order_id !== '--' ? (r.order_id.length > 15 ? r.order_id.substring(0, 15) + '...' : r.order_id) : '--';
-
-        return `
-          <tr onclick="openAccountInspector('${r.email}')" style="cursor: pointer;">
-            <td style="font-family: var(--mono); font-weight: 700; color: var(--text);">#${r.index}</td>
-            <td>
-              <strong style="color: var(--text);">${r.email}</strong>
-              <div style="font-size: 10px; color: var(--faint); font-family: var(--mono);">${ordIdShort}</div>
-            </td>
-            <td>${repBadge}</td>
-            <td>${methodBadge}</td>
-            <td style="font-family: var(--mono); font-weight: 700; color: var(--text);">${r.expected_lots} Lots</td>
-            <td style="font-family: var(--mono); font-weight: 700; color: ${r.lots_match ? 'var(--ok)' : 'var(--danger)'};">${r.actual_lots} Lots</td>
-            <td>${matchBadge}</td>
-            <td style="font-family: var(--mono); color: var(--text);">
-              ${r.fill_price}
-              <div style="font-size: 10px; color: var(--faint);">${r.slippage}</div>
-            </td>
-            <td style="font-family: var(--mono); font-weight: 700; color: var(--violet-ink);">${r.latency}</td>
-          </tr>
-        `;
-      }).join("");
+        if (r.linked === false) return `<tr style="opacity:.55"><td style="font-family:var(--mono)">#${r.index}</td><td><strong>${esc(r.email)}</strong></td>
+          <td><span class="btn-tag">NOT LINKED</span></td><td colspan="6" style="color:var(--muted)">No active copy link to the master – not expected to copy.</td></tr>`;
+        const rep = r.replicated ? `<span class="btn-tag tag-green"><i class="fa-solid fa-check"></i> ${esc(r.state)}</span>` : `<span class="btn-tag tag-red"><i class="fa-solid fa-xmark"></i> ${esc(r.state)}</span>`;
+        const match = r.passed ? `<span class="btn-tag tag-green"><i class="fa-solid fa-circle-check"></i> MATCH</span>` : `<span class="btn-tag tag-red"><i class="fa-solid fa-triangle-exclamation"></i> ${r.state === 'WRONG SIDE' ? 'WRONG SIDE' : 'MISMATCH'}</span>`;
+        const method = `<span class="btn-tag tag-cyan">${esc(String(r.method).toUpperCase())} ${esc(r.multiplier)}x${r.reverse ? ' REV' : ''}</span>`;
+        return `<tr onclick="openAccountInspector('${esc(r.email)}')" style="cursor:pointer">
+          <td style="font-family:var(--mono);font-weight:700">#${r.index}</td>
+          <td><strong>${esc(r.email)}</strong><div style="font-size:10px;color:var(--faint);font-family:var(--mono)">${esc(r.order_id || '--')}</div></td>
+          <td>${rep}</td><td>${method}</td>
+          <td style="font-family:var(--mono);font-weight:700">${esc(r.expected_lots)}</td>
+          <td style="font-family:var(--mono);font-weight:700;color:${r.lots_match ? 'var(--ok)' : 'var(--danger)'}">${esc(r.actual_lots)}</td>
+          <td>${match}</td>
+          <td style="font-family:var(--mono)">${esc(r.fill_price)}<div style="font-size:10px;color:var(--faint)">${esc(r.slippage)}</div></td>
+          <td style="font-family:var(--mono);font-weight:700;color:var(--violet-ink)">${esc(r.latency)}</td></tr>`;
+      }).join('');
     }
 
 
@@ -3169,9 +3128,9 @@
     let SUITES = [], SUITE_DEFAULTS = {}, APP_CONFIG = {}, runInstance = 'paper';
     let lastStatus = null, pendingRunKey = null, lastLogRaw = null, activeTab = 'terminal', lastHealth = null;
 
-    const TAB_IDS = { terminal: 'tabTerminal', followers: 'tabFollowers', tape: 'tabTape', reports: 'tabReports',
+    const TAB_IDS = { terminal: 'tabTerminal', e2e: 'tabE2E', regression: 'tabRegression', followers: 'tabFollowers', tape: 'tabTape', reports: 'tabReports',
                       replication: 'tabReplication', screenshots: 'tabScreenshots', history: 'tabHistory', setup: 'tabSetup' };
-    const TAB_BTN = { terminal: 'tabBtnTerminal', followers: 'tabBtnFollowers', tape: 'tabBtnTape', reports: 'tabBtnReports',
+    const TAB_BTN = { terminal: 'tabBtnTerminal', e2e: 'tabBtnE2E', regression: 'tabBtnRegression', followers: 'tabBtnFollowers', tape: 'tabBtnTape', reports: 'tabBtnReports',
                       replication: 'tabBtnReplication', screenshots: 'tabBtnScreenshots', history: 'tabBtnHistory', setup: 'tabBtnSetup' };
 
     const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -3202,8 +3161,10 @@
       if (key === 'reports') fetchReports();
       if (key === 'screenshots') fetchScreenshots();
       if (key === 'history') fetchHistory();
+      if (key === 'e2e') { fetchE2E(); fetchSymbols(); fetchMarkets(); }
       if (key === 'setup') renderHealth(lastHealth) || fetchHealth(false);
-      if (key === 'replication') { const b = $('dispatchInstanceBadge'); if (b) b.innerText = currentInstance.toUpperCase(); }
+      if (key === 'replication') { const b = $('dispatchInstanceBadge'); if (b) b.innerText = currentInstance.toUpperCase(); loadDispatchSymbols(); onDispatchType(); }
+      if (key === 'regression') fetchRegression();
       try { localStorage.setItem('bt_tab', key); } catch (e) {}
     }
 
@@ -3269,10 +3230,12 @@
     }
 
     /* ---- running suites ---- */
-    async function runSuite(key, confirmed = false) {
+    let pendingExtra = {};
+    async function runSuite(key, confirmed = false, extra = null) {
       const s = SUITES.find(x => x.key === key); if (!s) return;
       if (lastStatus?.is_running) { showToast('A run is already active – stop it first.', 'warn'); return; }
-      const params = collectParams();
+      if (extra !== null) pendingExtra = extra; else if (!confirmed) pendingExtra = {};
+      const params = { ...collectParams(), ...pendingExtra };
       if (params.end < params.start) { showToast('"Followers to" must be ≥ "from".', 'warn'); return; }
       const inst = s.fixed_instance || params.instance;
       if (!confirmed && (s.risk !== 'safe' || inst === 'real')) { openConfirm(s, params, inst); return; }
@@ -3291,9 +3254,181 @@
       switchTab('terminal'); fetchStatus(); fetchLogs();
     }
 
-    function firstRun() {
-      $('optStart').value = 1; $('optEnd').value = Math.min(10, SUITE_DEFAULTS.follower_count); setOptInstance('paper'); saveOpts();
-      runSuite('breakpoint');
+    function firstRun() { runE2E('quick'); }
+
+    /* ---- End-to-End test ---- */
+    function runE2E(mode, step) {
+      const max = SUITE_DEFAULTS.follower_count || 100;
+      if (mode === 'quick') { $('optStart').value = 1; $('optEnd').value = Math.min(10, max); }
+      if (mode === 'full') { $('optStart').value = 1; $('optEnd').value = max; }
+      if (mode !== 'step') { setOptInstance('paper'); saveOpts(); }
+      runSuite('e2e', false, step ? { only: step } : {});
+    }
+
+    let lastE2E = null;
+    async function fetchE2E(file) {
+      const { ok, data } = await api('/api/e2e/latest' + (file ? '?file=' + encodeURIComponent(file) : ''));
+      if (!ok) { $('e2eReport').innerHTML = `<div class="empty-note">${esc(data.error || 'Could not load the report')}</div>`; return; }
+      lastE2E = data; renderE2E(data);
+    }
+
+    function renderE2E(d) {
+      const badge = $('e2eTabBadge'), latest = (d.runs || [])[0];
+      if (badge) badge.innerHTML = latest ? `<span class="pill ${esc(latest.verdict)}">${esc(latest.verdict)}</span>` : '';
+      const r = d.report;
+      if (!r) {
+        $('e2eReport').innerHTML = `<div class="empty-note">No End-to-End run yet. Press <b>Quick run</b> above: it uses followers 1–10 on paper and takes about 2 minutes.</div>`;
+        return;
+      }
+      const t = r.tally || {}, range = r.followers_range || [];
+      const picker = (d.runs || []).length > 1 ? `<select onchange="fetchE2E(this.value)" aria-label="Earlier runs" style="font-size:12px">` +
+        d.runs.map(x => `<option value="${esc(x.file)}" ${x.file === d.file ? 'selected' : ''}>${esc((x.started || x.file).replace('T', ' '))} · ${esc(x.verdict)} · ${esc((x.instance || '').toUpperCase())} ${esc((x.followers_range || []).join('–'))}</option>`).join('') + `</select>` : '';
+      const head = `
+        <div class="e2e-verdict ${esc(r.verdict)}">
+          <div class="big">${esc(r.verdict)}</div>
+          <div style="flex:1; min-width:0">
+            <div class="e2e-meta"><span><b>${t.PASS || 0}</b> passed</span><span><b>${t.WARN || 0}</b> warnings</span>
+              <span><b>${(t.FAIL || 0) + (t.ERROR || 0)}</b> failed</span><span><b>${t.SKIP || 0}</b> skipped</span></div>
+            <div class="e2e-meta" style="margin-top:4px"><span>${esc((r.started || '').replace('T', ' '))} (${fmtDur(r.duration_sec)})</span>
+              <span>Instance <b>${esc((r.instance || '').toUpperCase())}</b></span><span>Followers <b>${esc(range.join('–'))}</b> (${esc(r.followers_linked)} linked)</span>
+              <span>Lot <b>${esc(r.lot)}</b></span>${r.max_sync_seconds != null ? `<span>Slowest sync <b>${esc(r.max_sync_seconds)}s</b></span>` : ''}</div>
+          </div>
+        </div>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:10px">
+          ${picker}
+          ${d.markdown ? `<button class="ghost" onclick="viewReport('${esc(d.markdown)}')"><i class="fa-solid fa-file-lines"></i> Full report</button>` : ''}
+          <button class="ghost" onclick="copyE2ESummary()"><i class="fa-solid fa-copy"></i> Copy summary</button>
+        </div>`;
+      const steps = (r.results || []).map(s => {
+        const shown = (s.findings || []);
+        const open = s.status === 'FAIL' || s.status === 'ERROR' ? 'open' : '';
+        const finalId = (r.results || []).length ? r.results[r.results.length - 1].id : '';
+        const canRerun = !['E01', 'E02', 'E03', 'E04'].includes(s.id) && !(s.id === finalId && /audit/i.test(s.title));
+        return `<details class="e2e-step ${esc(s.status)}" ${open}>
+          <summary><span class="sid">${esc(s.id)}</span><span>${esc(s.title)}</span><span class="secs">${esc(s.seconds)}s</span><span class="pill ${esc(s.status)}">${esc(s.status)}</span></summary>
+          <div class="e2e-body">
+            ${shown.length ? shown.map(f => `<div class="finding sev-${esc(f.severity)}"><b>${esc(f.severity)}</b>${esc(f.message)}</div>`).join('') : '<div class="finding sev-INFO">No findings – every check in this step held.</div>'}
+            ${s.metrics && Object.keys(s.metrics).length ? `<code>${esc(JSON.stringify(s.metrics))}</code>` : ''}
+            <div class="e2e-actions">
+              ${canRerun ? `<button class="ghost" onclick="runE2E('step','${esc(s.id)}')"><i class="fa-solid fa-rotate-right"></i> Re-run this step</button>` : ''}
+              ${s.status === 'FAIL' || s.status === 'ERROR' || s.status === 'WARN' ? `<button class="ghost" onclick="copyBugReport('${esc(s.id)}')"><i class="fa-solid fa-bug"></i> Copy bug report</button>` : ''}
+            </div>
+          </div></details>`;
+      }).join('');
+      $('e2eReport').innerHTML = head + `<div class="e2e-steps">${steps}</div>
+        <p class="lead" style="margin:12px 0 0; font-size:12px">FAIL = the platform broke a rule (file a bug) · WARN = check before sign-off · SKIP = an earlier step failed.
+        "Re-run this step" re-runs setup (E01–E04), that step and the final audit.</p>`;
+    }
+
+    let lastMarkets = null;
+    async function fetchMarkets() {
+      const { ok, data } = await api('/api/markets'); const el = $('marketsNow'); if (!el) return;
+      if (!ok) { el.innerHTML = ''; return; }
+      lastMarkets = data;
+      const chips = data.markets.map(m => `<span class="btn-tag ${m.data_feed ? '' : m.open ? 'tag-green' : 'tag-red'}" title="${esc(m.days.join(' '))} ${esc(m.session_utc)} UTC">
+        ${m.open ? '●' : '○'} ${esc(m.type)} <b>${m.symbols}</b></span>`).join(' ');
+      el.innerHTML = `<div style="font-size:12.5px; margin-bottom:6px"><b>Markets open now</b> (${esc(data.now_utc.replace('T', ' '))} UTC):
+        <b>${data.open_symbols}</b> of ${data.total_symbols} symbols are tradable right now. <span class="muted">Hover a market for its hours. ${esc(data.note)}</span></div>
+        <div style="display:flex; flex-wrap:wrap; gap:5px">${chips}</div>`;
+    }
+
+    function runSymbols(key) {
+      const open = lastMarkets ? `\n\nRight now ${lastMarkets.open_symbols} of ${lastMarkets.total_symbols} symbols are in session; the rest will be SKIPPED as closed.` : '';
+      if (key === 'symbols_all' && !confirm('Test every listed symbol (~3,600)?\nAbout 20–60 min with all followers. Paper only.' + open)) return;
+      setOptInstance('paper'); saveOpts(); runSuite(key, false, {});
+    }
+
+    /* ---- Regression ---- */
+    let REG = null;
+    async function fetchRegression() {
+      const { ok, data } = await api('/api/regression'); if (!ok) return;
+      const first = !REG; REG = data;
+      if (first) {
+        $('regSuites').innerHTML = data.suites.map(s => `<label class="checkline" style="display:flex; gap:6px; align-items:center">
+          <input type="checkbox" class="reg-suite" value="${esc(s.key)}" onchange="regEstimate()"> ${esc(s.name)} <span class="muted">~${s.minutes}m</span></label>`).join('');
+        $('regEnd').value = Math.min(10, SUITE_DEFAULTS.follower_count || 100); $('regEnd').max = SUITE_DEFAULTS.follower_count || 100;
+        regPreset('smoke');
+      }
+      renderRegression(data);
+    }
+    function regPreset(name) {
+      const keys = new Set((REG?.presets || {})[name] || []);
+      document.querySelectorAll('.reg-suite').forEach(c => c.checked = keys.has(c.value)); regEstimate();
+    }
+    function regEstimate() {
+      const mins = [...document.querySelectorAll('.reg-suite:checked')].reduce((a, c) => a + ((REG.suites.find(s => s.key === c.value) || {}).minutes || 3), 0);
+      $('regEstimate').innerText = mins ? `About ${mins} min at 10 followers (longer with more).` : '';
+    }
+    async function startRegression() {
+      const suites = [...document.querySelectorAll('.reg-suite:checked')].map(c => c.value);
+      if (!suites.length) { showToast('Tick at least one suite', 'warn'); return; }
+      const { ok, data } = await api('/api/regression/start', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ suites, params: { start: parseInt($('regStart').value) || 1, end: parseInt($('regEnd').value) || 10 } }) });
+      showToast(ok ? data.message : (data.error || 'Could not start'), ok ? 'ok' : 'err');
+      fetchRegression(); fetchStatus();
+    }
+    async function stopRegression() {
+      if (REG?.current?.status !== 'RUNNING') { showToast('No regression is running', 'warn'); return; }
+      if (!confirm('Stop the regression? The suite that is running now is cut off – run Emergency Teardown afterwards.')) return;
+      const { data } = await api('/api/regression/stop', { method: 'POST' }); showToast(data.message || 'Stopped', 'warn'); fetchRegression();
+    }
+    function renderRegression(d) {
+      const c = d.current || {}, running = c.status === 'RUNNING';
+      $('regStartBtn').disabled = running || !!lastStatus?.is_running; $('regStopBtn').disabled = !running;
+      $('regTabBadge').innerHTML = running ? `<span class="pill RUNNING">${(c.steps || []).filter(s => !['QUEUED', 'RUNNING'].includes(s.status)).length}/${(c.steps || []).length}</span>` : '';
+      if (c.id) {
+        const pillOf = s => ({ COMPLETED: s.failed ? 'FAIL' : 'PASS', FAILED: 'FAIL', ERROR: 'FAIL', TERMINATED: 'FAIL', RUNNING: 'RUNNING', QUEUED: 'SKIP', SKIPPED: 'SKIP' }[s.status] || 'SKIP');
+        $('regCurrent').innerHTML = `<div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap">
+            <h2 style="flex:1; margin:0">${running ? 'Running' : 'Last'} regression <code style="font-size:12px">${esc(c.id)}</code> <span class="pill ${running ? 'RUNNING' : (c.steps || []).some(s => pillOf(s) === 'FAIL') ? 'FAIL' : 'PASS'}">${esc(c.status)}</span></h2>
+            <a class="ghost" href="/api/regression/${esc(c.id)}/report" target="_blank" rel="noopener" style="text-decoration:none"><i class="fa-solid fa-up-right-from-square"></i> Open report</a>
+            <a class="ghost" href="/api/regression/${esc(c.id)}/report?download=1" style="text-decoration:none"><i class="fa-solid fa-download"></i> Download</a></div>
+          <p class="lead" style="margin:6px 0 10px">Started ${esc((c.started_at || '').replace('T', ' '))} · followers ${esc(c.params?.start)}–${esc(c.params?.end)} · paper</p>
+          <table class="hist-table"><thead><tr><th>#</th><th>Suite</th><th>Status</th><th>Result</th><th>Time</th><th></th></tr></thead><tbody>
+          ${(c.steps || []).map((s, i) => `<tr><td>${i + 1}</td><td><b>${esc(s.name)}</b></td><td><span class="pill ${pillOf(s)}">${esc(s.status)}</span></td>
+            <td>${s.passed != null ? `<span class="counter-pass">✓ ${s.passed}</span> <span class="counter-fail">✗ ${s.failed}</span>` : (s.error ? esc(s.error) : '')}</td>
+            <td>${s.duration_sec != null ? fmtDur(s.duration_sec) : ''}</td>
+            <td>${s.run_id ? `<button class="ghost" onclick="viewRunLog('${esc(s.run_id)}')">Log</button>` : ''}</td></tr>`).join('')}</tbody></table>`;
+      }
+      $('regPast').innerHTML = (d.past || []).length ? d.past.map(id => `<a class="ghost" href="/api/regression/${esc(id)}/report" target="_blank" rel="noopener" style="text-decoration:none">${esc(id.replace('reg_', '').replace('_', ' '))}</a>`).join('') : '<span class="muted" style="font-size:12px">None yet.</span>';
+    }
+
+    async function fetchSymbols() {
+      const { ok, data } = await api('/api/symbols/latest');
+      const el = $('symReport'); if (!el) return;
+      const r = ok ? data.report : null;
+      if (!r) { el.innerHTML = `<div class="empty-note">${ok ? 'No symbol run yet. Press <b>Market types</b> for a 2-minute check of every market group.' : esc(data.error || 'Could not load')}</div>`; return; }
+      const t = r.tally || {};
+      const rows = Object.entries(r.groups || {}).map(([g, v]) => `<tr><td>${esc(g)}</td><td class="counter-pass">${v.PASS}</td>
+        <td class="${v.FAIL ? 'counter-fail' : ''}">${v.FAIL}</td><td style="color:var(--warn)">${v.WARN || 0}</td><td style="color:var(--muted)">${v.SKIP}</td></tr>`).join('');
+      const probs = (r.problems || []).map(p => `<div class="finding sev-${p.status === 'FAIL' ? 'HIGH' : 'MED'}"><b>${esc(p.status)}</b><code style="color:inherit">${esc(p.symbol)}</code> (${esc(p.group)}) – ${esc(p.detail)}</div>`).join('');
+      el.innerHTML = `
+        <div class="e2e-verdict ${esc(r.verdict)}"><div class="big">${esc(r.verdict)}</div>
+          <div style="flex:1"><div class="e2e-meta"><span><b>${t.PASS || 0}</b> passed</span><span><b>${t.FAIL || 0}</b> failed</span>
+            <span><b>${t.WARN || 0}</b> warnings</span><span><b>${t.SKIP || 0}</b> closed</span></div>
+          <div class="e2e-meta" style="margin-top:4px"><span>${esc((r.started || '').replace('T', ' '))} (${fmtDur(r.duration_sec)})</span>
+            <span><b>${esc(r.tested)}</b> of ${esc(r.universe)} symbols (${r.mode === 'sample' ? 'one per market group' : 'all'})</span>
+            <span>Followers <b>${esc((r.followers_range || []).join('–'))}</b> (${esc(r.followers_linked)} linked)</span></div></div></div>
+        <div style="display:flex; gap:8px; margin-top:10px">${data.markdown ? `<button class="ghost" onclick="viewReport('${esc(data.markdown)}')"><i class="fa-solid fa-file-lines"></i> Full report</button>` : ''}</div>
+        <div style="overflow-x:auto; margin-top:10px"><table class="hist-table"><thead><tr><th>Market group</th><th>Pass</th><th>Fail</th><th>Warn</th><th>Closed</th></tr></thead><tbody>${rows}</tbody></table></div>
+        ${probs ? `<div class="e2e-body" style="padding:12px 0 0">${probs}${r.problem_count > 200 ? `<div class="finding sev-INFO">…and ${r.problem_count - 200} more in the full report</div>` : ''}</div>` : ''}`;
+    }
+
+    function copyE2ESummary() {
+      const r = lastE2E?.report; if (!r) return;
+      const lines = [`E2E copy-trading test: ${r.verdict} (${(r.started || '').replace('T', ' ')}, ${(r.instance || '').toUpperCase()}, followers ${(r.followers_range || []).join('-')})`];
+      (r.results || []).forEach(s => lines.push(`${s.id} ${s.title}: ${s.status}`));
+      copyText(lines.join('\n'));
+    }
+
+    function copyBugReport(id) {
+      const r = lastE2E?.report, s = (r?.results || []).find(x => x.id === id); if (!s) return;
+      copyText([`[E2E ${s.id}] ${s.title} – ${s.status}`, '',
+        `Platform: ${r.platform} | Instance: ${r.instance} | Run: ${r.started}`,
+        `Master: ${r.master} | Followers: ${(r.followers_range || []).join('-')} (${r.followers_linked} linked) | Lot: ${r.lot}`, '',
+        'Findings:', ...(s.findings || []).filter(f => f.severity !== 'INFO').map(f => `- ${f.severity}: ${f.message}`), '',
+        `Metrics: ${JSON.stringify(s.metrics || {})}`, '',
+        `Reproduce: python test_suite/e2e_runner.py --instance ${r.instance} --start ${(r.followers_range || [1])[0]} --end ${(r.followers_range || [1, 10])[1]} --lot ${r.lot} --only ${s.id}`,
+        `Evidence: reports/evidence/${lastE2E.file}`].join('\n'));
     }
 
     function openConfirm(s, params, inst) {
@@ -3346,6 +3481,7 @@
         if (prev && prev.is_running !== d.is_running) {
           renderSuites(); fetchSummary(); if (activeTab === 'history') fetchHistory();
           if (!d.is_running) showToast(`${d.name}: ${label} (✓${d.pass_count} ✗${d.fail_count}) in ${fmtDur(d.elapsed_seconds)}`, d.status === 'COMPLETED' && !d.fail_count ? 'ok' : 'err');
+          if (!d.is_running && ['e2e', 'symbols_sample', 'symbols_all'].includes(d.suite)) { await fetchE2E(); if (d.status !== 'TERMINATED') switchTab('e2e'); }
         } else if (!prev) renderSuites();
       } catch (e) { /* server restarting */ }
     }
@@ -3356,7 +3492,7 @@
         if (raw === lastLogRaw) return; lastLogRaw = raw;
         const term = $('terminalStream');
         if (!raw) {
-          term.innerHTML = `<div class="term-empty">No run yet.<br>1. Pick a suite on the left (start with <b>Breakpoint & Race Hunter</b> on 5–10 followers).<br>2. Output streams here live.<br>New to this project? Open <a href="#" onclick="switchTab('setup');return false">Getting Started</a>.</div>`;
+          term.innerHTML = `<div class="term-empty">No run yet.<br>1. Pick a suite on the left (start with <b>End-to-End Test</b> on 10 followers).<br>2. Output streams here live.<br>New to this project? Open <a href="#" onclick="switchTab('setup');return false">Getting Started</a>.</div>`;
           return;
         }
         term.innerHTML = esc(raw)
@@ -3432,7 +3568,7 @@
       const p = r.params || {};
       if (p.start) $('optStart').value = p.start; if (p.end) $('optEnd').value = p.end;
       if (p.lot) $('optLot').value = p.lot; if (p.orders_count) $('optOrders').value = p.orders_count; if (p.ramp) $('optRamp').value = p.ramp;
-      setOptInstance(p.instance === 'real' ? 'real' : 'paper'); runSuite(r.suite);
+      setOptInstance(p.instance === 'real' ? 'real' : 'paper'); runSuite(r.suite, false, p.only ? { only: p.only } : {});
     }
 
     /* ---- keyboard + visibility-aware polling ---- */
@@ -3446,6 +3582,8 @@
     setInterval(() => visible() && activeTab === 'tape' && fetchLiveOrders(), 3000);
     setInterval(() => visible() && activeTab === 'followers' && fetchFollowers(), 3000);
     setInterval(() => visible() && activeTab === 'reports' && fetchReports(), 5000);
+    setInterval(() => visible() && (activeTab === 'regression' || REG?.current?.status === 'RUNNING') && fetchRegression(), 4000);
+    setInterval(() => visible() && activeTab === 'e2e' && fetchMarkets(), 60000);
     setInterval(() => visible() && fetchSummary(), 15000);
     setInterval(() => visible() && fetchBooks(), 60000);
     setInterval(() => visible() && !lastStatus?.is_running && fetchHealth(false), 60000);
@@ -3453,7 +3591,7 @@
 
     (async function init() {
       await Promise.all([loadConfig(), loadSuites()]);
-      fetchStatus(); fetchLogs(); fetchSummary(); fetchReports(); fetchBooks();
+      fetchStatus(); fetchLogs(); fetchSummary(); fetchReports(); fetchBooks(); fetchE2E(); fetchRegression();
       await fetchHealth(false);
       let tab = 'terminal'; try { tab = localStorage.getItem('bt_tab') || 'terminal'; } catch (e) {}
       if (lastHealth && lastHealth.overall === 'fail') tab = 'setup';

@@ -1,0 +1,102 @@
+{
+ "suite": "Symbol Coverage",
+ "verdict": "PASS",
+ "timestamp": "2026-11-12T17:58:42.495688+00:00",
+ "started": "2026-11-12T23:27:08",
+ "duration_sec": 94.0,
+ "instance": "paper",
+ "symbol_source": "https://terminal.blacktrader.com/feed/symbol_list",
+ "universe": 3643,
+ "tested": 7,
+ "mode": "all",
+ "followers_range": [
+  1,
+  100
+ ],
+ "followers_linked": 99,
+ "tally": {
+  "PASS": 7,
+  "FAIL": 0,
+  "WARN": 0,
+  "SKIP": 0
+ },
+ "groups": {
+  "FOREX": {
+   "PASS": 6,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "SPOT_INDICES": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  }
+ },
+ "results": [
+  {
+   "symbol": "BLACK:CADCHF",
+   "type": "FOREX",
+   "group": "FOREX",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 99 followers and closed",
+   "entry": 0.58639
+  },
+  {
+   "symbol": "BLACK:CADJPY",
+   "type": "FOREX",
+   "group": "FOREX",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 99 followers and closed",
+   "entry": 112.063
+  },
+  {
+   "symbol": "BLACK:CHFJPY",
+   "type": "FOREX",
+   "group": "FOREX",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 99 followers and closed",
+   "entry": 191.115
+  },
+  {
+   "symbol": "BLACK:EURGBP",
+   "type": "FOREX",
+   "group": "FOREX",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 99 followers and closed",
+   "entry": 0.83527
+  },
+  {
+   "symbol": "BLACK:SGDJPY",
+   "type": "FOREX",
+   "group": "FOREX",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 99 followers and closed",
+   "entry": 124.102
+  },
+  {
+   "symbol": "BLACK:US30cash-1",
+   "type": "SPOT_INDICES",
+   "group": "SPOT_INDICES",
+   "qty": 2.0,
+   "status": "PASS",
+   "detail": "copied to 99 followers and closed",
+   "entry": 52657
+  },
+  {
+   "symbol": "BLACK:USDJPY",
+   "type": "FOREX",
+   "group": "FOREX",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 99 followers and closed",
+   "entry": 159.775
+  }
+ ]
+}

@@ -49,3 +49,7 @@ scratch/
 
 # Real JMeter run output (HTML dashboards, JTL, logs)
 reports/jmeter/
+
+# Local virtualenv (scripts/bootstrap.py) and regression run state
+.venv/
+reports/regressions/

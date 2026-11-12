@@ -1,0 +1,117 @@
+{
+ "suite": "Symbol Coverage",
+ "verdict": "PASS",
+ "timestamp": "2026-11-12T17:31:47.136790+00:00",
+ "started": "2026-11-12T22:59:08",
+ "duration_sec": 158.4,
+ "instance": "paper",
+ "symbol_source": "https://terminal.blacktrader.com/feed/symbol_list",
+ "universe": 3643,
+ "tested": 8,
+ "mode": "all",
+ "followers_range": [
+  1,
+  80
+ ],
+ "followers_linked": 80,
+ "tally": {
+  "PASS": 8,
+  "FAIL": 0,
+  "WARN": 0,
+  "SKIP": 0
+ },
+ "groups": {
+  "CMDTY": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "FOREX": {
+   "PASS": 5,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "METAL": {
+   "PASS": 2,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  }
+ },
+ "results": [
+  {
+   "symbol": "BLACK:EURGBP",
+   "type": "FOREX",
+   "group": "FOREX",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 80 followers and closed",
+   "entry": 0.83549
+  },
+  {
+   "symbol": "BLACK:EURUSD",
+   "type": "FOREX",
+   "group": "FOREX",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 80 followers and closed",
+   "entry": 1.10569
+  },
+  {
+   "symbol": "BLACK:GBPJPY",
+   "type": "FOREX",
+   "group": "FOREX",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 80 followers and closed",
+   "entry": 211.369
+  },
+  {
+   "symbol": "BLACK:NGAScash-1",
+   "type": "CMDTY",
+   "group": "CMDTY",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 80 followers and closed",
+   "entry": 3.188
+  },
+  {
+   "symbol": "BLACK:USDCHF",
+   "type": "FOREX",
+   "group": "FOREX",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 80 followers and closed",
+   "entry": 0.83527
+  },
+  {
+   "symbol": "BLACK:USDJPY",
+   "type": "FOREX",
+   "group": "FOREX",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 80 followers and closed",
+   "entry": 159.708
+  },
+  {
+   "symbol": "BLACK:XAGUSD",
+   "type": "METAL",
+   "group": "METAL",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 80 followers and closed",
+   "entry": 50.022
+  },
+  {
+   "symbol": "BLACK:XAUUSD",
+   "type": "METAL",
+   "group": "METAL",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 80 followers and closed",
+   "entry": 3872.72
+  }
+ ]
+}

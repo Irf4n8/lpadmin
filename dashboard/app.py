@@ -19,7 +19,7 @@ import sys
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from flask import Flask, Response, g, jsonify, make_response, render_template, request, send_from_directory
 
@@ -32,6 +32,7 @@ from config.settings import (BASE_URL, DEFAULT_DOMAIN, DEFAULT_PREFIX, DASHBOARD
                              FOLLOWER_COUNT, MASTER_EMAIL, MASTER_ID)
 from dashboard.suites import SUITE_INDEX, build_command, effective_instance, needs_confirmation, public_registry
 from test_suite.client import BlackTraderClient
+from test_suite import symbol_coverage_runner as SC
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 
@@ -280,7 +281,16 @@ def run_suite():
         return jsonify({"error": "This action needs explicit confirmation.", "needs_confirmation": True,
                         "reason": ("Runs against the REAL instance." if effective_instance(suite, params) in ("real", "both")
                                    else "Closes positions and cancels orders.")}), 412
+    with REGRESSION_LOCK:
+        if REGRESSION.get("status") == "RUNNING":
+            return jsonify({"error": "A regression is running - stop it first (Regression tab)."}), 409
+    body, code = _launch(suite_key, suite, params)
+    return jsonify(body), code
 
+
+def _launch(suite_key: str, suite: dict, params: dict):
+    """Start one suite as a subprocess (one at a time). Returns (json body, http code)."""
+    global RUNNING_PROCESS
     cmd = build_command(suite, params, {"follower_count": FOLLOWER_COUNT})
     title = suite["name"]
     run_id = datetime.now().strftime("%Y%m%d_%H%M%S") + "_" + suite_key
@@ -288,7 +298,7 @@ def run_suite():
     env = dict(os.environ, PYTHONUNBUFFERED="1", PYTHONIOENCODING="utf-8")
     with PROCESS_LOCK:
         if RUNNING_PROCESS and RUNNING_PROCESS.poll() is None:
-            return jsonify({"error": "A test suite is already running.", "current": CURRENT_TASK["name"]}), 409
+            return {"error": "A test suite is already running.", "current": CURRENT_TASK["name"]}, 409
 
         with open(LATEST_LOG_FILE, "w", encoding="utf-8") as f:
             f.write(f"=== LAUNCHING: {title} ===\n")
@@ -308,7 +318,200 @@ def run_suite():
                      "params": CURRENT_TASK["params"], "books": _book_snapshot()})
         threading.Thread(target=monitor_process, args=(proc, run_id, log_out), daemon=True).start()
 
-    return jsonify({"message": f"Launched {title}", "pid": proc.pid, "suite": suite_key, "run_id": run_id})
+    return {"message": f"Launched {title}", "pid": proc.pid, "suite": suite_key, "run_id": run_id}, 200
+
+
+# -------------------------------------------------------------------------------------
+# Regression: run several safe suites one after another, then one shareable report
+# -------------------------------------------------------------------------------------
+REGRESSION_LOCK = threading.Lock()
+REGRESSION: dict = {"status": "IDLE"}
+REGRESSION_DIR = BASE_DIR / "reports" / "regressions"
+REGRESSION_DIR.mkdir(parents=True, exist_ok=True)
+REGRESSION_PRESETS = {
+    "smoke": ["e2e", "symbols_sample"],
+    "standard": ["e2e", "symbols_sample", "copy_complex", "pending_trigger_race", "accounting", "security"],
+    "full": ["e2e", "symbols_sample", "multiplier", "symmetry", "copy_complex", "breakpoint", "race", "extreme",
+             "pending_trigger_race", "pending", "advanced", "state", "extended", "accounting", "security", "ui_journey"],
+}
+
+
+def _history_entry(run_id):
+    with HISTORY_LOCK:
+        return next((h for h in _load_history() if h.get("id") == run_id), {})
+
+
+def _latest_evidence(prefix: str, since: str):
+    """Newest evidence JSON whose name starts with prefix and was written during this regression."""
+    cands = sorted(EVIDENCE_DIR.glob(prefix + "_*.json"), key=lambda p: p.stat().st_mtime, reverse=True)
+    for p in cands:
+        if datetime.fromtimestamp(p.stat().st_mtime).isoformat(timespec="seconds") >= since:
+            return p
+    return None
+
+
+def _regression_worker(reg_id: str):
+    while True:
+        with REGRESSION_LOCK:
+            if REGRESSION.get("id") != reg_id or REGRESSION["status"] != "RUNNING":
+                return
+            step = next((s for s in REGRESSION["steps"] if s["status"] == "QUEUED"), None)
+            if step is None:
+                REGRESSION.update(status="DONE", ended_at=datetime.now().isoformat(timespec="seconds"))
+                _save_regression()
+                return
+            step["status"] = "RUNNING"
+            params = dict(REGRESSION["params"])
+        suite = SUITE_INDEX[step["suite"]]
+        body, code = _launch(step["suite"], suite, params)
+        if code != 200:
+            with REGRESSION_LOCK:
+                step.update(status="ERROR", error=body.get("error"))
+            continue
+        with REGRESSION_LOCK:
+            step.update(run_id=body["run_id"], started_at=datetime.now().isoformat(timespec="seconds"))
+        while True:                                     # wait for this suite to finish
+            time.sleep(2)
+            with PROCESS_LOCK:
+                busy = RUNNING_PROCESS is not None and RUNNING_PROCESS.poll() is None and CURRENT_TASK.get("run_id") == body["run_id"]
+            if not busy:
+                break
+        time.sleep(1.5)                                 # let monitor_process write the history entry
+        h = _history_entry(body["run_id"])
+        with REGRESSION_LOCK:
+            step.update(status=h.get("status", "UNKNOWN"), passed=h.get("passed"), failed=h.get("failed"),
+                        duration_sec=h.get("duration_sec"), exit_code=h.get("exit_code"))
+            if step["status"] == "TERMINATED":
+                REGRESSION["status"] = "STOPPED"
+            _save_regression()
+
+
+def _save_regression():
+    try:
+        (REGRESSION_DIR / f"{REGRESSION['id']}.json").write_text(json.dumps(REGRESSION, indent=1, default=str), encoding="utf-8")
+    except Exception:
+        pass
+
+
+@app.route("/api/regression", methods=["GET"])
+def regression_status():
+    with REGRESSION_LOCK:
+        cur = json.loads(json.dumps(REGRESSION, default=str))
+    past = sorted((p.stem for p in REGRESSION_DIR.glob("reg_*.json")), reverse=True)[:20]
+    if not cur.get("id") and past:                 # after a dashboard restart, show the last saved regression
+        try:
+            cur = json.loads((REGRESSION_DIR / f"{past[0]}.json").read_text(encoding="utf-8"))
+            if cur.get("status") == "RUNNING":     # the server stopped while it ran
+                cur["status"] = "INTERRUPTED"
+        except Exception:
+            cur = {"status": "IDLE"}
+    safe = [{"key": s["key"], "name": s["name"], "minutes": s.get("minutes"), "category": s["category"]}
+            for s in public_registry() if s["risk"] == "safe" and s["key"] not in ("symbols_all", "jmeter")]
+    return jsonify({"current": cur, "past": past, "presets": REGRESSION_PRESETS, "suites": safe})
+
+
+@app.route("/api/regression/start", methods=["POST"])
+def regression_start():
+    data = request.get_json(silent=True) or {}
+    # an explicit list (even an empty one) is taken as-is; the preset only applies when no list is sent
+    keys = data["suites"] if isinstance(data.get("suites"), list) else REGRESSION_PRESETS.get(data.get("preset"), [])
+    keys = [k for k in dict.fromkeys(keys) if k in SUITE_INDEX]
+    unsafe = [k for k in keys if SUITE_INDEX[k]["risk"] != "safe" or SUITE_INDEX[k].get("fixed_instance") == "real"]
+    if unsafe:
+        return jsonify({"error": f"regressions run safe paper suites only; remove {unsafe}"}), 400
+    if not keys:
+        return jsonify({"error": "pick at least one suite"}), 400
+    p = data.get("params") or {}
+    try:
+        start, end = max(1, int(p.get("start", 1))), min(FOLLOWER_COUNT, int(p.get("end", 10)))
+    except (TypeError, ValueError):
+        return jsonify({"error": "bad follower range"}), 400
+    params = {"instance": "paper", "start": min(start, end), "end": max(start, end), "lot": p.get("lot", 0.1)}
+    with REGRESSION_LOCK, PROCESS_LOCK:
+        if REGRESSION.get("status") == "RUNNING":
+            return jsonify({"error": "A regression is already running"}), 409
+        if RUNNING_PROCESS and RUNNING_PROCESS.poll() is None:
+            return jsonify({"error": "A suite is running - wait for it or stop it first"}), 409
+        reg_id = "reg_" + datetime.now().strftime("%Y%m%d_%H%M%S")
+        REGRESSION.clear()
+        REGRESSION.update(id=reg_id, status="RUNNING", started_at=datetime.now().isoformat(timespec="seconds"), params=params,
+                          name=data.get("name") or "", steps=[{"suite": k, "name": SUITE_INDEX[k]["name"], "status": "QUEUED"} for k in keys])
+    threading.Thread(target=_regression_worker, args=(reg_id,), daemon=True).start()
+    return jsonify({"message": f"Regression started: {len(keys)} suites", "id": reg_id})
+
+
+@app.route("/api/regression/stop", methods=["POST"])
+def regression_stop():
+    with REGRESSION_LOCK:
+        if REGRESSION.get("status") != "RUNNING":
+            return jsonify({"message": "No regression is running."})
+        REGRESSION["status"] = "STOPPED"
+        for s in REGRESSION["steps"]:
+            if s["status"] == "QUEUED":
+                s["status"] = "SKIPPED"
+        _save_regression()
+    with PROCESS_LOCK:
+        if RUNNING_PROCESS and RUNNING_PROCESS.poll() is None:
+            CURRENT_TASK["status"] = "TERMINATED"
+            RUNNING_PROCESS.terminate()
+    return jsonify({"message": "Regression stopped. Run Emergency Teardown if a suite was cut off mid-trade."})
+
+
+@app.route("/api/regression/<reg_id>/report")
+def regression_report(reg_id):
+    """Self-contained HTML report of one regression, for attaching to a ticket or sending to the team."""
+    if not re.fullmatch(r"reg_\d{8}_\d{6}", reg_id):
+        return jsonify({"error": "bad id"}), 400
+    p = REGRESSION_DIR / f"{reg_id}.json"
+    with REGRESSION_LOCK:
+        reg = json.loads(json.dumps(REGRESSION, default=str)) if REGRESSION.get("id") == reg_id else None
+    if reg is None:
+        if not p.exists():
+            return jsonify({"error": "not found"}), 404
+        reg = json.loads(p.read_text(encoding="utf-8"))
+    from html import escape as h
+    ok = lambda s: s.get("status") == "COMPLETED" and not s.get("failed")
+    steps_html = "".join(
+        f"<tr><td>{h(s['name'])}</td><td class='{'ok' if ok(s) else ('bad' if s.get('status') in ('FAILED', 'ERROR') or s.get('failed') else 'muted')}'>"
+        f"{h(str(s.get('status')))}</td><td>{s.get('passed') if s.get('passed') is not None else ''}</td>"
+        f"<td>{s.get('failed') if s.get('failed') is not None else ''}</td><td>{h(str(s.get('duration_sec') or ''))}s</td>"
+        f"<td><code>{h(str(s.get('run_id') or ''))}</code></td></tr>" for s in reg.get("steps", []))
+    extra = ""
+    e2e = _latest_evidence("e2e_evidence", reg.get("started_at", ""))
+    if e2e:
+        d = json.loads(e2e.read_text(encoding="utf-8"))
+        rows = "".join(f"<tr><td>{h(r['id'])}</td><td>{h(r['title'])}</td><td class='{'ok' if r['status'] == 'PASS' else 'bad' if r['status'] in ('FAIL', 'ERROR') else 'muted'}'>"
+                       f"{h(r['status'])}</td><td>{'<br>'.join(h(f['severity'] + ': ' + f['message']) for f in r['findings'] if f['severity'] != 'INFO')}</td></tr>"
+                       for r in d.get("results", []))
+        extra += f"<h2>End-to-End steps ({h(d.get('verdict', ''))})</h2><table><tr><th>Step</th><th>Check</th><th>Result</th><th>Findings</th></tr>{rows}</table>"
+    sym = _latest_evidence("symbols_evidence", reg.get("started_at", ""))
+    if sym:
+        d = json.loads(sym.read_text(encoding="utf-8"))
+        rows = "".join(f"<tr><td>{h(g)}</td><td>{v['PASS']}</td><td>{v['FAIL']}</td><td>{v['WARN']}</td><td>{v['SKIP']}</td></tr>"
+                       for g, v in d.get("groups", {}).items())
+        extra += f"<h2>Market types ({h(d.get('verdict', ''))})</h2><table><tr><th>Market group</th><th>Pass</th><th>Fail</th><th>Warn</th><th>Closed</th></tr>{rows}</table>"
+    total_f = sum(int(s.get("failed") or 0) for s in reg.get("steps", []))
+    bad = [s for s in reg.get("steps", []) if s.get("status") in ("FAILED", "ERROR", "TERMINATED") or s.get("failed")]
+    verdict = "FAIL" if bad else ("PASS" if reg.get("status") == "DONE" else str(reg.get("status")))
+    html = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Regression {h(reg_id)}</title><style>
+:root{{--bg:#fff;--fg:#14161a;--mut:#666;--line:#ddd;--ok:#0a7a45;--bad:#b42318}}
+@media (prefers-color-scheme:dark){{:root{{--bg:#111316;--fg:#e8e8ea;--mut:#9a9aa2;--line:#2a2d33;--ok:#3ccf8e;--bad:#f87171}}}}
+body{{font:14px/1.5 system-ui,sans-serif;background:var(--bg);color:var(--fg);max-width:1000px;margin:0 auto;padding:24px 16px}}
+table{{border-collapse:collapse;width:100%;margin:8px 0 24px;display:block;overflow-x:auto}}th,td{{text-align:left;padding:6px 10px;border-bottom:1px solid var(--line);vertical-align:top}}
+th{{font-size:12px;color:var(--mut);text-transform:uppercase}}.ok{{color:var(--ok);font-weight:700}}.bad{{color:var(--bad);font-weight:700}}.muted{{color:var(--mut)}}
+.v{{font-size:28px;font-weight:800}}code{{font-size:12px}}</style></head><body>
+<div class="v {'ok' if verdict == 'PASS' else 'bad'}">{h(verdict)}</div>
+<p>Regression <code>{h(reg_id)}</code> {h(reg.get('name') or '')}<br>Started {h(reg.get('started_at', ''))} · ended {h(str(reg.get('ended_at') or '-'))}<br>
+Platform {h(BASE_URL)} · instance {h(reg.get('params', {}).get('instance', ''))} · followers {reg.get('params', {}).get('start')}-{reg.get('params', {}).get('end')}
+ · master {h(MASTER_EMAIL)} · {total_f} failed checks in {len(bad)} suite(s)</p>
+<h2>Suites</h2><table><tr><th>Suite</th><th>Status</th><th>Passed</th><th>Failed</th><th>Time</th><th>Run</th></tr>{steps_html}</table>{extra}
+<p class="muted">Each suite's full log is in the Test Hub (History tab) under its run id; evidence files are in reports/evidence/.</p></body></html>"""
+    resp = make_response(html)
+    resp.headers["Content-Type"] = "text/html; charset=utf-8"
+    if request.args.get("download"):
+        resp.headers["Content-Disposition"] = f'attachment; filename="{reg_id}.html"'
+    return resp
 
 
 @app.route("/api/stop", methods=["POST"])
@@ -387,6 +590,120 @@ def get_summary():
     })
 
 
+_E2E_NAME = re.compile(r"^e2e_evidence_\d{8}_\d{6}\.json$")
+
+
+@app.route("/api/e2e/latest")
+def get_e2e_report():
+    """Latest (or ?file=) End-to-End evidence, parsed, plus the list of earlier E2E runs for the picker."""
+    files = sorted((p for p in EVIDENCE_DIR.glob("e2e_evidence_*.json") if _E2E_NAME.match(p.name)), key=lambda p: p.name, reverse=True)
+    runs = []
+    for p in files[:30]:
+        try:
+            d = json.loads(p.read_text(encoding="utf-8"))
+            runs.append({"file": p.name, "verdict": d.get("verdict"), "started": d.get("started"), "instance": d.get("instance"),
+                         "followers_range": d.get("followers_range"), "tally": d.get("tally")})
+        except Exception:
+            runs.append({"file": p.name, "verdict": "UNREADABLE"})
+    wanted = request.args.get("file")
+    if wanted and not _E2E_NAME.match(wanted):
+        return jsonify({"error": "bad file name"}), 400
+    target = (EVIDENCE_DIR / wanted) if wanted else (files[0] if files else None)
+    if target is None or not target.exists():
+        return jsonify({"report": None, "file": None, "runs": runs})
+    try:
+        report = json.loads(target.read_text(encoding="utf-8"))
+    except Exception as e:
+        return jsonify({"error": f"could not read {target.name}: {e}"}), 500
+    md = target.with_suffix(".md")
+    return jsonify({"report": report, "file": target.name, "markdown": md.name if md.exists() else None, "runs": runs})
+
+
+_UNIVERSE_CACHE = {"t": 0.0, "symbols": None, "types": None}
+
+
+def _universe():
+    """Symbol list + market schedule from the platform's symbol_url, cached for an hour."""
+    if _UNIVERSE_CACHE["symbols"] is None or time.time() - _UNIVERSE_CACHE["t"] > 3600:
+        import requests as _rq
+        data = _rq.get(SC.symbol_url(), timeout=60).json()["data"]
+        SC._UNIVERSE = None                         # refresh the runner-side cache too
+        _UNIVERSE_CACHE.update(t=time.time(), symbols=SC.load_symbols(), types=data.get("typeMap", {}))
+    return _UNIVERSE_CACHE["symbols"], _UNIVERSE_CACHE["types"]
+
+
+@app.route("/api/symbols/list")
+def list_symbols():
+    """Every tradable symbol with its market group and size rules (for the Dispatch symbol picker)."""
+    try:
+        syms, _ = _universe()
+    except Exception as e:
+        return jsonify({"error": f"symbol list unavailable: {e}", "symbols": []}), 502
+    return jsonify({"symbols": [{"sym": s["sym"], "group": s["group"], "type": s["type"], "min": s["min_qty"], "step": s["step"],
+                                 "max": s["max_qty"], "contract": s["csize"]} for s in syms]})
+
+
+def market_open(sched: dict, now: datetime) -> bool:
+    """Is a market type in session at `now` (UTC), per the platform's typeMap schedule."""
+    days = sched.get("days") or []
+    start, end = sched.get("session_start"), sched.get("session_end")
+    day = now.strftime("%A")
+    if not start or not end:                        # 24h on the listed days
+        return day in days
+    mins = now.hour * 60 + now.minute
+    s = int(start[:2]) * 60 + int(start[3:5])
+    e = int(end[:2]) * 60 + int(end[3:5])
+    if s < e:                                       # same-day session
+        return day in days and s <= mins < e
+    # overnight session (e.g. FOREX 21:05 -> 21:00): open from `start` on a listed day until `end` the next day
+    yesterday = (now - timedelta(days=1)).strftime("%A")
+    return (day in days and mins >= s) or (yesterday in days and mins < e)
+
+
+@app.route("/api/markets")
+def markets_status():
+    """Which market types are in session now (UTC, from the platform schedule) and how many symbols each has."""
+    try:
+        syms, types = _universe()
+    except Exception as e:
+        return jsonify({"error": f"symbol list unavailable: {e}"}), 502
+    now = datetime.now(timezone.utc)
+    counts: dict = {}
+    for s in syms:
+        counts[s["type"]] = counts.get(s["type"], 0) + 1
+    rows = []
+    for t, n in sorted(counts.items(), key=lambda kv: -kv[1]):
+        sch = types.get(t, {})
+        rows.append({"type": t, "symbols": n, "open": market_open(sch, now) if sch else None,
+                     "session_utc": f"{sch.get('session_start') or '00:00'}-{sch.get('session_end') or '24:00'}",
+                     "days": [d[:3] for d in (sch.get("days") or [])], "data_feed": t in SC.DATA_FEED_TYPES})
+    open_syms = sum(r["symbols"] for r in rows if r["open"])
+    return jsonify({"now_utc": now.isoformat(timespec="minutes"), "markets": rows, "open_symbols": open_syms, "total_symbols": len(syms),
+                    "note": "From the platform's published schedule (typeMap). Holidays are not included."})
+
+
+_SYM_NAME = re.compile(r"^symbols_evidence_\d{8}_\d{6}\.json$")
+
+
+@app.route("/api/symbols/latest")
+def get_symbols_report():
+    """Latest Symbol Coverage run: per market group tally + the problem symbols (not all ~3 600 rows)."""
+    files = sorted((p for p in EVIDENCE_DIR.glob("symbols_evidence_*.json") if _SYM_NAME.match(p.name)), key=lambda p: p.name, reverse=True)
+    if not files:
+        return jsonify({"report": None})
+    p = files[0]
+    try:
+        d = json.loads(p.read_text(encoding="utf-8"))
+    except Exception as e:
+        return jsonify({"error": f"could not read {p.name}: {e}"}), 500
+    problems = [r for r in d.get("results", []) if r.get("status") in ("FAIL", "WARN")]
+    keep = {k: d.get(k) for k in ("verdict", "started", "duration_sec", "instance", "mode", "universe", "tested",
+                                   "followers_range", "followers_linked", "tally", "groups", "symbol_source")}
+    md = p.with_suffix(".md")
+    return jsonify({"report": {**keep, "problems": problems[:200], "problem_count": len(problems)}, "file": p.name,
+                    "markdown": md.name if md.exists() else None})
+
+
 @app.route("/api/reports")
 def get_reports():
     reports = []
@@ -401,7 +718,11 @@ def get_reports():
                 seen_files.add(f.name)
                 mtime = datetime.fromtimestamp(f.stat().st_mtime).strftime("%Y-%m-%d %H:%M:%S")
                 category = "Other"
-                if "jmeter" in f.name:
+                if f.name.startswith("e2e"):
+                    category = "End-to-End"
+                elif f.name.startswith("symbols"):
+                    category = "Symbol Coverage"
+                elif "jmeter" in f.name:
                     category = "JMeter Load Test"
                 elif "real_money" in f.name:
                     category = "Real Money Mode"
@@ -820,7 +1141,7 @@ def get_live_activity():
             if "T" in raw_time:
                 clean_time = raw_time.split("T")[1].replace("Z", "")[:8]
             recent_events.append({
-                "account": "ctmaster (Master Trader)",
+                "account": f"{MASTER_EMAIL.split('@')[0]} (Master Trader)",
                 "account_type": "master",
                 "order_id": o.get("order_id"),
                 "symbol": o.get("symbol"),
@@ -853,7 +1174,7 @@ def get_live_orders():
             if "T" in raw_time:
                 clean_time = raw_time.split("T")[1].replace("Z", "")[:8]
             tape.append({
-                "account": "Master (ctmaster)",
+                "account": f"Master ({MASTER_EMAIL.split('@')[0]})",
                 "email": MASTER_EMAIL,
                 "role": "MASTER",
                 "order_id": o.get("order_id"),
@@ -869,8 +1190,9 @@ def get_live_orders():
                 "raw_time": raw_time
             })
 
-        # 2. Sample followers (e.g. follower1, follower26, follower51, follower76)
-        sample_followers = ["follower1@mailinator.com", "follower26@mailinator.com", "follower51@mailinator.com", "follower76@mailinator.com"]
+        # 2. Sample followers spread across the configured range (one per multiplier tier by default)
+        picks = sorted({i for i in (1, FOLLOWER_COUNT // 4 + 1, FOLLOWER_COUNT // 2 + 1, 3 * FOLLOWER_COUNT // 4 + 1) if 1 <= i <= FOLLOWER_COUNT})
+        sample_followers = [f"{DEFAULT_PREFIX}{i}@{DEFAULT_DOMAIN}" for i in picks]
         for f_email in sample_followers:
             f_ords = dashboard_client.get_orders(f_email, instance=instance).get("orders", [])
             f_name = f_email.split("@")[0]
@@ -880,7 +1202,7 @@ def get_live_orders():
                 if "T" in raw_time:
                     clean_time = raw_time.split("T")[1].replace("Z", "")[:8]
                 tape.append({
-                    "account": f"Follower {f_name.replace('follower', '#')}",
+                    "account": f"Follower {f_name.replace(DEFAULT_PREFIX, '#')}",
                     "email": f_email,
                     "role": "FOLLOWER",
                     "order_id": o.get("order_id"),
@@ -901,221 +1223,198 @@ def get_live_orders():
         return jsonify({"tape": tape[:40]})
     except Exception as e:
         return jsonify({"tape": [], "error": str(e)})
-    except Exception as e:
-        return jsonify({"events": [], "error": str(e)})
 
 
 @app.route("/api/order/dispatch_and_verify", methods=["POST"])
 def dispatch_and_verify():
-    """Places an order on Master account and concurrently verifies 100 followers replication."""
-    import time
-    from concurrent.futures import ThreadPoolExecutor
-    from datetime import datetime
+    """Place ONE master order and verify every linked follower copied it.
 
-    data = request.json or {}
-    symbol = data.get("symbol", "BINANCE:BTCUSDT.P")
-    side = data.get("side", "BUY").upper()
-    order_type = data.get("type", "MARKET").upper()
-    try:
-        qty = float(data.get("qty", 1.0))
-    except Exception:
-        qty = 1.0
-    price = data.get("price")
-    if price is not None:
+    MARKET: compares each follower's net position on the symbol before/after (expected change = qty x factor, factor
+            from the follower's own copy link: multiplier / balance / equity ratio, negative when reverse).
+    LIMIT / STOP: checks every follower received a pending copy that references the master order.
+    Followers without an active copy link are listed as NOT LINKED and left out of the pass rate.
+    """
+    data = request.get_json(silent=True) or {}
+    instance = data.get("instance") if data.get("instance") in ("paper", "real") else "paper"
+    symbol = str(data.get("symbol") or "BINANCE:BTCUSDT.P").strip()
+    side = str(data.get("side", "BUY")).upper()
+    order_type = str(data.get("type", "MARKET")).upper()
+    if side not in ("BUY", "SELL") or order_type not in ("MARKET", "LIMIT", "STOP"):
+        return jsonify({"success": False, "error": "side must be BUY/SELL and type MARKET/LIMIT/STOP"}), 400
+
+    def num(k):
         try:
-            price = float(price)
-        except Exception:
-            price = None
-    instance = data.get("instance", "paper")
+            v = data.get(k)
+            return float(v) if v not in (None, "") else None
+        except (TypeError, ValueError):
+            return None
+    qty, price, tp, sl = num("qty"), num("price"), num("tp"), num("sl")
+    if not qty or qty <= 0:
+        return jsonify({"success": False, "error": "quantity must be > 0"}), 400
+    if order_type != "MARKET" and not price:
+        return jsonify({"success": False, "error": f"{order_type} orders need a price"}), 400
+    if instance == "real" and data.get("confirm") is not True:
+        return jsonify({"success": False, "needs_confirmation": True, "error": "Dispatch on REAL needs confirmation"}), 412
+    with PROCESS_LOCK:
+        if RUNNING_PROCESS and RUNNING_PROCESS.poll() is None:
+            return jsonify({"success": False, "error": "A test run is active - a manual order would corrupt its results. Wait or stop it."}), 409
 
-    t_start = time.time()
-    # 1. Place order on Master
-    master_order_res = dashboard_client.place_order(
-        email=MASTER_EMAIL,
-        symbol=symbol,
-        side=side,
-        order_type=order_type,
-        qty=qty,
-        price=price,
-        instance=instance
-    )
-    t_master_placed = time.time()
+    emails = [f"{DEFAULT_PREFIX}{i}@{DEFAULT_DOMAIN}" for i in range(1, FOLLOWER_COUNT + 1)]
+    linked, factor = SC.linked_followers(dashboard_client, MASTER_EMAIL, MASTER_ID, emails, instance)
+    links = get_cached_active_links(instance=instance, force_refresh=True)
+    linked_set = set(linked)
 
-    master_status = master_order_res.get("status_code", 500)
-    master_data = master_order_res.get("data", {})
-    master_ord_obj = master_data.get("order", {}) if isinstance(master_data.get("order"), dict) else master_data
-    master_order_id = master_ord_obj.get("order_id") or master_ord_obj.get("market_order_id") or master_data.get("order_id") or master_data.get("market_order_id")
-    master_body = master_ord_obj
+    def net(positions):
+        return sum((1 if p.get("side") == "BUY" else -1) * float(p.get("net_qty") or 0) for p in positions if p.get("symbol") == symbol)
+    before = {e: d.get("positions", []) for e, d in dashboard_client.fetch_all_followers_positions(linked, instance=instance).items()}
+    before_ids = {e: {p.get("position_id") for p in ps} for e, ps in before.items()}
 
-    if master_status != 200 or not master_order_id:
-        return jsonify({
-            "success": False,
-            "error": "Failed to place Master order",
-            "master_response": master_order_res
-        }), 400
+    t0 = time.time()
+    res = dashboard_client.place_order(MASTER_EMAIL, symbol=symbol, side=side, order_type=order_type, qty=qty, price=price,
+                                       tp=tp, sl=sl, instance=instance)
+    body = res.get("data")
+    if res.get("status_code") != 200 or not isinstance(body, dict):
+        msg = body.get("error") if isinstance(body, dict) else str(body)
+        return jsonify({"success": False, "error": f"Master order rejected (HTTP {res.get('status_code')}): {str(msg)[:300]}",
+                        "master_response": res}), 400
+    mo, mp = body.get("order") or {}, body.get("position") or {}
+    master_ids = {i for i in (mo.get("order_id"), mo.get("market_order_id")) if i}
+    master_price = mp.get("avg_entry_price") or mo.get("avg_fill_price") or price
+    master_time = mo.get("created_at")
+    sign = 1 if side == "BUY" else -1
 
-    # 2. Wait 2.2 seconds for fan-out replication across 100 followers
-    time.sleep(2.2)
+    def ts(s):
+        """Server timestamps carry up to 9 fractional digits ('...07.75168207Z'); trim to microseconds."""
+        m = re.match(r"(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d)(?:\.(\d+))?", str(s or ""))
+        if not m:
+            return None
+        return datetime.fromisoformat(m.group(1) + "." + (m.group(2) or "0")[:6].ljust(6, "0"))
 
-    # Fetch master order details from oms
-    master_orders_list = dashboard_client.get_orders(MASTER_EMAIL, instance=instance).get("orders", [])
-    master_ord_details = next((o for o in master_orders_list if o.get("order_id") == master_order_id or o.get("market_order_id") == master_order_id), {})
-    master_fill_price = master_ord_details.get("avg_fill_price") or master_ord_details.get("price") or master_body.get("avg_fill_price") or "--"
-    master_filled_qty = master_ord_details.get("filled_qty") or master_body.get("filled_qty") or qty
-    master_created_at = master_ord_details.get("created_at") or master_body.get("created_at") or datetime.utcnow().isoformat()
+    rows = {}
+    if order_type == "MARKET":
+        deadline = time.time() + 20
+        while True:
+            after = {e: d.get("positions", []) for e, d in dashboard_client.fetch_all_followers_positions(linked, instance=instance).items()}
+            for e in linked:
+                exp = qty * factor[e] * sign
+                got = net(after[e]) - net(before[e])
+                new = [p for p in after[e] if p.get("position_id") not in before_ids[e] and p.get("symbol") == symbol]
+                ok = abs(got - exp) <= max(1e-6, 0.01 * abs(exp))
+                lat = None
+                if new and ts(new[0].get("opened_at")) and ts(master_time):
+                    lat = (ts(new[0]["opened_at"]) - ts(master_time)).total_seconds()
+                rows[e] = {"replicated": bool(new) or abs(got) > 1e-12, "actual_lots": round(abs(got), 8), "expected_lots": round(abs(exp), 8),
+                           "lots_match": ok, "fill_price": new[0].get("avg_entry_price") if new else "--",
+                           "order_id": new[0].get("market_order_id") if new else "--", "latency_s": lat,
+                           "state": "FILLED" if ok else ("WRONG SIZE" if new else "MISSING"),
+                           "side_ok": (not new) or new[0].get("side") == (side if factor[e] > 0 else ("SELL" if side == "BUY" else "BUY"))}
+            if all(r["lots_match"] for r in rows.values()) or time.time() > deadline:
+                break
+            time.sleep(0.8)
+    else:
+        deadline = time.time() + 20
+        while True:
+            def check(e):
+                for o in dashboard_client.get_orders(e, instance).get("orders", [])[:40]:
+                    if str(o.get("copy_ref") or "").lstrip("-") in master_ids:
+                        q = float(o.get("requested_qty") or 0)
+                        exp = qty * abs(factor[e])
+                        return e, {"replicated": True, "actual_lots": q, "expected_lots": round(exp, 8),
+                                   "lots_match": abs(q - exp) <= max(1e-6, 0.01 * exp), "fill_price": o.get("price") or "--",
+                                   "order_id": o.get("order_id"), "latency_s": None, "state": o.get("state") or "PENDING", "side_ok": True}
+                return e, {"replicated": False, "actual_lots": 0.0, "expected_lots": round(qty * abs(factor[e]), 8),
+                           "lots_match": False, "fill_price": "--", "order_id": "--", "latency_s": None, "state": "MISSING", "side_ok": True}
+            with ThreadPoolExecutor(max_workers=16) as ex:
+                rows = dict(ex.map(check, linked))
+            if all(r["replicated"] for r in rows.values()) or time.time() > deadline:
+                break
+            time.sleep(2.0)
 
-    # 3. Check all 100 followers concurrently
-    active_links = get_cached_active_links(instance=instance, force_refresh=True)
-
-    def check_follower(idx):
-        f_email = f"{DEFAULT_PREFIX}{idx}@{DEFAULT_DOMAIN}"
-        f_prefix = f"{DEFAULT_PREFIX}{idx}"
-        link = active_links.get(f_prefix, {})
-        f_method = link.get("method", "multiplier")
-        f_multiplier = float(link.get("multiplier", 1.0)) if link and "multiplier" in link else 1.0
-
-        # Calculate expected lots based on mode & multiplier
-        expected_lots = qty * f_multiplier
-
+    comparison = []
+    for i, e in enumerate(emails, 1):
+        link = links.get(f"{DEFAULT_PREFIX}{i}", {})
+        base = {"index": i, "email": e, "method": (link.get("method") or "-"), "multiplier": link.get("multiplier", "-"),
+                "reverse": bool(link.get("reverse")), "master_lots": qty, "master_price": master_price}
+        if e not in linked_set:
+            comparison.append({**base, "linked": False, "replicated": False, "order_id": "--", "copy_ref": "--", "expected_lots": 0,
+                               "actual_lots": 0, "lots_match": True, "fill_price": "--", "slippage": "--", "state": "NOT LINKED",
+                               "latency": "--", "passed": None})
+            continue
+        r = rows.get(e, {})
+        slip = "--"
         try:
-            f_ords = dashboard_client.get_orders(f_email, instance=instance).get("orders", [])
-            # Find replicated order matching copy_ref or symbol & recent time
-            matched = None
-            clean_master_id = master_order_id.replace("-", "").strip()
-            for o in f_ords:
-                c_ref = (o.get("copy_ref") or "").replace("-", "").strip()
-                if clean_master_id and clean_master_id in c_ref:
-                    matched = o
-                    break
-            
-            # Fallback to latest copy order within 10s if copy_ref format varies
-            if not matched and f_ords:
-                candidate = f_ords[0]
-                if candidate.get("source") == "copy" and candidate.get("symbol") == symbol and candidate.get("side") == side:
-                    matched = candidate
-
-            if matched:
-                actual_lots = float(matched.get("requested_qty") or matched.get("filled_qty", 0.0))
-                fill_price = matched.get("avg_fill_price") or matched.get("price") or "--"
-                state = (matched.get("state") or "FILLED").upper()
-                created_at = matched.get("created_at", "")
-                
-                # Check lot sizing match (allow 0.001 margin)
-                lots_matched = abs(actual_lots - expected_lots) < 0.01
-
-                # Calculate latency
-                latency_str = "~1.8s"
-                try:
-                    if created_at and master_created_at:
-                        t_m = datetime.fromisoformat(master_created_at.replace("Z", "+00:00"))
-                        t_f = datetime.fromisoformat(created_at.replace("Z", "+00:00"))
-                        diff = (t_f - t_m).total_seconds()
-                        if diff >= 0:
-                            latency_str = f"{diff:.2f}s"
-                except Exception:
-                    pass
-
-                # Calculate slippage
-                slippage_str = "0.0 pts"
-                try:
-                    if fill_price != "--" and master_fill_price != "--":
-                        slip = float(fill_price) - float(master_fill_price)
-                        slippage_str = f"{slip:+.1f} pts"
-                except Exception:
-                    pass
-
-                return {
-                    "index": idx,
-                    "email": f_email,
-                    "replicated": True,
-                    "order_id": matched.get("order_id"),
-                    "copy_ref": matched.get("copy_ref") or master_order_id,
-                    "expected_lots": expected_lots,
-                    "actual_lots": actual_lots,
-                    "lots_match": lots_matched,
-                    "master_lots": qty,
-                    "multiplier": f_multiplier,
-                    "method": f_method,
-                    "fill_price": fill_price,
-                    "master_price": master_fill_price,
-                    "slippage": slippage_str,
-                    "state": state,
-                    "latency": latency_str,
-                    "passed": (lots_matched and state in ["FILLED", "OPEN", "SUBMITTED"])
-                }
-            else:
-                return {
-                    "index": idx,
-                    "email": f_email,
-                    "replicated": False,
-                    "order_id": "--",
-                    "copy_ref": "--",
-                    "expected_lots": expected_lots,
-                    "actual_lots": 0.0,
-                    "lots_match": False,
-                    "master_lots": qty,
-                    "multiplier": f_multiplier,
-                    "method": f_method,
-                    "fill_price": "--",
-                    "master_price": master_fill_price,
-                    "slippage": "--",
-                    "state": "MISSING",
-                    "latency": "--",
-                    "passed": False
-                }
-        except Exception as e:
-            return {
-                "index": idx,
-                "email": f_email,
-                "replicated": False,
-                "error": str(e),
-                "expected_lots": expected_lots,
-                "actual_lots": 0.0,
-                "lots_match": False,
-                "master_lots": qty,
-                "multiplier": f_multiplier,
-                "method": f_method,
-                "fill_price": "--",
-                "master_price": master_fill_price,
-                "slippage": "--",
-                "state": "ERROR",
-                "latency": "--",
-                "passed": False
-            }
-
-    with ThreadPoolExecutor(max_workers=25) as ex:
-        follower_results = list(ex.map(check_follower, range(1, FOLLOWER_COUNT + 1)))
-
-    total_followers = len(follower_results)
-    replicated_count = sum(1 for r in follower_results if r["replicated"])
-    perfect_match_count = sum(1 for r in follower_results if r["passed"])
-    pass_rate_pct = round((perfect_match_count / total_followers) * 100, 1)
-
-    total_elapsed = round(time.time() - t_start, 2)
-
+            if r.get("fill_price") not in (None, "--") and master_price:
+                slip = f"{float(r['fill_price']) - float(master_price):+.6g}"
+        except (TypeError, ValueError):
+            pass
+        lat = r.get("latency_s")
+        comparison.append({**base, "linked": True, "replicated": r.get("replicated", False), "order_id": r.get("order_id", "--"),
+                           "copy_ref": ",".join(master_ids), "expected_lots": r.get("expected_lots"), "actual_lots": r.get("actual_lots"),
+                           "lots_match": r.get("lots_match", False), "fill_price": r.get("fill_price", "--"), "slippage": slip,
+                           "state": r.get("state", "MISSING") if r.get("side_ok", True) else "WRONG SIDE",
+                           "latency": f"{lat:.2f}s" if isinstance(lat, (int, float)) else "--",
+                           "passed": bool(r.get("lots_match")) and r.get("side_ok", True)})
+    linked_rows = [c for c in comparison if c["linked"]]
+    passed = sum(1 for c in linked_rows if c["passed"])
+    lats = [float(c["latency"][:-1]) for c in linked_rows if c["latency"] not in ("--", None)]
     return jsonify({
         "success": True,
-        "master_order": {
-            "order_id": master_order_id,
-            "symbol": symbol,
-            "side": side,
-            "type": order_type,
-            "requested_qty": qty,
-            "filled_qty": master_filled_qty,
-            "fill_price": master_fill_price,
-            "created_at": master_created_at,
-            "status": "FILLED"
-        },
-        "summary": {
-            "total_followers": total_followers,
-            "replicated_count": replicated_count,
-            "perfect_match_count": perfect_match_count,
-            "pass_rate_pct": pass_rate_pct,
-            "total_elapsed_seconds": total_elapsed,
-            "instance": instance
-        },
-        "comparison": follower_results
+        "master_order": {"order_id": mo.get("order_id"), "symbol": symbol, "side": side, "type": order_type, "requested_qty": qty,
+                         "filled_qty": mo.get("filled_qty"), "fill_price": master_price, "created_at": master_time,
+                         "status": mo.get("state"), "tp": tp, "sl": sl},
+        "summary": {"total_followers": len(linked_rows), "not_linked": len(comparison) - len(linked_rows),
+                    "replicated_count": sum(1 for c in linked_rows if c["replicated"]), "perfect_match_count": passed,
+                    "pass_rate_pct": round(100.0 * passed / len(linked_rows), 1) if linked_rows else 0.0,
+                    "total_elapsed_seconds": round(time.time() - t0, 2),
+                    "max_copy_latency_s": round(max(lats), 3) if lats else None, "instance": instance},
+        "comparison": comparison,
     })
+
+
+@app.route("/api/order/close_master", methods=["POST"])
+def close_master_and_verify():
+    """Cancel the master's pending orders and close its positions, then verify every linked follower is flat."""
+    data = request.get_json(silent=True) or {}
+    instance = data.get("instance") if data.get("instance") in ("paper", "real") else "paper"
+    if instance == "real" and data.get("confirm") is not True:
+        return jsonify({"error": "Closing on REAL needs confirmation", "needs_confirmation": True}), 412
+    with PROCESS_LOCK:
+        if RUNNING_PROCESS and RUNNING_PROCESS.poll() is None:
+            return jsonify({"error": "A test run is active - stop it first."}), 409
+    emails = [f"{DEFAULT_PREFIX}{i}@{DEFAULT_DOMAIN}" for i in range(1, FOLLOWER_COUNT + 1)]
+    linked, _ = SC.linked_followers(dashboard_client, MASTER_EMAIL, MASTER_ID, emails, instance)
+    t0 = time.time()
+
+    def pending(e):
+        return sum(1 for o in dashboard_client.get_orders(e, instance).get("orders", [])
+                   if str(o.get("state") or "").upper() in ("PENDING", "OPEN", "NEW", "WORKING", "ACCEPTED") and o.get("type") in ("LIMIT", "STOP"))
+    master_pending = pending(MASTER_EMAIL)
+    dashboard_client.bulk_cancel(MASTER_EMAIL, instance)
+    dashboard_client.bulk_squareoff(MASTER_EMAIL, instance)
+    left, left_pending = {}, {}
+    while time.time() - t0 < 20:
+        d = dashboard_client.fetch_all_followers_positions(linked, instance=instance)
+        left = {e: v.get("count", 0) for e, v in d.items() if v.get("count", 0)}
+        if not left:
+            break
+        time.sleep(1.0)
+    sample = []
+    if master_pending:   # each read downloads a follower's WHOLE order history (no API filter): check a spread sample of 12
+        n = len(linked)
+        sample = linked if n <= 12 else [linked[round(i * (n - 1) / 11)] for i in range(12)]
+        for _ in range(3):
+            time.sleep(1.5)
+            with ThreadPoolExecutor(max_workers=12) as ex:
+                left_pending = {e: k for e, k in zip(sample, ex.map(pending, sample)) if k}
+            if not left_pending:
+                break
+    master_left = dashboard_client.get_positions(MASTER_EMAIL, instance).get("count", 0)
+    return jsonify({"master_open": master_left, "master_pending_cancelled": master_pending, "followers_checked": len(linked),
+                    "followers_still_open": len(left), "still_open": [e.split("@")[0] for e in list(left)[:20]],
+                    "followers_with_pending": len(left_pending), "still_pending": [e.split("@")[0] for e in list(left_pending)[:20]],
+                    "pending_checked": len(sample),
+                    "seconds": round(time.time() - t0, 1), "ok": master_left == 0 and not left and not left_pending,
+                    "note": "Followers still holding positions/pending orders either did not copy the close/cancel or hold their own trades."})
 
 
 # -------------------------------------------------------------------------------------

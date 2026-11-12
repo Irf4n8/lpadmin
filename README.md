@@ -19,14 +19,34 @@ python scripts/doctor.py           # verifies install, credentials, login, accou
 python dashboard/app.py            # open http://localhost:5000
 ```
 
-In the dashboard: pick **Breakpoint & Race Hunter**, set followers `1` to `10`, press it.
-Output streams live; results land in **History** and **Evidence**.
+In the dashboard: press **End-to-End Test** (top of the launcher), or **Quick run** on the **E2E Report** tab.
+Output streams live; the step-by-step verdict appears in **E2E Report**, and every run lands in **History** and **Evidence**.
 
 No dashboard? Same thing from the terminal:
 
 ```bash
-python test_suite/breakpoint_race_runner.py --end 10
+python test_suite/e2e_runner.py --end 10          # ~3 min; all followers: ~10 min
+python test_suite/e2e_runner.py --only E06        # re-check one step (setup + final audit always run)
 ```
+
+### End-to-End test (start here)
+One run takes a copied trade through its whole life and checks the master **and every linked follower** after each step:
+open & fan-out → set TP/SL → modify TP/SL → partial close → pyramid + hedge → close one leg → close all →
+pending orders place/cancel → **one symbol of every market type** → invalid input rejected → accounting reconciles →
+final clean-account audit (E01–E16).
+
+### Symbols
+The platform lists ~3 600 symbols (its `symbol_url`: Binance crypto, forex, metals, commodities, CFDs, US/EU stocks,
+indices, NSE/BSE stocks, futures and options). **Market Types Check** trades one per market group (~2 min);
+**All Symbols** trades every one (~1 h on 100 followers). Closed markets are SKIPPED, so run again during their session.
+
+```bash
+python test_suite/symbol_coverage_runner.py --sample --end 10        # one per market group
+python test_suite/symbol_coverage_runner.py --end 10                 # every symbol
+python test_suite/symbol_coverage_runner.py --types FOREX,METAL      # chosen market types
+```
+Followers without an active copy link are listed as a **WARN** and left out of the checks
+(paper copy links can no longer be re-created on the platform). Details: [docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md#end-to-end-test).
 
 ### What you need before you start
 | Need | Details |
@@ -65,6 +85,10 @@ Copy `.env.example` to `.env` (git-ignored). Full list:
 | Area | What it does |
 |---|---|
 | **Launcher** (left) | All suites grouped by purpose. Options: paper/real, follower range, lot, orders, load ramp. Press `/` to filter. |
+| **Regression** | Runs a preset (Smoke ~5 min / Standard ~25 min / Full ~1 h) or hand-picked safe suites back to back on paper, then gives one downloadable HTML report (suites, E2E steps, market groups). Other launches are blocked while it runs. |
+| **Dispatch** | Send one master order on **any of the ~3 600 symbols** (search box shows market, min/step/max, contract size), MARKET / LIMIT / STOP with optional TP/SL; compares every linked follower's copy (size, side, fill, latency on server time; unlinked followers shown as NOT LINKED). **Close master & verify flat** closes everything and checks every follower followed. |
+| **Markets open now** (E2E Report tab) | Which market types are in session per the platform schedule, and how many symbols are tradable right now. |
+| **E2E Report** | The latest End-to-End verdict as a step checklist. Failed steps open by themselves; each has **Re-run this step** and **Copy bug report** (ready-to-paste ticket with the reproduce command). Earlier runs are in the picker. |
 | **Summary cards** | Computed from real evidence files and run history (not static numbers). |
 | **Terminal** | Live log with `PASS`/`FAIL` counters, copy and download. |
 | **Followers / Order Flow / Dispatch** | Live account grid, order tape, and "send one master order and verify all followers". |
@@ -86,6 +110,9 @@ in `.env`. The dashboard refuses to start on a non-local address without a token
 
 | Suite | Proves | Time |
 |---|---|---|
+| **End-to-End Test** | Full trade lifecycle on master + every linked follower, every market type, accounting and clean-up (E01–E16) | ~3 min (10 followers) / ~10 min (100) |
+| **Market Types Check** | One symbol of each of the 18 market groups: copied at the right size, closed everywhere, correct PnL | ~2 min |
+| **All Symbols** | The same for every listed symbol (~3 600); closed markets skipped | ~1 h (100 followers) |
 | Multiplier / Balance / Equity mode | Position sizing for each copy mode across followers | ~4 min |
 | Buy/Sell parity & Stop | Market/limit/stop orders behave identically both ways | ~3 min |
 | Paper 2x certification | 10 lot master -> 20 lot follower end to end | ~3 min |

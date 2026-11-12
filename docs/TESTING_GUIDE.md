@@ -58,6 +58,65 @@ The **Breakpoint & Race Hunter** uses severities:
 | B10 | Parallel forced re-logins leave every session valid |
 | B11 | After teardown: 0 positions, 0 pending orders, 0 margin, equity == balance on every account |
 
+### End-to-End Test
+
+`test_suite/e2e_runner.py` — the suite to run first on every build. Steps run in order; each prints
+`[PASS]`/`[WARN]`/`[FAIL]`/`[SKIP]` and the run writes `reports/evidence/e2e_evidence_<ts>.json|md`
+(rendered in the dashboard's **E2E Report** tab).
+
+Expected follower size after every master action: `net_qty(follower) = net_qty(master) × factor`, where factor is the
+link's multiplier (× balance or equity ratio for those methods, negative when reverse). Followers are polled for up to 25 s.
+
+| ID | Step | Fails when |
+|---|---|---|
+| E01 | Preflight | platform down, admin/master/follower login fails |
+| E02 | Copy topology | no follower in range is linked (unlinked ones are a WARN and excluded) |
+| E03 | Clean slate | teardown leaves positions or pending orders |
+| E04 | Baseline | margin in use with no positions |
+| E05 | Open & fan-out | a follower does not open master qty × factor; sampled copy orders lack a `copy_ref` to the master (WARN) |
+| E06 / E07 | Set / modify TP/SL | a follower's TP/SL trigger differs from the master's |
+| E08 | Partial close | followers do not reduce proportionally |
+| E09 | Pyramid + hedge | add-on BUY or hedge SELL leg not mirrored |
+| E10 | Close one position | followers keep the closed leg or lose the other one |
+| E11 | Close all | any account keeps a position or margin |
+| E12 | Pending orders | a far LIMIT/STOP creates a position, or pending orders survive the master's cancel |
+| E13 | Every market type | one symbol per market group is not copied, not closed everywhere, or has wrong PnL (closed markets: INFO) |
+| E14 | Input validation | qty 0 / negative / unknown symbol / bad side is accepted or returns 5xx |
+| E15 | Accounting | a trade's `realized_pnl` ≠ (exit − entry) × qty × contract size, or balance moved by something other than realized PnL |
+| E16 | Final audit | positions, pending orders, margin or equity ≠ balance left on any account |
+
+Options: `--start/--end` (followers), `--lot` (master opens 2× lot, then reduces/adds/hedges 1× lot),
+`--only E05,E06` (setup E01–E04 and the final audit E16 always run), `--instance real --i-understand-real-money`.
+
+### Symbol coverage
+
+`test_suite/symbol_coverage_runner.py` reads the platform's symbol universe from `symbol_url` in `GET /api/config`
+(today `https://terminal.blacktrader.com/feed/symbol_list`, 3 643 markets) and, in batches of 20, has the master open a
+market BUY of **2 × the symbol's quantity step** on each, checks every linked follower holds master qty × factor, closes,
+checks everyone is flat, and checks realized PnL on the master and one follower per distinct multiplier.
+
+| Verdict | Meaning |
+|---|---|
+| PASS | copied at the right size, closed everywhere, PnL correct |
+| FAIL | copy missing / wrong size, follower not flat after close, PnL wrong, or a 5xx |
+| WARN | the master order was rejected for a reason other than "market closed", or a data feed (GREEKS) accepted an order |
+| SKIP | `market closed for <symbol>` – re-run in that market's session |
+
+**Order size.** 2 × max(qty step, min qty), so a 0.5x follower's copy is still a valid size.
+
+**PnL rule.** `precisionMap[symbol][3]` is `1` or `[kind, _, contract_size, conversion_symbol]`. For `type1`, and `type3`
+quoted in USD (EURUSD), PnL = (exit − entry) × qty × contract_size exactly (XAUUSD ×100, EURUSD ×100 000, XAGUSD ×5 000).
+Pairs whose quote currency is not USD (`type2` USDJPY, `type3` crosses GBPJPY / EURGBP, `type4` crosses CADCHF / CHFJPY) are converted at a live rate the
+history row does not carry; for them the check is: PnL has the sign of the price move, and PnL per unit of move is the
+same on master and followers. Observed 2026-11-12: those pairs use 100 000 units per lot although the feed lists 1 000.
+
+Market sessions (UTC, from the feed's `typeMap`): NSE/BSE stocks, futures, options, indices 03:45–10:00 Mon–Fri;
+EU stocks 07:00–15:30; US stocks 13:30–20:00 (summer; one hour later in winter); forex/metals/commodities/indices nearly 24×5;
+crypto and `.247` CFDs 24×7. About 2 700 of the 3 643 symbols are Indian, so run **All Symbols** inside the Indian session for full coverage.
+
+Run time is dominated by `GET /orders`, which returns an account's **entire** order history (6 000+ orders, no paging or
+filter), so pending-order checks cost ~1–2 s per account. That is also why the `copy_ref` check samples 12 followers.
+
 ### Complex Copy Scenarios (model-based)
 
 Followers are split into cohorts with different copy rules (multiplier 2x/1x/0.5x, balance-based, equity-based,
@@ -166,9 +225,17 @@ use **Emergency Teardown**.
   the link cannot be re-created. Scenarios that unfollow then re-follow (Breakpoint B6, Race "unfollow vs order", Extended bulk
   unfollow/re-follow) will permanently drop followers until the platform allows it again.
 
+* **Sub-minimum copies are rounded UP (observed 2026-11-12, Symbol Coverage).** `BLACK:US30cash-1` has min qty 1 and step 0.1;
+  a master order of 1 was copied to 0.5x followers as **1.0**, not 0.5 - those followers carry double their intended
+  exposure. Whether to round up, skip or reject a copy below the symbol minimum is a product decision; it is not flagged by
+  the suites (they size orders so every copy is above the minimum).
+* First full **All Symbols** run (2026-11-12, 17:06–17:26 UTC, 99 followers): 820 / 820 open symbols copied, closed and
+  accounted correctly after the test's contract-spec fixes; 2 823 skipped as closed (all NSE/BSE, EU stocks, GREEKS).
+  NSE/BSE symbols (2 690) and EU stocks still need a run inside their sessions.
 * `POST /v1/oms/{instance}/orders` with an unknown `type` returns **500** instead of 400.
 * Absurd protection values (`tp=-1`, `sl=1e30`) on a market order are **accepted**.
-* `GET /orders` returns the full order history with no pagination (grows without bound).
+* `GET /orders` returns the full order history with no pagination (grows without bound). Verified 2026-11-12: `limit`,
+  `state`, `status`, `page_size` and `per_page` query parameters are all ignored (6 361 orders returned for follower1).
 * `BlackTraderClient` retries POSTs on 5xx; if the server executes an order and then errors, the retry could
   duplicate it. Treat unexplained duplicate orders in evidence with that in mind.
 

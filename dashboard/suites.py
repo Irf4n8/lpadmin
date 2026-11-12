@@ -14,20 +14,34 @@ icon       Font Awesome icon name (without the `fa-` prefix)
 tone       ok | cyan | warn | danger | violet  (accent colour)
 tag        small badge text
 script     path relative to repo root
-flags      CLI flags the runner understands: start, end, instance, lot, orders_count, burst, ramp
+flags      CLI flags the runner understands: start, end, instance, lot, orders_count, burst, ramp, profile,
+           only (comma list of step ids such as E05,E06 - used by "re-run this step")
 risk       safe      - paper trading only, no real money
            real      - touches the REAL instance (requires typed confirmation)
            destructive - closes positions / cancels orders everywhere (requires confirmation)
 fixed_instance  force a specific instance regardless of the UI selector (None = honour selector)
+args       optional fixed CLI arguments always passed (lets one script back several launcher entries)
 minutes    rough duration shown to the user
 """
 
+import re
 import sys
 from typing import Any, Dict, List, Optional
 
 PY = sys.executable or "python"
 
 SUITES: List[Dict[str, Any]] = [
+    # ---- Start here ------------------------------------------------------------------
+    dict(key="e2e", name="End-to-End Test", desc="Full trade lifecycle: open, TP/SL, partial, hedge, close, pending, validation, accounting",
+         category="Start here", icon="route", tone="ok", tag="16 steps", script="test_suite/e2e_runner.py",
+         flags=["start", "end", "instance", "lot", "only"], risk="safe", minutes=4),
+    dict(key="symbols_sample", name="Market Types Check", desc="One symbol of every market group: crypto, forex, metals, stocks, indices, F&O...",
+         category="Start here", icon="globe", tone="cyan", tag="18 groups", script="test_suite/symbol_coverage_runner.py",
+         flags=["start", "end", "instance"], args=["--sample"], risk="safe", minutes=2),
+    dict(key="symbols_all", name="All Symbols", desc="Every listed symbol (~3,600): open, copy, close, PnL. Closed markets are skipped",
+         category="Start here", icon="list-check", tone="violet", tag="Every symbol", script="test_suite/symbol_coverage_runner.py",
+         flags=["start", "end", "instance"], risk="safe", minutes=60),
+
     # ---- Copy modes ------------------------------------------------------------------
     dict(key="multiplier", name="Multiplier Mode", desc="1x / 2x / 3x / 0.5x multipliers across followers",
          category="Copy modes", icon="bolt", tone="warn", tag="Varied", script="test_suite/runner.py",
@@ -146,7 +160,7 @@ def build_command(suite: Dict[str, Any], params: Dict[str, Any], defaults: Dict[
         )
         return [PY, "-u", "-c", code]
 
-    cmd = [PY, "-u", suite["script"]]
+    cmd = [PY, "-u", suite["script"]] + list(suite.get("args") or [])
     flags = suite["flags"]
     if "start" in flags:
         cmd += ["--start", str(start)]
@@ -163,6 +177,11 @@ def build_command(suite: Dict[str, Any], params: Dict[str, Any], defaults: Dict[
     if "profile" in flags:
         prof = params.get("profile") if params.get("profile") in ("smoke", "standard", "stress") else "standard"
         cmd += ["--profile", prof]
+    if "only" in flags and params.get("only"):
+        steps = [s.strip().upper() for s in str(params["only"]).split(",")]
+        steps = [s for s in steps if re.fullmatch(r"E\d{2}", s)][:15]
+        if steps:
+            cmd += ["--only", ",".join(steps)]
     if "ramp" in flags:
         raw = str(params.get("ramp") or "10,25,50,100")
         levels = [str(_int(x, 10, 1, 500)) for x in raw.split(",") if x.strip()][:8]

@@ -1,0 +1,99 @@
+{
+ "suite": "Symbol Coverage",
+ "verdict": "FAIL",
+ "timestamp": "2026-11-12T17:28:18.497682+00:00",
+ "started": "2026-11-12T22:56:38",
+ "duration_sec": 100.1,
+ "instance": "paper",
+ "symbol_source": "https://terminal.blacktrader.com/feed/symbol_list",
+ "universe": 3643,
+ "tested": 6,
+ "mode": "all",
+ "followers_range": [
+  1,
+  80
+ ],
+ "followers_linked": 80,
+ "tally": {
+  "PASS": 3,
+  "FAIL": 2,
+  "WARN": 1,
+  "SKIP": 0
+ },
+ "groups": {
+  "CMDTY": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "FOREX": {
+   "PASS": 1,
+   "FAIL": 2,
+   "WARN": 1,
+   "SKIP": 0
+  },
+  "METAL": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  }
+ },
+ "results": [
+  {
+   "symbol": "BLACK:EURGBP",
+   "type": "FOREX",
+   "group": "FOREX",
+   "qty": 0.02,
+   "status": "FAIL",
+   "detail": "follower26 realized PnL -0.052936 but BUY 0.04 0.83538->0.83537 x contract 100000 (type3) = -0.04 | follower51 realized PnL -0.079403 but BUY 0.06 0.83538->0.83537 x contract 100000 (type3) = -0.06",
+   "entry": 0.83538
+  },
+  {
+   "symbol": "BLACK:GBPJPY",
+   "type": "FOREX",
+   "group": "FOREX",
+   "qty": 0.02,
+   "status": "FAIL",
+   "detail": "ctmaster realized PnL -0.225373 but BUY 0.02 211.402->211.384 x contract 1000 (type3) = -0.36 | follower1 realized PnL -0.225373 but BUY 0.02 211.402->211.384 x contract 1000 (type3) = -0.36 | follower26 realized PnL -0.450746 but BUY 0.04 211.402->211.384 x contract 1000 (type3) = -0.72 | follower51 realized PnL -0.676119 but BUY 0.06 211.402->211.384 x contract 1000 (type3) = -1.08 | follower76 realized PnL -0.112686 but BUY 0.01 211.402->211.384 x contract 1000 (type3) = -0.18",
+   "entry": 211.402
+  },
+  {
+   "symbol": "BLACK:NGAScash-1",
+   "type": "CMDTY",
+   "group": "CMDTY",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 80 followers and closed",
+   "entry": 3.183
+  },
+  {
+   "symbol": "BLACK:USDCHF",
+   "type": "FOREX",
+   "group": "FOREX",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 80 followers and closed",
+   "entry": 0.83542
+  },
+  {
+   "symbol": "BLACK:USDJPY",
+   "type": "FOREX",
+   "group": "FOREX",
+   "qty": 0.02,
+   "status": "WARN",
+   "detail": "ctmaster realized PnL -0.037562 but BUY 0.02 159.74->159.737 x contract 1000 (type2) = -0.000376 | follower1 realized PnL -0.037562 but BUY 0.02 159.74->159.737 x contract 1000 (type2) = -0.000376 | follower26 realized PnL -0.075123 but BUY 0.04 159.74->159.737 x contract 1000 (type2) = -0.000751 | follower51 realized PnL -0.112685 but BUY 0.06 159.74->159.737 x contract 1000 (type2) = -0.001127 | follower76 realized PnL -0.018781 but BUY 0.01 159.74->159.737 x contract 1000 (type2) = -0.000188",
+   "entry": 159.74
+  },
+  {
+   "symbol": "BLACK:XAGUSD",
+   "type": "METAL",
+   "group": "METAL",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 80 followers and closed",
+   "entry": 50.001
+  }
+ ]
+}
