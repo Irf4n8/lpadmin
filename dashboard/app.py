@@ -983,10 +983,23 @@ def squareoff_account(email):
         return jsonify({"error": str(e)}), 500
 
 
+def _account_change_refused(data: dict):
+    """Account changes corrupt a running suite, and on REAL they touch real-money accounts: refuse unless safe."""
+    with PROCESS_LOCK:
+        if RUNNING_PROCESS and RUNNING_PROCESS.poll() is None:
+            return jsonify({"error": "A test run is active - changing accounts now would corrupt its results. Wait or stop it."}), 409
+    if data.get("instance") == "real" and data.get("confirm") is not True:
+        return jsonify({"error": "Changing REAL accounts needs confirmation.", "needs_confirmation": True}), 412
+    return None
+
+
 @app.route("/api/account/<email>/copy_settings", methods=["POST"])
 def update_account_copy_settings(email):
     """Update copy trading settings (mode, multiplier) for a single follower."""
     data = request.json or {}
+    refused = _account_change_refused(data)
+    if refused:
+        return refused
     mode = data.get("mode", "multiplier")
     instance = data.get("instance", "paper")
     try:
@@ -1023,6 +1036,9 @@ def switch_copy_mode():
     """Bulk switch followers between Multiplier, Balance, and Equity modes with custom multipliers."""
     from concurrent.futures import ThreadPoolExecutor
     data = request.json or {}
+    refused = _account_change_refused(data)
+    if refused:
+        return refused
     mode = data.get("mode", "multiplier")
     instance = data.get("instance", "paper")
     tier_based = data.get("tier_based", False)
@@ -1083,6 +1099,9 @@ def sync_accounts_balance():
     """Set identical balance across Master and all 100 followers on selected instance."""
     from concurrent.futures import ThreadPoolExecutor
     data = request.json or {}
+    refused = _account_change_refused(data)
+    if refused:
+        return refused
     instance = data.get("instance", "paper")
     try:
         target_balance = float(data.get("balance", 100000000.0))

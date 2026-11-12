@@ -138,6 +138,20 @@ def test_dispatch_on_real_needs_confirmation(client):
     assert client.post("/api/order/close_master", json={"instance": "real"}, headers=LOCAL).status_code == 412
 
 
+@pytest.mark.parametrize("url,body", [("/api/accounts/sync_balance", {"balance": 1}),
+                                      ("/api/copy/switch_mode", {"mode": "multiplier"}),
+                                      ("/api/account/follower1@mailinator.com/copy_settings", {"mode": "multiplier"})])
+def test_account_changes_are_guarded(client, monkeypatch, url, body):
+    import dashboard.app as a
+    assert client.post(url, json={**body, "instance": "real"}, headers=LOCAL).status_code == 412      # real needs confirm
+
+    class Running:
+        def poll(self):
+            return None
+    monkeypatch.setattr(a, "RUNNING_PROCESS", Running())
+    assert client.post(url, json={**body, "instance": "paper"}, headers=LOCAL).status_code == 409     # never mid-run
+
+
 def test_regression_guards(client, monkeypatch):
     import dashboard.app as a
     launched = []

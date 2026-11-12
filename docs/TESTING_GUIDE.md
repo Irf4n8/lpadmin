@@ -62,7 +62,7 @@ The **Breakpoint & Race Hunter** uses severities:
 
 `test_suite/e2e_runner.py` — the suite to run first on every build. Steps run in order; each prints
 `[PASS]`/`[WARN]`/`[FAIL]`/`[SKIP]` and the run writes `reports/evidence/e2e_evidence_<ts>.json|md`
-(rendered in the dashboard's **E2E Report** tab).
+(rendered in the dashboard's **End-to-end** tab).
 
 Expected follower size after every master action: `net_qty(follower) = net_qty(master) × factor`, where factor is the
 link's multiplier (× balance or equity ratio for those methods, negative when reverse). Followers are polled for up to 25 s.

@@ -19,8 +19,8 @@ python scripts/doctor.py           # verifies install, credentials, login, accou
 python dashboard/app.py            # open http://localhost:5000
 ```
 
-In the dashboard: press **End-to-End Test** (top of the launcher), or **Quick run** on the **E2E Report** tab.
-Output streams live; the step-by-step verdict appears in **E2E Report**, and every run lands in **History** and **Evidence**.
+In the dashboard: press **End-to-End Test** (top of the launcher), or **Quick run** on the **End-to-end** tab.
+Output streams live in **Live output**; the step-by-step verdict appears in **End-to-end**, and every run lands in **Run history** and **Reports**.
 
 No dashboard? Same thing from the terminal:
 
@@ -57,7 +57,7 @@ Followers without an active copy link are listed as a **WARN** and left out of t
 | Follower accounts | `follower1..N@mailinator.com`; create them with `python main.py create --start 1 --end 100` |
 
 `python scripts/doctor.py` tells you exactly which of these is missing and how to fix it.
-The dashboard shows the same checks under **Getting Started**.
+The dashboard shows the same checks under **Setup & guide**.
 
 ---
 
@@ -86,16 +86,17 @@ Copy `.env.example` to `.env` (git-ignored). Full list:
 |---|---|
 | **Launcher** (left) | All suites grouped by purpose. Options: paper/real, follower range, lot, orders, load ramp. Press `/` to filter. |
 | **Regression** | Runs a preset (Smoke ~5 min / Standard ~25 min / Full ~1 h) or hand-picked safe suites back to back on paper, then gives one downloadable HTML report (suites, E2E steps, market groups). Other launches are blocked while it runs. |
-| **Dispatch** | Send one master order on **any of the ~3 600 symbols** (search box shows market, min/step/max, contract size), MARKET / LIMIT / STOP with optional TP/SL; compares every linked follower's copy (size, side, fill, latency on server time; unlinked followers shown as NOT LINKED). **Close master & verify flat** closes everything and checks every follower followed. |
-| **Markets open now** (E2E Report tab) | Which market types are in session per the platform schedule, and how many symbols are tradable right now. |
-| **E2E Report** | The latest End-to-End verdict as a step checklist. Failed steps open by themselves; each has **Re-run this step** and **Copy bug report** (ready-to-paste ticket with the reproduce command). Earlier runs are in the picker. |
+| **Test order** | Send one master order on **any of the ~3 600 symbols** (search box shows market, min/step/max, contract size), MARKET / LIMIT / STOP with optional TP/SL; compares every linked follower's copy (size, side, fill, latency on server time; unlinked followers shown as NOT LINKED). **Close master & verify flat** closes everything and checks every follower followed. |
+| **Markets open now** (End-to-end tab) | Which market types are in session per the platform schedule, and how many symbols are tradable right now. |
+| **End-to-end** | The latest End-to-End verdict as a step checklist. Failed steps open by themselves; each has **Re-run this step** and **Copy bug report** (ready-to-paste ticket with the reproduce command). Earlier runs are in the picker. |
 | **Summary cards** | Computed from real evidence files and run history (not static numbers). |
-| **Terminal** | Live log with `PASS`/`FAIL` counters, copy and download. |
-| **Followers / Order Flow / Dispatch** | Live account grid, order tape, and "send one master order and verify all followers". |
-| **Evidence** | Every JSON/Markdown report the suites produced. |
-| **History** | Every run from the dashboard with its archived log and a one-click re-run. |
+| **Release readiness** (top strip) | Setup, End-to-end, Market types, Regression and Running now, each with its live verdict; click one to open it. |
+| **Live output** | Live log with `PASS`/`FAIL` counters, copy and download. |
+| **Accounts / Order feed** | Every follower's link, multiplier and positions (bulk balance / copy-mode changes ask for confirmation and are refused while a run is active); the live order feed. |
+| **Reports** | Every JSON/Markdown report the suites produced. |
+| **Run history** | Every run from the dashboard with its archived log and a one-click re-run. |
 | **Book pill** (header) | Shows each account's routing and opens the **A-book / B-book switch** (per account: master, a follower range, or all). Typed confirmation, blocked during a run, read-back verified. Real-instance routing only. |
-| **Getting Started** | The setup doctor with a fix for each failing check. |
+| **Setup & guide** | The setup doctor with a fix for each failing check. |
 
 **Safety rails:** real-money suites and Emergency Teardown require typing a confirmation word;
 only one run at a time; the dashboard answers only on `localhost` unless `DASHBOARD_TOKEN` is set
@@ -182,7 +183,7 @@ CI (`.github/workflows/ci.yml`) runs the same on every push.
 
 | Symptom | Fix |
 |---|---|
-| Dashboard shows "Setup incomplete" | Open **Getting Started**; each failing check lists its fix |
+| Dashboard shows "Setup incomplete" | Open **Setup & guide**; each failing check lists its fix |
 | `ModuleNotFoundError: flask` | `pip install -r requirements.txt` (or `python scripts/bootstrap.py`) |
 | `Admin login failed: HTTP 401` | Check `ADMIN_EMAIL` / `ADMIN_PASSWORD` in `.env` |
 | Master login fails | Set `MASTER_EMAIL`, `MASTER_ID`, and `MEMBER_PASSWORD` |

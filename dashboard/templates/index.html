@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
   <style>
     /* Platform UI / UX Extensions maintaining 100% theme consistency */
@@ -1126,16 +1126,75 @@
       .main { height: auto; }
       .hist-table { display: block; overflow-x: auto; }
     }
-    .tab-nav { overflow-x: auto; scrollbar-width: thin; }
     .tab-item { white-space: nowrap; flex: none; }
     @media (prefers-reduced-motion: reduce) { .run-bar.on, .suite-card { animation: none; transition: none; } }
+
+    /* ---------- Header: what this is and what it is pointed at ---------- */
+    .hub-title { display: flex; flex-direction: column; min-width: 0; line-height: 1.2; }
+    .hub-title h1 { margin: 0; font-size: 15px; font-weight: 700; letter-spacing: -0.01em; }
+    .hub-sub { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .menu-btn { display: none; background: transparent; border: 1px solid var(--border); color: var(--text); border-radius: 8px;
+                width: 36px; height: 36px; place-items: center; cursor: pointer; flex: none; }
+    .side-scrim { display: none; }
+    @media (max-width: 900px) {
+      .menu-btn { display: grid; }
+      .sidebar { width: min(320px, 86vw); }
+      .side-scrim.on { display: block; position: fixed; inset: 0; background: var(--overlay); z-index: 55; }
+      .topbar { gap: 10px; }
+      .topbar #elapsedTimer, .topbar #bookPill span { display: none; }
+    }
+
+    /* ---------- Release readiness rail: the sign-off order, one live verdict per stage ---------- */
+    .ready-rail { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin: 4px 0 20px;
+                  border: 1px solid var(--hairline); border-radius: 12px; background: var(--card); }
+    .rr-step { position: relative; display: grid; grid-template-columns: 14px 1fr; column-gap: 10px; row-gap: 1px; align-items: baseline;
+               text-align: left; padding: 14px 16px 14px 14px; background: transparent; border: 0; color: var(--text); cursor: pointer;
+               font: inherit; min-width: 0; }
+    .rr-step + .rr-step { border-left: 1px solid var(--hairline); }
+    .rr-step:hover { background: var(--surface-2); }
+    .rr-step:first-child { border-radius: 11px 0 0 11px; } .rr-step:last-child { border-radius: 0 11px 11px 0; }
+    .rr-dot { grid-row: 1 / span 3; align-self: start; margin-top: 4px; width: 10px; height: 10px; border-radius: 50%;
+              background: var(--faint); box-shadow: 0 0 0 3px var(--surface-2); }
+    .rr-name { font-size: 12px; color: var(--muted); font-weight: 600; }
+    .rr-val { font-size: 17px; font-weight: 750; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .rr-sub { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .rr-step[data-state="ok"] .rr-dot { background: var(--ok); } .rr-step[data-state="ok"] .rr-val { color: var(--ok); }
+    .rr-step[data-state="warn"] .rr-dot { background: var(--warn); } .rr-step[data-state="warn"] .rr-val { color: var(--warn); }
+    .rr-step[data-state="fail"] .rr-dot { background: var(--danger); } .rr-step[data-state="fail"] .rr-val { color: var(--danger); }
+    .rr-step[data-state="run"] .rr-dot { background: var(--violet); animation: rr-pulse 1.6s ease-in-out infinite; }
+    .rr-step[data-state="run"] .rr-val { color: var(--violet-ink); }
+    .rr-now { background: var(--surface-2); }
+    @keyframes rr-pulse { 0%, 100% { box-shadow: 0 0 0 3px var(--violet-soft); } 50% { box-shadow: 0 0 0 7px var(--violet-soft); } }
+    @media (prefers-reduced-motion: reduce) { .rr-step[data-state="run"] .rr-dot { animation: none; } }
+    @media (max-width: 1100px) {
+      .ready-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .rr-step + .rr-step { border-left: 0; }
+      .rr-step { border-top: 1px solid var(--hairline); border-radius: 0 !important; }
+      .rr-step:nth-child(-n+2) { border-top: 0; }
+      .rr-step:nth-child(even) { border-left: 1px solid var(--hairline); }
+      .rr-now { grid-column: 1 / -1; border-left: 0 !important; }
+    }
+
+    /* ---------- Views grouped by task; wraps instead of scrolling sideways ---------- */
+    .tab-nav.tab-groups { display: flex; flex-wrap: wrap; gap: 6px 18px; background: transparent; border: 0; padding: 0; overflow: visible; }
+    .tab-group { display: flex; align-items: center; gap: 2px; flex-wrap: wrap; }
+    .tg-label { font-size: 11.5px; color: var(--faint); font-weight: 600; margin-right: 6px; }
+    .tab-groups .tab-item { padding: 7px 11px; }
+    .tab-groups .tab-item.active { background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--border); }
+    .tab-count { font-size: 11px; color: var(--faint); font-weight: 600; }
+    .tab-bar-wrap { border-bottom: 1px solid var(--hairline); padding-bottom: 10px; margin-bottom: 4px; }
+    @media (max-width: 640px) { .tg-label { width: 100%; margin: 4px 0 0; } }
+
+    /* ---------- Keyboard focus is always visible ---------- */
+    :where(button, a, input, select, summary, [tabindex]):focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
   </style>
 </head>
 <body data-theme="dark">
 
 <div class="app">
+  <div class="side-scrim" id="sideScrim" onclick="toggleSidebar(false)"></div>
   <!-- Left SideBar: Test Suites & System Status -->
-  <aside class="sidebar">
+  <aside class="sidebar" id="sidebar">
     <!-- Brand Header -->
     <div class="side-head">
       <div class="brand">
@@ -1214,10 +1273,12 @@
   <main class="main">
     <!-- Topbar Navigation -->
     <header class="topbar">
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <h1>Copy Trading OMS Pro</h1>
-        <span class="crumb">/</span>
-        <span class="who">Universal Multiplier & Equal Capital Control</span>
+      <button class="menu-btn" id="menuBtn" onclick="toggleSidebar()" aria-label="Open the test launcher" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <div class="hub-title">
+        <h1>Copy-trading test hub</h1>
+        <span class="hub-sub" id="hubSub">Loading target…</span>
       </div>
 
       <div class="spacer"></div>
@@ -1255,68 +1316,81 @@
         <button class="cta" onclick="switchTab('setup')">Open setup guide</button>
       </div>
 
-      <!-- Live summary cards (computed from real evidence + run history) -->
-      <div class="stats" style="margin-bottom: 18px;">
-        <div class="stat" id="statSuites" onclick="switchTab('reports')" style="cursor:pointer" title="Open evidence">
-          <div class="k"><i class="fa-solid fa-shield-halved"></i> Suites green</div>
-          <div class="v" id="statSuitesV">–</div>
-          <div class="s" id="statSuitesS">latest evidence per suite</div>
-        </div>
-        <div class="stat">
-          <div class="k"><i class="fa-solid fa-list-check"></i> Checks (latest)</div>
-          <div class="v" id="statChecksV">–</div>
-          <div class="s" id="statChecksS">passed / failed</div>
-        </div>
-        <div class="stat" onclick="switchTab('history')" style="cursor:pointer" title="Open run history">
-          <div class="k"><i class="fa-solid fa-clock-rotate-left"></i> Last run</div>
-          <div class="v" id="statLastV" style="font-size:18px">–</div>
-          <div class="s" id="statLastS">no runs yet</div>
-        </div>
-        <div class="stat">
-          <div class="k"><i class="fa-solid fa-users"></i> Target</div>
-          <div class="v" id="statTargetV">–</div>
-          <div class="s" id="statTargetS">followers</div>
-        </div>
-        <div class="stat" id="statSetup" onclick="switchTab('setup')" style="cursor:pointer" title="Open setup guide">
-          <div class="k"><i class="fa-solid fa-stethoscope"></i> Setup</div>
-          <div class="v" id="statSetupV">…</div>
-          <div class="s" id="statSetupS">checking</div>
-        </div>
-      </div>
+      <!-- Release readiness: the order a build is signed off in, each with its live verdict -->
+      <nav class="ready-rail" aria-label="Release readiness">
+        <button class="rr-step" id="rrSetup" data-state="idle" onclick="switchTab('setup')">
+          <span class="rr-dot" aria-hidden="true"></span>
+          <span class="rr-name">Setup</span>
+          <span class="rr-val" id="rrSetupV">Checking…</span>
+          <span class="rr-sub" id="rrSetupS">logins, accounts, links</span>
+        </button>
+        <button class="rr-step" id="rrE2E" data-state="idle" onclick="switchTab('e2e')">
+          <span class="rr-dot" aria-hidden="true"></span>
+          <span class="rr-name">End-to-end test</span>
+          <span class="rr-val" id="rrE2EV">Not run</span>
+          <span class="rr-sub" id="rrE2ES">16 steps on master + followers</span>
+        </button>
+        <button class="rr-step" id="rrSym" data-state="idle" onclick="switchTab('e2e')">
+          <span class="rr-dot" aria-hidden="true"></span>
+          <span class="rr-name">Market types</span>
+          <span class="rr-val" id="rrSymV">Not run</span>
+          <span class="rr-sub" id="rrSymS">every market group</span>
+        </button>
+        <button class="rr-step" id="rrReg" data-state="idle" onclick="switchTab('regression')">
+          <span class="rr-dot" aria-hidden="true"></span>
+          <span class="rr-name">Regression</span>
+          <span class="rr-val" id="rrRegV">Not run</span>
+          <span class="rr-sub" id="rrRegS">several suites in a row</span>
+        </button>
+        <button class="rr-step rr-now" id="rrRun" data-state="idle" onclick="switchTab('terminal')">
+          <span class="rr-dot" aria-hidden="true"></span>
+          <span class="rr-name">Running now</span>
+          <span class="rr-val" id="rrRunV">Nothing</span>
+          <span class="rr-sub" id="rrRunS">pick a test on the left</span>
+        </button>
+      </nav>
 
-      <!-- Tab Bar Navigation (.seg style) -->
+      <!-- Views, grouped by what a tester is doing -->
       <div class="tab-bar-wrap">
-        <div class="tab-nav">
+        <div class="tab-nav tab-groups" role="tablist" aria-label="Views">
+          <div class="tab-group"><span class="tg-label">Watch</span>
           <button id="tabBtnTerminal" onclick="switchTab('terminal')" class="tab-item active green">
-            <i class="fa-solid fa-terminal"></i> Terminal
+            <i class="fa-solid fa-terminal"></i> Live output
           </button>
+          <button id="tabBtnTape" onclick="switchTab('tape')" class="tab-item amber">
+            <i class="fa-solid fa-chart-line"></i> Order feed
+          </button>
+          </div>
+          <div class="tab-group"><span class="tg-label">Results</span>
           <button id="tabBtnE2E" onclick="switchTab('e2e')" class="tab-item green">
-            <i class="fa-solid fa-route"></i> E2E Report <span id="e2eTabBadge"></span>
+            <i class="fa-solid fa-route"></i> End-to-end <span id="e2eTabBadge"></span>
           </button>
           <button id="tabBtnRegression" onclick="switchTab('regression')" class="tab-item purple">
             <i class="fa-solid fa-list-ol"></i> Regression <span id="regTabBadge"></span>
           </button>
-          <button id="tabBtnFollowers" onclick="switchTab('followers')" class="tab-item cyan">
-            <i class="fa-solid fa-network-wired"></i> Followers
-          </button>
-          <button id="tabBtnTape" onclick="switchTab('tape')" class="tab-item amber">
-            <i class="fa-solid fa-chart-line"></i> Order Flow
-          </button>
           <button id="tabBtnReports" onclick="switchTab('reports')" class="tab-item purple">
-            <i class="fa-solid fa-file-contract"></i> Evidence (<span id="reportsTabBadge">–</span>)
+            <i class="fa-solid fa-file-contract"></i> Reports <span class="tab-count" id="reportsTabBadge">–</span>
           </button>
-          <button id="tabBtnReplication" onclick="switchTab('replication')" class="tab-item cyan">
-            <i class="fa-solid fa-code-compare"></i> Dispatch
+          <button id="tabBtnHistory" onclick="switchTab('history')" class="tab-item">
+            <i class="fa-solid fa-clock-rotate-left"></i> Run history
           </button>
           <button id="tabBtnScreenshots" onclick="switchTab('screenshots')" class="tab-item">
             <i class="fa-solid fa-image"></i> Screenshots
           </button>
-          <button id="tabBtnHistory" onclick="switchTab('history')" class="tab-item">
-            <i class="fa-solid fa-clock-rotate-left"></i> History
+          </div>
+          <div class="tab-group"><span class="tg-label">Check by hand</span>
+          <button id="tabBtnReplication" onclick="switchTab('replication')" class="tab-item cyan">
+            <i class="fa-solid fa-paper-plane"></i> Test order
           </button>
+          <button id="tabBtnFollowers" onclick="switchTab('followers')" class="tab-item cyan">
+            <i class="fa-solid fa-users"></i> Accounts
+          </button>
+          </div>
+          <div class="tab-group"><span class="tg-label">Help</span>
           <button id="tabBtnSetup" onclick="switchTab('setup')" class="tab-item green">
-            <i class="fa-solid fa-circle-play"></i> Getting Started
+            <i class="fa-solid fa-circle-question"></i> Setup &amp; guide
           </button>
+          </div>
         </div>
       </div>
 
@@ -1324,8 +1398,8 @@
       <div id="tabTerminal" class="terminal-container" style="margin-top: 10px;">
         <div class="terminal-toolbar">
           <div class="terminal-tools-left">
-            <span style="font-family: var(--mono); font-size: 12px; font-weight: 600;">● blacktrader-oms-live-runner</span>
-            <span id="activeSuiteName" style="color: var(--cyan-neon); font-weight: 600; font-family: var(--mono);">[IDLE - Ready]</span>
+            <span style="font-size: 12.5px; font-weight: 650;">Live output</span>
+            <span id="activeSuiteName" style="color: var(--muted); font-weight: 600;">Nothing running</span>
             <span id="runCounters"></span>
           </div>
           <div class="terminal-tools-right">
@@ -1352,7 +1426,7 @@
             </div>
             <div>
               <div style="font-size: 14.5px; font-weight: 750; color: var(--text); display: flex; align-items: center; gap: 8px;">
-                {{ MASTER_EMAIL }} <span class="btn-tag tag-green">MASTER TRADER</span>
+                {{ MASTER_EMAIL }} <span class="btn-tag tag-green">Master</span>
               </div>
               <div id="masterSubText" style="font-size: 12px; color: var(--muted); margin-top: 3px; font-family: var(--mono);">
                 Client ID: <code>{{ MASTER_ID }}</code> • Capital: 100,000,000.00 USD • Fans out to 100 followers
@@ -1361,7 +1435,7 @@
           </div>
           <div>
             <span class="btn sm" style="color: var(--cyan-neon); border-color: rgba(56, 189, 248, 0.4); background: var(--surface-2); font-weight: 650;">
-              <i class="fa-solid fa-magnifying-glass"></i> Inspect Master
+              <i class="fa-solid fa-magnifying-glass"></i> Open master account
             </span>
           </div>
         </div>
@@ -1372,10 +1446,10 @@
             <div>
               <div style="font-size: 15px; font-weight: 750; color: var(--text); display: flex; align-items: center; gap: 8px;">
                 <i class="fa-solid fa-sliders" style="color: var(--violet-ink);"></i>
-                <span>Universal Copy Trading Hub: Equal Balance & Mode Multiplier Controller</span>
-                <span class="btn-tag tag-purple">OMS Live Engine</span>
+                <span>Account settings</span>
+                
               </div>
-              <div class="desc">Synchronize identical balance across Master and all 100 followers, and switch replication modes with dynamic multiplier.</div>
+              <div class="desc">Set the balance of the master and every follower, and how followers size their copies. These change the accounts straight away, so you are asked to confirm first.</div>
             </div>
             <div style="display: flex; align-items: center; gap: 8px;">
               <span class="muted" style="font-size: 12px;">Target:</span>
@@ -1388,7 +1462,7 @@
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
               <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
                 <span style="font-size: 13px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 6px;">
-                  <i class="fa-solid fa-scale-balanced" style="color: var(--ok);"></i> 1. Equal Balance for Master & Followers:
+                  <i class="fa-solid fa-scale-balanced" style="color: var(--ok);"></i> Balance for every account:
                 </span>
                 <div style="display: flex; align-items: center; background: var(--card); border: 1px solid var(--border); border-radius: var(--r-xs); padding: 3px 10px;">
                   <span style="font-size: 12px; color: var(--ok); margin-right: 6px; font-weight: 700;">$</span>
@@ -1403,7 +1477,7 @@
                 </div>
               </div>
               <button onclick="applySyncBalanceOnly()" id="btnSyncBalOnly" class="btn sm" style="color: var(--ok); border-color: var(--ok-line); background: var(--ok-soft); font-weight: 700;">
-                <i class="fa-solid fa-coins"></i> Sync Equal Balance Only
+                <i class="fa-solid fa-coins"></i> Set balances
               </button>
             </div>
           </div>
@@ -1414,7 +1488,7 @@
               <!-- Mode Selection -->
               <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
                 <span style="font-size: 13px; font-weight: 700; color: var(--text); min-width: 155px; display: flex; align-items: center; gap: 6px;">
-                  <i class="fa-solid fa-network-wired" style="color: var(--violet-ink);"></i> 2. Select Copy Mode:
+                  <i class="fa-solid fa-network-wired" style="color: var(--violet-ink);"></i> How followers size copies:
                 </span>
                 <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                   <button class="mode-select-btn active" id="btnSelectModeMultiplier" onclick="selectCopyMode('multiplier')">
@@ -1432,7 +1506,7 @@
               <!-- Multiplier Text Box & Quick Auto-Fill -->
               <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
                 <span style="font-size: 13px; font-weight: 700; color: var(--text); min-width: 155px; display: flex; align-items: center; gap: 6px;">
-                  <i class="fa-solid fa-calculator" style="color: var(--warn);"></i> Multiplier Text Box:
+                  <i class="fa-solid fa-calculator" style="color: var(--warn);"></i> Multiplier:
                 </span>
                 <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
                   <button class="preset-pill" onclick="autoFillMultiplier(0.5)">0.5x</button>
@@ -1468,7 +1542,7 @@
           <!-- Section 3: Master Execution Actions -->
           <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 6px; flex-wrap: wrap; gap: 10px;">
             <div style="display: flex; align-items: center; gap: 10px;">
-              <span class="muted" style="font-size: 12.5px; font-weight: 600;">Target Followers:</span>
+              <span class="muted" style="font-size: 12.5px; font-weight: 600;">Apply to:</span>
               <select id="switchScopeSelect" class="input sm" style="width: auto; font-weight: 600;">
                 <option value="all">All 100 Followers (follower1 to follower100)</option>
                 <option value="tier1">Tier 1 Cohort Only (#1 to #25)</option>
@@ -1480,10 +1554,10 @@
 
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
               <button onclick="applyFollowerModeSwitch()" id="btnApplySwitch" class="btn sm" style="color: var(--violet-ink); border-color: var(--violet-line); background: var(--violet-soft); font-weight: 700;">
-                <i class="fa-solid fa-bolt"></i> Set Multiplier Only
+                <i class="fa-solid fa-bolt"></i> Set copy mode
               </button>
               <button onclick="applyCompleteSetup()" id="btnApplyComplete" class="btn primary" style="padding: 0 20px; font-weight: 750;">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> One-Click: Equalize Balance & Set Multiplier
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Set balances and copy mode
               </button>
             </div>
           </div>
@@ -1545,10 +1619,10 @@
             <div>
               <div style="font-size: 15px; font-weight: 750; color: var(--text); display: flex; align-items: center; gap: 8px;">
                 <i class="fa-solid fa-rocket" style="color: var(--ok);"></i>
-                <span>Master Order Dispatcher & Live 100-Follower Comparison Engine</span>
-                <span class="btn-tag tag-green">Real-Time Fan-Out</span>
+                <span>Send a test order</span>
+                
               </div>
-              <div class="desc">Place an order directly from the Master trader account ({{ MASTER_EMAIL }}) and verify instant replication, lot sizing accuracy, and price execution across all 100 followers.</div>
+              <div class="desc">Places one order from the master ({{ MASTER_EMAIL }}) and checks that every linked follower copied it at the right size and side, with its price and how long the copy took.</div>
             </div>
             <div style="display: flex; align-items: center; gap: 8px;">
               <span class="muted" style="font-size: 12px;">Active Broker:</span>
@@ -1624,7 +1698,7 @@
               <!-- Dispatch Action Button -->
               <div>
                 <button type="button" onclick="executeMasterDispatchAndVerify()" id="btnExecuteDispatch" class="btn primary" style="width: 100%; font-weight: 800; height: 32px;">
-                  <i class="fa-solid fa-bolt"></i> Dispatch & Verify
+                  <i class="fa-solid fa-bolt"></i> Send and check copies
                 </button>
                 <button type="button" onclick="closeMasterAndVerify()" id="btnCloseMaster" class="btn sm" style="width: 100%; margin-top: 6px; color: var(--danger); border-color: var(--danger-line);">
                   <i class="fa-solid fa-xmark"></i> Close master & verify flat
@@ -1665,7 +1739,7 @@
         <div class="card" style="margin-top: 0; padding: 20px;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
             <div style="display: flex; align-items: center; gap: 8px;">
-              <span style="font-size: 14px; font-weight: 750; color: var(--text);">100-Followers Live Comparative Reconciliation Table</span>
+              <span style="font-size: 14px; font-weight: 750; color: var(--text);">What each follower received</span>
               <span id="tableFollowerFilterBadge" class="btn-tag tag-purple">Showing All 100</span>
             </div>
             <div style="display: flex; gap: 6px;">
@@ -1694,7 +1768,7 @@
                 <tr>
                   <td colspan="9" style="text-align: center; color: var(--faint); padding: 40px;">
                     <i class="fa-solid fa-circle-info" style="font-size: 22px; display: block; margin-bottom: 8px; opacity: 0.6;"></i>
-                    Pick any symbol, then <strong>Dispatch & Verify</strong> places one master order and compares every linked follower's copy: size, side, price and copy latency.
+                    Pick any symbol, then <strong>Send and check copies</strong> places one master order and compares every linked follower's copy: size, side, price and copy latency.
                     <strong>Close master & verify flat</strong> afterwards checks the close is copied too.
                   </td>
                 </tr>
@@ -1735,15 +1809,15 @@
             <div class="step"><div><b>Check the setup is green</b> – the list at the top of this tab. Fix anything red before testing; a red check makes every suite fail for the wrong reason.</div></div>
             <div class="step"><div><b>Run the End-to-End test</b> – <a href="#" onclick="runE2E('quick');return false">Quick run</a> first (10 followers), then a
               <a href="#" onclick="runE2E('full');return false">Full run</a> before sign-off. It covers the whole trade life cycle in about 3 minutes.</div></div>
-            <div class="step"><div><b>Read the result</b> in <a href="#" onclick="switchTab('e2e');return false">E2E Report</a>. Failed steps open automatically.
+            <div class="step"><div><b>Read the result</b> in <a href="#" onclick="switchTab('e2e');return false">End-to-end</a>. Failed steps open automatically.
               <b>Re-run this step</b> confirms a failure is repeatable; <b>Copy bug report</b> gives you a ready-to-paste ticket with the command to reproduce it.</div></div>
             <div class="step"><div><b>Go deeper where it matters</b> – the launcher on the left has focused suites: copy modes, races, pending orders, accounting,
               load (JMeter), security and browser UI. Run the ones related to what changed.</div></div>
             <div class="step"><div><b>Before a release, run a regression</b> – <a href="#" onclick="switchTab('regression');return false">Regression</a> runs a preset (Smoke / Standard / Full)
               of suites back to back and gives you one HTML report to download and share.</div></div>
-            <div class="step"><div><b>Spot-check by hand</b> – <a href="#" onclick="switchTab('replication');return false">Dispatch</a> sends one master order on <b>any symbol</b> (market, limit or stop, optional TP/SL),
+            <div class="step"><div><b>Spot-check by hand</b> – <a href="#" onclick="switchTab('replication');return false">Test order</a> sends one master order on <b>any symbol</b> (market, limit or stop, optional TP/SL),
               shows every follower's copy side by side, and <b>Close master & verify flat</b> checks the close is copied too;
-              <a href="#" onclick="switchTab('followers');return false">Followers</a> opens any account's positions and orders.</div></div>
+              <a href="#" onclick="switchTab('followers');return false">Accounts</a> opens any account's positions and orders.</div></div>
             <div class="step"><div><b>If a run is stopped or crashes</b>, positions may stay open: run <b>Emergency Teardown</b> (bottom of the launcher) before the next test.
               Never run two suites at once – they share the same accounts.</div></div>
           </div>
@@ -2226,9 +2300,16 @@
       showToast(`Selected balance preset: $${(amount/1e6).toFixed(0)}M`);
     }
 
-    async function applySyncBalanceOnly() {
+    /* Bulk account changes always ask first; on REAL the word to type is REAL */
+    function askBulk(title, items, fn) {
+      const real = currentInstance === 'real';
+      openConfirmAction(title, items + `<li>Instance: <b>${real ? 'REAL (real money accounts)' : 'Paper'}</b></li>`, real ? 'REAL' : 'APPLY', fn);
+    }
+
+    async function applySyncBalanceOnly(confirmed = false) {
       const btn = document.getElementById("btnSyncBalOnly");
       const balVal = parseFloat(document.getElementById("syncBalanceInput")?.value || "100000000");
+      if (!confirmed) return askBulk('Set every balance?', `<li>The master and every follower get a balance of <b>${balVal.toLocaleString()}</b>.</li><li>Open positions are not closed.</li>`, () => applySyncBalanceOnly(true));
 
       if (btn) {
         btn.disabled = true;
@@ -2239,7 +2320,7 @@
         const res = await fetch("/api/accounts/sync_balance", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ balance: balVal, instance: currentInstance })
+          body: JSON.stringify({ balance: balVal, instance: currentInstance, confirm: true })
         });
         const data = await res.json();
         if (res.status === 200) {
@@ -2253,14 +2334,15 @@
       } finally {
         if (btn) {
           btn.disabled = false;
-          btn.innerHTML = `<i class="fa-solid fa-coins"></i> Sync Equal Balance Only`;
+          btn.innerHTML = `<i class="fa-solid fa-coins"></i> Set balances`;
         }
       }
     }
 
-    async function applyCompleteSetup() {
+    async function applyCompleteSetup(confirmed = false) {
       const btn = document.getElementById("btnApplyComplete");
       const balVal = parseFloat(document.getElementById("syncBalanceInput")?.value || "100000000");
+      if (!confirmed) return askBulk('Set balances and copy mode?', `<li>Every account gets a balance of <b>${balVal.toLocaleString()}</b>.</li><li>Every follower switches to <b>${esc(selectedCopyMode)}</b> mode.</li>`, () => applyCompleteSetup(true));
       const customMult = parseFloat(document.getElementById("customMultiplierInput")?.value || "2.0");
 
       if (btn) {
@@ -2273,7 +2355,7 @@
         const r1 = await fetch("/api/accounts/sync_balance", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ balance: balVal, instance: currentInstance })
+          body: JSON.stringify({ balance: balVal, instance: currentInstance, confirm: true })
         });
         const d1 = await r1.json();
 
@@ -2288,6 +2370,7 @@
             multiplier: customMult,
             tier_based: isTierBased,
             instance: currentInstance,
+            confirm: true,
             start: 1,
             end: 100
           })
@@ -2301,7 +2384,7 @@
       } finally {
         if (btn) {
           btn.disabled = false;
-          btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles"></i> 🚀 One-Click: Equalize Balance & Set Multiplier`;
+          btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles"></i> Set balances and copy mode`;
         }
       }
     }
@@ -2373,7 +2456,7 @@
       }
     }
 
-    async function applyFollowerModeSwitch() {
+    async function applyFollowerModeSwitch(confirmed = false) {
       const btn = document.getElementById("btnApplySwitch");
       const scope = document.getElementById("switchScopeSelect")?.value || "all";
       const customMult = parseFloat(document.getElementById("customMultiplierInput")?.value || "1.0");
@@ -2383,6 +2466,7 @@
       else if (scope === 'tier2') { start = 26; end = 50; }
       else if (scope === 'tier3') { start = 51; end = 75; }
       else if (scope === 'tier4') { start = 76; end = 100; }
+      if (!confirmed) return askBulk('Change how followers copy?', `<li>Followers <b>${start}–${end}</b> switch to <b>${esc(selectedCopyMode)}</b> mode${isTierBased ? ' with tier multipliers' : ` at <b>${customMult}x</b>`}.</li><li>Open positions keep their size; new copies use the new setting.</li>`, () => applyFollowerModeSwitch(true));
 
       if (btn) {
         btn.disabled = true;
@@ -2395,6 +2479,7 @@
           multiplier: customMult,
           tier_based: isTierBased,
           instance: currentInstance,
+          confirm: true,
           start: start,
           end: end
         };
@@ -2437,7 +2522,7 @@
         const res = await fetch(`/api/account/${currentInspectedEmail}/copy_settings`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ mode: mode, multiplier: mult, instance: currentInstance })
+          body: JSON.stringify({ mode: mode, multiplier: mult, instance: currentInstance, confirm: true })
         });
         const data = await res.json();
         if (res.status === 200) {
@@ -2495,7 +2580,7 @@
           badge.className = "btn-tag tag-amber";
           badge.innerHTML = `<i class="fa-solid fa-bolt"></i> MULTIPLIER MODE ACTIVE`;
           formula.innerHTML = `Sizing Rule: <strong>Master Lots × Configured Multiplier</strong> (1x, 2x, 3x, 0.5x)`;
-          if (masterSub) masterSub.innerHTML = `Client ID: <code>{{ MASTER_ID }}</code> • Base Capital: 100,000,000.00 • Direct Multiplier Fan-Out`;
+          if (masterSub) masterSub.innerHTML = `Client ID: <code>{{ MASTER_ID }}</code> • copies go to every linked follower`;
         }
       }
 
@@ -2625,7 +2710,7 @@
         avatar.className = "drawer-avatar-icon";
         avatar.innerHTML = `<i class="fa-solid fa-crown"></i>`;
         document.getElementById("drawerAccountBadge").className = "btn-tag tag-green";
-        document.getElementById("drawerAccountBadge").innerText = "MASTER TRADER";
+        document.getElementById("drawerAccountBadge").innerText = "Master";
       } else {
         avatar.className = "drawer-avatar-icon follower-avatar";
         avatar.innerHTML = `<i class="fa-solid fa-shield-halved"></i>`;
@@ -3053,7 +3138,7 @@
         if (!ok || !data.success) {
           $('cardMasterOrdId').innerText = 'Rejected'; $('cardReplicatedCount').innerText = '–'; $('cardMatchRate').innerText = '–'; $('cardFanOutLatency').innerText = '–';
           $('comparisonTableBody').innerHTML = `<tr><td colspan="9" style="text-align:center;color:var(--danger);padding:24px">${esc(data.error || ('HTTP ' + status))}</td></tr>`;
-          showToast(data.error || 'Dispatch failed', 'err'); return;
+          showToast(data.error || 'The order was not sent', 'err'); return;
         }
         const m = data.master_order || {}, s = data.summary || {};
         $('cardMasterOrdId').innerHTML = `<code style="color:var(--ok)">${esc(m.order_id)}</code>`;
@@ -3070,7 +3155,7 @@
       } catch (err) {
         showToast('Network error: ' + err, 'err');
       } finally {
-        btn.disabled = false; btn.innerHTML = `<i class="fa-solid fa-bolt"></i> Dispatch & Verify`;
+        btn.disabled = false; btn.innerHTML = `<i class="fa-solid fa-bolt"></i> Send and check copies`;
       }
     }
 
@@ -3168,13 +3253,28 @@
       try { localStorage.setItem('bt_tab', key); } catch (e) {}
     }
 
+    /* ---- release readiness rail ---- */
+    function setRR(id, state, val, sub) {
+      const el = $(id); if (!el) return;
+      el.dataset.state = state; $(id + 'V').innerText = val; if (sub != null) $(id + 'S').innerText = sub;
+      el.setAttribute('aria-label', `${el.querySelector('.rr-name').innerText}: ${val}${sub ? ', ' + sub : ''}`);
+    }
+    const VERDICT_STATE = { PASS: 'ok', WARN: 'warn', FAIL: 'fail', ERROR: 'fail' };
+    const VERDICT_WORD = { PASS: 'Passed', WARN: 'Passed with warnings', FAIL: 'Failed', ERROR: 'Failed' };
+
+    /* ---- phone layout: the launcher is a drawer ---- */
+    function toggleSidebar(open) {
+      const sb = $('sidebar'), on = open ?? !sb.classList.contains('open');
+      sb.classList.toggle('open', on); $('sideScrim').classList.toggle('on', on); $('menuBtn').setAttribute('aria-expanded', on);
+    }
+
     /* ---- config + suites ---- */
     async function loadConfig() {
       const { data } = await api('/api/config'); APP_CONFIG = data;
       document.querySelectorAll('.cfg-master-email').forEach(e => e.innerText = data.master_email);
-      $('sideTarget').innerText = `${data.follower_count} followers · ${new URL(data.base_url).host}`;
-      $('statTargetV').innerHTML = `${data.follower_count}<small>followers</small>`;
-      $('statTargetS').innerText = data.master_email;
+      const host = new URL(data.base_url).host;
+      $('sideTarget').innerText = `${data.follower_count} followers on ${host}`;
+      $('hubSub').innerText = `Testing ${host} with master ${data.master_email} and ${data.follower_count} followers`;
     }
 
     async function loadSuites() {
@@ -3250,6 +3350,7 @@
       else if (key === 'multiplier') setDisplayMode('multiplier', $('btnModeMultiplier'));
       if (inst !== currentInstance) { currentInstance = inst; updateBrokerUI(); }
       lastLogRaw = null;
+      toggleSidebar(false);
       showToast(`Started: ${s.name}`);
       switchTab('terminal'); fetchStatus(); fetchLogs();
     }
@@ -3275,6 +3376,11 @@
     function renderE2E(d) {
       const badge = $('e2eTabBadge'), latest = (d.runs || [])[0];
       if (badge) badge.innerHTML = latest ? `<span class="pill ${esc(latest.verdict)}">${esc(latest.verdict)}</span>` : '';
+      if (latest) {
+        const t = latest.tally || {}, failed = (t.FAIL || 0) + (t.ERROR || 0);
+        setRR('rrE2E', VERDICT_STATE[latest.verdict] || 'idle', VERDICT_WORD[latest.verdict] || latest.verdict,
+              `${failed ? failed + ' step(s) failed, ' : ''}${ago(latest.started)}, followers ${(latest.followers_range || []).join('–')}`);
+      }
       const r = d.report;
       if (!r) {
         $('e2eReport').innerHTML = `<div class="empty-note">No End-to-End run yet. Press <b>Quick run</b> above: it uses followers 1–10 on paper and takes about 2 minutes.</div>`;
@@ -3374,6 +3480,13 @@
     }
     function renderRegression(d) {
       const c = d.current || {}, running = c.status === 'RUNNING';
+      if (c.id) {
+        const steps = c.steps || [], done = steps.filter(s => !['QUEUED', 'RUNNING'].includes(s.status)).length;
+        const bad = steps.filter(s => ['FAILED', 'ERROR', 'TERMINATED'].includes(s.status) || s.failed).length;
+        setRR('rrReg', running ? 'run' : bad ? 'fail' : c.status === 'DONE' ? 'ok' : 'warn',
+              running ? `${done} of ${steps.length} done` : bad ? `${bad} suite(s) failed` : c.status === 'DONE' ? 'Passed' : 'Stopped early',
+              `${steps.length} suites, ${ago(c.started_at)}`);
+      }
       $('regStartBtn').disabled = running || !!lastStatus?.is_running; $('regStopBtn').disabled = !running;
       $('regTabBadge').innerHTML = running ? `<span class="pill RUNNING">${(c.steps || []).filter(s => !['QUEUED', 'RUNNING'].includes(s.status)).length}/${(c.steps || []).length}</span>` : '';
       if (c.id) {
@@ -3398,6 +3511,8 @@
       const r = ok ? data.report : null;
       if (!r) { el.innerHTML = `<div class="empty-note">${ok ? 'No symbol run yet. Press <b>Market types</b> for a 2-minute check of every market group.' : esc(data.error || 'Could not load')}</div>`; return; }
       const t = r.tally || {};
+      setRR('rrSym', VERDICT_STATE[r.verdict] || 'idle', VERDICT_WORD[r.verdict] || r.verdict,
+            `${t.PASS || 0} symbols copied${t.FAIL ? ', ' + t.FAIL + ' failed' : ''}, ${ago(r.started)}`);
       const rows = Object.entries(r.groups || {}).map(([g, v]) => `<tr><td>${esc(g)}</td><td class="counter-pass">${v.PASS}</td>
         <td class="${v.FAIL ? 'counter-fail' : ''}">${v.FAIL}</td><td style="color:var(--warn)">${v.WARN || 0}</td><td style="color:var(--muted)">${v.SKIP}</td></tr>`).join('');
       const probs = (r.problems || []).map(p => `<div class="finding sev-${p.status === 'FAIL' ? 'HIGH' : 'MED'}"><b>${esc(p.status)}</b><code style="color:inherit">${esc(p.symbol)}</code> (${esc(p.group)}) – ${esc(p.detail)}</div>`).join('');
@@ -3475,13 +3590,16 @@
         $('elapsedTimer').innerText = fmtDur(d.elapsed_seconds);
         $('runBar').classList.toggle('on', !!d.is_running);
         $('stopBtn').disabled = !d.is_running; $('stopBtn').style.opacity = d.is_running ? 1 : .4;
-        $('activeSuiteName').innerText = d.name ? `[${d.status === 'RUNNING' ? 'ACTIVE' : d.status}: ${d.name}]` : '[IDLE - Ready]';
+        $('activeSuiteName').innerText = d.is_running ? `Running ${d.name}` : d.name ? `Last run: ${d.name} (${label.toLowerCase()})` : 'Nothing running';
+        setRR('rrRun', d.is_running ? 'run' : 'idle', d.is_running ? d.name : 'Nothing',
+              d.is_running ? `${fmtDur(d.elapsed_seconds)} so far, ✓ ${d.pass_count} ✗ ${d.fail_count}`
+                           : (window.innerWidth <= 900 ? 'open the menu to pick a test' : 'pick a test on the left'));
         $('runCounters').innerHTML = d.suite ? `<span class="counter-pass">✓ ${d.pass_count}</span> <span class="counter-fail">✗ ${d.fail_count}</span>` : '';
         document.title = d.is_running ? `▶ ${d.name} (✓${d.pass_count} ✗${d.fail_count}) – BlackTrader` : 'BlackTrader OMS – Test Hub';
         if (prev && prev.is_running !== d.is_running) {
           renderSuites(); fetchSummary(); if (activeTab === 'history') fetchHistory();
           if (!d.is_running) showToast(`${d.name}: ${label} (✓${d.pass_count} ✗${d.fail_count}) in ${fmtDur(d.elapsed_seconds)}`, d.status === 'COMPLETED' && !d.fail_count ? 'ok' : 'err');
-          if (!d.is_running && ['e2e', 'symbols_sample', 'symbols_all'].includes(d.suite)) { await fetchE2E(); if (d.status !== 'TERMINATED') switchTab('e2e'); }
+          if (!d.is_running && ['e2e', 'symbols_sample', 'symbols_all'].includes(d.suite)) { await fetchE2E(); fetchSymbols(); if (d.status !== 'TERMINATED' && REG?.current?.status !== 'RUNNING') switchTab('e2e'); }
         } else if (!prev) renderSuites();
       } catch (e) { /* server restarting */ }
     }
@@ -3492,7 +3610,7 @@
         if (raw === lastLogRaw) return; lastLogRaw = raw;
         const term = $('terminalStream');
         if (!raw) {
-          term.innerHTML = `<div class="term-empty">No run yet.<br>1. Pick a suite on the left (start with <b>End-to-End Test</b> on 10 followers).<br>2. Output streams here live.<br>New to this project? Open <a href="#" onclick="switchTab('setup');return false">Getting Started</a>.</div>`;
+          term.innerHTML = `<div class="term-empty">No run yet.<br>1. Pick a suite on the left (start with <b>End-to-End Test</b> on 10 followers).<br>2. Output streams here live.<br>New to this project? Open <a href="#" onclick="switchTab('setup');return false">Setup &amp; guide</a>.</div>`;
           return;
         }
         term.innerHTML = esc(raw)
@@ -3508,15 +3626,6 @@
     /* ---- summary cards ---- */
     async function fetchSummary() {
       const { data: d } = await api('/api/summary'); if (!d.totals) return;
-      const t = d.totals, allGreen = t.suites > 0 && t.suites_green === t.suites;
-      $('statSuitesV').innerHTML = t.suites ? `${t.suites_green}<small>/ ${t.suites}</small>` : '–';
-      $('statSuites').className = 'stat ' + (!t.suites ? '' : allGreen ? 'is-ok' : 'is-warn');
-      $('statSuitesS').innerText = t.suites ? (allGreen ? 'all suites passing' : `${t.suites - t.suites_green} need attention`) : 'no evidence yet – run a suite';
-      $('statChecksV').innerHTML = `${t.passed}<small>passed</small>`;
-      $('statChecksS').innerHTML = t.failed ? `<span style="color:var(--danger);font-weight:600">${t.failed} failed</span>` : 'no failures recorded';
-      const l = d.last_run;
-      $('statLastV').innerText = l ? l.name : '–';
-      $('statLastS').innerText = l ? `${l.status.toLowerCase()} · ${ago(l.started_at)}` : 'no runs yet';
       const badge = $('reportsTabBadge'); if (badge && d.families) badge.innerText = d.families.length;
     }
 
@@ -3535,10 +3644,9 @@
       const bad = d.checks.filter(c => c.status === 'fail').length, warn = d.checks.filter(c => c.status === 'warn').length;
       $('healthTitle').innerText = d.overall === 'ok' ? 'You are ready to test' : bad ? `${bad} thing${bad > 1 ? 's' : ''} to fix` : 'Ready, with warnings';
       $('healthLead').innerText = `Checked ${ago(d.checked_at) || 'now'}. Same checks as: python scripts/doctor.py`;
-      const sv = $('statSetupV'), ss = $('statSetupS'), card = $('statSetup'), banner = $('setupBanner');
-      sv.innerText = d.overall === 'ok' ? 'Ready' : bad ? 'Needs setup' : 'Ready*';
-      ss.innerText = bad ? `${bad} to fix – click` : warn ? `${warn} warning${warn > 1 ? 's' : ''}` : 'all checks passed';
-      card.className = 'stat ' + (d.overall === 'ok' ? 'is-ok' : 'is-warn');
+      const banner = $('setupBanner');
+      setRR('rrSetup', bad ? 'fail' : 'ok', bad ? `${bad} to fix` : 'Ready',
+            bad ? 'open to see how to fix' : warn ? `${warn} warning${warn > 1 ? 's' : ''}, nothing blocking` : 'all checks passed');
       banner.style.display = bad ? 'flex' : 'none';
       if (bad) $('setupBannerText').innerHTML = `<b>Setup incomplete:</b> ${esc(d.checks.find(c => c.status === 'fail').label)} – ${esc(d.checks.find(c => c.status === 'fail').fix || 'see the setup guide')}`;
       return true;
@@ -3573,7 +3681,7 @@
 
     /* ---- keyboard + visibility-aware polling ---- */
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') { closeConfirm(); closeModal(); closeBookModal(); }
+      if (e.key === 'Escape') { closeConfirm(); closeModal(); closeBookModal(); toggleSidebar(false); }
       if (e.key === '/' && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) { e.preventDefault(); $('suiteSearch').focus(); }
     });
     const visible = () => !document.hidden;
@@ -3591,7 +3699,7 @@
 
     (async function init() {
       await Promise.all([loadConfig(), loadSuites()]);
-      fetchStatus(); fetchLogs(); fetchSummary(); fetchReports(); fetchBooks(); fetchE2E(); fetchRegression();
+      fetchStatus(); fetchLogs(); fetchSummary(); fetchReports(); fetchBooks(); fetchE2E(); fetchRegression(); fetchSymbols();
       await fetchHealth(false);
       let tab = 'terminal'; try { tab = localStorage.getItem('bt_tab') || 'terminal'; } catch (e) {}
       if (lastHealth && lastHealth.overall === 'fail') tab = 'setup';
