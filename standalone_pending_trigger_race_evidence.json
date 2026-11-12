@@ -1,27 +1,27 @@
 {
-  "timestamp": "2026-11-11T13:06:11.098223+00:00",
+  "timestamp": "2026-11-12T05:03:55.504221+00:00",
   "total_scenarios": 3,
   "passed_scenarios": 3,
-  "total_time_seconds": 21.44,
+  "total_time_seconds": 20.78,
   "results": [
     {
       "name": "BUY LIMIT Trigger Price Shift at Hit Boundary",
-      "mod_time_ms": 103.76,
+      "mod_time_ms": 232.37,
       "followers_with_pos": 5,
       "followers_with_duplicates": 0,
       "status": "PASS"
     },
     {
       "name": "SELL LIMIT Trigger Price Shift at Hit Boundary",
-      "mod_time_ms": 157.59,
-      "followers_with_pos": 5,
+      "mod_time_ms": 304.12,
+      "followers_with_pos": 0,
       "followers_with_duplicates": 0,
       "status": "PASS"
     },
     {
       "name": "Impending Trigger TP/SL Protection Shift Collision",
-      "market_order_id": "ord_741e208d0c9cc8c48b",
-      "mod_time_ms": 152.93,
+      "market_order_id": "ord_67971999d8ef2aeae5",
+      "mod_time_ms": 162.76,
       "mod_status_code": 200,
       "followers_with_pos": 5,
       "status": "PASS"

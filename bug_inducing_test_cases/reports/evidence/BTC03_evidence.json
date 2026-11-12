@@ -1,0 +1,170 @@
+{
+  "test_case_id": "BTC03",
+  "test_case_name": "Rapid Double-Tap Inversion Race Condition (Flip Direction within 500ms)",
+  "target_bug": "Async Execution Race Condition & Direction Flip",
+  "status": "NO_BUG_DETECTED",
+  "passed": true,
+  "execution_duration_sec": 161.09,
+  "timestamp": "2026-11-12T10:16:06.100627+00:00",
+  "symbol": "BINANCE:BTCUSDT.P",
+  "side": "BUY",
+  "master_lot": 1.25,
+  "has_exit_setting": false,
+  "tp_price": null,
+  "sl_price": null,
+  "master_order_id": null,
+  "fill_price": 73423.05,
+  "replication_rate_pct": 100.0,
+  "lot_match_rate_pct": 100.0,
+  "replicated_count": 100,
+  "residual_open_after_exit": 0,
+  "bugs_found": [],
+  "audit_summary": {
+    "total_followers": 100,
+    "replicated_count": 100,
+    "replication_rate_pct": 100.0,
+    "lot_match_count": 100,
+    "lot_match_rate_pct": 100.0,
+    "sample_entry": 73386.3,
+    "total_follower_pnl": -16.0
+  },
+  "price_history_sample": [
+    {
+      "second": 0,
+      "remaining": 120,
+      "live_price": 73423.05,
+      "master_pnl": -0.12499999998908606,
+      "timestamp": "10:13:42"
+    },
+    {
+      "second": 2,
+      "remaining": 118,
+      "live_price": 73426.01,
+      "master_pnl": -12.124999999996362,
+      "timestamp": "10:13:44"
+    },
+    {
+      "second": 4,
+      "remaining": 116,
+      "live_price": 73426.01,
+      "master_pnl": -11.999999999989086,
+      "timestamp": "10:13:46"
+    },
+    {
+      "second": 6,
+      "remaining": 114,
+      "live_price": 73426.01,
+      "master_pnl": -11.999999999989086,
+      "timestamp": "10:13:48"
+    },
+    {
+      "second": 8,
+      "remaining": 112,
+      "live_price": 73421.01,
+      "master_pnl": -0.375000000003638,
+      "timestamp": "10:13:51"
+    },
+    {
+      "second": 10,
+      "remaining": 110,
+      "live_price": 73421.01,
+      "master_pnl": -0.49999999999272404,
+      "timestamp": "10:13:53"
+    },
+    {
+      "second": 12,
+      "remaining": 108,
+      "live_price": 73421.01,
+      "master_pnl": -6.374999999989086,
+      "timestamp": "10:13:55"
+    },
+    {
+      "second": 14,
+      "remaining": 106,
+      "live_price": 73421.01,
+      "master_pnl": -6.374999999989086,
+      "timestamp": "10:13:58"
+    },
+    {
+      "second": 16,
+      "remaining": 104,
+      "live_price": 73421.01,
+      "master_pnl": -6.374999999989086,
+      "timestamp": "10:14:00"
+    },
+    {
+      "second": 18,
+      "remaining": 102,
+      "live_price": 73421.01,
+      "master_pnl": -6.25,
+      "timestamp": "10:14:02"
+    }
+  ],
+  "follower_sample": [
+    {
+      "follower": "follower1",
+      "email": "mamfollower1@mailinator.com",
+      "has_position": true,
+      "positions_count": 1,
+      "actual_qty": 2.5,
+      "expected_qty": 2.5,
+      "lot_match": true,
+      "entry_price": 73386.3,
+      "pnl": -0.25,
+      "market_order_id": "ord_5f73148f4d520140a4",
+      "source": "mam"
+    },
+    {
+      "follower": "follower2",
+      "email": "mamfollower2@mailinator.com",
+      "has_position": true,
+      "positions_count": 1,
+      "actual_qty": 2.5,
+      "expected_qty": 2.5,
+      "lot_match": true,
+      "entry_price": 73386.3,
+      "pnl": -0.25,
+      "market_order_id": "ord_0a64e542e2d18172a4",
+      "source": "mam"
+    },
+    {
+      "follower": "follower3",
+      "email": "mamfollower3@mailinator.com",
+      "has_position": true,
+      "positions_count": 1,
+      "actual_qty": 2.5,
+      "expected_qty": 2.5,
+      "lot_match": true,
+      "entry_price": 73386.3,
+      "pnl": -0.25,
+      "market_order_id": "ord_882be34f0ecf512fb8",
+      "source": "mam"
+    },
+    {
+      "follower": "follower4",
+      "email": "mamfollower4@mailinator.com",
+      "has_position": true,
+      "positions_count": 1,
+      "actual_qty": 2.5,
+      "expected_qty": 2.5,
+      "lot_match": true,
+      "entry_price": 73386.3,
+      "pnl": -0.25,
+      "market_order_id": "ord_3d664efba7fd12ed61",
+      "source": "mam"
+    },
+    {
+      "follower": "follower5",
+      "email": "mamfollower5@mailinator.com",
+      "has_position": true,
+      "positions_count": 1,
+      "actual_qty": 2.5,
+      "expected_qty": 2.5,
+      "lot_match": true,
+      "entry_price": 73386.3,
+      "pnl": -0.25,
+      "market_order_id": "ord_c9661ced7ea933edca",
+      "source": "mam"
+    }
+  ]
+}

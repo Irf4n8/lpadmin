@@ -41,8 +41,8 @@ from urllib3.util.retry import Retry
 # CONFIGURATION & CONSTANTS
 # ======================================================================================
 DEFAULT_BASE_URL = os.getenv("BASE_URL", "https://lpadmin.blackfx.com")
-DEFAULT_MASTER_EMAIL = os.getenv("MASTER_EMAIL", "ctmaster@mailinator.com")
-DEFAULT_MEMBER_PASSWORD = os.getenv("MEMBER_PASSWORD", "Test@1234")
+DEFAULT_MASTER_EMAIL = os.getenv("MAM_MASTER", "mammaster@mailinator.com")
+DEFAULT_MEMBER_PASSWORD = os.getenv("FOLLOWERS_PASSWORD", os.getenv("MEMBER_PASSWORD", "Test@1234"))
 
 
 # ======================================================================================
@@ -419,13 +419,13 @@ def main():
     args = parser.parse_args()
 
     client = BlackTraderClient(base_url=args.base_url, max_workers=10)
-    follower_emails = [f"follower{i}@mailinator.com" for i in range(args.start, args.end + 1)]
+    follower_emails = [f"mamfollower{i}@mailinator.com" for i in range(args.start, args.end + 1)]
 
     print("=" * 80)
     print("BLACKTRADER OMS: STANDALONE PENDING TRIGGER MODIFICATION RACE SUITE")
     print(f"Base URL: {args.base_url}")
     print(f"Master Account: {args.master}")
-    print(f"Followers: {len(follower_emails)} (follower{args.start} to follower{args.end})")
+    print(f"Followers: {len(follower_emails)} (mamfollower{args.start} to mamfollower{args.end})")
     print(f"Instance: {args.instance.upper()}")
     print("=" * 80)
 

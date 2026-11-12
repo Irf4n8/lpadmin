@@ -1,0 +1,105 @@
+{
+  "test_case_id": "BTC05",
+  "test_case_name": "Inverted / Crossed Bracket Order Entry (Fat-Finger Bracket Validation)",
+  "target_bug": "Order Validation Bypass & Corrupted Bracket Propagation",
+  "status": "BUG_EXPOSED",
+  "passed": true,
+  "execution_duration_sec": 61.44,
+  "timestamp": "2026-11-12T10:43:06.799511+00:00",
+  "symbol": "BINANCE:BTCUSDT.P",
+  "side": "BUY",
+  "master_lot": 1.2,
+  "has_exit_setting": true,
+  "tp_price": 73450.54,
+  "sl_price": 73550.54,
+  "master_order_id": null,
+  "fill_price": 73500.54,
+  "replication_rate_pct": 100.0,
+  "lot_match_rate_pct": 100.0,
+  "replicated_count": 100,
+  "residual_open_after_exit": 0,
+  "bugs_found": [
+    {
+      "severity": "CRITICAL",
+      "type": "VALIDATION_BYPASS_BUG",
+      "message": "CRITICAL BUG: Inverted/invalid bracket order was accepted by OMS without validation: {'order': {'order_id': 'ord_bff1c6041595a2759a', 'market_order_id': 'ord_bff1c6041595a2759a', 'symbol': 'BINANCE:BTCUSDT.P', 'side': 'BUY', 'type': 'MARKET', 'state': 'FILLED', 'requested_qty': 1.2, 'filled_qty': 1.2, 'avg_fill_price': 73468, 'copy_ref': 'ord_bff1c6041595a2759a', 'copy_kind': 'master', 'created_at': '2026-11-12T10:42:16.118862222Z', 'updated_at': '2026-11-12T10:42:16.118862222Z'}, 'position': {'position_id': 'pos_2104475ef0c230129c', 'market_order_id': 'ord_bff1c6041595a2759a', 'symbol': 'BINANCE:BTCUSDT.P', 'side': 'BUY', 'net_qty': 1.2, 'avg_entry_price': 73468, 'full_margin': 8816.16, 'margin_percent': 100, 'margin_used': 8816.16, 'entry_markup': 0, 'status': 'OPEN', 'opened_at': '2026-11-12T10:42:16.118929Z'}, 'success': True}"
+    }
+  ],
+  "audit_summary": {
+    "total_followers": 100,
+    "replicated_count": 100,
+    "replication_rate_pct": 100.0,
+    "lot_match_count": 100,
+    "lot_match_rate_pct": 100.0,
+    "sample_entry": 73468.0,
+    "total_follower_pnl": -24.0
+  },
+  "price_history_sample": [],
+  "follower_sample": [
+    {
+      "follower": "follower1",
+      "email": "mamfollower1@mailinator.com",
+      "has_position": true,
+      "positions_count": 1,
+      "actual_qty": 2.4,
+      "expected_qty": 2.4,
+      "lot_match": true,
+      "entry_price": 73468.0,
+      "pnl": -0.24,
+      "market_order_id": "ord_99da5ddb8564bee74e",
+      "source": "mam"
+    },
+    {
+      "follower": "follower2",
+      "email": "mamfollower2@mailinator.com",
+      "has_position": true,
+      "positions_count": 1,
+      "actual_qty": 2.4,
+      "expected_qty": 2.4,
+      "lot_match": true,
+      "entry_price": 73468.0,
+      "pnl": -0.24,
+      "market_order_id": "ord_b453809900bb7a8ae5",
+      "source": "mam"
+    },
+    {
+      "follower": "follower3",
+      "email": "mamfollower3@mailinator.com",
+      "has_position": true,
+      "positions_count": 1,
+      "actual_qty": 2.4,
+      "expected_qty": 2.4,
+      "lot_match": true,
+      "entry_price": 73468.0,
+      "pnl": -0.24,
+      "market_order_id": "ord_cad75ad0853f77806a",
+      "source": "mam"
+    },
+    {
+      "follower": "follower4",
+      "email": "mamfollower4@mailinator.com",
+      "has_position": true,
+      "positions_count": 1,
+      "actual_qty": 2.4,
+      "expected_qty": 2.4,
+      "lot_match": true,
+      "entry_price": 73468.0,
+      "pnl": -0.24,
+      "market_order_id": "ord_af6d9a4ce3c9cc4773",
+      "source": "mam"
+    },
+    {
+      "follower": "follower5",
+      "email": "mamfollower5@mailinator.com",
+      "has_position": true,
+      "positions_count": 1,
+      "actual_qty": 2.4,
+      "expected_qty": 2.4,
+      "lot_match": true,
+      "entry_price": 73468.0,
+      "pnl": -0.24,
+      "market_order_id": "ord_9f06dbe6c7f3c8b693",
+      "source": "mam"
+    }
+  ]
+}

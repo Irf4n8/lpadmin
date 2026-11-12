@@ -1,0 +1,50 @@
+{
+  "Total" : {
+    "transaction" : "Total",
+    "sampleCount" : 100,
+    "errorCount" : 11,
+    "errorPct" : 11.0,
+    "meanResTime" : 113.24000000000002,
+    "medianResTime" : 113.0,
+    "minResTime" : 0.0,
+    "maxResTime" : 291.0,
+    "pct1ResTime" : 219.40000000000003,
+    "pct2ResTime" : 245.84999999999997,
+    "pct3ResTime" : 290.8299999999999,
+    "throughput" : 36.85956505713232,
+    "receivedKBytesPerSec" : 56640.16281561003,
+    "sentKBytesPerSec" : 4.152100419277552
+  },
+  "GET Dashboard UI (/)" : {
+    "transaction" : "GET Dashboard UI (/)",
+    "sampleCount" : 50,
+    "errorCount" : 6,
+    "errorPct" : 12.0,
+    "meanResTime" : 79.94000000000001,
+    "medianResTime" : 62.5,
+    "minResTime" : 0.0,
+    "maxResTime" : 214.0,
+    "pct1ResTime" : 184.79999999999998,
+    "pct2ResTime" : 196.45,
+    "pct3ResTime" : 214.0,
+    "throughput" : 19.004180919802355,
+    "receivedKBytesPerSec" : 1836.4667961326493,
+    "sentKBytesPerSec" : 1.9598061573546182
+  },
+  "GET API Data (/api/data?master=mam)" : {
+    "transaction" : "GET API Data (/api/data?master=mam)",
+    "sampleCount" : 50,
+    "errorCount" : 5,
+    "errorPct" : 10.0,
+    "meanResTime" : 146.54000000000002,
+    "medianResTime" : 161.5,
+    "minResTime" : 0.0,
+    "maxResTime" : 291.0,
+    "pct1ResTime" : 245.7,
+    "pct2ResTime" : 264.6499999999999,
+    "pct3ResTime" : 291.0,
+    "throughput" : 18.656716417910445,
+    "receivedKBytesPerSec" : 55534.70805153918,
+    "sentKBytesPerSec" : 2.2792531483208953
+  }
+}

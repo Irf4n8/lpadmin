@@ -40,8 +40,12 @@ def normalize_symbol(symbol: str) -> str:
     s = symbol.strip()
     u = s.upper()
 
+    # Dedicated Black feed crypto mapping
+    if u in ["BTCUSD:BLACK", "BLACK:BTCUSD", "BTC:BLACK"]:
+        return "BLACK:BTCUSD"
+
     # Crypto mapping
-    if u in ["BTCUSD", "BTCUSDT", "BTC", "BTC/USD", "BTC/USDT", "BTCUSD:BLACK", "BTCUSD BLACK", "BLACK:BTCUSD"]:
+    if u in ["BTCUSD", "BTCUSDT", "BTC", "BTC/USD", "BTC/USDT", "BTCUSD BLACK"]:
         return "BINANCE:BTCUSDT.P"
     if u in ["ETHUSD", "ETHUSDT", "ETH", "ETH/USD"]:
         return "BINANCE:ETHUSDT.P"

@@ -1,0 +1,33 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1794485172016,428,GET /v1/oms/_instances,200,OK,1. Public OMS Health & Discovery Load 1-1,text,true,,1219,217,1,2,https://lpadmin.blackfx.com/v1/oms/_instances,425,0,349
+1794485172445,42,GET /v1/oms/paper/health,200,OK,1. Public OMS Health & Discovery Load 1-1,text,true,,1078,219,1,2,https://lpadmin.blackfx.com/v1/oms/paper/health,42,0,0
+1794485172488,45,GET /v1/oms/_licence,200,OK,1. Public OMS Health & Discovery Load 1-1,text,true,,1007,215,1,2,https://lpadmin.blackfx.com/v1/oms/_licence,45,0,0
+1794485172016,510,POST /v1/oms/_auth/login,200,OK,2. Authenticated Trader & OMS Flow 2-1,text,true,,1324,338,1,2,https://lpadmin.blackfx.com/v1/oms/_auth/login,510,0,349
+1794485172533,42,GET /v1/oms/_instances,200,OK,1. Public OMS Health & Discovery Load 1-1,text,true,,1219,217,1,2,https://lpadmin.blackfx.com/v1/oms/_instances,42,0,0
+1794485172550,37,GET /v1/oms/_auth/me,200,OK,2. Authenticated Trader & OMS Flow 2-1,text,true,,987,271,1,2,https://lpadmin.blackfx.com/v1/oms/_auth/me,37,0,0
+1794485172575,59,GET /v1/oms/paper/health,200,OK,1. Public OMS Health & Discovery Load 1-1,text,true,,1068,219,2,3,https://lpadmin.blackfx.com/v1/oms/paper/health,59,0,0
+1794485172587,82,GET /v1/oms/paper/all_open,200,OK,2. Authenticated Trader & OMS Flow 2-1,text,true,,71378,277,1,3,https://lpadmin.blackfx.com/v1/oms/paper/all_open,68,0,0
+1794485172635,40,GET /v1/oms/_licence,200,OK,1. Public OMS Health & Discovery Load 1-1,text,true,,1005,215,2,3,https://lpadmin.blackfx.com/v1/oms/_licence,40,0,0
+1794485172670,42,GET /v1/oms/paper/positions,200,OK,2. Authenticated Trader & OMS Flow 2-1,text,true,,1780,278,1,2,https://lpadmin.blackfx.com/v1/oms/paper/positions,42,0,0
+1794485172621,115,GET /v1/oms/_instances,200,OK,1. Public OMS Health & Discovery Load 1-2,text,true,,1223,217,1,2,https://lpadmin.blackfx.com/v1/oms/_instances,115,0,49
+1794485172736,59,GET /v1/oms/paper/health,200,OK,1. Public OMS Health & Discovery Load 1-2,text,true,,1062,219,1,2,https://lpadmin.blackfx.com/v1/oms/paper/health,59,0,0
+1794485172713,89,GET /v1/oms/paper/orders,200,OK,2. Authenticated Trader & OMS Flow 2-1,text,true,,206482,275,1,2,https://lpadmin.blackfx.com/v1/oms/paper/orders,67,0,0
+1794485172796,39,GET /v1/oms/_licence,200,OK,1. Public OMS Health & Discovery Load 1-2,text,true,,1005,215,1,2,https://lpadmin.blackfx.com/v1/oms/_licence,39,0,0
+1794485172802,51,GET /v1/oms/paper/mam/masters,200,OK,2. Authenticated Trader & OMS Flow 2-1,text,true,,2689,280,1,2,https://lpadmin.blackfx.com/v1/oms/paper/mam/masters,51,0,0
+1794485172836,55,GET /v1/oms/_instances,200,OK,1. Public OMS Health & Discovery Load 1-2,text,true,,1227,217,1,2,https://lpadmin.blackfx.com/v1/oms/_instances,55,0,0
+1794485172853,53,GET /v1/oms/paper/history,200,OK,2. Authenticated Trader & OMS Flow 2-1,text,true,,84636,276,1,2,https://lpadmin.blackfx.com/v1/oms/paper/history,50,0,0
+1794485172892,39,GET /v1/oms/paper/health,200,OK,1. Public OMS Health & Discovery Load 1-2,text,true,,1076,219,1,1,https://lpadmin.blackfx.com/v1/oms/paper/health,39,0,0
+1794485172932,40,GET /v1/oms/_licence,200,OK,1. Public OMS Health & Discovery Load 1-2,text,true,,1011,215,1,2,https://lpadmin.blackfx.com/v1/oms/_licence,40,0,0
+1794485172958,205,POST /v1/oms/_auth/login,200,OK,2. Authenticated Trader & OMS Flow 2-2,text,true,,1326,338,1,1,https://lpadmin.blackfx.com/v1/oms/_auth/login,205,0,43
+1794485173163,62,GET /v1/oms/_auth/me,200,OK,2. Authenticated Trader & OMS Flow 2-2,text,true,,975,271,1,1,https://lpadmin.blackfx.com/v1/oms/_auth/me,62,0,0
+1794485173225,80,GET /v1/oms/paper/all_open,200,OK,2. Authenticated Trader & OMS Flow 2-2,text,true,,71390,277,1,2,https://lpadmin.blackfx.com/v1/oms/paper/all_open,61,0,0
+1794485173287,83,GET /v1/oms/_instances,200,OK,1. Public OMS Health & Discovery Load 1-3,text,true,,1225,217,1,2,https://lpadmin.blackfx.com/v1/oms/_instances,83,0,44
+1794485173306,67,GET /v1/oms/paper/positions,200,OK,2. Authenticated Trader & OMS Flow 2-2,text,true,,1781,278,1,2,https://lpadmin.blackfx.com/v1/oms/paper/positions,67,0,0
+1794485173371,67,GET /v1/oms/paper/health,200,OK,1. Public OMS Health & Discovery Load 1-3,text,true,,1070,219,1,2,https://lpadmin.blackfx.com/v1/oms/paper/health,67,0,0
+1794485173374,100,GET /v1/oms/paper/orders,200,OK,2. Authenticated Trader & OMS Flow 2-2,text,true,,206488,275,1,2,https://lpadmin.blackfx.com/v1/oms/paper/orders,69,0,0
+1794485173439,42,GET /v1/oms/_licence,200,OK,1. Public OMS Health & Discovery Load 1-3,text,true,,1003,215,1,2,https://lpadmin.blackfx.com/v1/oms/_licence,42,0,0
+1794485173482,42,GET /v1/oms/_instances,200,OK,1. Public OMS Health & Discovery Load 1-3,text,true,,1223,217,1,2,https://lpadmin.blackfx.com/v1/oms/_instances,42,0,0
+1794485173475,53,GET /v1/oms/paper/mam/masters,200,OK,2. Authenticated Trader & OMS Flow 2-2,text,true,,2685,280,1,2,https://lpadmin.blackfx.com/v1/oms/paper/mam/masters,53,0,0
+1794485173525,37,GET /v1/oms/paper/health,200,OK,1. Public OMS Health & Discovery Load 1-3,text,true,,1072,219,1,2,https://lpadmin.blackfx.com/v1/oms/paper/health,37,0,0
+1794485173529,58,GET /v1/oms/paper/history,200,OK,2. Authenticated Trader & OMS Flow 2-2,text,true,,84625,276,1,2,https://lpadmin.blackfx.com/v1/oms/paper/history,54,0,0
+1794485173563,44,GET /v1/oms/_licence,200,OK,1. Public OMS Health & Discovery Load 1-3,text,true,,1011,215,1,1,https://lpadmin.blackfx.com/v1/oms/_licence,44,0,0

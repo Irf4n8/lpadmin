@@ -1,0 +1,176 @@
+{
+  "test_case_id": "BTC07",
+  "test_case_name": "Rapid Position Add-On / Pyramid Stacking on Same Symbol (Netting Aggregation)",
+  "target_bug": "Netting Account Lot Aggregation & Partial Exit Desync",
+  "status": "BUG_EXPOSED",
+  "passed": true,
+  "execution_duration_sec": 155.82,
+  "timestamp": "2026-11-12T10:45:42.706168+00:00",
+  "symbol": "BINANCE:BTCUSDT.P",
+  "side": "BUY",
+  "master_lot": 1.0,
+  "has_exit_setting": false,
+  "tp_price": null,
+  "sl_price": null,
+  "master_order_id": null,
+  "fill_price": 73510.33,
+  "replication_rate_pct": 62.0,
+  "lot_match_rate_pct": 62.0,
+  "replicated_count": 62,
+  "residual_open_after_exit": 62,
+  "bugs_found": [
+    {
+      "severity": "HIGH",
+      "type": "ORPHANED_POSITION_BUG",
+      "message": "ORPHANED_POSITION_BUG: Master square-off failed to close positions on 62 follower account(s)."
+    }
+  ],
+  "audit_summary": {
+    "total_followers": 100,
+    "replicated_count": 62,
+    "replication_rate_pct": 62.0,
+    "lot_match_count": 62,
+    "lot_match_rate_pct": 62.0,
+    "sample_entry": 73474.2,
+    "total_follower_pnl": -1984.0
+  },
+  "price_history_sample": [
+    {
+      "second": 0,
+      "remaining": 120,
+      "live_price": 73509.14,
+      "master_pnl": -15.999999999985448,
+      "timestamp": "10:43:22"
+    },
+    {
+      "second": 2,
+      "remaining": 118,
+      "live_price": 73500.01,
+      "master_pnl": -25.59999999999127,
+      "timestamp": "10:43:24"
+    },
+    {
+      "second": 4,
+      "remaining": 116,
+      "live_price": 73503.79,
+      "master_pnl": -8.80000000000291,
+      "timestamp": "10:43:26"
+    },
+    {
+      "second": 6,
+      "remaining": 114,
+      "live_price": 73503.79,
+      "master_pnl": -8.80000000000291,
+      "timestamp": "10:43:29"
+    },
+    {
+      "second": 8,
+      "remaining": 112,
+      "live_price": 73503.79,
+      "master_pnl": -8.80000000000291,
+      "timestamp": "10:43:31"
+    },
+    {
+      "second": 10,
+      "remaining": 110,
+      "live_price": 73503.79,
+      "master_pnl": -8.599999999991269,
+      "timestamp": "10:43:33"
+    },
+    {
+      "second": 12,
+      "remaining": 108,
+      "live_price": 73503.79,
+      "master_pnl": -8.599999999991269,
+      "timestamp": "10:43:35"
+    },
+    {
+      "second": 14,
+      "remaining": 106,
+      "live_price": 73503.79,
+      "master_pnl": -8.80000000000291,
+      "timestamp": "10:43:38"
+    },
+    {
+      "second": 16,
+      "remaining": 104,
+      "live_price": 73503.79,
+      "master_pnl": -8.80000000000291,
+      "timestamp": "10:43:40"
+    },
+    {
+      "second": 18,
+      "remaining": 102,
+      "live_price": 73503.79,
+      "master_pnl": -11.400000000008731,
+      "timestamp": "10:43:42"
+    }
+  ],
+  "follower_sample": [
+    {
+      "follower": "follower1",
+      "email": "mamfollower1@mailinator.com",
+      "has_position": true,
+      "positions_count": 2,
+      "actual_qty": 4.0,
+      "expected_qty": 4.0,
+      "lot_match": true,
+      "entry_price": 73474.2,
+      "pnl": -32.0,
+      "market_order_id": "ord_9dba56fffd810a8fda",
+      "source": "mam"
+    },
+    {
+      "follower": "follower2",
+      "email": "mamfollower2@mailinator.com",
+      "has_position": true,
+      "positions_count": 2,
+      "actual_qty": 4.0,
+      "expected_qty": 4.0,
+      "lot_match": true,
+      "entry_price": 73474.2,
+      "pnl": -32.0,
+      "market_order_id": "ord_75bed2505491d83ac1",
+      "source": "mam"
+    },
+    {
+      "follower": "follower3",
+      "email": "mamfollower3@mailinator.com",
+      "has_position": true,
+      "positions_count": 2,
+      "actual_qty": 4.0,
+      "expected_qty": 4.0,
+      "lot_match": true,
+      "entry_price": 73474.2,
+      "pnl": -32.0,
+      "market_order_id": "ord_a47ee36e7a7b11682a",
+      "source": "mam"
+    },
+    {
+      "follower": "follower4",
+      "email": "mamfollower4@mailinator.com",
+      "has_position": true,
+      "positions_count": 2,
+      "actual_qty": 4.0,
+      "expected_qty": 4.0,
+      "lot_match": true,
+      "entry_price": 73474.2,
+      "pnl": -32.0,
+      "market_order_id": "ord_ef3c956fe3701ea12a",
+      "source": "mam"
+    },
+    {
+      "follower": "follower5",
+      "email": "mamfollower5@mailinator.com",
+      "has_position": true,
+      "positions_count": 2,
+      "actual_qty": 4.0,
+      "expected_qty": 4.0,
+      "lot_match": true,
+      "entry_price": 73474.2,
+      "pnl": -32.0,
+      "market_order_id": "ord_ac13e7f2fd262478e5",
+      "source": "mam"
+    }
+  ]
+}

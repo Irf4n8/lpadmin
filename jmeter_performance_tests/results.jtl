@@ -1,0 +1,101 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1794483736248,31,GET Dashboard UI (/),200,OK,Load Test Users 1-1,text,true,,112094,120,1,1,http://127.0.0.1:8500/,27,0,22
+1794483736281,66,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-1,text,true,,3386485,139,2,2,http://127.0.0.1:8500/api/data?master=mam,58,0,1
+1794483736303,48,GET Dashboard UI (/),200,OK,Load Test Users 1-2,text,true,,112094,120,2,2,http://127.0.0.1:8500/,46,0,1
+1794483736347,8,GET Dashboard UI (/),200,OK,Load Test Users 1-1,text,true,,112094,120,2,2,http://127.0.0.1:8500/,7,0,1
+1794483736351,114,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-2,text,true,,3386485,139,2,2,http://127.0.0.1:8500/api/data?master=mam,104,0,1
+1794483736355,110,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-1,text,true,,3386485,139,2,2,http://127.0.0.1:8500/api/data?master=mam,103,0,1
+1794483736466,7,GET Dashboard UI (/),200,OK,Load Test Users 1-2,text,true,,112094,120,2,2,http://127.0.0.1:8500/,7,0,0
+1794483736466,11,GET Dashboard UI (/),200,OK,Load Test Users 1-1,text,true,,112094,120,2,2,http://127.0.0.1:8500/,11,0,1
+1794483736473,69,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-2,text,true,,3386485,139,3,3,http://127.0.0.1:8500/api/data?master=mam,51,0,1
+1794483736478,107,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-1,text,true,,3386485,139,3,3,http://127.0.0.1:8500/api/data?master=mam,102,0,0
+1794483736511,77,GET Dashboard UI (/),200,OK,Load Test Users 1-3,text,true,,112094,120,3,3,http://127.0.0.1:8500/,72,0,1
+1794483736543,45,GET Dashboard UI (/),200,OK,Load Test Users 1-2,text,true,,112094,120,3,3,http://127.0.0.1:8500/,44,0,1
+1794483736586,9,GET Dashboard UI (/),200,OK,Load Test Users 1-1,text,true,,112094,120,3,3,http://127.0.0.1:8500/,7,0,1
+1794483736588,69,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-3,text,true,,3386485,139,3,3,http://127.0.0.1:8500/api/data?master=mam,62,0,1
+1794483736588,166,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-2,text,true,,3386485,139,4,4,http://127.0.0.1:8500/api/data?master=mam,113,0,1
+1794483736657,99,GET Dashboard UI (/),200,OK,Load Test Users 1-3,text,true,,112094,120,4,4,http://127.0.0.1:8500/,98,0,1
+1794483736711,46,GET Dashboard UI (/),200,OK,Load Test Users 1-4,text,true,,112094,120,4,4,http://127.0.0.1:8500/,46,0,1
+1794483736755,2,GET Dashboard UI (/),200,OK,Load Test Users 1-2,text,true,,112094,120,4,4,http://127.0.0.1:8500/,2,0,1
+1794483736596,164,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-1,text,true,,3386485,139,4,4,http://127.0.0.1:8500/api/data?master=mam,158,0,1
+1794483736756,63,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-3,text,true,,3386485,139,4,4,http://127.0.0.1:8500/api/data?master=mam,57,0,1
+1794483736757,161,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-4,text,true,,3386485,139,5,5,http://127.0.0.1:8500/api/data?master=mam,112,0,1
+1794483736761,161,GET Dashboard UI (/),200,OK,Load Test Users 1-1,text,true,,112094,120,5,5,http://127.0.0.1:8500/,161,0,0
+1794483736820,105,GET Dashboard UI (/),200,OK,Load Test Users 1-3,text,true,,112094,120,5,5,http://127.0.0.1:8500/,104,0,1
+1794483736903,22,GET Dashboard UI (/),200,OK,Load Test Users 1-5,text,true,,112094,120,5,5,http://127.0.0.1:8500/,22,0,1
+1794483736919,7,GET Dashboard UI (/),200,OK,Load Test Users 1-4,text,true,,112094,120,5,5,http://127.0.0.1:8500/,7,0,1
+1794483736758,190,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-2,text,true,,3386485,139,5,5,http://127.0.0.1:8500/api/data?master=mam,163,0,0
+1794483736923,107,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-1,text,true,,3386485,139,5,5,http://127.0.0.1:8500/api/data?master=mam,56,0,0
+1794483736926,159,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-5,text,true,,3386485,139,4,4,http://127.0.0.1:8500/api/data?master=mam,153,0,0
+1794483736925,162,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-3,text,true,,3386485,139,4,4,http://127.0.0.1:8500/api/data?master=mam,155,0,1
+1794483736948,197,GET Dashboard UI (/),200,OK,Load Test Users 1-2,text,true,,112094,120,5,5,http://127.0.0.1:8500/,197,0,1
+1794483737086,60,GET Dashboard UI (/),200,OK,Load Test Users 1-5,text,true,,112094,120,5,5,http://127.0.0.1:8500/,60,0,1
+1794483737087,60,GET Dashboard UI (/),200,OK,Load Test Users 1-3,text,true,,112094,120,5,5,http://127.0.0.1:8500/,60,0,1
+1794483736926,221,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-4,text,true,,3386485,139,5,5,http://127.0.0.1:8500/api/data?master=mam,215,0,1
+1794483737100,49,GET Dashboard UI (/),200,OK,Load Test Users 1-6,text,true,,112094,120,5,5,http://127.0.0.1:8500/,48,0,1
+1794483737146,128,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-5,text,true,,3386485,139,5,5,http://127.0.0.1:8500/api/data?master=mam,65,0,1
+1794483737146,186,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-2,text,true,,3386485,139,6,6,http://127.0.0.1:8500/api/data?master=mam,128,0,1
+1794483737148,187,GET Dashboard UI (/),200,OK,Load Test Users 1-4,text,true,,112094,120,5,5,http://127.0.0.1:8500/,186,0,1
+1794483737148,191,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-3,text,true,,3386485,139,5,5,http://127.0.0.1:8500/api/data?master=mam,185,0,1
+1794483737274,118,GET Dashboard UI (/),200,OK,Load Test Users 1-5,text,true,,112094,120,5,5,http://127.0.0.1:8500/,117,0,1
+1794483737295,98,GET Dashboard UI (/),200,OK,Load Test Users 1-7,text,true,,112094,120,5,5,http://127.0.0.1:8500/,97,0,1
+1794483737149,246,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-6,text,true,,3386485,139,5,5,http://127.0.0.1:8500/api/data?master=mam,241,0,1
+1794483737340,104,GET Dashboard UI (/),200,OK,Load Test Users 1-3,text,true,,112094,120,5,5,http://127.0.0.1:8500/,103,0,1
+1794483737335,113,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-4,text,true,,3386485,139,5,5,http://127.0.0.1:8500/api/data?master=mam,108,0,1
+1794483737392,108,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-5,text,true,,3386485,139,6,6,http://127.0.0.1:8500/api/data?master=mam,102,0,1
+1794483737396,153,GET Dashboard UI (/),200,OK,Load Test Users 1-6,text,true,,112094,120,6,6,http://127.0.0.1:8500/,152,0,1
+1794483737393,158,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-7,text,true,,3386485,139,6,6,http://127.0.0.1:8500/api/data?master=mam,153,0,1
+1794483737448,160,GET Dashboard UI (/),200,OK,Load Test Users 1-4,text,true,,112094,120,6,6,http://127.0.0.1:8500/,159,0,1
+1794483737496,113,GET Dashboard UI (/),200,OK,Load Test Users 1-8,text,true,,112094,120,6,6,http://127.0.0.1:8500/,112,0,2
+1794483737500,110,GET Dashboard UI (/),200,OK,Load Test Users 1-5,text,true,,112094,120,6,6,http://127.0.0.1:8500/,110,0,1
+1794483737445,166,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-3,text,true,,3386485,139,6,6,http://127.0.0.1:8500/api/data?master=mam,161,0,1
+1794483737550,117,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-6,text,true,,3386485,139,5,5,http://127.0.0.1:8500/api/data?master=mam,110,0,1
+1794483737551,168,GET Dashboard UI (/),200,OK,Load Test Users 1-7,text,true,,112094,120,6,6,http://127.0.0.1:8500/,116,0,1
+1794483737608,188,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-4,text,true,,3386495,139,6,6,http://127.0.0.1:8500/api/data?master=mam,114,0,1
+1794483737609,252,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-8,text,true,,3386495,139,6,6,http://127.0.0.1:8500/api/data?master=mam,188,0,1
+1794483737667,196,GET Dashboard UI (/),200,OK,Load Test Users 1-6,text,true,,112094,120,6,6,http://127.0.0.1:8500/,196,0,1
+1794483737709,156,GET Dashboard UI (/),200,OK,Load Test Users 1-9,text,true,,112094,120,6,6,http://127.0.0.1:8500/,155,0,1
+1794483737610,257,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-5,text,true,,3386495,139,6,6,http://127.0.0.1:8500/api/data?master=mam,253,0,1
+1794483737912,1,GET Dashboard UI (/),Non HTTP response code: org.apache.http.conn.HttpHostConnectException,Non HTTP response message: Connect to 127.0.0.1:8500 [/127.0.0.1] failed: Connection refused: connect,Load Test Users 1-10,text,false,,2595,0,7,7,http://127.0.0.1:8500/,0,0,1
+1794483737914,1,GET API Data (/api/data?master=mam),Non HTTP response code: org.apache.http.conn.HttpHostConnectException,Non HTTP response message: Connect to 127.0.0.1:8500 [/127.0.0.1] failed: Connection refused: connect,Load Test Users 1-10,text,false,,2595,0,7,7,http://127.0.0.1:8500/api/data?master=mam,0,0,1
+1794483737916,1,GET Dashboard UI (/),Non HTTP response code: org.apache.http.conn.HttpHostConnectException,Non HTTP response message: Connect to 127.0.0.1:8500 [/127.0.0.1] failed: Connection refused: connect,Load Test Users 1-10,text,false,,2595,0,7,7,http://127.0.0.1:8500/,0,0,1
+1794483737918,1,GET API Data (/api/data?master=mam),Non HTTP response code: org.apache.http.conn.HttpHostConnectException,Non HTTP response message: Connect to 127.0.0.1:8500 [/127.0.0.1] failed: Connection refused: connect,Load Test Users 1-10,text,false,,2595,0,7,7,http://127.0.0.1:8500/api/data?master=mam,0,0,1
+1794483737920,1,GET Dashboard UI (/),Non HTTP response code: org.apache.http.conn.HttpHostConnectException,Non HTTP response message: Connect to 127.0.0.1:8500 [/127.0.0.1] failed: Connection refused: connect,Load Test Users 1-10,text,false,,2595,0,7,7,http://127.0.0.1:8500/,0,0,1
+1794483737796,131,GET Dashboard UI (/),200,OK,Load Test Users 1-4,text,true,,112094,120,7,7,http://127.0.0.1:8500/,130,0,1
+1794483737862,65,GET Dashboard UI (/),200,OK,Load Test Users 1-8,text,true,,112094,120,7,7,http://127.0.0.1:8500/,65,0,0
+1794483737720,210,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-7,text,true,,3386495,139,7,7,http://127.0.0.1:8500/api/data?master=mam,205,0,1
+1794483737930,1,GET Dashboard UI (/),Non HTTP response code: org.apache.http.conn.HttpHostConnectException,Non HTTP response message: Connect to 127.0.0.1:8500 [/127.0.0.1] failed: Connection refused: connect,Load Test Users 1-7,text,false,,2595,0,7,7,http://127.0.0.1:8500/,0,0,1
+1794483737931,1,GET API Data (/api/data?master=mam),Non HTTP response code: org.apache.http.conn.HttpHostConnectException,Non HTTP response message: Connect to 127.0.0.1:8500 [/127.0.0.1] failed: Connection refused: connect,Load Test Users 1-7,text,false,,2595,0,7,7,http://127.0.0.1:8500/api/data?master=mam,0,0,1
+1794483737932,0,GET Dashboard UI (/),Non HTTP response code: org.apache.http.conn.HttpHostConnectException,Non HTTP response message: Connect to 127.0.0.1:8500 [/127.0.0.1] failed: Connection refused: connect,Load Test Users 1-7,text,false,,2595,0,7,7,http://127.0.0.1:8500/,0,0,0
+1794483737933,1,GET API Data (/api/data?master=mam),Non HTTP response code: org.apache.http.conn.HttpHostConnectException,Non HTTP response message: Connect to 127.0.0.1:8500 [/127.0.0.1] failed: Connection refused: connect,Load Test Users 1-7,text,false,,2595,0,7,7,http://127.0.0.1:8500/api/data?master=mam,0,0,1
+1794483737934,1,GET Dashboard UI (/),Non HTTP response code: org.apache.http.conn.HttpHostConnectException,Non HTTP response message: Connect to 127.0.0.1:8500 [/127.0.0.1] failed: Connection refused: connect,Load Test Users 1-7,text,false,,2595,0,7,7,http://127.0.0.1:8500/,0,0,1
+1794483737935,0,GET API Data (/api/data?master=mam),Non HTTP response code: org.apache.http.conn.HttpHostConnectException,Non HTTP response message: Connect to 127.0.0.1:8500 [/127.0.0.1] failed: Connection refused: connect,Load Test Users 1-7,text,false,,2595,0,7,7,http://127.0.0.1:8500/api/data?master=mam,0,0,0
+1794483737864,176,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-6,text,true,,3386495,139,6,6,http://127.0.0.1:8500/api/data?master=mam,117,0,0
+1794483737868,174,GET Dashboard UI (/),200,OK,Load Test Users 1-5,text,true,,112094,120,6,6,http://127.0.0.1:8500/,173,0,0
+1794483737865,180,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-9,text,true,,3386495,139,6,6,http://127.0.0.1:8500/api/data?master=mam,176,0,1
+1794483737922,225,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-10,text,true,,3386495,139,6,6,http://127.0.0.1:8500/api/data?master=mam,175,0,1
+1794483737928,274,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-8,text,true,,3386495,139,6,6,http://127.0.0.1:8500/api/data?master=mam,220,0,0
+1794483738040,164,GET Dashboard UI (/),200,OK,Load Test Users 1-6,text,true,,112094,120,6,6,http://127.0.0.1:8500/,164,0,1
+1794483737928,291,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-4,text,true,,3386495,139,6,6,http://127.0.0.1:8500/api/data?master=mam,275,0,0
+1794483738045,214,GET Dashboard UI (/),200,OK,Load Test Users 1-9,text,true,,112094,120,5,5,http://127.0.0.1:8500/,213,0,1
+1794483738147,113,GET Dashboard UI (/),200,OK,Load Test Users 1-10,text,true,,112094,120,5,5,http://127.0.0.1:8500/,113,0,1
+1794483738202,59,GET Dashboard UI (/),200,OK,Load Test Users 1-8,text,true,,112094,120,5,5,http://127.0.0.1:8500/,58,0,1
+1794483738043,220,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-5,text,true,,3386495,139,5,5,http://127.0.0.1:8500/api/data?master=mam,215,0,0
+1794483738204,163,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-6,text,true,,3386495,139,4,4,http://127.0.0.1:8500/api/data?master=mam,108,0,1
+1794483738259,171,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-9,text,true,,3386495,139,4,4,http://127.0.0.1:8500/api/data?master=mam,109,0,1
+1794483738261,239,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-10,text,true,,3386495,139,4,4,http://127.0.0.1:8500/api/data?master=mam,172,0,0
+1794483738367,135,GET Dashboard UI (/),200,OK,Load Test Users 1-6,text,true,,112094,120,4,4,http://127.0.0.1:8500/,133,0,1
+1794483738431,72,GET Dashboard UI (/),200,OK,Load Test Users 1-9,text,true,,112094,120,4,4,http://127.0.0.1:8500/,72,0,1
+1794483738500,4,GET Dashboard UI (/),200,OK,Load Test Users 1-10,text,true,,112094,120,4,4,http://127.0.0.1:8500/,4,0,1
+1794483738261,243,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-8,text,true,,3386495,139,4,4,http://127.0.0.1:8500/api/data?master=mam,239,0,0
+1794483738502,125,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-6,text,true,,3386495,139,4,4,http://127.0.0.1:8500/api/data?master=mam,63,0,1
+1794483738503,183,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-9,text,true,,3386495,139,3,3,http://127.0.0.1:8500/api/data?master=mam,126,0,1
+1794483738505,186,GET Dashboard UI (/),200,OK,Load Test Users 1-8,text,true,,112094,120,3,3,http://127.0.0.1:8500/,184,0,0
+1794483738687,5,GET Dashboard UI (/),200,OK,Load Test Users 1-9,text,true,,112094,120,3,3,http://127.0.0.1:8500/,5,0,1
+1794483738504,189,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-10,text,true,,3386495,139,3,3,http://127.0.0.1:8500/api/data?master=mam,184,0,1
+1794483738691,122,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-8,text,true,,3386495,139,2,2,http://127.0.0.1:8500/api/data?master=mam,61,0,1
+1794483738813,4,GET Dashboard UI (/),200,OK,Load Test Users 1-8,text,true,,112094,120,2,2,http://127.0.0.1:8500/,4,0,1
+1794483738692,127,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-9,text,true,,3386495,139,2,2,http://127.0.0.1:8500/api/data?master=mam,123,0,1
+1794483738820,59,GET Dashboard UI (/),200,OK,Load Test Users 1-9,text,true,,112094,120,2,2,http://127.0.0.1:8500/,58,0,1
+1794483738818,65,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-8,text,true,,3386495,139,2,2,http://127.0.0.1:8500/api/data?master=mam,59,0,1
+1794483738879,82,GET API Data (/api/data?master=mam),200,OK,Load Test Users 1-9,text,true,,3386495,139,1,1,http://127.0.0.1:8500/api/data?master=mam,62,0,1

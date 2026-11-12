@@ -1,0 +1,170 @@
+{
+  "test_case_id": "BTC02",
+  "test_case_name": "Dangling Orphan Position via Mid-Trade Unfollow ('Leave Manager' Mid-Flight)",
+  "target_bug": "Dangling Orphan Position & State Desync",
+  "status": "NO_BUG_DETECTED",
+  "passed": true,
+  "execution_duration_sec": 155.78,
+  "timestamp": "2026-11-12T10:28:17.312964+00:00",
+  "symbol": "BINANCE:BTCUSDT.P",
+  "side": "BUY",
+  "master_lot": 1.5,
+  "has_exit_setting": false,
+  "tp_price": null,
+  "sl_price": null,
+  "master_order_id": null,
+  "fill_price": 73599.65,
+  "replication_rate_pct": 100.0,
+  "lot_match_rate_pct": 100.0,
+  "replicated_count": 100,
+  "residual_open_after_exit": 0,
+  "bugs_found": [],
+  "audit_summary": {
+    "total_followers": 100,
+    "replicated_count": 100,
+    "replication_rate_pct": 100.0,
+    "lot_match_count": 100,
+    "lot_match_rate_pct": 100.0,
+    "sample_entry": 73569.2,
+    "total_follower_pnl": -30.0
+  },
+  "price_history_sample": [
+    {
+      "second": 0,
+      "remaining": 120,
+      "live_price": 73599.65,
+      "master_pnl": 0.0,
+      "timestamp": "10:25:55"
+    },
+    {
+      "second": 2,
+      "remaining": 118,
+      "live_price": 73599.65,
+      "master_pnl": 0.0,
+      "timestamp": "10:25:57"
+    },
+    {
+      "second": 4,
+      "remaining": 116,
+      "live_price": 73599.67,
+      "master_pnl": 0.0,
+      "timestamp": "10:25:59"
+    },
+    {
+      "second": 6,
+      "remaining": 114,
+      "live_price": 73599.67,
+      "master_pnl": -0.14999999998690328,
+      "timestamp": "10:26:02"
+    },
+    {
+      "second": 8,
+      "remaining": 112,
+      "live_price": 73597.29,
+      "master_pnl": -11.25,
+      "timestamp": "10:26:04"
+    },
+    {
+      "second": 10,
+      "remaining": 110,
+      "live_price": 73597.27,
+      "master_pnl": -11.25,
+      "timestamp": "10:26:06"
+    },
+    {
+      "second": 12,
+      "remaining": 108,
+      "live_price": 73597.27,
+      "master_pnl": -11.25,
+      "timestamp": "10:26:08"
+    },
+    {
+      "second": 14,
+      "remaining": 106,
+      "live_price": 73597.27,
+      "master_pnl": -4.349999999991269,
+      "timestamp": "10:26:11"
+    },
+    {
+      "second": 16,
+      "remaining": 104,
+      "live_price": 73597.27,
+      "master_pnl": -4.200000000004366,
+      "timestamp": "10:26:13"
+    },
+    {
+      "second": 18,
+      "remaining": 102,
+      "live_price": 73597.29,
+      "master_pnl": -4.049999999995634,
+      "timestamp": "10:26:16"
+    }
+  ],
+  "follower_sample": [
+    {
+      "follower": "follower1",
+      "email": "mamfollower1@mailinator.com",
+      "has_position": true,
+      "positions_count": 1,
+      "actual_qty": 3.0,
+      "expected_qty": 3.0,
+      "lot_match": true,
+      "entry_price": 73569.2,
+      "pnl": -0.3,
+      "market_order_id": "ord_3b381d610128e9de2b",
+      "source": "mam"
+    },
+    {
+      "follower": "follower2",
+      "email": "mamfollower2@mailinator.com",
+      "has_position": true,
+      "positions_count": 1,
+      "actual_qty": 3.0,
+      "expected_qty": 3.0,
+      "lot_match": true,
+      "entry_price": 73569.2,
+      "pnl": -0.3,
+      "market_order_id": "ord_2d93bf50fe389070d8",
+      "source": "mam"
+    },
+    {
+      "follower": "follower3",
+      "email": "mamfollower3@mailinator.com",
+      "has_position": true,
+      "positions_count": 1,
+      "actual_qty": 3.0,
+      "expected_qty": 3.0,
+      "lot_match": true,
+      "entry_price": 73569.2,
+      "pnl": -0.3,
+      "market_order_id": "ord_141ec0f1a34eae811d",
+      "source": "mam"
+    },
+    {
+      "follower": "follower4",
+      "email": "mamfollower4@mailinator.com",
+      "has_position": true,
+      "positions_count": 1,
+      "actual_qty": 3.0,
+      "expected_qty": 3.0,
+      "lot_match": true,
+      "entry_price": 73569.2,
+      "pnl": -0.3,
+      "market_order_id": "ord_4283270541de0380dd",
+      "source": "mam"
+    },
+    {
+      "follower": "follower5",
+      "email": "mamfollower5@mailinator.com",
+      "has_position": true,
+      "positions_count": 1,
+      "actual_qty": 3.0,
+      "expected_qty": 3.0,
+      "lot_match": true,
+      "entry_price": 73569.2,
+      "pnl": -0.3,
+      "market_order_id": "ord_1e33f7526a3e338c54",
+      "source": "mam"
+    }
+  ]
+}

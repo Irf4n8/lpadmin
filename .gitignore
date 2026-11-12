@@ -1,11 +1,26 @@
 # Environment variables and secrets
 .env
+.env.*
+*.env
 *.env.local
+*.pem
+*.key
+*.cert
+*.crt
+*.p12
+*.pfx
+secrets/
 
 # Reference repos
 Wavexone testing 2/
 Wavexone testing 2
 
+# Logs and runtime artifacts
+*.log
+logs/
+*.pid
+*.seed
+*.pid.lock
 
 # Python artifacts
 __pycache__/
@@ -31,8 +46,9 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+.pytest_cache/
 
-# Playwright artifacts
+# Playwright & Browser artifacts
 test-results/
 playwright-report/
 blob-report/
@@ -43,4 +59,6 @@ playwright/.cache/
 Thumbs.db
 .vscode/
 .idea/
-
+*.swp
+*.swo
+*~
