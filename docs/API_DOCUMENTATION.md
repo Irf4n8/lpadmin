@@ -5,7 +5,7 @@
 * **Central Super-Admin:** `https://chartv2.blacktrader.com`
 * **Client Admin Instance:** `lpadmin` (#19) at `https://lpadmin.blackfx.com/blackadmin`
 * **Trader Terminal / Dashboard:** `https://lpadmin.blackfx.com/dashboard`
-* **Broker Token:** `bt_597a3fbcc2800eafc11a9b14d503e69cb1f198ac34caefa5111b871afd1b6ca6`
+* **Broker Token:** `bt_[REDACTED - rotate if this was ever secret]`
 
 ---
 
@@ -49,3 +49,14 @@
     }
     ```
 
+
+
+## A-book / B-book (per account)
+
+* Each member has `"book": "a" | "b"` (visible in `GET /admin/api/members`).
+* **A-book**: the member's *real* orders are executed at the liquidity provider. **B-book**: booked on the platform's
+  own engine. Paper accounts are always booked internally, so the setting only changes real-instance routing.
+* Change it: `POST /admin/api/members/{member_id}/book` with `{"book": "a"}` or `{"book": "b"}` (admin bearer token).
+* Dashboard: `GET /api/books`, `POST /api/books/switch {book, scope: master|followers|all|emails, start, end, confirm}`.
+  Limited to the configured master + followers, returns 412 without `confirm`, 409 while a run is active, and verifies
+  every account by reading it back (HTTP 207 if some did not switch).

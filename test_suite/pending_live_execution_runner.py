@@ -29,6 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
 
+from config.settings import MASTER_EMAIL
 from config.settings import BASE_URL, DEFAULT_PREFIX, DEFAULT_DOMAIN
 from test_suite.baseline import get_expected_multiplier
 from test_suite.client import BlackTraderClient
@@ -94,7 +95,10 @@ def place_and_execute_pending(
             continue
 
         print(f"[+] Pending order: {ord_id}. Waiting for market fill...")
-        filled = wait_until_executed(client, master_email, ord_id, instance=instance, timeout_sec=14)
+        # A STOP only fills when price crosses its trigger; in a quiet market that can take a minute or more
+        # (measured: 5s, 15s, 60s). Keep it resting instead of cancelling/re-placing every 14s.
+        wait = 120 if order_type == "STOP" else 14
+        filled = wait_until_executed(client, master_email, ord_id, instance=instance, timeout_sec=wait)
 
         if filled:
             print(f"[+] SUCCESS: Order {ord_id} TRIGGERED & EXECUTED into open position!")
@@ -121,10 +125,29 @@ def verify_followers_filled(
     instance: str = "paper",
     check_tpsl: bool = False
 ) -> tuple:
-    time.sleep(2.0)
-    followers_pos = client.fetch_all_followers_positions(follower_emails, instance=instance)
+    # Fan-out of a pending-order fill is asynchronous (measured 0.6-1.7s in isolation, occasionally longer under
+    # load). A fixed 2s wait produced false 95/100 and 0/100 results, so poll until every follower is correct
+    # (position and, if requested, TP/SL) or 15s pass, and report the measured lag.
+    def _ready(fp):
+        for i, em in enumerate(follower_emails):
+            exp = round(master_lot * get_expected_multiplier(i + 1), 4)
+            pl = [p for p in fp.get(em, {}).get("positions", []) if p.get("symbol") == symbol and p.get("side") == side]
+            if not pl or not math.isclose(round(pl[0].get("net_qty", 0.0), 4), exp, abs_tol=0.001):
+                return False
+            if check_tpsl and (pl[0].get("tp_order") is None or pl[0].get("sl_order") is None):
+                return False
+        return True
+
+    t_wait = time.time()
+    while True:
+        followers_pos = client.fetch_all_followers_positions(follower_emails, instance=instance)
+        if _ready(followers_pos) or time.time() - t_wait > 15.0:
+            break
+        time.sleep(0.5)
+    print(f"[*] Follower fan-out settled after {time.time() - t_wait:.1f}s")
     pass_count = 0
     tpsl_count = 0
+    misses = []
 
     for i, email in enumerate(follower_emails):
         idx = i + 1
@@ -135,9 +158,17 @@ def verify_followers_filled(
             pass_count += 1
             if check_tpsl and pos_list[0].get("tp_order") is not None and pos_list[0].get("sl_order") is not None:
                 tpsl_count += 1
+        else:
+            misses.append((idx, exp_lot, [round(p.get("net_qty", 0.0), 4) for p in followers_pos.get(email, {}).get("positions", [])],
+                           followers_pos.get(email, {}).get("error", "")))
+
+    if misses:
+        print(f"[!] {len(misses)} followers did not match (follower#, expected lot, positions held, error):")
+        for m in misses[:8]:
+            print("      ", m)
 
     # Cleanup master position
-    client.squareoff_position(client.master_email if hasattr(client, "master_email") else "ctmaster@mailinator.com", master_ord_id, instance=instance)
+    client.squareoff_position(client.master_email if hasattr(client, "master_email") else MASTER_EMAIL, master_ord_id, instance=instance)
     time.sleep(2.0)
 
     return pass_count, tpsl_count
@@ -267,7 +298,7 @@ def run_live_execution_suite(
 
 def main():
     parser = argparse.ArgumentParser(description="Pending Orders Live Execution Runner")
-    parser.add_argument("--master", default="ctmaster@mailinator.com")
+    parser.add_argument("--master", default=MASTER_EMAIL)
     parser.add_argument("--prefix", default=DEFAULT_PREFIX)
     parser.add_argument("--domain", default=DEFAULT_DOMAIN)
     parser.add_argument("--start", type=int, default=1)

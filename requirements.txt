@@ -1,5 +1,6 @@
-# BlackTrader Automation Dependencies
-playwright>=1.40.0
-python-dotenv>=1.0.0
+# BlackTrader Automation Suite dependencies
 requests>=2.31.0
-
+python-dotenv>=1.0.0
+flask>=3.0.0          # dashboard
+playwright>=1.40.0    # browser-driven scripts and UI suites (then: playwright install chromium)
+pytest>=8.0.0         # smoke tests (python -m pytest)

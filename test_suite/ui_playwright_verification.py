@@ -21,6 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
 
+from config.settings import MASTER_EMAIL
 from config.settings import BASE_URL, MEMBER_PASSWORD
 
 SCREENSHOT_DIR = BASE_DIR / "reports" / "evidence" / "screenshots"
@@ -42,7 +43,7 @@ def verify_ui():
         page.goto(f"{BASE_URL}/login", wait_until="networkidle")
         time.sleep(2)
 
-        page.fill('input[type="email"], input[name="email"]', "ctmaster@mailinator.com")
+        page.fill('input[type="email"], input[name="email"]', MASTER_EMAIL)
         page.fill('input[type="password"], input[name="password"]', MEMBER_PASSWORD)
         page.click('button[type="submit"]')
         page.wait_for_load_state("networkidle")

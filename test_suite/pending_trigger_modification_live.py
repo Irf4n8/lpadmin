@@ -47,6 +47,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
 
+from config.settings import MASTER_EMAIL
 from config.settings import BASE_URL, DEFAULT_PREFIX, DEFAULT_DOMAIN
 from test_suite.client import BlackTraderClient
 
@@ -306,7 +307,7 @@ def main():
     args = parser.parse_args()
 
     client = BlackTraderClient(base_url=BASE_URL, max_workers=10)
-    master_email = "ctmaster@mailinator.com"
+    master_email = MASTER_EMAIL
     follower_emails = [f"follower{i}@mailinator.com" for i in range(args.start, args.end + 1)]
 
     print("=" * 80)

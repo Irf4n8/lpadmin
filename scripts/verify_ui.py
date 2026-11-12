@@ -16,6 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
 
+from config.settings import MASTER_EMAIL
 from config.settings import BASE_URL, MEMBER_PASSWORD
 
 
@@ -33,7 +34,7 @@ async def verify_ui():
         print("[*] Launching browser to verify Master UI (ctmaster@mailinator.com)...")
         page_master = await context.new_page()
         await page_master.goto(f"{BASE_URL}/login")
-        await page_master.fill('input[type="email"]', "ctmaster@mailinator.com")
+        await page_master.fill('input[type="email"]', MASTER_EMAIL)
         await page_master.fill('input[type="password"]', MEMBER_PASSWORD)
         await page_master.click('button[type="submit"]')
 

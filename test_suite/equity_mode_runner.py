@@ -44,6 +44,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
 
+from config.settings import MASTER_EMAIL, MASTER_ID
 from config.settings import BASE_URL, DEFAULT_PREFIX, DEFAULT_DOMAIN
 from test_suite.baseline import get_expected_multiplier
 from test_suite.client import BlackTraderClient
@@ -183,8 +184,8 @@ def setup_equity_mode(
 
 def main():
     parser = argparse.ArgumentParser(description="BlackTrader Equity-Based Copy Trading 100-Follower Test Runner")
-    parser.add_argument("--master", default="ctmaster@mailinator.com", help="Master trader email")
-    parser.add_argument("--master-id", default="mem_aac4ca423a6925dca7", help="Master client ID")
+    parser.add_argument("--master", default=MASTER_EMAIL, help="Master trader email")
+    parser.add_argument("--master-id", default=MASTER_ID, help="Master client ID")
     parser.add_argument("--prefix", default=DEFAULT_PREFIX, help="Follower prefix")
     parser.add_argument("--domain", default=DEFAULT_DOMAIN, help="Follower domain")
     parser.add_argument("--start", type=int, default=1, help="Starting follower index")

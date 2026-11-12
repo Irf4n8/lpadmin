@@ -19,6 +19,7 @@ import statistics
 import time
 from datetime import datetime
 from typing import Any, Dict, List, Tuple
+from config.settings import MASTER_ID
 from test_suite.baseline import get_expected_multiplier
 from test_suite.client import BlackTraderClient
 
@@ -421,6 +422,10 @@ class ScenarioRunner:
     # -------------------------------------------------------------------------
     def test_unfollow_mid_trade_probe(self, probe_follower: str = "follower5@mailinator.com") -> Dict[str, Any]:
         print(f"\n[SCENARIO 7] Probing Unfollow Mid-Trade Platform Behavior on {probe_follower}...")
+        from test_suite.client import paper_unfollow_blocked, PAPER_UNFOLLOW_REASON
+        if paper_unfollow_blocked(self.instance):
+            print("[SKIP] Unfollow mid-trade: " + PAPER_UNFOLLOW_REASON)
+            return {"name": "Unfollow Mid-Trade Behavior", "status": "SKIPPED", "error": PAPER_UNFOLLOW_REASON}
         # 1. Open trade on master
         res = self.client.place_order(
             self.master_email,
@@ -438,7 +443,7 @@ class ScenarioRunner:
         had_position = pos_before.get("count", 0) > 0
 
         # 3. Unfollow master mid-trade
-        master_client_id = "mem_aac4ca423a6925dca7"
+        master_client_id = MASTER_ID
         unfollow_res = self.client.unfollow_master(probe_follower, master_client_id, instance=self.instance)
         time.sleep(1.0)
 
@@ -600,7 +605,11 @@ class ScenarioRunner:
     # -------------------------------------------------------------------------
     def test_follow_mid_trade_isolation(self, probe_follower: str = "follower10@mailinator.com") -> Dict[str, Any]:
         print(f"\n[SCENARIO 10] Testing Follow Mid-Trade Isolation (No Retroactive Copying) on {probe_follower}...")
-        master_client_id = "mem_aac4ca423a6925dca7"
+        from test_suite.client import paper_unfollow_blocked, PAPER_UNFOLLOW_REASON
+        if paper_unfollow_blocked(self.instance):
+            print("[SKIP] Follow mid-trade isolation: " + PAPER_UNFOLLOW_REASON)
+            return {"name": "Follow Mid-Trade Isolation", "status": "SKIPPED", "error": PAPER_UNFOLLOW_REASON}
+        master_client_id = MASTER_ID
 
         # 1. Temporarily unfollow probe follower
         self.client.unfollow_master(probe_follower, master_client_id, instance=self.instance)

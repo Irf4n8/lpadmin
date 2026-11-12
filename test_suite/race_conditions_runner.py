@@ -50,6 +50,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
 
+from config.settings import MASTER_EMAIL, MASTER_ID
 from config.settings import BASE_URL, DEFAULT_PREFIX, DEFAULT_DOMAIN
 from test_suite.baseline import get_expected_multiplier
 from test_suite.client import BlackTraderClient
@@ -250,6 +251,10 @@ def test_unfollow_vs_order_race(
     print("\n" + "=" * 80)
     print("[RACE-4] Testing Mid-Flight Unfollow vs Order Placement Race...")
     print("=" * 80)
+    from test_suite.client import paper_unfollow_blocked, PAPER_UNFOLLOW_REASON
+    if paper_unfollow_blocked(instance):
+        print("[SKIP] RACE-4: " + PAPER_UNFOLLOW_REASON)
+        return {"name": "Mid-Flight Unfollow vs Order Race", "status": "SKIPPED", "error": PAPER_UNFOLLOW_REASON}
 
     probe_cohort = follower_emails[-5:]  # Followers 96-100
     control_cohort = follower_emails[:-5]  # Followers 1-95
@@ -367,8 +372,8 @@ def test_immediate_tpsl_collision(
 
 def main():
     parser = argparse.ArgumentParser(description="BlackTrader Race Conditions Test Runner")
-    parser.add_argument("--master", default="ctmaster@mailinator.com")
-    parser.add_argument("--master-id", default="mem_aac4ca423a6925dca7")
+    parser.add_argument("--master", default=MASTER_EMAIL)
+    parser.add_argument("--master-id", default=MASTER_ID)
     parser.add_argument("--prefix", default=DEFAULT_PREFIX)
     parser.add_argument("--domain", default=DEFAULT_DOMAIN)
     parser.add_argument("--start", type=int, default=1)

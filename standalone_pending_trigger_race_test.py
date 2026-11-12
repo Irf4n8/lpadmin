@@ -24,6 +24,7 @@ Usage:
 """
 
 import argparse
+from config.settings import MASTER_EMAIL
 import json
 import os
 import sys
@@ -40,8 +41,18 @@ from urllib3.util.retry import Retry
 # ======================================================================================
 # CONFIGURATION & CONSTANTS
 # ======================================================================================
+# Auto-load from local .env if present
+_env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env")
+if os.path.exists(_env_path):
+    with open(_env_path, "r", encoding="utf-8") as _f:
+        for _line in _f:
+            _line = _line.strip()
+            if _line and not _line.startswith("#") and "=" in _line:
+                _k, _v = _line.split("=", 1)
+                os.environ.setdefault(_k.strip(), _v.strip())
+
 DEFAULT_BASE_URL = os.getenv("BASE_URL", "https://lpadmin.blackfx.com")
-DEFAULT_MASTER_EMAIL = os.getenv("MASTER_EMAIL", "ctmaster@mailinator.com")
+DEFAULT_MASTER_EMAIL = os.getenv("MASTER_EMAIL", MASTER_EMAIL)
 DEFAULT_MEMBER_PASSWORD = os.getenv("MEMBER_PASSWORD", "")
 
 

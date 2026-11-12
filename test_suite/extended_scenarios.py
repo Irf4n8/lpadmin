@@ -16,6 +16,7 @@ import math
 import time
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
+from config.settings import MASTER_ID
 from test_suite.baseline import get_expected_multiplier
 from test_suite.client import BlackTraderClient
 
@@ -32,7 +33,7 @@ class ExtendedScenarioRunner:
         self.master_email = master_email
         self.follower_emails = follower_emails
         self.instance = instance
-        self.master_client_id = "mem_aac4ca423a6925dca7"
+        self.master_client_id = MASTER_ID
 
     # -------------------------------------------------------------------------
     # Category I: Multiplier & Sizing Variants
@@ -251,24 +252,31 @@ class ExtendedScenarioRunner:
         self.client.set_member_status(member_id, status="disabled")
         time.sleep(1.0)
 
-        # 3. Master places order
-        r = self.client.place_order(self.master_email, symbol="BINANCE:BTCUSDT.P", side="BUY", qty=0.1, instance=self.instance)
-        m_id = r.get("data", {}).get("order", {}).get("market_order_id")
-        time.sleep(2.0)
+        m_id = None
+        try:
+            # 3. Master places order
+            r = self.client.place_order(self.master_email, symbol="BINANCE:BTCUSDT.P", side="BUY", qty=0.1, instance=self.instance)
+            m_id = r.get("data", {}).get("order", {}).get("market_order_id")
+            time.sleep(2.0)
 
-        # 4. Check active followers received order (excluding target follower)
-        active_sample = [em for em in self.follower_emails if em != target_follower][:10]
-        active_pos = self.client.fetch_all_followers_positions(active_sample, instance=self.instance)
-        active_ok = all(p.get("count", 0) > 0 for p in active_pos.values()) if active_sample else True
+            # 4. Check active followers received order (excluding target follower)
+            active_sample = [em for em in self.follower_emails if em != target_follower][:10]
+            active_pos = self.client.fetch_all_followers_positions(active_sample, instance=self.instance)
+            active_ok = all(p.get("count", 0) > 0 for p in active_pos.values()) if active_sample else True
 
-        # 5. Check target follower was cleanly skipped / isolated
-        disabled_pos = self.client.get_positions(target_follower, instance=self.instance)
-        disabled_skipped = disabled_pos.get("count", 0) == 0
-
-        # 6. Clean up trade on master and reactivate target follower
-        if m_id: self.client.squareoff_position(self.master_email, m_id, instance=self.instance)
-        self.client.set_member_status(member_id, status="active")
-        time.sleep(1.5)
+            # 5. Target follower must be isolated. The platform may answer with an empty list OR refuse the
+            #    login / token of a disabled account (HTTP 401/403) - both count as correctly isolated.
+            try:
+                disabled_pos = self.client.get_positions(target_follower, instance=self.instance)
+                disabled_skipped = disabled_pos.get("count", 0) == 0
+            except RuntimeError as e:
+                disabled_skipped = "disabled" in str(e).lower() or "403" in str(e) or "401" in str(e)
+        finally:
+            # 6. ALWAYS clean up: close master trade and reactivate the follower, even if a step above crashed
+            if m_id:
+                self.client.squareoff_position(self.master_email, m_id, instance=self.instance)
+            self.client.set_member_status(member_id, status="active")
+            time.sleep(1.5)
 
         status = "PASS" if active_ok and disabled_skipped else "FAIL"
         print(f"[{status}] Follower Disabled Isolation: Disabled follower skipped={disabled_skipped}, active peers filled={active_ok}")
@@ -329,6 +337,10 @@ class ExtendedScenarioRunner:
     def test_bulk_unfollow_and_refollow(self) -> Dict[str, Any]:
         """Bulk unfollow of all 100 followers at once, verify 0 links, then bulk re-follow."""
         print(f"\n[EXT-SCENARIO 8] Testing Bulk Unfollow & Bulk Re-Follow ({len(self.follower_emails)} followers)...")
+        from test_suite.client import paper_unfollow_blocked, PAPER_UNFOLLOW_REASON
+        if paper_unfollow_blocked(self.instance):
+            print("[SKIP] Bulk unfollow/re-follow: " + PAPER_UNFOLLOW_REASON)
+            return {"name": "Bulk Unfollow & Bulk Re-Follow", "category": "M. Bulk state changes", "status": "SKIPPED", "error": PAPER_UNFOLLOW_REASON}
 
         # 1. Concurrently unfollow all 100 followers
         from concurrent.futures import ThreadPoolExecutor

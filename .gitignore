@@ -39,3 +39,13 @@ Thumbs.db
 .vscode/
 .idea/
 
+
+# Dashboard runtime output (per-run logs & history stay local)
+reports/logs/
+.write_test
+
+# One-off helper scripts used while building the dashboard
+scratch/
+
+# Real JMeter run output (HTML dashboards, JTL, logs)
+reports/jmeter/

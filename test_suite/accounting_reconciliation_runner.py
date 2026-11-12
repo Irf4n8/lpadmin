@@ -34,6 +34,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
 
+from config.settings import MASTER_EMAIL
 from config.settings import BASE_URL, DEFAULT_PREFIX, DEFAULT_DOMAIN
 from test_suite.baseline import get_expected_multiplier
 from test_suite.client import BlackTraderClient
@@ -177,7 +178,7 @@ def run_accounting_audit(
 
 def main():
     parser = argparse.ArgumentParser(description="Accounting Reconciliation Audit Runner")
-    parser.add_argument("--master", default="ctmaster@mailinator.com")
+    parser.add_argument("--master", default=MASTER_EMAIL)
     parser.add_argument("--prefix", default=DEFAULT_PREFIX)
     parser.add_argument("--domain", default=DEFAULT_DOMAIN)
     parser.add_argument("--start", type=int, default=1)

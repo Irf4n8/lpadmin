@@ -34,6 +34,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
 
+from config.settings import MASTER_EMAIL, MASTER_ID
 from config.settings import BASE_URL, DEFAULT_PREFIX, DEFAULT_DOMAIN
 from test_suite.baseline import get_expected_multiplier
 from test_suite.client import BlackTraderClient
@@ -224,8 +225,8 @@ def test_follower_capital_change_mid_trade(
 
 def main():
     parser = argparse.ArgumentParser(description="State Changes & Hedging Runner")
-    parser.add_argument("--master", default="ctmaster@mailinator.com")
-    parser.add_argument("--master-id", default="mem_aac4ca423a6925dca7")
+    parser.add_argument("--master", default=MASTER_EMAIL)
+    parser.add_argument("--master-id", default=MASTER_ID)
     parser.add_argument("--prefix", default=DEFAULT_PREFIX)
     parser.add_argument("--domain", default=DEFAULT_DOMAIN)
     parser.add_argument("--start", type=int, default=1)
