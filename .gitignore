@@ -11,9 +11,6 @@
 *.pfx
 secrets/
 
-# Reference repos
-Wavexone testing 2/
-Wavexone testing 2
 
 # Logs and runtime artifacts
 *.log
