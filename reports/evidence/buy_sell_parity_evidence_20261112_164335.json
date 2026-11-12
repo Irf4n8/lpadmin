@@ -1,0 +1,38 @@
+{
+  "suite_name": "Buy/Sell Full Parity & Order Types (Market, Limit, Stop)",
+  "timestamp": "2026-11-12T11:13:35.988354+00:00",
+  "followers_count": 100,
+  "results": [
+    {
+      "name": "Market SELL Partial Close (10 orders)",
+      "status": "PASS",
+      "pass_count": 100,
+      "total_followers": 100
+    },
+    {
+      "name": "Market SELL Dynamic TP/SL (10 orders)",
+      "status": "PASS",
+      "pass_count": 100,
+      "total_followers": 100
+    },
+    {
+      "name": "Pending BUY STOP Orders Fan-Out & Cancel (10 orders)",
+      "status": "PASS",
+      "fanned_count": 100,
+      "clean_count": 100,
+      "total_followers": 100
+    },
+    {
+      "name": "Pending SELL STOP Orders Fan-Out & Cancel (10 orders)",
+      "status": "PASS",
+      "fanned_count": 100,
+      "clean_count": 100,
+      "total_followers": 100
+    },
+    {
+      "name": "Final Teardown & Zero Orphan Verification",
+      "status": "PASS",
+      "orphan_count": 0
+    }
+  ]
+}

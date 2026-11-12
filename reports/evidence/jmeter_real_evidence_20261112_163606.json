@@ -1,0 +1,127 @@
+{
+  "suite": "Apache JMeter load test",
+  "jmeter_version": "5.6.3",
+  "timestamp": "2026-11-12T11:06:51.395536+00:00",
+  "profile": "standard",
+  "profile_settings": {
+    "RAMP": 10,
+    "AUTH_THREADS": 20,
+    "AUTH_LOOPS": 3,
+    "ORDER_THREADS": 20,
+    "ORDER_LOOPS": 5,
+    "READ_THREADS": 50,
+    "READ_DURATION": 30,
+    "HIST_THREADS": 5,
+    "HIST_LOOPS": 3,
+    "tokens": 50
+  },
+  "instance": "paper",
+  "followers": 100,
+  "duration_sec": 19,
+  "sla_p95_ms": {
+    "AUTH login": 2500,
+    "AUTH chart-token": 2500,
+    "ORDER place market": 5000,
+    "ORDER close position": 5000,
+    "READ positions": 2500,
+    "READ orders (history)": 6000
+  },
+  "html_dashboard": "C:\\lpadmin\\reports\\jmeter\\20261112_163606\\html\\index.html",
+  "results": [
+    {
+      "name": "Load: AUTH chart-token",
+      "status": "PASS",
+      "sla_p95_ms": 2500,
+      "metrics": {
+        "samples": 60,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 48.6,
+        "p50_ms": 44.0,
+        "p90_ms": 66.0,
+        "p95_ms": 69.0,
+        "p99_ms": 76.0,
+        "max_ms": 76.0,
+        "tps": 5.69,
+        "response_codes": {
+          "200": 60
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Load: AUTH login",
+      "status": "PASS",
+      "sla_p95_ms": 2500,
+      "metrics": {
+        "samples": 60,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 217.4,
+        "p50_ms": 210.0,
+        "p90_ms": 238.0,
+        "p95_ms": 242.0,
+        "p99_ms": 494.0,
+        "max_ms": 494.0,
+        "tps": 5.55,
+        "response_codes": {
+          "200": 60
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Load: ORDER close position",
+      "status": "PASS",
+      "sla_p95_ms": 5000,
+      "metrics": {
+        "samples": 36,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 235.6,
+        "p50_ms": 211.0,
+        "p90_ms": 385.0,
+        "p95_ms": 431.0,
+        "p99_ms": 432.0,
+        "max_ms": 432.0,
+        "tps": 6.82,
+        "response_codes": {
+          "200": 36
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Load: ORDER place market",
+      "status": "PASS",
+      "sla_p95_ms": 5000,
+      "metrics": {
+        "samples": 41,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 252.6,
+        "p50_ms": 225.0,
+        "p90_ms": 392.0,
+        "p95_ms": 418.0,
+        "p99_ms": 446.0,
+        "max_ms": 446.0,
+        "tps": 7.4,
+        "response_codes": {
+          "200": 41
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Integrity: no orphan positions / stuck margin after load",
+      "status": "FAIL",
+      "metrics": {
+        "accounts": 101,
+        "accounts_with_open_positions": 101,
+        "open_positions": 101,
+        "accounts_with_stuck_margin": 101
+      },
+      "finding": "101 accounts still hold 101 positions after the master closed everything; 101 with stuck margin; e.g. {'ctmaster@mailinator.com': 1, 'follower1@mailinator.com': 1, 'follower6@mailinator.com': 1}"
+    }
+  ]
+}

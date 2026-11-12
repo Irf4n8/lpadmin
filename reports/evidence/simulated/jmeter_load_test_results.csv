@@ -1,0 +1,11 @@
+label,samples,average_ms,median_ms,p90_ms,p95_ms,p99_ms,min_ms,max_ms,error_pct,throughput_tps,received_kb_s,sent_kb_s
+Sampler_Auth_Token_Exchange,101,5.58,1,1,1,1,1,464,0.99,101.0,82.85,31.56
+Master_Place_Market_Order,1,97.0,97,97,97,97,97,97,0.0,1.0,0.63,0.27
+Follower_Poll_Replication_Order,100,168.67,65,99,852,6351,44,6351,1.0,15.18,21.05,2.82
+Master_Burst_Order_Placement,10,101.3,102,130,130,130,82,130,0.0,10.0,6.25,2.73
+Master_Place_Limit_Order,1,69.0,69,69,69,69,69,69,0.0,1.0,0.61,0.28
+Master_Bulk_Cancellation_Storm,1,381.0,381,381,381,381,381,381,0.0,1.0,0.47,0.21
+Follower_Audit_Cancelled_Pending,20,303.0,277,433,466,466,208,466,0.0,20.0,21.48,3.52
+Master_Emergency_SquareOff,1,993.0,993,993,993,993,993,993,0.0,1.0,0.5,0.22
+Follower_SquareOff_Reconciliation,100,132.71,127,152,166,696,90,696,1.0,86.28,68.83,17.73
+TOTAL,335,117.36,74,166,316,872,1,6351,0.9,14.15,13.99,3.29

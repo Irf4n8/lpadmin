@@ -1,0 +1,53 @@
+{
+  "suite": "BlackTrader OMS - Paper Trading 2x Multiplier Certification",
+  "timestamp": "2026-11-12T11:19:52.216703+00:00",
+  "instance": "paper",
+  "master_email": "ctmaster@mailinator.com",
+  "master_client_id": "mem_aac4ca423a6925dca7",
+  "target_balance": 100000000.0,
+  "target_multiplier": 2.0,
+  "master_order_lot": 10.0,
+  "expected_follower_lot": 20.0,
+  "follower_count": 100,
+  "total_duration_sec": 45.03,
+  "results": [
+    {
+      "phase": "Balance Synchronization (Paper)",
+      "target_balance": 100000000.0,
+      "success_count": 101,
+      "total_accounts": 101,
+      "duration_sec": 1.22,
+      "status": "PASS"
+    },
+    {
+      "phase": "Follow Link Configuration (2.0x Multiplier on Paper)",
+      "valid_2x_followers": 100,
+      "total_followers": 100,
+      "target_multiplier": 2.0,
+      "duration_sec": 10.36,
+      "status": "PASS"
+    },
+    {
+      "name": "Order 1 (10.0 Lot BUY -> 20.0 Lot Follower)",
+      "master_lot": 10.0,
+      "expected_follower_lot": 20.0,
+      "symbol": "BINANCE:BTCUSDT.P",
+      "side": "BUY",
+      "followers_copied": 100,
+      "total_followers": 100,
+      "replication_rate_pct": 100.0,
+      "status": "PASS"
+    },
+    {
+      "name": "Order 2 (10.0 Lot SELL -> 20.0 Lot Follower)",
+      "master_lot": 10.0,
+      "expected_follower_lot": 20.0,
+      "symbol": "BINANCE:BTCUSDT.P",
+      "side": "SELL",
+      "followers_copied": 100,
+      "total_followers": 100,
+      "replication_rate_pct": 100.0,
+      "status": "PASS"
+    }
+  ]
+}

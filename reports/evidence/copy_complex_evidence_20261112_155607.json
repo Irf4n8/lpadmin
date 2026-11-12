@@ -1,0 +1,154 @@
+{
+  "suite": "Complex Copy-Trading Scenarios",
+  "timestamp": "2026-11-12T10:26:07.555627+00:00",
+  "instance": "paper",
+  "followers": 20,
+  "seed": 1234,
+  "results": [
+    {
+      "name": "X1 Mixed-mode sizing",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "factors": {
+          "M2": [
+            2.0
+          ],
+          "M1": [
+            1.0
+          ],
+          "M05": [
+            0.5
+          ],
+          "BAL": [
+            0.1,
+            0.5,
+            2.0
+          ],
+          "EQ": [
+            0.25,
+            4.0
+          ],
+          "REV": [
+            -1.0
+          ]
+        }
+      }
+    },
+    {
+      "name": "X2 Reverse lifecycle",
+      "status": "PASS",
+      "findings": [
+        {
+          "severity": "INFO",
+          "message": "PnL master +6.200 | normal follower +6.200 | reverse follower -6.300"
+        }
+      ],
+      "metrics": {
+        "master_pnl": 6.2,
+        "avg_normal_follower_pnl": 6.2,
+        "avg_reverse_follower_pnl": -6.3
+      }
+    },
+    {
+      "name": "X3 Pyramid + partial cascade",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {}
+    },
+    {
+      "name": "X4 Protection sync",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {}
+    },
+    {
+      "name": "X5 Follower intervention",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "f1_net_after_master_add": 0.3,
+        "f2_net": 1.5
+      }
+    },
+    {
+      "name": "X6 Multiplier change mid-trade",
+      "status": "PASS",
+      "findings": [
+        {
+          "severity": "INFO",
+          "message": "after closing master's first position follower net is 1.5 (second position still open on master)"
+        }
+      ],
+      "metrics": {
+        "refollow_http": 200,
+        "net_after_second_order": 2.5
+      }
+    },
+    {
+      "name": "X7 Phantom-copy check",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "master_pending_placed": 8,
+        "followers_with_positions": 0,
+        "followers_with_leftover_pending": 0
+      }
+    },
+    {
+      "name": "X8 Open/close churn",
+      "status": "PASS",
+      "findings": [
+        {
+          "severity": "INFO",
+          "message": "churn PnL master +0.12 | normal followers avg -0.62 (min -0.62, max -0.62)"
+        }
+      ],
+      "metrics": {
+        "cycles": 12,
+        "master_open_failures": 0
+      }
+    },
+    {
+      "name": "X9 Chained concurrent ops",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {}
+    },
+    {
+      "name": "X10 Seeded random walk (seed 1234)",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "ops": [
+          "1: open SELL 1.0",
+          "2: open BUY 0.1",
+          "3: close f4fa0b",
+          "4: close d065a5",
+          "5: open SELL 0.1",
+          "6: reduce 507028 0.075",
+          "7: reduce 507028 0.0188",
+          "8: open SELL 1.0",
+          "9: close 507028",
+          "10: open BUY 1.0",
+          "11: close c05cce",
+          "12: close eb92b3",
+          "13: open BUY 1.0",
+          "14: reduce a11e3a 0.25",
+          "15: open SELL 0.2",
+          "16: open BUY 0.2",
+          "17: open SELL 0.1",
+          "18: protect 5142dd",
+          "19: reduce a11e3a 0.1875",
+          "20: open BUY 0.2",
+          "21: open SELL 0.2",
+          "22: reduce 5142dd 0.05",
+          "23: reduce f25b74 0.05",
+          "24: open SELL 1.0",
+          "25: open SELL 0.2"
+        ],
+        "seed": 1234
+      }
+    }
+  ]
+}

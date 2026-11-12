@@ -1,0 +1,1065 @@
+{
+  "metrics": {
+    "total_samples": 335,
+    "error_rate_pct": 0.9,
+    "average_ms": 117.36,
+    "median_ms": 74,
+    "p90_ms": 166,
+    "p95_ms": 316,
+    "p99_ms": 872,
+    "min_ms": 1,
+    "max_ms": 6351,
+    "throughput_tps": 14.15,
+    "received_kb_s": 13.99,
+    "sent_kb_s": 3.29,
+    "duration_seconds": 23.68,
+    "sampler_metrics": [
+      {
+        "label": "Sampler_Auth_Token_Exchange",
+        "samples": 101,
+        "average_ms": 5.58,
+        "median_ms": 1,
+        "p90_ms": 1,
+        "p95_ms": 1,
+        "p99_ms": 1,
+        "min_ms": 1,
+        "max_ms": 464,
+        "error_pct": 0.99,
+        "throughput_tps": 101.0,
+        "received_kb_s": 82.85,
+        "sent_kb_s": 31.56
+      },
+      {
+        "label": "Master_Place_Market_Order",
+        "samples": 1,
+        "average_ms": 97.0,
+        "median_ms": 97,
+        "p90_ms": 97,
+        "p95_ms": 97,
+        "p99_ms": 97,
+        "min_ms": 97,
+        "max_ms": 97,
+        "error_pct": 0.0,
+        "throughput_tps": 1.0,
+        "received_kb_s": 0.63,
+        "sent_kb_s": 0.27
+      },
+      {
+        "label": "Follower_Poll_Replication_Order",
+        "samples": 100,
+        "average_ms": 168.67,
+        "median_ms": 65,
+        "p90_ms": 99,
+        "p95_ms": 852,
+        "p99_ms": 6351,
+        "min_ms": 44,
+        "max_ms": 6351,
+        "error_pct": 1.0,
+        "throughput_tps": 15.18,
+        "received_kb_s": 21.05,
+        "sent_kb_s": 2.82
+      },
+      {
+        "label": "Master_Burst_Order_Placement",
+        "samples": 10,
+        "average_ms": 101.3,
+        "median_ms": 102,
+        "p90_ms": 130,
+        "p95_ms": 130,
+        "p99_ms": 130,
+        "min_ms": 82,
+        "max_ms": 130,
+        "error_pct": 0.0,
+        "throughput_tps": 10.0,
+        "received_kb_s": 6.25,
+        "sent_kb_s": 2.73
+      },
+      {
+        "label": "Master_Place_Limit_Order",
+        "samples": 1,
+        "average_ms": 69.0,
+        "median_ms": 69,
+        "p90_ms": 69,
+        "p95_ms": 69,
+        "p99_ms": 69,
+        "min_ms": 69,
+        "max_ms": 69,
+        "error_pct": 0.0,
+        "throughput_tps": 1.0,
+        "received_kb_s": 0.61,
+        "sent_kb_s": 0.28
+      },
+      {
+        "label": "Master_Bulk_Cancellation_Storm",
+        "samples": 1,
+        "average_ms": 381.0,
+        "median_ms": 381,
+        "p90_ms": 381,
+        "p95_ms": 381,
+        "p99_ms": 381,
+        "min_ms": 381,
+        "max_ms": 381,
+        "error_pct": 0.0,
+        "throughput_tps": 1.0,
+        "received_kb_s": 0.47,
+        "sent_kb_s": 0.21
+      },
+      {
+        "label": "Follower_Audit_Cancelled_Pending",
+        "samples": 20,
+        "average_ms": 303.0,
+        "median_ms": 277,
+        "p90_ms": 433,
+        "p95_ms": 466,
+        "p99_ms": 466,
+        "min_ms": 208,
+        "max_ms": 466,
+        "error_pct": 0.0,
+        "throughput_tps": 20.0,
+        "received_kb_s": 21.48,
+        "sent_kb_s": 3.52
+      },
+      {
+        "label": "Master_Emergency_SquareOff",
+        "samples": 1,
+        "average_ms": 993.0,
+        "median_ms": 993,
+        "p90_ms": 993,
+        "p95_ms": 993,
+        "p99_ms": 993,
+        "min_ms": 993,
+        "max_ms": 993,
+        "error_pct": 0.0,
+        "throughput_tps": 1.0,
+        "received_kb_s": 0.5,
+        "sent_kb_s": 0.22
+      },
+      {
+        "label": "Follower_SquareOff_Reconciliation",
+        "samples": 100,
+        "average_ms": 132.71,
+        "median_ms": 127,
+        "p90_ms": 152,
+        "p95_ms": 166,
+        "p99_ms": 696,
+        "min_ms": 90,
+        "max_ms": 696,
+        "error_pct": 1.0,
+        "throughput_tps": 86.28,
+        "received_kb_s": 68.83,
+        "sent_kb_s": 17.73
+      }
+    ]
+  },
+  "fanout": {
+    "master_order_id": "ord_42df1fd3ce785d3f70",
+    "master_latency_ms": 97,
+    "replicated_count": 99,
+    "fanout_p50_ms": 244,
+    "fanout_p90_ms": 353,
+    "fanout_p95_ms": 912,
+    "fanout_p99_ms": 6665,
+    "details": [
+      {
+        "follower_idx": 1,
+        "email": "follower1@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_a8561d3fada180470c",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 77
+      },
+      {
+        "follower_idx": 2,
+        "email": "follower2@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_5d2741b356eacb3955",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 81
+      },
+      {
+        "follower_idx": 3,
+        "email": "follower3@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_9301e4c44211ffac8a",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 88
+      },
+      {
+        "follower_idx": 4,
+        "email": "follower4@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_d178d89aca57b927a4",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 93
+      },
+      {
+        "follower_idx": 5,
+        "email": "follower5@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_25d4162251080b8f10",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 105
+      },
+      {
+        "follower_idx": 17,
+        "email": "follower17@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_48ce8dd15613aa5897",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 108
+      },
+      {
+        "follower_idx": 10,
+        "email": "follower10@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_3fa7ef81135f450751",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 110
+      },
+      {
+        "follower_idx": 14,
+        "email": "follower14@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_050270b9796506091d",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 112
+      },
+      {
+        "follower_idx": 15,
+        "email": "follower15@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_20ab617113a7457b14",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 113
+      },
+      {
+        "follower_idx": 7,
+        "email": "follower7@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_36fadc60b46f24acf1",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 117
+      },
+      {
+        "follower_idx": 20,
+        "email": "follower20@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_dbf5c26827b15e07d1",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 119
+      },
+      {
+        "follower_idx": 9,
+        "email": "follower9@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_3442ea5373e50182da",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 122
+      },
+      {
+        "follower_idx": 13,
+        "email": "follower13@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_c1bbdf3835a27e8019",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 122
+      },
+      {
+        "follower_idx": 6,
+        "email": "follower6@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_93dabcec345973d491",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 123
+      },
+      {
+        "follower_idx": 12,
+        "email": "follower12@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_75a1f1b5de36ef4afc",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 127
+      },
+      {
+        "follower_idx": 26,
+        "email": "follower26@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_e2094c96c55f290dc2",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 128
+      },
+      {
+        "follower_idx": 8,
+        "email": "follower8@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_0f4ec5cfccfc0cda0b",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 133
+      },
+      {
+        "follower_idx": 19,
+        "email": "follower19@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_760fbdfdb2c238e408",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 134
+      },
+      {
+        "follower_idx": 16,
+        "email": "follower16@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_aed95b1bd36782b292",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 137
+      },
+      {
+        "follower_idx": 11,
+        "email": "follower11@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_8994c24e31690c7eb4",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 145
+      },
+      {
+        "follower_idx": 18,
+        "email": "follower18@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_b89eb95023a007404a",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 147
+      },
+      {
+        "follower_idx": 27,
+        "email": "follower27@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_f542c63e9ae5bb5a94",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 151
+      },
+      {
+        "follower_idx": 30,
+        "email": "follower30@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_addeb9eceb53678e13",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 154
+      },
+      {
+        "follower_idx": 29,
+        "email": "follower29@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_82c308828c9a1d6baa",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 157
+      },
+      {
+        "follower_idx": 28,
+        "email": "follower28@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_715b168e12a6062c9f",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 160
+      },
+      {
+        "follower_idx": 31,
+        "email": "follower31@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_3aa410fe907155addd",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 171
+      },
+      {
+        "follower_idx": 33,
+        "email": "follower33@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_1c07e847915dbb8593",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 171
+      },
+      {
+        "follower_idx": 32,
+        "email": "follower32@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_201a315e5b4fd7cd91",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 174
+      },
+      {
+        "follower_idx": 34,
+        "email": "follower34@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_515bc5e105a5cf78be",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 184
+      },
+      {
+        "follower_idx": 35,
+        "email": "follower35@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_2a08ed42577306d82a",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 186
+      },
+      {
+        "follower_idx": 41,
+        "email": "follower41@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_9d01ea6d55ced83ffe",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 188
+      },
+      {
+        "follower_idx": 38,
+        "email": "follower38@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_c1bcd66d0583c78762",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 189
+      },
+      {
+        "follower_idx": 43,
+        "email": "follower43@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_a8112ff57e54d1941d",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 192
+      },
+      {
+        "follower_idx": 40,
+        "email": "follower40@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_f24fb3bac58e3dab8d",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 193
+      },
+      {
+        "follower_idx": 42,
+        "email": "follower42@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_428d43f094290a12ef",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 193
+      },
+      {
+        "follower_idx": 46,
+        "email": "follower46@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_21232e57c201b8361e",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 198
+      },
+      {
+        "follower_idx": 47,
+        "email": "follower47@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_a1eaf4a5438d6753ea",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 199
+      },
+      {
+        "follower_idx": 48,
+        "email": "follower48@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_c0316bd615f552da49",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 200
+      },
+      {
+        "follower_idx": 39,
+        "email": "follower39@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_218a4b586dbf029403",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 204
+      },
+      {
+        "follower_idx": 36,
+        "email": "follower36@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_f1de5f6f19d46586a2",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 206
+      },
+      {
+        "follower_idx": 50,
+        "email": "follower50@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_c563b0b35b18553aca",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 208
+      },
+      {
+        "follower_idx": 37,
+        "email": "follower37@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_0cc81cc742e80c1885",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 213
+      },
+      {
+        "follower_idx": 51,
+        "email": "follower51@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_e2a5a9ee136004b772",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 222
+      },
+      {
+        "follower_idx": 44,
+        "email": "follower44@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_9838b3c91fb3e9be1d",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 222
+      },
+      {
+        "follower_idx": 45,
+        "email": "follower45@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_69f16664ee17b09e8f",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 223
+      },
+      {
+        "follower_idx": 53,
+        "email": "follower53@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_b8e5263573edc71fcc",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 226
+      },
+      {
+        "follower_idx": 49,
+        "email": "follower49@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_7bf30894027f3bbac7",
+        "volume": 2.0,
+        "open_price": 73468.8,
+        "latency_ms": 226
+      },
+      {
+        "follower_idx": 52,
+        "email": "follower52@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_7464c372387d2b0ed5",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 227
+      },
+      {
+        "follower_idx": 54,
+        "email": "follower54@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_4ed5d6573db63685f7",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 241
+      },
+      {
+        "follower_idx": 57,
+        "email": "follower57@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_3f47cad347e4e3ba50",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 242
+      },
+      {
+        "follower_idx": 58,
+        "email": "follower58@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_ea364a94ad85342284",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 244
+      },
+      {
+        "follower_idx": 60,
+        "email": "follower60@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_4e35b595e40668a55f",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 246
+      },
+      {
+        "follower_idx": 59,
+        "email": "follower59@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_65547982625c8d732c",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 247
+      },
+      {
+        "follower_idx": 56,
+        "email": "follower56@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_5ebba2d6772aef4e2a",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 249
+      },
+      {
+        "follower_idx": 61,
+        "email": "follower61@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_78eb0a769029fef786",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 254
+      },
+      {
+        "follower_idx": 62,
+        "email": "follower62@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_8db0cd965cec299444",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 259
+      },
+      {
+        "follower_idx": 66,
+        "email": "follower66@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_14553d2b4d0314a625",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 261
+      },
+      {
+        "follower_idx": 65,
+        "email": "follower65@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_9807ef6110b1d790cc",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 262
+      },
+      {
+        "follower_idx": 64,
+        "email": "follower64@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_49a487a5460eba86cf",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 264
+      },
+      {
+        "follower_idx": 55,
+        "email": "follower55@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_36e33c34257975cae7",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 270
+      },
+      {
+        "follower_idx": 73,
+        "email": "follower73@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_93cae34ba1b89844b9",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 275
+      },
+      {
+        "follower_idx": 70,
+        "email": "follower70@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_75406e005d6e49f319",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 276
+      },
+      {
+        "follower_idx": 71,
+        "email": "follower71@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_c8d8b05907f6e195e7",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 276
+      },
+      {
+        "follower_idx": 69,
+        "email": "follower69@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_b8286cc5eacec5cdeb",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 277
+      },
+      {
+        "follower_idx": 63,
+        "email": "follower63@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_6998bd5002f2cff788",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 277
+      },
+      {
+        "follower_idx": 68,
+        "email": "follower68@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_8294a484fa4b25fcb0",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 281
+      },
+      {
+        "follower_idx": 67,
+        "email": "follower67@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_81fcd9653a13564365",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 282
+      },
+      {
+        "follower_idx": 75,
+        "email": "follower75@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_cc9c91fd16cfc6d011",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 293
+      },
+      {
+        "follower_idx": 72,
+        "email": "follower72@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_c9c55ee13f9498387f",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 295
+      },
+      {
+        "follower_idx": 78,
+        "email": "follower78@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_2f8211ecbae2b3d414",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 297
+      },
+      {
+        "follower_idx": 77,
+        "email": "follower77@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_d34eaa33d87b8ebdc6",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 304
+      },
+      {
+        "follower_idx": 79,
+        "email": "follower79@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_b702ad57930607f5be",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 309
+      },
+      {
+        "follower_idx": 84,
+        "email": "follower84@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_875007cfefd56a9e2b",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 311
+      },
+      {
+        "follower_idx": 83,
+        "email": "follower83@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_a4f2ba3b518c1e03ca",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 312
+      },
+      {
+        "follower_idx": 74,
+        "email": "follower74@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_da4c4b9e6f52d78208",
+        "volume": 3.0,
+        "open_price": 73468.8,
+        "latency_ms": 314
+      },
+      {
+        "follower_idx": 76,
+        "email": "follower76@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_05b389a3d4e4667036",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 321
+      },
+      {
+        "follower_idx": 89,
+        "email": "follower89@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_4d69d6751dbeea2e69",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 325
+      },
+      {
+        "follower_idx": 85,
+        "email": "follower85@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_6f50d5d83b522edce8",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 325
+      },
+      {
+        "follower_idx": 91,
+        "email": "follower91@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_f0b998ead7e0061f79",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 326
+      },
+      {
+        "follower_idx": 87,
+        "email": "follower87@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_a4b5d73ccbd9ff6e18",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 330
+      },
+      {
+        "follower_idx": 88,
+        "email": "follower88@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_7d12935cabd99b9ce9",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 332
+      },
+      {
+        "follower_idx": 80,
+        "email": "follower80@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_99e55e25bd40202b43",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 333
+      },
+      {
+        "follower_idx": 82,
+        "email": "follower82@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_405e2cae8784b308d8",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 334
+      },
+      {
+        "follower_idx": 81,
+        "email": "follower81@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_b82e5667ce143c72a3",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 334
+      },
+      {
+        "follower_idx": 86,
+        "email": "follower86@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_56cca3c259d4ad6fa0",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 334
+      },
+      {
+        "follower_idx": 95,
+        "email": "follower95@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_95e25e7e9fac5b0099",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 342
+      },
+      {
+        "follower_idx": 94,
+        "email": "follower94@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_e06376e70fc0d32eb7",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 343
+      },
+      {
+        "follower_idx": 90,
+        "email": "follower90@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_72a26881859a0ed1fc",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 345
+      },
+      {
+        "follower_idx": 93,
+        "email": "follower93@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_307655f5ded64d13fa",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 347
+      },
+      {
+        "follower_idx": 96,
+        "email": "follower96@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_6203c8e4289d3ee9b0",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 352
+      },
+      {
+        "follower_idx": 92,
+        "email": "follower92@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_9e925c91df9fb73461",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 353
+      },
+      {
+        "follower_idx": 99,
+        "email": "follower99@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_4ab222842cb866b9f0",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 364
+      },
+      {
+        "follower_idx": 98,
+        "email": "follower98@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_ce00e0aea02c2805be",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 398
+      },
+      {
+        "follower_idx": 97,
+        "email": "follower97@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_29d621b3a183e4ff03",
+        "volume": 0.5,
+        "open_price": 73468.8,
+        "latency_ms": 403
+      },
+      {
+        "follower_idx": 21,
+        "email": "follower21@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_e6a3d11b8335128639",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 897
+      },
+      {
+        "follower_idx": 22,
+        "email": "follower22@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_39d984890f4288252f",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 912
+      },
+      {
+        "follower_idx": 25,
+        "email": "follower25@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_80e39759737a7a2845",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 915
+      },
+      {
+        "follower_idx": 23,
+        "email": "follower23@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_049908e3031015613a",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 931
+      },
+      {
+        "follower_idx": 24,
+        "email": "follower24@mailinator.com",
+        "replicated": true,
+        "order_id": "pos_86b97a90a240e1e7a7",
+        "volume": 1.0,
+        "open_price": 73468.8,
+        "latency_ms": 939
+      },
+      {
+        "follower_idx": 100,
+        "email": "follower100@mailinator.com",
+        "replicated": false,
+        "order_id": null,
+        "volume": 0.0,
+        "open_price": 0.0,
+        "latency_ms": 6665
+      }
+    ]
+  }
+}

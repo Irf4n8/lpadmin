@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-11-11T12:50:30.017991+00:00",
+  "timestamp": "2026-11-12T11:28:29.543323+00:00",
   "total_scenarios": 7,
   "passed_scenarios": 7,
-  "total_time_seconds": 100.67,
+  "total_time_seconds": 133.25,
   "results": [
     {
       "name": "Rapid Market Reversal (Long-to-Short Flip)",
-      "delta_ms": 186.82,
+      "delta_ms": 249.87,
       "followers_with_orders": 100,
       "followers_with_pos": 100,
       "total_followers": 100,
@@ -14,7 +14,7 @@
     },
     {
       "name": "Simultaneous Opposing Square-Offs (Row Locking)",
-      "collision_time_ms": 210.22,
+      "collision_time_ms": 162.11,
       "collision_results_count": 6,
       "has_500_errors": false,
       "master_remaining_pos": 0,
@@ -25,8 +25,8 @@
       "name": "Mid-Trade Dynamic Capital Shock",
       "target_email": "follower10@mailinator.com",
       "entry_qty": 0.05,
-      "initial_balance": 100000022.50999996,
-      "shock_balance": 150000022.50999996,
+      "initial_balance": 100000168.08899993,
+      "shock_balance": 150000168.08899993,
       "final_open_positions": 0,
       "status": "PASS"
     },
@@ -45,14 +45,14 @@
     },
     {
       "name": "Breakout Straddle & OCO Pending Cancellation",
-      "buy_stop_price": 74310.6,
-      "sell_stop_price": 73710.6,
+      "buy_stop_price": 73564.5,
+      "sell_stop_price": 72964.5,
       "follower_hanging_pending": 0,
       "status": "PASS"
     },
     {
       "name": "Cross-Asset Portfolio Bombardment",
-      "burst_time_ms": 230.03,
+      "burst_time_ms": 345.68,
       "multi_asset_followers": 20,
       "sample_size": 20,
       "status": "PASS"
@@ -60,7 +60,7 @@
     {
       "name": "Full Accounting & Scaling Audit",
       "master_lot": 0.05,
-      "total_follower_volume": 8.125,
+      "total_follower_volume": 8.25,
       "master_used_margin_post_cleanup": 0.0,
       "status": "PASS"
     }

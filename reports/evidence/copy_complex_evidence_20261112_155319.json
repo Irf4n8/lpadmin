@@ -1,0 +1,54 @@
+{
+  "suite": "Complex Copy-Trading Scenarios",
+  "timestamp": "2026-11-12T10:23:19.503010+00:00",
+  "instance": "paper",
+  "followers": 20,
+  "seed": 1234,
+  "results": [
+    {
+      "name": "X1 Mixed-mode sizing",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "factors": {
+          "M2": [
+            2.0
+          ],
+          "M1": [
+            1.0
+          ],
+          "M05": [
+            0.5
+          ],
+          "BAL": [
+            0.1,
+            0.5,
+            2.0
+          ],
+          "EQ": [
+            0.25,
+            4.0
+          ],
+          "REV": [
+            -1.0
+          ]
+        }
+      }
+    },
+    {
+      "name": "X2 Reverse lifecycle",
+      "status": "PASS",
+      "findings": [
+        {
+          "severity": "INFO",
+          "message": "PnL master +0.000 | normal follower +0.000 | reverse follower -0.100"
+        }
+      ],
+      "metrics": {
+        "master_pnl": 0.0,
+        "avg_normal_follower_pnl": 0.0,
+        "avg_reverse_follower_pnl": -0.1
+      }
+    }
+  ]
+}

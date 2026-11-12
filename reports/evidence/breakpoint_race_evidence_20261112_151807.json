@@ -1,0 +1,170 @@
+{
+  "suite": "Breakpoint & Race Hunter",
+  "timestamp": "2026-11-12T09:48:07.152406+00:00",
+  "instance": "paper",
+  "followers": 10,
+  "results": [
+    {
+      "name": "B1 Duplicate squareoff storm",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "concurrent_closes": 20,
+        "http_200": 1,
+        "http_5xx": 0,
+        "balance_delta": 0.0,
+        "single_realized_pnl": 0.0,
+        "distinct_pnl_values": 1
+      }
+    },
+    {
+      "name": "B2 Over-reduce race",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "start_qty": 0.0,
+        "reduce_chunk": 0.0,
+        "attempts": 5,
+        "accepted": 0,
+        "final_qty": 0.0,
+        "expected_qty": 0.0
+      }
+    },
+    {
+      "name": "B3 Protection write storm",
+      "status": "SKIP",
+      "findings": [
+        {
+          "severity": "MED",
+          "message": "could not read entry price; skipping"
+        }
+      ],
+      "metrics": {}
+    },
+    {
+      "name": "B4 Double-cancel storm",
+      "status": "SKIP",
+      "findings": [
+        {
+          "severity": "MED",
+          "message": "no market price available; skipping"
+        }
+      ],
+      "metrics": {}
+    },
+    {
+      "name": "B5 Load ramp (breaking point)",
+      "status": "PASS",
+      "findings": [
+        {
+          "severity": "INFO",
+          "message": "first degradation at: not reached concurrent master orders"
+        }
+      ],
+      "metrics": {
+        "levels": [
+          {
+            "threads": 10,
+            "placed": 10,
+            "status_codes": {
+              "200": 10
+            },
+            "p50_s": 0.601,
+            "p95_s": 0.843,
+            "max_s": 0.912,
+            "burst_s": 0.915,
+            "fanout_lag_s": 0.39,
+            "followers_short": 0,
+            "followers_duplicated": 0,
+            "positions_expected": 100,
+            "positions_actual": 100
+          },
+          {
+            "threads": 25,
+            "placed": 25,
+            "status_codes": {
+              "200": 25
+            },
+            "p50_s": 1.68,
+            "p95_s": 2.446,
+            "max_s": 2.546,
+            "burst_s": 2.548,
+            "fanout_lag_s": 0.4,
+            "followers_short": 0,
+            "followers_duplicated": 0,
+            "positions_expected": 250,
+            "positions_actual": 250
+          }
+        ],
+        "first_degradation_at_threads": null
+      }
+    },
+    {
+      "name": "B6 Follow/unfollow flapping",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "probe_link_rows": 0,
+        "probe_positions_after_single_master_order": 1
+      }
+    },
+    {
+      "name": "B7 Margin exhaustion",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "master_orders": 20,
+        "follower_positions": 0,
+        "follower_balance": 1000.0,
+        "follower_equity": 1000.0,
+        "follower_used_margin": 0.0
+      }
+    },
+    {
+      "name": "B8",
+      "status": "ERROR",
+      "findings": [
+        {
+          "severity": "HIGH",
+          "message": "runner exception: 'payload'"
+        }
+      ],
+      "metrics": {}
+    },
+    {
+      "name": "B9 Bulk vs individual close",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "positions_opened": 6,
+        "http_5xx": 0,
+        "positions_left": 0,
+        "final_balance": 99994174.178,
+        "final_equity": 99994174.178,
+        "final_used_margin": 0.0
+      }
+    },
+    {
+      "name": "B10 Auth/token refresh storm",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "logins": 30,
+        "login_failures": 0,
+        "post_storm_read_failures": 0
+      }
+    },
+    {
+      "name": "B11 Final consistency audit",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "accounts": 11,
+        "orphan_positions": 0,
+        "pending_orders": 0,
+        "stuck_margin": 0,
+        "equity_balance_drift": 0
+      }
+    }
+  ]
+}

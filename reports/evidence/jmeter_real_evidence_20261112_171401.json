@@ -1,0 +1,513 @@
+{
+  "suite": "Apache JMeter load test",
+  "jmeter_version": "5.6.3",
+  "timestamp": "2026-11-12T11:45:43.332338+00:00",
+  "profile": "standard",
+  "profile_settings": {
+    "RAMP": 10,
+    "AUTH_THREADS": 20,
+    "AUTH_LOOPS": 3,
+    "ORDER_THREADS": 20,
+    "ORDER_LOOPS": 5,
+    "READ_THREADS": 50,
+    "READ_DURATION": 30,
+    "HIST_THREADS": 5,
+    "HIST_LOOPS": 3,
+    "tokens": 50
+  },
+  "instance": "paper",
+  "followers": 100,
+  "duration_sec": 75,
+  "sla_p95_ms": {
+    "AUTH login": 2500,
+    "AUTH chart-token": 2500,
+    "ORDER place market": 5000,
+    "ORDER close position": 5000,
+    "READ positions": 2500,
+    "READ orders (history)": 6000
+  },
+  "html_dashboard": "C:\\lpadmin\\reports\\jmeter\\20261112_171401\\html\\index.html",
+  "results": [
+    {
+      "name": "Load: AUTH chart-token",
+      "status": "PASS",
+      "sla_p95_ms": 2500,
+      "metrics": {
+        "samples": 60,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 54.4,
+        "p50_ms": 49.0,
+        "p90_ms": 71.0,
+        "p95_ms": 72.0,
+        "p99_ms": 76.0,
+        "max_ms": 76.0,
+        "tps": 5.75,
+        "response_codes": {
+          "200": 60
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Load: AUTH login",
+      "status": "PASS",
+      "sla_p95_ms": 2500,
+      "metrics": {
+        "samples": 60,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 225.9,
+        "p50_ms": 218.0,
+        "p90_ms": 252.0,
+        "p95_ms": 259.0,
+        "p99_ms": 579.0,
+        "max_ms": 579.0,
+        "tps": 5.57,
+        "response_codes": {
+          "200": 60
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Validation: absurd tp/sl",
+      "status": "FAIL",
+      "metrics": {
+        "samples": 1,
+        "errors": 1,
+        "error_pct": 100.0,
+        "avg_ms": 333.0,
+        "p50_ms": 333.0,
+        "p90_ms": 333.0,
+        "p95_ms": 333.0,
+        "p99_ms": 333.0,
+        "max_ms": 333.0,
+        "tps": 1.0,
+        "response_codes": {
+          "200": 1
+        },
+        "first_error": "200 Test failed: code expected to equal / received : [[[2]]]00 comparison: [[[4]]]00 /"
+      },
+      "finding": "KNOWN PLATFORM BUG - absurd TP/SL (tp=-1, sl=1e30) is accepted. got 200 Test failed: code expected to equal / received : [[[2]]]00 comparison: [[[4]]]00 /"
+    },
+    {
+      "name": "Validation: bad side",
+      "status": "PASS",
+      "metrics": {
+        "samples": 1,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 63.0,
+        "p50_ms": 63.0,
+        "p90_ms": 63.0,
+        "p95_ms": 63.0,
+        "p99_ms": 63.0,
+        "max_ms": 63.0,
+        "tps": 1.0,
+        "response_codes": {
+          "400": 1
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Validation: missing symbol",
+      "status": "PASS",
+      "metrics": {
+        "samples": 1,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 72.0,
+        "p50_ms": 72.0,
+        "p90_ms": 72.0,
+        "p95_ms": 72.0,
+        "p99_ms": 72.0,
+        "max_ms": 72.0,
+        "tps": 1.0,
+        "response_codes": {
+          "400": 1
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Validation: negative qty",
+      "status": "PASS",
+      "metrics": {
+        "samples": 1,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 65.0,
+        "p50_ms": 65.0,
+        "p90_ms": 65.0,
+        "p95_ms": 65.0,
+        "p99_ms": 65.0,
+        "max_ms": 65.0,
+        "tps": 1.0,
+        "response_codes": {
+          "400": 1
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Validation: string qty",
+      "status": "PASS",
+      "metrics": {
+        "samples": 1,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 71.0,
+        "p50_ms": 71.0,
+        "p90_ms": 71.0,
+        "p95_ms": 71.0,
+        "p99_ms": 71.0,
+        "max_ms": 71.0,
+        "tps": 1.0,
+        "response_codes": {
+          "400": 1
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Validation: unknown order type",
+      "status": "FAIL",
+      "metrics": {
+        "samples": 1,
+        "errors": 1,
+        "error_pct": 100.0,
+        "avg_ms": 56.0,
+        "p50_ms": 56.0,
+        "p90_ms": 56.0,
+        "p95_ms": 56.0,
+        "p99_ms": 56.0,
+        "max_ms": 56.0,
+        "tps": 1.0,
+        "response_codes": {
+          "500": 1
+        },
+        "first_error": "500 Test failed: code expected to equal / received : [[[5]]]00 comparison: [[[4]]]00 /"
+      },
+      "finding": "KNOWN PLATFORM BUG - unknown order type returns 500 instead of 400. got 500 Test failed: code expected to equal / received : [[[5]]]00 comparison: [[[4]]]00 /"
+    },
+    {
+      "name": "Validation: zero qty",
+      "status": "PASS",
+      "metrics": {
+        "samples": 1,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 102.0,
+        "p50_ms": 102.0,
+        "p90_ms": 102.0,
+        "p95_ms": 102.0,
+        "p99_ms": 102.0,
+        "max_ms": 102.0,
+        "tps": 1.0,
+        "response_codes": {
+          "400": 1
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Load: ORDER close position",
+      "status": "PASS",
+      "sla_p95_ms": 5000,
+      "metrics": {
+        "samples": 100,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 556.4,
+        "p50_ms": 572.0,
+        "p90_ms": 831.0,
+        "p95_ms": 964.0,
+        "p99_ms": 1148.0,
+        "max_ms": 1233.0,
+        "tps": 6.28,
+        "response_codes": {
+          "200": 100
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Load: ORDER place market",
+      "status": "PASS",
+      "sla_p95_ms": 5000,
+      "metrics": {
+        "samples": 100,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 563.6,
+        "p50_ms": 557.0,
+        "p90_ms": 867.0,
+        "p95_ms": 959.0,
+        "p99_ms": 1425.0,
+        "max_ms": 1608.0,
+        "tps": 6.29,
+        "response_codes": {
+          "200": 100
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Load: READ orders (history)",
+      "status": "PASS",
+      "sla_p95_ms": 6000,
+      "metrics": {
+        "samples": 15,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 454.2,
+        "p50_ms": 452.0,
+        "p90_ms": 527.0,
+        "p95_ms": 668.0,
+        "p99_ms": 668.0,
+        "max_ms": 668.0,
+        "tps": 1.6,
+        "response_codes": {
+          "200": 15
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Load: READ positions",
+      "status": "PASS",
+      "sla_p95_ms": 2500,
+      "metrics": {
+        "samples": 3950,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 110.5,
+        "p50_ms": 105.0,
+        "p90_ms": 129.0,
+        "p95_ms": 137.0,
+        "p99_ms": 170.0,
+        "max_ms": 1140.0,
+        "tps": 132.48,
+        "response_codes": {
+          "200": 3950
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Integrity: no orphan positions / stuck margin after load",
+      "status": "FAIL",
+      "metrics": {
+        "accounts": 101,
+        "accounts_with_open_positions": 22,
+        "open_positions": 22,
+        "accounts_with_stuck_margin": 22,
+        "orphan_details": [
+          {
+            "account": "follower33@mailinator.com",
+            "market_order_id": "ord_1198732041b00ca444",
+            "side": "BUY",
+            "qty": 0.002,
+            "opened_at": "2026-11-12T11:45:36.983839Z",
+            "ms_after_last_master_close": 50768,
+            "ms_before_next_master_close": null,
+            "master_closes_after_it_opened": 0
+          },
+          {
+            "account": "follower31@mailinator.com",
+            "market_order_id": "ord_981a68188024bc06fb",
+            "side": "BUY",
+            "qty": 0.002,
+            "opened_at": "2026-11-12T11:45:36.985153Z",
+            "ms_after_last_master_close": 50770,
+            "ms_before_next_master_close": null,
+            "master_closes_after_it_opened": 0
+          },
+          {
+            "account": "follower38@mailinator.com",
+            "market_order_id": "ord_c829ee2a1fa32669ac",
+            "side": "BUY",
+            "qty": 0.002,
+            "opened_at": "2026-11-12T11:45:36.979596Z",
+            "ms_after_last_master_close": 50764,
+            "ms_before_next_master_close": null,
+            "master_closes_after_it_opened": 0
+          },
+          {
+            "account": "follower36@mailinator.com",
+            "market_order_id": "ord_1ff5b144e2ac095fca",
+            "side": "BUY",
+            "qty": 0.002,
+            "opened_at": "2026-11-12T11:45:36.980681Z",
+            "ms_after_last_master_close": 50765,
+            "ms_before_next_master_close": null,
+            "master_closes_after_it_opened": 0
+          },
+          {
+            "account": "follower39@mailinator.com",
+            "market_order_id": "ord_f70e52a2c9a3c1e6e6",
+            "side": "BUY",
+            "qty": 0.002,
+            "opened_at": "2026-11-12T11:45:36.979333Z",
+            "ms_after_last_master_close": 50764,
+            "ms_before_next_master_close": null,
+            "master_closes_after_it_opened": 0
+          },
+          {
+            "account": "follower32@mailinator.com",
+            "market_order_id": "ord_ab4ad9561e984abc28",
+            "side": "BUY",
+            "qty": 0.002,
+            "opened_at": "2026-11-12T11:45:36.98446Z",
+            "ms_after_last_master_close": 50769,
+            "ms_before_next_master_close": null,
+            "master_closes_after_it_opened": 0
+          },
+          {
+            "account": "follower40@mailinator.com",
+            "market_order_id": "ord_00239d8b7674f5a881",
+            "side": "BUY",
+            "qty": 0.002,
+            "opened_at": "2026-11-12T11:45:36.979043Z",
+            "ms_after_last_master_close": 50764,
+            "ms_before_next_master_close": null,
+            "master_closes_after_it_opened": 0
+          },
+          {
+            "account": "follower34@mailinator.com",
+            "market_order_id": "ord_4e5c0bc9af6694a0da",
+            "side": "BUY",
+            "qty": 0.002,
+            "opened_at": "2026-11-12T11:45:36.983155Z",
+            "ms_after_last_master_close": 50768,
+            "ms_before_next_master_close": null,
+            "master_closes_after_it_opened": 0
+          },
+          {
+            "account": "follower35@mailinator.com",
+            "market_order_id": "ord_bdaf7c29705e882553",
+            "side": "BUY",
+            "qty": 0.002,
+            "opened_at": "2026-11-12T11:45:36.982285Z",
+            "ms_after_last_master_close": 50767,
+            "ms_before_next_master_close": null,
+            "master_closes_after_it_opened": 0
+          },
+          {
+            "account": "follower37@mailinator.com",
+            "market_order_id": "ord_d18f911e48fbebcb42",
+            "side": "BUY",
+            "qty": 0.002,
+            "opened_at": "2026-11-12T11:45:36.979936Z",
+            "ms_after_last_master_close": 50764,
+            "ms_before_next_master_close": null,
+            "master_closes_after_it_opened": 0
+          },
+          {
+            "account": "follower42@mailinator.com",
+            "market_order_id": "ord_8caded67a59f0d59c2",
+            "side": "BUY",
+            "qty": 0.002,
+            "opened_at": "2026-11-12T11:45:36.97834Z",
+            "ms_after_last_master_close": 50763,
+            "ms_before_next_master_close": null,
+            "master_closes_after_it_opened": 0
+          },
+          {
+            "account": "follower43@mailinator.com",
+            "market_order_id": "ord_e4c264f179a1707b84",
+            "side": "BUY",
+            "qty": 0.002,
+            "opened_at": "2026-11-12T11:45:36.977658Z",
+            "ms_after_last_master_close": 50762,
+            "ms_before_next_master_close": null,
+            "master_closes_after_it_opened": 0
+          },
+          {
+            "account": "follower44@mailinator.com",
+            "market_order_id": "ord_b1f24fd95c73323a41",
+            "side": "BUY",
+            "qty": 0.002,
+            "opened_at": "2026-11-12T11:45:36.977147Z",
+            "ms_after_last_master_close": 50762,
+            "ms_before_next_master_close": null,
+            "master_closes_after_it_opened": 0
+          },
+          {
+            "account": "follower45@mailinator.com",
+            "market_order_id": "ord_b607c59f137efcc1c2",
+            "side": "BUY",
+            "qty": 0.002,
+            "opened_at": "2026-11-12T11:45:36.976542Z",
+            "ms_after_last_master_close": 50761,
+            "ms_before_next_master_close": null,
+            "master_closes_after_it_opened": 0
+          },
+          {
+            "account": "follower41@mailinator.com",
+            "market_order_id": "ord_75727231b96237d513",
+            "side": "BUY",
+            "qty": 0.002,
+            "opened_at": "2026-11-12T11:45:36.97875Z",
+            "ms_after_last_master_close": 50763,
+            "ms_before_next_master_close": null,
+            "master_closes_after_it_opened": 0
+          },
+          {
+            "account": "follower49@mailinator.com",
+            "market_order_id": "ord_936d47ffe4b3d75bfa",
+            "side": "BUY",
+            "qty": 0.002,
+            "opened_at": "2026-11-12T11:45:36.974968Z",
+            "ms_after_last_master_close": 50759,
+            "ms_before_next_master_close": null,
+            "master_closes_after_it_opened": 0
+          },
+          {
+            "account": "follower47@mailinator.com",
+            "market_order_id": "ord_e7aac8381e2254da96",
+            "side": "BUY",
+            "qty": 0.002,
+            "opened_at": "2026-11-12T11:45:36.975704Z",
+            "ms_after_last_master_close": 50760,
+            "ms_before_next_master_close": null,
+            "master_closes_after_it_opened": 0
+          },
+          {
+            "account": "follower46@mailinator.com",
+            "market_order_id": "ord_9ec109762cbbf6a64b",
+            "side": "BUY",
+            "qty": 0.002,
+            "opened_at": "2026-11-12T11:45:36.976094Z",
+            "ms_after_last_master_close": 50761,
+            "ms_before_next_master_close": null,
+            "master_closes_after_it_opened": 0
+          },
+          {
+            "account": "follower50@mailinator.com",
+            "market_order_id": "ord_971b56a33b12363d56",
+            "side": "BUY",
+            "qty": 0.002,
+            "opened_at": "2026-11-12T11:45:36.974625Z",
+            "ms_after_last_master_close": 50759,
+            "ms_before_next_master_close": null,
+            "master_closes_after_it_opened": 0
+          },
+          {
+            "account": "follower48@mailinator.com",
+            "market_order_id": "ord_07a640bf08078fe51b",
+            "side": "BUY",
+            "qty": 0.002,
+            "opened_at": "2026-11-12T11:45:36.975361Z",
+            "ms_after_last_master_close": 50760,
+            "ms_before_next_master_close": null,
+            "master_closes_after_it_opened": 0
+          }
+        ]
+      },
+      "finding": "22 accounts still hold 22 positions after the master closed everything; 22 with stuck margin; e.g. {'follower33@mailinator.com': 1, 'follower31@mailinator.com': 1, 'follower38@mailinator.com': 1}"
+    }
+  ]
+}

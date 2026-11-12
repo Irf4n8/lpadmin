@@ -1,0 +1,338 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1794480424007,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-000,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424007,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-001,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424007,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-002,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424009,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-003,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424009,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-004,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424009,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-005,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424009,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-006,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424009,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-007,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424009,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-008,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424009,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-009,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424009,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-010,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424009,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-011,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424010,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-012,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424010,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-013,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424010,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-014,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424010,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-015,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424010,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-016,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424010,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-017,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424011,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-018,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424011,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-019,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424011,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-020,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424011,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-021,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424011,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-022,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424011,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-023,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424012,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-024,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424012,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-025,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424012,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-026,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424012,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-027,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424012,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-028,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424012,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-029,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424012,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-030,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424012,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-031,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424012,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-032,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424013,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-033,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424013,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-034,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424013,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-035,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424013,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-036,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424013,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-037,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424013,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-038,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424013,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-039,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424013,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-040,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424015,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-041,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424015,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-042,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424015,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-043,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424015,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-044,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424015,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-045,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424015,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-046,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424015,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-047,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424016,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-048,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424016,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-049,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424016,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-050,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424016,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-051,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424016,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-052,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424016,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-053,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424017,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-054,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424017,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-055,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424017,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-056,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-057,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-058,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-059,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-060,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-061,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-062,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-063,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-064,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-065,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-066,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-067,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-068,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-069,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-070,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-071,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-072,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-073,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-074,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-075,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-076,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-077,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-078,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-079,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-080,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-081,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-082,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-083,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-084,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-085,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-086,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-087,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-088,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-089,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-090,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-091,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-092,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-093,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-094,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-095,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-096,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-097,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-098,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424019,1,Sampler_Auth_Token_Exchange,200,OK,Auth-Thread-099,text,true,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,0,0,10
+1794480424488,464,Sampler_Auth_Token_Exchange,500,"Trader login failed for follower100@mailinator.com: HTTP 403 - {""error"":""account disabled""}
+",Auth-Thread-100,text,false,,840,320,101,101,https://lpadmin.blackfx.com/v1/member/login,394,0,10
+1794480424589,97,Master_Place_Market_Order,200,Order Placed,Master-Thread-001,text,true,,650,280,1,101,https://lpadmin.blackfx.com/v1/oms/paper/orders,82,0,12
+1794480424666,76,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-001,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,77,0,8
+1794480424670,78,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-002,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,81,0,8
+1794480424678,80,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-003,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,88,0,8
+1794480424683,83,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-004,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,93,0,8
+1794480424695,93,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-005,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,105,0,8
+1794480424697,62,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-017,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,108,0,8
+1794480424700,80,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-010,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,110,0,8
+1794480424701,70,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-014,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,112,0,8
+1794480424702,69,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-015,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,113,0,8
+1794480424707,96,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-007,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,117,0,8
+1794480424709,68,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-020,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,119,0,8
+1794480424711,93,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-009,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,122,0,8
+1794480424712,83,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-013,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,122,0,8
+1794480424713,105,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-006,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,123,0,8
+1794480424717,90,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-012,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,127,0,8
+1794480424718,51,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-026,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,128,0,8
+1794480424723,107,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-008,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,133,0,8
+1794480424724,84,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-019,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,134,0,8
+1794480424727,93,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-016,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,137,0,8
+1794480424734,111,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-011,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,145,0,8
+1794480424736,99,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-018,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,147,0,8
+1794480424741,70,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-027,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,151,0,8
+1794480424744,48,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-030,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,154,0,8
+1794480424747,63,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-029,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,157,0,8
+1794480424749,71,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-028,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,160,0,8
+1794480424760,62,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-031,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,171,0,8
+1794480424761,59,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-033,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,171,0,8
+1794480424762,63,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-032,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,174,0,8
+1794480424774,71,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-034,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,184,0,8
+1794480424775,68,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-035,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,186,0,8
+1794480424778,59,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-041,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,188,0,8
+1794480424779,66,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-038,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,189,0,8
+1794480424782,57,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-043,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,192,0,8
+1794480424783,65,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-040,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,193,0,8
+1794480424783,60,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-042,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,193,0,8
+1794480424787,50,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-046,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,198,0,8
+1794480424789,47,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-047,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,199,0,8
+1794480424790,45,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-048,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,200,0,8
+1794480424793,80,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-039,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,204,0,8
+1794480424795,86,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-036,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,206,0,8
+1794480424798,48,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-050,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,208,0,8
+1794480424802,91,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-037,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,213,0,8
+1794480424812,50,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-051,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,222,0,8
+1794480424812,84,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-044,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,222,0,8
+1794480424812,77,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-045,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,223,0,8
+1794480424815,52,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-053,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,226,0,8
+1794480424815,69,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-049,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,226,0,8
+1794480424816,55,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-052,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,227,0,8
+1794480424831,56,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-054,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,241,0,8
+1794480424831,52,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-057,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,242,0,8
+1794480424834,51,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-058,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,244,0,8
+1794480424835,52,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-060,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,246,0,8
+1794480424837,53,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-059,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,247,0,8
+1794480424839,61,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-056,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,249,0,8
+1794480424843,55,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-061,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,254,0,8
+1794480424848,60,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-062,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,259,0,8
+1794480424850,52,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-066,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,261,0,8
+1794480424851,56,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-065,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,262,0,8
+1794480424853,59,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-064,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,264,0,8
+1794480424860,83,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-055,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,270,0,8
+1794480424864,47,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-073,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,275,0,8
+1794480424865,52,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-070,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,276,0,8
+1794480424865,50,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-071,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,276,0,8
+1794480424866,54,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-069,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,277,0,8
+1794480424867,76,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-063,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,277,0,8
+1794480424871,59,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-068,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,281,0,8
+1794480424871,69,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-067,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,282,0,8
+1794480424883,51,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-075,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,293,0,8
+1794480424884,68,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-072,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,295,0,8
+1794480424887,50,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-078,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,297,0,8
+1794480424894,58,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-077,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,304,0,8
+1794480424899,59,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-079,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,309,0,8
+1794480424901,47,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-084,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,311,0,8
+1794480424901,50,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-083,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,312,0,8
+1794480424903,72,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-074,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,314,0,8
+1794480424910,76,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-076,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,321,0,8
+1794480424915,48,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-089,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,325,0,8
+1794480424915,55,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-085,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,325,0,8
+1794480424916,44,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-091,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,326,0,8
+1794480424920,54,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-087,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,330,0,8
+1794480424922,55,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-088,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,332,0,8
+1794480424922,79,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-080,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,333,0,8
+1794480424924,72,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-082,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,334,0,8
+1794480424924,74,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-081,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,334,0,8
+1794480424924,59,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-086,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,334,0,8
+1794480424932,44,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-095,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,342,0,8
+1794480424933,48,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-094,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,343,0,8
+1794480424935,67,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-090,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,345,0,8
+1794480424937,54,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-093,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,347,0,8
+1794480424942,47,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-096,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,352,0,8
+1794480424942,71,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-092,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,353,0,8
+1794480424953,51,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-099,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,364,0,8
+1794480424987,86,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-098,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,398,0,8
+1794480424992,93,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-097,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,403,0,8
+1794480425487,843,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-021,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,897,0,8
+1794480425501,855,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-022,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,912,0,8
+1794480425504,852,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-025,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,915,0,8
+1794480425520,872,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-023,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,931,0,8
+1794480425529,878,Follower_Poll_Replication_Order,200,Replicated,Follower-Thread-024,text,true,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,939,0,8
+1794480431255,6351,Follower_Poll_Replication_Order,404,Not Replicated,Follower-Thread-100,text,false,,1420,190,100,100,https://lpadmin.blackfx.com/v1/oms/paper/positions,6665,0,8
+1794480431349,87,Master_Burst_Order_Placement,200,Burst Order OK,Burst-Thread-2,text,true,,640,280,2,2,https://lpadmin.blackfx.com/v1/oms/paper/orders,73,0,10
+1794480431391,130,Master_Burst_Order_Placement,200,Burst Order OK,Burst-Thread-1,text,true,,640,280,2,2,https://lpadmin.blackfx.com/v1/oms/paper/orders,110,0,10
+1794480431451,102,Master_Burst_Order_Placement,200,Burst Order OK,Burst-Thread-1,text,true,,640,280,2,2,https://lpadmin.blackfx.com/v1/oms/paper/orders,86,0,10
+1794480431501,110,Master_Burst_Order_Placement,200,Burst Order OK,Burst-Thread-2,text,true,,640,280,2,2,https://lpadmin.blackfx.com/v1/oms/paper/orders,93,0,10
+1794480431562,110,Master_Burst_Order_Placement,200,Burst Order OK,Burst-Thread-1,text,true,,640,280,2,2,https://lpadmin.blackfx.com/v1/oms/paper/orders,93,0,10
+1794480431619,118,Master_Burst_Order_Placement,200,Burst Order OK,Burst-Thread-2,text,true,,640,280,2,2,https://lpadmin.blackfx.com/v1/oms/paper/orders,100,0,10
+1794480431660,97,Master_Burst_Order_Placement,200,Burst Order OK,Burst-Thread-1,text,true,,640,280,2,2,https://lpadmin.blackfx.com/v1/oms/paper/orders,82,0,10
+1794480431702,83,Master_Burst_Order_Placement,200,Burst Order OK,Burst-Thread-2,text,true,,640,280,2,2,https://lpadmin.blackfx.com/v1/oms/paper/orders,70,0,10
+1794480431743,82,Master_Burst_Order_Placement,200,Burst Order OK,Burst-Thread-1,text,true,,640,280,2,2,https://lpadmin.blackfx.com/v1/oms/paper/orders,69,0,10
+1794480431796,94,Master_Burst_Order_Placement,200,Burst Order OK,Burst-Thread-2,text,true,,640,280,2,2,https://lpadmin.blackfx.com/v1/oms/paper/orders,79,0,10
+1794480431866,69,Master_Place_Limit_Order,200,Limit Order Placed,Master-Limit-Thread,text,true,,620,290,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders/pending,58,0,10
+1794480432747,381,Master_Bulk_Cancellation_Storm,200,Cancelled Pending Orders,Master-Cancel-Thread,text,true,,480,220,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders/cancel,323,0,9
+1794480432967,208,Follower_Audit_Cancelled_Pending,200,Zero Pending Confirmed,CancelAudit-Thread-08,text,true,,1100,180,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders,176,0,10
+1794480433003,250,Follower_Audit_Cancelled_Pending,200,Zero Pending Confirmed,CancelAudit-Thread-07,text,true,,1100,180,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders,212,0,10
+1794480433034,283,Follower_Audit_Cancelled_Pending,200,Zero Pending Confirmed,CancelAudit-Thread-04,text,true,,1100,180,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders,240,0,10
+1794480433046,312,Follower_Audit_Cancelled_Pending,200,Zero Pending Confirmed,CancelAudit-Thread-01,text,true,,1100,180,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders,265,0,10
+1794480433091,342,Follower_Audit_Cancelled_Pending,200,Zero Pending Confirmed,CancelAudit-Thread-02,text,true,,1100,180,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders,290,0,10
+1794480433115,354,Follower_Audit_Cancelled_Pending,200,Zero Pending Confirmed,CancelAudit-Thread-09,text,true,,1100,180,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders,300,0,10
+1794480433140,378,Follower_Audit_Cancelled_Pending,200,Zero Pending Confirmed,CancelAudit-Thread-10,text,true,,1100,180,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders,321,0,10
+1794480433181,428,Follower_Audit_Cancelled_Pending,200,Zero Pending Confirmed,CancelAudit-Thread-06,text,true,,1100,180,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders,363,0,10
+1794480433181,433,Follower_Audit_Cancelled_Pending,200,Zero Pending Confirmed,CancelAudit-Thread-05,text,true,,1100,180,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders,368,0,10
+1794480433207,466,Follower_Audit_Cancelled_Pending,200,Zero Pending Confirmed,CancelAudit-Thread-03,text,true,,1100,180,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders,396,0,10
+1794480433239,232,Follower_Audit_Cancelled_Pending,200,Zero Pending Confirmed,CancelAudit-Thread-12,text,true,,1100,180,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders,197,0,10
+1794480433256,228,Follower_Audit_Cancelled_Pending,200,Zero Pending Confirmed,CancelAudit-Thread-13,text,true,,1100,180,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders,193,0,10
+1794480433284,316,Follower_Audit_Cancelled_Pending,200,Zero Pending Confirmed,CancelAudit-Thread-11,text,true,,1100,180,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders,268,0,10
+1794480433317,255,Follower_Audit_Cancelled_Pending,200,Zero Pending Confirmed,CancelAudit-Thread-14,text,true,,1100,180,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders,216,0,10
+1794480433321,227,Follower_Audit_Cancelled_Pending,200,Zero Pending Confirmed,CancelAudit-Thread-15,text,true,,1100,180,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders,192,0,10
+1794480433364,248,Follower_Audit_Cancelled_Pending,200,Zero Pending Confirmed,CancelAudit-Thread-16,text,true,,1100,180,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders,210,0,10
+1794480433408,269,Follower_Audit_Cancelled_Pending,200,Zero Pending Confirmed,CancelAudit-Thread-17,text,true,,1100,180,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders,228,0,10
+1794480433458,277,Follower_Audit_Cancelled_Pending,200,Zero Pending Confirmed,CancelAudit-Thread-18,text,true,,1100,180,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders,235,0,10
+1794480433465,277,Follower_Audit_Cancelled_Pending,200,Zero Pending Confirmed,CancelAudit-Thread-19,text,true,,1100,180,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders,235,0,10
+1794480433496,277,Follower_Audit_Cancelled_Pending,200,Zero Pending Confirmed,CancelAudit-Thread-20,text,true,,1100,180,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders,235,0,10
+1794480434486,993,Master_Emergency_SquareOff,200,SquareOff Completed,Master-SquareOff-Thread,text,true,,510,230,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,844,0,10
+1794480434602,107,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-003,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,90,0,10
+1794480434606,115,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-002,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,97,0,10
+1794480434613,108,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-007,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,91,0,10
+1794480434613,101,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-011,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,85,0,10
+1794480434613,116,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-004,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,98,0,10
+1794480434618,116,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-006,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,98,0,10
+1794480434619,126,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-001,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,107,0,10
+1794480434623,90,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-020,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,76,0,10
+1794480434629,121,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-008,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,102,0,10
+1794480434629,116,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-012,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,98,0,10
+1794480434633,111,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-015,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,94,0,10
+1794480434633,133,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-005,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,113,0,10
+1794480434636,125,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-010,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,106,0,10
+1794480434636,113,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-016,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,96,0,10
+1794480434639,110,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-019,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,93,0,10
+1794480434647,131,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-014,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,111,0,10
+1794480434647,124,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-018,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,105,0,10
+1794480434654,130,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-017,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,110,0,10
+1794480434656,141,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-013,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,119,0,10
+1794480434696,97,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-021,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,82,0,10
+1794480434707,101,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-025,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,85,0,10
+1794480434707,108,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-022,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,91,0,10
+1794480434720,211,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-009,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,179,0,10
+1794480434733,120,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-026,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,102,0,10
+1794480434741,129,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-024,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,109,0,10
+1794480434741,104,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-035,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,88,0,10
+1794480434741,125,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-027,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,106,0,10
+1794480434748,116,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-030,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,98,0,10
+1794480434748,122,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-029,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,103,0,10
+1794480434748,138,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-023,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,117,0,10
+1794480434758,109,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-037,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,92,0,10
+1794480434758,129,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-031,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,109,0,10
+1794480434758,113,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-036,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,96,0,10
+1794480434758,130,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-033,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,110,0,10
+1794480434758,145,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-028,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,123,0,10
+1794480434758,132,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-034,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,112,0,10
+1794480434775,118,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-039,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,100,0,10
+1794480434787,131,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-038,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,111,0,10
+1794480434788,154,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-032,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,130,0,10
+1794480434806,103,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-040,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,87,0,10
+1794480434838,117,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-043,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,99,0,10
+1794480434844,128,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-041,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,108,0,10
+1794480434847,127,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-042,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,107,0,10
+1794480434852,113,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-044,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,96,0,10
+1794480434860,113,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-047,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,96,0,10
+1794480434866,121,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-046,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,102,0,10
+1794480434868,117,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-050,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,99,0,10
+1794480434869,121,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-048,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,102,0,10
+1794480434872,130,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-045,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,110,0,10
+1794480434880,129,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-049,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,109,0,10
+1794480434896,127,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-055,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,107,0,10
+1794480434898,130,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-054,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,110,0,10
+1794480434900,112,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-058,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,95,0,10
+1794480434902,138,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-053,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,117,0,10
+1794480434912,105,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-060,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,89,0,10
+1794480434917,147,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-056,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,124,0,10
+1794480434920,143,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-057,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,121,0,10
+1794480434926,137,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-059,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,116,0,10
+1794480434935,171,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-052,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,145,0,10
+1794480434941,103,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-061,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,87,0,10
+1794480434943,181,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-051,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,153,0,10
+1794480434964,98,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-066,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,83,0,10
+1794480434970,123,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-063,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,104,0,10
+1794480434971,112,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-065,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,95,0,10
+1794480434978,108,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-068,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,91,0,10
+1794480434980,136,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-062,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,115,0,10
+1794480434987,114,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-069,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,96,0,10
+1794480434992,140,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-064,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,119,0,10
+1794480434997,129,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-067,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,109,0,10
+1794480435019,123,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-071,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,104,0,10
+1794480435022,142,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-070,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,120,0,10
+1794480435030,118,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-075,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,100,0,10
+1794480435033,129,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-074,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,109,0,10
+1794480435038,140,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-072,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,119,0,10
+1794480435040,139,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-073,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,118,0,10
+1794480435049,129,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-077,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,109,0,10
+1794480435050,115,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-079,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,97,0,10
+1794480435052,110,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-080,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,93,0,10
+1794480435060,142,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-076,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,120,0,10
+1794480435064,138,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-078,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,117,0,10
+1794480435074,108,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-082,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,91,0,10
+1794480435100,156,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-081,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,132,0,10
+1794480435116,145,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-083,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,123,0,10
+1794480435117,129,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-087,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,109,0,10
+1794480435125,144,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-086,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,122,0,10
+1794480435128,135,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-088,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,114,0,10
+1794480435133,161,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-084,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,136,0,10
+1794480435134,156,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-085,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,132,0,10
+1794480435137,117,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-090,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,99,0,10
+1794480435141,111,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-092,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,94,0,10
+1794480435144,146,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-089,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,124,0,10
+1794480435157,118,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-095,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,100,0,10
+1794480435163,140,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-091,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,119,0,10
+1794480435174,123,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-097,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,104,0,10
+1794480435185,133,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-098,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,113,0,10
+1794480435191,130,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-099,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,110,0,10
+1794480435191,152,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-094,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,129,0,10
+1794480435191,141,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-096,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,119,0,10
+1794480435198,166,Follower_SquareOff_Reconciliation,200,Positions Flattened,SquareOff-Thread-093,text,true,,820,210,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,141,0,10
+1794480435761,696,Follower_SquareOff_Reconciliation,500,"Trader login failed for follower100@mailinator.com: HTTP 403 - {""error"":""account disabled""}
+",SquareOff-Thread-100,text,false,,512,256,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/squareoff,591,0,10

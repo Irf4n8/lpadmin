@@ -1,0 +1,2829 @@
+{
+  "suite_name": "BlackTrader Copy Trading 100-Follower Test Suite",
+  "started_at": "2026-11-12T10:26:28.857726+00:00",
+  "completed_at": "2026-11-12T10:28:11.785370+00:00",
+  "master_email": "ctmaster@mailinator.com",
+  "master_id": "mem_aac4ca423a6925dca7",
+  "followers_count": 100,
+  "symbol": "BINANCE:BTCUSDT.P",
+  "lot_size": 0.1,
+  "instance": "paper",
+  "baseline_summary": {
+    "master_balance": 99997055.30492997,
+    "followers_count": 100,
+    "multiplier_distribution": {
+      "1.0x": "Followers 1-25",
+      "2.0x": "Followers 26-50",
+      "3.0x": "Followers 51-75",
+      "0.5x": "Followers 76-100"
+    }
+  },
+  "scenarios": [
+    {
+      "name": "Market BUY Fan-out (10 orders)",
+      "status": "PASS",
+      "pass_count": 100,
+      "total_followers": 100,
+      "orders_placed": 10,
+      "expected_orders": 10,
+      "master_mkt_ids": [
+        "ord_667e568b5cad00ce1e",
+        "ord_886f0173da7e3b1e3f",
+        "ord_9509e896e9fbbc093e",
+        "ord_563093aec999beb5ed",
+        "ord_76f42150b9c0614344",
+        "ord_83cb9d694d91095fc0",
+        "ord_268646994f4ba9f700",
+        "ord_026968126fe832ff13",
+        "ord_ae05e856df217fa73a",
+        "ord_1c1dfbfb452ca8c54e"
+      ],
+      "latencies": {
+        "min_ms": 1772.69,
+        "avg_ms": 1796.4,
+        "p95_ms": 1820.86,
+        "max_ms": 1822.22
+      },
+      "details": {
+        "follower1@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower2@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower3@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower4@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower5@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower6@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower7@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower8@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower9@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower10@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower11@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower12@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower13@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower14@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower15@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower16@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower17@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower18@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower19@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower20@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower21@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower22@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower23@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower24@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower25@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower26@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower27@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower28@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower29@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower30@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower31@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower32@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower33@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower34@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower35@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower36@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower37@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower38@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower39@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower40@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower41@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower42@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower43@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower44@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower45@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower46@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower47@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower48@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower49@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower50@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower51@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower52@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower53@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower54@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower55@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower56@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower57@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower58@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower59@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower60@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower61@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower62@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower63@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower64@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower65@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower66@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower67@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower68@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower69@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower70@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower71@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower72@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower73@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower74@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower75@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower76@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower77@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower78@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower79@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower80@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower81@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower82@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower83@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower84@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower85@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower86@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower87@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower88@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower89@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower90@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower91@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower92@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower93@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower94@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower95@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower96@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower97@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower98@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower99@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        },
+        "follower100@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "count_ok": true,
+          "lots_ok": true
+        }
+      }
+    },
+    {
+      "name": "Partial Close (10 orders reduced)",
+      "status": "PASS",
+      "pass_count": 100,
+      "total_followers": 100,
+      "orders_reduced": 10,
+      "details": {
+        "follower1@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower2@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower3@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower4@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower5@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower6@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower7@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower8@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower9@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower10@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower11@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower12@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower13@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower14@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower15@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower16@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower17@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower18@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower19@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower20@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower21@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower22@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower23@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower24@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower25@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.05,
+          "ok": true
+        },
+        "follower26@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower27@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower28@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower29@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower30@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower31@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower32@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower33@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower34@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower35@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower36@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower37@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower38@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower39@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower40@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower41@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower42@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower43@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower44@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower45@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower46@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower47@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower48@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower49@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower50@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.1,
+          "ok": true
+        },
+        "follower51@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower52@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower53@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower54@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower55@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower56@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower57@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower58@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower59@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower60@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower61@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower62@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower63@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower64@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower65@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower66@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower67@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower68@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower69@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower70@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower71@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower72@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower73@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower74@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower75@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.15,
+          "ok": true
+        },
+        "follower76@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower77@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower78@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower79@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower80@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower81@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower82@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower83@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower84@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower85@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower86@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower87@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower88@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower89@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower90@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower91@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower92@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower93@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower94@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower95@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower96@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower97@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower98@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower99@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        },
+        "follower100@mailinator.com": {
+          "matching_count": 10,
+          "expected_remaining": 0.025,
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "Full Close (10 orders closed)",
+      "status": "PASS",
+      "pass_count": 100,
+      "orphan_count": 0,
+      "total_followers": 100,
+      "orders_closed": 10,
+      "details": {
+        "follower1@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower2@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower3@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower4@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower5@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower6@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower7@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower8@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower9@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower10@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower11@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower12@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower13@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower14@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower15@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower16@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower17@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower18@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower19@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower20@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower21@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower22@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower23@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower24@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower25@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower26@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower27@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower28@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower29@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower30@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower31@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower32@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower33@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower34@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower35@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower36@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower37@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower38@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower39@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower40@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower41@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower42@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower43@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower44@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower45@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower46@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower47@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower48@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower49@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower50@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower51@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower52@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower53@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower54@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower55@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower56@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower57@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower58@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower59@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower60@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower61@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower62@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower63@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower64@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower65@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower66@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower67@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower68@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower69@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower70@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower71@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower72@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower73@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower74@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower75@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower76@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower77@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower78@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower79@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower80@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower81@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower82@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower83@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower84@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower85@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower86@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower87@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower88@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower89@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower90@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower91@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower92@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower93@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower94@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower95@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower96@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower97@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower98@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower99@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        },
+        "follower100@mailinator.com": {
+          "closed": true,
+          "open_positions": 0
+        }
+      }
+    },
+    {
+      "name": "Take Profit / Stop Loss Propagation (10 orders)",
+      "status": "PASS",
+      "pass_count": 100,
+      "total_followers": 100,
+      "orders_count": 10,
+      "details": {
+        "follower3@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower5@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower1@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower6@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower4@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower2@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower7@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower9@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower8@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower10@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower11@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower13@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower14@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower15@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower18@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower17@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower16@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower12@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower19@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower20@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower25@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower23@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower27@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower21@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower28@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower26@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower24@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower22@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower29@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower32@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower31@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower30@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower33@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower36@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower38@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower34@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower39@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower41@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower40@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower42@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower35@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower37@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower46@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower43@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower45@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower47@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower44@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower48@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower50@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower52@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower49@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower51@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower53@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower54@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower56@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower57@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower55@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower59@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower58@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower60@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower61@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower62@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower64@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower65@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower63@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower68@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower66@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower70@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower73@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower69@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower75@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower74@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower71@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower67@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower72@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower78@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower79@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower77@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower76@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower80@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower85@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower83@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower84@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower82@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower81@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower86@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower89@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower87@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower88@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower93@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower90@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower91@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower92@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower95@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower97@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower99@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower100@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower94@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower96@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        },
+        "follower98@mailinator.com": {
+          "tpsl_count": 10,
+          "expected_count": 10,
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "Pending Limit Orders & Cancel (10 orders)",
+      "status": "PASS",
+      "pass_count": 100,
+      "total_followers": 100,
+      "pending_count": 10
+    },
+    {
+      "name": "Rapid Burst (10 orders)",
+      "status": "PASS",
+      "burst_count": 10,
+      "placed_count": 10,
+      "burst_duration_sec": 2.09
+    },
+    {
+      "name": "Market SELL Fan-out (10 orders)",
+      "status": "PASS",
+      "pass_count": 100,
+      "total_followers": 100,
+      "orders_placed": 10,
+      "details": {
+        "follower1@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower2@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower3@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower4@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower5@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower6@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower7@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower8@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower9@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower10@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower11@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower12@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower13@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower14@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower15@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower16@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower17@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower18@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower19@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower20@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower21@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower22@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower23@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower24@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower25@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.1,
+          "ok": true
+        },
+        "follower26@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower27@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower28@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower29@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower30@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower31@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower32@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower33@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower34@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower35@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower36@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower37@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower38@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower39@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower40@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower41@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower42@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower43@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower44@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower45@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower46@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower47@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower48@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower49@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower50@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.2,
+          "ok": true
+        },
+        "follower51@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower52@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower53@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower54@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower55@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower56@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower57@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower58@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower59@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower60@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower61@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower62@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower63@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower64@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower65@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower66@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower67@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower68@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower69@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower70@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower71@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower72@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower73@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower74@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower75@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.3,
+          "ok": true
+        },
+        "follower76@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower77@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower78@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower79@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower80@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower81@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower82@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower83@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower84@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower85@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower86@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower87@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower88@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower89@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower90@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower91@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower92@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower93@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower94@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower95@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower96@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower97@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower98@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower99@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        },
+        "follower100@mailinator.com": {
+          "orders_count": 10,
+          "expected_count": 10,
+          "expected_lot": 0.05,
+          "ok": true
+        }
+      }
+    },
+    {
+      "name": "Follower Manual Close Isolation",
+      "status": "PASS",
+      "probe_follower": "follower3@mailinator.com",
+      "probe_closed": true,
+      "master_still_open": true,
+      "peers_still_open": true
+    },
+    {
+      "name": "Follow Mid-Trade Isolation (No Retroactive Copying)",
+      "status": "PASS",
+      "retroactive_copied": false,
+      "summary": "No retroactive trade copied (Platform isolates historical trades)"
+    },
+    {
+      "name": "Unfollow Mid-Trade Behavior Probe",
+      "status": "OBSERVED",
+      "had_position_initially": true,
+      "open_after_unfollow": true,
+      "open_after_master_close": false,
+      "behavior_summary": "Position was closed on master close"
+    },
+    {
+      "name": "Final Teardown & Zero Orphan Verification",
+      "status": "PASS",
+      "orphan_count": 0
+    }
+  ]
+}

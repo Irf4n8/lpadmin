@@ -1,0 +1,83 @@
+{
+  "suite": "Browser user journeys",
+  "timestamp": "2026-11-12T12:22:09.016149+00:00",
+  "results": [
+    {
+      "name": "U1-U3 Auth gate, wrong password, login",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "login_to_account_s": 1.0
+      }
+    },
+    {
+      "name": "U4-U6 Terminal loads, tabs, trades panel",
+      "status": "FAIL",
+      "findings": [
+        {
+          "severity": "HIGH",
+          "message": "U6 Trades tab 'Orders' could not be opened: TimeoutError"
+        },
+        {
+          "severity": "HIGH",
+          "message": "U6 Trades tab 'History' could not be opened: TimeoutError"
+        },
+        {
+          "severity": "INFO",
+          "message": "U6 'Orders' tab lists 4624 entries for one account (history is never trimmed/paginated)"
+        }
+      ],
+      "metrics": {
+        "terminal_ready_s": 3.1,
+        "trades_positions_s": 0.1,
+        "trades_pending_s": 0.1,
+        "trades_funds_s": 0.2,
+        "orders_count_in_tab": 4624
+      }
+    },
+    {
+      "name": "U7 Logout gates the app again",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {}
+    },
+    {
+      "name": "U8 Admin panel journey",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "admin_members_visible_samples": 1
+      }
+    },
+    {
+      "name": "U9 Mobile viewport",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {}
+    },
+    {
+      "name": "U10 Client-side hygiene (whole journey)",
+      "status": "WARN",
+      "findings": [
+        {
+          "severity": "MED",
+          "message": "JS/console error: Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "severity": "INFO",
+          "message": "client error 401 while browsing: https://lpadmin.blackfx.com/api/auth/login"
+        },
+        {
+          "severity": "MED",
+          "message": "the Content-Security-Policy blocks Cloudflare's analytics beacon (cloudflareinsights) - 19 console errors on every page load; allow it in script-src or remove the Cloudflare Web Analytics snippet"
+        }
+      ],
+      "metrics": {
+        "js_errors": 1,
+        "http_5xx": 0,
+        "http_4xx": 1,
+        "slow": 0
+      }
+    }
+  ]
+}

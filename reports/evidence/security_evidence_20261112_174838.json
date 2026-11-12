@@ -1,0 +1,123 @@
+{
+  "suite": "Security",
+  "timestamp": "2026-11-12T12:18:38.914067+00:00",
+  "results": [
+    {
+      "name": "S1 Unauthenticated access",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "endpoints_checked": 10
+      }
+    },
+    {
+      "name": "S2 Invalid and tampered tokens",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {}
+    },
+    {
+      "name": "S3 IDOR (cross-account access)",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "attacks": 4
+      }
+    },
+    {
+      "name": "S4 Vertical privilege (trader -> admin)",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {}
+    },
+    {
+      "name": "S5 Copy-trading data exposure",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "rows_visible_to_follower": 0
+      }
+    },
+    {
+      "name": "S6 Login hardening",
+      "status": "PASS",
+      "findings": [
+        {
+          "severity": "INFO",
+          "message": "session cookie lives 400 days (long-lived; consider shorter for a trading platform)"
+        }
+      ],
+      "metrics": {
+        "unknown_user": [
+          401,
+          "{\"error\":\"invalid email or password\"}\n"
+        ],
+        "known_user_wrong_pw": [
+          401,
+          "{\"error\":\"invalid email or password\"}\n"
+        ],
+        "timing_ms": [
+          566,
+          786
+        ],
+        "rapid_bad_logins": {
+          "attempts": 6,
+          "codes": [
+            401,
+            429
+          ]
+        },
+        "session_cookie_days": 400
+      }
+    },
+    {
+      "name": "S7 Injection",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {}
+    },
+    {
+      "name": "S8 Malformed and oversized requests",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {}
+    },
+    {
+      "name": "S9 Transport and headers",
+      "status": "WARN",
+      "findings": [
+        {
+          "severity": "MED",
+          "message": "plain http:// returns 200 and is not redirected to https:// (HSTS only protects after the first visit)"
+        },
+        {
+          "severity": "MED",
+          "message": "CORS allows origin 'https://evil.example' (ACAO=*, credentials=None)"
+        },
+        {
+          "severity": "MED",
+          "message": "CORS allows origin 'null' (ACAO=*, credentials=None)"
+        }
+      ],
+      "metrics": {
+        "http_status": 200,
+        "headers": {
+          "strict-transport-security": "max-age=31536000",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "SAMEORIGIN",
+          "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src https://chartv2.blacktrader.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'",
+          "referrer-policy": "strict-origin-when-cross-origin",
+          "permissions-policy": null,
+          "server": "cloudflare"
+        },
+        "tls": "TLSv1.3"
+      }
+    },
+    {
+      "name": "S10 Error hygiene",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {}
+    }
+  ]
+}
