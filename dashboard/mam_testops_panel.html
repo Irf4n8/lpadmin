@@ -1,0 +1,220 @@
+<!-- ================= TEST OPERATIONS (added tabs: Test Runner, Reports) ================= -->
+<style>
+  .to-wrap { margin-bottom: 24px; }
+  .to-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .to-kpi { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 14px 16px; }
+  .to-kpi .l { font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--text-muted); }
+  .to-kpi .v { font-size: 22px; font-weight: 800; font-family: 'JetBrains Mono', monospace; margin-top: 4px; }
+  .to-panel { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+  .to-panel h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .5px; color: var(--text-muted); margin-bottom: 12px; }
+  .to-opts { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; }
+  .to-opts label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; display: flex; flex-direction: column; gap: 4px; }
+  .to-opts input, .to-opts select { background: var(--surface); border: 1px solid var(--card-border); color: var(--text); border-radius: 8px; padding: 7px 10px; width: 110px; font-family: 'JetBrains Mono', monospace; }
+  .to-cat { font-size: 12px; font-weight: 800; color: var(--accent-bright); text-transform: uppercase; margin: 14px 0 8px; }
+  .to-suites { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; }
+  .to-suite { background: var(--surface); border: 1px solid var(--card-border); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 6px; }
+  .to-suite b { font-size: 13px; }
+  .to-suite p { font-size: 12px; color: var(--text-muted); flex: 1; }
+  .to-suite .meta { font-size: 11px; color: var(--text-dim); }
+  .to-suite.danger { border-color: rgba(244, 63, 94, .45); }
+  .to-suite.real { border-color: rgba(245, 158, 11, .5); }
+  .to-btn { background: var(--accent); color: #fff; border: none; border-radius: 8px; padding: 7px 12px; font-weight: 700; cursor: pointer; font-family: inherit; }
+  .to-btn.stop { background: var(--danger); } .to-btn.ghost { background: transparent; border: 1px solid var(--card-border); color: var(--text-muted); }
+  .to-btn:disabled { opacity: .45; cursor: not-allowed; }
+  .to-status { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; font-size: 13px; margin-bottom: 10px; }
+  .to-pill { padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 800; }
+  .to-pill.IDLE { background: rgba(148,163,184,.2); color: var(--text-muted); } .to-pill.RUNNING { background: rgba(59,130,246,.25); color: #60a5fa; }
+  .to-pill.COMPLETED, .to-pill.PASS, .to-pill.ok { background: rgba(16,185,129,.2); color: var(--success); }
+  .to-pill.FAILED, .to-pill.FAIL, .to-pill.fail, .to-pill.TERMINATED { background: rgba(244,63,94,.2); color: var(--danger); }
+  .to-pill.WARN, .to-pill.warn, .to-pill.skip { background: rgba(245,158,11,.2); color: var(--warning); }
+  .to-log { background: #05070b; border: 1px solid var(--card-border); border-radius: 10px; padding: 12px; height: 320px; overflow: auto; white-space: pre-wrap; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #cbd5e1; }
+  .to-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .to-table th { text-align: left; color: var(--text-muted); font-size: 11px; text-transform: uppercase; padding: 6px 8px; border-bottom: 1px solid var(--card-border); }
+  .to-table td { padding: 6px 8px; border-bottom: 1px solid rgba(30,40,61,.6); font-family: 'JetBrains Mono', monospace; }
+  .to-table tr.click { cursor: pointer; } .to-table tr.click:hover { background: var(--card-hover); }
+  .to-health { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 6px; font-size: 12px; }
+  .to-health div { display: flex; gap: 8px; align-items: center; } .to-health small { color: var(--text-dim); }
+</style>
+
+<div id="tabContentTestRunner" class="to-wrap" style="display: none;">
+  <div class="to-kpis">
+    <div class="to-kpi"><div class="l">Suites tracked</div><div class="v" id="toKSuites">0</div></div>
+    <div class="to-kpi"><div class="l">Suites green</div><div class="v text-green" id="toKGreen">0</div></div>
+    <div class="to-kpi"><div class="l">Checks passed</div><div class="v text-green" id="toKPass">0</div></div>
+    <div class="to-kpi"><div class="l">Checks failed</div><div class="v" style="color: var(--danger)" id="toKFail">0</div></div>
+    <div class="to-kpi"><div class="l">Runs recorded</div><div class="v" id="toKRuns">0</div></div>
+  </div>
+
+  <div class="to-panel">
+    <h3>Getting started / setup health <button class="to-btn ghost" style="float:right" onclick="toLoadHealth(true)">Re-check</button></h3>
+    <div id="toHealth" class="to-health">Checking…</div>
+  </div>
+
+  <div class="to-panel">
+    <h3>Run options</h3>
+    <div class="to-opts">
+      <label>Instance<select id="toInstance"><option value="paper">paper</option><option value="real">real</option></select></label>
+      <label>Followers from<input id="toStart" type="number" min="1" value="1"></label>
+      <label>to<input id="toEnd" type="number" min="1" value="100"></label>
+      <label>Lot<input id="toLot" type="number" step="0.01" min="0.01" value="0.1"></label>
+      <label>Orders<input id="toOrders" type="number" min="1" value="10"></label>
+    </div>
+    <div id="toSuites"></div>
+  </div>
+
+  <div class="to-panel">
+    <h3>Live run</h3>
+    <div class="to-status">
+      <span class="to-pill IDLE" id="toState">IDLE</span>
+      <span id="toName">No run in progress</span>
+      <span id="toElapsed" style="color: var(--text-muted)"></span>
+      <span id="toCounts" style="color: var(--text-muted)"></span>
+      <button class="to-btn stop" id="toStop" onclick="toStop()" disabled>■ Stop</button>
+    </div>
+    <div class="to-log" id="toLog">No logs recorded yet.</div>
+  </div>
+
+  <div class="to-panel">
+    <h3>Run history</h3>
+    <table class="to-table"><thead><tr><th>Started</th><th>Suite</th><th>Instance</th><th>Status</th><th>Pass</th><th>Fail</th><th>Duration</th></tr></thead>
+      <tbody id="toHistory"><tr><td colspan="7">No runs yet.</td></tr></tbody></table>
+    <div class="to-log" id="toHistLog" style="display:none; margin-top:12px"></div>
+  </div>
+</div>
+
+<div id="tabContentReports" class="to-wrap" style="display: none;">
+  <div class="to-panel">
+    <h3>Evidence reports <button class="to-btn ghost" style="float:right" onclick="toLoadReports()">Refresh</button></h3>
+    <table class="to-table"><thead><tr><th>File</th><th>Type</th><th>Size</th><th>Modified</th></tr></thead>
+      <tbody id="toReports"><tr><td colspan="4">No reports.</td></tr></tbody></table>
+  </div>
+  <div class="to-panel" id="toReportView" style="display:none">
+    <h3 id="toReportName"></h3>
+    <div class="to-log" id="toReportBody" style="height: 460px"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const j = async (url, opts) => { const r = await fetch(url, opts); let d = {}; try { d = await r.json(); } catch (e) {} return { ok: r.ok, status: r.status, data: d }; };
+  let toActive = false, pollTimer = null, suites = [];
+
+  function params() {
+    return { instance: $('toInstance').value, start: +$('toStart').value || 1, end: +$('toEnd').value || 100,
+             lot: +$('toLot').value || 0.1, orders_count: +$('toOrders').value || 10 };
+  }
+
+  async function loadSuites() {
+    const r = await j('/api/suites'); if (!r.ok) return;
+    suites = r.data.suites || [];
+    if (r.data.defaults) { $('toEnd').value = r.data.defaults.follower_count; }
+    const groups = {};
+    suites.forEach(s => (groups[s.category] = groups[s.category] || []).push(s));
+    $('toSuites').innerHTML = Object.keys(groups).map(cat => `<div class="to-cat">${esc(cat)}</div><div class="to-suites">` +
+      groups[cat].map(s => `<div class="to-suite ${s.risk === 'destructive' ? 'danger' : (s.risk === 'real' ? 'real' : '')}">
+        <b>${esc(s.name)}</b><p>${esc(s.desc)}</p>
+        <div class="meta">${esc(s.tag || '')} · ~${s.minutes || '?'} min${s.risk !== 'safe' ? ' · ' + esc(s.risk.toUpperCase()) : ''}</div>
+        <button class="to-btn run-btn" onclick="toRun('${esc(s.key)}')">▶ Run</button></div>`).join('') + '</div>').join('');
+  }
+
+  window.toRun = async function (key) {
+    const s = suites.find(x => x.key === key); const p = params(); let confirmed = false;
+    const inst = s.fixed_instance || p.instance;
+    if (s.risk !== 'safe' || inst === 'real') {
+      const word = (s.risk === 'destructive') ? 'TEARDOWN' : 'REAL';
+      const typed = prompt(`${s.name}\n${s.risk === 'destructive' ? 'This closes positions and cancels orders.' : 'This runs against the REAL instance.'}\nType ${word} to continue:`);
+      if (typed !== word) return;
+      confirmed = true;
+    }
+    const r = await j('/api/run', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ suite: key, params: p, confirm: confirmed || undefined }) });
+    if (!r.ok) alert(r.data.error || 'Could not start run');
+    refresh();
+  };
+
+  window.toStop = async function () { await j('/api/stop', { method: 'POST' }); refresh(); };
+
+  async function loadStatus() {
+    const r = await j('/api/status'); if (!r.ok) return; const s = r.data;
+    $('toState').className = 'to-pill ' + s.status; $('toState').textContent = s.status;
+    $('toName').textContent = s.name || 'No run in progress';
+    $('toElapsed').textContent = s.started_at ? `${s.elapsed_seconds}s` : '';
+    $('toCounts').textContent = s.suite ? `PASS ${s.pass_count} · FAIL ${s.fail_count}` : '';
+    $('toStop').disabled = !s.is_running;
+    document.querySelectorAll('.run-btn').forEach(b => b.disabled = !!s.is_running);
+    const l = await j('/api/logs');
+    if (l.ok) { const box = $('toLog'), stick = box.scrollTop + box.clientHeight >= box.scrollHeight - 30;
+      box.textContent = l.data.logs || 'No logs recorded yet.'; if (stick) box.scrollTop = box.scrollHeight; }
+  }
+
+  async function loadSummary() {
+    const r = await j('/api/summary'); if (!r.ok) return; const t = r.data.totals || {};
+    $('toKSuites').textContent = t.suites || 0; $('toKGreen').textContent = t.suites_green || 0;
+    $('toKPass').textContent = t.passed || 0; $('toKFail').textContent = t.failed || 0; $('toKRuns').textContent = r.data.runs_recorded || 0;
+  }
+
+  async function loadHistory() {
+    const r = await j('/api/history'); if (!r.ok) return; const runs = r.data.runs || [];
+    $('toHistory').innerHTML = runs.length ? runs.slice(0, 30).map(h => `<tr class="click" onclick="toViewRun('${esc(h.id)}')">
+      <td>${esc((h.started_at || '').replace('T', ' '))}</td><td>${esc(h.name)}</td><td>${esc((h.params || {}).instance || '')}</td>
+      <td><span class="to-pill ${esc(h.status)}">${esc(h.status)}</span></td><td>${h.passed ?? ''}</td><td>${h.failed ?? ''}</td>
+      <td>${h.duration_sec != null ? h.duration_sec + 's' : ''}</td></tr>`).join('') : '<tr><td colspan="7">No runs yet.</td></tr>';
+  }
+
+  window.toViewRun = async function (id) {
+    const r = await j('/api/history/' + encodeURIComponent(id) + '/log'); const box = $('toHistLog');
+    box.style.display = 'block'; box.textContent = r.ok ? r.data.logs : (r.data.error || 'log unavailable');
+  };
+
+  window.toLoadHealth = async function (refresh) {
+    $('toHealth').textContent = 'Checking…';
+    const r = await j('/api/health' + (refresh ? '?refresh=1' : '')); if (!r.ok) { $('toHealth').textContent = 'Health check failed'; return; }
+    $('toHealth').innerHTML = (r.data.checks || []).map(c => `<div><span class="to-pill ${esc(c.status)}">${esc(c.status.toUpperCase())}</span>
+      <span>${esc(c.label)}${c.detail ? ' <small>— ' + esc(c.detail) + '</small>' : ''}${(c.status === 'fail' || c.status === 'warn') && c.fix ? '<br><small>fix: ' + esc(c.fix) + '</small>' : ''}</span></div>`).join('');
+  };
+
+  window.toLoadReports = async function () {
+    const r = await j('/api/reports'); if (!r.ok) return; const rows = r.data.reports || [];
+    $('toReports').innerHTML = rows.length ? rows.map(f => `<tr class="click" onclick="toOpenReport('${esc(f.filename)}')"><td>${esc(f.filename)}</td><td>${esc(f.type)}</td><td>${f.size_kb} KB</td><td>${esc(f.modified_at)}</td></tr>`).join('') : '<tr><td colspan="4">No reports.</td></tr>';
+  };
+
+  window.toOpenReport = async function (name) {
+    const r = await j('/api/reports/' + encodeURIComponent(name)); $('toReportView').style.display = 'block'; $('toReportName').textContent = name;
+    let body = r.ok ? r.data.content : (r.data.error || 'unavailable');
+    if (r.ok && r.data.is_json) { try { body = JSON.stringify(JSON.parse(body), null, 2); } catch (e) {} }
+    $('toReportBody').textContent = body;
+  };
+
+  function refresh() { loadStatus(); loadSummary(); loadHistory(); }
+
+  function show(tabId) {
+    const runner = tabId === 'test-runner', reports = tabId === 'reports';
+    $('tabContentTestRunner').style.display = runner ? 'block' : 'none';
+    $('tabContentReports').style.display = reports ? 'block' : 'none';
+    clearInterval(pollTimer);
+    if (runner) { refresh(); pollTimer = setInterval(refresh, 2000); }
+    if (reports) toLoadReports();
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const bar = document.querySelector('.tabs-bar');
+    [['test-runner', '🧪 Test Runner'], ['reports', '📁 Evidence Reports']].forEach(([id, label]) => {
+      const b = document.createElement('button'); b.className = 'tab-item';
+      b.innerHTML = `<span>${label}</span>`; b.onclick = function () { window.switchTab(id, b); }; bar.appendChild(b);
+    });
+    const original = window.switchTab;
+    window.switchTab = function (tabId, el) {
+      original(tabId, el);
+      const known = ['master-pos', 'follower-pos', 'followers-ledger', 'trade-history', 'fleet-manager'];
+      if (!known.includes(tabId)) {
+        ['tabContentMasterPos', 'tabContentFollowerPos', 'tabContentFollowersLedger', 'tabContentTradeHistory', 'tabContentFleetManager']
+          .forEach(i => { const e = document.getElementById(i); if (e) e.style.display = 'none'; });
+      }
+      show(tabId);
+    };
+    loadSuites(); toLoadHealth(false);
+  });
+})();
+</script>
+<!-- ================= /TEST OPERATIONS ================= -->

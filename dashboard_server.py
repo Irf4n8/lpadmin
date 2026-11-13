@@ -72,6 +72,9 @@ def load_env_file(filepath: str = ".env") -> dict:
     return env
 
 
+# Hedging = paper / real, Netting = paper-net / real-net (separate OMS instances; an account follows on one at a time)
+ALL_INSTANCES = ["paper", "paper-net", "real", "real-net"]
+
 class TraderSession:
     def __init__(self, email: str, password: str, name: str, base_url: str = DEFAULT_BASE_URL, role: str = "follower"):
         self.email = email
@@ -273,7 +276,12 @@ class MultiMasterDashboardManager:
             concurrent.futures.wait(futures)
         print(f"[+] All {len(all_sessions)} sessions authenticated.")
 
+    @staticmethod
+    def _empty_cache() -> Dict[str, Any]:
+        return {"master": {}, "followers": [], "master_positions": [], "follower_positions": [], "history": [], "summary": {}}
+
     def update_single_group(self, g: MasterFollowerGroup):
+        inst_at_start = self.instance
         try:
             # 1. Master Data & Shares
             m_funds = g.master_session.get_funds(self.instance)
@@ -612,9 +620,13 @@ class MultiMasterDashboardManager:
                 "active_environment": self.instance,
                 "a_book_count": sum(1 for f in followers_list if f.get("book") == "a"),
                 "b_book_count": sum(1 for f in followers_list if f.get("book") != "a"),
-                "real_broker_count": sum(1 for f in followers_list if f.get("broker_setting") == "real"),
-                "paper_broker_count": sum(1 for f in followers_list if f.get("broker_setting") != "real")
+                "real_broker_count": sum(1 for f in followers_list if str(f.get("broker_setting")) == "real"),
+                "real_net_broker_count": sum(1 for f in followers_list if f.get("broker_setting") == "real-net"),
+                "paper_broker_count": sum(1 for f in followers_list if not str(f.get("broker_setting")).startswith("real"))
             }
+
+            if self.instance != inst_at_start:
+                return  # environment was switched while this refresh ran - discard it instead of mixing paper/real data
 
             g.cache = {
                 "master": master_data,
@@ -624,9 +636,11 @@ class MultiMasterDashboardManager:
                 "history": m_hist,
                 "summary": summary
             }
+            g.last_error = None
 
-        except Exception:
-            pass
+        except Exception as exc:
+            g.last_error = f"{type(exc).__name__}: {exc}"
+            print(f"[!] refresh failed ({inst_at_start}): {g.last_error}")
 
     def handle_master_share_change(self, master_id: str, share_percent: float, display_name: Optional[str] = None) -> dict:
         g = self.groups.get(master_id) or self.groups.get("mam")
@@ -726,11 +740,15 @@ class MultiMasterDashboardManager:
 
     def handle_environment_switch(self, instance: str) -> dict:
         inst = instance.lower()
-        if inst not in ["paper", "real"]:
+        if inst not in ALL_INSTANCES:
             return {"success": False, "error": f"Invalid instance: {instance}"}
+        if inst == self.instance:
+            return {"success": True, "active_environment": inst, "unchanged": True}
         self.instance = inst
         for g in self.groups.values():
             g.instance = inst
+            g.cache = self._empty_cache()
+            g.last_error = None
             threading.Thread(target=self.update_single_group, args=(g,)).start()
         return {"success": True, "active_environment": inst}
 
@@ -832,6 +850,8 @@ class MultiMasterDashboardManager:
 
         master_client_id = g.master_client_id
         target_inst = target_broker.lower()
+        if target_inst not in ALL_INSTANCES:
+            return {"success": False, "error": f"Invalid broker setting: {target_broker}"}
 
         if share_percent is None or share_percent <= 0:
             share_percent = float(g.cache.get("master", {}).get("mam_share_percent", 50.0))
@@ -857,8 +877,8 @@ class MultiMasterDashboardManager:
 
         def worker(s: TraderSession):
             try:
-                # 1. Unfollow from all instances to ensure clean state
-                for inst in ["paper", "real"]:
+                # 1. Unfollow first (every hedging/netting instance) so the account holds a single link
+                for inst in ALL_INSTANCES:
                     f_data = s.get_mam_follows(inst)
                     following_list = f_data.get("following", [])
                     for fol in following_list:
@@ -881,9 +901,10 @@ class MultiMasterDashboardManager:
                     fail_count += 1
                 details.append({"email": em, "success": ok})
 
-        if target_type == "all":
+        if target_type == "all" and target_inst != self.instance:
             self.instance = target_inst
             g.instance = target_inst
+            g.cache = self._empty_cache()
 
         # Trigger immediate background cache refresh
         threading.Thread(target=self.update_single_group, args=(g,)).start()
@@ -1709,7 +1730,9 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
       <div style="display: flex; align-items: center; gap: 6px; background: rgba(15, 23, 42, 0.7); padding: 4px 8px; border-radius: 18px; border: 1px solid var(--card-border);">
         <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-right: 2px;">ENVIRONMENT:</span>
         <button type="button" id="envBtnPaper" onclick="switchEnvironment('paper')" class="env-toggle-btn active">📄 Paper (Hedging)</button>
+        <button type="button" id="envBtnPaperNet" onclick="switchEnvironment('paper-net')" class="env-toggle-btn">📄 Paper (Netting)</button>
         <button type="button" id="envBtnReal" onclick="switchEnvironment('real')" class="env-toggle-btn">💎 Real (Hedging)</button>
+        <button type="button" id="envBtnRealNet" onclick="switchEnvironment('real-net')" class="env-toggle-btn">💎 Real (Netting)</button>
       </div>
 
       <div class="live-status">
@@ -2315,7 +2338,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
             <div style="font-weight: 800; font-size: 16px; color: #f472b6; display: flex; align-items: center; gap: 8px;">
               <span>🏢 Followers Broker Setting Controller</span>
             </div>
-            <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Switch replication broker setting between Paper & Real</div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Unfollows first, then follows on the chosen broker setting (Hedging or Netting)</div>
           </div>
           <span class="badge badge-env-real" id="brokerActiveBadge">REAL (HEDGING)</span>
         </div>
@@ -2349,7 +2372,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
         <!-- Broker Mode Selection -->
         <div>
           <label style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">2. Target Broker Setting</label>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 8px;">
             <button type="button" class="fleet-mode-btn" id="btnBrokerPaper" onclick="selectFleetBroker('paper')">
               <div style="font-weight: 700; color: #c084fc;">📄 Paper (Hedging)</div>
               <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Sandbox / Practice Account</div>
@@ -2358,11 +2381,15 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
               <div style="font-weight: 700; color: #f472b6;">💎 Real (Hedging)</div>
               <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Live Execution OMS Instance</div>
             </button>
+            <button type="button" class="fleet-mode-btn" id="btnBrokerRealNet" onclick="selectFleetBroker('real-net')">
+              <div style="font-weight: 700; color: #38bdf8;">🔷 Real (Netting)</div>
+              <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Live Netting OMS Instance</div>
+            </button>
           </div>
         </div>
 
         <div style="background: rgba(0,0,0,0.3); padding: 12px 14px; border-radius: 8px; font-size: 12px; color: #cbd5e1; border: 1px dashed rgba(236, 72, 153, 0.3);">
-          ℹ️ When set to <strong>Real (Hedging)</strong>, followers copy trades on the live OMS engine and use their Real balance set via Admin API.
+          ℹ️ Followers are <strong>unfollowed first</strong>, then follow on the chosen instance. <strong>Real (Hedging)</strong> copies the master's trades on the live <code>real</code> engine; <strong>Real (Netting)</strong> copies the master's trades on <code>real-net</code> (the master must trade on that instance). Each uses its own balance, set via Admin API &mdash; fund Real (Netting) in the Capital &amp; Balance Controller below.
         </div>
 
         <button class="btn" id="btnApplyBroker" onclick="applyFleetBrokerSetting()" style="background: linear-gradient(135deg, #db2777 0%, #ec4899 100%); color: #fff; padding: 12px 20px; font-size: 14px; font-weight: 700; width: 100%; justify-content: center; border: none; border-radius: 8px;">
@@ -2418,6 +2445,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
           <div style="display: flex; gap: 8px; margin-top: 8px;">
             <button type="button" class="preset-pill active" id="balEnvPaper" onclick="selectBalEnv('paper')">📄 Paper (Hedging)</button>
             <button type="button" class="preset-pill" id="balEnvReal" onclick="selectBalEnv('real')">💎 Real (Hedging)</button>
+            <button type="button" class="preset-pill" id="balEnvRealNet" onclick="selectBalEnv('real-net')">🔷 Real (Netting)</button>
             <button type="button" class="preset-pill" id="balEnvBoth" onclick="selectBalEnv('both')">🌐 Both (Paper & Real)</button>
           </div>
         </div>
@@ -2581,6 +2609,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
           <div style="display: flex; gap: 10px;">
             <button class="btn" style="flex: 1; padding: 8px; justify-content: center; border: 1px solid var(--accent); color: var(--accent);" onclick="saveQuickManageBroker('paper')">📄 Set Paper (Hedging)</button>
             <button class="btn btn-action-real" style="flex: 1; padding: 8px; justify-content: center;" onclick="saveQuickManageBroker('real')">💎 Set Real (Hedging)</button>
+            <button class="btn" style="flex: 1; padding: 8px; justify-content: center; border: 1px solid #38bdf8; color: #38bdf8;" onclick="saveQuickManageBroker('real-net')">🔷 Set Real (Netting)</button>
           </div>
         </div>
 
@@ -2676,6 +2705,11 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
         const res = await fetch(`/api/data?master=${activeMasterId}`);
         if (!res.ok) return;
         currentData = await res.json();
+        if (currentData.meta && currentData.meta.active_environment) syncEnvButtons(currentData.meta.active_environment);
+        if (currentData.meta) {
+          const st = document.getElementById('liveStatusText');
+          if (st) st.innerText = currentData.meta.error ? ('OMS ERROR: ' + currentData.meta.error) : 'OMS LIVE';
+        }
         renderAll();
       } catch (e) {
         console.error("Fetch error:", e);
@@ -2883,9 +2917,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
         const bookBtn = f.book === 'a'
           ? `<button class="btn-book-a" onclick="event.stopPropagation(); toggleFollowerBook('${f.email}', 'b')" title="Click to convert to B-Book">📙 A-BOOK</button>`
           : `<button class="btn-book-b" onclick="event.stopPropagation(); toggleFollowerBook('${f.email}', 'a')" title="Click to convert to A-Book">📘 B-BOOK</button>`;
-        const brokerBadge = (f.broker_setting === 'real')
-          ? '<span class="badge badge-env-real">💎 REAL</span>'
-          : '<span class="badge badge-env-paper">📄 PAPER</span>';
+        const brokerBadge = `<span class="${instBadgeClass(f.broker_setting)}">${instBadgeHtml(f.broker_setting)}</span>`;
 
         return `<tr class="clickable-row" onclick="openFollowerModal('${f.email}')" title="Click to view full order history & profit share breakdown">
           <td style="color: var(--text-dim);">${i + 1}</td>
@@ -3311,6 +3343,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
       const followers = currentData.followers || [];
       const catSelect = document.getElementById('catSingleSelect');
       const balSelect = document.getElementById('balSingleSelect');
+      populateBrokerBookDropdowns();
       if (!catSelect || !balSelect) return;
 
       if (catSelect.options.length !== followers.length) {
@@ -3562,6 +3595,165 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
       }
     }
 
+    // --- Fleet controls that the markup references (environment, broker, book, balance environment) ---
+    let selectedBalEnv = 'paper';
+    let selectedFleetBroker = 'real';
+    let selectedFleetBook = 'a';
+
+    function syncEnvButtons(env) {
+      document.getElementById('envBtnPaper').classList.toggle('active', env === 'paper');
+      document.getElementById('envBtnPaperNet').classList.toggle('active', env === 'paper-net');
+      document.getElementById('envBtnReal').classList.toggle('active', env === 'real');
+      document.getElementById('envBtnRealNet').classList.toggle('active', env === 'real-net');
+    }
+    const INSTANCE_LABELS = { 'paper': 'Paper (Hedging)', 'paper-net': 'Paper (Netting)', 'real': 'Real (Hedging)', 'real-net': 'Real (Netting)' };
+    const instLabel = (i) => INSTANCE_LABELS[i] || String(i || '').toUpperCase();
+    const instBadgeHtml = (i) => (String(i).startsWith('real') ? (i === 'real-net' ? '🔷 ' : '💎 ') : '📄 ') + instLabel(i).toUpperCase();
+    const instBadgeClass = (i) => String(i).startsWith('real') ? 'badge badge-env-real' : 'badge badge-env-paper';
+
+    async function switchEnvironment(env) {
+      syncEnvButtons(env);
+      try {
+        const res = await fetch('/api/manage/environment', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ instance: env })
+        });
+        const data = await res.json();
+        if (data.success) {
+          appendFleetLog(`Environment switched to ${instLabel(env)}`, 'success');
+          setTimeout(fetchDashboardData, 600);
+        } else {
+          appendFleetLog(`Environment switch failed: ${data.error || 'unknown error'}`, 'error');
+        }
+      } catch (e) {
+        appendFleetLog(`Environment switch failed: ${e.message}`, 'error');
+      }
+    }
+
+    function selectBalEnv(env) {
+      selectedBalEnv = env;
+      document.getElementById('balEnvPaper').classList.toggle('active', env === 'paper');
+      document.getElementById('balEnvReal').classList.toggle('active', env === 'real');
+      document.getElementById('balEnvRealNet').classList.toggle('active', env === 'real-net');
+      document.getElementById('balEnvBoth').classList.toggle('active', env === 'both');
+    }
+
+    function _scopeToggle(prefix, name) {
+      const scope = document.querySelector(`input[name="${name}"]:checked`).value;
+      document.getElementById(`${prefix}RangeRow`).style.display = scope === 'range' ? 'flex' : 'none';
+      document.getElementById(`${prefix}SingleRow`).style.display = scope === 'single' ? 'block' : 'none';
+    }
+    function onBrokerScopeChange() { _scopeToggle('broker', 'brokerScope'); }
+    function onBookScopeChange() { _scopeToggle('book', 'bookScope'); }
+
+    function populateBrokerBookDropdowns() {
+      const followers = currentData.followers || [];
+      ['brokerSingleSelect', 'bookSingleSelect'].forEach(id => {
+        const sel = document.getElementById(id);
+        if (!sel || sel.options.length === followers.length) return;
+        const cur = sel.value;
+        sel.innerHTML = followers.map(f => `<option value="${f.email}">${f.email} (${(f.book || '?').toUpperCase()}-book, ${f.broker_setting || '?'})</option>`).join('');
+        if (cur) sel.value = cur;
+      });
+      // First load: preselect the broker setting the followers are actually on (all on one instance), once only.
+      if (!window._fleetBrokerInit && followers.length) {
+        window._fleetBrokerInit = true;
+        const modes = new Set(followers.map(f => f.broker_setting).filter(Boolean));
+        if (modes.size === 1) selectFleetBroker([...modes][0]);
+      }
+    }
+
+    function selectFleetBroker(b) {
+      selectedFleetBroker = b;
+      document.getElementById('btnBrokerPaper').classList.toggle('active', b === 'paper');
+      document.getElementById('btnBrokerReal').classList.toggle('active', b === 'real');
+      document.getElementById('btnBrokerRealNet').classList.toggle('active', b === 'real-net');
+      const bb = document.getElementById('brokerActiveBadge');
+      if (bb) bb.innerText = instLabel(b).toUpperCase();
+    }
+
+    function selectFleetBook(b) {
+      selectedFleetBook = b;
+      document.getElementById('btnBookA').classList.toggle('active', b === 'a');
+      document.getElementById('btnBookB').classList.toggle('active', b === 'b');
+    }
+
+    function _fleetScopePayload(prefix, name) {
+      return {
+        target_type: document.querySelector(`input[name="${name}"]:checked`).value,
+        start: parseInt(document.getElementById(`${prefix}StartIdx`).value) || 1,
+        end: parseInt(document.getElementById(`${prefix}EndIdx`).value) || 100,
+        single_email: document.getElementById(`${prefix}SingleSelect`).value
+      };
+    }
+
+    async function _applyFleet(btnId, statusId, busyText, idleText, url, payload, okText, failText) {
+      const btn = document.getElementById(btnId);
+      const statusBox = document.getElementById(statusId);
+      btn.disabled = true;
+      btn.innerText = busyText;
+      statusBox.style.display = 'block';
+      statusBox.style.color = '#60a5fa';
+      statusBox.innerText = 'Submitting...';
+      try {
+        const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+        const data = await res.json();
+        if (data.success) {
+          statusBox.style.color = data.fail_count ? '#facc15' : '#34d399';
+          statusBox.innerText = `${data.fail_count ? '⚠️' : '✅'} ${okText}: ${data.success_count}/${data.total_targeted} accounts updated` + (data.fail_count ? `, ${data.fail_count} failed.` : '.');
+          appendFleetLog(`${okText}: ${data.success_count}/${data.total_targeted} accounts updated.`, data.fail_count ? 'warn' : 'success');
+          fetchDashboardData();
+        } else {
+          statusBox.style.color = '#f87171';
+          statusBox.innerText = `❌ Error: ${data.error || failText}`;
+          appendFleetLog(`❌ ${failText}: ${data.error || 'Unknown error'}`, 'error');
+        }
+      } catch (e) {
+        statusBox.style.color = '#f87171';
+        statusBox.innerText = `❌ Request failed: ${e.message}`;
+        appendFleetLog(`❌ Network Error: ${e.message}`, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerText = idleText;
+      }
+    }
+
+    async function applyFleetBrokerSetting() {
+      const payload = Object.assign(_fleetScopePayload('broker', 'brokerScope'), {
+        target_broker: selectedFleetBroker,
+        category: selectedFleetCat,
+        multiplier: parseFloat(document.getElementById('fleetMultiplierInput').value) || 2.0
+      });
+      if (payload.target_type === 'all' && !confirm(`Switch ALL followers to ${instLabel(selectedFleetBroker)}? They are unfollowed first, then re-followed on that instance.`)) return;
+      await _applyFleet('btnApplyBroker', 'brokerStatusBox', '⏳ Applying Broker Setting...', '⚡ Apply Broker Setting to Followers',
+        '/api/manage/broker-setting', payload, `Broker setting → ${instLabel(selectedFleetBroker)}`, 'Broker setting change failed');
+    }
+
+    async function applyFleetBook() {
+      const payload = Object.assign(_fleetScopePayload('book', 'bookScope'), { book: selectedFleetBook });
+      if (payload.target_type === 'all' && !confirm(`Convert ALL followers to ${selectedFleetBook.toUpperCase()}-Book? This changes where REAL orders are executed.`)) return;
+      await _applyFleet('btnApplyBook', 'bookStatusBox', '⏳ Converting Book...', '🔄 Convert Fleet Book via Admin API',
+        '/api/manage/book', payload, `Book → ${selectedFleetBook.toUpperCase()}-Book`, 'Book conversion failed');
+    }
+
+    async function toggleFollowerBook(email, targetBook) {
+      try {
+        const res = await fetch('/api/manage/book', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ target_type: 'single', single_email: email, book: targetBook })
+        });
+        const data = await res.json();
+        if (data.success && data.success_count > 0) {
+          appendFleetLog(`${email} converted to ${targetBook.toUpperCase()}-Book via Admin API`, 'success');
+        } else {
+          appendFleetLog(`❌ ${email} book change failed: ${data.error || 'unknown error'}`, 'error');
+          alert(`Book change failed: ${data.error || 'unknown error'}`);
+        }
+        fetchDashboardData();
+      } catch (e) {
+        appendFleetLog(`❌ ${email} book change failed: ${e.message}`, 'error');
+      }
+    }
+
     // --- Quick Manage Modal for Individual Follower ---
     let quickManageTargetEmail = null;
 
@@ -3572,7 +3764,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
       if (!f) return;
 
       document.getElementById('quickManageEmail').innerText = `⚙️ ${f.email}`;
-      document.getElementById('quickManageSub').innerText = `Member ID: ${f.member_id} | Book: ${String(f.book || 'B').toUpperCase()}-Book | Broker: ${String(f.broker_setting || 'paper').toUpperCase()} (Hedging)`;
+      document.getElementById('quickManageSub').innerText = `Member ID: ${f.member_id} | Book: ${String(f.book || 'B').toUpperCase()}-Book | Broker: ${instLabel(f.broker_setting || 'paper')}`;
       document.getElementById('qmCategory').value = f.method || 'multiplier';
       document.getElementById('qmMultiplier').value = f.multiplier || 2.0;
 
@@ -3581,8 +3773,8 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
       document.getElementById('qmCurrentBookBadge').className = fBook === 'a' ? 'badge badge-gold' : 'badge badge-mult';
 
       const fBroker = (f.broker_setting || 'paper').toLowerCase();
-      document.getElementById('qmCurrentBrokerBadge').innerText = fBroker === 'real' ? '💎 REAL (HEDGING)' : '📄 PAPER (HEDGING)';
-      document.getElementById('qmCurrentBrokerBadge').className = fBroker === 'real' ? 'badge badge-env-real' : 'badge badge-env-paper';
+      document.getElementById('qmCurrentBrokerBadge').innerText = instBadgeHtml(fBroker);
+      document.getElementById('qmCurrentBrokerBadge').className = instBadgeClass(fBroker);
 
       document.getElementById('qmPaperBalance').value = f.paper_balance !== undefined ? f.paper_balance : f.balance;
       document.getElementById('qmRealBalance').value = f.real_balance || 10000000;
@@ -3678,7 +3870,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
       const statusBox = document.getElementById('qmStatusBox');
       statusBox.style.display = 'block';
       statusBox.style.color = '#f472b6';
-      statusBox.innerText = `Updating Broker Setting to ${targetBroker.toUpperCase()} (Hedging)...`;
+      statusBox.innerText = `Unfollowing, then following on ${instLabel(targetBroker)}...`;
 
       try {
         const res = await fetch('/api/manage/broker-setting', {
@@ -3695,10 +3887,10 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
         const data = await res.json();
         if (data.success && data.success_count > 0) {
           statusBox.style.color = '#34d399';
-          statusBox.innerText = `✅ Switched to ${targetBroker.toUpperCase()} (Hedging)!`;
-          document.getElementById('qmCurrentBrokerBadge').innerText = targetBroker === 'real' ? '💎 REAL (HEDGING)' : '📄 PAPER (HEDGING)';
-          document.getElementById('qmCurrentBrokerBadge').className = targetBroker === 'real' ? 'badge badge-env-real' : 'badge badge-env-paper';
-          appendFleetLog(`Quick Edit: ${quickManageTargetEmail} broker setting switched to ${targetBroker.toUpperCase()} (Hedging)`, 'success');
+          statusBox.innerText = `✅ Switched to ${instLabel(targetBroker)}!`;
+          document.getElementById('qmCurrentBrokerBadge').innerText = instBadgeHtml(targetBroker);
+          document.getElementById('qmCurrentBrokerBadge').className = instBadgeClass(targetBroker);
+          appendFleetLog(`Quick Edit: ${quickManageTargetEmail} broker setting switched to ${instLabel(targetBroker)}`, 'success');
           fetchDashboardData();
         } else {
           statusBox.style.color = '#f87171';
@@ -3757,22 +3949,104 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
 """
 
 
+
+# ----------------------------------------------------------------------------
+# Test-operations add-on (Test Runner + Evidence Reports tabs)
+# ----------------------------------------------------------------------------
+from urllib.parse import urlparse, parse_qs, unquote  # noqa: E402
+from dashboard import testops  # noqa: E402
+from config.settings import DASHBOARD_TOKEN  # noqa: E402
+import hmac  # noqa: E402
+
+
+def build_dashboard_page() -> str:
+    """Terminal page with the Test Runner / Reports panel spliced in ahead of the main script."""
+    panel_file = BASE_DIR / "dashboard" / "mam_testops_panel.html"
+    try:
+        panel = panel_file.read_text(encoding="utf-8")
+    except OSError:
+        return ENTERPRISE_DASHBOARD_HTML
+    marker = "  <script>" + chr(10) + "    let activeTab"
+    if marker not in ENTERPRISE_DASHBOARD_HTML:
+        return ENTERPRISE_DASHBOARD_HTML
+    return ENTERPRISE_DASHBOARD_HTML.replace(marker, panel + chr(10) + marker, 1)
+
+
 class DashboardHTTPRequestHandler(BaseHTTPRequestHandler):
     data_manager: MultiMasterDashboardManager = None
 
     def log_message(self, format, *args):
         pass
 
+    def _send_json(self, payload, status=200):
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.end_headers()
+        self.wfile.write(json.dumps(payload).encode("utf-8"))
+
+    def _authorized(self, parsed_query) -> bool:
+        """Optional access token: enforced only when DASHBOARD_TOKEN is set in .env."""
+        if not DASHBOARD_TOKEN:
+            return True
+        cookie = ""
+        for part in (self.headers.get("Cookie") or "").split(";"):
+            k, _, v = part.strip().partition("=")
+            if k == "bt_dash":
+                cookie = v
+        supplied = cookie or self.headers.get("X-Dashboard-Token") or (parsed_query.get("token") or [""])[0]
+        return hmac.compare_digest(supplied, DASHBOARD_TOKEN)
+
+    def _testops_get(self, path, q):
+        """Returns True if the path was a test-operations route (and has been answered)."""
+        if path == "/api/config":
+            res = testops.get_config()
+        elif path == "/api/suites":
+            res = testops.get_suites()
+        elif path == "/api/health":
+            res = testops.get_health(offline=q.get("offline") == ["1"], refresh=q.get("refresh") == ["1"])
+        elif path == "/api/status":
+            res = testops.get_status()
+        elif path == "/api/logs":
+            res = testops.get_logs()
+        elif path == "/api/history":
+            res = testops.get_history()
+        elif path.startswith("/api/history/") and path.endswith("/log"):
+            res = testops.get_history_log(unquote(path[len("/api/history/"):-len("/log")]))
+        elif path == "/api/summary":
+            res = testops.get_summary()
+        elif path == "/api/reports":
+            res = testops.get_reports()
+        elif path.startswith("/api/reports/"):
+            res = testops.get_report_content(unquote(path[len("/api/reports/"):]))
+        else:
+            return False
+        self._send_json(*res)
+        return True
+
     def do_GET(self):
         url_parts = self.path.split("?")
         path = url_parts[0]
         query = url_parts[1] if len(url_parts) > 1 else ""
+        parsed_q = parse_qs(query)
+
+        if not self._authorized(parsed_q):
+            self.send_response(401)
+            self.send_header("Content-Type", "text/plain; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(b"Dashboard is locked. Open /?token=<DASHBOARD_TOKEN>")
+            return
+
+        if self._testops_get(path, parsed_q):
+            return
 
         if path in ["/", "/index.html"]:
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
+            if DASHBOARD_TOKEN and (parsed_q.get("token") or [""])[0]:
+                self.send_header("Set-Cookie", f"bt_dash={DASHBOARD_TOKEN}; HttpOnly; SameSite=Strict; Path=/")
             self.end_headers()
-            self.wfile.write(ENTERPRISE_DASHBOARD_HTML.encode("utf-8"))
+            self.wfile.write(build_dashboard_page().encode("utf-8"))
 
         elif path == "/api/data":
             master_param = "mam"
@@ -3787,7 +4061,7 @@ class DashboardHTTPRequestHandler(BaseHTTPRequestHandler):
                 for q in query.split("&"):
                     if q.startswith("instance="):
                         req_inst = q.split("=")[1].strip().lower()
-                        if req_inst in ["paper", "real"] and req_inst != self.data_manager.instance:
+                        if req_inst in ALL_INSTANCES and req_inst != self.data_manager.instance:
                             self.data_manager.handle_environment_switch(req_inst)
 
             with self.data_manager.lock:
@@ -3796,7 +4070,8 @@ class DashboardHTTPRequestHandler(BaseHTTPRequestHandler):
                     "last_updated": self.data_manager.last_update_str,
                     "active_master": master_param,
                     "active_environment": self.data_manager.instance,
-                    "status": "LIVE"
+                    "status": "ERROR" if getattr(target_group, "last_error", None) else "LIVE",
+                    "error": getattr(target_group, "last_error", None)
                 }
                 payload = json.dumps(cache_copy)
 
@@ -3836,6 +4111,17 @@ class DashboardHTTPRequestHandler(BaseHTTPRequestHandler):
             payload = json.loads(body.decode("utf-8")) if body else {}
         except Exception:
             payload = {}
+
+        if not self._authorized(parse_qs(url_parts[1] if len(url_parts) > 1 else "")):
+            self._send_json({"error": "unauthorized"}, 401)
+            return
+
+        if path == "/api/run":
+            self._send_json(*testops.run_suite(payload))
+            return
+        if path == "/api/stop":
+            self._send_json(*testops.stop_suite())
+            return
 
         if path == "/api/manage/master-share":
             master_id = payload.get("master_id", "mam")

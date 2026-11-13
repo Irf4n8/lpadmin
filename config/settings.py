@@ -42,3 +42,14 @@ DEFAULT_PREFIX = os.getenv("DEFAULT_EMAIL_PREFIX", "mamfollower")
 DEFAULT_DOMAIN = os.getenv("DEFAULT_EMAIL_DOMAIN", "mailinator.com")
 DEFAULT_INSTANCES = os.getenv("DEFAULT_INSTANCES", "paper,real")
 
+
+# --- Dashboard / copy-trading topology (additive; defaults match the previously hardcoded dashboard values) ---
+MASTER_EMAIL = os.getenv("MASTER_EMAIL", "ctmaster@mailinator.com")
+MASTER_ID = os.getenv("MASTER_ID", "mem_aac4ca423a6925dca7")
+FOLLOWER_COUNT = int(os.getenv("FOLLOWER_COUNT", "100"))
+FOLLOWER_PREFIX = os.getenv("FOLLOWER_PREFIX", "follower")
+
+# Dashboard server. Token is optional: when set, every request must carry it (open /?token=<DASHBOARD_TOKEN> once).
+DASHBOARD_HOST = os.getenv("DASHBOARD_HOST", "0.0.0.0")
+DASHBOARD_PORT = int(os.getenv("DASHBOARD_PORT") or os.getenv("PORT") or "5000")
+DASHBOARD_TOKEN = os.getenv("DASHBOARD_TOKEN", "")

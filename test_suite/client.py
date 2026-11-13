@@ -35,6 +35,16 @@ from config.settings import (
 )
 
 
+PAPER_UNFOLLOW_REASON = ("platform rule (observed 2026-11-12): paper copy links can no longer be CREATED, only ended - "
+                         "an unfollowed paper follower cannot be re-linked. Set BT_ALLOW_PAPER_UNFOLLOW=1 to override.")
+
+
+def paper_unfollow_blocked(instance: str) -> bool:
+    """True when unfollowing on this instance would permanently drop the follower (paper, no override).
+    Used by the dashboard's copy-settings actions only; BlackTraderClient.unfollow_master itself is unchanged."""
+    return instance in ("paper", "paper-net") and os.environ.get("BT_ALLOW_PAPER_UNFOLLOW") != "1"
+
+
 class BlackTraderClient:
     def __init__(self, base_url: str = BASE_URL, max_workers: int = 10, timeout: int = 15):
         self.base_url = base_url.rstrip("/")
@@ -120,6 +130,29 @@ class BlackTraderClient:
         token = self.get_admin_token()
         headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
         resp = self.request_with_retry("POST", f"{self.base_url}/admin/api/members/{member_id}/status", headers=headers, json={"status": status})
+        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
+
+    def get_member_books(self) -> Dict[str, Dict[str, Any]]:
+        """email -> {member_id, book ('a' / 'b'), account_type, status} for every member (admin API)."""
+        out: Dict[str, Dict[str, Any]] = {}
+        for m in self.get_admin_members():
+            out[m.get("email", "")] = {
+                "member_id": m.get("member_id"),
+                "book": (m.get("book") or "").lower(),
+                "account_type": m.get("account_type"),
+                "status": m.get("status"),
+            }
+        return out
+
+    def set_member_book(self, member_id: str, book: str) -> Dict[str, Any]:
+        """Switch one member to A-book ('a': real orders go to the liquidity provider) or B-book ('b': booked on the
+        platform's own engine). Paper accounts are always booked internally, so this only changes REAL routing.
+        Admin API: POST /admin/api/members/{member_id}/book  {"book": "a"|"b"}"""
+        if book not in ("a", "b"):
+            raise ValueError("book must be 'a' or 'b'")
+        token = self.get_admin_token()
+        headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+        resp = self.request_with_retry("POST", f"{self.base_url}/admin/api/members/{member_id}/book", headers=headers, json={"book": book})
         return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
 
     def set_member_balance(self, member_id: str, balance: float, instance: str = "paper") -> Dict[str, Any]:
