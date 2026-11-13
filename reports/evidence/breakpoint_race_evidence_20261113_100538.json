@@ -1,0 +1,212 @@
+{
+  "suite": "Breakpoint & Race Hunter",
+  "timestamp": "2026-11-13T04:35:38.436929+00:00",
+  "instance": "paper",
+  "followers": 20,
+  "results": [
+    {
+      "name": "B1 Duplicate squareoff storm",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "concurrent_closes": 20,
+        "http_200": 1,
+        "http_5xx": 0,
+        "balance_delta": -3.1,
+        "single_realized_pnl": -3.1,
+        "distinct_pnl_values": 1
+      }
+    },
+    {
+      "name": "B2 Over-reduce race",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "start_qty": 1.0,
+        "reduce_chunk": 0.4,
+        "attempts": 5,
+        "accepted": 2,
+        "final_qty": 0.2,
+        "expected_qty": 0.19999999999999996
+      }
+    },
+    {
+      "name": "B3 Protection write storm",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "writes": 20,
+        "http_5xx": 0,
+        "final_tp": 71029.83,
+        "final_sl": 66892.17
+      }
+    },
+    {
+      "name": "B4 Double-cancel storm",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "cancels": 20,
+        "http_200": 1,
+        "http_5xx": 0
+      }
+    },
+    {
+      "name": "B5 Load ramp (breaking point)",
+      "status": "PASS",
+      "findings": [
+        {
+          "severity": "INFO",
+          "message": "first degradation at: not reached concurrent master orders"
+        }
+      ],
+      "metrics": {
+        "levels": [
+          {
+            "threads": 10,
+            "placed": 10,
+            "status_codes": {
+              "200": 10
+            },
+            "p50_s": 0.382,
+            "p95_s": 0.598,
+            "max_s": 0.653,
+            "burst_s": 0.658,
+            "fanout_lag_s": 0.1,
+            "followers_short": 0,
+            "followers_duplicated": 0,
+            "positions_expected": 200,
+            "positions_actual": 200
+          },
+          {
+            "threads": 25,
+            "placed": 25,
+            "status_codes": {
+              "200": 25
+            },
+            "p50_s": 0.595,
+            "p95_s": 1.064,
+            "max_s": 1.164,
+            "burst_s": 1.175,
+            "fanout_lag_s": 0.09,
+            "followers_short": 0,
+            "followers_duplicated": 0,
+            "positions_expected": 500,
+            "positions_actual": 500
+          },
+          {
+            "threads": 50,
+            "placed": 50,
+            "status_codes": {
+              "200": 50
+            },
+            "p50_s": 1.379,
+            "p95_s": 2.262,
+            "max_s": 2.383,
+            "burst_s": 2.396,
+            "fanout_lag_s": 0.11,
+            "followers_short": 0,
+            "followers_duplicated": 0,
+            "positions_expected": 1000,
+            "positions_actual": 1000
+          },
+          {
+            "threads": 100,
+            "placed": 100,
+            "status_codes": {
+              "200": 100
+            },
+            "p50_s": 2.224,
+            "p95_s": 4.383,
+            "max_s": 4.599,
+            "burst_s": 4.623,
+            "fanout_lag_s": 0.4,
+            "followers_short": 0,
+            "followers_duplicated": 0,
+            "positions_expected": 2000,
+            "positions_actual": 2000
+          }
+        ],
+        "first_degradation_at_threads": null
+      }
+    },
+    {
+      "name": "B6 Follow/unfollow flapping",
+      "status": "SKIP",
+      "findings": [
+        {
+          "severity": "INFO",
+          "message": "skipped: platform rule (observed 2026-11-12): paper copy links can no longer be CREATED, only ended - an unfollowed paper follower cannot be re-linked. Set BT_ALLOW_PAPER_UNFOLLOW=1 to override."
+        }
+      ],
+      "metrics": {}
+    },
+    {
+      "name": "B7 Margin exhaustion",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "master_orders": 20,
+        "follower_positions": 0,
+        "follower_balance": 1000.0,
+        "follower_equity": 1000.0,
+        "follower_used_margin": 0.0
+      }
+    },
+    {
+      "name": "B8 Input fuzz",
+      "status": "FAIL",
+      "findings": [
+        {
+          "severity": "HIGH",
+          "message": "5xx on invalid input {\"qty\": 1, \"side\": \"BUY\", \"symbol\": \"BINANCE:BTCUSDT.P\", \"type\": \"WEIRD\"} -> 599 EXC RetryError: HTTPSConnectionPool(host='lpadmin.blackfx.com', port=443): Max r"
+        },
+        {
+          "severity": "HIGH",
+          "message": "INVALID input ACCEPTED (200): {\"qty\": 0.01, \"side\": \"BUY\", \"sl\": 1e+30, \"symbol\": \"BINANCE:BTCUSDT.P\", \"tp\": -1, \"type\": \"MARKET\"}"
+        }
+      ],
+      "metrics": {
+        "requests": 90,
+        "http_5xx": 5,
+        "http_200": 5,
+        "positions_created": 5
+      }
+    },
+    {
+      "name": "B9 Bulk vs individual close",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "positions_opened": 6,
+        "http_5xx": 0,
+        "positions_left": 0,
+        "final_balance": 99999750.18710144,
+        "final_equity": 99999750.18710144,
+        "final_used_margin": 0.0
+      }
+    },
+    {
+      "name": "B10 Auth/token refresh storm",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "logins": 30,
+        "login_failures": 0,
+        "post_storm_read_failures": 0
+      }
+    },
+    {
+      "name": "B11 Final consistency audit",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "accounts": 21,
+        "orphan_positions": 0,
+        "pending_orders": 0,
+        "stuck_margin": 0,
+        "equity_balance_drift": 0
+      }
+    }
+  ]
+}

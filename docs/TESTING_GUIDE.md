@@ -136,6 +136,23 @@ reverse). After every master action the suite checks each follower's **net signe
 | X9 | Protection + reduce + two new orders fired concurrently, then model check (5 rounds) |
 | X10 | Seeded random open/reduce/close/protect walk; reproduce a failure with `--only X10 --seed N` |
 
+### Netting vs Hedging (all four instances)
+`python test_suite/netting_hedging_runner.py --instances paper,paper-net --followers 10` (dashboard: *Netting vs Hedging (paper)* / *(real)*).
+
+* **Hedging** (`paper`, `real`): H1 BUY+SELL legs coexist, H2 close one leg, H3 partial reduce, H4 close all, H5 TP/SL sync.
+* **Netting** (`paper-net`, `real-net`): N1 open, N2 opposite order *reduces* (still one position), N3 oversized opposite order *flips*, N4 exact opposite closes, N5 TP/SL survives an add.
+* **Both**: P1 pending fan-out + cancel, C1 concurrent 6 BUY / 4 SELL race.
+* Every check compares each follower's long total and short total with `master x link multiplier`, so one model covers both modes.
+* `paper-net` has no copy links (the platform refuses to create paper links), so it runs master-only.
+* On `real` / `real-net` the suite creates **temporary** links + wallets for the first followers and removes them.
+  **It skips any follower with an active link on another instance**: a follower has one link record per master, so `follow` on
+  another instance converts the link and `unfollow` ends it - for a paper link that is permanent. It also refuses to run when the master or a follower is A-book.
+
+### Social-Trading Features (copy / MAM / PAMM / IB / wallets)
+`python test_suite/social_features_runner.py` - read-mostly contract checks of the new platform surface (see `docs/PLATFORM_FEATURES.md`):
+instances, master directories, role exclusivity, link shape, auth enforcement, wallet/portal/IB reads, rejected invalid writes, admin config.
+MAM/PAMM *trading* (profit share, pool settlement) is not automated yet.
+
 ## Load testing with Apache JMeter
 
 ```bash

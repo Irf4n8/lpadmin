@@ -1,0 +1,50 @@
+{
+  "suite_name": "BlackTrader Race Conditions & Concurrency Stress Test Suite",
+  "timestamp": "2026-11-13T04:36:43.026436+00:00",
+  "followers_count": 100,
+  "results": [
+    {
+      "name": "In-Flight Open-Close Race (Flash Trade)",
+      "status": "PASS",
+      "master_clean": true,
+      "orphan_followers_count": 0,
+      "orphan_details": {},
+      "open_duration_sec": 0.093,
+      "close_duration_sec": 0.123
+    },
+    {
+      "name": "Simultaneous Dual Master Orders (Zero-Delta Collision)",
+      "status": "FAIL",
+      "both_placed": true,
+      "dual_ok_count": 99,
+      "total_followers": 100,
+      "dispatch_duration_sec": 0.144
+    },
+    {
+      "name": "Multi-Threaded HFT Storm (10 Parallel Threads)",
+      "status": "FAIL",
+      "storm_orders_placed": 10,
+      "target_orders": 10,
+      "full_followers_count": 99,
+      "total_followers": 100,
+      "storm_duration_sec": 0.551
+    },
+    {
+      "name": "Mid-Flight Unfollow vs Order Race",
+      "status": "SKIPPED",
+      "error": "platform rule (observed 2026-11-12): paper copy links can no longer be CREATED, only ended - an unfollowed paper follower cannot be re-linked. Set BT_ALLOW_PAPER_UNFOLLOW=1 to override."
+    },
+    {
+      "name": "Immediate TP/SL Protection Collision",
+      "status": "FAIL",
+      "protected_count": 99,
+      "total_followers": 100,
+      "protection_latency_sec": 0.095
+    },
+    {
+      "name": "Final Teardown & Zero Orphan Verification",
+      "status": "PASS",
+      "orphan_count": 0
+    }
+  ]
+}

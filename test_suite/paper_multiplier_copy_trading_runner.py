@@ -37,7 +37,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
 
-from config.settings import MASTER_EMAIL, MASTER_ID
+from config.settings import MASTER_EMAIL, MASTER_ID, FOLLOWER_COUNT
 from config.settings import BASE_URL, DEFAULT_PREFIX, DEFAULT_DOMAIN
 from test_suite.client import BlackTraderClient
 
@@ -327,7 +327,7 @@ def test_paper_order_10lot_sell(client: BlackTraderClient, master_email: str, fo
 def main():
     parser = argparse.ArgumentParser(description="Paper Trading 2x Multiplier Copy Trading Certification Suite")
     parser.add_argument("--start", type=int, default=1, help="Start follower index (default: 1)")
-    parser.add_argument("--end", type=int, default=100, help="End follower index (default: 100)")
+    parser.add_argument("--end", type=int, default=FOLLOWER_COUNT, help="End follower index (default: 100)")
     args = parser.parse_args()
 
     follower_emails = [f"follower{i}@mailinator.com" for i in range(args.start, args.end + 1)]

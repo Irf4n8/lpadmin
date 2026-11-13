@@ -1,0 +1,312 @@
+{
+  "suite": "Apache JMeter load test",
+  "jmeter_version": "5.6.3",
+  "timestamp": "2026-11-13T04:14:13.135731+00:00",
+  "profile": "stress",
+  "profile_settings": {
+    "RAMP": 20,
+    "AUTH_THREADS": 40,
+    "AUTH_LOOPS": 3,
+    "ORDER_THREADS": 50,
+    "ORDER_LOOPS": 4,
+    "READ_THREADS": 100,
+    "READ_DURATION": 60,
+    "HIST_THREADS": 10,
+    "HIST_LOOPS": 3,
+    "tokens": 100
+  },
+  "instance": "paper",
+  "followers": 100,
+  "duration_sec": 154,
+  "sla_p95_ms": {
+    "AUTH login": 2500,
+    "AUTH chart-token": 2500,
+    "ORDER place market": 5000,
+    "ORDER close position": 5000,
+    "READ positions": 2500,
+    "READ orders (history)": 6000
+  },
+  "html_dashboard": "C:\\lpadmin\\reports\\jmeter\\20261113_094055\\html\\index.html",
+  "results": [
+    {
+      "name": "Load: AUTH chart-token",
+      "status": "PASS",
+      "sla_p95_ms": 2500,
+      "metrics": {
+        "samples": 120,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 56.5,
+        "p50_ms": 53.0,
+        "p90_ms": 72.0,
+        "p95_ms": 80.0,
+        "p99_ms": 100.0,
+        "max_ms": 193.0,
+        "tps": 5.9,
+        "response_codes": {
+          "200": 120
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Load: AUTH login",
+      "status": "PASS",
+      "sla_p95_ms": 2500,
+      "metrics": {
+        "samples": 120,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 217.2,
+        "p50_ms": 215.0,
+        "p90_ms": 243.0,
+        "p95_ms": 260.0,
+        "p99_ms": 300.0,
+        "max_ms": 547.0,
+        "tps": 5.81,
+        "response_codes": {
+          "200": 120
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Validation: absurd tp/sl",
+      "status": "FAIL",
+      "metrics": {
+        "samples": 1,
+        "errors": 1,
+        "error_pct": 100.0,
+        "avg_ms": 113.0,
+        "p50_ms": 113.0,
+        "p90_ms": 113.0,
+        "p95_ms": 113.0,
+        "p99_ms": 113.0,
+        "max_ms": 113.0,
+        "tps": 1.0,
+        "response_codes": {
+          "200": 1
+        },
+        "first_error": "200 Test failed: code expected to equal / received : [[[2]]]00 comparison: [[[4]]]00 /"
+      },
+      "finding": "KNOWN PLATFORM BUG - absurd TP/SL (tp=-1, sl=1e30) is accepted. got 200 Test failed: code expected to equal / received : [[[2]]]00 comparison: [[[4]]]00 /"
+    },
+    {
+      "name": "Validation: bad side",
+      "status": "PASS",
+      "metrics": {
+        "samples": 1,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 55.0,
+        "p50_ms": 55.0,
+        "p90_ms": 55.0,
+        "p95_ms": 55.0,
+        "p99_ms": 55.0,
+        "max_ms": 55.0,
+        "tps": 1.0,
+        "response_codes": {
+          "400": 1
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Validation: missing symbol",
+      "status": "PASS",
+      "metrics": {
+        "samples": 1,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 61.0,
+        "p50_ms": 61.0,
+        "p90_ms": 61.0,
+        "p95_ms": 61.0,
+        "p99_ms": 61.0,
+        "max_ms": 61.0,
+        "tps": 1.0,
+        "response_codes": {
+          "400": 1
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Validation: negative qty",
+      "status": "PASS",
+      "metrics": {
+        "samples": 1,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 83.0,
+        "p50_ms": 83.0,
+        "p90_ms": 83.0,
+        "p95_ms": 83.0,
+        "p99_ms": 83.0,
+        "max_ms": 83.0,
+        "tps": 1.0,
+        "response_codes": {
+          "400": 1
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Validation: string qty",
+      "status": "PASS",
+      "metrics": {
+        "samples": 1,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 73.0,
+        "p50_ms": 73.0,
+        "p90_ms": 73.0,
+        "p95_ms": 73.0,
+        "p99_ms": 73.0,
+        "max_ms": 73.0,
+        "tps": 1.0,
+        "response_codes": {
+          "400": 1
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Validation: unknown order type",
+      "status": "FAIL",
+      "metrics": {
+        "samples": 1,
+        "errors": 1,
+        "error_pct": 100.0,
+        "avg_ms": 263.0,
+        "p50_ms": 263.0,
+        "p90_ms": 263.0,
+        "p95_ms": 263.0,
+        "p99_ms": 263.0,
+        "max_ms": 263.0,
+        "tps": 1.0,
+        "response_codes": {
+          "500": 1
+        },
+        "first_error": "500 Test failed: code expected to equal / received : [[[5]]]00 comparison: [[[4]]]00 /"
+      },
+      "finding": "KNOWN PLATFORM BUG - unknown order type returns 500 instead of 400. got 500 Test failed: code expected to equal / received : [[[5]]]00 comparison: [[[4]]]00 /"
+    },
+    {
+      "name": "Validation: zero qty",
+      "status": "PASS",
+      "metrics": {
+        "samples": 1,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 127.0,
+        "p50_ms": 127.0,
+        "p90_ms": 127.0,
+        "p95_ms": 127.0,
+        "p99_ms": 127.0,
+        "max_ms": 127.0,
+        "tps": 1.0,
+        "response_codes": {
+          "400": 1
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Load: ORDER close position",
+      "status": "PASS",
+      "sla_p95_ms": 5000,
+      "metrics": {
+        "samples": 200,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 473.6,
+        "p50_ms": 496.0,
+        "p90_ms": 621.0,
+        "p95_ms": 678.0,
+        "p99_ms": 791.0,
+        "max_ms": 832.0,
+        "tps": 8.57,
+        "response_codes": {
+          "200": 200
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Load: ORDER place market",
+      "status": "PASS",
+      "sla_p95_ms": 5000,
+      "metrics": {
+        "samples": 200,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 492.9,
+        "p50_ms": 510.0,
+        "p90_ms": 647.0,
+        "p95_ms": 714.0,
+        "p99_ms": 775.0,
+        "max_ms": 802.0,
+        "tps": 8.51,
+        "response_codes": {
+          "200": 200
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Load: READ orders (history)",
+      "status": "FAIL",
+      "sla_p95_ms": 6000,
+      "metrics": {
+        "samples": 30,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 3719.3,
+        "p50_ms": 2273.0,
+        "p90_ms": 9914.0,
+        "p95_ms": 12760.0,
+        "p99_ms": 14442.0,
+        "max_ms": 14442.0,
+        "tps": 0.85,
+        "response_codes": {
+          "200": 30
+        },
+        "first_error": ""
+      },
+      "finding": "p95 12760ms > SLA 6000ms"
+    },
+    {
+      "name": "Load: READ positions",
+      "status": "PASS",
+      "sla_p95_ms": 2500,
+      "metrics": {
+        "samples": 13593,
+        "errors": 0,
+        "error_pct": 0.0,
+        "avg_ms": 162.9,
+        "p50_ms": 106.0,
+        "p90_ms": 138.0,
+        "p95_ms": 396.0,
+        "p99_ms": 1550.0,
+        "max_ms": 7128.0,
+        "tps": 227.21,
+        "response_codes": {
+          "200": 13593
+        },
+        "first_error": ""
+      }
+    },
+    {
+      "name": "Integrity: no orphan positions / stuck margin after load",
+      "status": "PASS",
+      "metrics": {
+        "accounts": 101,
+        "accounts_with_open_positions": 0,
+        "open_positions": 0,
+        "accounts_with_stuck_margin": 0,
+        "orphan_details": []
+      }
+    }
+  ]
+}

@@ -30,6 +30,14 @@ from typing import Any, Dict, List, Optional
 
 PY = sys.executable or "python"
 
+# The four trading instances: hedging + netting, each as paper and "real money".
+INSTANCES = ("paper", "paper-net", "real", "real-net")
+
+
+def is_real(instance: Optional[str]) -> bool:
+    """real and real-net both need the typed confirmation ("both" means paper + real)."""
+    return bool(instance) and (str(instance).startswith("real") or instance == "both")
+
 SUITES: List[Dict[str, Any]] = [
     # ---- Start here ------------------------------------------------------------------
     dict(key="e2e", name="End-to-End Test", desc="Full trade lifecycle: open, TP/SL, partial, hedge, close, pending, validation, accounting",
@@ -58,6 +66,15 @@ SUITES: List[Dict[str, Any]] = [
     dict(key="copy_complex", name="Complex Copy Scenarios", desc="Model-checked: mixed modes, reverse, pyramiding, TP/SL sync, random walk",
          category="Copy modes", icon="diagram-project", tone="violet", tag="10 scenarios", script="test_suite/copy_complex_runner.py",
          flags=["start", "end", "instance"], risk="safe", minutes=8),
+    dict(key="netting_paper", name="Netting vs Hedging (paper)", desc="paper = hedging, paper-net = netting: legs, reduce, flip, TP/SL, pending, race",
+         category="Copy modes", icon="code-compare", tone="cyan", tag="Hedge/Net", script="test_suite/netting_hedging_runner.py",
+         args=["--instances", "paper,paper-net"], flags=["end"], risk="safe", fixed_instance="paper", minutes=6),
+    dict(key="netting_real", name="Netting vs Hedging (real)", desc="real = hedging, real-net = netting. Refuses to run if master/followers are A-book",
+         category="Copy modes", icon="code-compare", tone="warn", tag="Hedge/Net", script="test_suite/netting_hedging_runner.py",
+         args=["--instances", "real,real-net", "--followers", "10"], flags=[], risk="real", fixed_instance="real", minutes=8),
+    dict(key="social_features", name="Social-Trading Features", desc="Copy / MAM / PAMM / IB / wallets / instances: contract, role rules, auth, invalid writes, admin config",
+         category="Copy modes", icon="people-group", tone="violet", tag="8 checks", script="test_suite/social_features_runner.py",
+         flags=[], risk="safe", fixed_instance="paper", minutes=1),
     dict(key="paper_2x", name="Paper 2x Certification", desc="10 lot master -> 20 lot follower, end to end",
          category="Copy modes", icon="angles-up", tone="ok", tag="2x", script="test_suite/paper_multiplier_copy_trading_runner.py",
          flags=["start", "end"], risk="safe", fixed_instance="paper", minutes=3),
@@ -144,12 +161,12 @@ def build_command(suite: Dict[str, Any], params: Dict[str, Any], defaults: Dict[
     end = _int(params.get("end"), defaults["follower_count"])
     if end < start:
         start, end = end, start
-    instance = suite.get("fixed_instance") or (params.get("instance") if params.get("instance") in ("paper", "real") else "paper")
+    instance = suite.get("fixed_instance") or (params.get("instance") if params.get("instance") in INSTANCES else "paper")
 
     if suite["key"] == "teardown":
         # run inline so the UI needs no extra script; instances: paper | real | both
-        which = params.get("instance") if params.get("instance") in ("paper", "real", "both") else "paper"
-        instances = ["paper", "real"] if which == "both" else [which]
+        which = params.get("instance") if params.get("instance") in INSTANCES + ("both", "all") else "paper"
+        instances = list(INSTANCES) if which == "all" else ["paper", "real"] if which == "both" else [which]
         code = (
             "from test_suite.client import BlackTraderClient; "
             "from config.settings import BASE_URL, MASTER_EMAIL, DEFAULT_PREFIX, DEFAULT_DOMAIN; "
@@ -195,4 +212,4 @@ def effective_instance(suite: Dict[str, Any], params: Dict[str, Any]) -> Optiona
 
 def needs_confirmation(suite: Dict[str, Any], params: Dict[str, Any]) -> bool:
     inst = effective_instance(suite, params)
-    return suite["risk"] in ("real", "destructive") or inst in ("real", "both")
+    return suite["risk"] in ("real", "destructive") or is_real(inst)

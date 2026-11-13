@@ -370,6 +370,49 @@ class BlackTraderClient:
     # -------------------------------------------------------------------------
     # Copy Trading API Calls
     # -------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
+    # Generic OMS / admin access + the social-trading API (copy, MAM, PAMM, IB, wallets, portal)
+    # -------------------------------------------------------------------------
+    INSTANCES = ("paper", "paper-net", "real", "real-net")          # hedging, netting, hedging, netting
+    SOCIAL_KINDS = ("copy", "mam", "pamm")
+
+    def oms(self, email: Optional[str], method: str, path: str, instance: str = "paper",
+            json: Optional[Any] = None, params: Optional[Dict[str, Any]] = None, root: bool = False) -> Dict[str, Any]:
+        """Call /v1/oms[/<instance>]<path> as `email` (None = anonymous). Returns {status_code, data}."""
+        headers: Dict[str, str] = {}
+        if email:
+            headers["Authorization"] = f"Bearer {self.get_trader_token(email)}"
+        url = f"{self.base_url}/v1/oms" + ("" if root else f"/{instance}") + path
+        resp = self.request_with_retry(method, url, headers=headers, json=json, params=params)
+        try:
+            data = resp.json()
+        except ValueError:
+            data = resp.text
+        return {"status_code": resp.status_code, "data": data}
+
+    def get_instances(self, email: str) -> List[Dict[str, Any]]:
+        """The platform's trading instances: slug, mode (hedging|netting), netting flag, real_money flag."""
+        res = self.oms(email, "GET", "/_instances", root=True)
+        return res["data"].get("instances", []) if res["status_code"] == 200 and isinstance(res["data"], dict) else []
+
+    def admin_get(self, path: str, params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        headers = {"Authorization": f"Bearer {self.get_admin_token()}"}
+        resp = self.request_with_retry("GET", f"{self.base_url}/admin/api/{path.lstrip('/')}", headers=headers, params=params)
+        try:
+            data = resp.json()
+        except ValueError:
+            data = resp.text
+        return {"status_code": resp.status_code, "data": data}
+
+    def social_masters(self, email: str, kind: str, instance: str = "real") -> List[Dict[str, Any]]:
+        """Directory of masters for kind copy | mam | pamm (rank, growth, drawdown, fund, risk, share_percent...)."""
+        res = self.oms(email, "GET", f"/{kind}/masters", instance)
+        return res["data"].get("masters", []) if res["status_code"] == 200 and isinstance(res["data"], dict) else []
+
+    def social_follows(self, email: str, kind: str, instance: str = "real") -> Dict[str, Any]:
+        """The caller's relationships for kind copy | mam | pamm, incl. follow_blocked_reason / master_blocked_reason."""
+        return self.oms(email, "GET", f"/{kind}/follows", instance)
+
     def follow_master(
         self,
         email: str,

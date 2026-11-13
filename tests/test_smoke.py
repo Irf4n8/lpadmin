@@ -338,3 +338,76 @@ def test_unfollow_on_paper_is_blocked_by_default(monkeypatch):
     assert res["status_code"] == 0 and res.get("blocked")
     monkeypatch.setenv("BT_ALLOW_PAPER_UNFOLLOW", "1")
     assert not cl.paper_unfollow_blocked("paper")
+
+
+# ---------------------------------------------------------------- netting/hedging suite must never convert paper links
+class _FakeClient:
+    """Stub: follower1 has an ACTIVE paper link, follower2 has an ENDED one, follower3 none."""
+    def __init__(self):
+        self.followed, self.funded = [], []
+
+    def get_member_books(self):
+        b = {"member_id": "mem_x", "book": "b"}
+        return {e: dict(b) for e in ["ctmaster@mailinator.com"] + [f"follower{i}@mailinator.com" for i in (1, 2, 3)]}
+
+    def get_copy_followers(self, master, instance, active_only=True):
+        links = [{"follower_name": "follower1", "instance": "paper", "status": "active", "multiplier": 1},
+                 {"follower_name": "follower2", "instance": "real", "status": "ended", "multiplier": 1}]
+        return [l for l in links if l["status"] == "active"] if active_only else links
+
+    def get_positions(self, email, instance):
+        return {"funds": {"balance": 5.0}}
+
+    def set_member_balance(self, *a, **k):
+        self.funded.append(a)
+
+    def follow_master(self, email, master_id, instance, **k):
+        self.followed.append(email)
+        return {"status_code": 200}
+
+
+def test_netting_suite_never_converts_an_active_paper_link(monkeypatch):
+    """A follow on real/real-net CONVERTS the follower's single link record, and unfollow then ends it for good."""
+    from test_suite import netting_hedging_runner as R
+    monkeypatch.setattr(R.time, "sleep", lambda s: None)
+    fake = _FakeClient()
+    emails, factors, created, _ = R.instance_setup(fake, "real", "ctmaster@mailinator.com", 3, False)
+    assert "follower1@mailinator.com" not in fake.followed and "follower1@mailinator.com" not in created
+    assert "follower1@mailinator.com" not in emails
+    assert set(created) <= {"follower2@mailinator.com", "follower3@mailinator.com"}
+
+
+def test_netting_suite_aborts_on_a_book_master():
+    from test_suite import netting_hedging_runner as R
+
+    class A(_FakeClient):
+        def get_member_books(self):
+            return {"ctmaster@mailinator.com": {"member_id": "m", "book": "a"}}
+    with pytest.raises(SystemExit):
+        R.instance_setup(A(), "real", "ctmaster@mailinator.com", 3, False)
+
+
+# ---------------------------------------------------------------- four instances + new suites in the dashboard registry
+def test_dashboard_accepts_all_four_instances_and_confirms_real_net():
+    suite = S.SUITE_INDEX["e2e"]
+    for inst in ("paper", "paper-net", "real", "real-net"):
+        cmd = S.build_command(suite, {"instance": inst, "end": 5}, {"follower_count": 99})
+        assert cmd[cmd.index("--instance") + 1] == inst
+    assert S.build_command(suite, {"instance": "bogus"}, {"follower_count": 99})[-1] != "bogus"
+    assert not S.needs_confirmation(suite, {"instance": "paper-net"})
+    assert S.needs_confirmation(suite, {"instance": "real"}) and S.needs_confirmation(suite, {"instance": "real-net"})
+
+
+def test_new_suites_are_registered_and_scripts_exist():
+    for key in ("netting_paper", "netting_real", "social_features"):
+        assert key in S.SUITE_INDEX, key
+        assert (Path(__file__).resolve().parent.parent / S.SUITE_INDEX[key]["script"]).exists()
+    assert S.SUITE_INDEX["netting_real"]["risk"] == "real"                    # typed confirmation required
+    assert S.SUITE_INDEX["social_features"]["risk"] == "safe"
+
+
+def test_social_suite_is_read_mostly_and_importable():
+    from test_suite import social_features_runner as R
+    assert [n.split()[0] for n, _ in R.SCENARIOS] == ["F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8"]
+    from test_suite.client import BlackTraderClient
+    assert BlackTraderClient.INSTANCES == ("paper", "paper-net", "real", "real-net")

@@ -1234,8 +1234,10 @@
           <div class="opt-row">
             <label>Run on</label>
             <div class="seg-mini" id="optInstance">
-              <button type="button" data-v="paper" class="on" onclick="setOptInstance('paper')">Paper</button>
-              <button type="button" data-v="real" class="real" onclick="setOptInstance('real')">Real</button>
+              <button type="button" data-v="paper" class="on" onclick="setOptInstance('paper')" title="Paper, hedging">Paper</button>
+              <button type="button" data-v="paper-net" onclick="setOptInstance('paper-net')" title="Paper, netting">Paper&nbsp;Net</button>
+              <button type="button" data-v="real" class="real" onclick="setOptInstance('real')" title="Real-money wallet, hedging">Real</button>
+              <button type="button" data-v="real-net" class="real" onclick="setOptInstance('real-net')" title="Real-money wallet, netting">Real&nbsp;Net</button>
             </div>
           </div>
           <div class="opt-row">
@@ -1387,6 +1389,9 @@
           </button>
           </div>
           <div class="tab-group"><span class="tg-label">Help</span>
+          <button id="tabBtnPlatform" onclick="switchTab('platform')" class="tab-item violet">
+            <i class="fa-solid fa-people-group"></i> Platform
+          </button>
           <button id="tabBtnSetup" onclick="switchTab('setup')" class="tab-item green">
             <i class="fa-solid fa-circle-question"></i> Setup &amp; guide
           </button>
@@ -1909,6 +1914,16 @@
       </div>
 
       <!-- Tab: Run history -->
+      <div id="tabPlatform" style="display: none; flex-direction: column; gap: 14px; margin-top: 10px;">
+        <div class="panel-card">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="flex:1"><h2>Platform overview</h2><p class="lead" style="margin:0">What the platform offers right now - read live from the API: trading instances (hedging / netting), copy, MAM and PAMM directories, plan modules and link state.</p></div>
+            <button class="ghost" onclick="fetchPlatform(true)"><i class="fa-solid fa-rotate"></i> Refresh</button>
+          </div>
+        </div>
+        <div id="platformBody" class="panel-card"><p class="lead">Loading…</p></div>
+      </div>
+
       <div id="tabHistory" style="display: none; flex-direction: column; gap: 14px; margin-top: 10px;">
         <div class="panel-card">
           <div style="display:flex; align-items:center; gap:10px;">
@@ -3214,9 +3229,9 @@
     let lastStatus = null, pendingRunKey = null, lastLogRaw = null, activeTab = 'terminal', lastHealth = null;
 
     const TAB_IDS = { terminal: 'tabTerminal', e2e: 'tabE2E', regression: 'tabRegression', followers: 'tabFollowers', tape: 'tabTape', reports: 'tabReports',
-                      replication: 'tabReplication', screenshots: 'tabScreenshots', history: 'tabHistory', setup: 'tabSetup' };
+                      replication: 'tabReplication', screenshots: 'tabScreenshots', history: 'tabHistory', setup: 'tabSetup', platform: 'tabPlatform' };
     const TAB_BTN = { terminal: 'tabBtnTerminal', e2e: 'tabBtnE2E', regression: 'tabBtnRegression', followers: 'tabBtnFollowers', tape: 'tabBtnTape', reports: 'tabBtnReports',
-                      replication: 'tabBtnReplication', screenshots: 'tabBtnScreenshots', history: 'tabBtnHistory', setup: 'tabBtnSetup' };
+                      replication: 'tabBtnReplication', screenshots: 'tabBtnScreenshots', history: 'tabBtnHistory', setup: 'tabBtnSetup', platform: 'tabBtnPlatform' };
 
     const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     const $ = id => document.getElementById(id);
@@ -3250,7 +3265,35 @@
       if (key === 'setup') renderHealth(lastHealth) || fetchHealth(false);
       if (key === 'replication') { const b = $('dispatchInstanceBadge'); if (b) b.innerText = currentInstance.toUpperCase(); loadDispatchSymbols(); onDispatchType(); }
       if (key === 'regression') fetchRegression();
+      if (key === 'platform') fetchPlatform(false);
       try { localStorage.setItem('bt_tab', key); } catch (e) {}
+    }
+
+    /* ---- platform overview (instances, copy / MAM / PAMM, plans) ---- */
+    async function fetchPlatform(force) {
+      const box = $('platformBody'); if (!box) return;
+      if (force || !box.dataset.loaded) box.innerHTML = '<p class="lead">Loading…</p>';
+      const { ok, data } = await api('/api/platform' + (force ? '?refresh=true' : ''));
+      if (!ok || !data.success) { box.innerHTML = '<p class="lead" style="color:var(--danger)">Could not load the platform overview.</p>'; return; }
+      box.dataset.loaded = '1';
+      const tag = (t, c) => `<span class="btn-tag tag-${c}">${esc(t)}</span>`;
+      const inst = (data.instances || []).map(i => `<tr><td><b>${esc(i.name)}</b> <code>${esc(i.slug)}</code></td><td>${tag(i.mode, i.netting ? 'purple' : 'green')}</td><td>${i.real_money ? tag('real-money wallet', 'red') : tag('simulated', 'green')}</td></tr>`).join('');
+      const label = { copy: 'Standard copy', mam: 'MAM', pamm: 'PAMM' };
+      const dirs = Object.entries(data.directories || {}).map(([k, d]) => `
+        <div style="margin-top:12px"><h3 style="margin:0 0 6px">${esc(label[k] || k)} masters <small>(${d.count}${d.kinds.length ? ' · ' + esc(d.kinds.join(', ')) : ''})</small></h3>
+        <table class="grid-table"><thead><tr><th>#</th><th>Name</th><th>Growth</th><th>Drawdown</th><th>Followers</th><th>Fund</th>${k === 'copy' ? '' : '<th>Share %</th>'}</tr></thead><tbody>
+        ${d.top.map(m => `<tr><td>${esc(m.rank)}</td><td>${esc(m.name)}</td><td>${esc(m.growth)}</td><td>${esc(m.drawdown)}</td><td>${esc(m.followers)}</td><td>${esc(m.fund)}</td>${k === 'copy' ? '' : `<td>${esc(m.share_percent)}</td>`}</tr>`).join('')}</tbody></table></div>`).join('');
+      const plans = Object.entries(data.plans || {}).map(([p, m]) => `<tr><td><b>${esc(p)}</b></td><td>${m.length ? m.map(x => tag(x, 'cyan')).join(' ') : '<small>no social / algo modules</small>'}</td></tr>`).join('');
+      const links = Object.entries(data.links || {}).map(([k, n]) => `<tr><td>${esc(k)}</td><td>${n}</td></tr>`).join('');
+      const bookBadge = data.master_book === 'a' ? tag('A-BOOK - real-instance tests will refuse to run', 'red') : data.master_book === 'b' ? tag('B-book (safe)', 'green') : '';
+      box.innerHTML = `
+        <h3 style="margin:0 0 6px">Trading instances</h3>
+        <table class="grid-table"><thead><tr><th>Instance</th><th>Position mode</th><th>Wallet</th></tr></thead><tbody>${inst}</tbody></table>
+        <p class="lead" style="margin-top:10px">Master <code>${esc(data.master)}</code> ${bookBadge}</p>
+        ${dirs}
+        <h3 style="margin:16px 0 6px">Plan modules</h3><table class="grid-table"><tbody>${plans}</tbody></table>
+        <h3 style="margin:16px 0 6px">Master's follower links (instance / status)</h3><table class="grid-table"><tbody>${links}</tbody></table>
+        ${(data.errors || []).length ? `<p class="lead" style="color:var(--warn)">${data.errors.map(esc).join(' · ')}</p>` : ''}`;
     }
 
     /* ---- release readiness rail ---- */
@@ -3298,7 +3341,7 @@
     function setOptInstance(v) {
       runInstance = v;
       document.querySelectorAll('#optInstance button').forEach(b => b.classList.toggle('on', b.dataset.v === v));
-      $('runOpts').classList.toggle('is-real', v === 'real');
+      $('runOpts').classList.toggle('is-real', v.startsWith('real'));
       updateOptsHint();
     }
 
@@ -3310,9 +3353,11 @@
 
     function updateOptsHint() {
       const p = collectParams(), max = SUITE_DEFAULTS.follower_count || 100, n = Math.max(0, p.end - p.start + 1);
-      let msg = `<b>${n}</b> follower${n === 1 ? '' : 's'} + master on <b>${p.instance.toUpperCase()}</b>.`;
+      const modeWord = p.instance.endsWith('-net') ? 'netting' : 'hedging';
+      let msg = `<b>${n}</b> follower${n === 1 ? '' : 's'} + master on <b>${p.instance.toUpperCase()}</b> (${modeWord}).`;
+      if (p.instance === 'paper-net') msg += ` <span style="color:var(--warn)">Paper netting has no copy links: copy suites will find no followers.</span>`;
       if (p.end > max) msg += ` <span style="color:var(--warn)">Only ${max} followers are configured (FOLLOWER_COUNT).</span>`;
-      if (p.instance === 'real') msg += ` <span style="color:var(--danger)">Real money – you will be asked to confirm.</span>`;
+      if (p.instance.startsWith('real')) msg += ` <span style="color:var(--danger)">Real-money wallet – you will be asked to confirm. Only B-book accounts are safe.</span>`;
       else if (n > 20) msg += ` Tip: start with 5–10 followers to iterate faster.`;
       $('optHint').innerHTML = msg;
     }

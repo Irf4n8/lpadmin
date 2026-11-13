@@ -1,0 +1,69 @@
+{
+  "suite": "Netting vs Hedging",
+  "timestamp": "2026-11-13T04:49:48.770786+00:00",
+  "symbol": "BINANCE:ETHUSDT.P",
+  "lot": 0.1,
+  "blocks": [
+    {
+      "instance": "real",
+      "mode": "HEDGING",
+      "followers": 10,
+      "note": "temporary links + wallets created for this run",
+      "results": [
+        {
+          "name": "H5 TP/SL sync",
+          "status": "PASS",
+          "failures": [],
+          "notes": [
+            "master TP/SL stored",
+            "followers match model: 10/10 OK (master long 0.2, short 0.0, 1 pos)",
+            "follower TP/SL equal master (10/10)"
+          ]
+        },
+        {
+          "name": "P1 pending fan-out + cancel",
+          "status": "PASS",
+          "failures": [],
+          "notes": [
+            "master pending orders placed = 3",
+            "pending orders fanned out to followers (10/10)",
+            "all pending orders cancelled everywhere"
+          ]
+        }
+      ]
+    },
+    {
+      "instance": "real-net",
+      "mode": "NETTING",
+      "followers": 10,
+      "note": "temporary links + wallets created for this run",
+      "results": [
+        {
+          "name": "N5 TP/SL on netted position survives add",
+          "status": "FAIL",
+          "failures": [
+            "followers match model: 8/10 wrong - follower1 x1.0: has long 0.2/short 0.0, expected long 0.3000/short 0.0000 | follower2 x2.0: has long 0.4/short 0.0, expected long 0.6000/short 0.0000 | follower3 x3.0: has long 0.6/short 0.0, expected long 0.9000/short 0.0000 | follower4 x0.5: has long 0.1/short 0.0, expected long 0.1500/short 0.0000",
+            "follower TP/SL equal master after add (0/10) follower1 tp None sl None; follower2 tp None sl None; follower3 tp None sl None; follower4 tp None sl None"
+          ],
+          "notes": [
+            "master TP/SL survive adding to the netted position",
+            "master netted size = 0.3"
+          ]
+        },
+        {
+          "name": "P1 pending fan-out + cancel",
+          "status": "FAIL",
+          "failures": [
+            "pending orders fanned out to followers (0/10) follower1, follower2, follower3, follower4, follower5"
+          ],
+          "notes": [
+            "master pending orders placed = 3",
+            "diagnostic: 0/10 of the missing followers got the orders within 10 s more",
+            "diagnostic: follower1 orders on BINANCE:ETHUSDT.P: [('FILLED', 'MARKET', 'SELL', None), ('FILLED', 'MARKET', 'BUY', None), ('FILLED', 'MARKET', 'SELL', None), ('FILLED', 'MARKET', 'BUY', None)]",
+            "all pending orders cancelled everywhere"
+          ]
+        }
+      ]
+    }
+  ]
+}

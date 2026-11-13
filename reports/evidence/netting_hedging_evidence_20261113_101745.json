@@ -1,0 +1,165 @@
+{
+  "suite": "Netting vs Hedging",
+  "timestamp": "2026-11-13T04:47:45.515704+00:00",
+  "symbol": "BINANCE:ETHUSDT.P",
+  "lot": 0.1,
+  "blocks": [
+    {
+      "instance": "real",
+      "mode": "HEDGING",
+      "followers": 10,
+      "note": "temporary links + wallets created for this run",
+      "results": [
+        {
+          "name": "H1 BUY and SELL legs coexist",
+          "status": "PASS",
+          "failures": [],
+          "notes": [
+            "master positions (BUY leg + SELL leg stay separate) = 2",
+            "master long = 0.1",
+            "master short = 0.1",
+            "followers match model: 10/10 OK (master long 0.1, short 0.1, 2 pos)"
+          ]
+        },
+        {
+          "name": "H2 close one leg",
+          "status": "PASS",
+          "failures": [],
+          "notes": [
+            "master long after closing BUY leg = 0.0",
+            "master short kept = 0.1",
+            "master positions = 1",
+            "followers match model: 10/10 OK (master long 0.0, short 0.1, 1 pos)"
+          ]
+        },
+        {
+          "name": "H3 partial reduce of one leg",
+          "status": "PASS",
+          "failures": [],
+          "notes": [
+            "master long untouched = 0.1",
+            "master short reduced by half = 0.05",
+            "followers match model: 10/10 OK (master long 0.1, short 0.05, 2 pos)"
+          ]
+        },
+        {
+          "name": "H4 close all",
+          "status": "PASS",
+          "failures": [],
+          "notes": [
+            "master positions after close all = 0",
+            "followers flat: 10/10 OK (master long 0.0, short 0.0, 0 pos)"
+          ]
+        },
+        {
+          "name": "P1 pending fan-out + cancel",
+          "status": "PASS",
+          "failures": [],
+          "notes": [
+            "master pending orders placed = 3",
+            "pending orders fanned out to followers (10/10)",
+            "all pending orders cancelled everywhere"
+          ]
+        },
+        {
+          "name": "C1 concurrent BUY/SELL race",
+          "status": "PASS",
+          "failures": [],
+          "notes": [
+            "orders accepted = 10",
+            "no 5xx under concurrent BUY/SELL",
+            "master hedging legs = 10",
+            "master long = 0.6",
+            "master short = 0.4",
+            "followers match model: 10/10 OK (master long 0.6, short 0.4, 10 pos)"
+          ]
+        }
+      ]
+    },
+    {
+      "instance": "real-net",
+      "mode": "NETTING",
+      "followers": 10,
+      "note": "temporary links + wallets created for this run",
+      "results": [
+        {
+          "name": "N1 open netted position",
+          "status": "PASS",
+          "failures": [],
+          "notes": [
+            "master positions = 1",
+            "master long = 0.3",
+            "followers match model: 10/10 OK (master long 0.3, short 0.0, 1 pos)"
+          ]
+        },
+        {
+          "name": "N2 opposite order reduces (one position)",
+          "status": "PASS",
+          "failures": [],
+          "notes": [
+            "master positions (opposite order must NET, not open a 2nd leg) = 1",
+            "master long reduced to 2L = 0.2",
+            "master short = 0.0",
+            "followers match model: 10/10 OK (master long 0.2, short 0.0, 1 pos)"
+          ]
+        },
+        {
+          "name": "N3 oversized opposite order flips",
+          "status": "PASS",
+          "failures": [],
+          "notes": [
+            "master positions after flip = 1",
+            "master long after flip = 0.0",
+            "master short = 5L - 3L = 0.2",
+            "followers match model: 10/10 OK (master long 0.0, short 0.2, 1 pos)"
+          ]
+        },
+        {
+          "name": "N4 exact opposite order closes",
+          "status": "PASS",
+          "failures": [],
+          "notes": [
+            "master positions (exact opposite order closes) = 0",
+            "followers flat: 10/10 OK (master long 0.0, short 0.0, 0 pos)"
+          ]
+        },
+        {
+          "name": "N5 TP/SL on netted position survives add",
+          "status": "FAIL",
+          "failures": [
+            "follower TP/SL equal master after add (0/10) follower1 tp None sl None; follower2 tp None sl None; follower3 tp None sl None; follower4 tp None sl None"
+          ],
+          "notes": [
+            "master TP/SL survive adding to the netted position",
+            "master netted size = 0.3",
+            "followers match model: 10/10 OK (master long 0.3, short 0.0, 1 pos)"
+          ]
+        },
+        {
+          "name": "P1 pending fan-out + cancel",
+          "status": "FAIL",
+          "failures": [
+            "pending orders fanned out to followers (0/10) follower1, follower2, follower3, follower4, follower5"
+          ],
+          "notes": [
+            "master pending orders placed = 3",
+            "all pending orders cancelled everywhere"
+          ]
+        },
+        {
+          "name": "C1 concurrent BUY/SELL race",
+          "status": "PASS",
+          "failures": [],
+          "notes": [
+            "orders accepted = 10",
+            "no 5xx under concurrent BUY/SELL",
+            "master holds <=1 position (netting invariant)",
+            "netting result is one-sided",
+            "master net equals 6L - 4L = 0.2",
+            "followers match model: 10/10 OK (master long 0.2, short 0.0, 1 pos)"
+          ]
+        }
+      ]
+    }
+  ]
+}

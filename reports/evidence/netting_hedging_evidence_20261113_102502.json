@@ -1,0 +1,28 @@
+{
+  "suite": "Netting vs Hedging",
+  "timestamp": "2026-11-13T04:55:02.159368+00:00",
+  "symbol": "BINANCE:ETHUSDT.P",
+  "lot": 0.1,
+  "blocks": [
+    {
+      "instance": "real-net",
+      "mode": "NETTING",
+      "followers": 6,
+      "note": "temporary links + wallets created for this run",
+      "results": [
+        {
+          "name": "N5 TP/SL on netted position survives add",
+          "status": "FAIL",
+          "failures": [
+            "follower TP/SL equal master after add (0/6) follower1 tp None sl None; follower2 tp None sl None; follower3 tp None sl None; follower4 tp None sl None"
+          ],
+          "notes": [
+            "master TP/SL survive adding to the netted position",
+            "master netted size = 0.3",
+            "followers match model: 6/6 OK (master long 0.3, short 0.0, 1 pos)"
+          ]
+        }
+      ]
+    }
+  ]
+}

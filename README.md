@@ -118,6 +118,8 @@ in `.env`. The dashboard refuses to start on a non-local address without a token
 | Buy/Sell parity & Stop | Market/limit/stop orders behave identically both ways | ~3 min |
 | Paper 2x certification | 10 lot master -> 20 lot follower end to end | ~3 min |
 | **Complex Copy Scenarios** | Model-checked cohorts (multiplier / balance / equity / reverse): pyramiding, partial closes, TP/SL sync, follower intervention, mid-trade multiplier change, phantom copies, churn, concurrent chained ops, seeded random walk | ~8 min |
+| **Netting vs Hedging** | The four instances (`paper`, `paper-net`, `real`, `real-net`): legs, reduce, flip, TP/SL, pending, concurrent race, follower model check | ~6-8 min |
+| **Social-Trading Features** | Copy / MAM / PAMM directories, role rules, link shape, auth, rejected invalid writes, wallets / IB / portal reads, admin config | ~1 min |
 | **Breakpoint & Race Hunter** | Double-close/double-credit, over-reduce, torn TP/SL, double-cancel, load ramp, follow/unfollow flapping, margin exhaustion, hostile input, bulk-vs-single close, auth storm, final audit | ~6 min |
 | Race conditions | Flash trades, dual orders, 10-thread storm, unfollow race | ~3 min |
 | Extreme scenarios | Rapid reversal, capital shock, straddle, micro-lots | ~5 min |
@@ -196,3 +198,6 @@ CI (`.github/workflows/ci.yml`) runs the same on every push.
 - `.env` is git-ignored. Never commit credentials; `.env.example` holds placeholders only.
 - Evidence reports are committed; skim them for account identifiers before publishing the repo.
 - The dashboard can place and close trades. Keep it on localhost, or behind `DASHBOARD_TOKEN`.
+
+
+See `docs/PLATFORM_FEATURES.md` for the full platform feature map (four instances, copy / MAM / PAMM, IB, wallets) and what is covered.

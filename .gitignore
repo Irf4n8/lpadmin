@@ -53,3 +53,9 @@ reports/jmeter/
 # Local virtualenv (scripts/bootstrap.py) and regression run state
 .venv/
 reports/regressions/
+
+# screen recordings of bug reproductions
+reports/videos/
+scratch/
+scratch_*.log
+scratch_*.err

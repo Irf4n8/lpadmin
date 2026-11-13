@@ -44,7 +44,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
 
-from config.settings import MASTER_EMAIL
+from config.settings import MASTER_EMAIL, FOLLOWER_COUNT
 from config.settings import BASE_URL, DEFAULT_PREFIX, DEFAULT_DOMAIN
 from test_suite.baseline import get_expected_multiplier
 from test_suite.client import BlackTraderClient
@@ -353,7 +353,7 @@ def test_pending_trigger_storm(
 def main():
     parser = argparse.ArgumentParser(description="BlackTrader Pending Order Trigger Race Suite")
     parser.add_argument("--start", type=int, default=1, help="Start follower index")
-    parser.add_argument("--end", type=int, default=100, help="End follower index")
+    parser.add_argument("--end", type=int, default=FOLLOWER_COUNT, help="End follower index")
     parser.add_argument("--instance", type=str, default="paper", help="Broker instance")
     args = parser.parse_args()
 

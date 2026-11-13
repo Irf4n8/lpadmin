@@ -1125,3 +1125,28 @@ Timestamp: 2026-11-12 (evening, day before go-live)
   accounts. A paper relationship that already exists can still be ended here." for accounts without an active paper link.
   Updating an active link still returns 200. My SELL STOP test unfollowed follower100 as a price probe, so follower100's paper link is
   now 'ended' and cannot be re-created by API (99/100 followers copy). NEVER unfollow paper followers in tests any more.
+
+## Turn 45 (2026-11-13) - netting/hedging suite, and an incident I caused
+- Pulled user commits 1c1b8ab/3653f9f (e2e + all-symbol runners). JMeter standard+stress re-run: 0 load errors; only failures = orders
+  history p95 6.7s (std) / 12.8s (stress) vs 6s SLA, unknown order type -> 500, absurd TP/SL accepted. Copy suites: all FAILs on the 99/100 count
+  were the unlinked follower100; complex X1-X10 10/10, e2e 14 PASS 2 WARN, accounting PASS.
+- Instances are FOUR: paper (hedging), paper-net (netting), real (hedging), real-net (netting). New suite test_suite/netting_hedging_runner.py
+  (dashboard: netting_paper / netting_real). paper 6/6, paper-net (master-only, no links possible) 7/7, real 6/6 (+H5 TP/SL, P1 pending).
+  real-net: TP/SL NOT copied to followers (0/6 after 30s) and pending orders NOT copied (0/6 after 30s) - plain open/reduce/flip/close/race copy fine.
+- INCIDENT: a follower has ONE link record per master whatever the instance. `follow` on real/real-net CONVERTS an active paper link
+  (instance + multiplier change) and my cleanup `unfollow` then ENDED it. followers 1-10 lost their paper links (now 89 active paper links, 11..99);
+  paper links cannot be re-created (HTTP 400). Guard added in instance_setup: skip followers with an active link on another instance.
+  NEVER call follow/unfollow with a different instance on a follower that has an active link.
+- FOUND: master ctmaster is now A-book (was B-book at start of the session; not changed by me). Do not run real-instance suites while A-book.
+- FOLLOWER_COUNT=99 in .env; --end defaults now come from FOLLOWER_COUNT. Paper suites must use followers 11..99 (--start 11) while 1-10 are unlinked.
+
+## Turn 46 (2026-11-13) - site crawl + platform features
+- Crawled the site (scripts/crawl_platform.py + JS bundle mining). New since the suites were written: 4 instances (paper, paper-net, real,
+  real-net = hedging/netting x simulated/real-money wallet), THREE social modes (Standard copy incl. private_master, MAM with share_percent,
+  PAMM pools with async money operations), IB/referral, wallets + money portal + KYC, plan-gated modules, groups (brokerage/markup/IB levels).
+  Full map: docs/PLATFORM_FEATURES.md.
+- Added: client.oms()/get_instances()/admin_get()/social_masters()/social_follows(); test_suite/social_features_runner.py (F1-F8, 8/8 pass,
+  read-mostly); dashboard: 4-instance selector (real + real-net need typed confirmation), /api/platform + "Platform" tab, suites
+  netting_paper / netting_real / social_features. 75 pytest tests pass.
+- NOT covered yet: MAM/PAMM trading (profit share, pool settlement), deposits/withdrawals/KYC, IB payout math, alerts/algo/backtest.
+- Another session is trading on the master right now (BTCUSD 0.01 positions at ~10:25 on paper) - never run suites while that is happening.

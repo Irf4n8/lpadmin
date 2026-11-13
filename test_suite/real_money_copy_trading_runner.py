@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
 
-from config.settings import MASTER_EMAIL, MASTER_ID
+from config.settings import MASTER_EMAIL, MASTER_ID, FOLLOWER_COUNT
 from config.settings import BASE_URL, DEFAULT_PREFIX, DEFAULT_DOMAIN
 from test_suite.client import BlackTraderClient
 
@@ -330,7 +330,7 @@ def test_real_order_with_protection(client: BlackTraderClient, master_email: str
 def main():
     parser = argparse.ArgumentParser(description="BlackTrader Real Money Copy Trading Runner")
     parser.add_argument("--start", type=int, default=1, help="Start follower index")
-    parser.add_argument("--end", type=int, default=100, help="End follower index")
+    parser.add_argument("--end", type=int, default=FOLLOWER_COUNT, help="End follower index")
     args = parser.parse_args()
 
     client = BlackTraderClient(base_url=BASE_URL, max_workers=10)

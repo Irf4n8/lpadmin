@@ -30,7 +30,7 @@ if str(BASE_DIR) not in sys.path:
 from config.doctor import run_checks, summarize as summarize_checks
 from config.settings import (BASE_URL, DEFAULT_DOMAIN, DEFAULT_PREFIX, DASHBOARD_HOST, DASHBOARD_PORT, DASHBOARD_TOKEN,
                              FOLLOWER_COUNT, MASTER_EMAIL, MASTER_ID)
-from dashboard.suites import SUITE_INDEX, build_command, effective_instance, needs_confirmation, public_registry
+from dashboard.suites import INSTANCES, SUITE_INDEX, build_command, effective_instance, is_real, needs_confirmation, public_registry
 from test_suite.client import BlackTraderClient
 from test_suite import symbol_coverage_runner as SC
 
@@ -279,7 +279,7 @@ def run_suite():
 
     if needs_confirmation(suite, params) and data.get("confirm") is not True:
         return jsonify({"error": "This action needs explicit confirmation.", "needs_confirmation": True,
-                        "reason": ("Runs against the REAL instance." if effective_instance(suite, params) in ("real", "both")
+                        "reason": ("Runs against the REAL instance." if is_real(effective_instance(suite, params))
                                    else "Closes positions and cancels orders.")}), 412
     with REGRESSION_LOCK:
         if REGRESSION.get("status") == "RUNNING":
@@ -548,6 +548,51 @@ def _count_statuses(obj, acc):
     elif isinstance(obj, list):
         for v in obj:
             _count_statuses(v, acc)
+
+
+
+# --------------------------------------------------------------------------- platform overview (read-only)
+_PLATFORM_CACHE: dict = {"at": 0.0, "data": None}
+
+
+@app.route("/api/platform")
+def platform_overview():
+    """What the platform offers right now: instances (hedging/netting), copy/MAM/PAMM directories, plan modules, link counts."""
+    if _PLATFORM_CACHE["data"] and time.time() - _PLATFORM_CACHE["at"] < 30 and request.args.get("refresh") != "true":
+        return jsonify(_PLATFORM_CACHE["data"])
+    c, master = dashboard_client, MASTER_EMAIL
+    out: dict = {"success": True, "master": master, "instances": [], "directories": {}, "plans": {}, "links": {}, "errors": []}
+    try:
+        out["instances"] = [{k: i.get(k) for k in ("slug", "name", "mode", "netting", "real_money")} for i in c.get_instances(master)]
+    except Exception as e:
+        out["errors"].append(f"instances: {e}")
+    for kind in c.SOCIAL_KINDS:
+        try:
+            ms = c.social_masters(master, kind, "real")
+            out["directories"][kind] = {
+                "count": len(ms), "kinds": sorted({m.get("kind") for m in ms if m.get("kind")}),
+                "top": [{"name": m.get("name"), "rank": (m.get("stats") or {}).get("rank"), "growth": (m.get("stats") or {}).get("growth"),
+                         "followers": (m.get("stats") or {}).get("followers"), "fund": (m.get("stats") or {}).get("fund"),
+                         "drawdown": (m.get("stats") or {}).get("drawdown"), "share_percent": m.get("share_percent")} for m in ms[:5]]}
+        except Exception as e:
+            out["errors"].append(f"{kind}: {e}")
+    try:
+        cfg = c.admin_get("config")["data"].get("plan_modules", {})
+        out["plans"] = {plan: sorted(set(mods) & {"copytrading", "mam", "pamm", "ib", "wallet", "alerts", "algo", "backtest"}) for plan, mods in cfg.items()}
+    except Exception as e:
+        out["errors"].append(f"plans: {e}")
+    try:
+        links = c.get_copy_followers(master, "paper", active_only=False)
+        by: dict = {}
+        for l in links:
+            key = f"{l.get('instance')}/{l.get('status')}"
+            by[key] = by.get(key, 0) + 1
+        out["links"] = by
+        out["master_book"] = (c.get_member_books().get(master) or {}).get("book")
+    except Exception as e:
+        out["errors"].append(f"links: {e}")
+    _PLATFORM_CACHE.update(at=time.time(), data=out)
+    return jsonify(out)
 
 
 @app.route("/api/summary")
@@ -988,7 +1033,7 @@ def _account_change_refused(data: dict):
     with PROCESS_LOCK:
         if RUNNING_PROCESS and RUNNING_PROCESS.poll() is None:
             return jsonify({"error": "A test run is active - changing accounts now would corrupt its results. Wait or stop it."}), 409
-    if data.get("instance") == "real" and data.get("confirm") is not True:
+    if is_real(data.get("instance")) and data.get("confirm") is not True:
         return jsonify({"error": "Changing REAL accounts needs confirmation.", "needs_confirmation": True}), 412
     return None
 
@@ -1254,7 +1299,7 @@ def dispatch_and_verify():
     Followers without an active copy link are listed as NOT LINKED and left out of the pass rate.
     """
     data = request.get_json(silent=True) or {}
-    instance = data.get("instance") if data.get("instance") in ("paper", "real") else "paper"
+    instance = data.get("instance") if data.get("instance") in INSTANCES else "paper"
     symbol = str(data.get("symbol") or "BINANCE:BTCUSDT.P").strip()
     side = str(data.get("side", "BUY")).upper()
     order_type = str(data.get("type", "MARKET")).upper()
@@ -1272,7 +1317,7 @@ def dispatch_and_verify():
         return jsonify({"success": False, "error": "quantity must be > 0"}), 400
     if order_type != "MARKET" and not price:
         return jsonify({"success": False, "error": f"{order_type} orders need a price"}), 400
-    if instance == "real" and data.get("confirm") is not True:
+    if is_real(instance) and data.get("confirm") is not True:
         return jsonify({"success": False, "needs_confirmation": True, "error": "Dispatch on REAL needs confirmation"}), 412
     with PROCESS_LOCK:
         if RUNNING_PROCESS and RUNNING_PROCESS.poll() is None:
@@ -1394,8 +1439,8 @@ def dispatch_and_verify():
 def close_master_and_verify():
     """Cancel the master's pending orders and close its positions, then verify every linked follower is flat."""
     data = request.get_json(silent=True) or {}
-    instance = data.get("instance") if data.get("instance") in ("paper", "real") else "paper"
-    if instance == "real" and data.get("confirm") is not True:
+    instance = data.get("instance") if data.get("instance") in INSTANCES else "paper"
+    if is_real(instance) and data.get("confirm") is not True:
         return jsonify({"error": "Closing on REAL needs confirmation", "needs_confirmation": True}), 412
     with PROCESS_LOCK:
         if RUNNING_PROCESS and RUNNING_PROCESS.poll() is None:
