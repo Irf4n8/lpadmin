@@ -731,6 +731,16 @@ class MultiMasterDashboardManager:
             "details": details
         }
 
+    def handle_bulk_follow(self, target_type: str, start: int, end: int, single_email: str, category: str = "equity", multiplier: float = 1.0) -> dict:
+        return self.handle_category_change(
+            target_type=target_type,
+            start=start,
+            end=end,
+            single_email=single_email,
+            category=category,
+            multiplier=multiplier
+        )
+
     def handle_category_change(self, target_type: str, start: int, end: int, single_email: str, category: str, multiplier: float, share_percent: Optional[float] = None) -> dict:
         g = self.groups.get("mam")
         if not g:
@@ -767,15 +777,18 @@ class MultiMasterDashboardManager:
 
         def worker(s: TraderSession):
             try:
-                # 1. Fetch current follows to get follow_id
-                f_data = s.get_mam_follows(self.instance)
-                following_list = f_data.get("following", [])
-                for fol in following_list:
-                    if fol.get("status") == "active":
-                        s.unfollow_mam_master(master_client_id, follow_id=fol.get("follow_id"), instance=self.instance)
+                # Follow on real if self.instance is paper (since OMS only allows copy trading on real instances)
+                inst = self.instance if self.instance in ["real", "real-net"] else "real"
+                # 1. Fetch current follows across instances to clean up previous follow
+                for check_inst in ALL_INSTANCES:
+                    f_data = s.get_mam_follows(check_inst)
+                    following_list = f_data.get("following", [])
+                    for fol in following_list:
+                        if fol.get("status") == "active":
+                            s.unfollow_mam_master(master_client_id, follow_id=fol.get("follow_id"), instance=check_inst)
                 time.sleep(0.1)
-                # 2. Follow with new configuration
-                ok = s.follow_mam_master(master_client_id, method=category, multiplier=multiplier, share_percent=share_percent, instance=self.instance)
+                # 2. Follow with new configuration on real instance
+                ok = s.follow_mam_master(master_client_id, method=category, multiplier=multiplier, share_percent=share_percent, instance=inst)
                 return s.email, ok
             except Exception as e:
                 return s.email, False
@@ -2446,11 +2459,14 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
         </div>
 
         <!-- Action Buttons -->
-        <div style="display: flex; gap: 10px;">
-          <button class="btn btn-action-primary" id="btnApplyCat" onclick="applyFleetCategory()" style="flex: 2; padding: 12px 20px; font-size: 14px; font-weight: 700; justify-content: center;">
-            🚀 Apply Category Configuration to Followers
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button class="btn btn-action-primary" id="btnApplyCat" onclick="applyFleetCategory()" style="flex: 2; min-width: 200px; padding: 12px 16px; font-size: 14px; font-weight: 700; justify-content: center;">
+            🚀 Apply Category Configuration
           </button>
-          <button class="btn" id="btnApplyUnfollow" onclick="applyFleetUnfollow()" style="flex: 1; padding: 12px 16px; font-size: 14px; font-weight: 700; justify-content: center; background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); color: #fff; border: none; border-radius: 8px; cursor: pointer;">
+          <button class="btn" id="btnBulkFollow" onclick="applyFleetBulkFollow()" style="flex: 2; min-width: 200px; padding: 12px 16px; font-size: 14px; font-weight: 700; justify-content: center; background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%); color: #fff; border: none; border-radius: 8px; cursor: pointer;">
+            👥 Bulk Follow Master (Default Equity)
+          </button>
+          <button class="btn" id="btnApplyUnfollow" onclick="applyFleetUnfollow()" style="flex: 1; min-width: 130px; padding: 12px 16px; font-size: 14px; font-weight: 700; justify-content: center; background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); color: #fff; border: none; border-radius: 8px; cursor: pointer;">
             🚪 Leave Master
           </button>
         </div>
@@ -2572,6 +2588,15 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
           <button class="btn" id="btnDisableBrokerFleet" onclick="applyFleetBrokerToggle('disable')" style="flex: 1; background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); color: #fff; padding: 12px 16px; font-size: 14px; font-weight: 700; justify-content: center; border: none; border-radius: 8px; cursor: pointer;">
             🔴 Disable Broker Setting for Followers
           </button>
+        </div>
+
+        <!-- Chrome Live Browser Sync Helper -->
+        <div style="background: rgba(59, 130, 246, 0.08); border: 1px dashed rgba(59, 130, 246, 0.35); border-radius: 8px; padding: 12px 14px; font-size: 12px; color: #93c5fd;">
+          💡 <strong>Chrome Terminal Sync Tip</strong>: The BlackTrader trading UI stores the Trades &rarr; Settings checkbox in browser <code>localStorage</code>. When you log in as a follower in Chrome, you can paste this 1-line command into Chrome Console (F12) to instantly tick the selected broker checkbox:
+          <div style="display: flex; gap: 8px; margin-top: 8px; align-items: center;">
+            <code id="chromeSyncSnippet" style="background: rgba(0,0,0,0.6); padding: 6px 10px; border-radius: 4px; color: #38bdf8; font-size: 11px; flex: 1; overflow-x: auto; font-family: monospace;">const f = document.querySelector('iframe'); const uid = f ? f.contentWindow.__IFRAME_CONFIG__?.user_id : ''; if(f && uid) { f.contentWindow.localStorage.setItem('selectedBrokers:' + uid, JSON.stringify(['real'])); f.contentWindow.location.reload(); }</code>
+            <button type="button" class="btn" onclick="copyChromeSyncSnippet()" style="padding: 6px 12px; font-size: 11px; background: #3b82f6; color: white; border: none; white-space: nowrap; cursor: pointer;">📋 Copy Snippet</button>
+          </div>
         </div>
 
         <div id="brokerStatusBox" style="display: none; padding: 12px; border-radius: 8px; font-size: 12px; background: rgba(30, 41, 59, 0.5); border: 1px solid var(--card-border);"></div>
@@ -3714,6 +3739,67 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
       });
     }
 
+    async function applyFleetBulkFollow() {
+      const btn = document.getElementById('btnBulkFollow');
+      const statusBox = document.getElementById('catStatusBox');
+      const scope = document.querySelector('input[name="catScope"]:checked').value;
+      const start = parseInt(document.getElementById('catStartIdx').value) || 1;
+      const end = parseInt(document.getElementById('catEndIdx').value) || 100;
+      const singleEmail = document.getElementById('catSingleSelect').value;
+
+      btn.disabled = true;
+      btn.innerText = "⏳ Following Master in Equity Mode...";
+      statusBox.style.display = 'block';
+      statusBox.style.color = '#60a5fa';
+      statusBox.innerText = `Submitting bulk follow (Equity mode) to ${scope} followers...`;
+
+      appendFleetLog(`Executing Bulk Follow: Master=${activeMasterId.toUpperCase()}, Category=EQUITY, Target=${scope.toUpperCase()}...`, 'info');
+
+      try {
+        const payload = {
+          target_type: scope,
+          start: start,
+          end: end,
+          single_email: singleEmail,
+          category: 'equity',
+          multiplier: 1.0
+        };
+
+        const res = await fetch('/api/manage/follow', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          statusBox.style.color = '#34d399';
+          statusBox.innerText = `✅ Success! ${data.success_count}/${data.total_targeted} followers are now following Master in EQUITY mode.`;
+          appendFleetLog(`✅ Bulk Follow Completed: ${data.success_count}/${data.total_targeted} accounts now following Master in EQUITY mode.`, 'success');
+          fetchDashboardData();
+        } else {
+          statusBox.style.color = '#f87171';
+          statusBox.innerText = `❌ Error: ${data.error || 'Failed to follow master'}`;
+          appendFleetLog(`❌ Bulk Follow Failed: ${data.error || 'Unknown error'}`, 'error');
+        }
+      } catch (err) {
+        statusBox.style.color = '#f87171';
+        statusBox.innerText = `❌ Request failed: ${err.message}`;
+        appendFleetLog(`❌ Network Error: ${err.message}`, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "👥 Bulk Follow Master (Default Equity)";
+      }
+    }
+
+    function copyChromeSyncSnippet() {
+      const broker = selectedFleetBroker || 'real';
+      const code = `const f = document.querySelector('iframe'); const uid = f ? f.contentWindow.__IFRAME_CONFIG__?.user_id : ''; if(f && uid) { f.contentWindow.localStorage.setItem('selectedBrokers:' + uid, JSON.stringify(['${broker}'])); f.contentWindow.location.reload(); }`;
+      navigator.clipboard.writeText(code).then(() => {
+        alert(`Copied Chrome Sync Snippet for [${broker}]! Paste into Chrome DevTools Console (F12) while on https://lpadmin.blackfx.com/dashboard to immediately tick the box.`);
+      });
+    }
+
     async function applyFleetCategory() {
       if (selectedFleetCat === 'leave') {
         await applyFleetUnfollow();
@@ -3941,6 +4027,11 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
       document.getElementById('brokerEqVal').innerText = Number(bal).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
       document.getElementById('brokerFreeVal').innerText = Number(bal).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
       document.getElementById('brokerUsedVal').innerText = '0.00';
+      const snip = document.getElementById('chromeSyncSnippet');
+      if (snip) {
+        snip.innerText = `const f = document.querySelector('iframe'); const uid = f ? f.contentWindow.__IFRAME_CONFIG__?.user_id : ''; if(f && uid) { f.contentWindow.localStorage.setItem('selectedBrokers:' + uid, JSON.stringify(['${b}'])); f.contentWindow.location.reload(); }`;
+      }
+
     }
 
     function onBrokerCheckboxToggle() {
@@ -4603,6 +4694,28 @@ class DashboardHTTPRequestHandler(BaseHTTPRequestHandler):
                 end=end,
                 single_email=single_email,
                 book=book
+            )
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(json.dumps(res).encode("utf-8"))
+
+        elif path == "/api/manage/follow":
+            target_type = payload.get("target_type", "all")
+            start = int(payload.get("start", 1))
+            end = int(payload.get("end", 100))
+            single_email = payload.get("single_email", "")
+            category = payload.get("category", "equity")
+            multiplier = float(payload.get("multiplier", 1.0))
+
+            res = self.data_manager.handle_bulk_follow(
+                target_type=target_type,
+                start=start,
+                end=end,
+                single_email=single_email,
+                category=category,
+                multiplier=multiplier
             )
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
