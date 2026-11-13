@@ -360,13 +360,15 @@ class MultiMasterDashboardManager:
                 # Fetch follow relationship & shares
                 follows_data = s.get_mam_follows(self.instance) if g.id == "mam" else {}
                 following_list = follows_data.get("following", [])
-                follow_obj = following_list[0] if following_list else {}
+                active_follows = [fol for fol in following_list if fol.get("status") == "active"]
+                follow_obj = active_follows[0] if active_follows else {}
+                is_following = bool(active_follows)
 
                 starting_balance = float(follow_obj.get("starting_balance", 10000000.0 if g.id == "mam" else 100000000.0))
                 share_pct = float(follow_obj.get("share_percent", 50.0))
-                method = follow_obj.get("method", "equity" if g.id == "mam" else "multiplier")
-                multiplier = float(follow_obj.get("multiplier", 1.0))
-                following_manager = g.master_email
+                method = follow_obj.get("method", "multiplier") if is_following else "unfollowed"
+                multiplier = float(follow_obj.get("multiplier", 1.0)) if is_following else 0.0
+                following_manager = g.master_email if is_following else "None (Unfollowed)"
 
                 # Fetch MAM profit shares on follower
                 shares_data = s.get_mam_shares(self.instance) if g.id == "mam" else {}
@@ -447,7 +449,8 @@ class MultiMasterDashboardManager:
                     "equity": eq,
                     "benchmark": starting_balance,
                     "above_benchmark": is_above_hwm,
-                    "following": f"{following_manager} ({int(share_pct)}% share)",
+                    "is_following": is_following,
+                    "following": f"{following_manager} ({int(share_pct)}% share)" if is_following else "Not Following (Unfollowed)",
                     "manager_email": following_manager,
                     "share_percent": share_pct,
                     "method": method,
@@ -669,12 +672,74 @@ class MultiMasterDashboardManager:
                 "error": res.get("error") if isinstance(res, dict) else "Failed to update master settings"
             }
 
+    def handle_unfollow(self, target_type: str, start: int, end: int, single_email: str) -> dict:
+        g = self.groups.get("mam")
+        if not g:
+            return {"success": False, "error": "MAM group not configured"}
+
+        master_client_id = g.master_client_id
+
+        target_sessions = []
+        if target_type == "single":
+            if single_email in g.follower_sessions:
+                target_sessions.append(g.follower_sessions[single_email])
+        elif target_type == "range":
+            for i in range(start, end + 1):
+                em = f"mamfollower{i}@mailinator.com"
+                if em in g.follower_sessions:
+                    target_sessions.append(g.follower_sessions[em])
+        else:  # "all"
+            target_sessions = list(g.follower_sessions.values())
+
+        if not target_sessions:
+            return {"success": False, "error": "No matching follower sessions found"}
+
+        success_count = 0
+        fail_count = 0
+        details = []
+
+        def worker(s: TraderSession):
+            try:
+                for inst in ALL_INSTANCES:
+                    f_data = s.get_mam_follows(inst)
+                    following_list = f_data.get("following", [])
+                    for fol in following_list:
+                        if fol.get("status") == "active":
+                            s.unfollow_mam_master(master_client_id, follow_id=fol.get("follow_id"), instance=inst)
+                return s.email, True
+            except Exception as e:
+                return s.email, False
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+            futures = [executor.submit(worker, s) for s in target_sessions]
+            for fut in concurrent.futures.as_completed(futures):
+                em, ok = fut.result()
+                if ok:
+                    success_count += 1
+                else:
+                    fail_count += 1
+                details.append({"email": em, "success": ok})
+
+        # Trigger immediate background cache refresh
+        threading.Thread(target=self.update_single_group, args=(g,)).start()
+
+        return {
+            "success": True,
+            "total_targeted": len(target_sessions),
+            "success_count": success_count,
+            "fail_count": fail_count,
+            "details": details
+        }
+
     def handle_category_change(self, target_type: str, start: int, end: int, single_email: str, category: str, multiplier: float, share_percent: Optional[float] = None) -> dict:
         g = self.groups.get("mam")
         if not g:
             return {"success": False, "error": "MAM group not configured"}
 
         master_client_id = g.master_client_id
+
+        if category in ["leave", "unfollowed"]:
+            return self.handle_unfollow(target_type=target_type, start=start, end=end, single_email=single_email)
 
         # Use Master's official profit share if not explicitly provided
         if share_percent is None or share_percent <= 0:
@@ -843,7 +908,7 @@ class MultiMasterDashboardManager:
             "details": details
         }
 
-    def handle_broker_setting_change(self, target_type: str, start: int, end: int, single_email: str, target_broker: str, category: str = "multiplier", multiplier: float = 2.0, share_percent: Optional[float] = None) -> dict:
+    def handle_broker_setting_change(self, target_type: str, start: int, end: int, single_email: str, target_broker: str, action: str = "enable", category: str = "multiplier", multiplier: float = 2.0, share_percent: Optional[float] = None) -> dict:
         g = self.groups.get("mam")
         if not g:
             return {"success": False, "error": "MAM group not configured"}
@@ -871,23 +936,71 @@ class MultiMasterDashboardManager:
         if not target_sessions:
             return {"success": False, "error": "No matching follower sessions found"}
 
+        # Admin login to sync account_type if enabling
+        admin_session = None
+        member_map = {}
+        if action == "enable":
+            try:
+                admin_email = os.getenv("ADMIN_ID", "lpadmin@blacktrader.com")
+                admin_pwd = os.getenv("ADMIN_PASSWORD", "Raj1234!")
+                admin_session = requests.Session()
+                adm_res = admin_session.post(
+                    f"{self.base_url}/admin/api/login",
+                    json={"email": admin_email, "password": admin_pwd, "remember": True},
+                    timeout=15
+                )
+                if adm_res.status_code == 200:
+                    adm_token = adm_res.json().get("token")
+                    admin_session.headers.update({
+                        "Authorization": f"Bearer {adm_token}",
+                        "Content-Type": "application/json"
+                    })
+                    m_list_res = admin_session.get(f"{self.base_url}/admin/api/members", timeout=12)
+                    if m_list_res.status_code == 200:
+                        for m in m_list_res.json().get("members", []):
+                            member_map[m.get("email")] = m.get("member_id")
+            except Exception:
+                pass
+
         success_count = 0
         fail_count = 0
         details = []
 
         def worker(s: TraderSession):
             try:
-                # 1. Unfollow first (every hedging/netting instance) so the account holds a single link
-                for inst in ALL_INSTANCES:
-                    f_data = s.get_mam_follows(inst)
+                if action == "enable":
+                    # Update account_type in Admin API if needed
+                    if target_inst in ["real", "real-net"] and admin_session and s.email in member_map:
+                        mem_id = member_map[s.email]
+                        try:
+                            admin_session.post(f"{self.base_url}/admin/api/members/{mem_id}/account-type", json={"account_type": "live"}, timeout=8)
+                        except Exception:
+                            pass
+                    elif target_inst in ["paper", "paper-net"] and admin_session and s.email in member_map:
+                        mem_id = member_map[s.email]
+                        try:
+                            admin_session.post(f"{self.base_url}/admin/api/members/{mem_id}/account-type", json={"account_type": "demo"}, timeout=8)
+                        except Exception:
+                            pass
+
+                    # Clean active follow on target_inst first if any
+                    f_data = s.get_mam_follows(target_inst)
                     following_list = f_data.get("following", [])
                     for fol in following_list:
                         if fol.get("status") == "active":
-                            s.unfollow_mam_master(master_client_id, follow_id=fol.get("follow_id"), instance=inst)
-                time.sleep(0.15)
-                # 2. Follow with target broker instance
-                ok = s.follow_mam_master(master_client_id, method=category, multiplier=multiplier, share_percent=share_percent, instance=target_inst)
-                return s.email, ok
+                            s.unfollow_mam_master(master_client_id, follow_id=fol.get("follow_id"), instance=target_inst)
+                    time.sleep(0.1)
+                    # Follow on target_inst
+                    ok = s.follow_mam_master(master_client_id, method=category, multiplier=multiplier, share_percent=share_percent, instance=target_inst)
+                    return s.email, ok
+                else:  # "disable"
+                    # Unfollow active follow on target_inst
+                    f_data = s.get_mam_follows(target_inst)
+                    following_list = f_data.get("following", [])
+                    for fol in following_list:
+                        if fol.get("status") == "active":
+                            s.unfollow_mam_master(master_client_id, follow_id=fol.get("follow_id"), instance=target_inst)
+                    return s.email, True
             except Exception as e:
                 return s.email, False
 
@@ -901,7 +1014,7 @@ class MultiMasterDashboardManager:
                     fail_count += 1
                 details.append({"email": em, "success": ok})
 
-        if target_type == "all" and target_inst != self.instance:
+        if action == "enable" and target_type == "all" and target_inst != self.instance:
             self.instance = target_inst
             g.instance = target_inst
             g.cache = self._empty_cache()
@@ -911,6 +1024,7 @@ class MultiMasterDashboardManager:
 
         return {
             "success": True,
+            "action": action,
             "total_targeted": len(target_sessions),
             "success_count": success_count,
             "fail_count": fail_count,
@@ -2282,7 +2396,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
         <!-- Category Mode Selection -->
         <div>
           <label style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">2. Sizing Category Mode</label>
-          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 8px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; margin-top: 8px;">
             <button type="button" class="fleet-mode-btn active" id="btnModeMult" onclick="selectFleetCategory('multiplier')">
               <div style="font-weight: 700;">Multiplier</div>
               <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Fixed Lot Ratio</div>
@@ -2294,6 +2408,10 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
             <button type="button" class="fleet-mode-btn" id="btnModeBal" onclick="selectFleetCategory('balance')">
               <div style="font-weight: 700;">Balance Based</div>
               <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Follower/Master Bal</div>
+            </button>
+            <button type="button" class="fleet-mode-btn" id="btnModeLeave" onclick="selectFleetCategory('leave')" style="border-color: rgba(239, 68, 68, 0.4);">
+              <div style="font-weight: 700; color: #f87171;">🚪 Leave Master</div>
+              <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Unfollow from MAM</div>
             </button>
           </div>
         </div>
@@ -2323,27 +2441,36 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
           <span class="badge badge-gold" id="followerInheritedShare" style="font-weight: 800; font-size: 13px;">50% (HWM)</span>
         </div>
 
-        <!-- Action Button -->
-        <button class="btn btn-action-primary" id="btnApplyCat" onclick="applyFleetCategory()" style="padding: 12px 20px; font-size: 14px; font-weight: 700; width: 100%; justify-content: center;">
-          🚀 Apply Category Configuration to Followers
-        </button>
+        <div id="leaveMasterNotice" style="display: none; background: rgba(239, 68, 68, 0.1); padding: 12px 14px; border-radius: 8px; font-size: 12px; color: #fca5a5; border: 1px dashed rgba(239, 68, 68, 0.4);">
+          ⚠️ <strong>Leave Master Mode Selected</strong>: All targeted followers will cleanly unfollow from the MAM master across all instances. Replication will cease immediately.
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display: flex; gap: 10px;">
+          <button class="btn btn-action-primary" id="btnApplyCat" onclick="applyFleetCategory()" style="flex: 2; padding: 12px 20px; font-size: 14px; font-weight: 700; justify-content: center;">
+            🚀 Apply Category Configuration to Followers
+          </button>
+          <button class="btn" id="btnApplyUnfollow" onclick="applyFleetUnfollow()" style="flex: 1; padding: 12px 16px; font-size: 14px; font-weight: 700; justify-content: center; background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); color: #fff; border: none; border-radius: 8px; cursor: pointer;">
+            🚪 Leave Master
+          </button>
+        </div>
 
         <div id="catStatusBox" style="display: none; padding: 12px; border-radius: 8px; font-size: 12px; background: rgba(30, 41, 59, 0.5); border: 1px solid var(--card-border);"></div>
       </div>
 
-      <!-- CARD 2: FOLLOWERS BROKER SETTING CONTROLLER (PAPER vs REAL) -->
-      <div class="kpi-card" style="padding: 24px; display: flex; flex-direction: column; gap: 18px; border: 1px solid rgba(236, 72, 153, 0.3); background: rgba(15, 23, 42, 0.85);">
+      <!-- CARD 2: BROKER SETTINGS CONTROLLER (TRADES MODULE SETTINGS) -->
+      <div class="kpi-card" style="padding: 24px; display: flex; flex-direction: column; gap: 18px; border: 1px solid rgba(139, 92, 246, 0.4); background: rgba(15, 23, 42, 0.9);">
         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 12px;">
           <div>
-            <div style="font-weight: 800; font-size: 16px; color: #f472b6; display: flex; align-items: center; gap: 8px;">
-              <span>🏢 Followers Broker Setting Controller</span>
+            <div style="font-weight: 800; font-size: 16px; color: #a78bfa; display: flex; align-items: center; gap: 8px;">
+              <span>⚙️ Followers Broker Setting Controller</span>
             </div>
-            <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Unfollows first, then follows on the chosen broker setting (Hedging or Netting)</div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Enable or disable broker settings (Hedging / Netting) across followers (matching Trades &rarr; Settings)</div>
           </div>
-          <span class="badge badge-env-real" id="brokerActiveBadge">REAL (HEDGING)</span>
+          <span class="badge badge-env-real" id="brokerActiveBadge">REAL (HEDGING) ● CONNECTED</span>
         </div>
 
-        <!-- Target Scope -->
+        <!-- 1. Target Scope -->
         <div>
           <label style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">1. Target Followers Scope</label>
           <div style="display: flex; gap: 16px; margin-top: 8px;">
@@ -2369,32 +2496,84 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
           </div>
         </div>
 
-        <!-- Broker Mode Selection -->
-        <div>
-          <label style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">2. Target Broker Setting</label>
-          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 8px;">
-            <button type="button" class="fleet-mode-btn" id="btnBrokerPaper" onclick="selectFleetBroker('paper')">
-              <div style="font-weight: 700; color: #c084fc;">📄 Paper (Hedging)</div>
-              <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Sandbox / Practice Account</div>
+        <!-- 2. Trades Settings Modal Replication -->
+        <div style="background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; overflow: hidden;">
+          <!-- Broker Tabs -->
+          <div style="display: flex; border-bottom: 1px solid #1e293b; background: rgba(15, 23, 42, 0.6); overflow-x: auto;">
+            <button type="button" class="broker-tab-btn" id="tabBrokerPaper" onclick="selectFleetBrokerTab('paper')" style="padding: 10px 16px; font-size: 13px; font-weight: 600; color: #94a3b8; background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+              Paper (Hedging) <span id="dotBrokerPaper" style="width: 6px; height: 6px; border-radius: 50%; background: #10b981;"></span>
             </button>
-            <button type="button" class="fleet-mode-btn active" id="btnBrokerReal" onclick="selectFleetBroker('real')">
-              <div style="font-weight: 700; color: #f472b6;">💎 Real (Hedging)</div>
-              <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Live Execution OMS Instance</div>
+            <button type="button" class="broker-tab-btn active" id="tabBrokerReal" onclick="selectFleetBrokerTab('real')" style="padding: 10px 16px; font-size: 13px; font-weight: 700; color: #60a5fa; background: none; border: none; border-bottom: 2px solid #3b82f6; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+              Real (Hedging) <span id="dotBrokerReal" style="width: 6px; height: 6px; border-radius: 50%; background: #10b981;"></span>
             </button>
-            <button type="button" class="fleet-mode-btn" id="btnBrokerRealNet" onclick="selectFleetBroker('real-net')">
-              <div style="font-weight: 700; color: #38bdf8;">🔷 Real (Netting)</div>
-              <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Live Netting OMS Instance</div>
+            <button type="button" class="broker-tab-btn" id="tabBrokerPaperNet" onclick="selectFleetBrokerTab('paper-net')" style="padding: 10px 16px; font-size: 13px; font-weight: 600; color: #94a3b8; background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+              Paper (Netting) <span id="dotBrokerPaperNet" style="width: 6px; height: 6px; border-radius: 50%; background: #64748b;"></span>
             </button>
+            <button type="button" class="broker-tab-btn" id="tabBrokerRealNet" onclick="selectFleetBrokerTab('real-net')" style="padding: 10px 16px; font-size: 13px; font-weight: 600; color: #94a3b8; background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+              Real (Netting) <span id="dotBrokerRealNet" style="width: 6px; height: 6px; border-radius: 50%; background: #10b981;"></span>
+            </button>
+          </div>
+
+          <!-- Active Broker Tab Body -->
+          <div style="padding: 16px; display: flex; flex-direction: column; gap: 14px;">
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #94a3b8;">
+              <span>Broker ID:</span>
+              <strong id="brokerIdLabel" style="color: #f1f5f9; font-family: monospace;">real</strong>
+              <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('brokerIdLabel').innerText)" style="background: none; border: none; color: #a78bfa; font-size: 12px; cursor: pointer;">📋 Copy</button>
+            </div>
+
+            <!-- Enable Checkbox Container (Identical to Trades Settings) -->
+            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center;">
+              <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; margin: 0;">
+                <input type="checkbox" id="chkEnableBroker" checked onchange="onBrokerCheckboxToggle()" style="width: 18px; height: 18px; accent-color: #8b5cf6; cursor: pointer;">
+                <span id="lblEnableBroker" style="font-size: 15px; font-weight: 700; color: #ffffff;">Enable Real (Hedging)</span>
+              </label>
+              <div id="brokerConnectedIndicator" style="display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #10b981;">
+                <span id="brokerConnectedDot" style="width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block;"></span> <span id="brokerConnectedText">connected</span>
+              </div>
+            </div>
+
+            <!-- Balance Box (Identical to Trades Settings) -->
+            <div style="background: #111827; border: 1px solid #1f2937; border-radius: 8px; padding: 14px 16px;">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                <span style="font-size: 14px; font-weight: 700; color: #ffffff;">Balance</span>
+                <span id="brokerMoneyTag" class="badge" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 4px;">REAL MONEY</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: left;">
+                <div>
+                  <div style="font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase;">BALANCE</div>
+                  <div id="brokerBalVal" style="font-size: 14px; font-weight: 800; color: #f1f5f9; margin-top: 2px;">1,000.00</div>
+                </div>
+                <div>
+                  <div style="font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase;">EQUITY</div>
+                  <div id="brokerEqVal" style="font-size: 14px; font-weight: 800; color: #f1f5f9; margin-top: 2px;">1,000.00</div>
+                </div>
+                <div>
+                  <div style="font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase;">FREE MARGIN</div>
+                  <div id="brokerFreeVal" style="font-size: 14px; font-weight: 800; color: #f1f5f9; margin-top: 2px;">1,000.00</div>
+                </div>
+                <div>
+                  <div style="font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase;">USED MARGIN</div>
+                  <div id="brokerUsedVal" style="font-size: 14px; font-weight: 800; color: #f1f5f9; margin-top: 2px;">0.00</div>
+                </div>
+              </div>
+              <div id="brokerBalanceDesc" style="font-size: 11px; color: #94a3b8; margin-top: 10px;">
+                This is a real-money account. Its balance changes by deposit or an admin adjustment.
+              </div>
+            </div>
           </div>
         </div>
 
-        <div style="background: rgba(0,0,0,0.3); padding: 12px 14px; border-radius: 8px; font-size: 12px; color: #cbd5e1; border: 1px dashed rgba(236, 72, 153, 0.3);">
-          ℹ️ Followers are <strong>unfollowed first</strong>, then follow on the chosen instance. <strong>Real (Hedging)</strong> copies the master's trades on the live <code>real</code> engine; <strong>Real (Netting)</strong> copies the master's trades on <code>real-net</code> (the master must trade on that instance). Each uses its own balance, set via Admin API &mdash; fund Real (Netting) in the Capital &amp; Balance Controller below.
+        <!-- 3. Fleet Action Buttons -->
+        <div style="display: flex; gap: 12px;">
+          <button class="btn" id="btnEnableBrokerFleet" onclick="applyFleetBrokerToggle('enable')" style="flex: 1; background: linear-gradient(135deg, #059669 0%, #10b981 100%); color: #fff; padding: 12px 16px; font-size: 14px; font-weight: 700; justify-content: center; border: none; border-radius: 8px; cursor: pointer;">
+            🟢 Enable Broker Setting for Followers
+          </button>
+          <button class="btn" id="btnDisableBrokerFleet" onclick="applyFleetBrokerToggle('disable')" style="flex: 1; background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); color: #fff; padding: 12px 16px; font-size: 14px; font-weight: 700; justify-content: center; border: none; border-radius: 8px; cursor: pointer;">
+            🔴 Disable Broker Setting for Followers
+          </button>
         </div>
 
-        <button class="btn" id="btnApplyBroker" onclick="applyFleetBrokerSetting()" style="background: linear-gradient(135deg, #db2777 0%, #ec4899 100%); color: #fff; padding: 12px 20px; font-size: 14px; font-weight: 700; width: 100%; justify-content: center; border: none; border-radius: 8px;">
-          ⚡ Apply Broker Setting to Followers
-        </button>
         <div id="brokerStatusBox" style="display: none; padding: 12px; border-radius: 8px; font-size: 12px; background: rgba(30, 41, 59, 0.5); border: 1px solid var(--card-border);"></div>
       </div>
 
@@ -2583,7 +2762,10 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
             <input type="number" id="qmMultiplier" value="2.0" step="0.1" min="0.1" max="10.0" class="fleet-input" style="width: 100%; margin-top: 6px;">
           </div>
 
-          <button class="btn btn-action-primary" style="width: 100%; margin-top: 12px; padding: 8px; justify-content: center;" onclick="saveQuickManageCategory()">Save Sizing Category</button>
+          <div style="display: flex; gap: 8px; margin-top: 12px;">
+            <button class="btn btn-action-primary" style="flex: 2; padding: 8px; justify-content: center;" onclick="saveQuickManageCategory()">Save Sizing Category</button>
+            <button class="btn" style="flex: 1; padding: 8px; justify-content: center; background: #dc2626; color: white; border: none; border-radius: 6px; cursor: pointer;" onclick="quickManageLeaveMaster()">🚪 Leave Master</button>
+          </div>
         </div>
 
         <!-- 2. Book Conversion (Admin API) -->
@@ -2599,17 +2781,42 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
           </div>
         </div>
 
-        <!-- 3. Broker Setting (Paper vs Real Hedging) -->
+        <!-- 3. Broker Settings (Trades Module Settings) -->
         <div style="background: rgba(255,255,255,0.02); padding: 14px; border-radius: 8px; border: 1px solid var(--card-border);">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <div style="font-size: 11px; font-weight: 700; color: var(--accent-real); text-transform: uppercase;">3. Broker Setting (Trading Environment)</div>
-            <span id="qmCurrentBrokerBadge" class="badge badge-env-paper">📄 PAPER (HEDGING)</span>
+            <div style="font-size: 11px; font-weight: 700; color: var(--accent-real); text-transform: uppercase;">3. Broker Settings (Trades &rarr; Settings)</div>
+            <span id="qmCurrentBrokerBadge" class="badge badge-env-real">💎 REAL (HEDGING)</span>
           </div>
-          <div style="font-size: 11px; color: var(--text-dim); margin-bottom: 10px;">Switch execution account between Paper (Hedging) simulated broker and Real (Hedging) live engine.</div>
-          <div style="display: flex; gap: 10px;">
-            <button class="btn" style="flex: 1; padding: 8px; justify-content: center; border: 1px solid var(--accent); color: var(--accent);" onclick="saveQuickManageBroker('paper')">📄 Set Paper (Hedging)</button>
-            <button class="btn btn-action-real" style="flex: 1; padding: 8px; justify-content: center;" onclick="saveQuickManageBroker('real')">💎 Set Real (Hedging)</button>
-            <button class="btn" style="flex: 1; padding: 8px; justify-content: center; border: 1px solid #38bdf8; color: #38bdf8;" onclick="saveQuickManageBroker('real-net')">🔷 Set Real (Netting)</button>
+          <div style="font-size: 11px; color: var(--text-dim); margin-bottom: 10px;">Enable or disable broker setting environments for this follower account.</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div style="background: #1e293b; padding: 10px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 12px; font-weight: 600; color: #cbd5e1;">Paper (Hedging)</span>
+              <div style="display: flex; gap: 6px;">
+                <button class="btn" style="padding: 4px 8px; font-size: 11px; background: #059669; color: white; border: none;" onclick="quickManageToggleBroker('paper', 'enable')">Enable</button>
+                <button class="btn" style="padding: 4px 8px; font-size: 11px; background: #dc2626; color: white; border: none;" onclick="quickManageToggleBroker('paper', 'disable')">Disable</button>
+              </div>
+            </div>
+            <div style="background: #1e293b; padding: 10px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 12px; font-weight: 600; color: #f472b6;">Real (Hedging)</span>
+              <div style="display: flex; gap: 6px;">
+                <button class="btn" style="padding: 4px 8px; font-size: 11px; background: #059669; color: white; border: none;" onclick="quickManageToggleBroker('real', 'enable')">Enable</button>
+                <button class="btn" style="padding: 4px 8px; font-size: 11px; background: #dc2626; color: white; border: none;" onclick="quickManageToggleBroker('real', 'disable')">Disable</button>
+              </div>
+            </div>
+            <div style="background: #1e293b; padding: 10px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 12px; font-weight: 600; color: #94a3b8;">Paper (Netting)</span>
+              <div style="display: flex; gap: 6px;">
+                <button class="btn" style="padding: 4px 8px; font-size: 11px; background: #059669; color: white; border: none;" onclick="quickManageToggleBroker('paper-net', 'enable')">Enable</button>
+                <button class="btn" style="padding: 4px 8px; font-size: 11px; background: #dc2626; color: white; border: none;" onclick="quickManageToggleBroker('paper-net', 'disable')">Disable</button>
+              </div>
+            </div>
+            <div style="background: #1e293b; padding: 10px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 12px; font-weight: 600; color: #38bdf8;">Real (Netting)</span>
+              <div style="display: flex; gap: 6px;">
+                <button class="btn" style="padding: 4px 8px; font-size: 11px; background: #059669; color: white; border: none;" onclick="quickManageToggleBroker('real-net', 'enable')">Enable</button>
+                <button class="btn" style="padding: 4px 8px; font-size: 11px; background: #dc2626; color: white; border: none;" onclick="quickManageToggleBroker('real-net', 'disable')">Disable</button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -2690,7 +2897,9 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
         return `<span class="badge badge-cat-master">👑 MAM MASTER</span>`;
       }
       const c = String(cat || 'multiplier').toLowerCase();
-      if (c.includes('equity')) {
+      if (c === 'unfollowed' || c === 'none' || c === 'leave' || c.includes('unfollow')) {
+        return `<span class="badge" style="background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4);">🚪 UNFOLLOWED</span>`;
+      } else if (c.includes('equity')) {
         return `<span class="badge badge-cat-equity">⚖️ EQUITY BASED</span>`;
       } else if (c.includes('balance')) {
         return `<span class="badge badge-cat-balance">💰 BALANCE BASED</span>`;
@@ -3373,20 +3582,39 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
       document.getElementById('btnModeMult').classList.toggle('active', cat === 'multiplier');
       document.getElementById('btnModeEq').classList.toggle('active', cat === 'equity');
       document.getElementById('btnModeBal').classList.toggle('active', cat === 'balance');
+      const btnLeave = document.getElementById('btnModeLeave');
+      if (btnLeave) btnLeave.classList.toggle('active', cat === 'leave');
 
       const multInputSec = document.getElementById('multiplierSection');
+      const leaveNotice = document.getElementById('leaveMasterNotice');
+      const btnApply = document.getElementById('btnApplyCat');
+
       if (cat === 'multiplier') {
+        multInputSec.style.display = 'block';
         multInputSec.style.opacity = '1';
         multInputSec.style.pointerEvents = 'auto';
+        if (leaveNotice) leaveNotice.style.display = 'none';
+        if (btnApply) btnApply.innerText = '🚀 Apply Category Configuration to Followers';
         document.getElementById('catActiveBadge').innerText = `MULTIPLIER (${document.getElementById('fleetMultiplierInput').value}x)`;
       } else if (cat === 'equity') {
+        multInputSec.style.display = 'block';
         multInputSec.style.opacity = '0.4';
         multInputSec.style.pointerEvents = 'none';
+        if (leaveNotice) leaveNotice.style.display = 'none';
+        if (btnApply) btnApply.innerText = '🚀 Apply Equity Based Configuration';
         document.getElementById('catActiveBadge').innerText = 'EQUITY BASED (PROPORTIONAL)';
-      } else {
+      } else if (cat === 'balance') {
+        multInputSec.style.display = 'block';
         multInputSec.style.opacity = '0.4';
         multInputSec.style.pointerEvents = 'none';
+        if (leaveNotice) leaveNotice.style.display = 'none';
+        if (btnApply) btnApply.innerText = '🚀 Apply Balance Based Configuration';
         document.getElementById('catActiveBadge').innerText = 'BALANCE BASED (PROPORTIONAL)';
+      } else if (cat === 'leave') {
+        multInputSec.style.display = 'none';
+        if (leaveNotice) leaveNotice.style.display = 'block';
+        if (btnApply) btnApply.innerText = '🚪 Execute Leave Master for Followers';
+        document.getElementById('catActiveBadge').innerText = 'LEAVE MASTER (UNFOLLOW)';
       }
     }
 
@@ -3487,6 +3715,11 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
     }
 
     async function applyFleetCategory() {
+      if (selectedFleetCat === 'leave') {
+        await applyFleetUnfollow();
+        return;
+      }
+
       const btn = document.getElementById('btnApplyCat');
       const statusBox = document.getElementById('catStatusBox');
       const scope = document.querySelector('input[name="catScope"]:checked').value;
@@ -3662,13 +3895,122 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
       }
     }
 
-    function selectFleetBroker(b) {
+    // --- Broker Settings Controller (Trades Module Settings) ---
+    const BROKER_PROPS = {
+      'paper': { id: 'paper', name: 'Paper (Hedging)', moneyTag: 'PRACTICE ACCOUNT', tagBg: 'rgba(59, 130, 246, 0.2)', tagColor: '#60a5fa', desc: 'This is a sandbox practice account for simulation and testing.' },
+      'real': { id: 'real', name: 'Real (Hedging)', moneyTag: 'REAL MONEY', tagBg: 'rgba(245, 158, 11, 0.2)', tagColor: '#f59e0b', desc: 'This is a real-money account. Its balance changes by deposit or an admin adjustment.' },
+      'paper-net': { id: 'paper-net', name: 'Paper (Netting)', moneyTag: 'PRACTICE ACCOUNT', tagBg: 'rgba(59, 130, 246, 0.2)', tagColor: '#60a5fa', desc: 'This is a simulated netting practice account.' },
+      'real-net': { id: 'real-net', name: 'Real (Netting)', moneyTag: 'REAL MONEY', tagBg: 'rgba(245, 158, 11, 0.2)', tagColor: '#f59e0b', desc: 'This is a live real-money netting account funded via Admin API.' }
+    };
+
+    function selectFleetBrokerTab(b) {
       selectedFleetBroker = b;
-      document.getElementById('btnBrokerPaper').classList.toggle('active', b === 'paper');
-      document.getElementById('btnBrokerReal').classList.toggle('active', b === 'real');
-      document.getElementById('btnBrokerRealNet').classList.toggle('active', b === 'real-net');
-      const bb = document.getElementById('brokerActiveBadge');
-      if (bb) bb.innerText = instLabel(b).toUpperCase();
+      ['paper', 'real', 'paper-net', 'real-net'].forEach(key => {
+        const tabEl = document.getElementById('tabBroker' + key.split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(''));
+        if (tabEl) {
+          tabEl.classList.toggle('active', key === b);
+          tabEl.style.color = key === b ? '#60a5fa' : '#94a3b8';
+          tabEl.style.fontWeight = key === b ? '700' : '600';
+          tabEl.style.borderBottom = key === b ? '2px solid #3b82f6' : '2px solid transparent';
+        }
+      });
+
+      const p = BROKER_PROPS[b] || BROKER_PROPS['real'];
+      document.getElementById('brokerIdLabel').innerText = p.id;
+      document.getElementById('lblEnableBroker').innerText = `Enable ${p.name}`;
+      document.getElementById('brokerMoneyTag').innerText = p.moneyTag;
+      document.getElementById('brokerMoneyTag').style.background = p.tagBg;
+      document.getElementById('brokerMoneyTag').style.color = p.tagColor;
+      document.getElementById('brokerBalanceDesc').innerText = p.desc;
+
+      const activeBadge = document.getElementById('brokerActiveBadge');
+      if (activeBadge) {
+        activeBadge.innerText = `${p.name.toUpperCase()} ● CONNECTED`;
+        activeBadge.className = b.startsWith('real') ? 'badge badge-env-real' : 'badge badge-env-paper';
+      }
+
+      // Update sample balances based on group cache
+      const followers = currentData.followers || [];
+      const f1 = followers[0] || {};
+      let bal = 1000.00;
+      if (b === 'paper') bal = f1.paper_balance || 10000000;
+      else if (b === 'real') bal = f1.real_balance || 1000;
+      else bal = 1000;
+
+      document.getElementById('brokerBalVal').innerText = Number(bal).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('brokerEqVal').innerText = Number(bal).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('brokerFreeVal').innerText = Number(bal).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('brokerUsedVal').innerText = '0.00';
+    }
+
+    function onBrokerCheckboxToggle() {
+      const isChecked = document.getElementById('chkEnableBroker').checked;
+      applyFleetBrokerToggle(isChecked ? 'enable' : 'disable');
+    }
+
+    async function applyFleetBrokerToggle(action) {
+      const p = BROKER_PROPS[selectedFleetBroker] || BROKER_PROPS['real'];
+      const payload = Object.assign(_fleetScopePayload('broker', 'brokerScope'), {
+        target_broker: selectedFleetBroker,
+        action: action,
+        category: selectedFleetCat === 'leave' ? 'multiplier' : selectedFleetCat,
+        multiplier: parseFloat(document.getElementById('fleetMultiplierInput').value) || 2.0
+      });
+
+      const verb = action === 'enable' ? 'Enable' : 'Disable';
+      if (payload.target_type === 'all' && !confirm(`${verb} broker setting ${p.name} for ALL 100 followers?`)) {
+        // Revert checkbox state
+        document.getElementById('chkEnableBroker').checked = (action !== 'enable');
+        return;
+      }
+
+      const btnId = action === 'enable' ? 'btnEnableBrokerFleet' : 'btnDisableBrokerFleet';
+      const idleText = action === 'enable' ? '🟢 Enable Broker Setting for Followers' : '🔴 Disable Broker Setting for Followers';
+
+      await _applyFleet(
+        btnId,
+        'brokerStatusBox',
+        `⏳ ${verb}ing ${p.name}...`,
+        idleText,
+        '/api/manage/broker-setting',
+        payload,
+        `Broker setting → ${p.name} ${action.toUpperCase()}D`,
+        `Failed to ${action} broker setting`
+      );
+
+      // Sync checkbox and status text
+      const chk = document.getElementById('chkEnableBroker');
+      const indText = document.getElementById('brokerConnectedText');
+      const indDot = document.getElementById('brokerConnectedDot');
+      if (action === 'enable') {
+        chk.checked = true;
+        if (indText) indText.innerText = 'connected';
+        if (indDot) indDot.style.background = '#10b981';
+      } else {
+        chk.checked = false;
+        if (indText) indText.innerText = 'disconnected';
+        if (indDot) indDot.style.background = '#64748b';
+      }
+    }
+
+    async function applyFleetUnfollow() {
+      const payload = _fleetScopePayload('cat', 'catScope');
+      if (payload.target_type === 'all' && !confirm('Are you sure you want ALL 100 followers to LEAVE the MAM master across all instances?')) return;
+
+      await _applyFleet(
+        'btnApplyUnfollow',
+        'catStatusBox',
+        '⏳ Unfollowing Fleet...',
+        '🚪 Leave Master',
+        '/api/manage/unfollow',
+        payload,
+        'Leave Master (Unfollowed)',
+        'Failed to unfollow from master'
+      );
+    }
+
+    function selectFleetBroker(b) {
+      selectFleetBrokerTab(b);
     }
 
     function selectFleetBook(b) {
@@ -3689,8 +4031,10 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
     async function _applyFleet(btnId, statusId, busyText, idleText, url, payload, okText, failText) {
       const btn = document.getElementById(btnId);
       const statusBox = document.getElementById(statusId);
-      btn.disabled = true;
-      btn.innerText = busyText;
+      if (btn) {
+        btn.disabled = true;
+        btn.innerText = busyText;
+      }
       statusBox.style.display = 'block';
       statusBox.style.color = '#60a5fa';
       statusBox.innerText = 'Submitting...';
@@ -3712,20 +4056,11 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
         statusBox.innerText = `❌ Request failed: ${e.message}`;
         appendFleetLog(`❌ Network Error: ${e.message}`, 'error');
       } finally {
-        btn.disabled = false;
-        btn.innerText = idleText;
+        if (btn) {
+          btn.disabled = false;
+          btn.innerText = idleText;
+        }
       }
-    }
-
-    async function applyFleetBrokerSetting() {
-      const payload = Object.assign(_fleetScopePayload('broker', 'brokerScope'), {
-        target_broker: selectedFleetBroker,
-        category: selectedFleetCat,
-        multiplier: parseFloat(document.getElementById('fleetMultiplierInput').value) || 2.0
-      });
-      if (payload.target_type === 'all' && !confirm(`Switch ALL followers to ${instLabel(selectedFleetBroker)}? They are unfollowed first, then re-followed on that instance.`)) return;
-      await _applyFleet('btnApplyBroker', 'brokerStatusBox', '⏳ Applying Broker Setting...', '⚡ Apply Broker Setting to Followers',
-        '/api/manage/broker-setting', payload, `Broker setting → ${instLabel(selectedFleetBroker)}`, 'Broker setting change failed');
     }
 
     async function applyFleetBook() {
@@ -3789,6 +4124,76 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
     function onQmCategoryChange() {
       const cat = document.getElementById('qmCategory').value;
       document.getElementById('qmMultiplierRow').style.display = cat === 'multiplier' ? 'block' : 'none';
+    }
+
+    async function quickManageLeaveMaster() {
+      if (!quickManageTargetEmail) return;
+      const statusBox = document.getElementById('qmStatusBox');
+      statusBox.style.display = 'block';
+      statusBox.style.color = '#f87171';
+      statusBox.innerText = `Unfollowing ${quickManageTargetEmail} from master across all instances...`;
+
+      try {
+        const res = await fetch('/api/manage/unfollow', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            target_type: 'single',
+            single_email: quickManageTargetEmail
+          })
+        });
+        const data = await res.json();
+        if (data.success && data.success_count > 0) {
+          statusBox.style.color = '#34d399';
+          statusBox.innerText = `✅ ${quickManageTargetEmail} left the master cleanly!`;
+          appendFleetLog(`Quick Edit: ${quickManageTargetEmail} left the MAM master (unfollowed)`, 'success');
+          fetchDashboardData();
+        } else {
+          statusBox.style.color = '#f87171';
+          statusBox.innerText = `❌ Error: ${data.error || 'Failed to leave master'}`;
+        }
+      } catch (e) {
+        statusBox.style.color = '#f87171';
+        statusBox.innerText = `❌ Error: ${e.message}`;
+      }
+    }
+
+    async function quickManageToggleBroker(targetBroker, action) {
+      if (!quickManageTargetEmail) return;
+      const statusBox = document.getElementById('qmStatusBox');
+      statusBox.style.display = 'block';
+      statusBox.style.color = '#60a5fa';
+      statusBox.innerText = `${action === 'enable' ? 'Enabling' : 'Disabling'} ${instLabel(targetBroker)} for ${quickManageTargetEmail}...`;
+
+      try {
+        const res = await fetch('/api/manage/broker-setting', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            target_type: 'single',
+            single_email: quickManageTargetEmail,
+            target_broker: targetBroker,
+            action: action,
+            category: document.getElementById('qmCategory').value || 'multiplier',
+            multiplier: parseFloat(document.getElementById('qmMultiplier').value) || 2.0
+          })
+        });
+        const data = await res.json();
+        if (data.success && data.success_count > 0) {
+          statusBox.style.color = '#34d399';
+          statusBox.innerText = `✅ ${instLabel(targetBroker)} ${action.toUpperCase()}D for ${quickManageTargetEmail}!`;
+          document.getElementById('qmCurrentBrokerBadge').innerText = instBadgeHtml(targetBroker);
+          document.getElementById('qmCurrentBrokerBadge').className = instBadgeClass(targetBroker);
+          appendFleetLog(`Quick Edit: ${quickManageTargetEmail} broker setting ${instLabel(targetBroker)} ${action.toUpperCase()}D`, 'success');
+          fetchDashboardData();
+        } else {
+          statusBox.style.color = '#f87171';
+          statusBox.innerText = `❌ Error: ${data.error || 'Failed to update broker setting'}`;
+        }
+      } catch (e) {
+        statusBox.style.color = '#f87171';
+        statusBox.innerText = `❌ Error: ${e.message}`;
+      }
     }
 
     async function saveQuickManageCategory() {
@@ -4205,12 +4610,31 @@ class DashboardHTTPRequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(json.dumps(res).encode("utf-8"))
 
+        elif path == "/api/manage/unfollow":
+            target_type = payload.get("target_type", "all")
+            start = int(payload.get("start", 1))
+            end = int(payload.get("end", 100))
+            single_email = payload.get("single_email", "")
+
+            res = self.data_manager.handle_unfollow(
+                target_type=target_type,
+                start=start,
+                end=end,
+                single_email=single_email
+            )
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(json.dumps(res).encode("utf-8"))
+
         elif path == "/api/manage/broker-setting":
             target_type = payload.get("target_type", "all")
             start = int(payload.get("start", 1))
             end = int(payload.get("end", 100))
             single_email = payload.get("single_email", "")
             target_broker = payload.get("target_broker", "real")
+            action = payload.get("action", "enable")
             category = payload.get("category", "multiplier")
             multiplier = float(payload.get("multiplier", 2.0))
             share_percent = float(payload.get("share_percent", 50.0))
@@ -4221,6 +4645,7 @@ class DashboardHTTPRequestHandler(BaseHTTPRequestHandler):
                 end=end,
                 single_email=single_email,
                 target_broker=target_broker,
+                action=action,
                 category=category,
                 multiplier=multiplier,
                 share_percent=share_percent
