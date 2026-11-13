@@ -41,6 +41,12 @@ from typing import Dict, Any, List, Optional, Tuple
 import requests
 import concurrent.futures
 
+try:
+    from follower_ui_automator import run_toggle_single_sync, run_toggle_batch_sync
+except ImportError:
+    run_toggle_single_sync = None
+    run_toggle_batch_sync = None
+
 BASE_DIR = Path(__file__).resolve().parent
 DEFAULT_BASE_URL = "https://lpadmin.blackfx.com"
 DEFAULT_PASSWORD = "Test@1234"
@@ -1027,6 +1033,31 @@ class MultiMasterDashboardManager:
                     fail_count += 1
                 details.append({"email": em, "success": ok})
 
+        # Real Follower Terminal UI Automation (Logs into user account -> Trades -> Settings -> untick/tick)
+        ui_results = []
+        enable_flag = (action == "enable")
+        target_emails = [s.email for s in target_sessions]
+        if run_toggle_single_sync:
+            try:
+                if len(target_emails) == 1:
+                    ui_res = run_toggle_single_sync(target_emails[0], "Test@1234", target_inst, enable=enable_flag)
+                    ui_results.append(ui_res)
+                    if ui_res.get("success"):
+                        success_count = max(success_count, 1)
+                elif len(target_emails) <= 5:
+                    ui_batch = run_toggle_batch_sync(target_emails, "Test@1234", target_inst, enable=enable_flag, concurrency=3)
+                    ui_results.extend(ui_batch)
+                else:
+                    # For larger batches (up to 100), launch UI automation in a background thread to prevent HTTP gateway timeout
+                    def async_ui_batch():
+                        try:
+                            run_toggle_batch_sync(target_emails, "Test@1234", target_inst, enable=enable_flag, concurrency=4)
+                        except Exception as ex:
+                            print(f"[Async UI Batch Error]: {ex}")
+                    threading.Thread(target=async_ui_batch, daemon=True).start()
+            except Exception as e:
+                print(f"[UI Automator Error]: {e}")
+
         if action == "enable" and target_type == "all" and target_inst != self.instance:
             self.instance = target_inst
             g.instance = target_inst
@@ -1044,7 +1075,8 @@ class MultiMasterDashboardManager:
             "target_broker": target_inst,
             "category": category,
             "multiplier": multiplier,
-            "details": details
+            "details": details,
+            "ui_results": ui_results
         }
 
     def handle_balance_change(self, target_type: str, start: int, end: int, single_email: str, balance: float, instance: str = "paper") -> dict:
