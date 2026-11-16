@@ -395,3 +395,26 @@ def test_social_suite_is_read_mostly_and_importable():
     assert [n.split()[0] for n, _ in R.SCENARIOS] == ["F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8"]
     from test_suite.client import BlackTraderClient
     assert BlackTraderClient.INSTANCES == ("real", "real-net")
+
+
+# ---------------------------------------------------------------- fund-only-one-instance
+def test_exclusive_funding_zeroes_the_other_wallets(client, monkeypatch):
+    import dashboard.app as a
+    wallets = {}
+
+    class Fake:
+        def get_admin_members(self):
+            emails = [a.MASTER_EMAIL] + a._all_emails()
+            return [{"email": e, "member_id": "m_" + e, "balances": dict(wallets.get(e, {}))} for e in emails]
+
+        def set_member_balance(self, mid, bal, instance="real"):
+            wallets.setdefault(mid[2:], {})[instance] = bal
+            return {"status_code": 200, "data": {}}
+    monkeypatch.setattr(a, "dashboard_client", Fake())
+    assert client.post("/api/broker_accounts/exclusive", json={"instance": "real"}, headers=LOCAL).status_code == 412
+    assert client.post("/api/broker_accounts/exclusive", json={"instance": "nope", "confirm": True}, headers=LOCAL).status_code == 400
+    r = client.post("/api/broker_accounts/exclusive", json={"instance": "real", "confirm": True}, headers=LOCAL)
+    d = r.get_json()
+    assert r.status_code == 200 and d["failed"] == 0 and d["ok"] == d["requested"]
+    w = wallets[a.MASTER_EMAIL]
+    assert w == {"real": 100_000_000.0, "paper": 0.0, "paper-net": 0.0, "real-net": 0.0}

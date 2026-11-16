@@ -1897,8 +1897,8 @@ def broker_accounts_balance():
         target = BROKER_RESET_BALANCE if data.get("reset") else float(data.get("balance"))
     except (TypeError, ValueError):
         return jsonify({"error": "balance must be a number"}), 400
-    if not (target > 0):
-        return jsonify({"error": "balance must be greater than 0"}), 400
+    if target < 0 or (target == 0 and is_real(inst)):
+        return jsonify({"error": "balance must be greater than 0 on real instances (0 is allowed on paper to lock it)"}), 400
     if not is_real(inst) and target > PAPER_MAX_BALANCE:
         return jsonify({"error": f"practice funds are capped at {PAPER_MAX_BALANCE:,.0f} on {ALL_BROKERS[inst]}"}), 400
     ids = {m["email"].lower(): m["member_id"] for m in dashboard_client.get_admin_members() if m.get("email") and m.get("member_id")}
@@ -1924,6 +1924,59 @@ def broker_accounts_balance():
     okn = sum(1 for r in results.values() if r["ok"])
     return jsonify({"instance": inst, "balance": target, "requested": len(emails), "ok": okn, "failed": len(emails) - okn,
                     "results": [r for r in results.values() if not r["ok"]][:20]}), (200 if okn == len(emails) else 207)
+
+
+DEFAULT_FUNDS = {"paper": 1_000_000.0, "paper-net": 1_000_000.0, "real": 100_000_000.0, "real-net": 1_000_000.0}
+
+
+@app.route("/api/broker_accounts/exclusive", methods=["POST"])
+def broker_accounts_exclusive():
+    """Fund ONE instance on the master + every follower and set the other three wallets to 0, then read all four back."""
+    data = request.get_json(silent=True) or {}
+    inst = str(data.get("instance", ""))
+    if inst not in ALL_BROKERS:
+        return jsonify({"error": "instance must be paper | paper-net | real | real-net"}), 400
+    refused = _account_change_refused({"instance": "real", "confirm": data.get("confirm")})   # always touches real wallets
+    if refused:
+        return refused
+    if data.get("confirm") is not True:
+        return jsonify({"error": "Needs confirmation.", "needs_confirmation": True}), 412
+    try:
+        amount = float(data["balance"]) if data.get("balance") not in (None, "") else DEFAULT_FUNDS[inst]
+    except (TypeError, ValueError):
+        return jsonify({"error": "balance must be a number"}), 400
+    if not (amount > 0):
+        return jsonify({"error": "balance for the chosen instance must be greater than 0"}), 400
+    if not is_real(inst) and amount > PAPER_MAX_BALANCE:
+        return jsonify({"error": f"practice funds are capped at {PAPER_MAX_BALANCE:,.0f}"}), 400
+    emails = [MASTER_EMAIL] + _all_emails()
+    ids = {m["email"].lower(): m["member_id"] for m in dashboard_client.get_admin_members() if m.get("email") and m.get("member_id")}
+    wanted = {k: (amount if k == inst else 0.0) for k in ALL_BROKERS}
+    errors = {e: [] for e in emails}
+
+    def fund(e):
+        mid = ids.get(e.lower())
+        if not mid:
+            errors[e].append("member not found")
+            return
+        for k, v in wanted.items():
+            r = dashboard_client.set_member_balance(mid, v, instance=k)
+            if r.get("status_code") != 200:
+                errors[e].append(f"{k}: HTTP {r.get('status_code')} {str(r.get('data'))[:60]}")
+    with ThreadPoolExecutor(max_workers=10) as ex:
+        list(ex.map(fund, emails))
+    after = {m["email"].lower(): (m.get("balances") or {}) for m in dashboard_client.get_admin_members()}
+    bad = []
+    for e in emails:
+        b = after.get(e.lower(), {})
+        for k, v in wanted.items():                                     # verify all four wallets, never trust the 200
+            got = b.get(k)
+            if got is None or abs(float(got) - v) > max(1.0, v * 1e-6):
+                errors[e].append(f"{k}: read-back {got}, expected {v:g}")
+        if errors[e]:
+            bad.append({"email": e, "error": "; ".join(errors[e])[:200]})
+    return jsonify({"instance": inst, "funded": amount, "others_zeroed": [k for k in wanted if k != inst],
+                    "requested": len(emails), "ok": len(emails) - len(bad), "failed": len(bad), "results": bad[:20]}), (200 if not bad else 207)
 
 
 @app.route("/api/copy/instance_link", methods=["POST"])
