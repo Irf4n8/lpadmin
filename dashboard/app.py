@@ -1853,6 +1853,79 @@ def all_members():
                     "books": sorted({m.get("book") for m in members if m.get("book")})})
 
 
+# ---------------------------------------------------------------- bulk Broker Settings (per instance, master + followers)
+PAPER_MAX_BALANCE, BROKER_RESET_BALANCE = 10_000_000.0, 1_000_000.0
+
+
+@app.route("/api/broker_accounts", methods=["GET"])
+def broker_accounts():
+    """Balance / equity / free margin / used margin of the master + every follower on ONE instance (read-only)."""
+    inst = request.args.get("instance", "real")
+    if inst not in ALL_BROKERS:
+        return jsonify({"error": "instance must be paper | paper-net | real | real-net"}), 400
+    emails = [MASTER_EMAIL] + _all_emails()
+
+    def one(e):
+        try:
+            f = (dashboard_client.get_positions(e, inst).get("funds") or {})
+            return {"email": e, "balance": f.get("balance"), "equity": f.get("equity"),
+                    "free_margin": f.get("free_margin"), "used_margin": f.get("used_margin")}
+        except Exception as ex:
+            return {"email": e, "error": str(ex)[:80]}
+    with ThreadPoolExecutor(max_workers=10) as ex:
+        rows = list(ex.map(one, emails))
+    ok = [r for r in rows if "error" not in r]
+    return jsonify({"instance": inst, "label": ALL_BROKERS[inst], "real_money": is_real(inst), "accounts": rows,
+                    "totals": {"balance": sum(r["balance"] or 0 for r in ok), "equity": sum(r["equity"] or 0 for r in ok),
+                               "used_margin": sum(r["used_margin"] or 0 for r in ok)},
+                    "paper_max": PAPER_MAX_BALANCE, "reset_to": BROKER_RESET_BALANCE})
+
+
+@app.route("/api/broker_accounts/balance", methods=["POST"])
+def broker_accounts_balance():
+    """Set (or reset) the balance of the master + every follower on one instance, then read it back."""
+    data = request.get_json(silent=True) or {}
+    inst = str(data.get("instance", ""))
+    if inst not in ALL_BROKERS:
+        return jsonify({"error": "instance must be paper | paper-net | real | real-net"}), 400
+    refused = _account_change_refused({"instance": inst, "confirm": data.get("confirm")})
+    if refused:
+        return refused
+    if data.get("confirm") is not True:
+        return jsonify({"error": "Setting balances needs confirmation.", "needs_confirmation": True}), 412
+    try:
+        target = BROKER_RESET_BALANCE if data.get("reset") else float(data.get("balance"))
+    except (TypeError, ValueError):
+        return jsonify({"error": "balance must be a number"}), 400
+    if not (target > 0):
+        return jsonify({"error": "balance must be greater than 0"}), 400
+    if not is_real(inst) and target > PAPER_MAX_BALANCE:
+        return jsonify({"error": f"practice funds are capped at {PAPER_MAX_BALANCE:,.0f} on {ALL_BROKERS[inst]}"}), 400
+    ids = {m["email"].lower(): m["member_id"] for m in dashboard_client.get_admin_members() if m.get("email") and m.get("member_id")}
+    emails = [MASTER_EMAIL] + _all_emails()
+    results = {e: {"email": e, "ok": False, "error": None} for e in emails}
+
+    def setb(e):
+        mid = ids.get(e.lower())
+        if not mid:
+            results[e]["error"] = "member not found"
+            return
+        r = dashboard_client.set_member_balance(mid, target, instance=inst)
+        if r.get("status_code") != 200:
+            results[e]["error"] = f"HTTP {r.get('status_code')} {str(r.get('data'))[:80]}"
+    with ThreadPoolExecutor(max_workers=10) as ex:
+        list(ex.map(setb, emails))
+    for e in emails:                                            # verify by reading back, never trust the 200
+        if not results[e]["error"]:
+            bal = (dashboard_client.get_positions(e, inst).get("funds") or {}).get("balance")
+            results[e]["ok"] = bal is not None and abs(float(bal) - target) < max(1.0, target * 1e-6)
+            if not results[e]["ok"]:
+                results[e]["error"] = f"read-back balance {bal}, expected {target}"
+    okn = sum(1 for r in results.values() if r["ok"])
+    return jsonify({"instance": inst, "balance": target, "requested": len(emails), "ok": okn, "failed": len(emails) - okn,
+                    "results": [r for r in results.values() if not r["ok"]][:20]}), (200 if okn == len(emails) else 207)
+
+
 @app.route("/api/copy/instance_link", methods=["POST"])
 def copy_instance_link():
     """Mass ENABLE / DISABLE copy trading on one instance for the followers.
