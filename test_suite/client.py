@@ -41,7 +41,7 @@ PAPER_UNFOLLOW_REASON = ("platform rule (observed 2026-11-12): paper copy links 
 
 def paper_unfollow_blocked(instance: str) -> bool:
     """True when unfollowing on this instance would permanently drop the follower (paper, no override)."""
-    return instance == "paper" and os.environ.get("BT_ALLOW_PAPER_UNFOLLOW") != "1"
+    return str(instance).startswith("paper") and os.environ.get("BT_ALLOW_PAPER_UNFOLLOW") != "1"
 
 
 class BlackTraderClient:

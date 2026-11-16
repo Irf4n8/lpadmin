@@ -36,6 +36,21 @@ from test_suite import symbol_coverage_runner as SC
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 
+
+@app.errorhandler(Exception)
+def _api_json_errors(e):
+    """Any unhandled error on /api/* returns JSON (the UI parses JSON), never Flask's HTML 500 page."""
+    from werkzeug.exceptions import HTTPException
+    if isinstance(e, HTTPException):
+        if request.path.startswith("/api/"):
+            return jsonify({"error": e.description}), e.code
+        return e
+    if request.path.startswith("/api/"):
+        import requests as _rq
+        unreachable = isinstance(e, (_rq.exceptions.ConnectionError, _rq.exceptions.Timeout))
+        return jsonify({"error": ("Platform unreachable: " if unreachable else "Server error: ") + str(e)[:200]}), (502 if unreachable else 500)
+    raise e
+
 dashboard_client = BlackTraderClient(base_url=BASE_URL, max_workers=10)
 
 EVIDENCE_DIR = BASE_DIR / "reports" / "evidence"
@@ -855,8 +870,17 @@ def get_cached_active_links(instance: str = "paper", force_refresh: bool = False
         links_by_follower = {}
         for link in raw_links:
             fn = link.get("follower_name")
-            if fn:
+            if not fn or link.get("instance") != instance:   # the follows list covers EVERY instance
+                continue
+            prev = links_by_follower.get(fn)
+            # a follower can have several records (ended + active); an ACTIVE one always wins,
+            # otherwise keep the most recently created one
+            if prev is None:
                 links_by_follower[fn] = link
+            else:
+                p_act, l_act = prev.get("status") == "active", link.get("status") == "active"
+                if (l_act and not p_act) or (l_act == p_act and (link.get("created_at") or "") > (prev.get("created_at") or "")):
+                    links_by_follower[fn] = link
         ACTIVE_LINKS_CACHE["data"] = links_by_follower
         ACTIVE_LINKS_CACHE["timestamp"] = now
         ACTIVE_LINKS_CACHE["instance"] = instance
@@ -864,6 +888,33 @@ def get_cached_active_links(instance: str = "paper", force_refresh: bool = False
     except Exception as e:
         print(f"Error fetching active links: {e}")
         return ACTIVE_LINKS_CACHE["data"] or {}
+
+
+FOLLOWER_FUNDS_CACHE = {"data": {}, "timestamp": 0, "instance": None}
+
+
+def get_cached_follower_funds(emails: list, instance: str, force_refresh: bool = False) -> dict:
+    """Each follower's OWN funds ({email: {balance, equity}}), fetched concurrently and cached ~10s."""
+    now = time.time()
+    c = FOLLOWER_FUNDS_CACHE
+    if not force_refresh and c["instance"] == instance and c["data"] and now - c["timestamp"] < 10:
+        return c["data"]
+    out = {}
+    try:
+        res = dashboard_client.fetch_all_followers_positions(emails, instance=instance)
+        for e, r in res.items():
+            f = (r or {}).get("funds") or {}
+            if f:
+                out[e] = f
+    except Exception as e:
+        print(f"Error fetching follower funds: {e}")
+        return c["data"] if c["instance"] == instance else {}
+    c.update({"data": out, "timestamp": now, "instance": instance})
+    return out
+
+
+def _fmt_money(v: float) -> str:
+    return f"{v/1e6:,.2f}".rstrip("0").rstrip(".") + "M" if abs(v) >= 1e6 else f"{v:,.2f}"
 
 
 @app.route("/api/followers")
@@ -892,10 +943,20 @@ def get_followers_list():
     m_bal = float(m_funds.get("balance", 100000000.0))
     m_eq = float(m_funds.get("equity", m_bal))
 
+    all_emails = [f"{DEFAULT_PREFIX}{i}@{DEFAULT_DOMAIN}" for i in range(1, FOLLOWER_COUNT + 1)]
+    funds_by_email = get_cached_follower_funds(all_emails, instance, force_refresh)
+
     followers = []
     for i in range(1, FOLLOWER_COUNT + 1):
         f_prefix = f"{DEFAULT_PREFIX}{i}"
         link = active_links.get(f_prefix, {})
+        f_funds = funds_by_email.get(f"{DEFAULT_PREFIX}{i}@{DEFAULT_DOMAIN}")
+        if f_funds:
+            f_bal = float(f_funds.get("balance", 0) or 0)
+            f_eq = float(f_funds.get("equity", f_bal) or f_bal)
+            bal_txt, eq_txt = _fmt_money(f_bal), _fmt_money(f_eq)
+        else:  # funds not available - say so instead of showing the master's numbers
+            bal_txt = eq_txt = "--"
 
         if link and "multiplier" in link:
             mult = float(link.get("multiplier", 1.0))
@@ -904,7 +965,7 @@ def get_followers_list():
         else:
             mult = get_expected_multiplier(i)
             f_method = detected_mode
-            link_status = "INACTIVE" if active_links else "ACTIVE"
+            link_status = "INACTIVE"
 
         tier = 1 if mult == 1.0 else (2 if mult == 2.0 else (3 if mult == 3.0 else 4))
         
@@ -922,8 +983,8 @@ def get_followers_list():
             "multiplier": mult,
             "method": f_method,
             "tier": tier,
-            "balance": f"{m_bal/1e6:.0f}M",
-            "equity": f"{m_eq/1e6:.0f}M",
+            "balance": bal_txt,
+            "equity": eq_txt,
             "display_label": display_label,
             "ratio_label": f"{mult:g}x",
             "status": link_status,
@@ -1104,39 +1165,52 @@ def switch_copy_mode():
             mult = get_expected_multiplier(idx)
         else:
             mult = custom_mult
-
         try:
-            dashboard_client.unfollow_master(email, master_id, instance=instance)
-            res = dashboard_client.follow_master(
-                email,
-                master_id,
-                instance=instance,
-                method=mode,
-                multiplier=mult,
-                reverse=False,
-                copy_mode="public"
-            )
-            return {"email": email, "success": (res.get("status_code") == 200), "multiplier": mult}
+            # Re-submitting the follow updates the existing link in place. We do NOT unfollow first: a failed
+            # follow after an unfollow would drop the follower for good (paper links can't be re-created).
+            res = dashboard_client.follow_master(email, master_id, instance=instance, method=mode,
+                                                 multiplier=mult, reverse=False, copy_mode="public")
+            err = None if res.get("status_code") == 200 else f"HTTP {res.get('status_code')}: {str(res.get('data'))[:140]}"
+            return {"email": email, "success": err is None, "multiplier": mult, "error": err}
         except Exception as e:
-            return {"email": email, "success": False, "error": str(e)}
+            return {"email": email, "success": False, "multiplier": mult, "error": str(e)}
 
     with ThreadPoolExecutor(max_workers=20) as ex:
         results = list(ex.map(update_follower, follower_emails))
 
-    success_count = sum(1 for r in results if r["success"])
     global ACTIVE_LINKS_CACHE
     ACTIVE_LINKS_CACHE["data"] = None
     ACTIVE_LINKS_CACHE["timestamp"] = 0
-    ACTIVE_LINKS_CACHE["forced_mode"] = mode
 
-    return jsonify({
-        "message": f"Successfully updated {success_count} / {len(follower_emails)} followers to {mode.upper()} mode ({custom_mult if not tier_based else 'Tier-Based'}x) on {instance.upper()}.",
-        "mode": mode,
-        "multiplier": custom_mult,
-        "tier_based": tier_based,
-        "success_count": success_count,
-        "total": len(follower_emails)
-    })
+    # verify by reading the links back - a 200 alone proves nothing
+    try:
+        live = get_cached_active_links(instance=instance, force_refresh=True)
+    except Exception:
+        live = {}
+    for r in results:
+        if not r["success"]:
+            continue
+        lk = live.get(r["email"].split("@")[0]) or {}
+        if lk.get("status") != "active" or lk.get("method") != mode or abs(float(lk.get("multiplier", -1)) - r["multiplier"]) > 1e-9:
+            r["success"] = False
+            r["error"] = (f"platform accepted the request but the link reads {lk.get('method')} {lk.get('multiplier')}x "
+                          f"({lk.get('status') or 'no link'}), expected {mode} {r['multiplier']}x")
+
+    success_count = sum(1 for r in results if r["success"])
+    total = len(follower_emails)
+    if success_count:
+        ACTIVE_LINKS_CACHE["forced_mode"] = mode
+    failures = [r for r in results if not r["success"]]
+    body = {
+        "message": f"Updated {success_count} / {total} followers to {mode.upper()} mode ({custom_mult if not tier_based else 'Tier-Based'}x) on {instance.upper()}.",
+        "mode": mode, "multiplier": custom_mult, "tier_based": tier_based,
+        "success_count": success_count, "total": total, "instance": instance,
+        "failures": [{"email": r["email"], "error": r["error"]} for r in failures[:10]],
+    }
+    if success_count == 0:
+        body["error"] = f"No follower was updated on {instance.upper()}. " + (failures[0]["error"] if failures else "")
+        return jsonify(body), 409
+    return jsonify(body), (200 if not failures else 207)
 
 
 @app.route("/api/accounts/sync_balance", methods=["POST"])
@@ -1172,6 +1246,7 @@ def sync_accounts_balance():
             results = list(ex.map(set_bal, all_emails))
 
         success_count = sum(1 for r in results if r["success"])
+        FOLLOWER_FUNDS_CACHE["timestamp"] = 0
         return jsonify({
             "message": f"Successfully synchronized ${target_balance:,.2f} balance across {success_count} / {len(all_emails)} accounts on {instance.upper()}.",
             "target_balance": target_balance,
@@ -1578,6 +1653,152 @@ def switch_books():
     ok = sum(1 for r in results.values() if r["ok"])
     return jsonify({"book": book, "requested": len(targets), "switched_ok": ok, "failed": len(targets) - ok,
                     "results": [r for r in results.values() if not r["ok"]][:20]}), (200 if ok == len(targets) else 207)
+
+
+REAL_MODES = {"real": "Real (hedging)", "real-net": "Real Net (netting)"}
+
+
+ALL_BROKERS = {"paper": "Paper (hedging)", "paper-net": "Paper (netting)", "real": "Real (hedging)", "real-net": "Real (netting)"}
+
+
+def _follower_real_links(instances=REAL_MODES) -> dict:
+    """email -> {instance: active copy-link} for the configured followers, for the given instances."""
+    links = dashboard_client.get_copy_followers(MASTER_EMAIL, instance="real", active_only=True)
+    by_name = {}
+    for l in links:
+        if l.get("instance") in instances and l.get("follower_name"):
+            by_name.setdefault(l["follower_name"], {})[l["instance"]] = l
+    return {f"{DEFAULT_PREFIX}{i}@{DEFAULT_DOMAIN}": by_name.get(f"{DEFAULT_PREFIX}{i}", {}) for i in range(1, FOLLOWER_COUNT + 1)}
+
+
+@app.route("/api/copy/instances")
+def copy_instances_summary():
+    """How many followers currently copy on real hedging vs real netting."""
+    per = _follower_real_links()
+    counts = {"real": 0, "real-net": 0, "both": 0, "none": 0}
+    for m in per.values():
+        if len(m) == 2: counts["both"] += 1
+        elif "real" in m: counts["real"] += 1
+        elif "real-net" in m: counts["real-net"] += 1
+        else: counts["none"] += 1
+    per_all = _follower_real_links(ALL_BROKERS)
+    per_instance = {k: sum(1 for m in per_all.values() if k in m) for k in ALL_BROKERS}
+    per_instance["none"] = sum(1 for m in per_all.values() if not m)
+    return jsonify({"counts": counts, "followers": len(per), "per_instance": per_instance})
+
+
+@app.route("/api/copy/switch_instance", methods=["POST"])
+def switch_copy_instance():
+    """ONE call moves every follower's copy link between real (hedging) and real-net (netting),
+    keeping each follower's method / multiplier / reverse / copy_mode. Follow on the target first, then
+    end the old link, so a failure never leaves a follower with no link."""
+    data = request.get_json(silent=True) or {}
+    target = str(data.get("to", ""))
+    if target not in REAL_MODES:
+        return jsonify({"error": "to must be 'real' (hedging) or 'real-net' (netting)"}), 400
+    refused = _account_change_refused({"instance": target, "confirm": data.get("confirm")})
+    if refused:
+        return refused
+    lo, hi = int(data.get("start") or 1), int(data.get("end") or FOLLOWER_COUNT)
+    emails = [f"{DEFAULT_PREFIX}{i}@{DEFAULT_DOMAIN}" for i in range(max(1, lo), min(FOLLOWER_COUNT, hi) + 1)]
+    before = _follower_real_links()
+    results = {e: {"email": e, "ok": False, "error": None} for e in emails}
+
+    def move(email):
+        links = before.get(email, {})
+        src = next((i for i in links if i != target), None)
+        if target in links and src is None:
+            results[email]["ok"] = True          # already on the target
+            return
+        if not links:
+            results[email]["error"] = "no active real copy link to move"
+            return
+        base = links.get(target) or links[src]
+        if target not in links:
+            r = dashboard_client.follow_master(email, MASTER_ID, instance=target, method=base.get("method", "multiplier"),
+                                               multiplier=float(base.get("multiplier", 1.0)), reverse=bool(base.get("reverse", False)),
+                                               copy_mode=base.get("copy_mode", "public"))
+            if r.get("status_code") != 200:
+                results[email]["error"] = f"follow on {target}: HTTP {r.get('status_code')} {str(r.get('data'))[:100]}"
+                return
+        if src:
+            u = dashboard_client.unfollow_master(email, MASTER_ID, instance=src)
+            if u.get("status_code") != 200:
+                results[email]["error"] = f"followed on {target} but could not end {src} link: HTTP {u.get('status_code')}"
+
+    with ThreadPoolExecutor(max_workers=10) as ex:
+        list(ex.map(move, emails))
+
+    ACTIVE_LINKS_CACHE["data"] = None
+    ACTIVE_LINKS_CACHE["timestamp"] = 0
+    after = _follower_real_links()           # verify by reading back, never trust the 200
+    for e in emails:
+        a = after.get(e, {})
+        results[e]["ok"] = (set(a) == {target})
+        if not results[e]["ok"] and not results[e]["error"]:
+            results[e]["error"] = f"read-back shows links on {sorted(a) or 'none'}, expected only {target}"
+    ok = sum(1 for r in results.values() if r["ok"])
+    return jsonify({"to": target, "requested": len(emails), "switched_ok": ok, "failed": len(emails) - ok,
+                    "results": [r for r in results.values() if not r["ok"]][:20]}), (200 if ok == len(emails) else 207)
+
+
+@app.route("/api/copy/instance_link", methods=["POST"])
+def copy_instance_link():
+    """Mass ENABLE / DISABLE copy trading on one instance for the followers.
+    A follower has ONE link record per master, so: enable = follow on that instance (an existing link on another
+    instance is converted, keeping its method/multiplier); disable = end the link if it is on that instance."""
+    data = request.get_json(silent=True) or {}
+    inst, action = str(data.get("instance", "")), str(data.get("action", ""))
+    if inst not in ALL_BROKERS or action not in ("enable", "disable"):
+        return jsonify({"error": "instance must be paper|paper-net|real|real-net and action enable|disable"}), 400
+    if action == "enable" and not is_real(inst):
+        return jsonify({"error": f"Cannot enable copy trading on {ALL_BROKERS[inst]}: the platform no longer creates paper copy links "
+                                 "(Copy trading, MAM and PAMM run on real-money accounts). Nothing was changed."}), 409
+    refused = _account_change_refused({"instance": inst, "confirm": data.get("confirm")})
+    if refused:
+        return refused
+    if action == "disable" and not is_real(inst) and not os.environ.get("BT_ALLOW_PAPER_UNFOLLOW") == "1":
+        return jsonify({"error": "Disabling a PAPER link is blocked: an unfollowed paper follower can never be re-linked. "
+                                 "Set BT_ALLOW_PAPER_UNFOLLOW=1 in .env to override. Nothing was changed."}), 409
+    lo, hi = int(data.get("start") or 1), int(data.get("end") or FOLLOWER_COUNT)
+    emails = [f"{DEFAULT_PREFIX}{i}@{DEFAULT_DOMAIN}" for i in range(max(1, lo), min(FOLLOWER_COUNT, hi) + 1)]
+    before = _follower_real_links(ALL_BROKERS)
+    results = {e: {"email": e, "ok": False, "error": None} for e in emails}
+
+    def apply(email):
+        links = before.get(email, {})
+        other = next((i for i in links if i != inst), None)
+        if action == "enable":
+            if inst in links and other is None:
+                return                                            # already enabled
+            base = links.get(inst) or (links.get(other) if other else {}) or {}
+            r = dashboard_client.follow_master(email, MASTER_ID, instance=inst, method=base.get("method", "multiplier"),
+                                               multiplier=float(base.get("multiplier", 1.0)), reverse=bool(base.get("reverse", False)),
+                                               copy_mode=base.get("copy_mode", "public"))
+            if r.get("status_code") != 200:
+                results[email]["error"] = f"HTTP {r.get('status_code')}: {str(r.get('data'))[:110]}"
+        else:
+            if inst not in links:
+                return                                            # nothing to disable
+            u = dashboard_client.unfollow_master(email, MASTER_ID, instance=inst)
+            if u.get("status_code") != 200:
+                results[email]["error"] = f"HTTP {u.get('status_code')}: {str(u.get('data'))[:110]}"
+
+    with ThreadPoolExecutor(max_workers=10) as ex:
+        list(ex.map(apply, emails))
+
+    ACTIVE_LINKS_CACHE["data"] = None
+    ACTIVE_LINKS_CACHE["timestamp"] = 0
+    after = _follower_real_links(ALL_BROKERS)                     # verify by reading back
+    for e in emails:
+        on = inst in after.get(e, {})
+        results[e]["ok"] = on if action == "enable" else not on
+        if not results[e]["ok"] and not results[e]["error"]:
+            results[e]["error"] = f"read-back: link {'not on' if action == 'enable' else 'still on'} {inst}"
+    ok = sum(1 for r in results.values() if r["ok"])
+    failed = [r for r in results.values() if not r["ok"]]
+    return jsonify({"instance": inst, "action": action, "requested": len(emails), "ok": ok, "failed": len(failed),
+                    "results": failed[:10]}), (200 if not failed else 207)
 
 
 if __name__ == "__main__":

@@ -1287,7 +1287,7 @@
 
       <div style="display: flex; align-items: center; gap: 10px;">
         <!-- Exact BlackTrader Broker Switcher Pill (.sw-pill) -->
-        <button class="sw-pill" onclick="toggleInstance()" id="brokerPill" title="Click to toggle broker instance (Paper / Real)">
+        <button class="sw-pill" onclick="openBrokerModal()" id="brokerPill" title="Broker settings: Paper / Paper Net / Real / Real Net">
           <span class="sw-dot" id="brokerDot"></span>
           <span>Broker:</span>
           <strong id="brokerLabel" style="color: var(--text);">Paper (Hedging)</strong>
@@ -1298,6 +1298,12 @@
         <button class="sw-pill" onclick="openBookModal()" id="bookPill" title="A-book / B-book routing per account">
           <i class="fa-solid fa-route" style="font-size:11px"></i>
           <span>Book:</span> <strong id="bookPillLabel" style="color: var(--text);">…</strong>
+        </button>
+
+        <!-- Real hedging / real netting for ALL followers, one click -->
+        <button class="sw-pill" onclick="openModeModal()" id="modePill" title="Move every follower between Real (hedging) and Real Net (netting)">
+          <i class="fa-solid fa-code-compare" style="font-size:11px"></i>
+          <span>Real:</span> <strong id="modePillLabel" style="color: var(--text);">…</strong>
         </button>
 
         <!-- Status Badge -->
@@ -2156,6 +2162,69 @@
   </div>
 </div>
 
+<div id="brokerModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="brokerTitle">
+  <div class="modal-window confirm-box" style="width:460px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+      <h3 id="brokerTitle" style="color:var(--text);margin:0;flex:1">Broker settings</h3>
+      <button class="ghost" onclick="closeBrokerModal()" aria-label="Close">&times;</button>
+    </div>
+    <p style="font-size:12.5px;color:var(--muted);margin:0 0 12px;line-height:1.5">
+      Choose which platform instance the dashboard views and acts on (Accounts, orders, balances, multiplier changes).
+      <b style="color:var(--text)">Real</b> instances use real-money accounts.
+    </p>
+    <div style="display:grid;gap:8px">
+      <div style="display:flex;align-items:center;gap:8px">
+        <button class="cta" data-broker="paper" onclick="setBroker('paper')" style="flex:1;text-align:left">Paper · Hedging</button>
+        <span id="brokerCount_paper" style="width:70px;font-size:12px;color:var(--muted);text-align:center">–</span>
+        <button class="ghost" onclick="startInstanceLink('paper','enable')" title="Link ALL followers to ctmaster on this instance">Enable all</button>
+        <button class="ghost" onclick="startInstanceLink('paper','disable')" title="End the copy link of every follower on this instance">Disable all</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <button class="cta" data-broker="paper-net" onclick="setBroker('paper-net')" style="flex:1;text-align:left">Paper · Netting</button>
+        <span id="brokerCount_paper-net" style="width:70px;font-size:12px;color:var(--muted);text-align:center">–</span>
+        <button class="ghost" onclick="startInstanceLink('paper-net','enable')" title="Link ALL followers to ctmaster on this instance">Enable all</button>
+        <button class="ghost" onclick="startInstanceLink('paper-net','disable')" title="End the copy link of every follower on this instance">Disable all</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <button class="cta danger" data-broker="real" onclick="setBroker('real')" style="flex:1;text-align:left">Real · Hedging</button>
+        <span id="brokerCount_real" style="width:70px;font-size:12px;color:var(--muted);text-align:center">–</span>
+        <button class="ghost" onclick="startInstanceLink('real','enable')" title="Link ALL followers to ctmaster on this instance">Enable all</button>
+        <button class="ghost" onclick="startInstanceLink('real','disable')" title="End the copy link of every follower on this instance">Disable all</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <button class="cta danger" data-broker="real-net" onclick="setBroker('real-net')" style="flex:1;text-align:left">Real · Netting</button>
+        <span id="brokerCount_real-net" style="width:70px;font-size:12px;color:var(--muted);text-align:center">–</span>
+        <button class="ghost" onclick="startInstanceLink('real-net','enable')" title="Link ALL followers to ctmaster on this instance">Enable all</button>
+        <button class="ghost" onclick="startInstanceLink('real-net','disable')" title="End the copy link of every follower on this instance">Disable all</button>
+      </div>
+    </div>
+    <p style="font-size:11.5px;color:var(--muted);margin:10px 0 0;line-height:1.5">Click a name to <b>view</b> that instance. <b>Enable all / Disable all</b> link or unlink <b>every follower</b> to ctmaster on it (the number is followers currently linked there). A follower has one link, so enabling an instance moves it from its current one.</p>
+    <div id="brokerResult" style="font-size:12.5px;margin-top:10px;color:var(--muted)"></div>
+  </div>
+</div>
+
+<div id="modeModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modeTitle">
+  <div class="modal-window confirm-box" style="width:520px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+      <h3 id="modeTitle" style="color:var(--text);margin:0;flex:1">Real hedging / Real netting</h3>
+      <button class="ghost" onclick="closeModeModal()" aria-label="Close">&times;</button>
+    </div>
+    <p style="font-size:12.5px;color:var(--muted);margin:0 0 10px;line-height:1.5">
+      Moves <b style="color:var(--text)">every follower's copy link</b> to the other real instance in one go. Each follower keeps its
+      method and multiplier. These are <u>real-money</u> accounts.
+    </p>
+    <div id="modeSummary" class="panel-card" style="padding:12px;margin-bottom:10px;font-size:13px;line-height:1.6">Loading…</div>
+    <div class="confirm-actions" style="justify-content:space-between;margin-top:14px">
+      <button class="ghost" onclick="closeModeModal()">Cancel</button>
+      <span style="display:flex;gap:8px">
+        <button class="cta" onclick="startModeSwitch('real')">All → Real (hedging)</button>
+        <button class="cta danger" onclick="startModeSwitch('real-net')">All → Real Net (netting)</button>
+      </span>
+    </div>
+    <div id="modeResult" style="font-size:12.5px;margin-top:10px;color:var(--muted)"></div>
+  </div>
+</div>
+
 <!-- Confirmation for real-money / destructive runs -->
 <div id="confirmModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
   <div class="modal-window confirm-box">
@@ -2189,10 +2258,27 @@
     /* INSTANCE STATE & SWITCHER */
     let currentInstance = 'paper';
 
-    function toggleInstance() {
-      currentInstance = (currentInstance === 'paper') ? 'real' : 'paper';
+    /* Broker settings: the four platform instances */
+    const BROKERS = {
+      'paper':     { label: 'Paper (Hedging)',  real: false },
+      'paper-net': { label: 'Paper (Netting)',  real: false },
+      'real':      { label: 'Real (Hedging)',   real: true  },
+      'real-net':  { label: 'Real (Netting)',   real: true  },
+    };
+    const isRealInst = (i) => String(i || '').startsWith('real');
+
+    function openBrokerModal() {
+      document.querySelectorAll('#brokerModal [data-broker]').forEach(b => b.classList.toggle('on', b.dataset.broker === currentInstance));
+      document.getElementById('brokerModal').style.display = 'flex';
+    }
+    function closeBrokerModal() { document.getElementById('brokerModal').style.display = 'none'; }
+    function setBroker(inst) {
+      if (!BROKERS[inst]) return;
+      closeBrokerModal();
+      if (inst === currentInstance) return;
+      currentInstance = inst;
       updateBrokerUI();
-      fetchFollowers();
+      fetchFollowers(true);
       fetchLiveOrders();
       if (currentInspectedEmail) {
         refreshAccountData(currentInspectedEmail);
@@ -2203,17 +2289,12 @@
       const label = document.getElementById("brokerLabel");
       const dot = document.getElementById("brokerDot");
       const targetBadge = document.getElementById("switchTargetInstanceBadge");
-      if (currentInstance === 'real') {
-        if (label) { label.innerText = 'Real Money'; label.style.color = '#fff'; }
-        if (dot) { dot.style.background = 'var(--warning)'; dot.style.boxShadow = '0 0 8px var(--warning)'; }
-        if (targetBadge) { targetBadge.innerText = 'REAL'; targetBadge.className = 'btn-tag tag-amber'; }
-        showToast('Switched broker view to REAL (Live Money)');
-      } else {
-        if (label) { label.innerText = 'Paper (Hedging)'; label.style.color = '#fff'; }
-        if (dot) { dot.style.background = 'var(--ok)'; dot.style.boxShadow = '0 0 8px var(--ok)'; }
-        if (targetBadge) { targetBadge.innerText = 'PAPER'; targetBadge.className = 'btn-tag tag-green'; }
-        showToast('Switched broker view to PAPER');
-      }
+      const meta = BROKERS[currentInstance] || BROKERS['paper'];
+      const real = meta.real;
+      if (label) { label.innerText = meta.label; label.style.color = '#fff'; }
+      if (dot) { dot.style.background = real ? 'var(--warning)' : 'var(--ok)'; dot.style.boxShadow = real ? '0 0 8px var(--warning)' : '0 0 8px var(--ok)'; }
+      if (targetBadge) { targetBadge.innerText = currentInstance.toUpperCase(); targetBadge.className = real ? 'btn-tag tag-amber' : 'btn-tag tag-green'; }
+      showToast(`Switched broker view to ${meta.label.toUpperCase()}` + (real ? ' (live money)' : ''));
     }
 
     /* REAL-TIME LIVE ORDER FLOW TAPE */
@@ -2317,7 +2398,7 @@
 
     /* Bulk account changes always ask first; on REAL the word to type is REAL */
     function askBulk(title, items, fn) {
-      const real = currentInstance === 'real';
+      const real = isRealInst(currentInstance);
       openConfirmAction(title, items + `<li>Instance: <b>${real ? 'REAL (real money accounts)' : 'Paper'}</b></li>`, real ? 'REAL' : 'APPLY', fn);
     }
 
@@ -2392,7 +2473,16 @@
         });
         const d2 = await r2.json();
 
-        showToast(`🚀 Setup Complete: Balances set to $${(balVal/1e6).toFixed(0)}M • Mode set to ${selectedCopyMode.toUpperCase()} with ${customMult}x multiplier!`);
+        const balOk = r1.status === 200 && d1.success_count === d1.total;
+        const modeOk = r2.status === 200;
+        if (balOk && modeOk) {
+          showToast(`🚀 Setup complete: ${d1.success_count}/${d1.total} balances set • ${d2.success_count}/${d2.total} followers on ${selectedCopyMode.toUpperCase()} ${customMult}x`);
+        } else {
+          alert('Setup did NOT fully apply.\n\n' +
+            `Balances: ${r1.status === 200 ? d1.success_count + '/' + d1.total + ' set' : (d1.error || 'failed')}\n` +
+            `Copy mode: ${r2.status === 200 ? 'ok' : (d2.error || ('only ' + d2.success_count + '/' + d2.total + ' updated'))}` +
+            (d2.failures && d2.failures.length ? '\n\nFirst failure: ' + d2.failures[0].email.split('@')[0] + ': ' + d2.failures[0].error : ''));
+        }
         await fetchFollowers(true);
       } catch (err) {
         alert("Setup error: " + err);
@@ -2444,7 +2534,7 @@
       const targetBadge = document.getElementById("switchTargetInstanceBadge");
       if (targetBadge) {
         targetBadge.innerText = currentInstance.toUpperCase();
-        targetBadge.className = currentInstance === 'real' ? "btn-tag tag-amber" : "btn-tag tag-green";
+        targetBadge.className = isRealInst(currentInstance) ? "btn-tag tag-amber" : "btn-tag tag-green";
       }
       
       const val = document.getElementById("customMultiplierInput")?.value || "2.0";
@@ -2507,10 +2597,14 @@
         const data = await res.json();
 
         if (res.status === 200) {
-          showToast(`⚡ Confirmed: All followers updated to ${selectedCopyMode.toUpperCase()} mode with ${customMult}x multiplier!`);
+          showToast(`⚡ ${data.success_count}/${data.total} followers verified on ${selectedCopyMode.toUpperCase()} ${customMult}x (${String(data.instance).toUpperCase()})`);
+          await fetchFollowers(true);
+        } else if (res.status === 207) {
+          showToast(`⚠ Only ${data.success_count}/${data.total} followers updated`, 'warn');
+          alert(`Only ${data.success_count} of ${data.total} followers were updated.\n\nFirst failures:\n` + (data.failures || []).slice(0, 3).map(f => f.email.split('@')[0] + ': ' + f.error).join('\n'));
           await fetchFollowers(true);
         } else {
-          alert("Switch mode error: " + (data.error || "Failed"));
+          alert("Nothing was changed.\n\n" + (data.error || "Failed"));
         }
       } catch (err) {
         alert("Network error: " + err);
@@ -3139,7 +3233,7 @@
                         instance: currentInstance, confirm: confirmed };
       if (!payload.symbol) { showToast('Pick a symbol', 'warn'); return; }
       if (payload.type !== 'MARKET' && !payload.price) { showToast(`${payload.type} orders need a price`, 'warn'); return; }
-      if (currentInstance === 'real' && !confirmed) {
+      if (isRealInst(currentInstance) && !confirmed) {
         openConfirmAction('Send a REAL order?', `<li><b>${esc(payload.side)} ${esc(payload.qty)} ${esc(payload.symbol)}</b> (${esc(payload.type)}) from the master</li><li>Every linked follower will copy it with real money.</li>`,
                           'REAL', () => executeMasterDispatchAndVerify(true));
         return;
@@ -3175,7 +3269,7 @@
     }
 
     async function closeMasterAndVerify(confirmed = false) {
-      if (currentInstance === 'real' && !confirmed) {
+      if (isRealInst(currentInstance) && !confirmed) {
         openConfirmAction('Close the master on REAL?', '<li>Cancels the master\'s pending orders and closes all its REAL positions.</li><li>Followers copy the close.</li>', 'REAL', () => closeMasterAndVerify(true));
         return;
       }
@@ -3383,7 +3477,7 @@
       const params = { ...collectParams(), ...pendingExtra };
       if (params.end < params.start) { showToast('"Followers to" must be ≥ "from".', 'warn'); return; }
       const inst = s.fixed_instance || params.instance;
-      if (!confirmed && (s.risk !== 'safe' || inst === 'real')) { openConfirm(s, params, inst); return; }
+      if (!confirmed && (s.risk !== 'safe' || isRealInst(inst))) { openConfirm(s, params, inst); return; }
 
       const { ok, status, data } = await api('/api/run', { method: 'POST', headers: { 'Content-Type': 'application/json' },
                                                             body: JSON.stringify({ suite: key, params, confirm: confirmed }) });
@@ -3794,6 +3888,71 @@
       await fetchBooks(); openBookModal();
       if (bad) $('bookResult').innerHTML = `<span style="color:var(--danger)">${bad} account(s) did not switch: ` + esc((data.results || []).slice(0, 3).map(r => r.email.split('@')[0] + ' – ' + r.error).join('; ')) + '</span>';
     }
+
+    /* ---- Real hedging / Real netting for all followers ---- */
+    async function fetchModes() {
+      const { ok, data } = await api('/api/copy/instances'); if (!ok) { $('modePillLabel').innerText = 'n/a'; return null; }
+      const c = data.counts, mixed = (c.real && c['real-net']) || c.both || c.none;
+      $('modePillLabel').innerText = mixed ? `Mixed (H${c.real}/N${c['real-net']})` : (c['real-net'] ? 'Netting' : 'Hedging');
+      $('modePill').title = `Followers: ${c.real} hedging, ${c['real-net']} netting` + (c.both ? `, ${c.both} on both` : '') + (c.none ? `, ${c.none} with no real link` : '');
+      $('modePill').style.borderColor = mixed ? 'var(--warn)' : '';
+      return data;
+    }
+    function modeSummaryHtml(d) {
+      if (!d) return 'Could not load.';
+      const c = d.counts;
+      return `<b>Real (hedging)</b>: ${c.real} followers<br><b>Real Net (netting)</b>: ${c['real-net']} followers` +
+             (c.both ? `<br><span style="color:var(--warn)">${c.both} on both</span>` : '') +
+             (c.none ? `<br><span style="color:var(--warn)">${c.none} with no active real link (skipped)</span>` : '');
+    }
+    async function openModeModal() {
+      $('modeResult').innerText = ''; $('modeModal').style.display = 'flex'; $('modeSummary').innerHTML = 'Loading…';
+      $('modeSummary').innerHTML = modeSummaryHtml(await fetchModes());
+    }
+    function closeModeModal() { $('modeModal').style.display = 'none'; }
+    function startModeSwitch(to) {
+      if (lastStatus?.is_running) { showToast('A test run is active – stop it before changing modes.', 'warn'); return; }
+      const word = to === 'real' ? 'HEDGING' : 'NETTING';
+      closeModeModal();
+      openConfirmAction(`Move all followers to ${to === 'real' ? 'Real hedging' : 'Real netting'}?`,
+        `<li>Applies to: <b>all followers</b> (real-money instance)</li><li>Each keeps its method and multiplier.</li><li>The new link is created first, then the old one is ended.</li>`, word, () => doModeSwitch(to));
+    }
+    async function doModeSwitch(to) {
+      const { data, status } = await api('/api/copy/switch_instance', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ to, confirm: true }) });
+      if (status === 409 || status === 400 || status === 412) { showToast(data.error || 'Switch refused', 'err'); return; }
+      const bad = data.failed || 0;
+      showToast(`${to}: ${data.switched_ok}/${data.requested} followers verified` + (bad ? `, ${bad} FAILED` : ''), bad ? 'err' : 'ok');
+      await fetchModes(); await openModeModal();
+      if (bad) $('modeResult').innerHTML = `<span style="color:var(--danger)">${bad} did not switch: ` + esc((data.results || []).slice(0, 3).map(r => r.email.split('@')[0] + ' – ' + r.error).join('; ')) + '</span>';
+    }
+
+    /* ---- Mass enable / disable copy trading per instance ---- */
+    async function refreshBrokerCounts() {
+      const { ok, data } = await api('/api/copy/instances'); if (!ok || !data.per_instance) return;
+      for (const k of Object.keys(BROKERS)) { const el = $('brokerCount_' + k); if (el) el.innerText = (data.per_instance[k] ?? 0) + ' linked'; }
+    }
+    const _openBroker = openBrokerModal;
+    openBrokerModal = function () { _openBroker(); $('brokerResult').innerText = ''; refreshBrokerCounts(); };
+    function startInstanceLink(inst, action) {
+      if (lastStatus?.is_running) { showToast('A test run is active – stop it first.', 'warn'); return; }
+      const real = isRealInst(inst), word = real ? (action === 'enable' ? 'ENABLE' : 'DISABLE') : 'APPLY';
+      closeBrokerModal();
+      openConfirmAction(`${action === 'enable' ? 'Enable' : 'Disable'} ${BROKERS[inst].label} for all followers?`,
+        `<li>Applies to: <b>all 100 followers</b> ↔ ctmaster</li>` +
+        (action === 'enable' ? `<li>Each follower is linked on <b>${esc(BROKERS[inst].label)}</b>, keeping its method and multiplier (moved from its current instance).</li>`
+                             : `<li>Every follower currently linked on <b>${esc(BROKERS[inst].label)}</b> is <b>unfollowed</b>.</li>`) +
+        (real ? '<li>Real-money instance.</li>' : '<li>Paper links can never be re-created once ended.</li>'),
+        word, () => doInstanceLink(inst, action));
+    }
+    async function doInstanceLink(inst, action) {
+      const { data, status } = await api('/api/copy/instance_link', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ instance: inst, action, confirm: true }) });
+      if ([400, 409, 412].includes(status)) { await openBrokerModal(); $('brokerResult').innerHTML = `<span style="color:var(--danger)">${esc(data.error || 'Refused')}</span>`; showToast(data.error || 'Refused', 'err'); return; }
+      const bad = data.failed || 0;
+      showToast(`${BROKERS[inst].label}: ${action} verified for ${data.ok}/${data.requested} followers` + (bad ? `, ${bad} FAILED` : ''), bad ? 'err' : 'ok');
+      await openBrokerModal(); fetchModes(); fetchFollowers(true);
+      if (bad) $('brokerResult').innerHTML = `<span style="color:var(--danger)">${bad} failed: ` + esc((data.results || []).slice(0, 3).map(r => r.email.split('@')[0] + ' – ' + r.error).join('; ')) + '</span>';
+    }
+    fetchModes(); setInterval(() => document.visibilityState === 'visible' && fetchModes(), 60000);
   </script>
 </body>
 </html>

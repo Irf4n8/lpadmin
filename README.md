@@ -16,7 +16,7 @@ git clone <this-repo> && cd lpadmin
 python scripts/bootstrap.py        # venv + dependencies + .env from template
 # edit .env: ADMIN_*, MEMBER_PASSWORD, MASTER_EMAIL, MASTER_ID
 python scripts/doctor.py           # verifies install, credentials, login, accounts
-python dashboard/app.py            # open http://localhost:5000
+python dashboard/app.py            # open http://localhost:5001
 ```
 
 In the dashboard: press **End-to-End Test** (top of the launcher), or **Quick run** on the **End-to-end** tab.
@@ -80,7 +80,7 @@ Copy `.env.example` to `.env` (git-ignored). Full list:
 
 ## The dashboard (Test Hub)
 
-`python dashboard/app.py` -> http://localhost:5000
+`python dashboard/app.py` -> http://localhost:5001
 
 | Area | What it does |
 |---|---|
