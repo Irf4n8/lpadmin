@@ -6,7 +6,8 @@ echo ========================================================
 
 set "JAVA_HOME=C:\Program Files\Java\jdk-25.0.5.0.3"
 set "PATH=%JAVA_HOME%\bin;%PATH%"
-set "JMETER_BIN=C:\Users\Asus\Downloads\apache-jmeter-5.6.3\apache-jmeter-5.6.3\bin\jmeter.bat"
+
+set JMETER_BIN=C:\Users\Asus\Downloads\apache-jmeter-5.6.3\apache-jmeter-5.6.3\bin\
 
 if not exist "%JAVA_HOME%\bin\java.exe" (
     echo Error: Java not found at %JAVA_HOME%
@@ -14,11 +15,11 @@ if not exist "%JAVA_HOME%\bin\java.exe" (
     exit /b 1
 )
 
-if not exist "%JMETER_BIN%" (
-    echo Error: JMeter not found at %JMETER_BIN%
+if not exist "%JMETER_BIN%jmeter.bat" (
+    echo Error: JMeter not found at %JMETER_BIN%jmeter.bat
     pause
     exit /b 1
 )
 
 echo Starting JMeter with Java from %JAVA_HOME% ...
-start "" "%JMETER_BIN%" %*
+start "" "%JMETER_BIN%jmeter.bat" %*

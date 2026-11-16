@@ -135,9 +135,92 @@ async def toggle_batch_followers_broker(
 def run_toggle_batch_sync(emails: List[str], password: str = "Test@1234", broker_key: str = "paper", enable: bool = False, concurrency: int = 3) -> List[Dict]:
     return asyncio.run(toggle_batch_followers_broker(emails, password, broker_key, enable, concurrency))
 
+async def configure_follower_all_instances(
+    email: str,
+    password: str = "Test@1234",
+    targets: Dict[str, bool] = None,
+    proof_dir: str = "reports/evidence/broker_proofs"
+) -> Dict:
+    if targets is None:
+        targets = {
+            "Paper (Hedging)": False,
+            "Paper (Netting)": False,
+            "Real (Hedging)": True,
+            "Real (Netting)": True
+        }
+    res = {
+        "email": email,
+        "success": False,
+        "states": {},
+        "error": None,
+        "proof_screenshot": None
+    }
+    try:
+        async with async_playwright() as p:
+            browser = await p.chromium.launch(headless=True)
+            context = await browser.new_context(viewport={'width': 1366, 'height': 768})
+            page = await context.new_page()
+            
+            await page.goto("https://lpadmin.blackfx.com/login", wait_until="networkidle", timeout=30000)
+            await page.fill('input[type="email"]', email)
+            await page.fill('input[type="password"]', password)
+            await page.click('button[type="submit"]')
+            await page.wait_for_timeout(2500)
+            
+            await page.goto("https://lpadmin.blackfx.com/dashboard", wait_until="networkidle", timeout=35000)
+            await page.wait_for_timeout(4500)
+            
+            chart_frame = next((f for f in page.frames if "chartv2" in f.url), None)
+            if not chart_frame:
+                res["error"] = "chartv2 iframe not found"
+                await browser.close()
+                return res
+                
+            gear_btn = await chart_frame.query_selector('button[aria-label="Broker settings"]')
+            if not gear_btn:
+                res["error"] = "Broker settings gear button not found"
+                await browser.close()
+                return res
+                
+            await gear_btn.click()
+            await page.wait_for_timeout(1000)
+            
+            for tab_name, desired_state in targets.items():
+                tab_btn = await chart_frame.query_selector(f'[data-popup="broker-settings"] button:has-text("{tab_name}")')
+                if not tab_btn:
+                    continue
+                await tab_btn.click()
+                await page.wait_for_timeout(500)
+                chk = await chart_frame.query_selector('[data-popup="broker-settings"] input[type="checkbox"]')
+                if not chk:
+                    continue
+                curr = await chk.is_checked()
+                if curr != desired_state:
+                    await chk.click()
+                    await page.wait_for_timeout(700)
+                    final = await chk.is_checked()
+                else:
+                    final = curr
+                res["states"][tab_name] = final
+                
+            res["success"] = all(res["states"].get(t) == expected for t, expected in targets.items())
+            
+            os.makedirs(proof_dir, exist_ok=True)
+            prefix = email.split('@')[0]
+            proof_path = os.path.join(proof_dir, f"proof_{prefix}_real_only.png")
+            await page.screenshot(path=proof_path)
+            res["proof_screenshot"] = proof_path
+            
+            await browser.close()
+            return res
+    except Exception as e:
+        res["error"] = str(e)
+        return res
+
 if __name__ == "__main__":
     print("Testing follower_ui_automator...")
     result = run_toggle_single_sync("mamfollower1@mailinator.com", "Test@1234", "paper", enable=False)
     print("Toggle paper -> False:", result)
     result2 = run_toggle_single_sync("mamfollower1@mailinator.com", "Test@1234", "paper", enable=True)
     print("Toggle paper -> True:", result2)
+

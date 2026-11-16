@@ -1,0 +1,1310 @@
+{
+  "timestamp": "2026-11-16 12:49:23",
+  "method": "Pure Playwright DOM manipulation (no API calls)",
+  "total_followers": 100,
+  "success_count": 100,
+  "failed_count": 0,
+  "total_duration_seconds": 507.44,
+  "details": [
+    {
+      "email": "mamfollower1@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower1_real_enabled.png",
+      "duration": 31.18
+    },
+    {
+      "email": "mamfollower2@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower2_real_enabled.png",
+      "duration": 26.71
+    },
+    {
+      "email": "mamfollower3@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower3_real_enabled.png",
+      "duration": 26.38
+    },
+    {
+      "email": "mamfollower4@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower4_real_enabled.png",
+      "duration": 26.67
+    },
+    {
+      "email": "mamfollower5@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower5_real_enabled.png",
+      "duration": 33.23
+    },
+    {
+      "email": "mamfollower6@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower6_real_enabled.png",
+      "duration": 25.1
+    },
+    {
+      "email": "mamfollower7@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower7_real_enabled.png",
+      "duration": 25.0
+    },
+    {
+      "email": "mamfollower8@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower8_real_enabled.png",
+      "duration": 28.25
+    },
+    {
+      "email": "mamfollower9@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower9_real_enabled.png",
+      "duration": 25.57
+    },
+    {
+      "email": "mamfollower10@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower10_real_enabled.png",
+      "duration": 27.38
+    },
+    {
+      "email": "mamfollower11@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower11_real_enabled.png",
+      "duration": 23.59
+    },
+    {
+      "email": "mamfollower12@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower12_real_enabled.png",
+      "duration": 27.69
+    },
+    {
+      "email": "mamfollower13@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower13_real_enabled.png",
+      "duration": 22.85
+    },
+    {
+      "email": "mamfollower14@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower14_real_enabled.png",
+      "duration": 25.16
+    },
+    {
+      "email": "mamfollower15@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower15_real_enabled.png",
+      "duration": 22.97
+    },
+    {
+      "email": "mamfollower16@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower16_real_enabled.png",
+      "duration": 24.95
+    },
+    {
+      "email": "mamfollower17@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower17_real_enabled.png",
+      "duration": 24.1
+    },
+    {
+      "email": "mamfollower18@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower18_real_enabled.png",
+      "duration": 23.86
+    },
+    {
+      "email": "mamfollower19@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower19_real_enabled.png",
+      "duration": 24.23
+    },
+    {
+      "email": "mamfollower20@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower20_real_enabled.png",
+      "duration": 24.87
+    },
+    {
+      "email": "mamfollower21@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower21_real_enabled.png",
+      "duration": 23.39
+    },
+    {
+      "email": "mamfollower22@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower22_real_enabled.png",
+      "duration": 22.83
+    },
+    {
+      "email": "mamfollower23@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower23_real_enabled.png",
+      "duration": 23.18
+    },
+    {
+      "email": "mamfollower24@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower24_real_enabled.png",
+      "duration": 22.71
+    },
+    {
+      "email": "mamfollower25@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower25_real_enabled.png",
+      "duration": 23.05
+    },
+    {
+      "email": "mamfollower26@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower26_real_enabled.png",
+      "duration": 26.23
+    },
+    {
+      "email": "mamfollower27@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower27_real_enabled.png",
+      "duration": 26.33
+    },
+    {
+      "email": "mamfollower28@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower28_real_enabled.png",
+      "duration": 23.5
+    },
+    {
+      "email": "mamfollower29@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower29_real_enabled.png",
+      "duration": 22.66
+    },
+    {
+      "email": "mamfollower30@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower30_real_enabled.png",
+      "duration": 28.56
+    },
+    {
+      "email": "mamfollower31@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower31_real_enabled.png",
+      "duration": 22.89
+    },
+    {
+      "email": "mamfollower32@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower32_real_enabled.png",
+      "duration": 24.92
+    },
+    {
+      "email": "mamfollower33@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower33_real_enabled.png",
+      "duration": 23.98
+    },
+    {
+      "email": "mamfollower34@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower34_real_enabled.png",
+      "duration": 24.55
+    },
+    {
+      "email": "mamfollower35@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower35_real_enabled.png",
+      "duration": 24.74
+    },
+    {
+      "email": "mamfollower36@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower36_real_enabled.png",
+      "duration": 24.85
+    },
+    {
+      "email": "mamfollower37@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower37_real_enabled.png",
+      "duration": 22.37
+    },
+    {
+      "email": "mamfollower38@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower38_real_enabled.png",
+      "duration": 25.55
+    },
+    {
+      "email": "mamfollower39@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower39_real_enabled.png",
+      "duration": 25.93
+    },
+    {
+      "email": "mamfollower40@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower40_real_enabled.png",
+      "duration": 22.91
+    },
+    {
+      "email": "mamfollower41@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower41_real_enabled.png",
+      "duration": 23.87
+    },
+    {
+      "email": "mamfollower42@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower42_real_enabled.png",
+      "duration": 27.09
+    },
+    {
+      "email": "mamfollower43@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower43_real_enabled.png",
+      "duration": 23.33
+    },
+    {
+      "email": "mamfollower44@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower44_real_enabled.png",
+      "duration": 22.9
+    },
+    {
+      "email": "mamfollower45@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower45_real_enabled.png",
+      "duration": 25.71
+    },
+    {
+      "email": "mamfollower46@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower46_real_enabled.png",
+      "duration": 25.8
+    },
+    {
+      "email": "mamfollower47@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower47_real_enabled.png",
+      "duration": 26.07
+    },
+    {
+      "email": "mamfollower48@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower48_real_enabled.png",
+      "duration": 25.6
+    },
+    {
+      "email": "mamfollower49@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower49_real_enabled.png",
+      "duration": 24.65
+    },
+    {
+      "email": "mamfollower50@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower50_real_enabled.png",
+      "duration": 26.01
+    },
+    {
+      "email": "mamfollower51@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower51_real_enabled.png",
+      "duration": 23.2
+    },
+    {
+      "email": "mamfollower52@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower52_real_enabled.png",
+      "duration": 24.16
+    },
+    {
+      "email": "mamfollower53@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower53_real_enabled.png",
+      "duration": 26.59
+    },
+    {
+      "email": "mamfollower54@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower54_real_enabled.png",
+      "duration": 26.52
+    },
+    {
+      "email": "mamfollower55@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower55_real_enabled.png",
+      "duration": 26.54
+    },
+    {
+      "email": "mamfollower56@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower56_real_enabled.png",
+      "duration": 23.45
+    },
+    {
+      "email": "mamfollower57@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower57_real_enabled.png",
+      "duration": 22.75
+    },
+    {
+      "email": "mamfollower58@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower58_real_enabled.png",
+      "duration": 26.7
+    },
+    {
+      "email": "mamfollower59@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower59_real_enabled.png",
+      "duration": 25.15
+    },
+    {
+      "email": "mamfollower60@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower60_real_enabled.png",
+      "duration": 24.52
+    },
+    {
+      "email": "mamfollower61@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower61_real_enabled.png",
+      "duration": 23.29
+    },
+    {
+      "email": "mamfollower62@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower62_real_enabled.png",
+      "duration": 27.14
+    },
+    {
+      "email": "mamfollower63@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower63_real_enabled.png",
+      "duration": 26.19
+    },
+    {
+      "email": "mamfollower64@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower64_real_enabled.png",
+      "duration": 26.9
+    },
+    {
+      "email": "mamfollower65@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower65_real_enabled.png",
+      "duration": 24.71
+    },
+    {
+      "email": "mamfollower66@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower66_real_enabled.png",
+      "duration": 24.26
+    },
+    {
+      "email": "mamfollower67@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower67_real_enabled.png",
+      "duration": 24.23
+    },
+    {
+      "email": "mamfollower68@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower68_real_enabled.png",
+      "duration": 25.82
+    },
+    {
+      "email": "mamfollower69@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower69_real_enabled.png",
+      "duration": 24.86
+    },
+    {
+      "email": "mamfollower70@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower70_real_enabled.png",
+      "duration": 24.31
+    },
+    {
+      "email": "mamfollower71@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower71_real_enabled.png",
+      "duration": 22.45
+    },
+    {
+      "email": "mamfollower72@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower72_real_enabled.png",
+      "duration": 27.6
+    },
+    {
+      "email": "mamfollower73@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower73_real_enabled.png",
+      "duration": 25.55
+    },
+    {
+      "email": "mamfollower74@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower74_real_enabled.png",
+      "duration": 25.86
+    },
+    {
+      "email": "mamfollower75@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower75_real_enabled.png",
+      "duration": 23.52
+    },
+    {
+      "email": "mamfollower76@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower76_real_enabled.png",
+      "duration": 24.75
+    },
+    {
+      "email": "mamfollower77@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower77_real_enabled.png",
+      "duration": 22.0
+    },
+    {
+      "email": "mamfollower78@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower78_real_enabled.png",
+      "duration": 24.05
+    },
+    {
+      "email": "mamfollower79@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower79_real_enabled.png",
+      "duration": 24.44
+    },
+    {
+      "email": "mamfollower80@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower80_real_enabled.png",
+      "duration": 23.69
+    },
+    {
+      "email": "mamfollower81@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower81_real_enabled.png",
+      "duration": 22.94
+    },
+    {
+      "email": "mamfollower82@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower82_real_enabled.png",
+      "duration": 24.07
+    },
+    {
+      "email": "mamfollower83@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower83_real_enabled.png",
+      "duration": 25.89
+    },
+    {
+      "email": "mamfollower84@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower84_real_enabled.png",
+      "duration": 23.37
+    },
+    {
+      "email": "mamfollower85@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower85_real_enabled.png",
+      "duration": 23.25
+    },
+    {
+      "email": "mamfollower86@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower86_real_enabled.png",
+      "duration": 21.69
+    },
+    {
+      "email": "mamfollower87@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower87_real_enabled.png",
+      "duration": 35.7
+    },
+    {
+      "email": "mamfollower88@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower88_real_enabled.png",
+      "duration": 22.79
+    },
+    {
+      "email": "mamfollower89@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower89_real_enabled.png",
+      "duration": 23.21
+    },
+    {
+      "email": "mamfollower90@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower90_real_enabled.png",
+      "duration": 22.97
+    },
+    {
+      "email": "mamfollower91@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower91_real_enabled.png",
+      "duration": 23.48
+    },
+    {
+      "email": "mamfollower92@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower92_real_enabled.png",
+      "duration": 22.62
+    },
+    {
+      "email": "mamfollower93@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower93_real_enabled.png",
+      "duration": 22.41
+    },
+    {
+      "email": "mamfollower94@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower94_real_enabled.png",
+      "duration": 22.01
+    },
+    {
+      "email": "mamfollower95@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower95_real_enabled.png",
+      "duration": 21.82
+    },
+    {
+      "email": "mamfollower96@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower96_real_enabled.png",
+      "duration": 24.7
+    },
+    {
+      "email": "mamfollower97@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower97_real_enabled.png",
+      "duration": 23.47
+    },
+    {
+      "email": "mamfollower98@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower98_real_enabled.png",
+      "duration": 24.29
+    },
+    {
+      "email": "mamfollower99@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower99_real_enabled.png",
+      "duration": 23.62
+    },
+    {
+      "email": "mamfollower100@mailinator.com",
+      "success": true,
+      "states": {
+        "Paper (Hedging)": false,
+        "Paper (Netting)": false,
+        "Real (Hedging)": true,
+        "Real (Netting)": true
+      },
+      "error": null,
+      "proof": "C:\\Users\\hp\\Downloads\\BlackTrader Testing\\BlackTrader Testing-20261112T041830Z-1-001\\BlackTrader Testing\\reports\\evidence\\dom_broker_proofs\\dom_mamfollower100_real_enabled.png",
+      "duration": 23.56
+    }
+  ]
+}

@@ -43,6 +43,7 @@ CONFIG = {
     "BASE_URL": DEFAULT_BASE_URL,
     "TRADER_EMAIL": DEFAULT_TRADER_EMAIL,
     "TRADER_PASSWORD": DEFAULT_TRADER_PASSWORD,
+    "INSTANCE": "real",
     "SYMBOL": "BTCUSD",                # Asset
     "SIDE": "BUY",                     # 'BUY' or 'SELL'
     "LOT": 1.0,                        # Lot size per order
@@ -62,6 +63,7 @@ def run_bulk_order_test(cfg: dict):
 
     email = env.get("MAM_MASTER", cfg["TRADER_EMAIL"])
     password = env.get("FOLLOWERS_PASSWORD", cfg["TRADER_PASSWORD"])
+    instance = env.get("INSTANCE", cfg.get("INSTANCE", "real")).lower()
     symbol = cfg["SYMBOL"]
     side = cfg["SIDE"].upper()
     lot = float(cfg["LOT"])
@@ -128,7 +130,7 @@ def run_bulk_order_test(cfg: dict):
             if api_session and chart_token:
                 headers = {"Authorization": f"Bearer {chart_token}", "Content-Type": "application/json"}
                 api_session.post(
-                    f"{url}/v1/oms/paper/orders",
+                    f"{url}/v1/oms/{instance}/orders",
                     headers=headers,
                     json={"symbol": norm_symbol, "side": side, "qty": lot, "type": "MARKET"},
                     timeout=15
@@ -194,10 +196,12 @@ def main():
     parser.add_argument("--count", type=int, default=CONFIG["COUNT"], help="Number of consecutive orders")
     parser.add_argument("--interval", type=float, default=CONFIG["INTERVAL_SECONDS"], help="Interval between clicks")
     parser.add_argument("--timer", type=int, default=CONFIG["TIMER_SECONDS"], help="Hold timer before bulk close")
+    parser.add_argument("--instance", choices=["real", "real-net", "paper", "paper-net"], default=CONFIG.get("INSTANCE", "real"), help="Trading instance (default: real)")
     parser.add_argument("--headed", action="store_true", help="Run with visible browser window")
     args = parser.parse_args()
 
     cfg = CONFIG.copy()
+    cfg["INSTANCE"] = args.instance
     cfg["SYMBOL"] = args.symbol
     cfg["SIDE"] = args.side
     cfg["LOT"] = args.lot

@@ -1,0 +1,51 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1794487356186,269,1. POST /api/auth/login,200,OK,Orders Concurrency Test Group 1-2,text,true,,1118,332,2,2,https://lpadmin.blackfx.com/api/auth/login,266,0,79
+1794487355852,668,1. POST /api/auth/login,200,OK,Orders Concurrency Test Group 1-1,text,true,,1110,332,2,2,https://lpadmin.blackfx.com/api/auth/login,668,0,413
+1794487356459,41,2. POST /api/auth/chart-token,200,OK,Orders Concurrency Test Group 1-2,text,true,,819,362,2,2,https://lpadmin.blackfx.com/api/auth/chart-token,41,0,0
+1794487356521,40,2. POST /api/auth/chart-token,200,OK,Orders Concurrency Test Group 1-1,text,true,,821,362,2,2,https://lpadmin.blackfx.com/api/auth/chart-token,40,0,0
+1794487356527,61,3. POST /v1/oms/paper/orders (Place Order),200,OK,Orders Concurrency Test Group 1-2,text,true,,1605,482,3,3,https://lpadmin.blackfx.com/v1/oms/paper/orders,61,0,0
+1794487356562,42,3. POST /v1/oms/paper/orders (Place Order),200,OK,Orders Concurrency Test Group 1-1,text,true,,1601,482,3,3,https://lpadmin.blackfx.com/v1/oms/paper/orders,42,0,0
+1794487356605,44,4. GET /v1/oms/paper/orders/{id} (Check Fill),200,OK,Orders Concurrency Test Group 1-1,text,true,,1265,414,3,3,https://lpadmin.blackfx.com/v1/oms/paper/orders/ord_0ff907e485ff8fd8ba,44,0,0
+1794487356589,71,4. GET /v1/oms/paper/orders/{id} (Check Fill),200,OK,Orders Concurrency Test Group 1-2,text,true,,1253,414,3,3,https://lpadmin.blackfx.com/v1/oms/paper/orders/ord_c9dddd18dc57c799b8,71,0,0
+1794487356650,41,5. POST /v1/oms/paper/positions/{id}/squareoff (Close Order),200,OK,Orders Concurrency Test Group 1-1,text,true,,1096,447,3,3,https://lpadmin.blackfx.com/v1/oms/paper/positions/ord_0ff907e485ff8fd8ba/squareoff,41,0,0
+1794487356661,57,5. POST /v1/oms/paper/positions/{id}/squareoff (Close Order),200,OK,Orders Concurrency Test Group 1-2,text,true,,1100,447,3,3,https://lpadmin.blackfx.com/v1/oms/paper/positions/ord_c9dddd18dc57c799b8/squareoff,57,0,0
+1794487356584,224,1. POST /api/auth/login,200,OK,Orders Concurrency Test Group 1-3,text,true,,1104,332,3,3,https://lpadmin.blackfx.com/api/auth/login,224,0,49
+1794487356692,149,1. POST /api/auth/login,200,OK,Orders Concurrency Test Group 1-1,text,true,,1112,466,3,3,https://lpadmin.blackfx.com/api/auth/login,149,0,0
+1794487356808,66,2. POST /api/auth/chart-token,200,OK,Orders Concurrency Test Group 1-3,text,true,,813,362,3,3,https://lpadmin.blackfx.com/api/auth/chart-token,66,0,0
+1794487356842,38,2. POST /api/auth/chart-token,200,OK,Orders Concurrency Test Group 1-1,text,true,,819,412,3,3,https://lpadmin.blackfx.com/api/auth/chart-token,38,0,0
+1794487356719,166,1. POST /api/auth/login,200,OK,Orders Concurrency Test Group 1-2,text,true,,1114,466,3,3,https://lpadmin.blackfx.com/api/auth/login,166,0,0
+1794487356881,43,3. POST /v1/oms/paper/orders (Place Order),200,OK,Orders Concurrency Test Group 1-1,text,true,,1608,482,3,3,https://lpadmin.blackfx.com/v1/oms/paper/orders,43,0,0
+1794487356875,62,3. POST /v1/oms/paper/orders (Place Order),200,OK,Orders Concurrency Test Group 1-3,text,true,,1603,482,3,3,https://lpadmin.blackfx.com/v1/oms/paper/orders,62,0,0
+1794487356886,54,2. POST /api/auth/chart-token,200,OK,Orders Concurrency Test Group 1-2,text,true,,823,412,3,3,https://lpadmin.blackfx.com/api/auth/chart-token,54,0,0
+1794487356925,38,4. GET /v1/oms/paper/orders/{id} (Check Fill),200,OK,Orders Concurrency Test Group 1-1,text,true,,1255,414,3,3,https://lpadmin.blackfx.com/v1/oms/paper/orders/ord_14e504411e87eb736c,38,0,0
+1794487356938,61,4. GET /v1/oms/paper/orders/{id} (Check Fill),200,OK,Orders Concurrency Test Group 1-3,text,true,,1265,414,4,4,https://lpadmin.blackfx.com/v1/oms/paper/orders/ord_f345c1a8ac463c22db,61,0,0
+1794487356941,59,3. POST /v1/oms/paper/orders (Place Order),200,OK,Orders Concurrency Test Group 1-2,text,true,,1609,482,4,4,https://lpadmin.blackfx.com/v1/oms/paper/orders,59,0,0
+1794487356963,39,5. POST /v1/oms/paper/positions/{id}/squareoff (Close Order),200,OK,Orders Concurrency Test Group 1-1,text,true,,1075,447,4,4,https://lpadmin.blackfx.com/v1/oms/paper/positions/ord_14e504411e87eb736c/squareoff,39,0,0
+1794487357000,57,4. GET /v1/oms/paper/orders/{id} (Check Fill),200,OK,Orders Concurrency Test Group 1-2,text,true,,1261,414,3,3,https://lpadmin.blackfx.com/v1/oms/paper/orders/ord_1af81c6db030fe7908,57,0,0
+1794487356999,65,5. POST /v1/oms/paper/positions/{id}/squareoff (Close Order),200,OK,Orders Concurrency Test Group 1-3,text,true,,1079,447,3,3,https://lpadmin.blackfx.com/v1/oms/paper/positions/ord_f345c1a8ac463c22db/squareoff,65,0,0
+1794487357058,55,5. POST /v1/oms/paper/positions/{id}/squareoff (Close Order),200,OK,Orders Concurrency Test Group 1-2,text,true,,1102,447,3,3,https://lpadmin.blackfx.com/v1/oms/paper/positions/ord_1af81c6db030fe7908/squareoff,55,0,0
+1794487356984,193,1. POST /api/auth/login,200,OK,Orders Concurrency Test Group 1-4,text,true,,1108,332,2,2,https://lpadmin.blackfx.com/api/auth/login,193,0,44
+1794487357178,55,2. POST /api/auth/chart-token,200,OK,Orders Concurrency Test Group 1-4,text,true,,817,362,2,2,https://lpadmin.blackfx.com/api/auth/chart-token,55,0,0
+1794487357065,177,1. POST /api/auth/login,200,OK,Orders Concurrency Test Group 1-3,text,true,,1104,466,2,2,https://lpadmin.blackfx.com/api/auth/login,177,0,0
+1794487357234,41,3. POST /v1/oms/paper/orders (Place Order),200,OK,Orders Concurrency Test Group 1-4,text,true,,1611,482,2,2,https://lpadmin.blackfx.com/v1/oms/paper/orders,40,0,0
+1794487357243,60,2. POST /api/auth/chart-token,200,OK,Orders Concurrency Test Group 1-3,text,true,,815,412,2,2,https://lpadmin.blackfx.com/api/auth/chart-token,60,0,0
+1794487357275,52,4. GET /v1/oms/paper/orders/{id} (Check Fill),200,OK,Orders Concurrency Test Group 1-4,text,true,,1261,414,2,2,https://lpadmin.blackfx.com/v1/oms/paper/orders/ord_893ccfab2848f8c1ab,52,0,0
+1794487357328,37,5. POST /v1/oms/paper/positions/{id}/squareoff (Close Order),200,OK,Orders Concurrency Test Group 1-4,text,true,,1094,447,2,2,https://lpadmin.blackfx.com/v1/oms/paper/positions/ord_893ccfab2848f8c1ab/squareoff,37,0,0
+1794487357303,65,3. POST /v1/oms/paper/orders (Place Order),200,OK,Orders Concurrency Test Group 1-3,text,true,,1607,482,2,2,https://lpadmin.blackfx.com/v1/oms/paper/orders,65,0,0
+1794487357369,64,4. GET /v1/oms/paper/orders/{id} (Check Fill),200,OK,Orders Concurrency Test Group 1-3,text,true,,1265,414,3,3,https://lpadmin.blackfx.com/v1/oms/paper/orders/ord_8f19f01bba66899da2,64,0,0
+1794487357434,60,5. POST /v1/oms/paper/positions/{id}/squareoff (Close Order),200,OK,Orders Concurrency Test Group 1-3,text,true,,1077,447,3,3,https://lpadmin.blackfx.com/v1/oms/paper/positions/ord_8f19f01bba66899da2/squareoff,60,0,0
+1794487357366,150,1. POST /api/auth/login,200,OK,Orders Concurrency Test Group 1-4,text,true,,1110,466,2,2,https://lpadmin.blackfx.com/api/auth/login,150,0,0
+1794487357517,38,2. POST /api/auth/chart-token,200,OK,Orders Concurrency Test Group 1-4,text,true,,819,412,2,2,https://lpadmin.blackfx.com/api/auth/chart-token,38,0,0
+1794487357386,191,1. POST /api/auth/login,200,OK,Orders Concurrency Test Group 1-5,text,true,,1112,332,2,2,https://lpadmin.blackfx.com/api/auth/login,191,0,45
+1794487357556,59,3. POST /v1/oms/paper/orders (Place Order),200,OK,Orders Concurrency Test Group 1-4,text,true,,1607,482,2,2,https://lpadmin.blackfx.com/v1/oms/paper/orders,59,0,0
+1794487357578,47,2. POST /api/auth/chart-token,200,OK,Orders Concurrency Test Group 1-5,text,true,,821,362,2,2,https://lpadmin.blackfx.com/api/auth/chart-token,47,0,0
+1794487357616,36,4. GET /v1/oms/paper/orders/{id} (Check Fill),200,OK,Orders Concurrency Test Group 1-4,text,true,,1267,414,2,2,https://lpadmin.blackfx.com/v1/oms/paper/orders/ord_8349a7e13520279cec,36,0,0
+1794487357625,49,3. POST /v1/oms/paper/orders (Place Order),200,OK,Orders Concurrency Test Group 1-5,text,true,,1605,482,2,2,https://lpadmin.blackfx.com/v1/oms/paper/orders,49,0,0
+1794487357652,56,5. POST /v1/oms/paper/positions/{id}/squareoff (Close Order),200,OK,Orders Concurrency Test Group 1-4,text,true,,1098,447,2,2,https://lpadmin.blackfx.com/v1/oms/paper/positions/ord_8349a7e13520279cec/squareoff,56,0,0
+1794487357675,38,4. GET /v1/oms/paper/orders/{id} (Check Fill),200,OK,Orders Concurrency Test Group 1-5,text,true,,1261,414,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders/ord_2358fc103f6c439ae3,38,0,0
+1794487357714,46,5. POST /v1/oms/paper/positions/{id}/squareoff (Close Order),200,OK,Orders Concurrency Test Group 1-5,text,true,,1096,447,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/ord_2358fc103f6c439ae3/squareoff,46,0,0
+1794487357760,165,1. POST /api/auth/login,200,OK,Orders Concurrency Test Group 1-5,text,true,,1110,466,1,1,https://lpadmin.blackfx.com/api/auth/login,165,0,0
+1794487357925,43,2. POST /api/auth/chart-token,200,OK,Orders Concurrency Test Group 1-5,text,true,,819,412,1,1,https://lpadmin.blackfx.com/api/auth/chart-token,43,0,0
+1794487357968,46,3. POST /v1/oms/paper/orders (Place Order),200,OK,Orders Concurrency Test Group 1-5,text,true,,1603,482,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders,45,0,0
+1794487358014,41,4. GET /v1/oms/paper/orders/{id} (Check Fill),200,OK,Orders Concurrency Test Group 1-5,text,true,,1263,414,1,1,https://lpadmin.blackfx.com/v1/oms/paper/orders/ord_e034731e3b1dcc0c80,41,0,0
+1794487358056,49,5. POST /v1/oms/paper/positions/{id}/squareoff (Close Order),200,OK,Orders Concurrency Test Group 1-5,text,true,,1102,447,1,1,https://lpadmin.blackfx.com/v1/oms/paper/positions/ord_e034731e3b1dcc0c80/squareoff,49,0,0
