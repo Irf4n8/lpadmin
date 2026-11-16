@@ -49,7 +49,7 @@ def ok200(res) -> bool:
 def f1_instances(c, k):
     ins = c.get_instances(MASTER_EMAIL)
     slugs = {i["slug"]: i for i in ins}
-    k.true("4 instances exist (paper, paper-net, real, real-net)", set(slugs) == set(c.INSTANCES), f"(got {sorted(slugs)})")
+    k.true("2 instances exist (real, real-net)", set(slugs) == set(c.INSTANCES), f"(got {sorted(slugs)})")
     for s, i in slugs.items():
         k.true(f"{s}: mode matches netting flag", (i.get("mode") == "netting") == bool(i.get("netting")), f"({i.get('mode')}/{i.get('netting')})")
         k.true(f"{s}: real_money flag follows the name", bool(i.get("real_money")) == s.startswith("real"), f"({i.get('real_money')})")
@@ -99,7 +99,7 @@ def f3_roles(c, k):
     if k.true("mam/follows reachable for a follower", ok200(r)):
         k.true("follower has no follow block", not r["data"].get("follow_blocked_reason"), f"({r['data'].get('follow_blocked_reason')!r})")
     # an account with an ACTIVE standard-copy link must not be able to become a master
-    linked = [f for f in c.get_copy_followers(MASTER_EMAIL, "paper", active_only=True)]
+    linked = [f for f in c.get_copy_followers(MASTER_EMAIL, "real", active_only=True)]
     if linked:
         e = f"{linked[0]['follower_name']}@{DEFAULT_DOMAIN}"
         for kind in ("mam", "pamm"):
@@ -180,7 +180,7 @@ def f7_invalid_writes(c, k):
     after = c.social_follows(FOLLOWER, "copy", "real")["data"]
     k.true("no relationship was created by the rejected writes", before == after)
     k.true("follower1 still has no active link anywhere",
-           not [l for l in c.get_copy_followers(MASTER_EMAIL, "paper", active_only=True) if l.get("follower_name") == "follower1"])
+           not [l for l in c.get_copy_followers(MASTER_EMAIL, "real", active_only=True) if l.get("follower_name") == "follower1"])
 
 
 def f8_admin(c, k):

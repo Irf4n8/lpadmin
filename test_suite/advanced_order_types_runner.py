@@ -39,7 +39,7 @@ from test_suite.baseline import get_expected_multiplier
 from test_suite.client import BlackTraderClient
 
 
-def test_multi_symbol_fanout(client: BlackTraderClient, master_email: str, follower_emails: list, instance: str = "paper") -> dict:
+def test_multi_symbol_fanout(client: BlackTraderClient, master_email: str, follower_emails: list, instance: str = "real") -> dict:
     print("\n[ADV-1] Testing Multi-Symbol Simultaneous Fan-Out (BTC, ETH, SOL, BNB)...")
     symbols = [
         {"symbol": "BINANCE:BTCUSDT.P", "qty": 0.01},
@@ -92,7 +92,7 @@ def test_multi_symbol_fanout(client: BlackTraderClient, master_email: str, follo
     }
 
 
-def test_reverse_trade_sync(client: BlackTraderClient, master_email: str, follower_emails: list, instance: str = "paper") -> dict:
+def test_reverse_trade_sync(client: BlackTraderClient, master_email: str, follower_emails: list, instance: str = "real") -> dict:
     print("\n[ADV-2] Testing Reverse Trade Execution (Master Closes BUY -> Opens SELL)...")
     symbol = "BINANCE:BTCUSDT.P"
 
@@ -133,7 +133,7 @@ def test_reverse_trade_sync(client: BlackTraderClient, master_email: str, follow
     }
 
 
-def test_boundary_rejection_safety(client: BlackTraderClient, master_email: str, follower_emails: list, instance: str = "paper") -> dict:
+def test_boundary_rejection_safety(client: BlackTraderClient, master_email: str, follower_emails: list, instance: str = "real") -> dict:
     print("\n[ADV-3] Testing Order Boundary Rejections & Follower Safety...")
     symbol = "BINANCE:BTCUSDT.P"
 
@@ -182,7 +182,7 @@ def main():
     parser.add_argument("--domain", default=DEFAULT_DOMAIN)
     parser.add_argument("--start", type=int, default=1)
     parser.add_argument("--end", type=int, default=FOLLOWER_COUNT)
-    parser.add_argument("--instance", default="paper")
+    parser.add_argument("--instance", default="real")
     args = parser.parse_args()
 
     follower_emails = [f"{args.prefix}{i}@{args.domain}" for i in range(args.start, args.end + 1)]

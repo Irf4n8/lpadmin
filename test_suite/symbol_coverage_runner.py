@@ -374,7 +374,7 @@ def main() -> int:
     ap.add_argument("--master-id", default=MASTER_ID)
     ap.add_argument("--start", type=int, default=1)
     ap.add_argument("--end", type=int, default=FOLLOWER_COUNT)
-    ap.add_argument("--instance", default="paper", choices=["paper", "real"])
+    ap.add_argument("--instance", default="real", choices=["real"])
     ap.add_argument("--sample", action="store_true", help="one symbol per market group instead of every symbol")
     ap.add_argument("--types", default="", help="comma list of market types, e.g. FOREX,METAL,CRYPTO")
     ap.add_argument("--symbols", default="", help="comma list of exact symbols, e.g. BLACK:XAUUSD")
@@ -382,7 +382,7 @@ def main() -> int:
     ap.add_argument("--batch", type=int, default=20)
     ap.add_argument("--i-understand-real-money", action="store_true")
     a = ap.parse_args()
-    if a.instance != "paper" and not a.i_understand_real_money:
+    if not a.i_understand_real_money:
         print("Refusing to run on the REAL instance without --i-understand-real-money"); return 2
     if a.end < a.start:
         a.start, a.end = a.end, a.start

@@ -23,7 +23,7 @@ reports/logs (live log, run history)   reports/evidence (JSON + Markdown)
 
 * 1 **master** (`MASTER_EMAIL`) whose orders are copied.
 * N **followers** named `<prefix><n>@<domain>`, `n = 1..FOLLOWER_COUNT`.
-* Two broker **instances**: `paper` (hedging, simulated) and `real`.
+* Broker **instances**: `real` (hedging) and `real-net` (netting). Paper is no longer used.
 * Copy modes: *multiplier* (fixed), *balance-based* and *equity-based* sizing.
 
 Start small: `--end 10` is enough to iterate; use all followers before a release.
@@ -137,10 +137,10 @@ reverse). After every master action the suite checks each follower's **net signe
 | X10 | Seeded random open/reduce/close/protect walk; reproduce a failure with `--only X10 --seed N` |
 
 ### Netting vs Hedging (all four instances)
-`python test_suite/netting_hedging_runner.py --instances paper,paper-net --followers 10` (dashboard: *Netting vs Hedging (paper)* / *(real)*).
+`python test_suite/netting_hedging_runner.py --instances real,real-net --followers 10` (dashboard: *Netting vs Hedging (paper)* / *(real)*).
 
-* **Hedging** (`paper`, `real`): H1 BUY+SELL legs coexist, H2 close one leg, H3 partial reduce, H4 close all, H5 TP/SL sync.
-* **Netting** (`paper-net`, `real-net`): N1 open, N2 opposite order *reduces* (still one position), N3 oversized opposite order *flips*, N4 exact opposite closes, N5 TP/SL survives an add.
+* **Hedging** (`real`): H1 BUY+SELL legs coexist, H2 close one leg, H3 partial reduce, H4 close all, H5 TP/SL sync.
+* **Netting** (`real-net`): N1 open, N2 opposite order *reduces* (still one position), N3 oversized opposite order *flips*, N4 exact opposite closes, N5 TP/SL survives an add.
 * **Both**: P1 pending fan-out + cancel, C1 concurrent 6 BUY / 4 SELL race.
 * Every check compares each follower's long total and short total with `master x link multiplier`, so one model covers both modes.
 * `paper-net` has no copy links (the platform refuses to create paper links), so it runs master-only.
@@ -210,7 +210,7 @@ use **Emergency Teardown**.
        ap = argparse.ArgumentParser()
        ap.add_argument("--start", type=int, default=1)
        ap.add_argument("--end", type=int, default=FOLLOWER_COUNT)
-       ap.add_argument("--instance", default="paper")
+       ap.add_argument("--instance", default="real")
        a = ap.parse_args()
        emails = [f"{DEFAULT_PREFIX}{i}@{DEFAULT_DOMAIN}" for i in range(a.start, a.end + 1)]
        c = BlackTraderClient(BASE_URL)

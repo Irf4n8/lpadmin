@@ -61,7 +61,7 @@ def test_inflight_open_close_race(
     master_email: str,
     follower_emails: list,
     symbol: str = "BINANCE:BTCUSDT.P",
-    instance: str = "paper"
+    instance: str = "real"
 ) -> dict:
     """RACE-1: Immediate open followed by immediate close with zero delay."""
     print("\n" + "=" * 80)
@@ -123,7 +123,7 @@ def test_simultaneous_dual_orders(
     master_email: str,
     follower_emails: list,
     symbol: str = "BINANCE:BTCUSDT.P",
-    instance: str = "paper"
+    instance: str = "real"
 ) -> dict:
     """RACE-2: True simultaneous opposing orders (BUY & SELL) fired concurrently."""
     print("\n" + "=" * 80)
@@ -185,7 +185,7 @@ def test_multithreaded_hft_storm(
     follower_emails: list,
     symbol: str = "BINANCE:BTCUSDT.P",
     orders_count: int = 10,
-    instance: str = "paper"
+    instance: str = "real"
 ) -> dict:
     """RACE-3: 10 concurrent threads firing orders on the master simultaneously."""
     print("\n" + "=" * 80)
@@ -245,7 +245,7 @@ def test_unfollow_vs_order_race(
     master_client_id: str,
     follower_emails: list,
     symbol: str = "BINANCE:BTCUSDT.P",
-    instance: str = "paper"
+    instance: str = "real"
 ) -> dict:
     """RACE-4: Master fires order at exact instant 5 followers trigger unfollow."""
     print("\n" + "=" * 80)
@@ -319,7 +319,7 @@ def test_immediate_tpsl_collision(
     master_email: str,
     follower_emails: list,
     symbol: str = "BINANCE:BTCUSDT.P",
-    instance: str = "paper"
+    instance: str = "real"
 ) -> dict:
     """RACE-5: Master places order and attaches TP/SL immediately (<10ms)."""
     print("\n" + "=" * 80)
@@ -378,7 +378,7 @@ def main():
     parser.add_argument("--domain", default=DEFAULT_DOMAIN)
     parser.add_argument("--start", type=int, default=1)
     parser.add_argument("--end", type=int, default=FOLLOWER_COUNT)
-    parser.add_argument("--instance", default="paper")
+    parser.add_argument("--instance", default="real")
     args = parser.parse_args()
 
     follower_emails = [f"{args.prefix}{i}@{args.domain}" for i in range(args.start, args.end + 1)]

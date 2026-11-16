@@ -32,7 +32,7 @@ from test_suite.baseline import get_expected_multiplier, run_setup_and_baseline
 from test_suite.client import BlackTraderClient
 
 
-def get_current_price(client: BlackTraderClient, master_email: str, symbol: str, instance: str = "paper") -> float:
+def get_current_price(client: BlackTraderClient, master_email: str, symbol: str, instance: str = "real") -> float:
     """Fetch live market price by probing a micro order."""
     r = client.place_order(master_email, symbol=symbol, side="BUY", qty=0.001, instance=instance)
     m = r.get("data", {}).get("order", {})
@@ -48,7 +48,7 @@ def wait_for_order_trigger(
     client: BlackTraderClient,
     master_email: str,
     order_id: str,
-    instance: str = "paper",
+    instance: str = "real",
     timeout_sec: int = 15
 ) -> bool:
     """Poll until pending order triggers and becomes an open position."""
@@ -68,7 +68,7 @@ def run_pending_trigger_suite(
     follower_emails: list,
     symbol: str = "BINANCE:BTCUSDT.P",
     master_lot: float = 0.5,
-    instance: str = "paper"
+    instance: str = "real"
 ) -> list:
     results = []
 
@@ -333,7 +333,7 @@ def main():
     parser.add_argument("--end", type=int, default=FOLLOWER_COUNT, help="Ending follower index")
     parser.add_argument("--lot", type=float, default=0.5, help="Master lot size")
     parser.add_argument("--symbol", default="BINANCE:BTCUSDT.P", help="Trading symbol")
-    parser.add_argument("--instance", default="paper", help="Trading instance (paper)")
+    parser.add_argument("--instance", default="real", help="Trading instance (real)")
     args = parser.parse_args()
 
     follower_emails = [f"{args.prefix}{i}@{args.domain}" for i in range(args.start, args.end + 1)]

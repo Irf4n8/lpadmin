@@ -131,7 +131,7 @@ class BlackTraderClient:
         resp = self.request_with_retry("POST", f"{self.base_url}/admin/api/members/{member_id}/status", headers=headers, json={"status": status})
         return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
 
-    def set_member_balance(self, member_id: str, balance: float, instance: str = "paper") -> Dict[str, Any]:
+    def set_member_balance(self, member_id: str, balance: float, instance: str = "real") -> Dict[str, Any]:
         """Update a member's balance via admin API."""
         token = self.get_admin_token()
         headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
@@ -193,7 +193,7 @@ class BlackTraderClient:
     # -------------------------------------------------------------------------
     # OMS API Calls (Paper / Real)
     # -------------------------------------------------------------------------
-    def get_positions(self, email: str, instance: str = "paper") -> Dict[str, Any]:
+    def get_positions(self, email: str, instance: str = "real") -> Dict[str, Any]:
         """Fetch all open positions and current funds for an account."""
         token = self.get_trader_token(email)
         headers = {"Authorization": f"Bearer {token}", "X-Broker-ID": instance}
@@ -206,7 +206,7 @@ class BlackTraderClient:
             return {"count": 0, "positions": [], "funds": {}, "error": resp.text}
         return resp.json()
 
-    def get_orders(self, email: str, instance: str = "paper") -> Dict[str, Any]:
+    def get_orders(self, email: str, instance: str = "real") -> Dict[str, Any]:
         """Fetch all orders (active / pending / recent) for an account."""
         token = self.get_trader_token(email)
         headers = {"Authorization": f"Bearer {token}", "X-Broker-ID": instance}
@@ -219,7 +219,7 @@ class BlackTraderClient:
             return {"count": 0, "orders": [], "error": resp.text}
         return resp.json()
 
-    def get_history(self, email: str, instance: str = "paper") -> Dict[str, Any]:
+    def get_history(self, email: str, instance: str = "real") -> Dict[str, Any]:
         """Fetch closed trade history for an account."""
         token = self.get_trader_token(email)
         headers = {"Authorization": f"Bearer {token}", "X-Broker-ID": instance}
@@ -242,7 +242,7 @@ class BlackTraderClient:
         price: Optional[float] = None,
         tp: Optional[float] = None,
         sl: Optional[float] = None,
-        instance: str = "paper"
+        instance: str = "real"
     ) -> Dict[str, Any]:
         """Place market or pending order."""
         token = self.get_trader_token(email)
@@ -274,7 +274,7 @@ class BlackTraderClient:
         market_order_id: str,
         tp: Optional[float] = None,
         sl: Optional[float] = None,
-        instance: str = "paper"
+        instance: str = "real"
     ) -> Dict[str, Any]:
         """Set or modify Take Profit / Stop Loss on an open position."""
         token = self.get_trader_token(email)
@@ -293,7 +293,7 @@ class BlackTraderClient:
         resp = self.request_with_retry("PUT", url, headers=headers, json=payload)
         return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
 
-    def squareoff_position(self, email: str, market_order_id: str, instance: str = "paper") -> Dict[str, Any]:
+    def squareoff_position(self, email: str, market_order_id: str, instance: str = "real") -> Dict[str, Any]:
         """Close an open position completely."""
         token = self.get_trader_token(email)
         headers = {
@@ -305,7 +305,7 @@ class BlackTraderClient:
         resp = self.request_with_retry("POST", url, headers=headers, json={})
         return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
 
-    def reduce_position(self, email: str, market_order_id: str, qty: float, instance: str = "paper") -> Dict[str, Any]:
+    def reduce_position(self, email: str, market_order_id: str, qty: float, instance: str = "real") -> Dict[str, Any]:
         """Partially close an open position."""
         token = self.get_trader_token(email)
         headers = {
@@ -317,7 +317,7 @@ class BlackTraderClient:
         resp = self.request_with_retry("POST", url, headers=headers, json={"qty": qty})
         return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
 
-    def cancel_order(self, email: str, order_id: str, instance: str = "paper") -> Dict[str, Any]:
+    def cancel_order(self, email: str, order_id: str, instance: str = "real") -> Dict[str, Any]:
         """Cancel a pending order."""
         token = self.get_trader_token(email)
         headers = {"Authorization": f"Bearer {token}", "X-Broker-ID": instance}
@@ -325,7 +325,7 @@ class BlackTraderClient:
         resp = self.request_with_retry("DELETE", url, headers=headers)
         return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
 
-    def bulk_squareoff(self, email: str, instance: str = "paper") -> Dict[str, Any]:
+    def bulk_squareoff(self, email: str, instance: str = "real") -> Dict[str, Any]:
         """Close all open positions for an account."""
         pos_res = self.get_positions(email, instance)
         positions = pos_res.get("positions", [])
@@ -346,7 +346,7 @@ class BlackTraderClient:
         resp = self.request_with_retry("POST", url, headers=headers, json={"market_order_ids": mkt_ids})
         return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
 
-    def bulk_cancel(self, email: str, instance: str = "paper") -> Dict[str, Any]:
+    def bulk_cancel(self, email: str, instance: str = "real") -> Dict[str, Any]:
         """Cancel all pending orders for an account."""
         orders_res = self.get_orders(email, instance)
         orders = orders_res.get("orders", [])
@@ -373,10 +373,10 @@ class BlackTraderClient:
     # -------------------------------------------------------------------------
     # Generic OMS / admin access + the social-trading API (copy, MAM, PAMM, IB, wallets, portal)
     # -------------------------------------------------------------------------
-    INSTANCES = ("paper", "paper-net", "real", "real-net")          # hedging, netting, hedging, netting
+    INSTANCES = ("real", "real-net")          # hedging, netting
     SOCIAL_KINDS = ("copy", "mam", "pamm")
 
-    def oms(self, email: Optional[str], method: str, path: str, instance: str = "paper",
+    def oms(self, email: Optional[str], method: str, path: str, instance: str = "real",
             json: Optional[Any] = None, params: Optional[Dict[str, Any]] = None, root: bool = False) -> Dict[str, Any]:
         """Call /v1/oms[/<instance>]<path> as `email` (None = anonymous). Returns {status_code, data}."""
         headers: Dict[str, str] = {}
@@ -417,7 +417,7 @@ class BlackTraderClient:
         self,
         email: str,
         master_client_id: str,
-        instance: str = "paper",
+        instance: str = "real",
         method: str = "multiplier",
         multiplier: float = 1.0,
         reverse: bool = False,
@@ -440,7 +440,7 @@ class BlackTraderClient:
         resp = self.request_with_retry("POST", url, headers=headers, json=payload)
         return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
 
-    def unfollow_master(self, email: str, master_client_id: str, instance: str = "paper") -> Dict[str, Any]:
+    def unfollow_master(self, email: str, master_client_id: str, instance: str = "real") -> Dict[str, Any]:
         """Unfollow a master trader. On PAPER this is blocked by default (the link could never be re-created)."""
         if paper_unfollow_blocked(instance):
             return {"status_code": 0, "data": "BLOCKED: " + PAPER_UNFOLLOW_REASON, "blocked": True}
@@ -453,7 +453,7 @@ class BlackTraderClient:
         resp = self.request_with_retry("POST", url, headers=headers, json={"master_client_id": master_client_id})
         return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
 
-    def get_copy_followers(self, master_email: str, instance: str = "paper", active_only: bool = True) -> List[Dict[str, Any]]:
+    def get_copy_followers(self, master_email: str, instance: str = "real", active_only: bool = True) -> List[Dict[str, Any]]:
         """Fetch all followers linked to this master (optionally filtering for active status)."""
         token = self.get_trader_token(master_email)
         headers = {"Authorization": f"Bearer {token}"}
@@ -469,7 +469,7 @@ class BlackTraderClient:
     # -------------------------------------------------------------------------
     # High-Throughput Concurrent Read-Back (ThreadPoolExecutor)
     # -------------------------------------------------------------------------
-    def fetch_all_followers_positions(self, follower_emails: List[str], instance: str = "paper") -> Dict[str, Dict[str, Any]]:
+    def fetch_all_followers_positions(self, follower_emails: List[str], instance: str = "real") -> Dict[str, Dict[str, Any]]:
         """Concurrently fetch open positions and funds for all followers."""
         results: Dict[str, Dict[str, Any]] = {}
         with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
@@ -482,7 +482,7 @@ class BlackTraderClient:
                     results[email] = {"count": 0, "positions": [], "funds": {}, "error": str(e)}
         return results
 
-    def fetch_all_followers_orders(self, follower_emails: List[str], instance: str = "paper") -> Dict[str, Dict[str, Any]]:
+    def fetch_all_followers_orders(self, follower_emails: List[str], instance: str = "real") -> Dict[str, Dict[str, Any]]:
         """Concurrently fetch orders for all followers."""
         results: Dict[str, Dict[str, Any]] = {}
         with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
@@ -495,7 +495,7 @@ class BlackTraderClient:
                     results[email] = {"count": 0, "orders": [], "error": str(e)}
         return results
 
-    def teardown_all_accounts(self, master_email: str, follower_emails: List[str], instance: str = "paper") -> None:
+    def teardown_all_accounts(self, master_email: str, follower_emails: List[str], instance: str = "real") -> None:
         """Teardown: squareoff all positions and cancel all pending orders for master + all followers."""
         print(f"[*] Teardown: Closing all positions and cancelling orders for Master & {len(follower_emails)} followers...")
         all_emails = [master_email] + follower_emails

@@ -39,7 +39,7 @@ from test_suite.baseline import get_expected_multiplier
 from test_suite.client import BlackTraderClient
 
 
-def test_sell_partial_close(client: BlackTraderClient, master_email: str, follower_emails: list, count: int = 10, lot: float = 0.1, instance: str = "paper") -> dict:
+def test_sell_partial_close(client: BlackTraderClient, master_email: str, follower_emails: list, count: int = 10, lot: float = 0.1, instance: str = "real") -> dict:
     print(f"\n[PARITY-1] Testing Market SELL Partial Close ({count} orders of {lot} lot, reduce 50%)...")
     symbol = "BINANCE:BTCUSDT.P"
     master_mkt_ids = []
@@ -91,7 +91,7 @@ def test_sell_partial_close(client: BlackTraderClient, master_email: str, follow
     }
 
 
-def test_sell_tpsl_propagation(client: BlackTraderClient, master_email: str, follower_emails: list, count: int = 10, lot: float = 0.1, instance: str = "paper") -> dict:
+def test_sell_tpsl_propagation(client: BlackTraderClient, master_email: str, follower_emails: list, count: int = 10, lot: float = 0.1, instance: str = "real") -> dict:
     print(f"\n[PARITY-2] Testing Market SELL Dynamic TP/SL Propagation ({count} orders)...")
     symbol = "BINANCE:BTCUSDT.P"
     master_mkt_ids = []
@@ -136,7 +136,7 @@ def test_sell_tpsl_propagation(client: BlackTraderClient, master_email: str, fol
     }
 
 
-def test_buy_stop_orders_fanout(client: BlackTraderClient, master_email: str, follower_emails: list, count: int = 10, instance: str = "paper") -> dict:
+def test_buy_stop_orders_fanout(client: BlackTraderClient, master_email: str, follower_emails: list, count: int = 10, instance: str = "real") -> dict:
     print(f"\n[PARITY-3] Testing Pending BUY STOP Orders Fan-Out & Cancel ({count} orders)...")
     symbol = "BINANCE:BTCUSDT.P"
     base_price = 85000.0  # Above current market price (~73,700)
@@ -183,7 +183,7 @@ def test_buy_stop_orders_fanout(client: BlackTraderClient, master_email: str, fo
     }
 
 
-def test_sell_stop_orders_fanout(client: BlackTraderClient, master_email: str, follower_emails: list, count: int = 10, instance: str = "paper") -> dict:
+def test_sell_stop_orders_fanout(client: BlackTraderClient, master_email: str, follower_emails: list, count: int = 10, instance: str = "real") -> dict:
     print(f"\n[PARITY-4] Testing Pending SELL STOP Orders Fan-Out & Cancel ({count} orders)...")
     symbol = "BINANCE:BTCUSDT.P"
     base_price = 60000.0  # Below current market price (~73,700)
@@ -237,7 +237,7 @@ def main():
     parser.add_argument("--end", type=int, default=FOLLOWER_COUNT)
     parser.add_argument("--orders-count", type=int, default=10)
     parser.add_argument("--lot", type=float, default=0.1)
-    parser.add_argument("--instance", default="paper")
+    parser.add_argument("--instance", default="real")
     args = parser.parse_args()
 
     follower_emails = [f"{args.prefix}{i}@{args.domain}" for i in range(args.start, args.end + 1)]

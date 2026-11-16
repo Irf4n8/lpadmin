@@ -154,7 +154,7 @@ def build() -> str:
         f'<elementProp name="{k}" elementType="Argument"><stringProp name="Argument.name">{k}</stringProp>'
         f'<stringProp name="Argument.value">{v}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>'
         for k, v in [("HOST", P("HOST", "lpadmin.blackfx.com")), ("PORT", P("PORT", 443)), ("PROTOCOL", P("PROTOCOL", "https")),
-                     ("INSTANCE", P("INSTANCE", "paper"))])
+                     ("INSTANCE", P("INSTANCE", "real"))])
     defaults = ('<ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">'
                 '<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" '
                 'testname="User Defined Variables" enabled="true"><collectionProp name="Arguments.arguments"/></elementProp>'

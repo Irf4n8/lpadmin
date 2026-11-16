@@ -33,7 +33,7 @@ MEMBER_PASSWORD = os.getenv("MEMBER_PASSWORD", "")
 DEFAULT_BALANCE = float(os.getenv("DEFAULT_BALANCE", "100000000"))
 DEFAULT_PREFIX = os.getenv("DEFAULT_EMAIL_PREFIX", "follower")
 DEFAULT_DOMAIN = os.getenv("DEFAULT_EMAIL_DOMAIN", "mailinator.com")
-DEFAULT_INSTANCES = os.getenv("DEFAULT_INSTANCES", "paper,real")
+DEFAULT_INSTANCES = os.getenv("DEFAULT_INSTANCES", "real")
 
 
 # --- Copy-trading topology (override in .env for your own master / follower set) ---

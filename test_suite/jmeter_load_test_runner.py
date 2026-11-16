@@ -52,7 +52,7 @@ MD_REPORT_PATH = EVIDENCE_DIR / "jmeter_performance_report.md"
 MASTER_CLIENT_ID = MASTER_ID
 SYMBOL = "BINANCE:BTCUSDT.P"
 TOTAL_FOLLOWERS = 100
-INSTANCE = "paper"
+INSTANCE = "real"
 
 
 class JMeterSample:

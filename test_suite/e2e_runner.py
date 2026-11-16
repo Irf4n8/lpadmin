@@ -29,7 +29,7 @@ Expected follower size:  net_qty(follower) = net_qty(master) x factor
     factor = multiplier (multiplier method) | balance ratio x multiplier | equity ratio x multiplier, negative when reverse.
 
 Verdicts per step:  PASS | WARN (suspicious, worth a look) | FAIL (invariant broken = bug) | SKIP (a prerequisite failed)
-Paper instance by default; the real instance needs --i-understand-real-money (the dashboard asks you to type REAL).
+Runs on the real instance; needs --i-understand-real-money (the dashboard asks you to type REAL).
 
 Usage:
     python test_suite/e2e_runner.py --end 10                 # quick: followers 1-10
@@ -232,7 +232,7 @@ def e02_topology(x: Ctx, F: Findings):
     print(f"    {len(x.linked)}/{len(x.emails)} followers linked: {methods}")
     if unlinked:
         F.add("MED", f"{len(unlinked)} follower(s) have NO active copy link and are left out of the checks: {', '.join(unlinked[:10])}"
-                     + (" (paper links can no longer be re-created on this platform)" if x.inst == "paper" else ""))
+                    )
     if not x.linked:
         F.add("HIGH", "no follower in the selected range is linked to the master - nothing to test")
 
@@ -401,8 +401,8 @@ def e09_pyramid_hedge(x: Ctx, F: Findings):
     wait_model(x, F, f"hedge SELL {x.a.lot}")
     legs = {p.get("side") for p in x.positions(x.master)}
     F.metrics["master_sides"] = sorted(legs)
-    if legs != {"BUY", "SELL"} and x.inst == "paper":
-        F.add("MED", f"paper (hedging) master should hold BUY and SELL legs at once; holds {sorted(legs)}")
+    if legs != {"BUY", "SELL"} and x.inst == "real":
+        F.add("MED", f"real (hedging) master should hold BUY and SELL legs at once; holds {sorted(legs)}")
     sample = x.linked[0]
     sides = sorted(p.get("side") for p in x.positions(sample))
     F.metrics["sample_follower_legs"] = {short(sample): sides}
@@ -711,12 +711,12 @@ def main() -> int:
     ap.add_argument("--domain", default=DEFAULT_DOMAIN)
     ap.add_argument("--start", type=int, default=1)
     ap.add_argument("--end", type=int, default=FOLLOWER_COUNT)
-    ap.add_argument("--instance", default="paper", choices=["paper", "real"])
+    ap.add_argument("--instance", default="real", choices=["real"])
     ap.add_argument("--lot", type=float, default=0.1, help="base lot; the master opens 2x this, then reduces/adds/hedges by 1x")
     ap.add_argument("--only", default="", help="comma list of steps, e.g. E05,E06 (E01-E04 and the final audit always run)")
     ap.add_argument("--i-understand-real-money", action="store_true")
     a = ap.parse_args()
-    if a.instance != "paper" and not a.i_understand_real_money:
+    if not a.i_understand_real_money:
         print("Refusing to run on the REAL instance without --i-understand-real-money"); return 2
     if a.lot <= 0:
         print("--lot must be > 0"); return 2

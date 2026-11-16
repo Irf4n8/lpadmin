@@ -185,7 +185,7 @@ def main():
     parser.add_argument("--start", type=int, default=1, help="Starting index (default: 1)")
     parser.add_argument("--end", type=int, default=100, help="Ending index (default: 100)")
     parser.add_argument("--balance", type=float, default=DEFAULT_BALANCE, help="Balance amount (default: from config/settings.py)")
-    parser.add_argument("--instances", default=DEFAULT_INSTANCES, help="Comma-separated instances: paper,real")
+    parser.add_argument("--instances", default=DEFAULT_INSTANCES, help="Comma-separated instances: real")
     parser.add_argument("--headed", action="store_true", help="Launch visible browser window")
     parser.add_argument("--slow-mo", type=int, default=0, help="Slow down Playwright actions by N ms")
     args = parser.parse_args()

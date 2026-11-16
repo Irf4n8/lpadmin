@@ -100,7 +100,7 @@ def build(only=None) -> str:
           f'</ThreadGroup><hashTree>{setup}{checks}</hashTree>')
 
     variables = [("HOST", P("HOST", "lpadmin.blackfx.com")), ("PORT", P("PORT", 443)), ("PROTOCOL", P("PROTOCOL", "https")),
-                 ("INSTANCE", P("INSTANCE", "paper")), ("SYMBOL", P("SYMBOL", "BINANCE:BTCUSDT.P")),
+                 ("INSTANCE", P("INSTANCE", "real")), ("SYMBOL", P("SYMBOL", "BINANCE:BTCUSDT.P")),
                  ("EMAIL", P("EMAIL", "follower1@mailinator.com")), ("PASSWORD", P("PASSWORD", "CHANGE_ME"))]
     udv = "".join(
         f'<elementProp name="{k}" elementType="Argument"><stringProp name="Argument.name">{k}</stringProp>'

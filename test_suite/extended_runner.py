@@ -44,7 +44,7 @@ def main():
     parser.add_argument("--domain", default=DEFAULT_DOMAIN, help="Follower domain")
     parser.add_argument("--start", type=int, default=1, help="Starting follower index")
     parser.add_argument("--end", type=int, default=FOLLOWER_COUNT, help="Ending follower index")
-    parser.add_argument("--instance", default="paper", help="Trading instance (paper)")
+    parser.add_argument("--instance", default="real", help="Trading instance (real)")
     args = parser.parse_args()
 
     follower_emails = [f"{args.prefix}{i}@{args.domain}" for i in range(args.start, args.end + 1)]

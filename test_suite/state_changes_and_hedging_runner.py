@@ -45,7 +45,7 @@ def test_follower_manual_position_same_side(
     master_email: str,
     follower_email: str = "follower1@mailinator.com",
     symbol: str = "BINANCE:BTCUSDT.P",
-    instance: str = "paper"
+    instance: str = "real"
 ) -> dict:
     print(f"\n[STATE-1] Testing Follower Pre-Existing Manual Trade (Same Side: BUY + BUY) on {follower_email}...")
 
@@ -100,7 +100,7 @@ def test_follower_opposing_hedge(
     master_email: str,
     follower_email: str = "follower2@mailinator.com",
     symbol: str = "BINANCE:BTCUSDT.P",
-    instance: str = "paper"
+    instance: str = "real"
 ) -> dict:
     print(f"\n[STATE-2] Testing Opposing Direction Hedging (Follower Manual SELL vs Master Copied BUY) on {follower_email}...")
 
@@ -154,7 +154,7 @@ def test_follower_capital_change_mid_trade(
     master_email: str,
     follower_email: str = "follower3@mailinator.com",
     symbol: str = "BINANCE:BTCUSDT.P",
-    instance: str = "paper"
+    instance: str = "real"
 ) -> dict:
     print(f"\n[STATE-3] Testing Capital Adjustment Mid-Trade on {follower_email}...")
 
@@ -231,7 +231,7 @@ def main():
     parser.add_argument("--domain", default=DEFAULT_DOMAIN)
     parser.add_argument("--start", type=int, default=1)
     parser.add_argument("--end", type=int, default=FOLLOWER_COUNT)
-    parser.add_argument("--instance", default="paper")
+    parser.add_argument("--instance", default="real")
     args = parser.parse_args()
 
     follower_emails = [f"{args.prefix}{i}@{args.domain}" for i in range(args.start, args.end + 1)]

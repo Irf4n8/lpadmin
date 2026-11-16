@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """
-BlackTrader Netting vs Hedging Suite (paper, paper-net, real, real-net)
-=======================================================================
-The platform has four trading instances:
+BlackTrader Netting vs Hedging Suite (real, real-net)
+======================================================
+The suite runs on the real-money instances:
 
-    paper      hedging   simulated        paper-net   netting   simulated
     real       hedging   "real" wallet    real-net    netting   "real" wallet
 
 HEDGING keeps every order as its own position (BUY and SELL legs coexist).
@@ -19,16 +18,14 @@ Netting scenarios        N1 open                    N2 opposite order reduces (s
                          N3 oversized opposite order FLIPS side         N4 exact opposite closes   N5 TP/SL on netted position
 Both                     P1 pending order fan-out + cancel     C1 concurrent mixed BUY/SELL race
 
-Copy trading needs links on the instance.  Paper links already exist (the platform no longer
-creates them) and are only used as they are.  paper-net has no links, so it runs master-only.
-On real / real-net the suite creates temporary links + wallets for the first --followers
+Copy trading needs links on the instance.  On real / real-net the suite creates temporary links + wallets for the first --followers
 accounts, and removes the links it created when it is done.
 
 Safety: refuses to run if the master or any follower is A-book (orders could reach a broker),
 unless --allow-a-book is passed.  Only the chosen --symbol is ever touched.
 
 Usage:
-    python test_suite/netting_hedging_runner.py --instances paper,paper-net --followers 10
+    python test_suite/netting_hedging_runner.py --instances real,real-net --followers 10
     python test_suite/netting_hedging_runner.py --instances real,real-net --followers 10
 """
 
@@ -48,7 +45,7 @@ from config.settings import BASE_URL, DEFAULT_PREFIX, DEFAULT_DOMAIN, MASTER_EMA
 from test_suite.client import BlackTraderClient
 from test_suite.breakpoint_race_runner import mkt_id, ord_id, getf, pos_qty, parallel
 
-INSTANCES = ("paper", "paper-net", "real", "real-net")
+INSTANCES = ("real", "real-net")
 FACTORS = [1.0, 2.0, 3.0, 0.5]          # multipliers given to links this suite creates
 WALLET = 1_000_000.0
 TOL = 1e-4
@@ -369,9 +366,9 @@ def instance_setup(c, inst, master, n_followers, allow_a_book) -> Tuple[List[str
     existing = {n: l for n, l in all_links.items() if l.get("instance") == inst and l.get("status") == "active"}
     created: List[str] = []
     emails = [f"{DEFAULT_PREFIX}{i}@{DEFAULT_DOMAIN}" for i in range(1, n_followers + 1)]
-    if inst not in ("paper", "paper-net"):
+    if True:
         # A follower has ONE link record per master, whatever the instance: `follow` on another instance CONVERTS an
-        # active link (e.g. paper -> real) and `unfollow` then ENDS it - and paper links can never be re-created.
+        # active link (e.g. real -> real-net) and `unfollow` then ENDS it.
         # So never touch a follower that is actively linked on a different instance.
         taken = [e for e in emails if all_links.get(e.split("@")[0], {}).get("status") == "active"
                  and all_links[e.split("@")[0]].get("instance") != inst]
@@ -379,12 +376,7 @@ def instance_setup(c, inst, master, n_followers, allow_a_book) -> Tuple[List[str
             print(f"[!] skipping {len(taken)} follower(s) with an ACTIVE link on another instance (would be converted/ended): "
                   + ", ".join(t.split("@")[0] for t in taken[:6]) + (" ..." if len(taken) > 6 else ""))
         emails = [e for e in emails if e not in taken]
-    if inst == "paper":
-        emails = [e for e in emails if e.split("@")[0] in existing]          # links cannot be created on paper
-        note = "paper links exist already; none created"
-    elif inst == "paper-net":
-        return [], {}, [], "paper-net: platform refuses to create copy links on paper accounts -> master-only netting tests"
-    else:
+    if True:
         note = "temporary links + wallets created for this run"
         # master wallet
         mrow = books[master]
@@ -457,7 +449,7 @@ def write_reports(blocks, args) -> Path:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="Netting vs Hedging suite")
-    ap.add_argument("--instances", default="paper,paper-net", help="comma list of: " + ", ".join(INSTANCES))
+    ap.add_argument("--instances", default="real,real-net", help="comma list of: " + ", ".join(INSTANCES))
     ap.add_argument("--followers", type=int, default=10, help="how many followers (1..N) to verify per instance")
     ap.add_argument("--end", type=int, default=None, help="alias for --followers (dashboard compatibility)")
     ap.add_argument("--start", type=int, default=1, help="ignored; followers always start at 1")

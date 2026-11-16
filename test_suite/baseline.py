@@ -34,7 +34,7 @@ def run_setup_and_baseline(
     master_email: str,
     master_client_id: str,
     follower_emails: List[str],
-    instance: str = "paper"
+    instance: str = "real"
 ) -> Dict[str, Any]:
     print("\n" + "=" * 80)
     print(" [PHASE A] SETUP AND BASELINE VERIFICATION (100 FOLLOWERS)")

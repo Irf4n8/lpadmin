@@ -21,7 +21,7 @@ B11 Final consistency audit        all accounts after teardown          -> 0 pos
 
 Severity:  HIGH = invariant broken (system bug)   MED = suspicious / non-idempotent   INFO = measurement
 
-Safety: runs on the PAPER instance only unless --i-understand-real-money is passed.
+Safety: runs on the real instance and requires --i-understand-real-money.
 
 Usage:
     python test_suite/breakpoint_race_runner.py --end 20
@@ -610,14 +610,14 @@ def main() -> int:
     ap.add_argument("--domain", default=DEFAULT_DOMAIN)
     ap.add_argument("--start", type=int, default=1)
     ap.add_argument("--end", type=int, default=min(20, FOLLOWER_COUNT), help="Last follower index (default 20; use FOLLOWER_COUNT for full fan-out)")
-    ap.add_argument("--instance", default="paper")
+    ap.add_argument("--instance", default="real")
     ap.add_argument("--only", default="", help="Comma list, e.g. B1,B5")
     ap.add_argument("--ramp", default="10,25,50,100", help="Concurrency levels for B5")
     ap.add_argument("--i-understand-real-money", action="store_true")
     args = ap.parse_args()
 
-    if args.instance != "paper" and not args.i_understand_real_money:
-        print("Refusing to run on non-paper instance without --i-understand-real-money")
+    if not args.i_understand_real_money:
+        print("Refusing to run on the real instance without --i-understand-real-money")
         return 2
 
     emails = [f"{args.prefix}{i}@{args.domain}" for i in range(args.start, args.end + 1)]

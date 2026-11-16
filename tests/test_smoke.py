@@ -66,7 +66,7 @@ def test_build_command_rejects_injection_and_junk():
     s = S.SUITE_INDEX["breakpoint"]
     cmd = S.build_command(s, {"start": "1; rm -rf /", "end": "x", "ramp": "10,abc,$(id)", "instance": "../../etc"}, DEFAULTS)
     assert all(";" not in c and "$" not in c for c in cmd)
-    assert cmd[cmd.index("--instance") + 1] == "paper"
+    assert cmd[cmd.index("--instance") + 1] == "real"
 
 
 def test_e2e_only_flag_is_validated():
@@ -149,7 +149,7 @@ def test_account_changes_are_guarded(client, monkeypatch, url, body):
         def poll(self):
             return None
     monkeypatch.setattr(a, "RUNNING_PROCESS", Running())
-    assert client.post(url, json={**body, "instance": "paper"}, headers=LOCAL).status_code == 409     # never mid-run
+    assert client.post(url, json={**body, "instance": "real", "confirm": "REAL"}, headers=LOCAL).status_code == 409     # never mid-run
 
 
 def test_regression_guards(client, monkeypatch):
@@ -168,15 +168,13 @@ def test_regression_guards(client, monkeypatch):
 
 
 def test_fixed_instance_cannot_be_overridden():
-    assert S.effective_instance(S.SUITE_INDEX["paper_2x"], {"instance": "real"}) == "paper"
-    assert S.effective_instance(S.SUITE_INDEX["real_money"], {"instance": "paper"}) == "real"
+    assert S.effective_instance(S.SUITE_INDEX["real_money"], {"instance": "real-net"}) == "real"
 
 
 def test_confirmation_rules():
     assert S.needs_confirmation(S.SUITE_INDEX["real_money"], {})
-    assert S.needs_confirmation(S.SUITE_INDEX["teardown"], {"instance": "paper"})
+    assert S.needs_confirmation(S.SUITE_INDEX["teardown"], {"instance": "real"})
     assert S.needs_confirmation(S.SUITE_INDEX["race"], {"instance": "real"})
-    assert not S.needs_confirmation(S.SUITE_INDEX["race"], {"instance": "paper"})
 
 
 # ---------------------------------------------------------------- dashboard API
@@ -197,7 +195,7 @@ def test_suites_endpoint(client):
 @pytest.mark.parametrize("payload,code", [
     ({"suite": "nope"}, 400),
     ({"suite": "real_money"}, 412),
-    ({"suite": "teardown", "params": {"instance": "paper"}}, 412),
+    ({"suite": "teardown", "params": {"instance": "real"}}, 412),
     ({"suite": "race", "params": {"instance": "real"}}, 412),
 ])
 def test_run_guards(client, payload, code):
@@ -327,22 +325,9 @@ def test_client_rejects_bad_book_value():
         BlackTraderClient().set_member_book("mem_x", "c")
 
 
-# ---------------------------------------------------------------- paper-link safety guard
-def test_unfollow_on_paper_is_blocked_by_default(monkeypatch):
-    """The platform no longer lets paper copy links be re-created, so an unfollow would be permanent."""
-    from test_suite import client as cl
-    monkeypatch.delenv("BT_ALLOW_PAPER_UNFOLLOW", raising=False)
-    assert cl.paper_unfollow_blocked("paper") and not cl.paper_unfollow_blocked("real")
-    c = cl.BlackTraderClient("http://127.0.0.1:9")            # unreachable: proves no request is made
-    res = c.unfollow_master("a@b.c", "mem_x", "paper")
-    assert res["status_code"] == 0 and res.get("blocked")
-    monkeypatch.setenv("BT_ALLOW_PAPER_UNFOLLOW", "1")
-    assert not cl.paper_unfollow_blocked("paper")
-
-
-# ---------------------------------------------------------------- netting/hedging suite must never convert paper links
+# ---------------------------------------------------------------- netting/hedging suite must never convert active links
 class _FakeClient:
-    """Stub: follower1 has an ACTIVE paper link, follower2 has an ENDED one, follower3 none."""
+    """Stub: follower1 has an ACTIVE link on another instance, follower2 has an ENDED one, follower3 none."""
     def __init__(self):
         self.followed, self.funded = [], []
 
@@ -351,7 +336,7 @@ class _FakeClient:
         return {e: dict(b) for e in ["ctmaster@mailinator.com"] + [f"follower{i}@mailinator.com" for i in (1, 2, 3)]}
 
     def get_copy_followers(self, master, instance, active_only=True):
-        links = [{"follower_name": "follower1", "instance": "paper", "status": "active", "multiplier": 1},
+        links = [{"follower_name": "follower1", "instance": "real-net", "status": "active", "multiplier": 1},
                  {"follower_name": "follower2", "instance": "real", "status": "ended", "multiplier": 1}]
         return [l for l in links if l["status"] == "active"] if active_only else links
 
@@ -366,7 +351,7 @@ class _FakeClient:
         return {"status_code": 200}
 
 
-def test_netting_suite_never_converts_an_active_paper_link(monkeypatch):
+def test_netting_suite_never_converts_an_active_link(monkeypatch):
     """A follow on real/real-net CONVERTS the follower's single link record, and unfollow then ends it for good."""
     from test_suite import netting_hedging_runner as R
     monkeypatch.setattr(R.time, "sleep", lambda s: None)
@@ -388,18 +373,17 @@ def test_netting_suite_aborts_on_a_book_master():
 
 
 # ---------------------------------------------------------------- four instances + new suites in the dashboard registry
-def test_dashboard_accepts_all_four_instances_and_confirms_real_net():
+def test_dashboard_accepts_both_real_instances_and_confirms_real_net():
     suite = S.SUITE_INDEX["e2e"]
-    for inst in ("paper", "paper-net", "real", "real-net"):
+    for inst in ("real", "real-net"):
         cmd = S.build_command(suite, {"instance": inst, "end": 5}, {"follower_count": 99})
         assert cmd[cmd.index("--instance") + 1] == inst
     assert S.build_command(suite, {"instance": "bogus"}, {"follower_count": 99})[-1] != "bogus"
-    assert not S.needs_confirmation(suite, {"instance": "paper-net"})
     assert S.needs_confirmation(suite, {"instance": "real"}) and S.needs_confirmation(suite, {"instance": "real-net"})
 
 
 def test_new_suites_are_registered_and_scripts_exist():
-    for key in ("netting_paper", "netting_real", "social_features"):
+    for key in ("netting_real", "social_features"):
         assert key in S.SUITE_INDEX, key
         assert (Path(__file__).resolve().parent.parent / S.SUITE_INDEX[key]["script"]).exists()
     assert S.SUITE_INDEX["netting_real"]["risk"] == "real"                    # typed confirmation required
@@ -410,4 +394,4 @@ def test_social_suite_is_read_mostly_and_importable():
     from test_suite import social_features_runner as R
     assert [n.split()[0] for n, _ in R.SCENARIOS] == ["F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8"]
     from test_suite.client import BlackTraderClient
-    assert BlackTraderClient.INSTANCES == ("paper", "paper-net", "real", "real-net")
+    assert BlackTraderClient.INSTANCES == ("real", "real-net")

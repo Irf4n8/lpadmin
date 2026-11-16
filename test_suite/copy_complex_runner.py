@@ -22,7 +22,7 @@ X9  Chained concurrent ops   protection + reduce + two new orders fired simultan
 X10 Seeded random walk       random open/reduce/close/protect sequence, model-checked (reproduce with --seed)
 
 Severity:  HIGH = model violated (bug)   MED = suspicious / unsupported behaviour   INFO = measurement
-Paper instance only unless --i-understand-real-money.
+Real instance; requires --i-understand-real-money.
 
 Usage:
     python test_suite/copy_complex_runner.py --end 20
@@ -486,13 +486,13 @@ def main() -> int:
     ap.add_argument("--domain", default=DEFAULT_DOMAIN)
     ap.add_argument("--start", type=int, default=1)
     ap.add_argument("--end", type=int, default=min(20, FOLLOWER_COUNT))
-    ap.add_argument("--instance", default="paper")
+    ap.add_argument("--instance", default="real")
     ap.add_argument("--seed", type=int, default=1234)
     ap.add_argument("--only", default="")
     ap.add_argument("--i-understand-real-money", action="store_true")
     a = ap.parse_args()
-    if a.instance != "paper" and not a.i_understand_real_money:
-        print("Refusing to run on non-paper instance without --i-understand-real-money"); return 2
+    if not a.i_understand_real_money:
+        print("Refusing to run on the real instance without --i-understand-real-money"); return 2
     emails = [f"{a.prefix}{i}@{a.domain}" for i in range(a.start, a.end + 1)]
     if len(emails) < 10:
         print("Need at least 10 followers so every cohort has a member"); return 2

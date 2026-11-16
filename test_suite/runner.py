@@ -40,7 +40,7 @@ def main():
     parser.add_argument("--symbol", default="BINANCE:BTCUSDT.P", help="Trading symbol")
     parser.add_argument("--lot", type=float, default=0.1, help="Master lot size per order")
     parser.add_argument("--orders-count", type=int, default=10, help="Number of orders per scenario (at least 10)")
-    parser.add_argument("--instance", default="paper", help="Trading instance (paper)")
+    parser.add_argument("--instance", default="real", help="Trading instance (real)")
     parser.add_argument("--burst", type=int, default=10, help="Number of orders in rapid burst scenario")
     args = parser.parse_args()
 

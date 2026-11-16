@@ -46,7 +46,7 @@ def run_accounting_audit(
     follower_emails: list,
     symbol: str = "BINANCE:BTCUSDT.P",
     lot: float = 0.1,
-    instance: str = "paper"
+    instance: str = "real"
 ) -> dict:
     print("\n" + "=" * 80)
     print(f" [ACCOUNTING AUDIT] FINANCIAL RECONCILIATION & AGGREGATE PNL AUDIT ({len(follower_emails)} FOLLOWERS)")
@@ -184,7 +184,7 @@ def main():
     parser.add_argument("--start", type=int, default=1)
     parser.add_argument("--end", type=int, default=FOLLOWER_COUNT)
     parser.add_argument("--lot", type=float, default=0.1)
-    parser.add_argument("--instance", default="paper")
+    parser.add_argument("--instance", default="real")
     args = parser.parse_args()
 
     follower_emails = [f"{args.prefix}{i}@{args.domain}" for i in range(args.start, args.end + 1)]

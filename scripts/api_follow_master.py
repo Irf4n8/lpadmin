@@ -56,7 +56,7 @@ class FollowerClient:
         self.chart_token = resp.json().get("token")
         return self.chart_token
 
-    def get_available_masters(self, instance: str = "paper") -> list:
+    def get_available_masters(self, instance: str = "real") -> list:
         """Fetch list of copy-trade masters."""
         if not self.chart_token:
             return []
@@ -73,7 +73,7 @@ class FollowerClient:
     def follow_master(
         self,
         master_client_id: str,
-        instance: str = "paper",
+        instance: str = "real",
         method: str = "multiplier",
         multiplier: float = 1.0,
         reverse: bool = False,
@@ -162,7 +162,7 @@ def main():
     parser.add_argument("--start", type=int, default=1, help="Starting follower index (default: 1)")
     parser.add_argument("--end", type=int, default=100, help="Ending follower index (default: 100)")
     parser.add_argument("--master", help="Target Master name or client ID ('mem_...')")
-    parser.add_argument("--instance", choices=["paper", "real", "both"], default="paper", help="Trading instance (default: paper)")
+    parser.add_argument("--instance", choices=["real"], default="real", help="Trading instance (default: real)")
     parser.add_argument("--method", choices=["multiplier", "balance", "equity"], default="multiplier", help="Copy sizing method")
     parser.add_argument("--multiplier", type=float, default=1.0, help="Lot size multiplier (default: 1.0)")
     parser.add_argument("--reverse", action="store_true", help="Trade opposite side (buy -> sell)")
@@ -177,7 +177,7 @@ def main():
     probe_email = f"{args.prefix}{args.start}@{args.domain}"
 
     if args.list_masters:
-        inst = "paper" if args.instance == "both" else args.instance
+        inst = args.instance
         list_masters(args.url, probe_email, args.password, inst)
         return
 
@@ -191,14 +191,14 @@ def main():
         sys.exit(1)
     probe_client.get_chart_token()
 
-    inst_for_lookup = "paper" if args.instance == "both" else args.instance
+    inst_for_lookup = args.instance
     target_master_id = resolve_master_id(probe_client, args.master, inst_for_lookup)
 
     if not target_master_id:
         print(f"[-] Could not find any master matching '{args.master}'. Run with --list-masters to see valid names.")
         sys.exit(1)
 
-    target_instances = ["paper", "real"] if args.instance == "both" else [args.instance]
+    target_instances = [args.instance]
     total_followers = args.end - args.start + 1
 
     print("\n" + "=" * 75)

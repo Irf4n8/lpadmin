@@ -9,7 +9,7 @@ Real Apache JMeter load test (replaces the old Python simulation)
 5. audits platform state afterwards: every copied position must have been closed (no orphans, no stuck margin)
 6. writes evidence (JSON + Markdown) and JMeter's own HTML dashboard under reports/jmeter/<timestamp>/
 
-Profiles (paper instance only unless --i-understand-real-money):
+Profiles (real instance; requires --i-understand-real-money):
     smoke     a few threads, ~1 min       - sanity check the plan and the platform
     standard  realistic launch-day load   - the one to gate on
     stress    heavy                       - to find where it degrades
@@ -120,12 +120,12 @@ def main() -> int:
     ap.add_argument("--domain", default=DEFAULT_DOMAIN)
     ap.add_argument("--start", type=int, default=1)
     ap.add_argument("--end", type=int, default=FOLLOWER_COUNT)
-    ap.add_argument("--instance", default="paper")
+    ap.add_argument("--instance", default="real")
     ap.add_argument("--sla", action="append", default=[], help='override p95 budget, e.g. --sla "ORDER place market=3000"')
     ap.add_argument("--i-understand-real-money", action="store_true")
     a = ap.parse_args()
-    if a.instance != "paper" and not a.i_understand_real_money:
-        print("Refusing to load-test a non-paper instance without --i-understand-real-money")
+    if not a.i_understand_real_money:
+        print("Refusing to load-test a the real instance without --i-understand-real-money")
         return 2
     for s in a.sla:
         k, _, v = s.rpartition("=")

@@ -52,7 +52,7 @@ from config.settings import BASE_URL, DEFAULT_PREFIX, DEFAULT_DOMAIN
 from test_suite.client import BlackTraderClient
 
 
-def cleanup(client: BlackTraderClient, master_email: str, follower_emails: list, instance: str = "paper"):
+def cleanup(client: BlackTraderClient, master_email: str, follower_emails: list, instance: str = "real"):
     """Safety cleanup."""
     client.bulk_cancel(master_email, instance=instance)
     client.bulk_squareoff(master_email, instance=instance)
@@ -68,7 +68,7 @@ def cleanup(client: BlackTraderClient, master_email: str, follower_emails: list,
         list(executor.map(clean_f, follower_emails))
 
 
-def get_live_price(client: BlackTraderClient, master_email: str, symbol: str = "BINANCE:BTCUSDT.P", instance: str = "paper") -> float:
+def get_live_price(client: BlackTraderClient, master_email: str, symbol: str = "BINANCE:BTCUSDT.P", instance: str = "real") -> float:
     res = client.place_order(master_email, symbol=symbol, side="BUY", qty=0.001, instance=instance)
     order_data = res.get("data", {}).get("order", {})
     lp = float(order_data.get("avg_fill_price", 73800.0))
@@ -82,7 +82,7 @@ def get_live_price(client: BlackTraderClient, master_email: str, symbol: str = "
 # =============================================================================
 # SCENARIO 1: BUY LIMIT Trigger Price Shift at Hit Boundary
 # =============================================================================
-def test_buy_limit_trigger_shift(client: BlackTraderClient, master_email: str, follower_emails: list, symbol: str = "BINANCE:BTCUSDT.P", instance: str = "paper") -> dict:
+def test_buy_limit_trigger_shift(client: BlackTraderClient, master_email: str, follower_emails: list, symbol: str = "BINANCE:BTCUSDT.P", instance: str = "real") -> dict:
     print("\n" + "=" * 80)
     print("[TEST-MOD-1] Testing In-Flight BUY LIMIT Trigger Price Shift at Hit Boundary...")
     print("=" * 80)
@@ -166,7 +166,7 @@ def test_buy_limit_trigger_shift(client: BlackTraderClient, master_email: str, f
 # =============================================================================
 # SCENARIO 2: SELL LIMIT Trigger Price Shift at Hit Boundary
 # =============================================================================
-def test_sell_limit_trigger_shift(client: BlackTraderClient, master_email: str, follower_emails: list, symbol: str = "BINANCE:BTCUSDT.P", instance: str = "paper") -> dict:
+def test_sell_limit_trigger_shift(client: BlackTraderClient, master_email: str, follower_emails: list, symbol: str = "BINANCE:BTCUSDT.P", instance: str = "real") -> dict:
     print("\n" + "=" * 80)
     print("[TEST-MOD-2] Testing In-Flight SELL LIMIT Trigger Price Shift at Hit Boundary...")
     print("=" * 80)
@@ -234,7 +234,7 @@ def test_sell_limit_trigger_shift(client: BlackTraderClient, master_email: str, 
 # =============================================================================
 # SCENARIO 3: Impending Trigger TP/SL Protection Shift Collision
 # =============================================================================
-def test_protection_trigger_shift(client: BlackTraderClient, master_email: str, follower_emails: list, symbol: str = "BINANCE:BTCUSDT.P", instance: str = "paper") -> dict:
+def test_protection_trigger_shift(client: BlackTraderClient, master_email: str, follower_emails: list, symbol: str = "BINANCE:BTCUSDT.P", instance: str = "real") -> dict:
     print("\n" + "=" * 80)
     print("[TEST-MOD-3] Testing Impending Trigger TP/SL Protection Shift Collision...")
     print("=" * 80)
@@ -303,7 +303,7 @@ def main():
     parser = argparse.ArgumentParser(description="Live Pending Order Trigger Modification Race Runner")
     parser.add_argument("--start", type=int, default=1, help="Start follower index")
     parser.add_argument("--end", type=int, default=FOLLOWER_COUNT, help="End follower index")
-    parser.add_argument("--instance", type=str, default="paper", help="Broker instance")
+    parser.add_argument("--instance", type=str, default="real", help="Broker instance")
     args = parser.parse_args()
 
     client = BlackTraderClient(base_url=BASE_URL, max_workers=10)

@@ -35,7 +35,7 @@ from test_suite.baseline import get_expected_multiplier
 from test_suite.client import BlackTraderClient
 
 
-def get_live_price(client: BlackTraderClient, master_email: str, symbol: str = "BINANCE:BTCUSDT.P", instance: str = "paper") -> float:
+def get_live_price(client: BlackTraderClient, master_email: str, symbol: str = "BINANCE:BTCUSDT.P", instance: str = "real") -> float:
     r = client.place_order(master_email, symbol=symbol, side="BUY", qty=0.001, instance=instance)
     m = r.get("data", {}).get("order", {})
     fill_p = float(m.get("avg_fill_price", 73700.0))
@@ -46,7 +46,7 @@ def get_live_price(client: BlackTraderClient, master_email: str, symbol: str = "
     return fill_p
 
 
-def wait_until_executed(client: BlackTraderClient, email: str, order_id: str, instance: str = "paper", timeout_sec: int = 15) -> bool:
+def wait_until_executed(client: BlackTraderClient, email: str, order_id: str, instance: str = "real", timeout_sec: int = 15) -> bool:
     """Poll until pending order triggers and becomes an active open position."""
     start = time.time()
     while time.time() - start < timeout_sec:
@@ -65,7 +65,7 @@ def place_and_execute_pending(
     side: str,
     order_type: str,
     lot: float,
-    instance: str = "paper",
+    instance: str = "real",
     tp: float = None,
     sl: float = None,
     max_attempts: int = 3
@@ -122,7 +122,7 @@ def verify_followers_filled(
     side: str,
     master_lot: float,
     master_ord_id: str,
-    instance: str = "paper",
+    instance: str = "real",
     check_tpsl: bool = False
 ) -> tuple:
     # Fan-out of a pending-order fill is asynchronous (measured 0.6-1.7s in isolation, occasionally longer under
@@ -180,7 +180,7 @@ def run_live_execution_suite(
     follower_emails: list,
     symbol: str = "BINANCE:BTCUSDT.P",
     lot: float = 0.1,
-    instance: str = "paper"
+    instance: str = "real"
 ) -> list:
     results = []
 
@@ -304,7 +304,7 @@ def main():
     parser.add_argument("--start", type=int, default=1)
     parser.add_argument("--end", type=int, default=FOLLOWER_COUNT)
     parser.add_argument("--lot", type=float, default=0.1)
-    parser.add_argument("--instance", default="paper")
+    parser.add_argument("--instance", default="real")
     args = parser.parse_args()
 
     follower_emails = [f"{args.prefix}{i}@{args.domain}" for i in range(args.start, args.end + 1)]

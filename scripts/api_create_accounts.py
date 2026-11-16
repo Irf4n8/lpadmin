@@ -84,7 +84,7 @@ class BlackTraderAdmin:
             return None
         return resp.json().get("member")
 
-    def set_balance(self, member_id: str, balance: float, instance: str = "paper") -> bool:
+    def set_balance(self, member_id: str, balance: float, instance: str = "real") -> bool:
         """Set account balance for paper or real instance."""
         url = f"{self.base_url}/admin/api/members/{member_id}/balance"
         payload = {
@@ -111,7 +111,7 @@ def main():
     parser.add_argument("--start", type=int, default=1, help="Starting index (default: 1)")
     parser.add_argument("--end", type=int, default=100, help="Ending index (default: 100)")
     parser.add_argument("--balance", type=float, default=DEFAULT_BALANCE, help="Balance per account (default: from config/settings.py)")
-    parser.add_argument("--instances", default=DEFAULT_INSTANCES, help="Comma-separated instances: paper,real")
+    parser.add_argument("--instances", default=DEFAULT_INSTANCES, help="Comma-separated instances: real")
     args = parser.parse_args()
 
     if not args.admin_email or not args.admin_pass:

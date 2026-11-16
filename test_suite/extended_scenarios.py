@@ -27,7 +27,7 @@ class ExtendedScenarioRunner:
         client: BlackTraderClient,
         master_email: str,
         follower_emails: List[str],
-        instance: str = "paper"
+        instance: str = "real"
     ):
         self.client = client
         self.master_email = master_email

@@ -1234,9 +1234,7 @@
           <div class="opt-row">
             <label>Run on</label>
             <div class="seg-mini" id="optInstance">
-              <button type="button" data-v="paper" class="on" onclick="setOptInstance('paper')" title="Paper, hedging">Paper</button>
-              <button type="button" data-v="paper-net" onclick="setOptInstance('paper-net')" title="Paper, netting">Paper&nbsp;Net</button>
-              <button type="button" data-v="real" class="real" onclick="setOptInstance('real')" title="Real-money wallet, hedging">Real</button>
+              <button type="button" data-v="real" class="real on" onclick="setOptInstance('real')" title="Real-money wallet, hedging">Real</button>
               <button type="button" data-v="real-net" class="real" onclick="setOptInstance('real-net')" title="Real-money wallet, netting">Real&nbsp;Net</button>
             </div>
           </div>
@@ -1290,7 +1288,7 @@
         <button class="sw-pill" onclick="openBrokerModal()" id="brokerPill" title="Broker settings: Paper / Paper Net / Real / Real Net">
           <span class="sw-dot" id="brokerDot"></span>
           <span>Broker:</span>
-          <strong id="brokerLabel" style="color: var(--text);">Paper (Hedging)</strong>
+          <strong id="brokerLabel" style="color: var(--text);">Real (Hedging)</strong>
           <i class="fa-solid fa-repeat" style="font-size: 10px; margin-left: 3px;"></i>
         </button>
 
@@ -1464,7 +1462,7 @@
             </div>
             <div style="display: flex; align-items: center; gap: 8px;">
               <span class="muted" style="font-size: 12px;">Target:</span>
-              <span id="switchTargetInstanceBadge" class="btn-tag tag-green">PAPER</span>
+              <span id="switchTargetInstanceBadge" class="btn-tag tag-red">REAL</span>
             </div>
           </div>
 
@@ -1637,7 +1635,7 @@
             </div>
             <div style="display: flex; align-items: center; gap: 8px;">
               <span class="muted" style="font-size: 12px;">Active Broker:</span>
-              <span id="dispatchInstanceBadge" class="btn-tag tag-green">PAPER</span>
+              <span id="dispatchInstanceBadge" class="btn-tag tag-red">REAL</span>
             </div>
           </div>
 
@@ -1805,12 +1803,12 @@
         </div>
         <div class="panel-card">
           <h2>First time? Four steps</h2>
-          <p class="lead">Everything below runs against the <b>paper</b> instance, so no real money is touched.</p>
+          <p class="lead">Everything below runs against the <b>real</b> instance (real-money accounts) - you will be asked to confirm.</p>
           <div class="step-list">
             <div class="step"><div><b>Install</b><br><code>pip install -r requirements.txt</code> <button class="ghost" onclick="copyText('pip install -r requirements.txt')">copy</button></div></div>
             <div class="step"><div><b>Configure</b> – copy <code>.env.example</code> to <code>.env</code> and fill in admin + member credentials, master email/id, and follower count.<br><code>cp .env.example .env</code></div></div>
             <div class="step"><div><b>Verify</b> – the checks above are the same as <code>python scripts/doctor.py</code>. All green means you're ready.</div></div>
-            <div class="step"><div><b>Run a safe first test</b> – the End-to-End test on 10 followers, paper only, about 2 minutes.<br><button class="cta" style="margin-top:6px" onclick="firstRun()"><i class="fa-solid fa-play"></i> Run End-to-End on 10 followers</button></div></div>
+            <div class="step"><div><b>Run a safe first test</b> – the End-to-End test on 10 followers, real instance, about 2 minutes.<br><button class="cta" style="margin-top:6px" onclick="firstRun()"><i class="fa-solid fa-play"></i> Run End-to-End on 10 followers</button></div></div>
           </div>
         </div>
         <div class="panel-card">
@@ -1864,8 +1862,8 @@
                 bad input, accounting, and a final clean-up audit. Every step is checked on the master <b>and</b> every linked follower.</p>
             </div>
             <div class="e2e-actions">
-              <button class="cta" onclick="runE2E('quick')" title="Followers 1-10 on paper, about 2 minutes"><i class="fa-solid fa-play"></i> Quick run (10 followers)</button>
-              <button class="ghost" onclick="runE2E('full')" title="All configured followers on paper"><i class="fa-solid fa-users"></i> Full run (all followers)</button>
+              <button class="cta" onclick="runE2E('quick')" title="Followers 1-10 on real, about 2 minutes"><i class="fa-solid fa-play"></i> Quick run (10 followers)</button>
+              <button class="ghost" onclick="runE2E('full')" title="All configured followers on real"><i class="fa-solid fa-users"></i> Full run (all followers)</button>
             </div>
           </div>
         </div>
@@ -1892,7 +1890,7 @@
       <div id="tabRegression" style="display: none; flex-direction: column; gap: 14px; margin-top: 10px;">
         <div class="panel-card">
           <h2>Regression run</h2>
-          <p class="lead">Runs several suites one after another on <b>paper</b> and produces one report you can download and share.
+          <p class="lead">Runs several suites one after another on <b>real</b> and produces one report you can download and share.
             While it runs, other launches are blocked. Pick a preset or tick suites yourself.</p>
           <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:10px">
             <span class="muted" style="font-size:12px">Preset:</span>
@@ -1921,6 +1919,14 @@
 
       <!-- Tab: Run history -->
       <div id="tabPlatform" style="display: none; flex-direction: column; gap: 14px; margin-top: 10px;">
+        <div class="panel-card">
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap">
+            <div style="flex:1; min-width:220px"><h2>Real-only health check</h2><p class="lead" style="margin:0">Master and every follower must be linked, funded and trading on <b>real</b> only - nothing on paper.</p></div>
+            <button class="ghost" onclick="runRealCheck()"><i class="fa-solid fa-shield-halved"></i> Verify</button>
+            <button class="cta danger" onclick="runCopyTest()"><i class="fa-solid fa-vial"></i> Live copy test</button>
+          </div>
+          <div id="realCheckBody" class="lead" style="margin-top:10px">Press <b>Verify</b> (read-only) or <b>Live copy test</b> (places a 0.01 BTC master order, then closes it).</div>
+        </div>
         <div class="panel-card">
           <div style="display:flex; align-items:center; gap:10px;">
             <div style="flex:1"><h2>Platform overview</h2><p class="lead" style="margin:0">What the platform offers right now - read live from the API: trading instances (hedging / netting), copy, MAM and PAMM directories, plan modules and link state.</p></div>
@@ -1968,7 +1974,7 @@
           <span id="drawerAccountBadge" class="btn-tag tag-green">MASTER</span>
           <button onclick="copyAccountEmail()" class="btn ghost sm" style="padding: 2px 6px; font-size: 11px;" title="Copy email"><i class="fa-regular fa-copy"></i></button>
         </div>
-        <div id="drawerAccountSub" class="drawer-title-sub">Client ID: {{ MASTER_ID }} • Paper Hedging</div>
+        <div id="drawerAccountSub" class="drawer-title-sub">Client ID: {{ MASTER_ID }} • Real Hedging</div>
       </div>
     </div>
     <div class="drawer-header-actions">
@@ -2137,8 +2143,7 @@
     </div>
     <p style="font-size:12.5px;color:var(--muted);margin:0 0 10px;line-height:1.5">
       Set per account. <b style="color:var(--text)">A-book:</b> the account's <u>real</u> orders are executed at the liquidity provider.
-      <b style="color:var(--text)">B-book:</b> booked on the platform's own engine. Paper accounts are always booked internally,
-      so this changes <u>real-instance</u> routing only.
+      <b style="color:var(--text)">B-book:</b> booked on the platform's own engine. This changes <u>real-instance</u> routing.
     </p>
     <div id="bookSummary" class="panel-card" style="padding:12px;margin-bottom:10px;font-size:13px;line-height:1.6">Loading…</div>
     <div class="opt-row" style="margin-bottom:8px"><label for="bookScope" style="width:70px">Apply to</label>
@@ -2256,9 +2261,9 @@
 
 
     /* INSTANCE STATE & SWITCHER */
-    let currentInstance = 'paper';
+    let currentInstance = 'real';
 
-    /* Broker settings: the four platform instances */
+    /* Broker settings: the real-money platform instances */
     const BROKERS = {
       'paper':     { label: 'Paper (Hedging)',  real: false },
       'paper-net': { label: 'Paper (Netting)',  real: false },
@@ -2289,7 +2294,7 @@
       const label = document.getElementById("brokerLabel");
       const dot = document.getElementById("brokerDot");
       const targetBadge = document.getElementById("switchTargetInstanceBadge");
-      const meta = BROKERS[currentInstance] || BROKERS['paper'];
+      const meta = BROKERS[currentInstance] || BROKERS['real'];
       const real = meta.real;
       if (label) { label.innerText = meta.label; label.style.color = '#fff'; }
       if (dot) { dot.style.background = real ? 'var(--warning)' : 'var(--ok)'; dot.style.boxShadow = real ? '0 0 8px var(--warning)' : '0 0 8px var(--ok)'; }
@@ -2399,7 +2404,7 @@
     /* Bulk account changes always ask first; on REAL the word to type is REAL */
     function askBulk(title, items, fn) {
       const real = isRealInst(currentInstance);
-      openConfirmAction(title, items + `<li>Instance: <b>${real ? 'REAL (real money accounts)' : 'Paper'}</b></li>`, real ? 'REAL' : 'APPLY', fn);
+      openConfirmAction(title, items + `<li>Instance: <b>${'REAL (real money accounts)'}</b></li>`, real ? 'REAL' : 'APPLY', fn);
     }
 
     async function applySyncBalanceOnly(confirmed = false) {
@@ -3319,7 +3324,7 @@
     /* ========================================================================= */
     /* Dashboard v3: launcher, setup doctor, history, confirmations              */
     /* ========================================================================= */
-    let SUITES = [], SUITE_DEFAULTS = {}, APP_CONFIG = {}, runInstance = 'paper';
+    let SUITES = [], SUITE_DEFAULTS = {}, APP_CONFIG = {}, runInstance = 'real';
     let lastStatus = null, pendingRunKey = null, lastLogRaw = null, activeTab = 'terminal', lastHealth = null;
 
     const TAB_IDS = { terminal: 'tabTerminal', e2e: 'tabE2E', regression: 'tabRegression', followers: 'tabFollowers', tape: 'tabTape', reports: 'tabReports',
@@ -3361,6 +3366,27 @@
       if (key === 'regression') fetchRegression();
       if (key === 'platform') fetchPlatform(false);
       try { localStorage.setItem('bt_tab', key); } catch (e) {}
+    }
+
+    /* ---- real-only health check ---- */
+    function realCheckRow(ok, text) { return `<div style="color:var(--${ok ? 'ok' : 'danger'})"><i class="fa-solid fa-${ok ? 'circle-check' : 'circle-xmark'}"></i> ${esc(text)}</div>`; }
+    async function runRealCheck() {
+      const box = $('realCheckBody'); box.innerHTML = 'Checking master + followers…';
+      const { ok, data } = await api('/api/real_check');
+      if (!ok) { box.innerHTML = realCheckRow(false, data.error || 'Check failed'); return; }
+      const list = (a) => a && a.length ? ' - ' + a.join(', ') : '';
+      box.innerHTML = realCheckRow(data.ok, data.ok ? 'All good: master and followers are on real only.' : data.problems.join('; ')) +
+        realCheckRow(data.linked_real_active === data.followers, `${data.linked_real_active}/${data.followers} followers linked on real and active${list(data.missing.concat(data.not_real, data.not_active))}`) +
+        realCheckRow(!data.unfunded.length, `Funded on real (master balance ${Number(data.master_balance || 0).toLocaleString()})${list(data.unfunded)}`) +
+        realCheckRow(!data.on_paper.length, `Nothing open on paper${list(data.on_paper)}`);
+    }
+    async function runCopyTest() {
+      if ((prompt('This places a real-instance master order (0.01 BTC) and closes it. Type REAL to continue.') || '').trim() !== 'REAL') return;
+      const box = $('realCheckBody'); box.innerHTML = 'Placing master order and waiting for followers…';
+      const { ok, data } = await api('/api/real_check/copy_test', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ confirm: true }) });
+      if (!ok || data.error) { box.innerHTML = realCheckRow(false, data.error || 'Copy test failed'); return; }
+      box.innerHTML = realCheckRow(data.ok, `${data.copied}/${data.followers} followers copied the master's ${data.symbol} order` + (data.missing.length ? ' - missing: ' + data.missing.join(', ') : '')) +
+        realCheckRow(true, 'All positions closed again.');
     }
 
     /* ---- platform overview (instances, copy / MAM / PAMM, plans) ---- */
@@ -3449,7 +3475,6 @@
       const p = collectParams(), max = SUITE_DEFAULTS.follower_count || 100, n = Math.max(0, p.end - p.start + 1);
       const modeWord = p.instance.endsWith('-net') ? 'netting' : 'hedging';
       let msg = `<b>${n}</b> follower${n === 1 ? '' : 's'} + master on <b>${p.instance.toUpperCase()}</b> (${modeWord}).`;
-      if (p.instance === 'paper-net') msg += ` <span style="color:var(--warn)">Paper netting has no copy links: copy suites will find no followers.</span>`;
       if (p.end > max) msg += ` <span style="color:var(--warn)">Only ${max} followers are configured (FOLLOWER_COUNT).</span>`;
       if (p.instance.startsWith('real')) msg += ` <span style="color:var(--danger)">Real-money wallet – you will be asked to confirm. Only B-book accounts are safe.</span>`;
       else if (n > 20) msg += ` Tip: start with 5–10 followers to iterate faster.`;
@@ -3501,7 +3526,7 @@
       const max = SUITE_DEFAULTS.follower_count || 100;
       if (mode === 'quick') { $('optStart').value = 1; $('optEnd').value = Math.min(10, max); }
       if (mode === 'full') { $('optStart').value = 1; $('optEnd').value = max; }
-      if (mode !== 'step') { setOptInstance('paper'); saveOpts(); }
+      if (mode !== 'step') { setOptInstance('real'); saveOpts(); }
       runSuite('e2e', false, step ? { only: step } : {});
     }
 
@@ -3522,7 +3547,7 @@
       }
       const r = d.report;
       if (!r) {
-        $('e2eReport').innerHTML = `<div class="empty-note">No End-to-End run yet. Press <b>Quick run</b> above: it uses followers 1–10 on paper and takes about 2 minutes.</div>`;
+        $('e2eReport').innerHTML = `<div class="empty-note">No End-to-End run yet. Press <b>Quick run</b> above: it uses followers 1–10 on real and takes about 2 minutes.</div>`;
         return;
       }
       const t = r.tally || {}, range = r.followers_range || [];
@@ -3579,8 +3604,8 @@
 
     function runSymbols(key) {
       const open = lastMarkets ? `\n\nRight now ${lastMarkets.open_symbols} of ${lastMarkets.total_symbols} symbols are in session; the rest will be SKIPPED as closed.` : '';
-      if (key === 'symbols_all' && !confirm('Test every listed symbol (~3,600)?\nAbout 20–60 min with all followers. Paper only.' + open)) return;
-      setOptInstance('paper'); saveOpts(); runSuite(key, false, {});
+      if (key === 'symbols_all' && !confirm('Test every listed symbol (~3,600)?\nAbout 20–60 min with all followers.' + open)) return;
+      setOptInstance('real'); saveOpts(); runSuite(key, false, {});
     }
 
     /* ---- Regression ---- */
@@ -3607,8 +3632,9 @@
     async function startRegression() {
       const suites = [...document.querySelectorAll('.reg-suite:checked')].map(c => c.value);
       if (!suites.length) { showToast('Tick at least one suite', 'warn'); return; }
+      if ((prompt('This regression runs on the REAL instance (real-money accounts). Type REAL to continue.') || '').trim() !== 'REAL') return;
       const { ok, data } = await api('/api/regression/start', { method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ suites, params: { start: parseInt($('regStart').value) || 1, end: parseInt($('regEnd').value) || 10 } }) });
+        body: JSON.stringify({ confirm: true, suites, params: { start: parseInt($('regStart').value) || 1, end: parseInt($('regEnd').value) || 10 } }) });
       showToast(ok ? data.message : (data.error || 'Could not start'), ok ? 'ok' : 'err');
       fetchRegression(); fetchStatus();
     }
@@ -3634,7 +3660,7 @@
             <h2 style="flex:1; margin:0">${running ? 'Running' : 'Last'} regression <code style="font-size:12px">${esc(c.id)}</code> <span class="pill ${running ? 'RUNNING' : (c.steps || []).some(s => pillOf(s) === 'FAIL') ? 'FAIL' : 'PASS'}">${esc(c.status)}</span></h2>
             <a class="ghost" href="/api/regression/${esc(c.id)}/report" target="_blank" rel="noopener" style="text-decoration:none"><i class="fa-solid fa-up-right-from-square"></i> Open report</a>
             <a class="ghost" href="/api/regression/${esc(c.id)}/report?download=1" style="text-decoration:none"><i class="fa-solid fa-download"></i> Download</a></div>
-          <p class="lead" style="margin:6px 0 10px">Started ${esc((c.started_at || '').replace('T', ' '))} · followers ${esc(c.params?.start)}–${esc(c.params?.end)} · paper</p>
+          <p class="lead" style="margin:6px 0 10px">Started ${esc((c.started_at || '').replace('T', ' '))} · followers ${esc(c.params?.start)}–${esc(c.params?.end)} · real</p>
           <table class="hist-table"><thead><tr><th>#</th><th>Suite</th><th>Status</th><th>Result</th><th>Time</th><th></th></tr></thead><tbody>
           ${(c.steps || []).map((s, i) => `<tr><td>${i + 1}</td><td><b>${esc(s.name)}</b></td><td><span class="pill ${pillOf(s)}">${esc(s.status)}</span></td>
             <td>${s.passed != null ? `<span class="counter-pass">✓ ${s.passed}</span> <span class="counter-fail">✗ ${s.failed}</span>` : (s.error ? esc(s.error) : '')}</td>
@@ -3815,7 +3841,7 @@
       const p = r.params || {};
       if (p.start) $('optStart').value = p.start; if (p.end) $('optEnd').value = p.end;
       if (p.lot) $('optLot').value = p.lot; if (p.orders_count) $('optOrders').value = p.orders_count; if (p.ramp) $('optRamp').value = p.ramp;
-      setOptInstance(p.instance === 'real' ? 'real' : 'paper'); runSuite(r.suite, false, p.only ? { only: p.only } : {});
+      setOptInstance(p.instance === 'real-net' ? 'real-net' : 'real'); runSuite(r.suite, false, p.only ? { only: p.only } : {});
     }
 
     /* ---- keyboard + visibility-aware polling ---- */
@@ -3876,7 +3902,7 @@
       const effect = book === 'a' ? 'Their <b>real</b> orders will be sent to the <b>liquidity provider</b>.' : 'Their <b>real</b> orders will be booked on the <b>platform\'s own engine</b>.';
       closeBookModal();
       openConfirmAction(`Switch to ${book.toUpperCase()}-book?`,
-        `<li>Applies to: <b>${esc(label)}</b></li><li>${effect}</li><li>Paper accounts are unaffected.</li>`, word, () => doBookSwitch(book, scope));
+        `<li>Applies to: <b>${esc(label)}</b></li><li>${effect}</li>`, word, () => doBookSwitch(book, scope));
     }
     async function doBookSwitch(book, scope) {
       const body = { book, scope, confirm: true, start: parseInt($('bookStart').value) || 1, end: parseInt($('bookEnd').value) || 100 };

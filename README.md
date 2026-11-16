@@ -4,7 +4,7 @@ Automated testing for the **BlackTrader / BlackFX** copy-trading OMS (`lpadmin.b
 a 100-follower fan-out test suite, a race-condition / breakpoint hunter, and a web dashboard
 (**Test Hub**) to launch suites, watch them live and browse the evidence.
 
-> **Safe by default.** Everything runs on the **paper** instance. Anything that touches the
+> **Safe by default.** Everything runs on the **real** instance (real-money accounts). Anything that touches the
 > **real** instance, or that closes positions everywhere, needs a typed confirmation.
 
 ---
@@ -46,7 +46,7 @@ python test_suite/symbol_coverage_runner.py --end 10                 # every sym
 python test_suite/symbol_coverage_runner.py --types FOREX,METAL      # chosen market types
 ```
 Followers without an active copy link are listed as a **WARN** and left out of the checks
-(paper copy links can no longer be re-created on the platform). Details: [docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md#end-to-end-test).
+Details: [docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md#end-to-end-test).
 
 ### What you need before you start
 | Need | Details |
@@ -84,8 +84,8 @@ Copy `.env.example` to `.env` (git-ignored). Full list:
 
 | Area | What it does |
 |---|---|
-| **Launcher** (left) | All suites grouped by purpose. Options: paper/real, follower range, lot, orders, load ramp. Press `/` to filter. |
-| **Regression** | Runs a preset (Smoke ~5 min / Standard ~25 min / Full ~1 h) or hand-picked safe suites back to back on paper, then gives one downloadable HTML report (suites, E2E steps, market groups). Other launches are blocked while it runs. |
+| **Launcher** (left) | All suites grouped by purpose. Options: real / real-net, follower range, lot, orders, load ramp. Press `/` to filter. |
+| **Regression** | Runs a preset (Smoke ~5 min / Standard ~25 min / Full ~1 h) or hand-picked safe suites back to back on real, then gives one downloadable HTML report (suites, E2E steps, market groups). Other launches are blocked while it runs. |
 | **Test order** | Send one master order on **any of the ~3 600 symbols** (search box shows market, min/step/max, contract size), MARKET / LIMIT / STOP with optional TP/SL; compares every linked follower's copy (size, side, fill, latency on server time; unlinked followers shown as NOT LINKED). **Close master & verify flat** closes everything and checks every follower followed. |
 | **Markets open now** (End-to-end tab) | Which market types are in session per the platform schedule, and how many symbols are tradable right now. |
 | **End-to-end** | The latest End-to-End verdict as a step checklist. Failed steps open by themselves; each has **Re-run this step** and **Copy bug report** (ready-to-paste ticket with the reproduce command). Earlier runs are in the picker. |
@@ -116,9 +116,8 @@ in `.env`. The dashboard refuses to start on a non-local address without a token
 | **All Symbols** | The same for every listed symbol (~3 600); closed markets skipped | ~1 h (100 followers) |
 | Multiplier / Balance / Equity mode | Position sizing for each copy mode across followers | ~4 min |
 | Buy/Sell parity & Stop | Market/limit/stop orders behave identically both ways | ~3 min |
-| Paper 2x certification | 10 lot master -> 20 lot follower end to end | ~3 min |
 | **Complex Copy Scenarios** | Model-checked cohorts (multiplier / balance / equity / reverse): pyramiding, partial closes, TP/SL sync, follower intervention, mid-trade multiplier change, phantom copies, churn, concurrent chained ops, seeded random walk | ~8 min |
-| **Netting vs Hedging** | The four instances (`paper`, `paper-net`, `real`, `real-net`): legs, reduce, flip, TP/SL, pending, concurrent race, follower model check | ~6-8 min |
+| **Netting vs Hedging** | The real instances (`real`, `real-net`): legs, reduce, flip, TP/SL, pending, concurrent race, follower model check | ~6-8 min |
 | **Social-Trading Features** | Copy / MAM / PAMM directories, role rules, link shape, auth, rejected invalid writes, wallets / IB / portal reads, admin config | ~1 min |
 | **Breakpoint & Race Hunter** | Double-close/double-credit, over-reduce, torn TP/SL, double-cancel, load ramp, follow/unfollow flapping, margin exhaustion, hostile input, bulk-vs-single close, auth storm, final audit | ~6 min |
 | Race conditions | Flash trades, dual orders, 10-thread storm, unfollow race | ~3 min |

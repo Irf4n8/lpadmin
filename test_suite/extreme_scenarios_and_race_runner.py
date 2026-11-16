@@ -69,7 +69,7 @@ from test_suite.baseline import get_expected_multiplier
 from test_suite.client import BlackTraderClient
 
 
-def cleanup_all(client: BlackTraderClient, master_email: str, follower_emails: list, instance: str = "paper"):
+def cleanup_all(client: BlackTraderClient, master_email: str, follower_emails: list, instance: str = "real"):
     """Safety cleanup: cancel all pending orders and close all positions across all accounts."""
     client.bulk_cancel(master_email, instance=instance)
     client.bulk_squareoff(master_email, instance=instance)
@@ -93,7 +93,7 @@ def test_rapid_reversal(
     master_email: str,
     follower_emails: list,
     symbol: str = "BINANCE:BTCUSDT.P",
-    instance: str = "paper"
+    instance: str = "real"
 ) -> dict:
     print("\n" + "=" * 80)
     print("[SCENARIO-1] Testing Rapid Market Reversal (Long-to-Short Flip in <50ms)...")
@@ -164,7 +164,7 @@ def test_simultaneous_squareoffs(
     master_email: str,
     follower_emails: list,
     symbol: str = "BINANCE:BTCUSDT.P",
-    instance: str = "paper"
+    instance: str = "real"
 ) -> dict:
     print("\n" + "=" * 80)
     print("[SCENARIO-2] Testing High-Contention Simultaneous Square-Offs (Row Locking)...")
@@ -255,7 +255,7 @@ def test_midtrade_dynamic_capital_shock(
     follower_emails: list,
     target_follower_index: int = 10,
     symbol: str = "BINANCE:BTCUSDT.P",
-    instance: str = "paper"
+    instance: str = "real"
 ) -> dict:
     print("\n" + "=" * 80)
     print(f"[SCENARIO-3] Testing Mid-Trade Dynamic Capital Shock (Deposit on Follower #{target_follower_index})...")
@@ -339,7 +339,7 @@ def test_microlot_underflow(
     master_email: str,
     follower_emails: list,
     symbol: str = "BINANCE:BTCUSDT.P",
-    instance: str = "paper"
+    instance: str = "real"
 ) -> dict:
     print("\n" + "=" * 80)
     print("[SCENARIO-4] Testing Micro-Lot Underflow (Sub-Contract Step Protection)...")
@@ -392,7 +392,7 @@ def test_breakout_straddle_and_cancel(
     master_email: str,
     follower_emails: list,
     symbol: str = "BINANCE:BTCUSDT.P",
-    instance: str = "paper"
+    instance: str = "real"
 ) -> dict:
     print("\n" + "=" * 80)
     print("[SCENARIO-5] Testing Dual-Sided Breakout Straddle & OCO Pending Cancellation...")
@@ -458,7 +458,7 @@ def test_cross_asset_portfolio_bombardment(
     client: BlackTraderClient,
     master_email: str,
     follower_emails: list,
-    instance: str = "paper"
+    instance: str = "real"
 ) -> dict:
     print("\n" + "=" * 80)
     print("[SCENARIO-6] Testing Cross-Asset Portfolio Bombardment (Multi-Pair Concurrent)...")
@@ -523,7 +523,7 @@ def test_accounting_scaling_audit(
     follower_emails: list,
     symbol: str = "BINANCE:BTCUSDT.P",
     lot: float = 0.05,
-    instance: str = "paper"
+    instance: str = "real"
 ) -> dict:
     print("\n" + "=" * 80)
     print("[SCENARIO-7] Testing Full Accounting & Financial Scaling Reconciliation...")
@@ -577,7 +577,7 @@ def main():
     parser = argparse.ArgumentParser(description="BlackTrader Extreme Scenarios & Race Condition Runner")
     parser.add_argument("--start", type=int, default=1, help="Start follower index")
     parser.add_argument("--end", type=int, default=FOLLOWER_COUNT, help="End follower index")
-    parser.add_argument("--instance", type=str, default="paper", help="Broker instance")
+    parser.add_argument("--instance", type=str, default="real", help="Broker instance")
     args = parser.parse_args()
 
     client = BlackTraderClient(base_url=BASE_URL, max_workers=10)

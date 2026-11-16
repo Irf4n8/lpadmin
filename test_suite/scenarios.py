@@ -69,7 +69,7 @@ class ScenarioRunner:
         master_email: str,
         follower_emails: List[str],
         symbol: str = "BINANCE:BTCUSDT.P",
-        instance: str = "paper",
+        instance: str = "real",
         copy_method: str = "multiplier"
     ):
         self.client = client

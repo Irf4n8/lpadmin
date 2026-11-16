@@ -16,7 +16,7 @@ tag        small badge text
 script     path relative to repo root
 flags      CLI flags the runner understands: start, end, instance, lot, orders_count, burst, ramp, profile,
            only (comma list of step ids such as E05,E06 - used by "re-run this step")
-risk       safe      - paper trading only, no real money
+risk       safe      - no destructive actions (still runs on the real instance)
            real      - touches the REAL instance (requires typed confirmation)
            destructive - closes positions / cancels orders everywhere (requires confirmation)
 fixed_instance  force a specific instance regardless of the UI selector (None = honour selector)
@@ -30,12 +30,12 @@ from typing import Any, Dict, List, Optional
 
 PY = sys.executable or "python"
 
-# The four trading instances: hedging + netting, each as paper and "real money".
-INSTANCES = ("paper", "paper-net", "real", "real-net")
+# The real-money trading instances: hedging + netting.
+INSTANCES = ("paper", "paper-net", "real", "real-net")  # paper ones only for dashboard broker views / on-off
 
 
 def is_real(instance: Optional[str]) -> bool:
-    """real and real-net both need the typed confirmation ("both" means paper + real)."""
+    """real and real-net both need the typed confirmation ."""
     return bool(instance) and (str(instance).startswith("real") or instance == "both")
 
 SUITES: List[Dict[str, Any]] = [
@@ -66,18 +66,12 @@ SUITES: List[Dict[str, Any]] = [
     dict(key="copy_complex", name="Complex Copy Scenarios", desc="Model-checked: mixed modes, reverse, pyramiding, TP/SL sync, random walk",
          category="Copy modes", icon="diagram-project", tone="violet", tag="10 scenarios", script="test_suite/copy_complex_runner.py",
          flags=["start", "end", "instance"], risk="safe", minutes=8),
-    dict(key="netting_paper", name="Netting vs Hedging (paper)", desc="paper = hedging, paper-net = netting: legs, reduce, flip, TP/SL, pending, race",
-         category="Copy modes", icon="code-compare", tone="cyan", tag="Hedge/Net", script="test_suite/netting_hedging_runner.py",
-         args=["--instances", "paper,paper-net"], flags=["end"], risk="safe", fixed_instance="paper", minutes=6),
     dict(key="netting_real", name="Netting vs Hedging (real)", desc="real = hedging, real-net = netting. Refuses to run if master/followers are A-book",
          category="Copy modes", icon="code-compare", tone="warn", tag="Hedge/Net", script="test_suite/netting_hedging_runner.py",
          args=["--instances", "real,real-net", "--followers", "10"], flags=[], risk="real", fixed_instance="real", minutes=8),
     dict(key="social_features", name="Social-Trading Features", desc="Copy / MAM / PAMM / IB / wallets / instances: contract, role rules, auth, invalid writes, admin config",
          category="Copy modes", icon="people-group", tone="violet", tag="8 checks", script="test_suite/social_features_runner.py",
-         flags=[], risk="safe", fixed_instance="paper", minutes=1),
-    dict(key="paper_2x", name="Paper 2x Certification", desc="10 lot master -> 20 lot follower, end to end",
-         category="Copy modes", icon="angles-up", tone="ok", tag="2x", script="test_suite/paper_multiplier_copy_trading_runner.py",
-         flags=["start", "end"], risk="safe", fixed_instance="paper", minutes=3),
+         flags=[], risk="safe", fixed_instance="real", minutes=1),
 
     # ---- Races & concurrency ---------------------------------------------------------
     dict(key="breakpoint", name="Breakpoint & Race Hunter", desc="Tries to break the OMS: double-close, torn TP/SL, load ramp, fuzz",
@@ -118,10 +112,10 @@ SUITES: List[Dict[str, Any]] = [
     # ---- Security & UI ----------------------------------------------------------------
     dict(key="security", name="Security Checks", desc="Auth gates, IDOR, privilege escalation, injection, headers, CORS, rate limiting",
          category="Security & UI", icon="user-shield", tone="danger", tag="10 checks", script="test_suite/security_runner.py",
-         flags=[], risk="safe", fixed_instance="paper", minutes=3),
+         flags=[], risk="safe", fixed_instance="real", minutes=3),
     dict(key="ui_journey", name="Browser User Journey", desc="Real Chromium: login, terminal, tabs, logout, admin panel, mobile",
          category="Security & UI", icon="window-maximize", tone="cyan", tag="Playwright", script="test_suite/ui_journey_runner.py",
-         flags=[], risk="safe", fixed_instance="paper", minutes=3),
+         flags=[], risk="safe", fixed_instance="real", minutes=3),
 
     # ---- Real money / maintenance ----------------------------------------------------
     dict(key="real_money", name="Real-Money Certification", desc="Copy trading on the REAL instance",
@@ -161,12 +155,12 @@ def build_command(suite: Dict[str, Any], params: Dict[str, Any], defaults: Dict[
     end = _int(params.get("end"), defaults["follower_count"])
     if end < start:
         start, end = end, start
-    instance = suite.get("fixed_instance") or (params.get("instance") if params.get("instance") in INSTANCES else "paper")
+    instance = suite.get("fixed_instance") or (params.get("instance") if params.get("instance") in INSTANCES else "real")
 
     if suite["key"] == "teardown":
-        # run inline so the UI needs no extra script; instances: paper | real | both
-        which = params.get("instance") if params.get("instance") in INSTANCES + ("both", "all") else "paper"
-        instances = list(INSTANCES) if which == "all" else ["paper", "real"] if which == "both" else [which]
+        # run inline so the UI needs no extra script; instances: real | real-net | both | all
+        which = params.get("instance") if params.get("instance") in INSTANCES + ("both", "all") else "real"
+        instances = list(INSTANCES) if which == "all" else ["real"] if which == "both" else [which]
         code = (
             "from test_suite.client import BlackTraderClient; "
             "from config.settings import BASE_URL, MASTER_EMAIL, DEFAULT_PREFIX, DEFAULT_DOMAIN; "
@@ -207,7 +201,7 @@ def build_command(suite: Dict[str, Any], params: Dict[str, Any], defaults: Dict[
 
 
 def effective_instance(suite: Dict[str, Any], params: Dict[str, Any]) -> Optional[str]:
-    return suite.get("fixed_instance") or params.get("instance") or "paper"
+    return suite.get("fixed_instance") or params.get("instance") or "real"
 
 
 def needs_confirmation(suite: Dict[str, Any], params: Dict[str, Any]) -> bool:

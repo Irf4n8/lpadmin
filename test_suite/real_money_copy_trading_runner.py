@@ -4,7 +4,7 @@ BlackTrader OMS - Real Money (Live Instance) Copy Trading Suite
 ==============================================================
 Validates end-to-end copy trading on the REAL broker instance:
 1. Balance Synchronization: Sets Master & 100 Followers to exact same balance (100,000,000.00 each) on REAL.
-2. Linkage Migration: Disables/unfollows PAPER instance, establishes active follow links on REAL instance.
+2. Linkage Migration: Establishes active follow links on REAL instance.
 3. Verification Audit: Confirms 100/100 followers follow Master exclusively on REAL instance.
 4. Order Replication Test 1: Master executes BUY MARKET (0.05 lot) on REAL -> verify 100/100 followers copy on REAL.
 5. Order Replication Test 2: Master executes SELL MARKET (0.05 lot) on REAL -> verify 100/100 followers copy short on REAL.
@@ -108,18 +108,16 @@ def sync_real_balances(client: BlackTraderClient, master_email: str, follower_em
 
 
 # =============================================================================
-# PHASE 2 & 3: Disable Paper & Enable Real Copy Links for 100 Followers
+# PHASE 2 & 3: Enable Real Copy Links for 100 Followers
 # =============================================================================
 def switch_copy_links_to_real(client: BlackTraderClient, follower_emails: list) -> dict:
     print("\n" + "=" * 80)
-    print("[PHASE 2 & 3] Disabling Paper Copy Links and Activating REAL Copy Links...")
+    print("[PHASE 2 & 3] Activating REAL Copy Links...")
     print("=" * 80)
 
     def re_link_task(email):
         try:
-            # 1. Unfollow on paper if active
-            client.unfollow_master(email, MASTER_CLIENT_ID, instance="paper")
-            # 2. Follow on real instance with multiplier 1.0 (equal balance)
+            # Follow on real instance with multiplier 1.0 (equal balance)
             fol_res = client.follow_master(email, MASTER_CLIENT_ID, instance="real", method="multiplier", multiplier=1.0)
             
             # 3. Verify real follow link
@@ -350,7 +348,7 @@ def main():
         # Phase 1: Equalize balances on REAL to 100M each
         suite_results.append(sync_real_balances(client, MASTER_EMAIL, follower_emails))
 
-        # Phase 2 & 3: Disable Paper & Link Real
+        # Phase 2 & 3: Link Real
         suite_results.append(switch_copy_links_to_real(client, follower_emails))
 
         # Phase 4: Order 1 (BUY MARKET)

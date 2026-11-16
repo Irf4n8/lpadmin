@@ -19,7 +19,7 @@ Features Tested across Master + 100 Followers:
 Usage:
     pip install requests
     python standalone_pending_trigger_race_test.py
-    python standalone_pending_trigger_race_test.py --start 1 --end 100 --instance paper
+    python standalone_pending_trigger_race_test.py --start 1 --end 100 --instance real
 ========================================================================================
 """
 
@@ -115,7 +115,7 @@ class BlackTraderClient:
             self._tokens[email] = token
         return token
 
-    def get_positions(self, email: str, instance: str = "paper") -> Dict[str, Any]:
+    def get_positions(self, email: str, instance: str = "real") -> Dict[str, Any]:
         token = self.get_trader_token(email)
         headers = {"Authorization": f"Bearer {token}", "X-Broker-ID": instance}
         resp = self.request_with_retry("GET", f"{self.base_url}/v1/oms/{instance}/positions", headers=headers)
@@ -125,7 +125,7 @@ class BlackTraderClient:
             resp = self.request_with_retry("GET", f"{self.base_url}/v1/oms/{instance}/positions", headers=headers)
         return resp.json() if resp.status_code == 200 else {"positions": []}
 
-    def get_orders(self, email: str, instance: str = "paper") -> Dict[str, Any]:
+    def get_orders(self, email: str, instance: str = "real") -> Dict[str, Any]:
         token = self.get_trader_token(email)
         headers = {"Authorization": f"Bearer {token}", "X-Broker-ID": instance}
         resp = self.request_with_retry("GET", f"{self.base_url}/v1/oms/{instance}/orders", headers=headers)
@@ -145,7 +145,7 @@ class BlackTraderClient:
         price: Optional[float] = None,
         tp: Optional[float] = None,
         sl: Optional[float] = None,
-        instance: str = "paper"
+        instance: str = "real"
     ) -> Dict[str, Any]:
         token = self.get_trader_token(email)
         headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json", "X-Broker-ID": instance}
@@ -161,7 +161,7 @@ class BlackTraderClient:
         resp = self.request_with_retry("POST", f"{self.base_url}/v1/oms/{instance}{endpoint}", headers=headers, json_body=payload)
         return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
 
-    def set_position_protection(self, email: str, market_order_id: str, tp: Optional[float] = None, sl: Optional[float] = None, instance: str = "paper") -> Dict[str, Any]:
+    def set_position_protection(self, email: str, market_order_id: str, tp: Optional[float] = None, sl: Optional[float] = None, instance: str = "real") -> Dict[str, Any]:
         token = self.get_trader_token(email)
         headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json", "X-Broker-ID": instance}
         payload = {}
@@ -172,19 +172,19 @@ class BlackTraderClient:
         resp = self.request_with_retry("PUT", f"{self.base_url}/v1/oms/{instance}/positions/{market_order_id}/protection", headers=headers, json_body=payload)
         return {"status_code": resp.status_code, "data": resp.json() if resp.status_code in [200, 204] else resp.text}
 
-    def cancel_order(self, email: str, order_id: str, instance: str = "paper") -> Dict[str, Any]:
+    def cancel_order(self, email: str, order_id: str, instance: str = "real") -> Dict[str, Any]:
         token = self.get_trader_token(email)
         headers = {"Authorization": f"Bearer {token}", "X-Broker-ID": instance}
         resp = self.request_with_retry("DELETE", f"{self.base_url}/v1/oms/{instance}/orders/{order_id}", headers=headers)
         return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
 
-    def squareoff_position(self, email: str, market_order_id: str, instance: str = "paper") -> Dict[str, Any]:
+    def squareoff_position(self, email: str, market_order_id: str, instance: str = "real") -> Dict[str, Any]:
         token = self.get_trader_token(email)
         headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json", "X-Broker-ID": instance}
         resp = self.request_with_retry("POST", f"{self.base_url}/v1/oms/{instance}/positions/{market_order_id}/squareoff", headers=headers, json_body={})
         return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
 
-    def bulk_squareoff(self, email: str, instance: str = "paper") -> Dict[str, Any]:
+    def bulk_squareoff(self, email: str, instance: str = "real") -> Dict[str, Any]:
         pos = self.get_positions(email, instance).get("positions", [])
         mkt_ids = [p.get("market_order_id") for p in pos if p.get("market_order_id")]
         if not mkt_ids:
@@ -194,7 +194,7 @@ class BlackTraderClient:
         resp = self.request_with_retry("POST", f"{self.base_url}/v1/oms/{instance}/positions/bulk/squareoff", headers=headers, json_body={"market_order_ids": mkt_ids})
         return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
 
-    def bulk_cancel(self, email: str, instance: str = "paper") -> Dict[str, Any]:
+    def bulk_cancel(self, email: str, instance: str = "real") -> Dict[str, Any]:
         orders = self.get_orders(email, instance).get("orders", [])
         pending_ids = [o.get("order_id") for o in orders if o.get("status") in ["PENDING", "OPEN", "NEW"] or o.get("type") in ["LIMIT", "STOP"]]
         if not pending_ids:
@@ -208,7 +208,7 @@ class BlackTraderClient:
 # ======================================================================================
 # HELPER FUNCTIONS
 # ======================================================================================
-def cleanup(client: BlackTraderClient, master_email: str, follower_emails: List[str], instance: str = "paper"):
+def cleanup(client: BlackTraderClient, master_email: str, follower_emails: List[str], instance: str = "real"):
     """Safety cleanup: close all open positions and cancel pending orders."""
     client.bulk_cancel(master_email, instance=instance)
     client.bulk_squareoff(master_email, instance=instance)
@@ -224,7 +224,7 @@ def cleanup(client: BlackTraderClient, master_email: str, follower_emails: List[
         list(executor.map(clean_f, follower_emails))
 
 
-def get_live_price(client: BlackTraderClient, master_email: str, symbol: str = "BINANCE:BTCUSDT.P", instance: str = "paper") -> float:
+def get_live_price(client: BlackTraderClient, master_email: str, symbol: str = "BINANCE:BTCUSDT.P", instance: str = "real") -> float:
     """Fetch current live price using a micro probe trade."""
     res = client.place_order(master_email, symbol=symbol, side="BUY", qty=0.001, instance=instance)
     order_data = res.get("data", {}).get("order", {})
@@ -239,7 +239,7 @@ def get_live_price(client: BlackTraderClient, master_email: str, symbol: str = "
 # ======================================================================================
 # TEST SCENARIO 1: BUY LIMIT Trigger Price Shift at Hit Boundary
 # ======================================================================================
-def test_buy_limit_trigger_shift(client: BlackTraderClient, master_email: str, follower_emails: List[str], symbol: str = "BINANCE:BTCUSDT.P", instance: str = "paper") -> dict:
+def test_buy_limit_trigger_shift(client: BlackTraderClient, master_email: str, follower_emails: List[str], symbol: str = "BINANCE:BTCUSDT.P", instance: str = "real") -> dict:
     print("\n" + "=" * 80)
     print("[TEST-MOD-1] Testing In-Flight BUY LIMIT Trigger Price Shift at Hit Boundary...")
     print("=" * 80)
@@ -300,7 +300,7 @@ def test_buy_limit_trigger_shift(client: BlackTraderClient, master_email: str, f
 # ======================================================================================
 # TEST SCENARIO 2: SELL LIMIT Trigger Price Shift at Hit Boundary
 # ======================================================================================
-def test_sell_limit_trigger_shift(client: BlackTraderClient, master_email: str, follower_emails: List[str], symbol: str = "BINANCE:BTCUSDT.P", instance: str = "paper") -> dict:
+def test_sell_limit_trigger_shift(client: BlackTraderClient, master_email: str, follower_emails: List[str], symbol: str = "BINANCE:BTCUSDT.P", instance: str = "real") -> dict:
     print("\n" + "=" * 80)
     print("[TEST-MOD-2] Testing In-Flight SELL LIMIT Trigger Price Shift at Hit Boundary...")
     print("=" * 80)
@@ -357,7 +357,7 @@ def test_sell_limit_trigger_shift(client: BlackTraderClient, master_email: str, 
 # ======================================================================================
 # TEST SCENARIO 3: Impending Trigger TP/SL Protection Shift Collision
 # ======================================================================================
-def test_protection_trigger_shift(client: BlackTraderClient, master_email: str, follower_emails: List[str], symbol: str = "BINANCE:BTCUSDT.P", instance: str = "paper") -> dict:
+def test_protection_trigger_shift(client: BlackTraderClient, master_email: str, follower_emails: List[str], symbol: str = "BINANCE:BTCUSDT.P", instance: str = "real") -> dict:
     print("\n" + "=" * 80)
     print("[TEST-MOD-3] Testing Impending Trigger TP/SL Protection Shift Collision...")
     print("=" * 80)
@@ -426,7 +426,7 @@ def main():
     parser.add_argument("--master", type=str, default=DEFAULT_MASTER_EMAIL, help="Master account email")
     parser.add_argument("--start", type=int, default=1, help="Start follower index")
     parser.add_argument("--end", type=int, default=100, help="End follower index")
-    parser.add_argument("--instance", type=str, default="paper", help="Broker instance (paper/real)")
+    parser.add_argument("--instance", type=str, default="real", help="Broker instance (paper/real)")
     args = parser.parse_args()
 
     client = BlackTraderClient(base_url=args.base_url, max_workers=10)

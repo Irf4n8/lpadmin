@@ -50,7 +50,7 @@ from test_suite.baseline import get_expected_multiplier
 from test_suite.client import BlackTraderClient
 
 
-def cleanup_all(client: BlackTraderClient, master_email: str, follower_emails: list, instance: str = "paper"):
+def cleanup_all(client: BlackTraderClient, master_email: str, follower_emails: list, instance: str = "real"):
     """Cancel all pending orders and square off all open positions."""
     client.bulk_cancel(master_email, instance=instance)
     client.bulk_squareoff(master_email, instance=instance)
@@ -66,7 +66,7 @@ def cleanup_all(client: BlackTraderClient, master_email: str, follower_emails: l
         list(executor.map(clean_follower, follower_emails))
 
 
-def get_live_market_price(client: BlackTraderClient, master_email: str, symbol: str = "BINANCE:BTCUSDT.P", instance: str = "paper") -> float:
+def get_live_market_price(client: BlackTraderClient, master_email: str, symbol: str = "BINANCE:BTCUSDT.P", instance: str = "real") -> float:
     """Fetch current live price using a micro probe order."""
     res = client.place_order(master_email, symbol=symbol, side="BUY", qty=0.001, instance=instance)
     order_data = res.get("data", {}).get("order", {})
@@ -86,7 +86,7 @@ def test_cancel_at_trigger_collision(
     master_email: str,
     follower_emails: list,
     symbol: str = "BINANCE:BTCUSDT.P",
-    instance: str = "paper"
+    instance: str = "real"
 ) -> dict:
     print("\n" + "=" * 80)
     print("[RACE-TRIGGER-1] Testing Cancel-at-Trigger Millisecond Collision...")
@@ -182,7 +182,7 @@ def test_trigger_protection_modification(
     master_email: str,
     follower_emails: list,
     symbol: str = "BINANCE:BTCUSDT.P",
-    instance: str = "paper"
+    instance: str = "real"
 ) -> dict:
     print("\n" + "=" * 80)
     print("[RACE-TRIGGER-2] Testing Trigger-Time Protection (TP/SL) Modification Collision...")
@@ -275,7 +275,7 @@ def test_pending_trigger_storm(
     follower_emails: list,
     symbol: str = "BINANCE:BTCUSDT.P",
     num_orders: int = 5,
-    instance: str = "paper"
+    instance: str = "real"
 ) -> dict:
     print("\n" + "=" * 80)
     print(f"[RACE-TRIGGER-3] Testing Multi-Threaded Pending Trigger Storm ({num_orders} Parallel Orders)...")
@@ -354,7 +354,7 @@ def main():
     parser = argparse.ArgumentParser(description="BlackTrader Pending Order Trigger Race Suite")
     parser.add_argument("--start", type=int, default=1, help="Start follower index")
     parser.add_argument("--end", type=int, default=FOLLOWER_COUNT, help="End follower index")
-    parser.add_argument("--instance", type=str, default="paper", help="Broker instance")
+    parser.add_argument("--instance", type=str, default="real", help="Broker instance")
     args = parser.parse_args()
 
     client = BlackTraderClient(base_url=BASE_URL, max_workers=10)

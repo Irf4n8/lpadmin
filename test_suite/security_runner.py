@@ -109,8 +109,8 @@ def s3_idor(ctx):
     F = Findings("S3 IDOR (cross-account access)")
     c, A, B = ctx.c, ctx.a, ctx.b
     c.bulk_cancel(B, "paper"); c.bulk_squareoff(B, "paper")
-    pos_b = mkt_id(c.place_order(B, qty=0.01, instance="paper"))
-    pend = c.place_order(B, side="BUY", order_type="LIMIT", qty=0.01, price=1000.0, instance="paper")
+    pos_b = mkt_id(c.place_order(B, qty=0.01, instance="real"))
+    pend = c.place_order(B, side="BUY", order_type="LIMIT", qty=0.01, price=1000.0, instance="real")
     ord_b = ord_id(pend)
     if not pos_b:
         F.add("INFO", "could not open victim position; skipped"); return F.result("SKIP")

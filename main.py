@@ -60,7 +60,7 @@ Examples:
     sub_list.add_argument("--domain", default=DEFAULT_DOMAIN, help="Follower domain")
     sub_list.add_argument("--password", default=MEMBER_PASSWORD, help="Probe account password")
     sub_list.add_argument("--start", type=int, default=1, help="Probe account index")
-    sub_list.add_argument("--instance", choices=["paper", "real", "both"], default="paper", help="Instance to probe")
+    sub_list.add_argument("--instance", choices=["real"], default="real", help="Instance to probe")
     sub_list.add_argument("--headed", action="store_true", help="Launch visible browser")
 
     # Command: create
@@ -74,7 +74,7 @@ Examples:
     sub_create.add_argument("--start", type=int, default=1, help="Starting index")
     sub_create.add_argument("--end", type=int, default=100, help="Ending index")
     sub_create.add_argument("--balance", type=float, default=DEFAULT_BALANCE, help="Balance amount (10cr = 100000000)")
-    sub_create.add_argument("--instances", default=DEFAULT_INSTANCES, help="Instances to fund (paper,real)")
+    sub_create.add_argument("--instances", default=DEFAULT_INSTANCES, help="Instances to fund (real)")
     sub_create.add_argument("--headed", action="store_true", help="Launch visible browser")
     sub_create.add_argument("--slow-mo", type=int, default=0, help="Slow down actions by N ms")
 
@@ -87,7 +87,7 @@ Examples:
     sub_follow.add_argument("--password", default=MEMBER_PASSWORD, help="Follower password")
     sub_follow.add_argument("--start", type=int, default=1, help="Starting index")
     sub_follow.add_argument("--end", type=int, default=100, help="Ending index")
-    sub_follow.add_argument("--instance", choices=["paper", "real", "both"], default="paper", help="Trading instance")
+    sub_follow.add_argument("--instance", choices=["real"], default="real", help="Trading instance")
     sub_follow.add_argument("--method", choices=["multiplier", "balance", "equity"], default="multiplier", help="Sizing method")
     sub_follow.add_argument("--multiplier", type=float, default=1.0, help="Lot size multiplier")
     sub_follow.add_argument("--reverse", action="store_true", help="Reverse trades (Buy -> Sell)")

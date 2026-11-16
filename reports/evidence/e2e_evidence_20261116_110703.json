@@ -1,0 +1,140 @@
+{
+  "suite": "End-to-End Copy-Trading Test",
+  "verdict": "FAIL",
+  "timestamp": "2026-11-16T05:38:03.503993+00:00",
+  "started": "2026-11-16T11:07:03",
+  "duration_sec": 59.8,
+  "instance": "real",
+  "platform": "https://lpadmin.blackfx.com",
+  "master": "ctmaster@mailinator.com",
+  "master_id": "mem_aac4ca423a6925dca7",
+  "followers_range": [
+    1,
+    10
+  ],
+  "followers_linked": 10,
+  "lot": 0.1,
+  "max_sync_seconds": null,
+  "tally": {
+    "PASS": 5,
+    "FAIL": 1
+  },
+  "results": [
+    {
+      "name": "E01 Preflight: platform + logins",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "platform_http": 200,
+        "accounts": 11,
+        "logins_ok": 11,
+        "login_seconds": 2.4
+      },
+      "id": "E01",
+      "title": "Preflight: platform + logins",
+      "seconds": 2.4
+    },
+    {
+      "name": "E02 Copy topology (who is linked)",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "followers_in_range": 10,
+        "linked": 10,
+        "unlinked": [],
+        "link_mix": {
+          "multiplier 2x": 10
+        }
+      },
+      "id": "E02",
+      "title": "Copy topology (who is linked)",
+      "seconds": 1.9
+    },
+    {
+      "name": "E03 Clean slate",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "accounts_with_positions": 0,
+        "accounts_with_pending": 0
+      },
+      "id": "E03",
+      "title": "Clean slate",
+      "seconds": 6.7
+    },
+    {
+      "name": "E04 Baseline snapshot",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "master_balance": 99989809.08,
+        "master_equity": 99989809.08,
+        "follower_balance_min": 99997395.59
+      },
+      "id": "E04",
+      "title": "Baseline snapshot",
+      "seconds": 0.6
+    },
+    {
+      "name": "E13 Every market type (symbol sweep)",
+      "status": "FAIL",
+      "findings": [
+        {
+          "severity": "MED",
+          "message": "BSE:SENSEX 03DEC2026 76300 CE (IN_OPTIONS): master order rejected: HTTP 400 {\"error\":\"feed stale for BSE:SENSEX 03DEC2026 76300 CE (no live tick in 90s)\",\"order\":{\"order_id\":\"ord_fe37c7f15d9751b5cd\",\"market_order_id\":\"ord_fe37c7f15d9751"
+        },
+        {
+          "severity": "HIGH",
+          "message": "GX:1!BANKNIFTY@FAIR (GREEKS): 10/10 followers did not copy correctly: follower1 expected 4.0 got 1.0; follower2 expected 4.0 got 1.0; follower3 expected 4.0 got 1.0"
+        },
+        {
+          "severity": "INFO",
+          "message": "market closed now, not tested this run: US_STOCKS, EU_STOCKS (re-run in session, e.g. NSE/BSE 03:45-10:00 UTC)"
+        }
+      ],
+      "metrics": {
+        "universe": 3409,
+        "groups_tested": 18,
+        "pass": 14,
+        "fail": 1,
+        "warn": 1,
+        "skip": 2,
+        "per_group": {
+          "CRYPTO/CRYPTO_PERP": "PASS BINANCE:BTCUSDT.P",
+          "CRYPTO/STOCK_PERP": "PASS BINANCE:AAOIUSDT.P",
+          "CRYPTO/CRYPTO_SPOT": "PASS BINANCE:BTCUSDT",
+          "CRYPTO/CRYPTO_PERP_COINM": "PASS BINANCE:BTCUSD_PERP.P",
+          "CRYPTO/COMMODITY_PERP": "PASS BINANCE:BZUSDT.P",
+          "US_STOCKS": "SKIP BLACK:AAPL.OQ",
+          "CRYPTO_CFD": "PASS BLACK:BTCUSD",
+          "EU_STOCKS": "SKIP BLACK:ADSGn.DE",
+          "METAL": "PASS BLACK:XAUUSD",
+          "FOREX": "PASS BLACK:EURUSD",
+          "SPOT_INDICES": "PASS BLACK:US500cash-1",
+          "CMDTY": "PASS BLACK:BRENTcash-1",
+          "CFD_247": "PASS BLACK:GOLD.247",
+          "IN_INDEX": "PASS NSE:NIFTY",
+          "IN_OPTIONS": "WARN BSE:SENSEX 03DEC2026 76300 CE",
+          "IN_FUTURES": "PASS BSE:SENSEX DEC2026 FUT",
+          "GREEKS": "FAIL GX:1!BANKNIFTY@FAIR",
+          "IN_STOCKS": "PASS NSE:RELIANCE"
+        }
+      },
+      "id": "E13",
+      "title": "Every market type (symbol sweep)",
+      "seconds": 41.0
+    },
+    {
+      "name": "E16 Final audit (clean accounts)",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "accounts_checked": 11,
+        "issues": 0
+      },
+      "id": "E16",
+      "title": "Final audit (clean accounts)",
+      "seconds": 7.3
+    }
+  ]
+}

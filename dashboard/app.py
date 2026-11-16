@@ -431,17 +431,20 @@ def regression_start():
     # an explicit list (even an empty one) is taken as-is; the preset only applies when no list is sent
     keys = data["suites"] if isinstance(data.get("suites"), list) else REGRESSION_PRESETS.get(data.get("preset"), [])
     keys = [k for k in dict.fromkeys(keys) if k in SUITE_INDEX]
-    unsafe = [k for k in keys if SUITE_INDEX[k]["risk"] != "safe" or SUITE_INDEX[k].get("fixed_instance") == "real"]
+    unsafe = [k for k in keys if SUITE_INDEX[k]["risk"] != "safe"]
     if unsafe:
-        return jsonify({"error": f"regressions run safe paper suites only; remove {unsafe}"}), 400
+        return jsonify({"error": f"regressions run non-destructive suites only; remove {unsafe}"}), 400
     if not keys:
         return jsonify({"error": "pick at least one suite"}), 400
+    refused = _account_change_refused({"instance": "real", "confirm": data.get("confirm")})
+    if refused:
+        return refused
     p = data.get("params") or {}
     try:
         start, end = max(1, int(p.get("start", 1))), min(FOLLOWER_COUNT, int(p.get("end", 10)))
     except (TypeError, ValueError):
         return jsonify({"error": "bad follower range"}), 400
-    params = {"instance": "paper", "start": min(start, end), "end": max(start, end), "lot": p.get("lot", 0.1)}
+    params = {"instance": "real", "start": min(start, end), "end": max(start, end), "lot": p.get("lot", 0.1)}
     with REGRESSION_LOCK, PROCESS_LOCK:
         if REGRESSION.get("status") == "RUNNING":
             return jsonify({"error": "A regression is already running"}), 409
@@ -597,7 +600,7 @@ def platform_overview():
     except Exception as e:
         out["errors"].append(f"plans: {e}")
     try:
-        links = c.get_copy_followers(master, "paper", active_only=False)
+        links = c.get_copy_followers(master, "real", active_only=False)
         by: dict = {}
         for l in links:
             key = f"{l.get('instance')}/{l.get('status')}"
@@ -786,8 +789,6 @@ def get_reports():
                     category = "JMeter Load Test"
                 elif "real_money" in f.name:
                     category = "Real Money Mode"
-                elif "paper_2x" in f.name:
-                    category = "2x Multiplier Mode"
                 elif "balance" in f.name:
                     category = "Balance Mode"
                 elif "equity" in f.name:
@@ -858,7 +859,7 @@ def get_screenshot(filename):
 ACTIVE_LINKS_CACHE = {"data": None, "timestamp": 0, "instance": None, "forced_mode": None}
 
 
-def get_cached_active_links(instance: str = "paper", force_refresh: bool = False) -> dict:
+def get_cached_active_links(instance: str = "real", force_refresh: bool = False) -> dict:
     global ACTIVE_LINKS_CACHE
     now = time.time()
     if not force_refresh and (ACTIVE_LINKS_CACHE["data"] is not None and 
@@ -920,7 +921,7 @@ def _fmt_money(v: float) -> str:
 @app.route("/api/followers")
 def get_followers_list():
     from test_suite.baseline import get_expected_multiplier
-    instance = request.args.get("instance", "paper")
+    instance = request.args.get("instance", "real")
     force_refresh = request.args.get("refresh") == "true"
     active_links = get_cached_active_links(instance=instance, force_refresh=force_refresh)
 
@@ -1008,7 +1009,7 @@ def get_followers_list():
 def get_account_details(email):
     try:
         from test_suite.baseline import get_expected_multiplier
-        instance = request.args.get("instance", "paper")
+        instance = request.args.get("instance", "real")
         pos_data = dashboard_client.get_positions(email, instance=instance)
         ord_data = dashboard_client.get_orders(email, instance=instance)
 
@@ -1082,7 +1083,7 @@ def get_account_details(email):
 @app.route("/api/account/<email>/squareoff", methods=["POST"])
 def squareoff_account(email):
     try:
-        instance = request.args.get("instance", "paper")
+        instance = request.args.get("instance", "real")
         res = dashboard_client.bulk_squareoff(email, instance=instance)
         return jsonify({"message": f"Positions closed for {email}", "data": res})
     except Exception as e:
@@ -1107,7 +1108,7 @@ def update_account_copy_settings(email):
     if refused:
         return refused
     mode = data.get("mode", "multiplier")
-    instance = data.get("instance", "paper")
+    instance = data.get("instance", "real")
     try:
         mult = float(data.get("multiplier", 1.0))
     except Exception:
@@ -1146,7 +1147,7 @@ def switch_copy_mode():
     if refused:
         return refused
     mode = data.get("mode", "multiplier")
-    instance = data.get("instance", "paper")
+    instance = data.get("instance", "real")
     tier_based = data.get("tier_based", False)
     try:
         custom_mult = float(data.get("multiplier", 1.0))
@@ -1167,7 +1168,7 @@ def switch_copy_mode():
             mult = custom_mult
         try:
             # Re-submitting the follow updates the existing link in place. We do NOT unfollow first: a failed
-            # follow after an unfollow would drop the follower for good (paper links can't be re-created).
+            # follow after an unfollow would drop the follower for good .
             res = dashboard_client.follow_master(email, master_id, instance=instance, method=mode,
                                                  multiplier=mult, reverse=False, copy_mode="public")
             err = None if res.get("status_code") == 200 else f"HTTP {res.get('status_code')}: {str(res.get('data'))[:140]}"
@@ -1221,7 +1222,7 @@ def sync_accounts_balance():
     refused = _account_change_refused(data)
     if refused:
         return refused
-    instance = data.get("instance", "paper")
+    instance = data.get("instance", "real")
     try:
         target_balance = float(data.get("balance", 100000000.0))
     except Exception:
@@ -1261,7 +1262,7 @@ def sync_accounts_balance():
 @app.route("/api/account/<email>/position/<market_order_id>/close", methods=["POST"])
 def close_single_position(email, market_order_id):
     try:
-        instance = request.args.get("instance", "paper")
+        instance = request.args.get("instance", "real")
         res = dashboard_client.squareoff_position(email, market_order_id, instance=instance)
         return jsonify({"message": f"Position {market_order_id} closed for {email}", "data": res})
     except Exception as e:
@@ -1271,7 +1272,7 @@ def close_single_position(email, market_order_id):
 @app.route("/api/live_activity")
 def get_live_activity():
     try:
-        instance = request.args.get("instance", "paper")
+        instance = request.args.get("instance", "real")
         recent_events = []
         master_ords = dashboard_client.get_orders(MASTER_EMAIL, instance=instance).get("orders", [])
         for o in master_ords[:20]:
@@ -1302,7 +1303,7 @@ def get_live_activity():
 def get_live_orders():
     """Returns combined live order tape from master and sample active followers."""
     try:
-        instance = request.args.get("instance", "paper")
+        instance = request.args.get("instance", "real")
         tape = []
         
         # 1. Master orders
@@ -1374,7 +1375,7 @@ def dispatch_and_verify():
     Followers without an active copy link are listed as NOT LINKED and left out of the pass rate.
     """
     data = request.get_json(silent=True) or {}
-    instance = data.get("instance") if data.get("instance") in INSTANCES else "paper"
+    instance = data.get("instance") if data.get("instance") in INSTANCES else "real"
     symbol = str(data.get("symbol") or "BINANCE:BTCUSDT.P").strip()
     side = str(data.get("side", "BUY")).upper()
     order_type = str(data.get("type", "MARKET")).upper()
@@ -1514,7 +1515,7 @@ def dispatch_and_verify():
 def close_master_and_verify():
     """Cancel the master's pending orders and close its positions, then verify every linked follower is flat."""
     data = request.get_json(silent=True) or {}
-    instance = data.get("instance") if data.get("instance") in INSTANCES else "paper"
+    instance = data.get("instance") if data.get("instance") in INSTANCES else "real"
     if is_real(instance) and data.get("confirm") is not True:
         return jsonify({"error": "Closing on REAL needs confirmation", "needs_confirmation": True}), 412
     with PROCESS_LOCK:
@@ -1559,7 +1560,7 @@ def close_master_and_verify():
 # -------------------------------------------------------------------------------------
 # A-book / B-book routing (per account)
 #   A-book: the member's REAL orders are executed at the liquidity provider.
-#   B-book: booked on the platform's own engine. Paper accounts are always B-book style (internal).
+#   B-book: booked on the platform's own engine. 
 # -------------------------------------------------------------------------------------
 def _topology_emails() -> list:
     return [MASTER_EMAIL] + [f"{DEFAULT_PREFIX}{i}@{DEFAULT_DOMAIN}" for i in range(1, FOLLOWER_COUNT + 1)]
@@ -1591,7 +1592,7 @@ def get_books():
                       "other": sum(1 for r in fol if r["book"] not in ("a", "b")),
                       "missing": sum(1 for r in rows if r["role"] == "follower" and not r["book"])},
         "accounts": rows,
-        "note": "Book only affects REAL-instance routing. Paper accounts are always booked on the platform's own engine.",
+        "note": "Book only affects REAL-instance routing. ",
     })
 
 
@@ -1658,7 +1659,7 @@ def switch_books():
 REAL_MODES = {"real": "Real (hedging)", "real-net": "Real Net (netting)"}
 
 
-ALL_BROKERS = {"paper": "Paper (hedging)", "paper-net": "Paper (netting)", "real": "Real (hedging)", "real-net": "Real (netting)"}
+ALL_BROKERS = {"paper": "Paper (hedging)", "paper-net": "Paper (netting)", **REAL_MODES}
 
 
 def _follower_real_links(instances=REAL_MODES) -> dict:
@@ -1740,6 +1741,90 @@ def switch_copy_instance():
     ok = sum(1 for r in results.values() if r["ok"])
     return jsonify({"to": target, "requested": len(emails), "switched_ok": ok, "failed": len(emails) - ok,
                     "results": [r for r in results.values() if not r["ok"]][:20]}), (200 if ok == len(emails) else 207)
+
+
+# ---------------------------------------------------------------- real-only health check
+def _all_emails():
+    return [f"{DEFAULT_PREFIX}{i}@{DEFAULT_DOMAIN}" for i in range(1, FOLLOWER_COUNT + 1)]
+
+
+def _pos_count(res) -> int:
+    return len((res or {}).get("positions") or [])
+
+
+@app.route("/api/real_check", methods=["GET"])
+def real_check():
+    """Read-only: master + followers must be linked on REAL only, funded, and hold nothing on paper."""
+    c = dashboard_client
+    emails = _all_emails()
+    problems = []
+    try:
+        links = c.get_copy_followers(MASTER_EMAIL, "real", active_only=False)
+    except Exception as e:
+        return jsonify({"ok": False, "error": f"could not read copy links: {e}"}), 502
+    by_name = {l.get("follower_name"): l for l in links}
+    not_real, not_active, missing = [], [], []
+    for e in emails:
+        l = by_name.get(e.split("@")[0])
+        if not l:
+            missing.append(e.split("@")[0])
+        elif l.get("instance") != "real":
+            not_real.append(e.split("@")[0])
+        elif l.get("status") != "active":
+            not_active.append(e.split("@")[0])
+
+    def acct(e):
+        try:
+            r = c.get_positions(e, "real")
+            p = c.get_positions(e, "paper")
+            return e, float((r.get("funds") or {}).get("balance", 0) or 0), _pos_count(r), _pos_count(p)
+        except Exception:
+            return e, None, 0, 0
+    with ThreadPoolExecutor(10) as ex:
+        rows = list(ex.map(acct, [MASTER_EMAIL] + emails))
+    unfunded = [e.split("@")[0] for e, bal, _, _ in rows if bal is None or bal <= 0]
+    on_paper = [e.split("@")[0] for e, _, _, pp in rows if pp]
+    open_real = [e.split("@")[0] for e, _, rp, _ in rows if rp]
+    if missing: problems.append(f"{len(missing)} follower(s) have no copy link")
+    if not_real: problems.append(f"{len(not_real)} follower(s) linked on a non-real instance")
+    if not_active: problems.append(f"{len(not_active)} follower(s) with an inactive link")
+    if unfunded: problems.append(f"{len(unfunded)} account(s) with no real balance")
+    if on_paper: problems.append(f"{len(on_paper)} account(s) hold positions on paper")
+    return jsonify({
+        "ok": not problems, "problems": problems, "master": MASTER_EMAIL, "followers": len(emails),
+        "linked_real_active": len(emails) - len(missing) - len(not_real) - len(not_active),
+        "missing": missing[:20], "not_real": not_real[:20], "not_active": not_active[:20],
+        "unfunded": unfunded[:20], "on_paper": on_paper[:20], "open_on_real": open_real[:20],
+        "master_balance": rows[0][1],
+    })
+
+
+@app.route("/api/real_check/copy_test", methods=["POST"])
+def real_check_copy_test():
+    """Live: master BUYs 0.01 BTC on REAL, count followers that copy it, then flatten everything."""
+    data = request.get_json(silent=True) or {}
+    refused = _account_change_refused({"instance": "real", "confirm": data.get("confirm")})
+    if refused:
+        return refused
+    c = dashboard_client
+    emails = _all_emails()
+    symbol = "BINANCE:BTCUSDT.P"
+    try:
+        r = c.place_order(MASTER_EMAIL, symbol, "BUY", "MARKET", 0.01, instance="real")
+        if r.get("status_code") != 200:
+            return jsonify({"ok": False, "error": f"master order rejected: HTTP {r.get('status_code')} {str(r.get('data'))[:200]}"}), 200
+        time.sleep(6)
+        pos = c.fetch_all_followers_positions(emails, "real")
+        copied = [e for e, v in pos.items() if _pos_count(v)]
+        master_pos = _pos_count(c.get_positions(MASTER_EMAIL, "real"))
+    finally:
+        try:
+            c.teardown_all_accounts(MASTER_EMAIL, emails, "real")
+        except Exception:
+            pass
+    missing = [e.split("@")[0] for e in emails if e not in copied]
+    return jsonify({"ok": not missing and master_pos > 0, "symbol": symbol, "master_positions": master_pos,
+                    "copied": len(copied), "followers": len(emails), "missing": missing[:20], "cleaned_up": True})
 
 
 @app.route("/api/copy/instance_link", methods=["POST"])

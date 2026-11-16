@@ -66,7 +66,7 @@ def list_masters_playwright(args):
             browser.close()
             sys.exit(1)
 
-        instance = "paper" if args.instance == "both" else args.instance
+        instance = args.instance
         masters_res = context.request.get(
             f"{args.url.rstrip('/')}/v1/oms/{instance}/copy/masters",
             headers={"Authorization": f"Bearer {chart_token}"}
@@ -139,7 +139,7 @@ def follow_master_playwright(args):
             browser.close()
             sys.exit(1)
 
-        lookup_instance = "paper" if args.instance == "both" else args.instance
+        lookup_instance = args.instance
         masters_res = probe_context.request.get(
             f"{args.url.rstrip('/')}/v1/oms/{lookup_instance}/copy/masters",
             headers={"Authorization": f"Bearer {chart_token}"}
@@ -163,7 +163,7 @@ def follow_master_playwright(args):
         print(f"[+] Master resolved: '{args.master}' -> ID: {target_master_id}\n")
         probe_context.close()
 
-        target_instances = ["paper", "real"] if args.instance == "both" else [args.instance]
+        target_instances = [args.instance]
         total_followers = args.end - args.start + 1
         success_count = 0
 
@@ -241,7 +241,7 @@ def main():
     parser.add_argument("--start", type=int, default=1, help="Starting index (default: 1)")
     parser.add_argument("--end", type=int, default=100, help="Ending index (default: 100)")
     parser.add_argument("--master", help="Target Master name or client ID ('mem_...')")
-    parser.add_argument("--instance", choices=["paper", "real", "both"], default="paper", help="Trading instance (default: paper)")
+    parser.add_argument("--instance", choices=["real"], default="real", help="Trading instance (default: real)")
     parser.add_argument("--method", choices=["multiplier", "balance", "equity"], default="multiplier", help="Copy sizing method")
     parser.add_argument("--multiplier", type=float, default=1.0, help="Lot size multiplier (default: 1.0)")
     parser.add_argument("--reverse", action="store_true", help="Reverse trade side (Buy -> Sell)")

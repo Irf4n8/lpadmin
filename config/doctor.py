@@ -112,14 +112,14 @@ def check_followers(client):
 
 def check_links(client):
     try:
-        # the follows list covers EVERY instance; count only links that live on paper
-        links = client.get_copy_followers(S.MASTER_EMAIL, "paper", active_only=True)
-        n = len({l.get("follower_name") or l.get("follower_client_id") for l in links if l.get("instance") == "paper"})
+        # the follows list covers EVERY instance; count only links that live on the real instance
+        links = client.get_copy_followers(S.MASTER_EMAIL, "real", active_only=True)
+        n = len({l.get("follower_name") or l.get("follower_client_id") for l in links if l.get("instance") == "real"})
     except Exception:
         n = 0
     ok = n >= S.FOLLOWER_COUNT
-    return _r("links", f"Followers linked to master on paper ({n}/{S.FOLLOWER_COUNT})", "ok" if ok else "warn",
-              "" if ok else "paper links can no longer be created by the platform - lower FOLLOWER_COUNT in .env if a follower's link was ended",
+    return _r("links", f"Followers linked to master on real ({n}/{S.FOLLOWER_COUNT})", "ok" if ok else "warn",
+              "" if ok else "lower FOLLOWER_COUNT in .env if a follower's link was ended",
               "" if ok else f"set FOLLOWER_COUNT={n} in .env")
 
 
