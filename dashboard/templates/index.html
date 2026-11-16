@@ -1393,6 +1393,9 @@
           </button>
           </div>
           <div class="tab-group"><span class="tg-label">Help</span>
+          <button id="tabBtnMembers" onclick="switchTab('members')" class="tab-item violet">
+            <i class="fa-solid fa-users"></i> Master &amp; followers
+          </button>
           <button id="tabBtnPlatform" onclick="switchTab('platform')" class="tab-item violet">
             <i class="fa-solid fa-people-group"></i> Platform
           </button>
@@ -1918,6 +1921,35 @@
       </div>
 
       <!-- Tab: Run history -->
+      <div id="tabMembers" style="display: none; flex-direction: column; gap: 14px; margin-top: 10px;">
+        <div class="panel-card">
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap">
+            <div style="flex:1; min-width:200px"><h2>Master &amp; followers</h2><p class="lead" style="margin:0" id="membersSummary">ctmaster and followers 1-100 (read-only).</p></div>
+            <input id="memQ" placeholder="Search email, name or id" oninput="memDebounce()" style="min-width:200px">
+            <select id="memStatus" onchange="fetchMembers(1)"><option value="">Any status</option></select>
+            <select id="memBook" onchange="fetchMembers(1)"><option value="">Any book</option></select>
+            <button class="ghost" onclick="fetchMembers(1)"><i class="fa-solid fa-rotate"></i> Refresh</button>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:12px; padding-top:10px; border-top:1px solid var(--line, #8883)">
+            <b style="font-size:13px">Bulk switch all followers to:</b>
+            <button class="ghost" onclick="bulkSwitch('paper')">Paper · Hedging</button>
+            <button class="ghost" onclick="bulkSwitch('paper-net')">Paper · Netting</button>
+            <button class="cta danger" onclick="bulkSwitch('real')">Real · Hedging</button>
+            <button class="cta danger" onclick="bulkSwitch('real-net')">Real · Netting</button>
+            <span id="bulkSwitchState" class="muted" style="font-size:12px"></span>
+          </div>
+          <div style="overflow-x:auto; margin-top:10px;">
+            <table class="hist-table">
+              <thead><tr><th>Email</th><th>Name</th><th>Status</th><th>Book</th><th>Type</th><th>Paper balance</th><th>Real balance</th><th>Created</th></tr></thead>
+              <tbody id="membersBody"><tr><td colspan="8" class="empty-note">Loading…</td></tr></tbody>
+            </table>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center; margin-top:10px">
+            <button class="ghost" onclick="fetchMembers(memPage-1)">Prev</button><span id="memPageLabel" class="muted"></span><button class="ghost" onclick="fetchMembers(memPage+1)">Next</button>
+          </div>
+        </div>
+      </div>
+
       <div id="tabPlatform" style="display: none; flex-direction: column; gap: 14px; margin-top: 10px;">
         <div class="panel-card">
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap">
@@ -2168,7 +2200,7 @@
 </div>
 
 <div id="brokerModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="brokerTitle">
-  <div class="modal-window confirm-box" style="width:460px">
+  <div class="modal-window confirm-box" style="width:620px;max-width:95vw">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
       <h3 id="brokerTitle" style="color:var(--text);margin:0;flex:1">Broker settings</h3>
       <button class="ghost" onclick="closeBrokerModal()" aria-label="Close">&times;</button>
@@ -2181,29 +2213,33 @@
       <div style="display:flex;align-items:center;gap:8px">
         <button class="cta" data-broker="paper" onclick="setBroker('paper')" style="flex:1;text-align:left">Paper · Hedging</button>
         <span id="brokerCount_paper" style="width:70px;font-size:12px;color:var(--muted);text-align:center">–</span>
+        <button class="cta" onclick="brokerBulk('paper')" title="Move ALL followers to this instance in one step (keeps each follower's method and multiplier)">Switch all</button>
         <button class="ghost" onclick="startInstanceLink('paper','enable')" title="Link ALL followers to ctmaster on this instance">Enable all</button>
         <button class="ghost" onclick="startInstanceLink('paper','disable')" title="End the copy link of every follower on this instance">Disable all</button>
       </div>
       <div style="display:flex;align-items:center;gap:8px">
         <button class="cta" data-broker="paper-net" onclick="setBroker('paper-net')" style="flex:1;text-align:left">Paper · Netting</button>
         <span id="brokerCount_paper-net" style="width:70px;font-size:12px;color:var(--muted);text-align:center">–</span>
+        <button class="cta" onclick="brokerBulk('paper-net')" title="Move ALL followers to this instance in one step (keeps each follower's method and multiplier)">Switch all</button>
         <button class="ghost" onclick="startInstanceLink('paper-net','enable')" title="Link ALL followers to ctmaster on this instance">Enable all</button>
         <button class="ghost" onclick="startInstanceLink('paper-net','disable')" title="End the copy link of every follower on this instance">Disable all</button>
       </div>
       <div style="display:flex;align-items:center;gap:8px">
         <button class="cta danger" data-broker="real" onclick="setBroker('real')" style="flex:1;text-align:left">Real · Hedging</button>
         <span id="brokerCount_real" style="width:70px;font-size:12px;color:var(--muted);text-align:center">–</span>
+        <button class="cta" onclick="brokerBulk('real')" title="Move ALL followers to this instance in one step (keeps each follower's method and multiplier)">Switch all</button>
         <button class="ghost" onclick="startInstanceLink('real','enable')" title="Link ALL followers to ctmaster on this instance">Enable all</button>
         <button class="ghost" onclick="startInstanceLink('real','disable')" title="End the copy link of every follower on this instance">Disable all</button>
       </div>
       <div style="display:flex;align-items:center;gap:8px">
         <button class="cta danger" data-broker="real-net" onclick="setBroker('real-net')" style="flex:1;text-align:left">Real · Netting</button>
         <span id="brokerCount_real-net" style="width:70px;font-size:12px;color:var(--muted);text-align:center">–</span>
+        <button class="cta" onclick="brokerBulk('real-net')" title="Move ALL followers to this instance in one step (keeps each follower's method and multiplier)">Switch all</button>
         <button class="ghost" onclick="startInstanceLink('real-net','enable')" title="Link ALL followers to ctmaster on this instance">Enable all</button>
         <button class="ghost" onclick="startInstanceLink('real-net','disable')" title="End the copy link of every follower on this instance">Disable all</button>
       </div>
     </div>
-    <p style="font-size:11.5px;color:var(--muted);margin:10px 0 0;line-height:1.5">Click a name to <b>view</b> that instance. <b>Enable all / Disable all</b> link or unlink <b>every follower</b> to ctmaster on it (the number is followers currently linked there). A follower has one link, so enabling an instance moves it from its current one.</p>
+    <p style="font-size:11.5px;color:var(--muted);margin:10px 0 0;line-height:1.5">Click a name to <b>view</b> that instance. <b>Switch all</b> moves every follower to that instance in one step; <b>Enable all / Disable all</b> link or unlink <b>every follower</b> to ctmaster on it (the number is followers currently linked there). A follower has one link, so enabling an instance moves it from its current one.</p>
     <div id="brokerResult" style="font-size:12.5px;margin-top:10px;color:var(--muted)"></div>
   </div>
 </div>
@@ -3328,9 +3364,9 @@
     let lastStatus = null, pendingRunKey = null, lastLogRaw = null, activeTab = 'terminal', lastHealth = null;
 
     const TAB_IDS = { terminal: 'tabTerminal', e2e: 'tabE2E', regression: 'tabRegression', followers: 'tabFollowers', tape: 'tabTape', reports: 'tabReports',
-                      replication: 'tabReplication', screenshots: 'tabScreenshots', history: 'tabHistory', setup: 'tabSetup', platform: 'tabPlatform' };
+                      replication: 'tabReplication', screenshots: 'tabScreenshots', history: 'tabHistory', setup: 'tabSetup', platform: 'tabPlatform', members: 'tabMembers' };
     const TAB_BTN = { terminal: 'tabBtnTerminal', e2e: 'tabBtnE2E', regression: 'tabBtnRegression', followers: 'tabBtnFollowers', tape: 'tabBtnTape', reports: 'tabBtnReports',
-                      replication: 'tabBtnReplication', screenshots: 'tabBtnScreenshots', history: 'tabBtnHistory', setup: 'tabBtnSetup', platform: 'tabBtnPlatform' };
+                      replication: 'tabBtnReplication', screenshots: 'tabBtnScreenshots', history: 'tabBtnHistory', setup: 'tabBtnSetup', platform: 'tabBtnPlatform', members: 'tabBtnMembers' };
 
     const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     const $ = id => document.getElementById(id);
@@ -3365,7 +3401,54 @@
       if (key === 'replication') { const b = $('dispatchInstanceBadge'); if (b) b.innerText = currentInstance.toUpperCase(); loadDispatchSymbols(); onDispatchType(); }
       if (key === 'regression') fetchRegression();
       if (key === 'platform') fetchPlatform(false);
+      if (key === 'members') { fetchMembers(1); bulkCounts(); }
       try { localStorage.setItem('bt_tab', key); } catch (e) {}
+    }
+
+    /* ---- master & followers ---- */
+    let memPage = 1, memTimer = null, memPages = 1;
+    function memDebounce() { clearTimeout(memTimer); memTimer = setTimeout(() => fetchMembers(1), 300); }
+    async function fetchMembers(page) {
+      memPage = Math.max(1, Math.min(page || 1, memPages));
+      const qs = new URLSearchParams({ page: memPage, size: 50, q: $('memQ').value, status: $('memStatus').value, book: $('memBook').value });
+      const { ok, data } = await api('/api/members?' + qs);
+      const body = $('membersBody');
+      if (!ok) { body.innerHTML = `<tr><td colspan="8" class="empty-note">${esc(data.error || 'Could not load members')}</td></tr>`; return; }
+      for (const [id, list] of [['memStatus', data.statuses], ['memBook', data.books]]) {
+        const sel = $(id); if (sel.options.length <= 1) list.forEach(v => sel.add(new Option(v, v)));
+      }
+      memPages = Math.max(1, Math.ceil(data.matched / data.size));
+      $('membersSummary').innerText = `${data.matched} of ${data.total} accounts (read-only)`;
+      $('memPageLabel').innerText = `Page ${data.page} / ${memPages}`;
+      const fmt = v => v == null ? '-' : Number(v).toLocaleString();
+      body.innerHTML = data.members.map(m => `<tr><td>${esc(m.email)}</td><td>${esc(m.name)}</td><td>${esc(m.status)}</td><td>${esc(m.book)}</td><td>${esc(m.account_type)}</td>` +
+        `<td>${fmt((m.balances || {}).paper)}</td><td>${fmt((m.balances || {}).real)}</td><td>${esc((m.created_at || '').slice(0, 10))}</td></tr>`).join('') ||
+        '<tr><td colspan="8" class="empty-note">No members match.</td></tr>';
+    }
+
+    /* ---- bulk paper / real, hedging / netting switch ---- */
+    async function bulkCounts() {
+      const { ok, data } = await api('/api/copy/instances'); if (!ok || !data.per_instance) return;
+      const pi = data.per_instance;
+      $('bulkSwitchState').innerText = `Now: Paper ${pi.paper || 0} · Paper Net ${pi['paper-net'] || 0} · Real ${pi.real || 0} · Real Net ${pi['real-net'] || 0} (of ${data.followers})`;
+    }
+    function brokerBulk(to) { closeBrokerModal(); bulkSwitch(to); }
+    function bulkSwitch(to) {
+      if (lastStatus?.is_running) { showToast('A test run is active – stop it first.', 'warn'); return; }
+      const real = isRealInst(to), word = real ? 'REAL' : 'PAPER';
+      openConfirmAction(`Move all followers to ${BROKERS[to].label}?`,
+        `<li>Applies to: <b>all followers</b> ↔ ctmaster</li><li>Each keeps its method and multiplier; the new link is created first, then the old one is ended.</li>` +
+        (real ? '<li>Real-money instance.</li>' : '<li>The platform may refuse paper links; anything refused stays where it is and is listed.</li>'),
+        word, () => doBulkSwitch(to));
+    }
+    async function doBulkSwitch(to) {
+      const { data, status } = await api('/api/copy/switch_instance', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ to, confirm: true }) });
+      if ([400, 409, 412].includes(status)) { showToast(data.error || 'Switch refused', 'err'); return; }
+      const bad = data.failed || 0;
+      showToast(`${BROKERS[to].label}: ${data.switched_ok}/${data.requested} followers verified` + (bad ? `, ${bad} FAILED` : ''), bad ? 'err' : 'ok');
+      if (bad) $('bulkSwitchState').innerHTML = `<span style="color:var(--danger)">${bad} did not switch: ` + esc((data.results || []).slice(0, 3).map(r => r.email.split('@')[0] + ' – ' + r.error).join('; ')) + '</span>';
+      else bulkCounts();
+      fetchModes(); fetchMembers(memPage);
     }
 
     /* ---- real-only health check ---- */
@@ -3941,7 +4024,7 @@
       const word = to === 'real' ? 'HEDGING' : 'NETTING';
       closeModeModal();
       openConfirmAction(`Move all followers to ${to === 'real' ? 'Real hedging' : 'Real netting'}?`,
-        `<li>Applies to: <b>all followers</b> (real-money instance)</li><li>Each keeps its method and multiplier.</li><li>The new link is created first, then the old one is ended.</li>`, word, () => doModeSwitch(to));
+        `<li>Applies to: <b>all followers</b> (real-money instance)</li><li>Each keeps its method and multiplier.</li><li>The link is moved in one step.</li>`, word, () => doModeSwitch(to));
     }
     async function doModeSwitch(to) {
       const { data, status } = await api('/api/copy/switch_instance', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ to, confirm: true }) });

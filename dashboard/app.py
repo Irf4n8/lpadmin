@@ -1691,18 +1691,19 @@ def copy_instances_summary():
 @app.route("/api/copy/switch_instance", methods=["POST"])
 def switch_copy_instance():
     """ONE call moves every follower's copy link between real (hedging) and real-net (netting),
-    keeping each follower's method / multiplier / reverse / copy_mode. Follow on the target first, then
-    end the old link, so a failure never leaves a follower with no link."""
+    keeping each follower's method / multiplier / reverse / copy_mode. One follow on the target moves the single link."""
     data = request.get_json(silent=True) or {}
     target = str(data.get("to", ""))
-    if target not in REAL_MODES:
-        return jsonify({"error": "to must be 'real' (hedging) or 'real-net' (netting)"}), 400
+    if target not in ALL_BROKERS:
+        return jsonify({"error": "to must be paper | paper-net (simulated) or real | real-net (hedging | netting)"}), 400
     refused = _account_change_refused({"instance": target, "confirm": data.get("confirm")})
     if refused:
         return refused
+    if data.get("confirm") is not True:
+        return jsonify({"error": "Switching needs confirmation.", "needs_confirmation": True}), 412
     lo, hi = int(data.get("start") or 1), int(data.get("end") or FOLLOWER_COUNT)
     emails = [f"{DEFAULT_PREFIX}{i}@{DEFAULT_DOMAIN}" for i in range(max(1, lo), min(FOLLOWER_COUNT, hi) + 1)]
-    before = _follower_real_links()
+    before = _follower_real_links(ALL_BROKERS)
     results = {e: {"email": e, "ok": False, "error": None} for e in emails}
 
     def move(email):
@@ -1712,7 +1713,7 @@ def switch_copy_instance():
             results[email]["ok"] = True          # already on the target
             return
         if not links:
-            results[email]["error"] = "no active real copy link to move"
+            results[email]["error"] = "no active copy link to move"
             return
         base = links.get(target) or links[src]
         if target not in links:
@@ -1722,17 +1723,15 @@ def switch_copy_instance():
             if r.get("status_code") != 200:
                 results[email]["error"] = f"follow on {target}: HTTP {r.get('status_code')} {str(r.get('data'))[:100]}"
                 return
-        if src:
-            u = dashboard_client.unfollow_master(email, MASTER_ID, instance=src)
-            if u.get("status_code") != 200:
-                results[email]["error"] = f"followed on {target} but could not end {src} link: HTTP {u.get('status_code')}"
+        # A follower has ONE link record per master: following on the target already MOVES it. Never unfollow the old
+        # instance afterwards - that would end the moved link. The read-back below verifies the result.
 
     with ThreadPoolExecutor(max_workers=10) as ex:
         list(ex.map(move, emails))
 
     ACTIVE_LINKS_CACHE["data"] = None
     ACTIVE_LINKS_CACHE["timestamp"] = 0
-    after = _follower_real_links()           # verify by reading back, never trust the 200
+    after = _follower_real_links(ALL_BROKERS)           # verify by reading back, never trust the 200
     for e in emails:
         a = after.get(e, {})
         results[e]["ok"] = (set(a) == {target})
@@ -1825,6 +1824,33 @@ def real_check_copy_test():
     missing = [e.split("@")[0] for e in emails if e not in copied]
     return jsonify({"ok": not missing and master_pos > 0, "symbol": symbol, "master_positions": master_pos,
                     "copied": len(copied), "followers": len(emails), "missing": missing[:20], "cleaned_up": True})
+
+
+# ---------------------------------------------------------------- all members (read-only, like the lpadmin Members page)
+@app.route("/api/members", methods=["GET"])
+def all_members():
+    """The master + configured followers from the admin API, with search / status / book filters and paging."""
+    try:
+        everyone = dashboard_client.get_admin_members()
+    except Exception as e:
+        return jsonify({"error": f"could not read members: {e}"}), 502
+    mine = {MASTER_EMAIL.lower(), *(e.lower() for e in _all_emails())}      # only the master + follower1..N
+    members = [m for m in everyone if str(m.get("email", "")).lower() in mine]
+    members.sort(key=lambda m: (m.get("email") != MASTER_EMAIL, int(re.sub(r"\D", "", str(m.get("email", "")).split("@")[0]) or 0)))
+    q = (request.args.get("q") or "").strip().lower()
+    status, book = request.args.get("status") or "", request.args.get("book") or ""
+    try:
+        page, size = max(1, int(request.args.get("page", 1))), min(200, max(1, int(request.args.get("size", 50))))
+    except ValueError:
+        return jsonify({"error": "bad page/size"}), 400
+    rows = [m for m in members
+            if (not q or q in str(m.get("email", "")).lower() or q in str(m.get("name", "")).lower() or q in str(m.get("member_id", "")).lower())
+            and (not status or m.get("status") == status) and (not book or m.get("book") == book)]
+    keep = ("member_id", "email", "name", "status", "book", "account_type", "group_code", "plan", "created_at", "balances")
+    return jsonify({"total": len(members), "matched": len(rows), "page": page, "size": size,
+                    "members": [{k: m.get(k) for k in keep} for m in rows[(page - 1) * size: page * size]],
+                    "statuses": sorted({m.get("status") for m in members if m.get("status")}),
+                    "books": sorted({m.get("book") for m in members if m.get("book")})})
 
 
 @app.route("/api/copy/instance_link", methods=["POST"])
