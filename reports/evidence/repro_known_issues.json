@@ -1,0 +1,42 @@
+{
+  "D1": {
+    "status": 200,
+    "stored_multiplier": 1
+  },
+  "D2": {
+    "status": 200,
+    "order": [
+      {
+        "order_id": "ord_728304375a71e8ae3e",
+        "market_order_id": "ord_728304375a71e8ae3e",
+        "symbol": "BINANCE:BTCUSDT.P",
+        "side": "BUY",
+        "type": "MARKET",
+        "state": "FILLED",
+        "requested_qty": 0.0001,
+        "filled_qty": 0.0001,
+        "avg_fill_price": 64547.1,
+        "copy_ref": "ord_728304375a71e8ae3e",
+        "copy_kind": "master",
+        "created_at": "2026-11-16T11:41:49.750006Z",
+        "updated_at": "2026-11-16T11:41:49.750006Z"
+      }
+    ]
+  },
+  "D3": {
+    "price": 65037.3,
+    "trigger_price": 65137.3
+  },
+  "D4": {
+    "before": [
+      200,
+      3596,
+      -51.0268
+    ],
+    "after": [
+      200,
+      3596,
+      -51.0268
+    ]
+  }
+}

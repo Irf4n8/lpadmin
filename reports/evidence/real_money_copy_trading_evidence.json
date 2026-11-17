@@ -1,25 +1,25 @@
 {
-  "timestamp": "2026-11-12T05:57:48.014805+00:00",
+  "timestamp": "2026-11-17T04:38:32.270933+00:00",
   "instance": "real",
   "target_balance": 100000000.0,
   "total_followers": 100,
-  "passed_phases": 5,
+  "passed_phases": 4,
   "total_phases": 5,
-  "total_time_seconds": 46.23,
+  "total_time_seconds": 53.25,
   "results": [
     {
       "phase": "Balance Synchronization",
       "target_balance": 100000000.0,
       "success_count": 101,
       "total_accounts": 101,
-      "duration_sec": 1.45,
+      "duration_sec": 0.71,
       "status": "PASS"
     },
     {
       "phase": "Copy Link Migration to REAL",
       "real_active_followers": 100,
       "total_followers": 100,
-      "duration_sec": 13.26,
+      "duration_sec": 3.84,
       "status": "PASS"
     },
     {
@@ -37,17 +37,17 @@
       "master_lot": 0.05,
       "symbol": "BINANCE:BTCUSDT.P",
       "side": "SELL",
-      "followers_copied": 100,
+      "followers_copied": 79,
       "total_followers": 100,
-      "replication_rate_pct": 100.0,
-      "status": "PASS"
+      "replication_rate_pct": 79.0,
+      "status": "FAIL"
     },
     {
       "name": "Order 3 (BUY with TP/SL on REAL)",
       "master_lot": 0.1,
       "symbol": "BINANCE:BTCUSDT.P",
-      "tp_price": 73830.1,
-      "sl_price": 73330.1,
+      "tp_price": 65234.0,
+      "sl_price": 64734.0,
       "followers_copied": 100,
       "total_followers": 100,
       "replication_rate_pct": 100.0,

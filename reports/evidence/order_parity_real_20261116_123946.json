@@ -1,0 +1,1132 @@
+{
+  "instance": "real",
+  "orders_requested": 20,
+  "orders_accepted": 18,
+  "refused": [
+    "{\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask yo",
+    "{\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask yo"
+  ],
+  "master": {
+    "total": 18,
+    "filled": 18,
+    "rejected": 0,
+    "cancelled": 0,
+    "other": 0
+  },
+  "master_positions": 18,
+  "followers": 100,
+  "mismatches": [
+    {
+      "email": "follower1@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower2@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower3@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower4@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower5@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower6@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower7@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower8@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower9@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower10@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower11@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower12@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower13@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower14@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower15@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower16@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower17@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower18@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower19@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower20@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower21@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower22@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower23@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower24@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower25@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower26@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower27@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower28@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower29@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower30@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower31@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower32@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower33@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower34@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower35@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower36@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower37@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower38@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower39@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower40@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower41@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower42@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower43@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower44@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower45@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower46@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower47@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower48@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower49@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower50@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower51@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower52@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower53@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower54@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower55@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower56@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower57@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower58@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower59@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower60@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower61@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower62@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower63@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower64@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower65@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower66@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower67@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower68@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower69@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower70@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower71@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower72@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower73@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower74@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower75@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower76@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower77@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower78@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower79@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower80@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower81@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower82@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower83@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower84@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower85@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower86@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower87@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower88@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower89@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower90@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower91@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower92@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower93@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower94@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower95@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower96@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower97@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower98@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower99@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    },
+    {
+      "email": "follower100@mailinator.com",
+      "summary": {
+        "total": 17,
+        "filled": 17,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0
+      }
+    }
+  ],
+  "api_list_lengths": [
+    108,
+    110,
+    156,
+    158,
+    159,
+    187
+  ],
+  "follower_order_totals": [
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17
+  ],
+  "verdict": "FAIL",
+  "duration_place_sec": 2.1
+}

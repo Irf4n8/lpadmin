@@ -1,0 +1,8 @@
+[
+  {
+    "id": "T9",
+    "name": "bulk close with 186 open orders",
+    "verdict": "PASS",
+    "detail": "before: master 186, followers min/max 181/186; bulk close HTTP 200; after 30 s: master left 0, followers left min/max 0/0, followers not flat 0/100"
+  }
+]

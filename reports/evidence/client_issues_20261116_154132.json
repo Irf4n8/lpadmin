@@ -1,0 +1,20 @@
+[
+  {
+    "id": "T2",
+    "name": "partial close: count / lot / P&L",
+    "verdict": "PASS",
+    "detail": "master open qty 0.125, positions 3, reduce pnl -0.0025; followers off: 0/5 []"
+  },
+  {
+    "id": "T3-LIMIT",
+    "name": "edit LIMIT trigger price",
+    "verdict": "PASS",
+    "detail": "PUT /orders/<id>/modify {price} -> HTTP 200; master 63993.9 -> 63893.9 (want 63893.9); followers had a pending LIMIT before: 5/5; followers now at 63893.9: 5/5 (off: []); follower qty [0.1]"
+  },
+  {
+    "id": "T3-STOP",
+    "name": "edit STOP trigger price",
+    "verdict": "FAIL",
+    "detail": "PUT /orders/<id>/modify {price} -> HTTP 200; master 64874.4 -> 64874.4 (want 64974.4); followers had a pending STOP before: 5/5; followers now at 64974.4: 0/5 (off: ['follower1', 'follower2', 'follower3']); follower qty [0.1]"
+  }
+]

@@ -1,0 +1,326 @@
+[
+ {
+  "mode": "multiplier",
+  "test": "MARKET BUY TP only",
+  "ok": true,
+  "detail": "master prot ok=True [('TP', 65069.9)]; followers prot ok 10/10, qty scaled 10/10; want [('TP', 65069.9)]"
+ },
+ {
+  "mode": "multiplier",
+  "test": "MARKET BUY TP only modify TP/SL",
+  "ok": true,
+  "detail": "HTTP 200; master ok=True; followers ok 10/10; want [('TP', 65119.9)]"
+ },
+ {
+  "mode": "multiplier",
+  "test": "MARKET BUY SL only",
+  "ok": true,
+  "detail": "master prot ok=True [('SL', 64469.9)]; followers prot ok 10/10, qty scaled 10/10; want [('SL', 64469.9)]"
+ },
+ {
+  "mode": "multiplier",
+  "test": "MARKET BUY SL only modify TP/SL",
+  "ok": true,
+  "detail": "HTTP 200; master ok=True; followers ok 10/10; want [('SL', 64419.9)]"
+ },
+ {
+  "mode": "multiplier",
+  "test": "MARKET BUY TP+SL",
+  "ok": true,
+  "detail": "master prot ok=True [('SL', 64469.9), ('TP', 65069.9)]; followers prot ok 10/10, qty scaled 10/10; want [('SL', 64469.9), ('TP', 65069.9)]"
+ },
+ {
+  "mode": "multiplier",
+  "test": "MARKET BUY TP+SL modify TP/SL",
+  "ok": true,
+  "detail": "HTTP 200; master ok=True; followers ok 10/10; want [('SL', 64419.9), ('TP', 65119.9)]"
+ },
+ {
+  "mode": "multiplier",
+  "test": "MARKET SELL TP only",
+  "ok": true,
+  "detail": "master prot ok=True [('TP', 64469.9)]; followers prot ok 10/10, qty scaled 10/10; want [('TP', 64469.9)]"
+ },
+ {
+  "mode": "multiplier",
+  "test": "MARKET SELL TP only modify TP/SL",
+  "ok": true,
+  "detail": "HTTP 200; master ok=True; followers ok 10/10; want [('TP', 64519.9)]"
+ },
+ {
+  "mode": "multiplier",
+  "test": "MARKET SELL SL only",
+  "ok": false,
+  "detail": "rejected HTTP 400: {\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask your broker\"}\n"
+ },
+ {
+  "mode": "multiplier",
+  "test": "MARKET SELL TP+SL",
+  "ok": false,
+  "detail": "master prot ok=True [('SL', 65069.9), ('TP', 64469.9)]; followers prot ok 1/10, qty scaled 1/10; want [('SL', 65069.9), ('TP', 64469.9)]"
+ },
+ {
+  "mode": "multiplier",
+  "test": "MARKET SELL TP+SL modify TP/SL",
+  "ok": false,
+  "detail": "HTTP 200; master ok=True; followers ok 1/10; want [('SL', 65019.9), ('TP', 64519.9)]"
+ },
+ {
+  "mode": "multiplier",
+  "test": "LIMIT SELL TP only fill->TP/SL",
+  "ok": false,
+  "detail": "master prot ok=False []; followers prot ok 0/10, qty scaled 10/10; want [('TP', 64485.6)]"
+ },
+ {
+  "mode": "multiplier",
+  "test": "LIMIT SELL SL only fill->TP/SL",
+  "ok": false,
+  "detail": "master prot ok=False []; followers prot ok 0/10, qty scaled 10/10; want [('SL', 65128.7)]"
+ },
+ {
+  "mode": "multiplier",
+  "test": "LIMIT SELL TP+SL fill->TP/SL",
+  "ok": false,
+  "detail": "master prot ok=False []; followers prot ok 0/10, qty scaled 10/10; want [('SL', 65178.2), ('TP', 64578.2)]"
+ },
+ {
+  "mode": "multiplier",
+  "test": "STOP BUY TP only fill->TP/SL",
+  "ok": false,
+  "detail": "master prot ok=False []; followers prot ok 0/10, qty scaled 10/10; want [('TP', 65195.5)]"
+ },
+ {
+  "mode": "multiplier",
+  "test": "STOP SELL SL only fill->TP/SL",
+  "ok": false,
+  "detail": "master prot ok=False []; followers prot ok 0/10, qty scaled 10/10; want [('SL', 65284.1)]"
+ },
+ {
+  "mode": "multiplier",
+  "test": "STOP BUY TP+SL fill->TP/SL",
+  "ok": false,
+  "detail": "master prot ok=False []; followers prot ok 0/10, qty scaled 10/10; want [('SL', 64647.3), ('TP', 65247.3)]"
+ },
+ {
+  "mode": "balance",
+  "test": "MARKET BUY TP only",
+  "ok": true,
+  "detail": "master prot ok=True [('TP', 65267.4)]; followers prot ok 10/10, qty scaled 10/10; want [('TP', 65267.4)]"
+ },
+ {
+  "mode": "balance",
+  "test": "MARKET BUY TP only modify TP/SL",
+  "ok": true,
+  "detail": "HTTP 200; master ok=True; followers ok 10/10; want [('TP', 65317.4)]"
+ },
+ {
+  "mode": "balance",
+  "test": "MARKET BUY SL only",
+  "ok": true,
+  "detail": "master prot ok=True [('SL', 64667.4)]; followers prot ok 10/10, qty scaled 10/10; want [('SL', 64667.4)]"
+ },
+ {
+  "mode": "balance",
+  "test": "MARKET BUY SL only modify TP/SL",
+  "ok": true,
+  "detail": "HTTP 200; master ok=True; followers ok 10/10; want [('SL', 64617.4)]"
+ },
+ {
+  "mode": "balance",
+  "test": "MARKET BUY TP+SL",
+  "ok": true,
+  "detail": "master prot ok=True [('SL', 64667.4), ('TP', 65267.4)]; followers prot ok 10/10, qty scaled 10/10; want [('SL', 64667.4), ('TP', 65267.4)]"
+ },
+ {
+  "mode": "balance",
+  "test": "MARKET BUY TP+SL modify TP/SL",
+  "ok": true,
+  "detail": "HTTP 200; master ok=True; followers ok 10/10; want [('SL', 64617.4), ('TP', 65317.4)]"
+ },
+ {
+  "mode": "balance",
+  "test": "MARKET SELL TP only",
+  "ok": true,
+  "detail": "master prot ok=True [('TP', 64667.4)]; followers prot ok 10/10, qty scaled 10/10; want [('TP', 64667.4)]"
+ },
+ {
+  "mode": "balance",
+  "test": "MARKET SELL TP only modify TP/SL",
+  "ok": true,
+  "detail": "HTTP 200; master ok=True; followers ok 10/10; want [('TP', 64717.4)]"
+ },
+ {
+  "mode": "balance",
+  "test": "MARKET SELL SL only",
+  "ok": true,
+  "detail": "master prot ok=True [('SL', 65267.4)]; followers prot ok 10/10, qty scaled 10/10; want [('SL', 65267.4)]"
+ },
+ {
+  "mode": "balance",
+  "test": "MARKET SELL SL only modify TP/SL",
+  "ok": true,
+  "detail": "HTTP 200; master ok=True; followers ok 10/10; want [('SL', 65217.4)]"
+ },
+ {
+  "mode": "balance",
+  "test": "MARKET SELL TP+SL",
+  "ok": true,
+  "detail": "master prot ok=True [('SL', 65267.4), ('TP', 64667.4)]; followers prot ok 10/10, qty scaled 10/10; want [('SL', 65267.4), ('TP', 64667.4)]"
+ },
+ {
+  "mode": "balance",
+  "test": "MARKET SELL TP+SL modify TP/SL",
+  "ok": true,
+  "detail": "HTTP 200; master ok=True; followers ok 10/10; want [('SL', 65217.4), ('TP', 64717.4)]"
+ },
+ {
+  "mode": "balance",
+  "test": "LIMIT BUY TP only fill->TP/SL",
+  "ok": false,
+  "detail": "master prot ok=False []; followers prot ok 0/10, qty scaled 10/10; want [('TP', 65262.7)]"
+ },
+ {
+  "mode": "balance",
+  "test": "LIMIT BUY SL only fill->TP/SL",
+  "ok": false,
+  "detail": "master prot ok=False []; followers prot ok 0/10, qty scaled 0/10; want [('SL', 64645.4)]"
+ },
+ {
+  "mode": "balance",
+  "test": "LIMIT SELL TP+SL fill->TP/SL",
+  "ok": false,
+  "detail": "master prot ok=False []; followers prot ok 0/10, qty scaled 10/10; want [('SL', 65229.2), ('TP', 64629.2)]"
+ },
+ {
+  "mode": "balance",
+  "test": "STOP BUY TP only fill->TP/SL",
+  "ok": false,
+  "detail": "master prot ok=False []; followers prot ok 0/10, qty scaled 10/10; want [('TP', 65229)]"
+ },
+ {
+  "mode": "balance",
+  "test": "STOP SELL SL only fill->TP/SL",
+  "ok": false,
+  "detail": "master prot ok=False []; followers prot ok 0/10, qty scaled 10/10; want [('SL', 65277.6)]"
+ },
+ {
+  "mode": "balance",
+  "test": "STOP SELL TP+SL fill->TP/SL",
+  "ok": false,
+  "detail": "master prot ok=False []; followers prot ok 0/10, qty scaled 10/10; want [('SL', 65272), ('TP', 64672)]"
+ },
+ {
+  "mode": "equity",
+  "test": "MARKET BUY TP only",
+  "ok": true,
+  "detail": "master prot ok=True [('TP', 65279.9)]; followers prot ok 10/10, qty scaled 10/10; want [('TP', 65279.9)]"
+ },
+ {
+  "mode": "equity",
+  "test": "MARKET BUY TP only modify TP/SL",
+  "ok": true,
+  "detail": "HTTP 200; master ok=True; followers ok 10/10; want [('TP', 65329.9)]"
+ },
+ {
+  "mode": "equity",
+  "test": "MARKET BUY SL only",
+  "ok": true,
+  "detail": "master prot ok=True [('SL', 64679.9)]; followers prot ok 10/10, qty scaled 10/10; want [('SL', 64679.9)]"
+ },
+ {
+  "mode": "equity",
+  "test": "MARKET BUY SL only modify TP/SL",
+  "ok": true,
+  "detail": "HTTP 200; master ok=True; followers ok 10/10; want [('SL', 64629.9)]"
+ },
+ {
+  "mode": "equity",
+  "test": "MARKET BUY TP+SL",
+  "ok": true,
+  "detail": "master prot ok=True [('SL', 64679.9), ('TP', 65279.9)]; followers prot ok 10/10, qty scaled 10/10; want [('SL', 64679.9), ('TP', 65279.9)]"
+ },
+ {
+  "mode": "equity",
+  "test": "MARKET BUY TP+SL modify TP/SL",
+  "ok": true,
+  "detail": "HTTP 200; master ok=True; followers ok 10/10; want [('SL', 64629.9), ('TP', 65329.9)]"
+ },
+ {
+  "mode": "equity",
+  "test": "MARKET SELL TP only",
+  "ok": true,
+  "detail": "master prot ok=True [('TP', 64679.9)]; followers prot ok 10/10, qty scaled 10/10; want [('TP', 64679.9)]"
+ },
+ {
+  "mode": "equity",
+  "test": "MARKET SELL TP only modify TP/SL",
+  "ok": true,
+  "detail": "HTTP 200; master ok=True; followers ok 10/10; want [('TP', 64729.9)]"
+ },
+ {
+  "mode": "equity",
+  "test": "MARKET SELL SL only",
+  "ok": true,
+  "detail": "master prot ok=True [('SL', 65279.9)]; followers prot ok 10/10, qty scaled 10/10; want [('SL', 65279.9)]"
+ },
+ {
+  "mode": "equity",
+  "test": "MARKET SELL SL only modify TP/SL",
+  "ok": true,
+  "detail": "HTTP 200; master ok=True; followers ok 10/10; want [('SL', 65229.9)]"
+ },
+ {
+  "mode": "equity",
+  "test": "MARKET SELL TP+SL",
+  "ok": true,
+  "detail": "master prot ok=True [('SL', 65279.9), ('TP', 64679.9)]; followers prot ok 10/10, qty scaled 10/10; want [('SL', 65279.9), ('TP', 64679.9)]"
+ },
+ {
+  "mode": "equity",
+  "test": "MARKET SELL TP+SL modify TP/SL",
+  "ok": true,
+  "detail": "HTTP 200; master ok=True; followers ok 10/10; want [('SL', 65229.9), ('TP', 64729.9)]"
+ },
+ {
+  "mode": "equity",
+  "test": "LIMIT SELL TP only fill->TP/SL",
+  "ok": false,
+  "detail": "master prot ok=False []; followers prot ok 0/10, qty scaled 10/10; want [('TP', 64682.4)]"
+ },
+ {
+  "mode": "equity",
+  "test": "LIMIT BUY SL only fill->TP/SL",
+  "ok": false,
+  "detail": "master prot ok=False []; followers prot ok 0/10, qty scaled 10/10; want [('SL', 64701.2)]"
+ },
+ {
+  "mode": "equity",
+  "test": "LIMIT SELL TP+SL place",
+  "ok": false,
+  "detail": "rejected HTTP 400: {\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask your broker\"}\n"
+ },
+ {
+  "mode": "equity",
+  "test": "LIMIT BUY TP+SL fill->TP/SL",
+  "ok": false,
+  "detail": "master prot ok=False []; followers prot ok 0/10, qty scaled 10/10; want [('SL', 64684.1), ('TP', 65284.1)]"
+ },
+ {
+  "mode": "equity",
+  "test": "STOP BUY TP only fill->TP/SL",
+  "ok": false,
+  "detail": "master prot ok=False []; followers prot ok 0/10, qty scaled 10/10; want [('TP', 65268.7)]"
+ },
+ {
+  "mode": "equity",
+  "test": "STOP SELL SL only fill->TP/SL",
+  "ok": false,
+  "detail": "master prot ok=False []; followers prot ok 0/10, qty scaled 10/10; want [('SL', 65277.5)]"
+ },
+ {
+  "mode": "equity",
+  "test": "STOP SELL TP+SL fill->TP/SL",
+  "ok": false,
+  "detail": "master prot ok=False []; followers prot ok 0/10, qty scaled 10/10; want [('SL', 65238), ('TP', 64638)]"
+ }
+]

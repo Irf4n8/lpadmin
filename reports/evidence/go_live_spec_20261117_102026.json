@@ -1,0 +1,1154 @@
+{
+  "F006": {
+    "verdict": "PASS",
+    "detail": "master BUY 0.01 accepted=200; followers at 0.02 (2x): 10/10",
+    "priority": "P0",
+    "scenario": "Master places BUY market order Pre: Master and 1+ active followers; market open."
+  },
+  "F007": {
+    "verdict": "PASS",
+    "detail": "SELL copied as SELL x2 on 10/10; follower order copy_ref -> master: True",
+    "priority": "P0",
+    "scenario": "Master places SELL market order Pre: Master and followers active; market open."
+  },
+  "F008": {
+    "verdict": "FAIL",
+    "detail": "LIMIT accepted=False; followers with mirrored pending at 64614 qty 0.02: 0/10",
+    "priority": "P0",
+    "scenario": "Master places limit order Pre: Strategy allows pending order copying."
+  },
+  "F010": {
+    "verdict": "FAIL",
+    "detail": "modify HTTP 404; followers moved to 64514: 0/10; follower order ids kept same (no recreate) not verifiable via API",
+    "priority": "P0",
+    "scenario": "Master modifies pending-order price Pre: Master and follower both hold unfilled pending or"
+  },
+  "F011": {
+    "verdict": "FAIL",
+    "detail": "cancel HTTP 404; follower pending orders left: 0",
+    "priority": "P0",
+    "scenario": "Master cancels pending order Pre: Unfilled pending order exists on master and follower."
+  },
+  "F009": {
+    "verdict": "PASS",
+    "detail": "STOP accepted=True; followers with mirrored pending at 65514 qty 0.02: 10/10",
+    "priority": "P0",
+    "scenario": "Master places stop order Pre: Pending order copying enabled."
+  },
+  "F014": {
+    "verdict": "PASS",
+    "detail": "SL set HTTP 200; master protection [('SL', 64255.3), ('TP', 65855.3)]; followers not matching: 0/10 e.g. [('SL', 64255.3), ('TP', 65855.3)]",
+    "priority": "P0",
+    "scenario": "Master modifies stop-loss (SL) Pre: Active position open with existing or no SL."
+  },
+  "F015": {
+    "verdict": "PASS",
+    "detail": "TP modify HTTP 200; master [('SL', 64255.3), ('TP', 65955.3)]; followers not matching: 0/10",
+    "priority": "P0",
+    "scenario": "Master modifies take-profit (TP) Pre: Active position open."
+  },
+  "R008": {
+    "verdict": "PASS",
+    "detail": "two SL edits 50 ms apart: master [('SL', 64105.3), ('TP', 65955.3)]; followers differing: 0/10",
+    "priority": "P0",
+    "scenario": "Master modifies SL twice rapidly Pre: Master adjusts SL to 1.0820, then 50ms later to 1.08"
+  },
+  "F017": {
+    "verdict": "PASS",
+    "detail": "3 market positions (BTC, ETH, BTC): followers with 3 positions 10/10",
+    "priority": "P0",
+    "scenario": "Master opens multiple positions Pre: Master has multiple trades across different pairs (EU"
+  },
+  "R011": {
+    "verdict": "PASS",
+    "detail": "3 orders same symbol 1 s apart each copied independently (hedging)",
+    "priority": "P0",
+    "scenario": "Master sends multiple orders for same symbol Pre: Master enters 3 separate BUY trades on E"
+  },
+  "F018": {
+    "verdict": "PASS",
+    "detail": "follower2 balance set to 1 (HTTP 200); master 0.5 BTC accepted; others filled 9/9; follower2 qty 0, its order [('FILLED', 0.02)]",
+    "priority": "P0",
+    "scenario": "Follower has insufficient margin Pre: Follower free margin is below required margin for ca"
+  },
+  "P009": {
+    "verdict": "PASS",
+    "detail": "rejected follower does not affect master or others; master P&L unaffected (flat after clean)",
+    "priority": "P0",
+    "scenario": "Follower trade rejected by broker Pre: Follower order rejected at placement time."
+  },
+  "F019": {
+    "verdict": "PASS",
+    "detail": "master oversize refused HTTP 400 {\"error\":\"insufficient free margin: required 6502410000000.00, free 99999982.38\"; followers with positions: 0",
+    "priority": "P0",
+    "scenario": "Master order rejected by broker Pre: Master order fails broker pre-trade validation (e.g.,"
+  },
+  "F025": {
+    "verdict": "PASS",
+    "detail": "follower1 closed manually (HTTP 200), master close HTTP 200; no rejected orders on follower1: True; others closed True",
+    "priority": "P0",
+    "scenario": "Follower manually closes copied trade Pre: Follower has active copied position."
+  },
+  "F030": {
+    "verdict": "PASS",
+    "detail": "follower order -> master order id link present: True; history row: {'entry_price': 65012.3, 'exit_price': 65012.3, 'realized_pnl': 0, 'opened_at': '2026-11-17T04:44:40.248688Z', 'executed_at': '2026-11-17T04:44:40.993823Z'}",
+    "priority": "P1",
+    "scenario": "Verify copy trading history Pre: Multiple master trades opened and closed over time."
+  },
+  "F003": {
+    "verdict": "PASS",
+    "detail": "follow HTTP 200; master follower count 99 -> 100; link status active (no Pending_Activation state exposed)",
+    "priority": "P0",
+    "scenario": "Link follower to master Pre: Master account is active; follower account has sufficient fre"
+  },
+  "F005": {
+    "verdict": "PASS",
+    "detail": "unfollow HTTP 200; later master trade copied to unfollowed account: False",
+    "priority": "P0",
+    "scenario": "Unsubscribe follower from master Pre: Follower currently actively copying master."
+  },
+  "F004": {
+    "verdict": "PASS",
+    "detail": "linked follower is in the fan-out and active (copies at its multiplier)",
+    "priority": "P0",
+    "scenario": "Subscribe follower to master strategy Pre: Follower linked to master; allocation mode conf"
+  },
+  "C002": {
+    "verdict": "PASS",
+    "detail": "multiplier 0.5 with master 0.04 -> followers [0.02] (want 0.02)",
+    "priority": "P0",
+    "scenario": "Lot multiplier copying Pre: Follower configures Multiplier = 0.5x."
+  },
+  "C014": {
+    "verdict": "PASS",
+    "detail": "changed 0.5x -> 2x mid-trade: existing position untouched {0.04}; next copy at new ratio (total {0.12}, want 0.04 + 0.08)",
+    "priority": "P0",
+    "scenario": "Change copy ratio during active trade Pre: Follower holds 1.0 lot copied at 1.0x ratio."
+  },
+  "R021": {
+    "verdict": "PASS",
+    "detail": "multiplier change applies to the next copied order only",
+    "priority": "P0",
+    "scenario": "Subscription setting changed while trade is being copied Pre: Follower edits multiplier (f"
+  },
+  "C003": {
+    "verdict": "PASS",
+    "detail": "equity method, follower equity 25M vs master 100M, master 0.04 -> follower 0.01 (want 0.01)",
+    "priority": "P0",
+    "scenario": "Equity proportional copying Pre: Master Equity = $10,000; Follower Equity = $2,500 (Ratio "
+  },
+  "C004": {
+    "verdict": "PASS",
+    "detail": "balance method, follower 50M vs master 100M, master 0.04 -> follower 0.02 (want 0.02)",
+    "priority": "P0",
+    "scenario": "Balance proportional copying Pre: Master Balance = $20,000; Follower Balance = $10,000 (Ra"
+  },
+  "C007": {
+    "verdict": "FAIL",
+    "detail": "multiplier 0 -> HTTP 200, stored multiplier 1 (silently coerced to 1x instead of rejected)",
+    "priority": "P1",
+    "scenario": "Set zero lot multiplier Pre: Follower edits settings and inputs 0 as multiplier."
+  },
+  "C008": {
+    "verdict": "PASS",
+    "detail": "multiplier -1 -> HTTP 400 {\"error\":\"The multiplier can't be below 0.01.\"}\n",
+    "priority": "P1",
+    "scenario": "Set negative multiplier Pre: Follower enters negative multiplier (-1.0)."
+  },
+  "C013": {
+    "verdict": "PASS",
+    "detail": "reverse copy: master BUY -> follower3 net -0.02 (direction filter BUY-only/SELL-only is not exposed by the API; reverse tested instead)",
+    "priority": "P1",
+    "scenario": "Configure BUY-only or SELL-only copying Pre: Follower configures Directional Filter = 'BUY"
+  },
+  "C015": {
+    "verdict": "PASS",
+    "detail": "unfollow with 1 open copied position: HTTP 200, position kept 1, new master trade copied 0; master close later closes it? open now 0",
+    "priority": "P0",
+    "scenario": "Disable copying with open positions Pre: Follower has 2 open copied positions."
+  },
+  "R018": {
+    "verdict": "PASS",
+    "detail": "unfollow while position open -> position stays open (manual close needed): 0 open after master closed",
+    "priority": "P0",
+    "scenario": "Follower unsubscribes while copied position is open Pre: Follower has active open position"
+  },
+  "R001": {
+    "verdict": "PASS",
+    "detail": "2 concurrent BUY: accepted [200, 200]; followers with exactly 2 positions 10/10",
+    "priority": "P0",
+    "scenario": "Master places two BUY orders simultaneously Pre: Master triggers 2 concurrent API BUY requ"
+  },
+  "R002": {
+    "verdict": "PASS",
+    "detail": "BUY+SELL concurrent in hedging: followers hold 2 positions (one each): 10/10; net [0.0]",
+    "priority": "P0",
+    "scenario": "Master places BUY and SELL simultaneously Pre: Master account in hedging mode fires BUY 1 "
+  },
+  "R003": {
+    "verdict": "PASS",
+    "detail": "10 orders in 2.1s: accepted 10; followers with 10 positions 10/10",
+    "priority": "P0",
+    "scenario": "Master places 10 orders within 1 second Pre: Master runs EA / algorithmic burst sending 10"
+  },
+  "R004": {
+    "verdict": "PASS",
+    "detail": "place LIMIT then cancel 20 ms later (cancel HTTP 200); pending left on master+followers: 0",
+    "priority": "P0",
+    "scenario": "Master places order and immediately cancels it Pre: Master submits limit order and issues "
+  },
+  "R005": {
+    "verdict": "PASS",
+    "detail": "open + close <150 ms: orphan follower positions 0/10; master open 0",
+    "priority": "P0",
+    "scenario": "Master opens and immediately closes position Pre: Master scalp lasts < 150ms."
+  },
+  "R019": {
+    "verdict": "PASS",
+    "detail": "two simultaneous follows -> HTTP [200, 200], link records for follower100: 1",
+    "priority": "P0",
+    "scenario": "Two subscription requests sent simultaneously Pre: User double-clicks 'Subscribe' button o"
+  },
+  "R020": {
+    "verdict": "PASS",
+    "detail": "two simultaneous unfollows -> HTTP [404, 200]; no error 5xx: True",
+    "priority": "P1",
+    "scenario": "Two unsubscribe requests sent simultaneously Pre: Duplicate unsubscribe requests sent."
+  },
+  "R028": {
+    "verdict": "FAIL",
+    "detail": "50 simultaneous unfollows: HTTP ok 49/50; active followers now 50 (want 50)",
+    "priority": "P0",
+    "scenario": "50 followers unsubscribe simultaneously Pre: 50 users unsubscribe during high volatility."
+  },
+  "R027": {
+    "verdict": "PASS",
+    "detail": "50 simultaneous follows: HTTP ok 50/50; active followers now 100 (want 100)",
+    "priority": "P0",
+    "scenario": "50 followers subscribe simultaneously Pre: Master launches popular strategy; 50 users clic"
+  },
+  "R024": {
+    "verdict": "PASS",
+    "detail": "1 master BUY with 100 followers: followers with exactly 1 position of 0.02: 100/100",
+    "priority": "P0",
+    "scenario": "One master places BUY with 100 followers Pre: 100 active followers connected across multip"
+  },
+  "R023": {
+    "verdict": "PASS",
+    "detail": "10-follower cohort inside the same fan-out: 10/10",
+    "priority": "P0",
+    "scenario": "One master places BUY with 10 active followers Pre: 10 active followers subscribed with di"
+  },
+  "R032": {
+    "verdict": "PASS",
+    "detail": "follower and master close the same moment: open master 0, followers 0",
+    "priority": "P0",
+    "scenario": "One follower manually closes while master closes Pre: Follower clicks Close on broker app "
+  },
+  "R051": {
+    "verdict": "PASS",
+    "detail": "master closes BUY then opens SELL at once: master net -0.01, follower net [-0.02] (want -0.02)",
+    "priority": "P0",
+    "scenario": "Master closes and reopens same symbol immediately Pre: Master closes BUY EURUSD and opens "
+  },
+  "R074": {
+    "verdict": "PASS",
+    "detail": "hedging: opposite SELL opens a second position instead of netting; master 2 positions, followers [2]",
+    "priority": "P0",
+    "scenario": "Master reverses position while follower close is delayed Pre: Master flips Long to Short; "
+  },
+  "N003": {
+    "verdict": "PASS",
+    "detail": "invalid master id -> HTTP 400 {'error': \"Master accounts can't follow another master.\"}",
+    "priority": "P1",
+    "scenario": "Invalid master account ID Pre: Malicious or malformed API request."
+  },
+  "N010": {
+    "verdict": "PASS",
+    "detail": "master follows itself -> HTTP 400 {'error': \"Master accounts can't follow another master.\"}",
+    "priority": "P0",
+    "scenario": "Master attempts to copy own account Pre: Master trader attempts to subscribe to their own "
+  },
+  "N011": {
+    "verdict": "PASS",
+    "detail": "master follows its own follower (circular) -> HTTP 400 {'error': \"Master accounts can't follow another master.\"}",
+    "priority": "P0",
+    "scenario": "Circular master-follower relationship Pre: Account A is master for Account B."
+  },
+  "N012": {
+    "verdict": "PASS",
+    "detail": "no token: positions 401, order 401, copy/follows 401",
+    "priority": "P0",
+    "scenario": "Copy trading API called without authorization token Pre: Unauthenticated client."
+  },
+  "N013": {
+    "verdict": "PASS",
+    "detail": "follower token on admin members list -> HTTP 401; follower endpoints return only the caller's own data (token-bound, no id parameter)",
+    "priority": "P0",
+    "scenario": "Follower attempts to view another follower's data Pre: Follower A authenticated with valid"
+  },
+  "N005": {
+    "verdict": "FAIL",
+    "detail": "qty 0.0001 (below min step) -> HTTP 200 {'order': {'order_id': 'ord_401ee29352f0911832', 'market_ord",
+    "priority": "P0",
+    "scenario": "Follower lot below broker minimum Pre: Calculated follower lot is 0.003; broker minimum lo"
+  },
+  "N006": {
+    "verdict": "PASS",
+    "detail": "qty 10,000,000 -> HTTP 400 {\"error\":\"insufficient free margin: required 65024000000.00,",
+    "priority": "P0",
+    "scenario": "Follower lot above broker maximum Pre: Calculated follower lot is 150.0; broker max lot pe"
+  },
+  "N014": {
+    "verdict": "PASS",
+    "detail": "invalid config: text multiplier 400, unknown method 400, negative 400",
+    "priority": "P1",
+    "scenario": "Invalid risk configuration saved Pre: Follower inputs negative max drawdown (-20%) or text"
+  },
+  "N007": {
+    "verdict": "PASS",
+    "detail": "BUY with SL above price / TP below price -> HTTP 400 {\"error\":\"SL crosses current price\"}\n",
+    "priority": "P0",
+    "scenario": "Broker rejects invalid SL/TP Pre: Master SL is too close to market price (violates broker "
+  },
+  "P002": {
+    "verdict": "PASS",
+    "detail": "master 0.05 vs follower 0.1: master P&L -0.8250, follower P&L [-1.65] (want ~-1.6500); outside tolerance: 0/10",
+    "priority": "P0",
+    "scenario": "Master and follower have different quantities Pre: Master trades 10 lots; Follower trades "
+  },
+  "P003": {
+    "verdict": "PASS",
+    "detail": "follower2 partially closes 0.03 of 0.08 -> 0.05 left; master unaffected 0.04; follower1 fully closed manually",
+    "priority": "P0",
+    "scenario": "Follower partially closes trade Pre: Follower holds 1.0 lot; closes 0.4 lot manually or vi"
+  },
+  "P001": {
+    "verdict": "PASS",
+    "detail": "entry/exit price per side recorded: master (64990.1, 64990), follower (64990.1, 64990) (fill prices may differ by slippage; P&L is computed from each side's own fills)",
+    "priority": "P0",
+    "scenario": "Master and follower execute at different prices (Slippage P&L) Pre: Master fills BUY EURUS"
+  },
+  "F001": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Account onboarding / KYC / broker-credential binding is a UI + back-office flow with no OMS API.",
+    "priority": "P0",
+    "scenario": "Create a master trader account Pre: User is registered and passed basic onboarding."
+  },
+  "F002": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Account onboarding / KYC / broker-credential binding is a UI + back-office flow with no OMS API.",
+    "priority": "P0",
+    "scenario": "Create a follower account Pre: User registered and KYC verified."
+  },
+  "F016": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Trailing SL is not exposed by the position protection API used here.",
+    "priority": "P1",
+    "scenario": "Master uses trailing stop-loss Pre: Trailing SL supported by copy engine / broker."
+  },
+  "F021": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a network or socket disconnect / browser refresh that the API test cannot induce.",
+    "priority": "P0",
+    "scenario": "Master account disconnects during trading Pre: Master broker API connection drops."
+  },
+  "F022": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a network or socket disconnect / browser refresh that the API test cannot induce.",
+    "priority": "P0",
+    "scenario": "Follower account disconnects during trading Pre: Follower API token expires or socket disc"
+  },
+  "F023": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a network or socket disconnect / browser refresh that the API test cannot induce.",
+    "priority": "P1",
+    "scenario": "Refresh copy trading page UI Pre: Active trades running; UI open."
+  },
+  "R026": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a network or socket disconnect / browser refresh that the API test cannot induce.",
+    "priority": "P0",
+    "scenario": "One follower disconnects while others remain online Pre: Follower #3 network socket drops."
+  },
+  "R033": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a network or socket disconnect / browser refresh that the API test cannot induce.",
+    "priority": "P0",
+    "scenario": "Follower disconnects during master BUY Pre: Follower broker connection drops while order i"
+  },
+  "R034": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a network or socket disconnect / browser refresh that the API test cannot induce.",
+    "priority": "P0",
+    "scenario": "Master disconnects immediately after submitting order Pre: Master submits order, network d"
+  },
+  "R035": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a network or socket disconnect / browser refresh that the API test cannot induce.",
+    "priority": "P0",
+    "scenario": "Network reconnects while order acknowledgement is pending Pre: Follower order sent; networ"
+  },
+  "R039": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a network or socket disconnect / browser refresh that the API test cannot induce.",
+    "priority": "P0",
+    "scenario": "WebSocket reconnects during rapid trading Pre: WebSocket connection breaks during high-vol"
+  },
+  "I009": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a network or socket disconnect / browser refresh that the API test cannot induce.",
+    "priority": "P0",
+    "scenario": "Network partition between Copy Engine and Broker FIX / WebSocket Gateway Pre: Gateway conn"
+  },
+  "F024": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Symbol-mapping tables between brokers are not exposed (single broker, BINANCE: symbols).",
+    "priority": "P0",
+    "scenario": "Master trades different symbols with mapping rules Pre: Master trades 'GOLD' on Broker A, "
+  },
+  "N004": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Symbol-mapping tables between brokers are not exposed (single broker, BINANCE: symbols).",
+    "priority": "P0",
+    "scenario": "Unsupported follower symbol Pre: Master trades exotic pair (e.g., USDRUB) not offered by f"
+  },
+  "R065": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Symbol-mapping tables between brokers are not exposed (single broker, BINANCE: symbols).",
+    "priority": "P0",
+    "scenario": "Symbol mapping changes during active copied position Pre: Admin edits symbol mapping from "
+  },
+  "F026": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "No pause / resume endpoint exists on this platform (only follow / unfollow).",
+    "priority": "P0",
+    "scenario": "Master trades when follower is paused Pre: Follower status is 'Paused'."
+  },
+  "F027": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "No pause / resume endpoint exists on this platform (only follow / unfollow).",
+    "priority": "P0",
+    "scenario": "Resume copying Pre: Follower resumes subscription from 'Paused' state."
+  },
+  "R015": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "No pause / resume endpoint exists on this platform (only follow / unfollow).",
+    "priority": "P0",
+    "scenario": "Follower pauses while master places order Pre: Follower pauses subscription concurrent wit"
+  },
+  "R016": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "No pause / resume endpoint exists on this platform (only follow / unfollow).",
+    "priority": "P0",
+    "scenario": "Follower resumes while master places order Pre: Follower resumes copying exactly when mast"
+  },
+  "R017": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "No pause / resume endpoint exists on this platform (only follow / unfollow).",
+    "priority": "P0",
+    "scenario": "Follower rapidly pauses and resumes Pre: Follower clicks Pause/Resume 5 times in 2 seconds"
+  },
+  "R062": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "No pause / resume endpoint exists on this platform (only follow / unfollow).",
+    "priority": "P0",
+    "scenario": "Older subscription update arrives after newer update Pre: Network reordering causes update"
+  },
+  "F028": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Single broker and one leverage / contract-size model on staging; cannot configure mismatches.",
+    "priority": "P0",
+    "scenario": "Master and follower have different leverage Pre: Master account leverage is 1:100; followe"
+  },
+  "F029": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Single broker and one leverage / contract-size model on staging; cannot configure mismatches.",
+    "priority": "P0",
+    "scenario": "Master and follower use different brokers Pre: Master on Broker X; Follower on Broker Y."
+  },
+  "G002": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Single broker and one leverage / contract-size model on staging; cannot configure mismatches.",
+    "priority": "P0",
+    "scenario": "Master has 1:500 leverage, follower account is restricted to 1:30 (ESMA retail rules) Pre:"
+  },
+  "C018": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Single broker and one leverage / contract-size model on staging; cannot configure mismatches.",
+    "priority": "P0",
+    "scenario": "Master and follower have different contract sizes Pre: Master broker standard lot = 100,00"
+  },
+  "C001": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Risk settings (fixed lot, min/max lot, daily loss, drawdown, max positions, symbol blacklist, slippage) are not in the follow API (methods: balance / equity / multiplier only).",
+    "priority": "P0",
+    "scenario": "Fixed lot copying Pre: Follower configures Copy Mode = 'Fixed Lot', Value = 0.10 lot."
+  },
+  "C005": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Risk settings (fixed lot, min/max lot, daily loss, drawdown, max positions, symbol blacklist, slippage) are not in the follow API (methods: balance / equity / multiplier only).",
+    "priority": "P0",
+    "scenario": "Set minimum lot threshold Pre: Follower configures Min Lot = 0.05 lot (Broker minimum = 0."
+  },
+  "C006": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Risk settings (fixed lot, min/max lot, daily loss, drawdown, max positions, symbol blacklist, slippage) are not in the follow API (methods: balance / equity / multiplier only).",
+    "priority": "P0",
+    "scenario": "Set maximum lot threshold Pre: Follower configures Max Lot = 2.0 lots."
+  },
+  "C009": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Risk settings (fixed lot, min/max lot, daily loss, drawdown, max positions, symbol blacklist, slippage) are not in the follow API (methods: balance / equity / multiplier only).",
+    "priority": "P0",
+    "scenario": "Set maximum daily loss limit Pre: Follower sets Max Daily Loss = $500."
+  },
+  "C010": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Risk settings (fixed lot, min/max lot, daily loss, drawdown, max positions, symbol blacklist, slippage) are not in the follow API (methods: balance / equity / multiplier only).",
+    "priority": "P0",
+    "scenario": "Set maximum drawdown limit Pre: Follower configures Max Drawdown = 15%."
+  },
+  "C011": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Risk settings (fixed lot, min/max lot, daily loss, drawdown, max positions, symbol blacklist, slippage) are not in the follow API (methods: balance / equity / multiplier only).",
+    "priority": "P0",
+    "scenario": "Set maximum open positions limit Pre: Follower configures Max Open Positions = 3."
+  },
+  "C012": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Risk settings (fixed lot, min/max lot, daily loss, drawdown, max positions, symbol blacklist, slippage) are not in the follow API (methods: balance / equity / multiplier only).",
+    "priority": "P1",
+    "scenario": "Exclude a symbol Pre: Follower adds 'BTCUSD' and 'XAUUSD' to Symbol Blacklist."
+  },
+  "C016": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Risk settings (fixed lot, min/max lot, daily loss, drawdown, max positions, symbol blacklist, slippage) are not in the follow API (methods: balance / equity / multiplier only).",
+    "priority": "P0",
+    "scenario": "Follower equity becomes insufficient Pre: Follower equity drops near margin call level."
+  },
+  "C017": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Risk settings (fixed lot, min/max lot, daily loss, drawdown, max positions, symbol blacklist, slippage) are not in the follow API (methods: balance / equity / multiplier only).",
+    "priority": "P0",
+    "scenario": "Configure slippage limit Pre: Follower configures Max Slippage = 3 pips."
+  },
+  "R045": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Risk settings (fixed lot, min/max lot, daily loss, drawdown, max positions, symbol blacklist, slippage) are not in the follow API (methods: balance / equity / multiplier only).",
+    "priority": "P0",
+    "scenario": "Two trades arrive when only one position slot remains Pre: Max Positions = 5; Follower cur"
+  },
+  "R046": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Risk settings (fixed lot, min/max lot, daily loss, drawdown, max positions, symbol blacklist, slippage) are not in the follow API (methods: balance / equity / multiplier only).",
+    "priority": "P0",
+    "scenario": "Two trades arrive near maximum exposure limit Pre: Max exposure = $10,000; Current exposur"
+  },
+  "R047": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Risk settings (fixed lot, min/max lot, daily loss, drawdown, max positions, symbol blacklist, slippage) are not in the follow API (methods: balance / equity / multiplier only).",
+    "priority": "P0",
+    "scenario": "Daily loss threshold reached while order is being copied Pre: Closed loss is $490; Max Dai"
+  },
+  "R055": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Risk settings (fixed lot, min/max lot, daily loss, drawdown, max positions, symbol blacklist, slippage) are not in the follow API (methods: balance / equity / multiplier only).",
+    "priority": "P0",
+    "scenario": "Risk limit updated while multiple trades arrive Pre: Follower lowers Max Daily Loss while "
+  },
+  "N008": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Risk settings (fixed lot, min/max lot, daily loss, drawdown, max positions, symbol blacklist, slippage) are not in the follow API (methods: balance / equity / multiplier only).",
+    "priority": "P0",
+    "scenario": "Master account has no available margin Pre: Master account margin level < 100%."
+  },
+  "N009": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Risk settings (fixed lot, min/max lot, daily loss, drawdown, max positions, symbol blacklist, slippage) are not in the follow API (methods: balance / equity / multiplier only).",
+    "priority": "P0",
+    "scenario": "Follower account is read-only or disabled Pre: Follower broker password set to Investor (r"
+  },
+  "R006": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs injected broker latency or partial fills; the staging fill engine is instant.",
+    "priority": "P0",
+    "scenario": "Master modifies SL while follower order is being filled Pre: Master SL update arrives whil"
+  },
+  "R007": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs injected broker latency or partial fills; the staging fill engine is instant.",
+    "priority": "P0",
+    "scenario": "Master modifies TP while follower order is pending Pre: Follower pending limit order await"
+  },
+  "R009": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs injected broker latency or partial fills; the staging fill engine is instant.",
+    "priority": "P0",
+    "scenario": "Master partially closes while follower order is pending Pre: Master opens 2 lots, then imm"
+  },
+  "R010": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs injected broker latency or partial fills; the staging fill engine is instant.",
+    "priority": "P0",
+    "scenario": "Master closes position while follower execution is delayed Pre: Follower broker latency is"
+  },
+  "R036": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs injected broker latency or partial fills; the staging fill engine is instant.",
+    "priority": "P0",
+    "scenario": "Broker response delayed while master closes Pre: Follower broker takes 5 seconds to reply;"
+  },
+  "R041": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs injected broker latency or partial fills; the staging fill engine is instant.",
+    "priority": "P0",
+    "scenario": "Master and follower brokers have different execution speeds Pre: Master fills in 10ms; Fol"
+  },
+  "R058": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs injected broker latency or partial fills; the staging fill engine is instant.",
+    "priority": "P0",
+    "scenario": "Follower receives partial fill while master fully closes Pre: Follower broker partially fi"
+  },
+  "R064": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs injected broker latency or partial fills; the staging fill engine is instant.",
+    "priority": "P0",
+    "scenario": "Master closes position while follower broker is in maintenance Pre: Follower broker offlin"
+  },
+  "R069": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs injected broker latency or partial fills; the staging fill engine is instant.",
+    "priority": "P0",
+    "scenario": "Copy service recovers while broker sends delayed fill Pre: Service rebooted; broker sends "
+  },
+  "R012": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Infrastructure fault injection (duplicate webhooks, worker races, restarts, queue replay, failover) needs access to the platform's servers.",
+    "priority": "P0",
+    "scenario": "Duplicate master trade event delivered Pre: Network glitch causes master broker webhook to"
+  },
+  "R037": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Infrastructure fault injection (duplicate webhooks, worker races, restarts, queue replay, failover) needs access to the platform's servers.",
+    "priority": "P0",
+    "scenario": "Broker sends duplicate fill event Pre: Broker message broker resends identical execution r"
+  },
+  "R038": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Infrastructure fault injection (duplicate webhooks, worker races, restarts, queue replay, failover) needs access to the platform's servers.",
+    "priority": "P0",
+    "scenario": "Broker sends out-of-order execution events Pre: Network routes 'Order Filled' event before"
+  },
+  "R042": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Infrastructure fault injection (duplicate webhooks, worker races, restarts, queue replay, failover) needs access to the platform's servers.",
+    "priority": "P0",
+    "scenario": "Two workers process same copy event concurrently Pre: Distributed consumer group assigns m"
+  },
+  "R043": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Infrastructure fault injection (duplicate webhooks, worker races, restarts, queue replay, failover) needs access to the platform's servers.",
+    "priority": "P0",
+    "scenario": "Backend service restarts during order processing Pre: Docker container / Kubernetes pod ki"
+  },
+  "R044": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Infrastructure fault injection (duplicate webhooks, worker races, restarts, queue replay, failover) needs access to the platform's servers.",
+    "priority": "P0",
+    "scenario": "Message queue replays events after recovery Pre: Kafka offset reset or replay of past 1 ho"
+  },
+  "R061": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Infrastructure fault injection (duplicate webhooks, worker races, restarts, queue replay, failover) needs access to the platform's servers.",
+    "priority": "P0",
+    "scenario": "Two master events have identical timestamps Pre: Two distinct master trades executed at id"
+  },
+  "R063": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Infrastructure fault injection (duplicate webhooks, worker races, restarts, queue replay, failover) needs access to the platform's servers.",
+    "priority": "P0",
+    "scenario": "Risk service and execution service process same trade concurrently Pre: Microservices comm"
+  },
+  "R067": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Infrastructure fault injection (duplicate webhooks, worker races, restarts, queue replay, failover) needs access to the platform's servers.",
+    "priority": "P0",
+    "scenario": "Two identical API retries reach separate backend instances Pre: Follower client retries su"
+  },
+  "R071": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Infrastructure fault injection (duplicate webhooks, worker races, restarts, queue replay, failover) needs access to the platform's servers.",
+    "priority": "P0",
+    "scenario": "Two settlement workers calculate same performance fee Pre: Cron schedule triggers duplicat"
+  },
+  "I001": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Infrastructure fault injection (duplicate webhooks, worker races, restarts, queue replay, failover) needs access to the platform's servers.",
+    "priority": "P0",
+    "scenario": "Primary copy database fails over to replica during active trade wave Pre: Master executes "
+  },
+  "I002": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Infrastructure fault injection (duplicate webhooks, worker races, restarts, queue replay, failover) needs access to the platform's servers.",
+    "priority": "P0",
+    "scenario": "Message queue latency spikes (Stale Trade Protection) Pre: Kafka broker latency spikes, ca"
+  },
+  "I003": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Infrastructure fault injection (duplicate webhooks, worker races, restarts, queue replay, failover) needs access to the platform's servers.",
+    "priority": "P0",
+    "scenario": "Signal processing failure routes message to Dead-Letter Queue (DLQ) Pre: Corrupted payload"
+  },
+  "I006": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Infrastructure fault injection (duplicate webhooks, worker races, restarts, queue replay, failover) needs access to the platform's servers.",
+    "priority": "P1",
+    "scenario": "Redis Cache eviction / memory saturation under heavy fan-out Pre: Redis instance reaches m"
+  },
+  "I008": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Infrastructure fault injection (duplicate webhooks, worker races, restarts, queue replay, failover) needs access to the platform's servers.",
+    "priority": "P0",
+    "scenario": "Zero-downtime rolling deployment of copy engine microservice Pre: Engine version 2.1 deplo"
+  },
+  "I010": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Infrastructure fault injection (duplicate webhooks, worker races, restarts, queue replay, failover) needs access to the platform's servers.",
+    "priority": "P0",
+    "scenario": "Cold start recovery after total datacenter power loss Pre: All servers abruptly lose power"
+  },
+  "R013": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a second master, admin suspend, stop-out engine, or fee-settlement jobs not available through the follower API; not exercised in this pass.",
+    "priority": "P0",
+    "scenario": "Follower subscribes while master places BUY Pre: Follower 'Subscribe' API call arrives at "
+  },
+  "R014": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a second master, admin suspend, stop-out engine, or fee-settlement jobs not available through the follower API; not exercised in this pass.",
+    "priority": "P0",
+    "scenario": "Follower unsubscribes while master places BUY Pre: Unsubscribe request arrives concurrentl"
+  },
+  "R022": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a second master, admin suspend, stop-out engine, or fee-settlement jobs not available through the follower API; not exercised in this pass.",
+    "priority": "P0",
+    "scenario": "Master disabled while followers receive orders Pre: Admin suspends master account while ma"
+  },
+  "R025": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a second master, admin suspend, stop-out engine, or fee-settlement jobs not available through the follower API; not exercised in this pass.",
+    "priority": "P0",
+    "scenario": "One follower rejects while others execute Pre: Follower #5 has insufficient margin; follow"
+  },
+  "R029": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a second master, admin suspend, stop-out engine, or fee-settlement jobs not available through the follower API; not exercised in this pass.",
+    "priority": "P0",
+    "scenario": "Multiple masters trade same symbol for one follower Pre: Follower subscribes to Master A a"
+  },
+  "R030": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a second master, admin suspend, stop-out engine, or fee-settlement jobs not available through the follower API; not exercised in this pass.",
+    "priority": "P0",
+    "scenario": "Two masters place opposite orders for same follower Pre: Follower copies Master A and B; M"
+  },
+  "R031": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a second master, admin suspend, stop-out engine, or fee-settlement jobs not available through the follower API; not exercised in this pass.",
+    "priority": "P0",
+    "scenario": "Two masters close positions simultaneously Pre: Follower holds positions from Master A and"
+  },
+  "R050": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a second master, admin suspend, stop-out engine, or fee-settlement jobs not available through the follower API; not exercised in this pass.",
+    "priority": "P0",
+    "scenario": "SL and TP triggered during volatile market movement Pre: Flash crash moves price violently"
+  },
+  "R052": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a second master, admin suspend, stop-out engine, or fee-settlement jobs not available through the follower API; not exercised in this pass.",
+    "priority": "P0",
+    "scenario": "Follower manually modifies SL while master modifies SL Pre: Follower changes SL to 1.0800 "
+  },
+  "R053": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a second master, admin suspend, stop-out engine, or fee-settlement jobs not available through the follower API; not exercised in this pass.",
+    "priority": "P0",
+    "scenario": "Follower manually opens same-symbol trade while copying Pre: Follower manually opens EURUS"
+  },
+  "R054": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a second master, admin suspend, stop-out engine, or fee-settlement jobs not available through the follower API; not exercised in this pass.",
+    "priority": "P0",
+    "scenario": "Margin consumed by another trade during copy execution Pre: Two strategies trade simultane"
+  },
+  "R056": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a second master, admin suspend, stop-out engine, or fee-settlement jobs not available through the follower API; not exercised in this pass.",
+    "priority": "P0",
+    "scenario": "Master order partially fills while cancellation is requested Pre: Master places 10 lots; 4"
+  },
+  "R057": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a second master, admin suspend, stop-out engine, or fee-settlement jobs not available through the follower API; not exercised in this pass.",
+    "priority": "P0",
+    "scenario": "Master receives multiple partial fills out of order Pre: Broker fills 1 lot, 2 lots, 2 lot"
+  },
+  "R059": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a second master, admin suspend, stop-out engine, or fee-settlement jobs not available through the follower API; not exercised in this pass.",
+    "priority": "P0",
+    "scenario": "Master SL hits while follower SL modification is pending Pre: Follower engine dispatched S"
+  },
+  "R060": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a second master, admin suspend, stop-out engine, or fee-settlement jobs not available through the follower API; not exercised in this pass.",
+    "priority": "P0",
+    "scenario": "Follower liquidated while master position remains open Pre: Follower suffers account stop-"
+  },
+  "R066": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a second master, admin suspend, stop-out engine, or fee-settlement jobs not available through the follower API; not exercised in this pass.",
+    "priority": "P0",
+    "scenario": "Master account switches between hedging and netting configurations Pre: Master switches ac"
+  },
+  "R068": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a second master, admin suspend, stop-out engine, or fee-settlement jobs not available through the follower API; not exercised in this pass.",
+    "priority": "P0",
+    "scenario": "Follower changes broker while a copy order is in flight Pre: Follower initiates broker acc"
+  },
+  "R070": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a second master, admin suspend, stop-out engine, or fee-settlement jobs not available through the follower API; not exercised in this pass.",
+    "priority": "P0",
+    "scenario": "Performance fee calculation runs while trade closes Pre: Fee settlement cron job triggers "
+  },
+  "R072": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a second master, admin suspend, stop-out engine, or fee-settlement jobs not available through the follower API; not exercised in this pass.",
+    "priority": "P0",
+    "scenario": "Master removes follower while follower closes position Pre: Master kicks follower out of s"
+  },
+  "R073": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a second master, admin suspend, stop-out engine, or fee-settlement jobs not available through the follower API; not exercised in this pass.",
+    "priority": "P0",
+    "scenario": "Follower deposits or withdraws during proportional lot calculation Pre: Follower withdraws"
+  },
+  "R075": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Needs a second master, admin suspend, stop-out engine, or fee-settlement jobs not available through the follower API; not exercised in this pass.",
+    "priority": "P0",
+    "scenario": "Stop-copy and close-all requests execute simultaneously Pre: Follower hits 'Stop Copying' "
+  },
+  "N001": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Broker credential / KYC / geo / suitability / licensing checks are compliance or back-office functions with no API here.",
+    "priority": "P0",
+    "scenario": "Subscribe without valid broker connection Pre: Follower account has no linked broker crede"
+  },
+  "N002": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Broker credential / KYC / geo / suitability / licensing checks are compliance or back-office functions with no API here.",
+    "priority": "P0",
+    "scenario": "Subscribe using unauthorized account Pre: Follower attempts to link broker account belongi"
+  },
+  "N015": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Broker credential / KYC / geo / suitability / licensing checks are compliance or back-office functions with no API here.",
+    "priority": "P0",
+    "scenario": "Copy order fails repeatedly Pre: Follower broker API returns continuous 500 server errors."
+  },
+  "G001": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Broker credential / KYC / geo / suitability / licensing checks are compliance or back-office functions with no API here.",
+    "priority": "P0",
+    "scenario": "Master uses Hedging, follower account in US FIFO / No-Hedging jurisdiction Pre: Follower a"
+  },
+  "G003": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Broker credential / KYC / geo / suitability / licensing checks are compliance or back-office functions with no API here.",
+    "priority": "P0",
+    "scenario": "Follower KYC expires or enters 'Close-Only' suspension Pre: Follower fails annual KYC refr"
+  },
+  "G004": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Broker credential / KYC / geo / suitability / licensing checks are compliance or back-office functions with no API here.",
+    "priority": "P0",
+    "scenario": "Restricted country IP access during order replication Pre: Master or Follower logs in from"
+  },
+  "G005": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Broker credential / KYC / geo / suitability / licensing checks are compliance or back-office functions with no API here.",
+    "priority": "P1",
+    "scenario": "Suitability and risk-profile questionnaire gating Pre: Regulatory requirement (MiFID II) r"
+  },
+  "G006": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Broker credential / KYC / geo / suitability / licensing checks are compliance or back-office functions with no API here.",
+    "priority": "P1",
+    "scenario": "Maximum capital allocation cap per follower (Retail Investor Protection) Pre: Regulatory c"
+  },
+  "G007": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Broker credential / KYC / geo / suitability / licensing checks are compliance or back-office functions with no API here.",
+    "priority": "P0",
+    "scenario": "Master trader regulatory licensing validation Pre: Jurisdiction requires master traders ch"
+  },
+  "G008": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Broker credential / KYC / geo / suitability / licensing checks are compliance or back-office functions with no API here.",
+    "priority": "P1",
+    "scenario": "Audit log immutability and regulatory reporting export Pre: Regulator requests audit trail"
+  },
+  "P004": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Commission, swap, HWM performance fee, payout and tax reporting need billing jobs / time passing; not runnable on demand.",
+    "priority": "P0",
+    "scenario": "Commission differs between brokers Pre: Master broker charges $0 commission (spread-only);"
+  },
+  "P005": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Commission, swap, HWM performance fee, payout and tax reporting need billing jobs / time passing; not runnable on demand.",
+    "priority": "P1",
+    "scenario": "Swap or overnight financing charged Pre: Position held across Wednesday 22:00 UTC rollover"
+  },
+  "P006": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Commission, swap, HWM performance fee, payout and tax reporting need billing jobs / time passing; not runnable on demand.",
+    "priority": "P0",
+    "scenario": "High-Water Mark (HWM) performance fee calculation Pre: Master charges 20% perf fee; Billin"
+  },
+  "P007": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Commission, swap, HWM performance fee, payout and tax reporting need billing jobs / time passing; not runnable on demand.",
+    "priority": "P0",
+    "scenario": "Same closed trade event replayed in reporting engine Pre: Reporting sync cron restarts and"
+  },
+  "P008": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Commission, swap, HWM performance fee, payout and tax reporting need billing jobs / time passing; not runnable on demand.",
+    "priority": "P0",
+    "scenario": "Master trade profitable, follower trade losing due to slippage Pre: Master scalps 1 pip pr"
+  },
+  "S003": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Commission, swap, HWM performance fee, payout and tax reporting need billing jobs / time passing; not runnable on demand.",
+    "priority": "P0",
+    "scenario": "High-Water Mark (HWM) proportional adjustment on follower withdrawal Pre: Follower deposit"
+  },
+  "O006": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Commission, swap, HWM performance fee, payout and tax reporting need billing jobs / time passing; not runnable on demand.",
+    "priority": "P1",
+    "scenario": "Master profit share payout and tax withholding reporting Pre: Monthly performance fee payo"
+  },
+  "O005": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Commission, swap, HWM performance fee, payout and tax reporting need billing jobs / time passing; not runnable on demand.",
+    "priority": "P1",
+    "scenario": "Manual compensation / adjustment credit workflow Pre: Technical glitch causes follower ord"
+  },
+  "P010": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Dashboard refresh is a UI behaviour.",
+    "priority": "P1",
+    "scenario": "Dashboard refresh during execution Pre: Follower looking at web dashboard while 5 position"
+  },
+  "M001": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Market microstructure events (news, halts, gaps, DST, rollover, stale feed, negative prices) cannot be created on a live feed.",
+    "priority": "P0",
+    "scenario": "Master trades during follower closed market session (Weekend / Holiday) Pre: Master trades"
+  },
+  "M002": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Market microstructure events (news, halts, gaps, DST, rollover, stale feed, negative prices) cannot be created on a live feed.",
+    "priority": "P0",
+    "scenario": "Master executes during high-impact news event with massive spread widening Pre: Non-Farm P"
+  },
+  "M003": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Market microstructure events (news, halts, gaps, DST, rollover, stale feed, negative prices) cannot be created on a live feed.",
+    "priority": "P0",
+    "scenario": "Trading halt or circuit breaker triggered on symbol at follower broker Pre: Stock/Index ha"
+  },
+  "M004": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Market microstructure events (news, halts, gaps, DST, rollover, stale feed, negative prices) cannot be created on a live feed.",
+    "priority": "P0",
+    "scenario": "Weekend price gap blows past both Master and Follower Stop Loss Pre: Positions held over w"
+  },
+  "M005": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Market microstructure events (news, halts, gaps, DST, rollover, stale feed, negative prices) cannot be created on a live feed.",
+    "priority": "P0",
+    "scenario": "Master trades illiquid instrument consuming multiple order book levels Pre: Master trades "
+  },
+  "M006": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Market microstructure events (news, halts, gaps, DST, rollover, stale feed, negative prices) cannot be created on a live feed.",
+    "priority": "P1",
+    "scenario": "Master places aggressive iceberg order Pre: Master uses algorithmic hidden/iceberg order."
+  },
+  "M007": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Market microstructure events (news, halts, gaps, DST, rollover, stale feed, negative prices) cannot be created on a live feed.",
+    "priority": "P0",
+    "scenario": "Daylight Saving Time (DST) shift creates session mismatch Pre: US switches to DST one week"
+  },
+  "M008": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Market microstructure events (news, halts, gaps, DST, rollover, stale feed, negative prices) cannot be created on a live feed.",
+    "priority": "P0",
+    "scenario": "Symbol rollover / expiry date on futures-based CFDs (e.g., USOIL / WTI) Pre: Crude oil con"
+  },
+  "M009": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Market microstructure events (news, halts, gaps, DST, rollover, stale feed, negative prices) cannot be created on a live feed.",
+    "priority": "P0",
+    "scenario": "Broker quote freeze / stale price feed during sudden volatility Pre: Follower broker price"
+  },
+  "M010": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Market microstructure events (news, halts, gaps, DST, rollover, stale feed, negative prices) cannot be created on a live feed.",
+    "priority": "P1",
+    "scenario": "Negative pricing handling (e.g., negative oil / commodity price event) Pre: Commodity pric"
+  },
+  "I004": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Platform-side batch jobs, rate limiting, anti-abuse analytics and leaderboard integrity are server internals.",
+    "priority": "P0",
+    "scenario": "Daily End-of-Day (EOD) automated reconciliation batch job Pre: Day trades conclude; 23:59:"
+  },
+  "I005": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Platform-side batch jobs, rate limiting, anti-abuse analytics and leaderboard integrity are server internals.",
+    "priority": "P1",
+    "scenario": "High-frequency trade burst with rate limiting (Anti-Throttling) Pre: Master robot executes"
+  },
+  "I007": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Platform-side batch jobs, rate limiting, anti-abuse analytics and leaderboard integrity are server internals.",
+    "priority": "P1",
+    "scenario": "Multi-region latency optimization and routing Pre: Master in London (LD4); Followers acros"
+  },
+  "S001": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Platform-side batch jobs, rate limiting, anti-abuse analytics and leaderboard integrity are server internals.",
+    "priority": "P0",
+    "scenario": "Master hides floating unrealized drawdown to fake 100% Win Rate Pre: Master holds 10 losin"
+  },
+  "S002": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Platform-side batch jobs, rate limiting, anti-abuse analytics and leaderboard integrity are server internals.",
+    "priority": "P0",
+    "scenario": "Follower front-running prevention (Latency Arbitrage Protection) Pre: Follower attempts to"
+  },
+  "S004": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Platform-side batch jobs, rate limiting, anti-abuse analytics and leaderboard integrity are server internals.",
+    "priority": "P1",
+    "scenario": "Master micro-lot churning detection (Volume / Rebate gaming) Pre: Master opens and closes "
+  },
+  "S005": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Platform-side batch jobs, rate limiting, anti-abuse analytics and leaderboard integrity are server internals.",
+    "priority": "P1",
+    "scenario": "Sudden strategy shift detection (Style Drift Warning) Pre: Master registered as 'Low Risk "
+  },
+  "S006": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Platform-side batch jobs, rate limiting, anti-abuse analytics and leaderboard integrity are server internals.",
+    "priority": "P1",
+    "scenario": "Follower reverse-engineering master algorithmic strategy Pre: Follower scrapes tick-by-tic"
+  },
+  "S007": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Platform-side batch jobs, rate limiting, anti-abuse analytics and leaderboard integrity are server internals.",
+    "priority": "P0",
+    "scenario": "Master account bankruptcy / negative equity protection Pre: Black swan event causes master"
+  },
+  "S008": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Platform-side batch jobs, rate limiting, anti-abuse analytics and leaderboard integrity are server internals.",
+    "priority": "P2",
+    "scenario": "Master fake review and rating manipulation Pre: Master creates burner accounts to post 5-s"
+  },
+  "O001": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Admin kill-switch, dispute and audit-archive tools are admin-console features with no documented API in this test kit.",
+    "priority": "P0",
+    "scenario": "Admin triggers Global Emergency Kill-Switch Pre: Catastrophic platform-wide anomaly or sev"
+  },
+  "O002": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Admin kill-switch, dispute and audit-archive tools are admin-console features with no documented API in this test kit.",
+    "priority": "P0",
+    "scenario": "Admin halts individual rogue or compromised Master Trader Pre: Master account compromised "
+  },
+  "O003": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Admin kill-switch, dispute and audit-archive tools are admin-console features with no documented API in this test kit.",
+    "priority": "P0",
+    "scenario": "Follower Panic Button: 'Emergency Close All and Unsubscribe' Pre: Follower sees rapid loss"
+  },
+  "O004": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Admin kill-switch, dispute and audit-archive tools are admin-console features with no documented API in this test kit.",
+    "priority": "P0",
+    "scenario": "Customer Support Trade Dispute & Resolution Tool Pre: Follower reports trade mismatch / un"
+  },
+  "O007": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Admin kill-switch, dispute and audit-archive tools are admin-console features with no documented API in this test kit.",
+    "priority": "P0",
+    "scenario": "Automated alert for high slippage deviation (> 5 pips) Pre: Follower broker execution pric"
+  },
+  "O008": {
+    "verdict": "NOT-TESTABLE",
+    "detail": "Admin kill-switch, dispute and audit-archive tools are admin-console features with no documented API in this test kit.",
+    "priority": "P1",
+    "scenario": "Compliance data retention and immutable audit archive (7 Years) Pre: Regulatory archiving "
+  },
+  "F012": {
+    "verdict": "NOT-RUN",
+    "detail": "not covered by the automated pass",
+    "priority": "P0",
+    "scenario": "Master closes position Pre: Open copied position exists on master and follower."
+  },
+  "F013": {
+    "verdict": "NOT-RUN",
+    "detail": "not covered by the automated pass",
+    "priority": "P0",
+    "scenario": "Master partially closes position Pre: Master opened 2.0 lots; follower opened 1.0 lot (0.5"
+  },
+  "F020": {
+    "verdict": "NOT-RUN",
+    "detail": "not covered by the automated pass",
+    "priority": "P0",
+    "scenario": "Follower order rejected by broker Pre: Follower broker account temporarily rejects order ("
+  },
+  "R040": {
+    "verdict": "NOT-RUN",
+    "detail": "not covered by the automated pass",
+    "priority": "P0",
+    "scenario": "API request times out but broker executes order Pre: HTTP POST to broker returns 504 Gatew"
+  },
+  "R048": {
+    "verdict": "NOT-RUN",
+    "detail": "not covered by the automated pass",
+    "priority": "P0",
+    "scenario": "Equity changes while follower lot is calculated Pre: Follower using Equity Proportional si"
+  },
+  "R049": {
+    "verdict": "NOT-RUN",
+    "detail": "not covered by the automated pass",
+    "priority": "P0",
+    "scenario": "Follower changes multiplier while order is processing Pre: Follower updates multiplier in "
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "plan": [
+    [
+      "BUY",
+      0.1
+    ],
+    [
+      "SELL",
+      0.08
+    ],
+    [
+      "BUY",
+      0.06
+    ],
+    [
+      "SELL",
+      0.12
+    ],
+    [
+      "BUY",
+      0.04
+    ],
+    [
+      "SELL",
+      0.1
+    ],
+    [
+      "BUY",
+      0.08
+    ],
+    [
+      "SELL",
+      0.05
+    ]
+  ],
+  "reduces": [
+    [
+      "ord_b523b139f2ff811f7f",
+      0.05,
+      200
+    ],
+    [
+      "ord_029f313248daf90d6e",
+      0.02,
+      200
+    ],
+    [
+      "ord_029f313248daf90d6e",
+      0.03,
+      200
+    ],
+    [
+      "ord_b63f09767aa4ed2afe",
+      0.006,
+      200
+    ],
+    [
+      "ord_61c5651ac3d4ff628b",
+      0.06,
+      200
+    ],
+    [
+      "ord_3f9d88452dcd10f8c3",
+      0.01,
+      200
+    ],
+    [
+      "ord_57bfd174400abfbe77",
+      0.05,
+      200
+    ]
+  ],
+  "master": {
+    "remaining": {
+      "ord_b523b139f2ff811f7f": 0.05,
+      "ord_029f313248daf90d6e": 0.03,
+      "ord_b63f09767aa4ed2afe": 0.054,
+      "ord_61c5651ac3d4ff628b": 0.06,
+      "ord_3f9d88452dcd10f8c3": 0.03,
+      "ord_57bfd174400abfbe77": 0.05,
+      "ord_a8faa76d1478c20051": 0.0,
+      "ord_880aa448cb2900fa19": 0.05
+    },
+    "events": 8,
+    "pnl": 0.7568000000001627
+  },
+  "bad": {
+    "positions": [],
+    "lots": [],
+    "events": [],
+    "reduced_lots": [],
+    "pnl_rows": [],
+    "pnl_arith": []
+  },
+  "followers": {
+    "follower1": {
+      "open": 7,
+      "events": 8,
+      "pnl": 1.5136,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower2": {
+      "open": 7,
+      "events": 8,
+      "pnl": 1.5136,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower3": {
+      "open": 7,
+      "events": 8,
+      "pnl": 1.5136,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower4": {
+      "open": 7,
+      "events": 8,
+      "pnl": 1.5136,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower5": {
+      "open": 7,
+      "events": 8,
+      "pnl": 1.5136,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower6": {
+      "open": 7,
+      "events": 8,
+      "pnl": 1.5136,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower7": {
+      "open": 7,
+      "events": 8,
+      "pnl": 1.5136,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower8": {
+      "open": 7,
+      "events": 8,
+      "pnl": 1.5036,
+      "pnl_vs_master_x2": -0.01
+    },
+    "follower9": {
+      "open": 7,
+      "events": 8,
+      "pnl": 1.5036,
+      "pnl_vs_master_x2": -0.01
+    },
+    "follower10": {
+      "open": 7,
+      "events": 8,
+      "pnl": 1.5036,
+      "pnl_vs_master_x2": -0.01
+    }
+  },
+  "verdict": "PASS"
+}

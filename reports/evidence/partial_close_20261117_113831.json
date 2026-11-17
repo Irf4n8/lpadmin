@@ -1,0 +1,698 @@
+{
+  "plan": [
+    [
+      "BUY",
+      0.1
+    ],
+    [
+      "SELL",
+      0.08
+    ],
+    [
+      "BUY",
+      0.06
+    ],
+    [
+      "SELL",
+      0.12
+    ],
+    [
+      "BUY",
+      0.04
+    ],
+    [
+      "SELL",
+      0.1
+    ],
+    [
+      "BUY",
+      0.08
+    ],
+    [
+      "SELL",
+      0.05
+    ]
+  ],
+  "reduces": [
+    [
+      "ord_0601622154633f1931",
+      0.05,
+      200
+    ],
+    [
+      "ord_1370ae37f598c0c6e3",
+      0.02,
+      200
+    ],
+    [
+      "ord_1370ae37f598c0c6e3",
+      0.03,
+      200
+    ],
+    [
+      "ord_8e5a4e675ce21685f4",
+      0.006,
+      200
+    ],
+    [
+      "ord_16d48eb72e22f446e8",
+      0.05,
+      200
+    ],
+    [
+      "ord_155708f5d29f58864a",
+      0.01,
+      200
+    ],
+    [
+      "ord_91c961ee5852d96617",
+      0.06,
+      200
+    ]
+  ],
+  "master": {
+    "remaining": {
+      "ord_0601622154633f1931": 0.05,
+      "ord_1370ae37f598c0c6e3": 0.03,
+      "ord_8e5a4e675ce21685f4": 0.054,
+      "ord_91c961ee5852d96617": 0.06,
+      "ord_155708f5d29f58864a": 0.03,
+      "ord_16d48eb72e22f446e8": 0.05,
+      "ord_634738142a27b1ec7d": 0.0,
+      "ord_00fe9e0fafc32441cb": 0.05
+    },
+    "events": 8,
+    "pnl": -0.09139999999979048
+  },
+  "bad": {
+    "positions": [],
+    "lots": [],
+    "events": [],
+    "reduced_lots": [],
+    "pnl_rows": [],
+    "pnl_arith": []
+  },
+  "followers": {
+    "follower1": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower2": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower3": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower4": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower5": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower6": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower7": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower8": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower9": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower10": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower11": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower12": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower13": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower14": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower15": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower16": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower17": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower18": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower19": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower20": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower21": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower22": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower23": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower24": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower25": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower26": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower27": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower28": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower29": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower30": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower31": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower32": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower33": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower34": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower35": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower36": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower37": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower38": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower39": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower40": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower41": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower42": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower43": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower44": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower45": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower46": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower47": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower48": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower49": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower50": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower51": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower52": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower53": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower54": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower55": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower56": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower57": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower58": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower59": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower60": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower61": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower62": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower63": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower64": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower65": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower66": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower67": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower68": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower69": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower70": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower71": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower72": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower73": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower74": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower75": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower76": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower77": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower78": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower79": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower80": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower81": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower82": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower83": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower84": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower85": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower86": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower87": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower88": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower89": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower90": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower91": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower92": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower93": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower94": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower95": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower96": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower97": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower98": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower99": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    },
+    "follower100": {
+      "open": 7,
+      "events": 8,
+      "pnl": -0.1828,
+      "pnl_vs_master_x2": 0.0
+    }
+  },
+  "verdict": "PASS"
+}

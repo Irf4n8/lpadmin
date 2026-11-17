@@ -129,7 +129,7 @@ class BlackTraderClient:
         token = self.get_admin_token()
         headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
         resp = self.request_with_retry("POST", f"{self.base_url}/admin/api/members/{member_id}/status", headers=headers, json={"status": status})
-        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
+        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else {"error": resp.text}}
 
     def set_member_balance(self, member_id: str, balance: float, instance: str = "real") -> Dict[str, Any]:
         """Update a member's balance via admin API."""
@@ -137,7 +137,7 @@ class BlackTraderClient:
         headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
         payload = {"instance": instance, "balance": balance, "remark": "Automated Test Adjustment", "force": True}
         resp = self.request_with_retry("POST", f"{self.base_url}/admin/api/members/{member_id}/balance", headers=headers, json=payload)
-        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
+        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else {"error": resp.text}}
 
     def get_member_books(self) -> Dict[str, Dict[str, Any]]:
         """email -> {member_id, book ('a' / 'b'), account_type, status} for every member (admin API)."""
@@ -160,7 +160,7 @@ class BlackTraderClient:
         token = self.get_admin_token()
         headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
         resp = self.request_with_retry("POST", f"{self.base_url}/admin/api/members/{member_id}/book", headers=headers, json={"book": book})
-        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
+        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else {"error": resp.text}}
 
     def get_trader_token(self, email: str, password: str = MEMBER_PASSWORD, force_refresh: bool = False) -> str:
         with self._lock:
@@ -266,7 +266,7 @@ class BlackTraderClient:
             payload["sl"] = sl
 
         resp = self.request_with_retry("POST", f"{self.base_url}/v1/oms/{instance}{endpoint}", headers=headers, json=payload)
-        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
+        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else {"error": resp.text}}
 
     def set_position_protection(
         self,
@@ -291,7 +291,7 @@ class BlackTraderClient:
 
         url = f"{self.base_url}/v1/oms/{instance}/positions/{market_order_id}/protection"
         resp = self.request_with_retry("PUT", url, headers=headers, json=payload)
-        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
+        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else {"error": resp.text}}
 
     def squareoff_position(self, email: str, market_order_id: str, instance: str = "real") -> Dict[str, Any]:
         """Close an open position completely."""
@@ -303,7 +303,7 @@ class BlackTraderClient:
         }
         url = f"{self.base_url}/v1/oms/{instance}/positions/{market_order_id}/squareoff"
         resp = self.request_with_retry("POST", url, headers=headers, json={})
-        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
+        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else {"error": resp.text}}
 
     def reduce_position(self, email: str, market_order_id: str, qty: float, instance: str = "real") -> Dict[str, Any]:
         """Partially close an open position."""
@@ -315,7 +315,7 @@ class BlackTraderClient:
         }
         url = f"{self.base_url}/v1/oms/{instance}/positions/{market_order_id}/reduce"
         resp = self.request_with_retry("POST", url, headers=headers, json={"qty": qty})
-        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
+        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else {"error": resp.text}}
 
     def cancel_order(self, email: str, order_id: str, instance: str = "real") -> Dict[str, Any]:
         """Cancel a pending order."""
@@ -323,7 +323,7 @@ class BlackTraderClient:
         headers = {"Authorization": f"Bearer {token}", "X-Broker-ID": instance}
         url = f"{self.base_url}/v1/oms/{instance}/orders/{order_id}"
         resp = self.request_with_retry("DELETE", url, headers=headers)
-        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
+        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else {"error": resp.text}}
 
     def bulk_squareoff(self, email: str, instance: str = "real") -> Dict[str, Any]:
         """Close all open positions for an account."""
@@ -344,7 +344,7 @@ class BlackTraderClient:
         }
         url = f"{self.base_url}/v1/oms/{instance}/positions/bulk/squareoff"
         resp = self.request_with_retry("POST", url, headers=headers, json={"market_order_ids": mkt_ids})
-        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
+        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else {"error": resp.text}}
 
     def bulk_cancel(self, email: str, instance: str = "real") -> Dict[str, Any]:
         """Cancel all pending orders for an account."""
@@ -365,7 +365,7 @@ class BlackTraderClient:
         }
         url = f"{self.base_url}/v1/oms/{instance}/orders/bulk/cancel"
         resp = self.request_with_retry("POST", url, headers=headers, json={"order_ids": pending_ids})
-        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
+        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else {"error": resp.text}}
 
     # -------------------------------------------------------------------------
     # Copy Trading API Calls
@@ -438,7 +438,7 @@ class BlackTraderClient:
         }
         url = f"{self.base_url}/v1/oms/{instance}/copy/follow"
         resp = self.request_with_retry("POST", url, headers=headers, json=payload)
-        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
+        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else {"error": resp.text}}
 
     def unfollow_master(self, email: str, master_client_id: str, instance: str = "real") -> Dict[str, Any]:
         """Unfollow a master trader. On PAPER this is blocked by default (the link could never be re-created)."""
@@ -451,7 +451,7 @@ class BlackTraderClient:
         }
         url = f"{self.base_url}/v1/oms/{instance}/copy/unfollow"
         resp = self.request_with_retry("POST", url, headers=headers, json={"master_client_id": master_client_id})
-        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else resp.text}
+        return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else {"error": resp.text}}
 
     def get_copy_followers(self, master_email: str, instance: str = "real", active_only: bool = True) -> List[Dict[str, Any]]:
         """Fetch all followers linked to this master (optionally filtering for active status)."""

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "T3-LIMIT",
+    "name": "edit LIMIT trigger price",
+    "verdict": "PASS",
+    "detail": "PUT /orders/<id>/modify {price} -> HTTP 200; master 63959.6 -> 63859.6 (want 63859.6); followers had a pending LIMIT before: 5/5; followers now at 63859.6: 5/5 (off: []); follower qty [0.02]"
+  },
+  {
+    "id": "T3-STOP",
+    "name": "edit STOP trigger price",
+    "verdict": "PASS",
+    "detail": "[sending only 'price' -> HTTP 200, trigger now 64957.6 (unchanged = silently ignored)] PUT /orders/<id>/modify {trigger_price} -> HTTP 200; master 64857.6 -> 64957.6 (want 64957.6); followers had a pending STOP before: 5/5; followers now at 64957.6: 5/5 (off: []); follower qty [0.02]"
+  }
+]

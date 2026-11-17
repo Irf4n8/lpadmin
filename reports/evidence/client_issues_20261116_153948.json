@@ -1,0 +1,32 @@
+[
+  {
+    "id": "T3",
+    "name": "edit LIMIT trigger price",
+    "verdict": "FAIL",
+    "detail": "edit call: ('PUT', '/orders/ord_dcaa65660784617f2b/modify') (POST /orders/ord_dcaa65660784617f2b/modify -> 405; PUT /orders/ord_dcaa65660784617f2b/modify -> 200); master trigger 63937.7 -> None (want 63737.7); followers with a pending LIMIT before edit: 5/5; followers NOT at 63737.7: 5 sample prices [[None], [None]]"
+  },
+  {
+    "id": "T5",
+    "name": "STOP pending copied at multiplier",
+    "verdict": "PASS",
+    "detail": "master STOP qty 0.01, want follower qty 0.02; followers without matching STOP: 0/5; sample [('follower1', [('STOP', 0.02, 64868.7)]), ('follower2', [('STOP', 0.02, 64868.7)])]"
+  },
+  {
+    "id": "T4",
+    "name": "re-follow shows old history",
+    "verdict": "FAIL (old data still shown)",
+    "detail": "unfollow HTTP 200, follow HTTP 200; follower history rows 200 -> 200, orders 2561 -> 2561 (a fresh relationship should start empty if the client expects that; this is the platform's current behaviour)"
+  },
+  {
+    "id": "T7",
+    "name": "master / follower history separate",
+    "verdict": "PASS",
+    "detail": "master history rows 200, follower1 rows 200, shared order ids 0; follower rows are marked entry_source=copy: 200/200; master rows entry_copy_kind=master: 200/200"
+  },
+  {
+    "id": "T13",
+    "name": "bulk close from follower and from master",
+    "verdict": "PASS",
+    "detail": "follower1 bulk close: follower1 open 0, master still 4 (want 4), other followers [4, 4, 4, 4]; then master bulk close: master 0, followers open [0, 0, 0, 0, 0]"
+  }
+]

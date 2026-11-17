@@ -1,0 +1,1223 @@
+{
+  "instance": "real",
+  "orders_requested": 200,
+  "orders_accepted": 177,
+  "refused": [
+    "{\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask yo",
+    "{\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask yo",
+    "{\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask yo",
+    "{\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask yo",
+    "{\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask yo",
+    "{\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask yo",
+    "{\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask yo",
+    "{\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask yo",
+    "{\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask yo",
+    "{\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask yo",
+    "{\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask yo",
+    "{\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask yo",
+    "{\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask yo",
+    "{\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask yo",
+    "{\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask yo",
+    "{\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask yo",
+    "{\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask yo",
+    "{\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask yo",
+    "{\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask yo",
+    "{\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask yo"
+  ],
+  "master": {
+    "total": 177,
+    "filled": 177,
+    "rejected": 0,
+    "cancelled": 0,
+    "other": 0
+  },
+  "master_positions": 177,
+  "followers": 100,
+  "mismatches": [
+    {
+      "email": "follower1@mailinator.com",
+      "summary": {
+        "total": 170,
+        "filled": 170,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 7
+      }
+    },
+    {
+      "email": "follower2@mailinator.com",
+      "summary": {
+        "total": 170,
+        "filled": 170,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 7
+      }
+    },
+    {
+      "email": "follower3@mailinator.com",
+      "summary": {
+        "total": 170,
+        "filled": 170,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 7
+      }
+    },
+    {
+      "email": "follower4@mailinator.com",
+      "summary": {
+        "total": 170,
+        "filled": 170,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 7
+      }
+    },
+    {
+      "email": "follower5@mailinator.com",
+      "summary": {
+        "total": 170,
+        "filled": 170,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 7
+      }
+    },
+    {
+      "email": "follower6@mailinator.com",
+      "summary": {
+        "total": 170,
+        "filled": 170,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 7
+      }
+    },
+    {
+      "email": "follower7@mailinator.com",
+      "summary": {
+        "total": 170,
+        "filled": 170,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 7
+      }
+    },
+    {
+      "email": "follower8@mailinator.com",
+      "summary": {
+        "total": 170,
+        "filled": 170,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 7
+      }
+    },
+    {
+      "email": "follower9@mailinator.com",
+      "summary": {
+        "total": 170,
+        "filled": 170,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 7
+      }
+    },
+    {
+      "email": "follower10@mailinator.com",
+      "summary": {
+        "total": 170,
+        "filled": 170,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 7
+      }
+    },
+    {
+      "email": "follower11@mailinator.com",
+      "summary": {
+        "total": 170,
+        "filled": 170,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 7
+      }
+    },
+    {
+      "email": "follower12@mailinator.com",
+      "summary": {
+        "total": 170,
+        "filled": 170,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 7
+      }
+    },
+    {
+      "email": "follower13@mailinator.com",
+      "summary": {
+        "total": 170,
+        "filled": 170,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 7
+      }
+    },
+    {
+      "email": "follower14@mailinator.com",
+      "summary": {
+        "total": 170,
+        "filled": 170,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 7
+      }
+    },
+    {
+      "email": "follower15@mailinator.com",
+      "summary": {
+        "total": 170,
+        "filled": 170,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 7
+      }
+    },
+    {
+      "email": "follower16@mailinator.com",
+      "summary": {
+        "total": 170,
+        "filled": 170,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 7
+      }
+    },
+    {
+      "email": "follower17@mailinator.com",
+      "summary": {
+        "total": 170,
+        "filled": 170,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 7
+      }
+    },
+    {
+      "email": "follower18@mailinator.com",
+      "summary": {
+        "total": 170,
+        "filled": 170,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 7
+      }
+    },
+    {
+      "email": "follower19@mailinator.com",
+      "summary": {
+        "total": 170,
+        "filled": 170,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 7
+      }
+    },
+    {
+      "email": "follower20@mailinator.com",
+      "summary": {
+        "total": 171,
+        "filled": 171,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 6
+      }
+    },
+    {
+      "email": "follower21@mailinator.com",
+      "summary": {
+        "total": 172,
+        "filled": 172,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 5
+      }
+    },
+    {
+      "email": "follower22@mailinator.com",
+      "summary": {
+        "total": 172,
+        "filled": 172,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 5
+      }
+    },
+    {
+      "email": "follower23@mailinator.com",
+      "summary": {
+        "total": 173,
+        "filled": 173,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 4
+      }
+    },
+    {
+      "email": "follower24@mailinator.com",
+      "summary": {
+        "total": 173,
+        "filled": 173,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 4
+      }
+    },
+    {
+      "email": "follower25@mailinator.com",
+      "summary": {
+        "total": 173,
+        "filled": 173,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 4
+      }
+    },
+    {
+      "email": "follower26@mailinator.com",
+      "summary": {
+        "total": 173,
+        "filled": 173,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 4
+      }
+    },
+    {
+      "email": "follower27@mailinator.com",
+      "summary": {
+        "total": 173,
+        "filled": 173,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 4
+      }
+    },
+    {
+      "email": "follower28@mailinator.com",
+      "summary": {
+        "total": 173,
+        "filled": 173,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 4
+      }
+    },
+    {
+      "email": "follower29@mailinator.com",
+      "summary": {
+        "total": 173,
+        "filled": 173,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 4
+      }
+    },
+    {
+      "email": "follower30@mailinator.com",
+      "summary": {
+        "total": 173,
+        "filled": 173,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 4
+      }
+    },
+    {
+      "email": "follower31@mailinator.com",
+      "summary": {
+        "total": 173,
+        "filled": 173,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 4
+      }
+    },
+    {
+      "email": "follower32@mailinator.com",
+      "summary": {
+        "total": 173,
+        "filled": 173,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 4
+      }
+    },
+    {
+      "email": "follower33@mailinator.com",
+      "summary": {
+        "total": 173,
+        "filled": 173,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 4
+      }
+    },
+    {
+      "email": "follower34@mailinator.com",
+      "summary": {
+        "total": 173,
+        "filled": 173,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 4
+      }
+    },
+    {
+      "email": "follower35@mailinator.com",
+      "summary": {
+        "total": 173,
+        "filled": 173,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 4
+      }
+    },
+    {
+      "email": "follower36@mailinator.com",
+      "summary": {
+        "total": 173,
+        "filled": 173,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 4
+      }
+    },
+    {
+      "email": "follower37@mailinator.com",
+      "summary": {
+        "total": 173,
+        "filled": 173,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 4
+      }
+    },
+    {
+      "email": "follower38@mailinator.com",
+      "summary": {
+        "total": 174,
+        "filled": 174,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 3
+      }
+    },
+    {
+      "email": "follower39@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower40@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower41@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower42@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower43@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower44@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower45@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower46@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower47@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower48@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower49@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower50@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower51@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower52@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower53@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower54@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower55@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower56@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower57@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower58@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower59@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower60@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower61@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower62@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower63@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower64@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower65@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower66@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower67@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower68@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower69@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower70@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower71@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower72@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower73@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower74@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower75@mailinator.com",
+      "summary": {
+        "total": 175,
+        "filled": 175,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 2
+      }
+    },
+    {
+      "email": "follower76@mailinator.com",
+      "summary": {
+        "total": 176,
+        "filled": 176,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 1
+      }
+    },
+    {
+      "email": "follower77@mailinator.com",
+      "summary": {
+        "total": 176,
+        "filled": 176,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 1
+      }
+    },
+    {
+      "email": "follower78@mailinator.com",
+      "summary": {
+        "total": 176,
+        "filled": 176,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 1
+      }
+    },
+    {
+      "email": "follower79@mailinator.com",
+      "summary": {
+        "total": 176,
+        "filled": 176,
+        "rejected": 0,
+        "cancelled": 0,
+        "other": 0,
+        "missing_master_orders": 1
+      }
+    }
+  ],
+  "api_list_lengths": [
+    699,
+    700,
+    701,
+    702,
+    703,
+    704,
+    706,
+    708,
+    710,
+    711,
+    714,
+    716,
+    720,
+    747,
+    749,
+    750,
+    798
+  ],
+  "follower_order_totals": [
+    170,
+    170,
+    170,
+    170,
+    170,
+    170,
+    170,
+    170,
+    170,
+    170,
+    170,
+    170,
+    170,
+    170,
+    170,
+    170,
+    170,
+    170,
+    170,
+    171,
+    172,
+    172,
+    173,
+    173,
+    173,
+    173,
+    173,
+    173,
+    173,
+    173,
+    173,
+    173,
+    173,
+    173,
+    173,
+    173,
+    173,
+    174,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    175,
+    176,
+    176,
+    176,
+    176,
+    177,
+    177,
+    177,
+    177,
+    177,
+    177,
+    177,
+    177,
+    177,
+    177,
+    177,
+    177,
+    177,
+    177,
+    177,
+    177,
+    177,
+    177,
+    177,
+    177,
+    177
+  ],
+  "missing_master_orders_by_follower": {
+    "follower1": [
+      "ord_1605ee1dad89f3fe0f",
+      "ord_1f39e49c67523cb4a3",
+      "ord_6b3516b282c8cb1897",
+      "ord_acac3c7c6553a98cbc",
+      "ord_ce6ff8e285c193615c",
+      "ord_f679ebf419fe576221",
+      "ord_faa8982f3b897ba989"
+    ],
+    "follower2": [
+      "ord_1605ee1dad89f3fe0f",
+      "ord_1f39e49c67523cb4a3",
+      "ord_6b3516b282c8cb1897",
+      "ord_acac3c7c6553a98cbc",
+      "ord_ce6ff8e285c193615c",
+      "ord_f679ebf419fe576221",
+      "ord_faa8982f3b897ba989"
+    ],
+    "follower3": [
+      "ord_1605ee1dad89f3fe0f",
+      "ord_1f39e49c67523cb4a3",
+      "ord_6b3516b282c8cb1897",
+      "ord_acac3c7c6553a98cbc",
+      "ord_ce6ff8e285c193615c",
+      "ord_f679ebf419fe576221",
+      "ord_faa8982f3b897ba989"
+    ],
+    "follower4": [
+      "ord_1605ee1dad89f3fe0f",
+      "ord_1f39e49c67523cb4a3",
+      "ord_6b3516b282c8cb1897",
+      "ord_acac3c7c6553a98cbc",
+      "ord_ce6ff8e285c193615c",
+      "ord_f679ebf419fe576221",
+      "ord_faa8982f3b897ba989"
+    ],
+    "follower5": [
+      "ord_1605ee1dad89f3fe0f",
+      "ord_1f39e49c67523cb4a3",
+      "ord_6b3516b282c8cb1897",
+      "ord_acac3c7c6553a98cbc",
+      "ord_ce6ff8e285c193615c",
+      "ord_f679ebf419fe576221",
+      "ord_faa8982f3b897ba989"
+    ],
+    "follower6": [
+      "ord_1605ee1dad89f3fe0f",
+      "ord_1f39e49c67523cb4a3",
+      "ord_6b3516b282c8cb1897",
+      "ord_acac3c7c6553a98cbc",
+      "ord_ce6ff8e285c193615c",
+      "ord_f679ebf419fe576221",
+      "ord_faa8982f3b897ba989"
+    ],
+    "follower7": [
+      "ord_1605ee1dad89f3fe0f",
+      "ord_1f39e49c67523cb4a3",
+      "ord_6b3516b282c8cb1897",
+      "ord_acac3c7c6553a98cbc",
+      "ord_ce6ff8e285c193615c",
+      "ord_f679ebf419fe576221",
+      "ord_faa8982f3b897ba989"
+    ],
+    "follower8": [
+      "ord_1605ee1dad89f3fe0f",
+      "ord_1f39e49c67523cb4a3",
+      "ord_6b3516b282c8cb1897",
+      "ord_acac3c7c6553a98cbc",
+      "ord_ce6ff8e285c193615c",
+      "ord_f679ebf419fe576221",
+      "ord_faa8982f3b897ba989"
+    ],
+    "follower9": [
+      "ord_1605ee1dad89f3fe0f",
+      "ord_1f39e49c67523cb4a3",
+      "ord_6b3516b282c8cb1897",
+      "ord_acac3c7c6553a98cbc",
+      "ord_ce6ff8e285c193615c",
+      "ord_f679ebf419fe576221",
+      "ord_faa8982f3b897ba989"
+    ],
+    "follower10": [
+      "ord_1605ee1dad89f3fe0f",
+      "ord_1f39e49c67523cb4a3",
+      "ord_6b3516b282c8cb1897",
+      "ord_acac3c7c6553a98cbc",
+      "ord_ce6ff8e285c193615c",
+      "ord_f679ebf419fe576221",
+      "ord_faa8982f3b897ba989"
+    ],
+    "follower11": [
+      "ord_1605ee1dad89f3fe0f",
+      "ord_1f39e49c67523cb4a3",
+      "ord_6b3516b282c8cb1897",
+      "ord_acac3c7c6553a98cbc",
+      "ord_ce6ff8e285c193615c",
+      "ord_f679ebf419fe576221",
+      "ord_faa8982f3b897ba989"
+    ],
+    "follower12": [
+      "ord_1605ee1dad89f3fe0f",
+      "ord_1f39e49c67523cb4a3",
+      "ord_6b3516b282c8cb1897",
+      "ord_acac3c7c6553a98cbc",
+      "ord_ce6ff8e285c193615c",
+      "ord_f679ebf419fe576221",
+      "ord_faa8982f3b897ba989"
+    ],
+    "follower13": [
+      "ord_1605ee1dad89f3fe0f",
+      "ord_1f39e49c67523cb4a3",
+      "ord_6b3516b282c8cb1897",
+      "ord_acac3c7c6553a98cbc",
+      "ord_ce6ff8e285c193615c",
+      "ord_f679ebf419fe576221",
+      "ord_faa8982f3b897ba989"
+    ],
+    "follower14": [
+      "ord_1605ee1dad89f3fe0f",
+      "ord_1f39e49c67523cb4a3",
+      "ord_6b3516b282c8cb1897",
+      "ord_acac3c7c6553a98cbc",
+      "ord_ce6ff8e285c193615c",
+      "ord_f679ebf419fe576221",
+      "ord_faa8982f3b897ba989"
+    ],
+    "follower15": [
+      "ord_1605ee1dad89f3fe0f",
+      "ord_1f39e49c67523cb4a3",
+      "ord_6b3516b282c8cb1897",
+      "ord_acac3c7c6553a98cbc",
+      "ord_ce6ff8e285c193615c",
+      "ord_f679ebf419fe576221",
+      "ord_faa8982f3b897ba989"
+    ],
+    "follower16": [
+      "ord_1605ee1dad89f3fe0f",
+      "ord_1f39e49c67523cb4a3",
+      "ord_6b3516b282c8cb1897",
+      "ord_acac3c7c6553a98cbc",
+      "ord_ce6ff8e285c193615c",
+      "ord_f679ebf419fe576221",
+      "ord_faa8982f3b897ba989"
+    ],
+    "follower17": [
+      "ord_1605ee1dad89f3fe0f",
+      "ord_1f39e49c67523cb4a3",
+      "ord_6b3516b282c8cb1897",
+      "ord_acac3c7c6553a98cbc",
+      "ord_ce6ff8e285c193615c",
+      "ord_f679ebf419fe576221",
+      "ord_faa8982f3b897ba989"
+    ],
+    "follower18": [
+      "ord_1605ee1dad89f3fe0f",
+      "ord_1f39e49c67523cb4a3",
+      "ord_6b3516b282c8cb1897",
+      "ord_acac3c7c6553a98cbc",
+      "ord_ce6ff8e285c193615c",
+      "ord_f679ebf419fe576221",
+      "ord_faa8982f3b897ba989"
+    ],
+    "follower19": [
+      "ord_1605ee1dad89f3fe0f",
+      "ord_1f39e49c67523cb4a3",
+      "ord_6b3516b282c8cb1897",
+      "ord_acac3c7c6553a98cbc",
+      "ord_ce6ff8e285c193615c",
+      "ord_f679ebf419fe576221",
+      "ord_faa8982f3b897ba989"
+    ],
+    "follower20": [
+      "ord_1605ee1dad89f3fe0f",
+      "ord_1f39e49c67523cb4a3",
+      "ord_6b3516b282c8cb1897",
+      "ord_acac3c7c6553a98cbc",
+      "ord_ce6ff8e285c193615c",
+      "ord_f679ebf419fe576221"
+    ]
+  },
+  "missing_order_distribution": {
+    "ord_1605ee1dad89f3fe0f": 79,
+    "ord_1f39e49c67523cb4a3": 38,
+    "ord_6b3516b282c8cb1897": 22,
+    "ord_acac3c7c6553a98cbc": 75,
+    "ord_ce6ff8e285c193615c": 20,
+    "ord_f679ebf419fe576221": 37,
+    "ord_faa8982f3b897ba989": 19
+  },
+  "size_ratios": {
+    "2.0": 3401
+  },
+  "verdict": "FAIL",
+  "duration_place_sec": 10.2
+}

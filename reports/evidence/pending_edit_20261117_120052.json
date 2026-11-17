@@ -1,0 +1,82 @@
+[
+  {
+    "test": "LIMIT BUY: 3 successive edits via {price}",
+    "ok": true,
+    "detail": "master/followers reached each new price: [(64273.5, 64273.5), (64203.5, 64203.5), (64293.5, 64293.5)]; followers all at last price {64293.5: 100}"
+  },
+  {
+    "test": "LIMIT BUY: field names",
+    "ok": true,
+    "detail": "{'price': (200, 'moved'), 'trigger_price': (200, 'moved'), 'new_price': (200, 'IGNORED'), 'stop_price': (200, 'IGNORED'), 'newPrice': (200, 'IGNORED')}"
+  },
+  {
+    "test": "LIMIT BUY: quantity edit",
+    "ok": true,
+    "detail": "qty 0.01 -> 0.02 (field qty, HTTP 200), -> 0.02 (field quantity, HTTP 200); follower qty {0.04: 100} (want 0.04 if edited)"
+  },
+  {
+    "test": "LIMIT SELL: 3 successive edits via {price}",
+    "ok": true,
+    "detail": "master/followers reached each new price: [(65173.5, 65173.5), (65243.5, 65243.5), (65153.5, 65153.5)]; followers all at last price {65153.5: 100}"
+  },
+  {
+    "test": "LIMIT SELL: field names",
+    "ok": true,
+    "detail": "{'price': (200, 'moved'), 'trigger_price': (200, 'moved'), 'new_price': (200, 'IGNORED'), 'stop_price': (200, 'IGNORED'), 'newPrice': (200, 'IGNORED')}"
+  },
+  {
+    "test": "LIMIT SELL: quantity edit",
+    "ok": true,
+    "detail": "qty 0.01 -> 0.02 (field qty, HTTP 200), -> 0.02 (field quantity, HTTP 200); follower qty {0.04: 100} (want 0.04 if edited)"
+  },
+  {
+    "test": "STOP BUY: 3 successive edits via {price}",
+    "ok": true,
+    "detail": "master/followers reached each new price: [(65173.5, 65173.5), (65243.5, 65243.5), (65153.5, 65153.5)]; followers all at last price {65153.5: 100}"
+  },
+  {
+    "test": "STOP BUY: field names",
+    "ok": true,
+    "detail": "{'price': (200, 'moved'), 'trigger_price': (200, 'moved'), 'new_price': (200, 'IGNORED'), 'stop_price': (200, 'IGNORED'), 'newPrice': (200, 'IGNORED')}"
+  },
+  {
+    "test": "STOP BUY: quantity edit",
+    "ok": true,
+    "detail": "qty 0.01 -> 0.02 (field qty, HTTP 200), -> 0.02 (field quantity, HTTP 200); follower qty {0.04: 100} (want 0.04 if edited)"
+  },
+  {
+    "test": "STOP SELL: 3 successive edits via {price}",
+    "ok": true,
+    "detail": "master/followers reached each new price: [(64273.5, 64273.5), (64203.5, 64203.5), (64293.5, 64293.5)]; followers all at last price {64293.5: 100}"
+  },
+  {
+    "test": "STOP SELL: field names",
+    "ok": true,
+    "detail": "{'price': (200, 'moved'), 'trigger_price': (200, 'moved'), 'new_price': (200, 'IGNORED'), 'stop_price': (200, 'IGNORED'), 'newPrice': (200, 'IGNORED')}"
+  },
+  {
+    "test": "STOP SELL: quantity edit",
+    "ok": true,
+    "detail": "qty 0.01 -> 0.02 (field qty, HTTP 200), -> 0.02 (field quantity, HTTP 200); follower qty {0.04: 100} (want 0.04 if edited)"
+  },
+  {
+    "test": "pending LIMIT with TP/SL: edit price",
+    "ok": true,
+    "detail": "placed with tp/sl (None, None) -> after edit (None, None); price 64323.5 -> 64273.5; raw keys ['copy_kind', 'copy_ref', 'created_at', 'filled_qty', 'market_order_id', 'order_id', 'price', 'requested_qty', 'side', 'state', 'symbol', 'type', 'updated_at']"
+  },
+  {
+    "test": "edit LIMIT BUY above market (marketable)",
+    "ok": false,
+    "detail": "HTTP 200, master state FILLED, followers holding 0.002: 0/100"
+  },
+  {
+    "test": "edit a CANCELLED order is refused",
+    "ok": true,
+    "detail": "HTTP 400 {'error': 'order is CANCELLED (only PENDING orders can be modified)'}"
+  },
+  {
+    "test": "edit a FILLED order is refused",
+    "ok": true,
+    "detail": "HTTP 400 {'error': 'order is FILLED (only PENDING orders can be modified)'}"
+  }
+]

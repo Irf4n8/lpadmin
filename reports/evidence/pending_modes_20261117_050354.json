@@ -1,0 +1,260 @@
+[
+ {
+  "mode": "multiplier",
+  "test": "MARKET BUY",
+  "ok": true,
+  "detail": "accepted=200; followers at expected scaled qty 10/10"
+ },
+ {
+  "mode": "multiplier",
+  "test": "MARKET SELL",
+  "ok": true,
+  "detail": "accepted=200; followers at expected scaled qty 10/10"
+ },
+ {
+  "mode": "multiplier",
+  "test": "LIMIT BUY place+mirror",
+  "ok": true,
+  "detail": "@ 64589.8: 10/10 followers mirrored w/ scaled qty "
+ },
+ {
+  "mode": "multiplier",
+  "test": "LIMIT BUY modify",
+  "ok": true,
+  "detail": "HTTP 200; moved to 64489.8 on 10/10 "
+ },
+ {
+  "mode": "multiplier",
+  "test": "LIMIT BUY cancel",
+  "ok": true,
+  "detail": "HTTP 200; follower pendings left 0"
+ },
+ {
+  "mode": "multiplier",
+  "test": "LIMIT SELL place+mirror",
+  "ok": true,
+  "detail": "@ 65389.8: 10/10 followers mirrored w/ scaled qty "
+ },
+ {
+  "mode": "multiplier",
+  "test": "LIMIT SELL modify",
+  "ok": true,
+  "detail": "HTTP 200; moved to 65489.8 on 10/10 "
+ },
+ {
+  "mode": "multiplier",
+  "test": "LIMIT SELL cancel",
+  "ok": true,
+  "detail": "HTTP 200; follower pendings left 0"
+ },
+ {
+  "mode": "multiplier",
+  "test": "STOP BUY place+mirror",
+  "ok": true,
+  "detail": "@ 65389.8: 10/10 followers mirrored w/ scaled qty "
+ },
+ {
+  "mode": "multiplier",
+  "test": "STOP BUY modify",
+  "ok": true,
+  "detail": "HTTP 200; moved to 65489.8 on 10/10 "
+ },
+ {
+  "mode": "multiplier",
+  "test": "STOP BUY cancel",
+  "ok": true,
+  "detail": "HTTP 200; follower pendings left 0"
+ },
+ {
+  "mode": "multiplier",
+  "test": "STOP SELL place+mirror",
+  "ok": true,
+  "detail": "@ 64589.8: 10/10 followers mirrored w/ scaled qty "
+ },
+ {
+  "mode": "multiplier",
+  "test": "STOP SELL modify",
+  "ok": true,
+  "detail": "HTTP 200; moved to 64489.8 on 10/10 "
+ },
+ {
+  "mode": "multiplier",
+  "test": "STOP SELL cancel",
+  "ok": true,
+  "detail": "HTTP 200; follower pendings left 0"
+ },
+ {
+  "mode": "multiplier",
+  "test": "STOP BUY trigger->fill",
+  "ok": true,
+  "detail": "master filled BUY; followers filled at scaled qty 10/10"
+ },
+ {
+  "mode": "balance",
+  "test": "MARKET BUY",
+  "ok": true,
+  "detail": "accepted=200; followers at expected scaled qty 10/10"
+ },
+ {
+  "mode": "balance",
+  "test": "MARKET SELL",
+  "ok": true,
+  "detail": "accepted=200; followers at expected scaled qty 10/10"
+ },
+ {
+  "mode": "balance",
+  "test": "LIMIT BUY place+mirror",
+  "ok": true,
+  "detail": "@ 64659.1: 10/10 followers mirrored w/ scaled qty "
+ },
+ {
+  "mode": "balance",
+  "test": "LIMIT BUY modify",
+  "ok": true,
+  "detail": "HTTP 200; moved to 64559.1 on 10/10 "
+ },
+ {
+  "mode": "balance",
+  "test": "LIMIT BUY cancel",
+  "ok": true,
+  "detail": "HTTP 200; follower pendings left 0"
+ },
+ {
+  "mode": "balance",
+  "test": "LIMIT SELL place+mirror",
+  "ok": true,
+  "detail": "@ 65459.1: 10/10 followers mirrored w/ scaled qty "
+ },
+ {
+  "mode": "balance",
+  "test": "LIMIT SELL modify",
+  "ok": true,
+  "detail": "HTTP 200; moved to 65559.1 on 10/10 "
+ },
+ {
+  "mode": "balance",
+  "test": "LIMIT SELL cancel",
+  "ok": true,
+  "detail": "HTTP 200; follower pendings left 0"
+ },
+ {
+  "mode": "balance",
+  "test": "STOP BUY place+mirror",
+  "ok": true,
+  "detail": "@ 65459.1: 10/10 followers mirrored w/ scaled qty "
+ },
+ {
+  "mode": "balance",
+  "test": "STOP BUY modify",
+  "ok": true,
+  "detail": "HTTP 200; moved to 65559.1 on 10/10 "
+ },
+ {
+  "mode": "balance",
+  "test": "STOP BUY cancel",
+  "ok": true,
+  "detail": "HTTP 200; follower pendings left 0"
+ },
+ {
+  "mode": "balance",
+  "test": "STOP SELL place",
+  "ok": false,
+  "detail": "rejected HTTP 400: {\"error\":\"the liquidity provider must be configured, enabled and tested before real trading \u2014 ask your broker\"}\n"
+ },
+ {
+  "mode": "balance",
+  "test": "STOP SELL trigger->fill",
+  "ok": true,
+  "detail": "master filled SELL; followers filled at scaled qty 10/10"
+ },
+ {
+  "mode": "equity",
+  "test": "MARKET BUY",
+  "ok": true,
+  "detail": "accepted=200; followers at expected scaled qty 10/10"
+ },
+ {
+  "mode": "equity",
+  "test": "MARKET SELL",
+  "ok": true,
+  "detail": "accepted=200; followers at expected scaled qty 10/10"
+ },
+ {
+  "mode": "equity",
+  "test": "LIMIT BUY place+mirror",
+  "ok": true,
+  "detail": "@ 64578.1: 10/10 followers mirrored w/ scaled qty "
+ },
+ {
+  "mode": "equity",
+  "test": "LIMIT BUY modify",
+  "ok": true,
+  "detail": "HTTP 200; moved to 64478.1 on 10/10 "
+ },
+ {
+  "mode": "equity",
+  "test": "LIMIT BUY cancel",
+  "ok": true,
+  "detail": "HTTP 200; follower pendings left 0"
+ },
+ {
+  "mode": "equity",
+  "test": "LIMIT SELL place+mirror",
+  "ok": true,
+  "detail": "@ 65378.1: 10/10 followers mirrored w/ scaled qty "
+ },
+ {
+  "mode": "equity",
+  "test": "LIMIT SELL modify",
+  "ok": true,
+  "detail": "HTTP 200; moved to 65478.1 on 10/10 "
+ },
+ {
+  "mode": "equity",
+  "test": "LIMIT SELL cancel",
+  "ok": true,
+  "detail": "HTTP 200; follower pendings left 0"
+ },
+ {
+  "mode": "equity",
+  "test": "STOP BUY place+mirror",
+  "ok": true,
+  "detail": "@ 65378.1: 10/10 followers mirrored w/ scaled qty "
+ },
+ {
+  "mode": "equity",
+  "test": "STOP BUY modify",
+  "ok": true,
+  "detail": "HTTP 200; moved to 65478.1 on 10/10 "
+ },
+ {
+  "mode": "equity",
+  "test": "STOP BUY cancel",
+  "ok": true,
+  "detail": "HTTP 200; follower pendings left 0"
+ },
+ {
+  "mode": "equity",
+  "test": "STOP SELL place+mirror",
+  "ok": true,
+  "detail": "@ 64578.1: 10/10 followers mirrored w/ scaled qty "
+ },
+ {
+  "mode": "equity",
+  "test": "STOP SELL modify",
+  "ok": true,
+  "detail": "HTTP 200; moved to 64478.1 on 10/10 "
+ },
+ {
+  "mode": "equity",
+  "test": "STOP SELL cancel",
+  "ok": true,
+  "detail": "HTTP 200; follower pendings left 0"
+ },
+ {
+  "mode": "equity",
+  "test": "STOP trigger",
+  "ok": false,
+  "detail": "neither STOP (+/-20 around 64853.4) triggered within 90s (inconclusive)"
+ }
+]

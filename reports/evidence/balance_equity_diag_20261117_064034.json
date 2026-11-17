@@ -1,0 +1,2016 @@
+{
+ "balance": {
+  "summary": {
+   "MISSING_COPIES (sizes right)": 100
+  },
+  "rows": [
+   {
+    "f": "follower1@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower2@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower3@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower4@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower5@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower6@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower7@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower8@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower9@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower10@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower11@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower12@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower13@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower14@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower15@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower16@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower17@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower18@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower19@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower20@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower21@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower22@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower23@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower24@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower25@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 9,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower26@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower27@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower28@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower29@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower30@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower31@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower32@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower33@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower34@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower35@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower36@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower37@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower38@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower39@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower40@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower41@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower42@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower43@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower44@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower45@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower46@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower47@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower48@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower49@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower50@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 9,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower51@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower52@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower53@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower54@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower55@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower56@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower57@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower58@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower59@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower60@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower61@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower62@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower63@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower64@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower65@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower66@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower67@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower68@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower69@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower70@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower71@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower72@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower73@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower74@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower75@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 9,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower76@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower77@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower78@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower79@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower80@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower81@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower82@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower83@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower84@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower85@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower86@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower87@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower88@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower89@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower90@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower91@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower92@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower93@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower94@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower95@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower96@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower97@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower98@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower99@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   },
+   {
+    "f": "follower100@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 9,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 9
+    },
+    "cat": "MISSING_COPIES (sizes right)"
+   }
+  ]
+ },
+ "equity": {
+  "summary": {
+   "OK": 100
+  },
+  "rows": [
+   {
+    "f": "follower1@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower2@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower3@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower4@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower5@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower6@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower7@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower8@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower9@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower10@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower11@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower12@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower13@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower14@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower15@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower16@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower17@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower18@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower19@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower20@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower21@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower22@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower23@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower24@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower25@mailinator.com",
+    "bal_ratio": 1.0,
+    "n_pos": 10,
+    "expected_qty": 0.1,
+    "qtys": {
+     "0.1": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower26@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower27@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower28@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower29@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower30@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower31@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower32@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower33@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower34@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower35@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower36@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower37@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower38@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower39@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower40@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower41@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower42@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower43@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower44@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower45@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower46@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower47@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower48@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower49@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower50@mailinator.com",
+    "bal_ratio": 2.0,
+    "n_pos": 10,
+    "expected_qty": 0.2,
+    "qtys": {
+     "0.2": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower51@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower52@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower53@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower54@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower55@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower56@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower57@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower58@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower59@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower60@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower61@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower62@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower63@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower64@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower65@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower66@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower67@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower68@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower69@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower70@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower71@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower72@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower73@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower74@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower75@mailinator.com",
+    "bal_ratio": 3.0,
+    "n_pos": 10,
+    "expected_qty": 0.3,
+    "qtys": {
+     "0.3": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower76@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower77@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower78@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower79@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower80@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower81@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower82@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower83@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower84@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower85@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower86@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower87@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower88@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower89@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower90@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower91@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower92@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower93@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower94@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower95@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower96@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower97@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower98@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower99@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   },
+   {
+    "f": "follower100@mailinator.com",
+    "bal_ratio": 0.5,
+    "n_pos": 10,
+    "expected_qty": 0.05,
+    "qtys": {
+     "0.05": 10
+    },
+    "cat": "OK"
+   }
+  ]
+ }
+}
