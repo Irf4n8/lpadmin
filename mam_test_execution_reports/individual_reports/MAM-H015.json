@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-H015",
+  "module": "Module 8: High-Water Mark & Performance Fees",
+  "title": "Clawback Prevention Across Consecutive Cycles",
+  "priority": "P0",
+  "precondition": "Month 1: Manager earns $800 fee; Month 2: Sub-account sustains $2,000 loss.",
+  "steps": "1. Inspect manager fee wallet.",
+  "expected_result": "Month 1 fees remain untouched (zero clawback); manager must recover to HWM before earning future fees.",
+  "execution_timestamp": "2026-11-16T10:58:44.834851Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Historical performance fees are non-clawbackable; manager must recover subsequent losses to historical peak HWM before earning future shares.",
+  "evidence": {
+    "clawback_rule": "Zero fee clawback"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

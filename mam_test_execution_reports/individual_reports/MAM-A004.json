@@ -1,0 +1,26 @@
+{
+  "test_case_id": "MAM-A004",
+  "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+  "title": "Predefined Percentage Allocation: Exact Percentage Distribution",
+  "priority": "P0",
+  "precondition": "Manager configures fixed percentages: Acc 1 = 25%, Acc 2 = 35%, Acc 3 = 40% (Sum = 100%).",
+  "steps": "1. Master executes 4.00 lots EURUSD.",
+  "expected_result": "Acc 1 gets 1.00 lot (25%); Acc 2 gets 1.40 lots (35%); Acc 3 gets 1.60 lots (40%); sum == 4.00 lots.",
+  "execution_timestamp": "2026-11-16T10:58:42.338562Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Predefined percentage distribution: child lots = [1.0, 1.4, 1.6], total = 4.0 lots.",
+  "evidence": {
+    "percentages": [
+      0.25,
+      0.35,
+      0.4
+    ],
+    "child_lots": [
+      1.0,
+      1.4,
+      1.6
+    ]
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

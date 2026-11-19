@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-M012",
+  "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+  "title": "Hedging Margin Requirement on Sub-Accounts",
+  "priority": "P1",
+  "precondition": "Master opens Buy 1.0 EURUSD then Sell 1.0 EURUSD on hedged broker bridge.",
+  "steps": "1. Measure margin on child accounts.",
+  "expected_result": "Broker hedged margin reduction (0% to 50% margin requirement) applied accurately to each child ticket.",
+  "execution_timestamp": "2026-11-16T10:58:44.397427Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Broker hedged margin reduction (0% to 50% margin requirement on opposing Buy/Sell legs) applied cleanly per child account.",
+  "evidence": {
+    "instance_mode": "real (hedging)"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

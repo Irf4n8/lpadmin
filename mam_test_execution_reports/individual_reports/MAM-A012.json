@@ -1,0 +1,24 @@
+{
+  "test_case_id": "MAM-A012",
+  "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+  "title": "Multi-Currency Balance Conversion at Live Spot Rates",
+  "priority": "P1",
+  "precondition": "Group contains USD, EUR, and JPY sub-accounts under PBB.1 EUR = 1.08 USD, 1 USD = 150 JPY.",
+  "steps": "1. Master opens trade.",
+  "expected_result": "EUR and JPY balances dynamically converted to USD to determine true equity weighting; orders apportioned accurately.",
+  "execution_timestamp": "2026-11-16T10:58:42.344559Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Dynamic FX spot conversion yields normalized USD base: $30800.00, weights: [0.3247, 0.3506, 0.3247].",
+  "evidence": {
+    "eur_usd": 1.08,
+    "usd_jpy": 150.0,
+    "total_usd": 30800.0,
+    "weights": [
+      0.3247,
+      0.3506,
+      0.3247
+    ]
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

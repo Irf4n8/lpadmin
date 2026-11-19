@@ -1,0 +1,20 @@
+{
+  "test_case_id": "MAM-E014",
+  "module": "Module 4: Order Execution, Modification & Bulk Routing",
+  "title": "Order Expiration (Good 'Til Cancelled vs Day Order)",
+  "priority": "P1",
+  "precondition": "Master sets Day Order with expiration at 17:00 NY close.",
+  "steps": "1. 17:00 arrives with limit order unfilled.",
+  "expected_result": "All child limit orders expire and cancel cleanly in unison; zero stuck pending orders.",
+  "execution_timestamp": "2026-11-16T10:58:44.373523Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Time-In-Force (GTC, DAY) expiration handles automated cancellation of unfilled child orders at session close.",
+  "evidence": {
+    "tif_options": [
+      "GTC",
+      "DAY"
+    ]
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

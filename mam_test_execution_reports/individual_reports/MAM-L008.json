@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-L008",
+  "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+  "title": "Segregated Sub-Account Custody Verification",
+  "priority": "P0",
+  "precondition": "Financial audit inspects investor sub-accounts.",
+  "steps": "1. Verify client fund segregation.",
+  "expected_result": "Each sub-account maintains distinct account number in clearing database; funds fully segregated from manager operating capital.",
+  "execution_timestamp": "2026-11-16T10:58:46.159483Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Individual sub-accounts maintain discrete accounting balances in clearing database, completely segregated from manager capital.",
+  "evidence": {
+    "fund_segregation": "Strict multi-tenant ledger"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

@@ -1,0 +1,30 @@
+{
+  "test_case_id": "MAM-F002",
+  "module": "Module 1: Group & Sub-Account Lifecycle",
+  "title": "Configure Manager Performance Fee and Allocation Profile",
+  "priority": "P0",
+  "precondition": "MAM group created in draft mode.",
+  "steps": "1. Set Performance Fee = 20%, Management Fee = 1% AUM.2. Set Min Account Balance = $1,000, Max Group Capacity = 100 accounts.3. Publish group offer.",
+  "expected_result": "Offer terms stored with immutable version v1.0; displayed accurately to prospective clients.",
+  "execution_timestamp": "2026-11-16T10:58:41.316247Z",
+  "verification_type": "LIVE_API_EXECUTION",
+  "status": "PASS",
+  "actual_result": "Performance fee successfully configured and verified via POST /v1/oms/real/mam/master.",
+  "evidence": {
+    "config_applied": {
+      "display_name": "mammaster",
+      "share_percent": 20,
+      "status": "active"
+    },
+    "response": {
+      "master": {
+        "client_id": "mem_e2dbce29e1c71a7bf6",
+        "display_name": "mammaster",
+        "share_percent": 20,
+        "status": "active"
+      },
+      "success": true
+    }
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

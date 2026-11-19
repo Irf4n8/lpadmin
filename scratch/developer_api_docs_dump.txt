@@ -1,0 +1,107 @@
+Skip to content
+lpadmin.blackfx.com
+/
+Developers
+My account
+Open workspace ↗
+API
+Documentation
+API v1
+/
+GET STARTED
+Introduction
+Authentication
+Order lifecycle
+Errors & conventions
+All endpoints
+Authentication
+7
+POST
+Trader login (email + password) -> session token
+GET
+Who am I
+POST
+End a login session
+GET
+List the member's API keys
+POST
+Create an API key (shown once)
+DELETE
+Revoke an API key
+POST
+Exchange an API key for an access token
+Accounts & venues
+32
+Orders
+8
+Positions
+9
+Account & funds
+5
+Streams
+2
+Market signals and alerts
+7
+Instance
+3
+Wallets
+3
+Client portal
+18
+IB
+4
+Copy trading
+5
+MAM
+6
+PAMM
+6
+AI assistant
+4
+Catalogue
+1
+cURL · JavaScript · Python
+TRADING API / V1
+Build your first integration.
+
+Everything you need to connect an idea to your trading account. Simple HTTP requests, clear responses, and examples in your language.
+
+REST + WebSocket
+120 endpoints
+JSON responses
+YOUR API BASE URL
+https://lpadmin.blackfx.com/v1
+From zero to your first request
+1
+Create your API key
+
+Open the API tab. Start with a read-only key while you connect your application.
+
+2
+Exchange it for a token
+
+Send your key to the token endpoint. Access tokens last for one hour.
+
+3
+Read your account
+
+Discover your available instances, then call funds with a Bearer token.
+
+Start with authentication
+cURL
+fetch
+Python
+cURL request
+Copy
+curl --request POST 'https://lpadmin.blackfx.com/v1/oms/_auth/token' \
+  --header 'Content-Type: application/json' \
+  --data "{\"api_key\":\"$API_KEY\"}"
+
+Replace YOUR_* placeholders. Set API_KEY / ACCESS_TOKEN in your environment. Examples are never run on this page.
+
+Write your integration once
+
+All examples use this installation’s API URL. Keep credentials in environment variables on your server. JavaScript examples use Node.js fetch; Python examples use requests.
+
+lpadmin.blackfx.com · Developer API
+Built for the way you trade.

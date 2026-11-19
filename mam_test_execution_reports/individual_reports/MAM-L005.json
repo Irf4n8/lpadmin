@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-L005",
+  "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+  "title": "Sanctioned Territory IP Geoblocking on LPOA Submissions",
+  "priority": "P0",
+  "precondition": "Connection originates from OFAC sanctioned country.",
+  "steps": "1. Attempt to execute LPOA contract.",
+  "expected_result": "Gateway blocks request with 403 Forbidden; compliance alert triggered.",
+  "execution_timestamp": "2026-11-16T10:58:46.157913Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "API gateway inspects GeoIP database, rejecting connections from OFAC-sanctioned jurisdictions with 403 Forbidden.",
+  "evidence": {
+    "geoblocking_code": 403
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

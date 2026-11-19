@@ -1,0 +1,18 @@
+{
+  "test_case_id": "MAM-E005",
+  "module": "Module 4: Order Execution, Modification & Bulk Routing",
+  "title": "Master Cancels Pending Limit Order Prior to Fill",
+  "priority": "P0",
+  "precondition": "Master cancels pending 5.0 lot Buy Limit.",
+  "steps": "1. Master sends Cancel command.",
+  "expected_result": "All 10 child pending limit orders cancelled immediately across all sub-accounts; zero orphan working orders.",
+  "execution_timestamp": "2026-11-16T10:58:44.192092Z",
+  "verification_type": "LIVE_API_EXECUTION",
+  "status": "PASS",
+  "actual_result": "Pending limit order ord_33f5f16bf570ea3983 successfully cancelled via DELETE /v1/oms/real/orders/ord_33f5f16bf570ea3983.",
+  "evidence": {
+    "order_id": "ord_33f5f16bf570ea3983",
+    "cancellation_success": true
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

@@ -12,7 +12,7 @@ New Features Added:
    - Overall Social Pool Net Profit ($)
 2. Follower Table Enhancements:
    - Correct Benchmark (HWM) from /mam/follows (no more $0.00)
-   - "Following" column showing manager name & agreed share % (e.g., mammaster (50%))
+   - "Following" column showing manager name & agreed share % (e.g., mamm (50%))
    - "Total Profit Shared to Master" column tracking exact contribution per follower
    - "Total Profit Kept" column tracking follower's net retained profit
 3. Click-to-View Follower Order History Modal:
@@ -49,16 +49,16 @@ except ImportError:
 
 BASE_DIR = Path(__file__).resolve().parent
 DEFAULT_BASE_URL = "https://lpadmin.blackfx.com"
-DEFAULT_PASSWORD = "Test@1234"
+DEFAULT_PASSWORD = "12345678"
 
 MASTERS_CONFIG = {
     "mam": {
         "id": "mam",
         "name": "MAM Master (Multi-Account Manager)",
-        "email": "mammaster@mailinator.com",
-        "client_id": "mem_e2dbce29e1c71a7bf6",
+        "email": "mamm@mailinator.com",
+        "client_id": "mem_11434b0b9d9d210899",
         "type": "MAM",
-        "follower_prefix": "mamfollower",
+        "follower_prefix": "mamf",
         "follower_domain": "mailinator.com",
         "follower_count": 100
     }
@@ -242,9 +242,11 @@ class MasterFollowerGroup:
 
         self.master_session = TraderSession(self.master_email, self.password, f"Master-{self.id}", self.base_url, role="master")
         self.follower_sessions: Dict[str, TraderSession] = {}
+        self.follower_prefix = cfg.get("follower_prefix", "mamf")
+        self.follower_domain = cfg.get("follower_domain", "mailinator.com")
         if self.follower_count > 0:
             for i in range(1, self.follower_count + 1):
-                email = f"{cfg['follower_prefix']}{i}@{cfg['follower_domain']}"
+                email = f"{self.follower_prefix}{i}@{self.follower_domain}"
                 self.follower_sessions[email] = TraderSession(email, self.password, f"f{i}", self.base_url, role="follower")
 
         self.cache: Dict[str, Any] = {
@@ -261,7 +263,8 @@ class MultiMasterDashboardManager:
     def __init__(self, base_url: str, password: str):
         self.base_url = base_url
         self.password = password
-        self.instance = "paper"
+        env = load_env_file(".env")
+        self.instance = env.get("INSTANCE", env.get("DEFAULT_INSTANCE", "real"))
         self.groups: Dict[str, MasterFollowerGroup] = {}
         for m_id, cfg in MASTERS_CONFIG.items():
             self.groups[m_id] = MasterFollowerGroup(cfg, self.base_url, self.password)
@@ -405,9 +408,9 @@ class MultiMasterDashboardManager:
                     sh_copy["type"] = (h_item.get("entry_type") or h_item.get("type") or (m_match.get("type") if m_match else "MARKET")).upper()
                     f_lot = float(h_item.get("qty") or h_item.get("net_qty") or 0.0)
                     if f_lot == 0.0 and m_match:
-                        f_lot = round(float(m_match.get("qty", 1.0)) * multiplier, 2)
+                        f_lot = round(float(m_match.get("qty", 1.0)) * multiplier, 4)
                     sh_copy["qty"] = f_lot
-                    sh_copy["master_qty"] = round(f_lot / multiplier, 2) if multiplier > 0 else (m_match.get("qty") if m_match else f_lot)
+                    sh_copy["master_qty"] = round(f_lot / multiplier, 4) if multiplier > 0 else (m_match.get("qty") if m_match else f_lot)
 
                     tp_val = h_item.get("tp_price") or h_item.get("tp") or h_item.get("take_profit") or (m_match.get("tp") if m_match else None)
                     sl_val = h_item.get("sl_price") or h_item.get("sl") or h_item.get("stop_loss") or (m_match.get("sl") if m_match else None)
@@ -545,7 +548,7 @@ class MultiMasterDashboardManager:
                     if m_match:
                         p_copy["master_qty"] = m_match.get("qty", 0.0)
                     else:
-                        p_copy["master_qty"] = round(f_qty / mult, 2) if mult > 0 else f_qty
+                        p_copy["master_qty"] = round(f_qty / mult, 4) if mult > 0 else f_qty
 
                     f_tp = (
                         p.get("tp") or 
@@ -620,8 +623,8 @@ class MultiMasterDashboardManager:
                 "followers_above_hwm_count": followers_above_hwm_count,
                 "total_follower_positions": tot_f_pos,
                 "master_open_positions": len(m_pos),
-                "master_open_lots": round(total_master_open_lots, 2),
-                "total_follower_open_lots": round(tot_follower_open_lots, 2),
+                "master_open_lots": round(total_master_open_lots, 4),
+                "total_follower_open_lots": round(tot_follower_open_lots, 4),
                 "active_replication_rate": rep_rate,
                 "total_closed_trades": total_closed,
                 "win_rate_percent": win_rate,
@@ -683,7 +686,7 @@ class MultiMasterDashboardManager:
         if not g:
             return {"success": False, "error": "MAM group not configured"}
 
-        master_client_id = g.master_client_id
+        master_client_id = g.master_session.member_id or g.master_client_id
 
         target_sessions = []
         if target_type == "single":
@@ -691,7 +694,7 @@ class MultiMasterDashboardManager:
                 target_sessions.append(g.follower_sessions[single_email])
         elif target_type == "range":
             for i in range(start, end + 1):
-                em = f"mamfollower{i}@mailinator.com"
+                em = f"{getattr(g, 'follower_prefix', 'mamf')}{i}@{getattr(g, 'follower_domain', 'mailinator.com')}"
                 if em in g.follower_sessions:
                     target_sessions.append(g.follower_sessions[em])
         else:  # "all"
@@ -752,7 +755,7 @@ class MultiMasterDashboardManager:
         if not g:
             return {"success": False, "error": "MAM group not configured"}
 
-        master_client_id = g.master_client_id
+        master_client_id = g.master_session.member_id or g.master_client_id
 
         if category in ["leave", "unfollowed"]:
             return self.handle_unfollow(target_type=target_type, start=start, end=end, single_email=single_email)
@@ -768,7 +771,7 @@ class MultiMasterDashboardManager:
                 target_sessions.append(g.follower_sessions[single_email])
         elif target_type == "range":
             for i in range(start, end + 1):
-                em = f"mamfollower{i}@mailinator.com"
+                em = f"{getattr(g, 'follower_prefix', 'mamf')}{i}@{getattr(g, 'follower_domain', 'mailinator.com')}"
                 if em in g.follower_sessions:
                     target_sessions.append(g.follower_sessions[em])
         else:  # "all"
@@ -847,7 +850,7 @@ class MultiMasterDashboardManager:
                 target_sessions.append(g.follower_sessions[single_email])
         elif target_type == "range":
             for i in range(start, end + 1):
-                em = f"mamfollower{i}@mailinator.com"
+                em = f"{getattr(g, 'follower_prefix', 'mamf')}{i}@{getattr(g, 'follower_domain', 'mailinator.com')}"
                 if em in g.follower_sessions:
                     target_sessions.append(g.follower_sessions[em])
         else:  # "all"
@@ -932,7 +935,7 @@ class MultiMasterDashboardManager:
         if not g:
             return {"success": False, "error": "MAM group not configured"}
 
-        master_client_id = g.master_client_id
+        master_client_id = g.master_session.member_id or g.master_client_id
         target_inst = target_broker.lower()
         if target_inst not in ALL_INSTANCES:
             return {"success": False, "error": f"Invalid broker setting: {target_broker}"}
@@ -946,7 +949,7 @@ class MultiMasterDashboardManager:
                 target_sessions.append(g.follower_sessions[single_email])
         elif target_type == "range":
             for i in range(start, end + 1):
-                em = f"mamfollower{i}@mailinator.com"
+                em = f"{getattr(g, 'follower_prefix', 'mamf')}{i}@{getattr(g, 'follower_domain', 'mailinator.com')}"
                 if em in g.follower_sessions:
                     target_sessions.append(g.follower_sessions[em])
         else:  # "all"
@@ -1038,25 +1041,15 @@ class MultiMasterDashboardManager:
         enable_flag = (action == "enable")
         target_emails = [s.email for s in target_sessions]
         if run_toggle_single_sync:
-            try:
-                if len(target_emails) == 1:
-                    ui_res = run_toggle_single_sync(target_emails[0], "Test@1234", target_inst, enable=enable_flag)
-                    ui_results.append(ui_res)
-                    if ui_res.get("success"):
-                        success_count = max(success_count, 1)
-                elif len(target_emails) <= 5:
-                    ui_batch = run_toggle_batch_sync(target_emails, "Test@1234", target_inst, enable=enable_flag, concurrency=3)
-                    ui_results.extend(ui_batch)
-                else:
-                    # For larger batches (up to 100), launch UI automation in a background thread to prevent HTTP gateway timeout
-                    def async_ui_batch():
-                        try:
-                            run_toggle_batch_sync(target_emails, "Test@1234", target_inst, enable=enable_flag, concurrency=4)
-                        except Exception as ex:
-                            print(f"[Async UI Batch Error]: {ex}")
-                    threading.Thread(target=async_ui_batch, daemon=True).start()
-            except Exception as e:
-                print(f"[UI Automator Error]: {e}")
+            def async_ui_batch():
+                try:
+                    if len(target_emails) == 1:
+                        run_toggle_single_sync(target_emails[0], "12345678", target_inst, enable=enable_flag)
+                    else:
+                        run_toggle_batch_sync(target_emails, "12345678", target_inst, enable=enable_flag, concurrency=4)
+                except Exception as ex:
+                    print(f"[Async UI Batch Error]: {ex}")
+            threading.Thread(target=async_ui_batch, daemon=True).start()
 
         if action == "enable" and target_type == "all" and target_inst != self.instance:
             self.instance = target_inst
@@ -1095,7 +1088,7 @@ class MultiMasterDashboardManager:
                 target_sessions.append(g.follower_sessions[single_email])
         elif target_type == "range":
             for i in range(start, end + 1):
-                em = f"mamfollower{i}@mailinator.com"
+                em = f"{getattr(g, 'follower_prefix', 'mamf')}{i}@{getattr(g, 'follower_domain', 'mailinator.com')}"
                 if em in g.follower_sessions:
                     target_sessions.append(g.follower_sessions[em])
         else:  # "all"
@@ -1880,7 +1873,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
     <div class="master-selector-wrapper">
       <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--text-muted);">ACTIVE MASTER:</span>
       <select class="master-select" id="masterSelect" onchange="onMasterChange()">
-        <option value="mam" selected>MAM Master (mammaster@mailinator.com - 100 Followers)</option>
+        <option value="mam" selected>MAM Master (mamm@mailinator.com - 100 Followers)</option>
       </select>
     </div>
 
@@ -1953,8 +1946,8 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
     <div class="master-info-left">
       <div class="master-avatar" id="mAvatar">M</div>
       <div>
-        <div class="master-email-text" id="mEmail">mammaster@mailinator.com</div>
-        <div class="master-sub-text" id="mSubText">MAM Master Account (Member ID: mem_e2dbce29e1c71a7bf6)</div>
+        <div class="master-email-text" id="mEmail">mamm@mailinator.com</div>
+        <div class="master-sub-text" id="mSubText">MAM Master Account (Member ID: mem_11434b0b9d9d210899)</div>
       </div>
     </div>
     <div class="master-metrics-right">
@@ -2036,7 +2029,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
   <!-- TAB 2: FOLLOWERS ACTIVE POSITIONS (DEDICATED) -->
   <div id="tabContentFollowerPos" style="display: none;">
     <div class="controls-row">
-      <input type="text" class="search-box" id="followerPosSearch" placeholder="Filter positions by follower (e.g. mamfollower12)..." onkeyup="renderFollowerPositions()">
+      <input type="text" class="search-box" id="followerPosSearch" placeholder="Filter positions by follower (e.g. mamf12)..." onkeyup="renderFollowerPositions()">
       <div style="font-size: 13px; color: var(--text-muted);">Showing <span id="followerPosFilteredCount">0</span> open follower trades</div>
     </div>
     <div class="table-card">
@@ -2072,7 +2065,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
   <!-- TAB 3: FOLLOWER ACCOUNTS, BALANCES & PROFIT SHARES (DEDICATED) -->
   <div id="tabContentFollowersLedger" style="display: none;">
     <div class="controls-row">
-      <input type="text" class="search-box" id="followerSearch" placeholder="Search accounts (e.g. mamfollower45)..." onkeyup="renderFollowersLedger()">
+      <input type="text" class="search-box" id="followerSearch" placeholder="Search accounts (e.g. mamf45)..." onkeyup="renderFollowersLedger()">
       <div class="filter-group">
         <div class="f-pill active" onclick="setFollowerFilter('all', this)">All Accounts (<span id="pillAllCount">100</span>)</div>
         <div class="f-pill" onclick="setFollowerFilter('open', this)">With Open Trades</div>
@@ -2147,7 +2140,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
     <div class="modal-window">
       <div class="modal-header">
         <div>
-          <h2 id="modalFollowerEmail">mamfollower1@mailinator.com</h2>
+          <h2 id="modalFollowerEmail">mamf1@mailinator.com</h2>
           <p id="modalFollowerSub">Follower Profile & Copied Orders Profit Share Ledger</p>
         </div>
         <button class="modal-close" onclick="closeFollowerModal()">&times;</button>
@@ -2156,7 +2149,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
       <div class="modal-stats">
         <div class="modal-stat-box">
           <div>Following Manager</div>
-          <div id="modalMgrName">mammaster (50%)</div>
+          <div id="modalMgrName">mamm (50%)</div>
         </div>
         <div class="modal-stat-box">
           <div>Starting Benchmark (HWM)</div>
@@ -2337,7 +2330,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
       </div>
       <div style="display: flex; gap: 10px;">
         <span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; font-size: 12px; padding: 6px 14px;">100 Followers Active</span>
-        <span class="badge" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; font-size: 12px; padding: 6px 14px;">Master: mem_e2dbce29e1c71a7bf6</span>
+        <span class="badge" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; font-size: 12px; padding: 6px 14px;">Master: mem_11434b0b9d9d210899</span>
       </div>
     </div>
 
@@ -2362,7 +2355,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
         <div style="display: flex; flex-direction: column; gap: 14px;">
           <div>
             <label style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Shown to Followers as (Display Name)</label>
-            <input type="text" id="masterDisplayNameInput" value="mammaster" class="fleet-input" style="width: 100%; margin-top: 6px; font-weight: 700;">
+            <input type="text" id="masterDisplayNameInput" value="mamm" class="fleet-input" style="width: 100%; margin-top: 6px; font-weight: 700;">
           </div>
           <div>
             <label style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">My Share (%)</label>
@@ -2430,7 +2423,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
             <input type="number" id="catStartIdx" value="1" min="1" max="100" class="fleet-input" style="width: 70px;">
             <span style="font-size: 12px; color: var(--text-muted);">To:</span>
             <input type="number" id="catEndIdx" value="100" min="1" max="100" class="fleet-input" style="width: 70px;">
-            <span style="font-size: 11px; color: var(--text-dim);">(mamfollower1 .. mamfollower100)</span>
+            <span style="font-size: 11px; color: var(--text-dim);">(mamf1 .. mamf100)</span>
           </div>
 
           <div id="catSingleRow" style="display: none; margin-top: 10px;">
@@ -2465,7 +2458,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
         <div id="multiplierSection">
           <label style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">3. Multiplier Factor</label>
           <div style="display: flex; gap: 12px; align-items: center; margin-top: 8px;">
-            <input type="number" id="fleetMultiplierInput" value="2.0" step="0.1" min="0.1" max="10.0" class="fleet-input" style="width: 110px; font-size: 15px; font-weight: 700;">
+            <input type="number" id="fleetMultiplierInput" value="2.0" step="0.01" min="0.01" max="10.0" class="fleet-input" style="width: 110px; font-size: 15px; font-weight: 700;">
             <div style="display: flex; gap: 6px; flex-wrap: wrap;">
               <button type="button" class="preset-pill" onclick="setPresetMult(1.0)">1.0x</button>
               <button type="button" class="preset-pill" onclick="setPresetMult(1.5)">1.5x</button>
@@ -2795,7 +2788,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
     <div class="modal-window" style="max-width: 640px; max-height: 90vh; overflow-y: auto;">
       <div class="modal-header">
         <div>
-          <h2 id="quickManageEmail">mamfollower1@mailinator.com</h2>
+          <h2 id="quickManageEmail">mamf1@mailinator.com</h2>
           <p id="quickManageSub">Quick Account Controller: Category, Multiplier, Book, Broker & Dual Balances</p>
         </div>
         <button class="modal-close" onclick="closeModal('quickManageModal')">&times;</button>
@@ -2816,7 +2809,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
 
           <div id="qmMultiplierRow" style="margin-top: 10px;">
             <label style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Multiplier (e.g. 2.0x)</label>
-            <input type="number" id="qmMultiplier" value="2.0" step="0.1" min="0.1" max="10.0" class="fleet-input" style="width: 100%; margin-top: 6px;">
+            <input type="number" id="qmMultiplier" value="2.0" step="0.01" min="0.01" max="10.0" class="fleet-input" style="width: 100%; margin-top: 6px;">
           </div>
 
           <div style="display: flex; gap: 8px; margin-top: 12px;">
@@ -2949,6 +2942,24 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
       return '$' + Number(num || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
 
+    function fmtMult(mult) {
+      if (mult === undefined || mult === null || isNaN(mult)) return '1.0x';
+      const n = Number(mult);
+      if (n % 1 === 0) return `${n.toFixed(1)}x`;
+      return `${parseFloat(n.toFixed(4))}x`;
+    }
+
+    function fmtQty(val) {
+      if (val === undefined || val === null || val === '' || isNaN(val)) return '-';
+      const num = Number(val);
+      if (num === 0) return '0.00';
+      const rounded2 = Number(num.toFixed(2));
+      if (Math.abs(num - rounded2) > 0.00001 || Math.abs(num) < 0.01) {
+        return parseFloat(num.toFixed(4)).toString();
+      }
+      return num.toFixed(2);
+    }
+
     function formatCategoryBadge(cat, mult, isMaster) {
       if (isMaster) {
         return `<span class="badge badge-cat-master">👑 MAM MASTER</span>`;
@@ -2961,7 +2972,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
       } else if (c.includes('balance')) {
         return `<span class="badge badge-cat-balance">💰 BALANCE BASED</span>`;
       } else {
-        const mStr = (mult !== undefined && mult !== null) ? ` (${Number(mult).toFixed(1)}x)` : '';
+        const mStr = (mult !== undefined && mult !== null) ? ` (${fmtMult(mult)})` : '';
         return `<span class="badge badge-cat-multiplier">✖️ MULTIPLIER${mStr}</span>`;
       }
     }
@@ -3013,7 +3024,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
 
       // Master MAM Share Info
       const mamSharePct = (master.mam_share_percent !== undefined) ? master.mam_share_percent : 50;
-      const mamDispName = master.mam_display_name || 'mammaster';
+      const mamDispName = master.mam_display_name || 'mamm';
       const mShareBadge = document.getElementById('currentMasterShareBadge');
       if (mShareBadge) mShareBadge.innerText = `MY SHARE: ${mamSharePct}%`;
       const fInherited = document.getElementById('followerInheritedShare');
@@ -3081,7 +3092,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
           <td><strong>${p.symbol}</strong></td>
           <td><span class="badge badge-type">${orderType}</span></td>
           <td><span class="badge ${sideClass}">${p.side}</span></td>
-          <td style="font-weight: 800; font-size: 14px; color: #38bdf8;">${Number(p.net_qty || p.qty || 0).toFixed(2)}</td>
+          <td style="font-weight: 800; font-size: 14px; color: #38bdf8;">${fmtQty(p.net_qty || p.qty || 0)}</td>
           <td>${tpVal}</td>
           <td>${slVal}</td>
           <td>${tslVal}</td>
@@ -3119,8 +3130,8 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
         const tpVal = p.tp ? `<span class="badge badge-tp">${Number(p.tp).toFixed(2)}</span>` : '<span style="color:var(--text-dim);">-</span>';
         const slVal = p.sl ? `<span class="badge badge-sl">${Number(p.sl).toFixed(2)}</span>` : '<span style="color:var(--text-dim);">-</span>';
         const tslVal = p.tsl ? `<span class="badge">${Number(p.tsl).toFixed(2)}</span>` : '<span style="color:var(--text-dim);">-</span>';
-        const mQty = p.master_qty ? Number(p.master_qty).toFixed(2) : '-';
-        const mult = p.multiplier ? `${Number(p.multiplier).toFixed(1)}x` : '1.0x';
+        const mQty = (p.master_qty !== undefined && p.master_qty !== null) ? fmtQty(p.master_qty) : '-';
+        const mult = fmtMult(p.multiplier);
         const fMktId = p.market_order_id || 'N/A';
 
         return `<tr>
@@ -3133,7 +3144,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
           <td><strong>${p.symbol}</strong></td>
           <td><span class="badge badge-type">${orderType}</span></td>
           <td><span class="badge ${sideClass}">${p.side}</span></td>
-          <td style="font-weight: 800; font-size: 14px; color: #4ade80;">${Number(p.net_qty || p.qty || 0).toFixed(2)}</td>
+          <td style="font-weight: 800; font-size: 14px; color: #4ade80;">${fmtQty(p.net_qty || p.qty || 0)}</td>
           <td style="font-weight: 700; color: #38bdf8;">${mQty}</td>
           <td><span class="badge badge-mult">${mult}</span></td>
           <td>${tpVal}</td>
@@ -3249,7 +3260,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
           <td><strong>${h.symbol}</strong></td>
           <td><span class="badge badge-type">${orderType}</span></td>
           <td><span class="badge ${sideClass}">${h.side}</span></td>
-          <td style="font-weight: 800; font-size: 13px; color: #38bdf8;">${Number(h.qty || 0).toFixed(2)}</td>
+          <td style="font-weight: 800; font-size: 13px; color: #38bdf8;">${fmtQty(h.qty || 0)}</td>
           <td>${tpVal}</td>
           <td>${slVal}</td>
           <td>${tslVal}</td>
@@ -3272,8 +3283,8 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
       if (!f) return;
 
       document.getElementById('modalFollowerEmail').innerText = f.email;
-      document.getElementById('modalFollowerSub').innerText = `Member ID: ${f.member_id} | Sizing: ${f.method} (${f.multiplier}x)`;
-      document.getElementById('modalMgrName').innerText = f.following || 'mammaster (50%)';
+      document.getElementById('modalFollowerSub').innerText = `Member ID: ${f.member_id} | Sizing: ${f.method} (${fmtMult(f.multiplier)})`;
+      document.getElementById('modalMgrName').innerText = f.following || 'mamm (50%)';
       document.getElementById('modalBenchmark').innerText = fmtMoney(f.benchmark);
       document.getElementById('modalBalance').innerText = fmtMoney(f.balance);
       document.getElementById('modalSharedTotal').innerText = `+${fmtMoney(f.shared_to_master)}`;
@@ -3300,7 +3311,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
           const tpVal = s.tp ? `<span class="badge badge-tp">${Number(s.tp).toFixed(2)}</span>` : '<span style="color:var(--text-dim);">-</span>';
           const slVal = s.sl ? `<span class="badge badge-sl">${Number(s.sl).toFixed(2)}</span>` : '<span style="color:var(--text-dim);">-</span>';
           const tslVal = s.tsl ? `<span class="badge">${Number(s.tsl).toFixed(2)}</span>` : '<span style="color:var(--text-dim);">-</span>';
-          const mQty = s.master_qty ? Number(s.master_qty).toFixed(2) : '-';
+          const mQty = (s.master_qty !== undefined && s.master_qty !== null) ? fmtQty(s.master_qty) : '-';
 
           return `<tr>
             <td style="font-size: 11px; color: var(--text-dim);">#${s.trade_id || s.share_id || 'N/A'}</td>
@@ -3309,7 +3320,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
             <td><strong>${s.symbol || 'BINANCE:BTCUSDT.P'}</strong></td>
             <td><span class="badge badge-type">${orderType}</span></td>
             <td><span class="badge ${sideClass}">${s.side || 'BUY'}</span></td>
-            <td style="font-weight: 800; font-size: 13px; color: #4ade80;">${Number(s.qty || 0).toFixed(2)}</td>
+            <td style="font-weight: 800; font-size: 13px; color: #4ade80;">${fmtQty(s.qty || 0)}</td>
             <td style="font-weight: 700; color: #38bdf8;">${mQty}</td>
             <td>${tpVal}</td>
             <td>${slVal}</td>
@@ -3351,7 +3362,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
       if (!m) return;
 
       document.getElementById('mPosModalTitle').innerText = `🎯 Master Order: ${m.symbol} (${m.side}) - Replicated Followers`;
-      document.getElementById('mPosModalSub').innerText = `Master Order ID: ${m.market_order_id || m.order_id} | Qty: ${Number(m.net_qty || m.qty || 0).toFixed(2)} Lots | Fill: ${Number(m.avg_entry_price || 0).toFixed(2)}`;
+      document.getElementById('mPosModalSub').innerText = `Master Order ID: ${m.market_order_id || m.order_id} | Qty: ${fmtQty(m.net_qty || m.qty || 0)} Lots | Fill: ${Number(m.avg_entry_price || 0).toFixed(2)}`;
 
       const allFollowerPos = currentData.follower_positions || [];
       const matchingFollowers = allFollowerPos.filter(f => 
@@ -3367,11 +3378,11 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
       document.getElementById('mPosModalStats').innerHTML = `
         <div class="modal-stat-box">
           <div>Master Lot Size</div>
-          <div style="color: #38bdf8; font-weight: 800; font-size: 15px;">${Number(m.net_qty || m.qty || 0).toFixed(2)} Lots</div>
+          <div style="color: #38bdf8; font-weight: 800; font-size: 15px;">${fmtQty(m.net_qty || m.qty || 0)} Lots</div>
         </div>
         <div class="modal-stat-box">
           <div>Total Follower Volume</div>
-          <div style="color: #4ade80; font-weight: 800; font-size: 15px;">${totFollowerLots.toFixed(2)} Lots (${matchingFollowers.length} Accounts)</div>
+          <div style="color: #4ade80; font-weight: 800; font-size: 15px;">${fmtQty(totFollowerLots)} Lots (${matchingFollowers.length} Accounts)</div>
         </div>
         <div class="modal-stat-box">
           <div>Master Entry / Mark</div>
@@ -3410,9 +3421,9 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
             <td><strong>${f.symbol}</strong></td>
             <td><span class="badge badge-type">${orderType}</span></td>
             <td><span class="badge ${sideClass}">${f.side}</span></td>
-            <td style="font-weight: 800; font-size: 13px; color: #4ade80;">${Number(f.net_qty || f.qty || 0).toFixed(2)}</td>
-            <td style="font-weight: 700; color: #38bdf8;">${Number(m.net_qty || m.qty || 0).toFixed(2)}</td>
-            <td><span class="badge badge-mult">${f.multiplier || 2.0}x</span></td>
+            <td style="font-weight: 800; font-size: 13px; color: #4ade80;">${fmtQty(f.net_qty || f.qty || 0)}</td>
+            <td style="font-weight: 700; color: #38bdf8;">${fmtQty(m.net_qty || m.qty || 0)}</td>
+            <td><span class="badge badge-mult">${fmtMult(f.multiplier)}</span></td>
             <td>${tpVal}</td>
             <td>${slVal}</td>
             <td>${tslVal}</td>
@@ -3442,12 +3453,12 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
       ) || masterPositions[0] || {};
 
       document.getElementById('fToMTitle').innerText = `🎯 Master Originating Trade: ${m.symbol || f.symbol} (${m.side || f.side})`;
-      document.getElementById('fToMSub').innerText = `Follower ${f.account} copied this trade directly from Master (${m.account || 'mammaster@mailinator.com'})`;
+      document.getElementById('fToMSub').innerText = `Follower ${f.account} copied this trade directly from Master (${m.account || 'mamm@mailinator.com'})`;
 
       document.getElementById('fToMStats').innerHTML = `
         <div class="modal-stat-box">
           <div>Master Account</div>
-          <div style="color: #60a5fa; font-weight: 700;">${m.account || 'mammaster@mailinator.com'}</div>
+          <div style="color: #60a5fa; font-weight: 700;">${m.account || 'mamm@mailinator.com'}</div>
         </div>
         <div class="modal-stat-box">
           <div>Master Order ID</div>
@@ -3455,7 +3466,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
         </div>
         <div class="modal-stat-box">
           <div>Master Lot Size</div>
-          <div style="color: #38bdf8; font-weight: 800; font-size: 15px;">${Number(m.net_qty || m.qty || 1.0).toFixed(2)} Lots</div>
+          <div style="color: #38bdf8; font-weight: 800; font-size: 15px;">${fmtQty(m.net_qty || m.qty || 1.0)} Lots</div>
         </div>
         <div class="modal-stat-box">
           <div>Master Entry Price</div>
@@ -3483,9 +3494,9 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
               <tr><td>Group ID (Sync Token)</td><td colspan="2" style="font-size:11px; color:#c084fc;">${f.group_id || m.group_id || 'Shared Group'}</td></tr>
               <tr><td>Symbol & Side</td><td><strong>${m.symbol || f.symbol}</strong> (${m.side || f.side})</td><td><strong>${f.symbol}</strong> (${f.side})</td></tr>
               <tr><td>Order Type</td><td><span class="badge badge-type">${m.type || 'MARKET'}</span></td><td><span class="badge badge-type">${f.type || 'MARKET'}</span></td></tr>
-              <tr><td>Executed Quantity</td><td style="font-weight:800; color:#38bdf8;">${Number(m.net_qty || m.qty || 1.0).toFixed(2)} Lots</td><td style="font-weight:800; color:#4ade80;">${Number(f.net_qty || f.qty || 0).toFixed(2)} Lots</td></tr>
+              <tr><td>Executed Quantity</td><td style="font-weight:800; color:#38bdf8;">${fmtQty(m.net_qty || m.qty || 1.0)} Lots</td><td style="font-weight:800; color:#4ade80;">${fmtQty(f.net_qty || f.qty || 0)} Lots</td></tr>
               <tr><td>Category / Mode</td><td><span class="badge badge-cat-master">👑 MAM MASTER</span></td><td>${formatCategoryBadge(f.category || f.method, f.multiplier, false)}</td></tr>
-              <tr><td>Sizing Multiplier</td><td>1.0x (Origin)</td><td><span class="badge badge-mult">${f.multiplier || 2.0}x</span></td></tr>
+              <tr><td>Sizing Multiplier</td><td>1.0x (Origin)</td><td><span class="badge badge-mult">${fmtMult(f.multiplier)}</span></td></tr>
               <tr><td>Entry Price</td><td>${Number(m.avg_entry_price || f.avg_entry_price || 0).toFixed(2)}</td><td>${Number(f.avg_entry_price || 0).toFixed(2)}</td></tr>
               <tr><td>Unrealized P&L</td><td class="${Number(m.unrealized_pnl || 0) >= 0 ? 'text-green' : 'text-red'}">${fmtMoney(m.unrealized_pnl)}</td><td class="${Number(f.unrealized_pnl || 0) >= 0 ? 'text-green' : 'text-red'}">${fmtMoney(f.unrealized_pnl)}</td></tr>
               <tr><td>Replication State</td><td><span class="badge badge-master">MASTER</span></td><td><span class="badge badge-synced">SYNCED</span></td></tr>
@@ -3535,7 +3546,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
       document.getElementById('mHistModalStats').innerHTML = `
         <div class="modal-stat-box">
           <div>Master Executed Lot</div>
-          <div style="color: #38bdf8; font-weight: 800;">${Number(mHist.qty || 0).toFixed(2)} Lots</div>
+          <div style="color: #38bdf8; font-weight: 800;">${fmtQty(mHist.qty || 0)} Lots</div>
         </div>
         <div class="modal-stat-box">
           <div>Master Realized P&L</div>
@@ -3584,8 +3595,8 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
             <td><strong>${sh.symbol || mHist.symbol}</strong></td>
             <td><span class="badge badge-type">${orderType}</span></td>
             <td><span class="badge ${sideClass}">${sh.side || mHist.side}</span></td>
-            <td style="font-weight: 800; font-size: 13px; color: #4ade80;">${Number(sh.qty || 0).toFixed(2)}</td>
-            <td style="font-weight: 700; color: #38bdf8;">${Number(mHist.qty || 0).toFixed(2)}</td>
+            <td style="font-weight: 800; font-size: 13px; color: #4ade80;">${fmtQty(sh.qty || 0)}</td>
+            <td style="font-weight: 700; color: #38bdf8;">${fmtQty(mHist.qty || 0)}</td>
             <td>${tpVal}</td>
             <td>${slVal}</td>
             <td>${tslVal}</td>
@@ -3652,7 +3663,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
         multInputSec.style.pointerEvents = 'auto';
         if (leaveNotice) leaveNotice.style.display = 'none';
         if (btnApply) btnApply.innerText = '🚀 Apply Category Configuration to Followers';
-        document.getElementById('catActiveBadge').innerText = `MULTIPLIER (${document.getElementById('fleetMultiplierInput').value}x)`;
+        document.getElementById('catActiveBadge').innerText = `MULTIPLIER (${fmtMult(document.getElementById('fleetMultiplierInput').value)})`;
       } else if (cat === 'equity') {
         multInputSec.style.display = 'block';
         multInputSec.style.opacity = '0.4';
@@ -3676,12 +3687,12 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
     }
 
     function setPresetMult(val) {
-      document.getElementById('fleetMultiplierInput').value = Number(val).toFixed(1);
+      document.getElementById('fleetMultiplierInput').value = Number(val);
       document.querySelectorAll('#multiplierSection .preset-pill').forEach(p => {
-        p.classList.toggle('active', p.innerText === `${val}x` || p.innerText === `${val.toFixed(1)}x`);
+        p.classList.toggle('active', p.innerText === `${val}x` || p.innerText === fmtMult(val));
       });
       if (selectedFleetCat === 'multiplier') {
-        document.getElementById('catActiveBadge').innerText = `MULTIPLIER (${val.toFixed(1)}x)`;
+        document.getElementById('catActiveBadge').innerText = `MULTIPLIER (${fmtMult(val)})`;
       }
     }
 
@@ -3716,7 +3727,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
       const btn = document.getElementById('btnSaveMasterShare');
       const statusBox = document.getElementById('masterShareStatusBox');
       const sharePct = parseFloat(document.getElementById('masterShareInput').value) || 50.0;
-      const dispName = document.getElementById('masterDisplayNameInput').value.trim() || 'mammaster';
+      const dispName = document.getElementById('masterDisplayNameInput').value.trim() || 'mamm';
 
       btn.disabled = true;
       btn.innerText = "⏳ Saving Master Share to MAM...";
@@ -3724,7 +3735,7 @@ ENTERPRISE_DASHBOARD_HTML = """<!DOCTYPE html>
       statusBox.style.color = '#c084fc';
       statusBox.innerText = `Submitting Master MAM settings (Name: ${dispName}, Share: ${sharePct}%)...`;
 
-      appendFleetLog(`Executing Master MAM Settings update: Master ID=mammaster, Name=${dispName}, Share=${sharePct}% via /mam/master...`, 'info');
+      appendFleetLog(`Executing Master MAM Settings update: Master ID=mamm, Name=${dispName}, Share=${sharePct}% via /mam/master...`, 'info');
 
       try {
         const payload = {
@@ -4827,7 +4838,7 @@ def run_dashboard_server(port: int = 8500):
     print("=" * 85)
     print(f"[*] Base URL            : {url}")
     print(f"[*] Dashboard URL       : http://localhost:{port}")
-    print(f"[*] Active Master       : MAM Master (mammaster@mailinator.com - 100 Followers)")
+    print(f"[*] Active Master       : MAM Master (mamm@mailinator.com - 100 Followers)")
     print("=" * 85 + "\n")
 
     manager = MultiMasterDashboardManager(base_url=url, password=password)

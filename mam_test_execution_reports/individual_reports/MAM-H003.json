@@ -1,0 +1,19 @@
+{
+  "test_case_id": "MAM-H003",
+  "module": "Module 8: High-Water Mark & Performance Fees",
+  "title": "Drawdown Period: Zero Performance Fee Charged Below Sub-Account HWM",
+  "priority": "P0",
+  "precondition": "Acc 1 HWM = $11,600; balance drops to $9,500 due to market losses.",
+  "steps": "1. Execute monthly fee settlement.",
+  "expected_result": "Fee = $0.00. Manager receives zero fee; Acc 1 HWM remains $11,600.",
+  "execution_timestamp": "2026-11-16T10:58:44.701806Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Drawdown calculation: Balance ($9500.0) is below HWM ($11600.0). Fee charged == $0.00.",
+  "evidence": {
+    "balance": 9500.0,
+    "hwm": 11600.0,
+    "fee": 0.0
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

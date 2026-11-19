@@ -1,0 +1,19 @@
+{
+  "test_case_id": "MAM-A014",
+  "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+  "title": "Large Block Order Allocation (100.0 Lots Across 20 Accounts)",
+  "priority": "P0",
+  "precondition": "Master executes institutional 100.0 lot order.",
+  "steps": "1. Apportion 100.0 lots across 20 sub-accounts.",
+  "expected_result": "All child orders sized accurately without integer overflow; total child lots == 100.00.",
+  "execution_timestamp": "2026-11-16T10:58:42.346421Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Institutional block allocation: 20 accounts receive exactly 5.00 lots each. Sum = 100.00.",
+  "evidence": {
+    "master_lots": 100.0,
+    "accounts": 20,
+    "child_lot": 5.0
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

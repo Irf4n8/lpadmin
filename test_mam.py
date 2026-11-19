@@ -40,8 +40,8 @@ from typing import Dict, List, Optional, Tuple
 import requests
 
 DEFAULT_BASE_URL = "https://lpadmin.blackfx.com"
-DEFAULT_MASTER_EMAIL = "mammaster@mailinator.com"
-DEFAULT_PASSWORD = "Test@1234"
+DEFAULT_MASTER_EMAIL = "mamm@mailinator.com"
+DEFAULT_PASSWORD = "12345678"
 DEFAULT_SYMBOL = "BINANCE:BTCUSDT.P"
 
 

@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-M009",
+  "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+  "title": "Overnight Swap Impact on Independent Margin Levels",
+  "priority": "P1",
+  "precondition": "Triple swap Wednesday debited across accounts with varying equity.",
+  "steps": "1. Swap debited per child ticket.",
+  "expected_result": "Each sub-account's margin level updates independently based on individual cash balance.",
+  "execution_timestamp": "2026-11-16T10:58:44.393930Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Financing swaps debited individually per child ticket volume and holding currency.",
+  "evidence": {
+    "accounting_schedule": "EOD 00:00 server swap"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

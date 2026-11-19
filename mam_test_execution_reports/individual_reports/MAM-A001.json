@@ -1,0 +1,27 @@
+{
+  "test_case_id": "MAM-A001",
+  "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+  "title": "Proportional by Balance (PBB): 3 Accounts with Equal Balances",
+  "priority": "P0",
+  "precondition": "Master opens 3.00 lots EURUSD; 3 sub-accounts hold $10k, $10k, $10k (Total $30k).",
+  "steps": "1. Allocation engine applies formula: Child_Lots = Master_Lots * (Account_Balance / Total_Balance).",
+  "expected_result": "Each sub-account receives exactly 1.00 lot (3.00 * $10k / $30k); sum of child lots == 3.00 lots.",
+  "execution_timestamp": "2026-11-16T10:58:42.336892Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Mathematical calculation: child lots = [1.0, 1.0, 1.0], sum = 3.0. Perfectly matches 3.00 lots.",
+  "evidence": {
+    "balances": [
+      10000.0,
+      10000.0,
+      10000.0
+    ],
+    "child_lots": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "sum": 3.0
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

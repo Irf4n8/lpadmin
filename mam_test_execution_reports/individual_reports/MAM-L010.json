@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-L010",
+  "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+  "title": "GDPR Right to Be Forgotten with Regulatory Ledger Retention",
+  "priority": "P2",
+  "precondition": "Exited investor requests account deletion.",
+  "steps": "1. Process GDPR request.",
+  "expected_result": "PII data anonymized in CRM; financial transaction logs preserved for mandatory 7-year statutory retention period.",
+  "execution_timestamp": "2026-11-16T10:58:46.161663Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Personal identification information is anonymized upon GDPR request, while trade financial records are preserved for mandatory 7-year retention.",
+  "evidence": {
+    "retention_policy": "7-year statutory ledger retention"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

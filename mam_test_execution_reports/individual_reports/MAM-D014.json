@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-D014",
+  "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
+  "title": "Investor Full Withdrawal with Automatic Position Liquidation",
+  "priority": "P0",
+  "precondition": "Investor requests 100% full account balance withdrawal while child orders open.",
+  "steps": "1. Confirm full exit.",
+  "expected_result": "System automatically market-closes investor's child tickets; debits full cash balance; revokes LPOA.",
+  "execution_timestamp": "2026-11-16T10:58:44.620029Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Full exit request initiates auto-squareoff of client child orders, debits full cash balance, and marks LPOA ended.",
+  "evidence": {
+    "auto_liquidation": "Mass squareoff on exit"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-M010",
+  "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+  "title": "Maximum Leverage Limit on Master Terminal Sizing",
+  "priority": "P1",
+  "precondition": "Manager attempts order that would push lowest-leverage sub-account past 1:30 limit.",
+  "steps": "1. Submit oversized order.",
+  "expected_result": "Order clamped or blocked: 'Order exceeds maximum leverage limit for retail sub-accounts in group'.",
+  "execution_timestamp": "2026-11-16T10:58:44.395448Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Master terminal sizing clamps max parent order volume to ensure lowest-leverage retail account does not exceed 1:30 cap.",
+  "evidence": {
+    "leverage_ceiling": "1:30"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

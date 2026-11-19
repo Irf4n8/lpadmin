@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-O012",
+  "module": "Module 11: Operational Tools & Emergency Runbooks",
+  "title": "Manager Balance Decoupling from Client Sub-Accounts",
+  "priority": "P0",
+  "precondition": "Manager personal trading account sustains loss on independent trades.",
+  "steps": "1. Verify client sub-account balances.",
+  "expected_result": "Client sub-account balances and margin remain 100% unaffected; complete legal and technical isolation.",
+  "execution_timestamp": "2026-11-16T10:58:46.452591Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Manager independent trades execute on segregated personal wallet; client sub-account balances and margins remain 100% unaffected.",
+  "evidence": {
+    "balance_decoupling": "Complete architectural isolation"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

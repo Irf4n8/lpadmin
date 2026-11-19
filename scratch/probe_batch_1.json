@@ -1,0 +1,230 @@
+[
+  {
+    "title": "MAM Master Self-Follow Loop",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/mam/follow",
+    "payload": {
+      "master_client_id": "mem_11434b0b9d9d210899",
+      "method": "multiplier",
+      "multiplier": 1.0,
+      "share_percent": 50.0
+    },
+    "status_code": 400,
+    "response": "{\"error\":\"Master accounts can't follow another master.\"}\n",
+    "is_500": false,
+    "json": {
+      "error": "Master accounts can't follow another master."
+    }
+  },
+  {
+    "title": "Negative Multiplier in MAM Follow",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/mam/follow",
+    "payload": {
+      "master_client_id": "mem_11434b0b9d9d210899",
+      "method": "multiplier",
+      "multiplier": -2.5,
+      "share_percent": 50.0
+    },
+    "status_code": 400,
+    "response": "{\"error\":\"The multiplier can't be below 0.01.\"}\n",
+    "is_500": false,
+    "json": {
+      "error": "The multiplier can't be below 0.01."
+    }
+  },
+  {
+    "title": "Zero Multiplier in MAM Follow",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/mam/follow",
+    "payload": {
+      "master_client_id": "mem_11434b0b9d9d210899",
+      "method": "multiplier",
+      "multiplier": 0.0,
+      "share_percent": 50.0
+    },
+    "status_code": 200,
+    "response": "{\"follow\":{\"follow_id\":\"mfl_290505635a1f10a01b\",\"master_client_id\":\"mem_11434b0b9d9d210899\",\"follower_client_id\":\"mem_0ea679062ffd38adf7\",\"instance\":\"real\",\"starting_balance\":9920.3855,\"share_percent\":50,\"method\":\"multiplier\",\"multiplier\":1,\"status\":\"active\",\"joined_at\":\"2026-11-18T10:22:57.664029Z\"},\"success\":true}\n",
+    "is_500": false,
+    "json": {
+      "follow": {
+        "follow_id": "mfl_290505635a1f10a01b",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_0ea679062ffd38adf7",
+        "instance": "real",
+        "starting_balance": 9920.3855,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-18T10:22:57.664029Z"
+      },
+      "success": true
+    }
+  },
+  {
+    "title": "Excessive Master Profit Share (>100%)",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/mam/master",
+    "payload": {
+      "share_percent": 150.0,
+      "display_name": "GreedyMaster"
+    },
+    "status_code": 400,
+    "response": "{\"error\":\"share_percent must be between 0 and 100\"}\n",
+    "is_500": false,
+    "json": {
+      "error": "share_percent must be between 0 and 100"
+    }
+  },
+  {
+    "title": "Negative Master Profit Share (<0%)",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/mam/master",
+    "payload": {
+      "share_percent": -50.0,
+      "display_name": "NegativeMaster"
+    },
+    "status_code": 400,
+    "response": "{\"error\":\"share_percent must be between 0 and 100\"}\n",
+    "is_500": false,
+    "json": {
+      "error": "share_percent must be between 0 and 100"
+    }
+  },
+  {
+    "title": "Privilege Escalation: Follower Mutates Master Settings",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/mam/master",
+    "payload": {
+      "share_percent": 10.0,
+      "display_name": "HackedMaster"
+    },
+    "status_code": 400,
+    "response": "{\"error\":\"Accounts that follow a master can't become a master.\"}\n",
+    "is_500": false,
+    "json": {
+      "error": "Accounts that follow a master can't become a master."
+    }
+  },
+  {
+    "title": "Order Placement with Negative Quantity",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/orders",
+    "payload": {
+      "symbol": "BINANCE:BTCUSDT",
+      "side": "BUY",
+      "type": "MARKET",
+      "qty": -1.0
+    },
+    "status_code": 400,
+    "response": "{\"error\":\"symbol, side (BUY/SELL) and a positive qty are required\"}\n",
+    "is_500": false,
+    "json": {
+      "error": "symbol, side (BUY/SELL) and a positive qty are required"
+    }
+  },
+  {
+    "title": "Order Placement with Zero Quantity",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/orders",
+    "payload": {
+      "symbol": "BINANCE:BTCUSDT",
+      "side": "BUY",
+      "type": "MARKET",
+      "qty": 0.0
+    },
+    "status_code": 400,
+    "response": "{\"error\":\"symbol, side (BUY/SELL) and a positive qty are required\"}\n",
+    "is_500": false,
+    "json": {
+      "error": "symbol, side (BUY/SELL) and a positive qty are required"
+    }
+  },
+  {
+    "title": "Order Placement with Empty Symbol (500 crash test)",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/orders",
+    "payload": {
+      "symbol": "",
+      "side": "BUY",
+      "type": "MARKET",
+      "qty": 0.01
+    },
+    "status_code": 400,
+    "response": "{\"error\":\"symbol, side (BUY/SELL) and a positive qty are required\"}\n",
+    "is_500": false,
+    "json": {
+      "error": "symbol, side (BUY/SELL) and a positive qty are required"
+    }
+  },
+  {
+    "title": "Order Placement with Non-Existent Symbol",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/orders",
+    "payload": {
+      "symbol": "INVALID:COIN_DOES_NOT_EXIST",
+      "side": "BUY",
+      "type": "MARKET",
+      "qty": 0.01
+    },
+    "status_code": 400,
+    "response": "{\"error\":\"feed stale for INVALID:COIN_DOES_NOT_EXIST (no live tick in 90s)\",\"order\":{\"order_id\":\"ord_656b61e45a57f19dd9\",\"market_order_id\":\"ord_656b61e45a57f19dd9\",\"symbol\":\"INVALID:COIN_DOES_NOT_EXIST\",\"side\":\"BUY\",\"type\":\"MARKET\",\"state\":\"REJECTED\",\"reject_reason\":\"feed stale for INVALID:COIN_DOES_NOT_EXIST (no live tick in 90s)\",\"requested_qty\":0.01,\"filled_qty\":0,\"created_at\":\"2026-11-18T10:23:11.021728263Z\",\"updated_at\":\"2026-11-18T10:23:11.021728263Z\"},\"order_id\":\"ord_656b61e45a57f19dd9\"}\n",
+    "is_500": false,
+    "json": {
+      "error": "feed stale for INVALID:COIN_DOES_NOT_EXIST (no live tick in 90s)",
+      "order": {
+        "order_id": "ord_656b61e45a57f19dd9",
+        "market_order_id": "ord_656b61e45a57f19dd9",
+        "symbol": "INVALID:COIN_DOES_NOT_EXIST",
+        "side": "BUY",
+        "type": "MARKET",
+        "state": "REJECTED",
+        "reject_reason": "feed stale for INVALID:COIN_DOES_NOT_EXIST (no live tick in 90s)",
+        "requested_qty": 0.01,
+        "filled_qty": 0,
+        "created_at": "2026-11-18T10:23:11.021728263Z",
+        "updated_at": "2026-11-18T10:23:11.021728263Z"
+      },
+      "order_id": "ord_656b61e45a57f19dd9"
+    }
+  },
+  {
+    "title": "Bulk Squareoff with Arbitrary / Malformed IDs",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/positions/bulk/squareoff",
+    "payload": {
+      "market_order_ids": [
+        "non_existent_id_12345",
+        "../../etc/passwd",
+        "' OR '1'='1"
+      ]
+    },
+    "status_code": 200,
+    "response": "{\"failed\":3,\"failures\":[{\"error\":\"No open position for non_existent_id_12345\",\"market_order_id\":\"non_existent_id_12345\"},{\"error\":\"No open position for ../../etc/passwd\",\"market_order_id\":\"../../etc/passwd\"},{\"error\":\"No open position for ' OR '1'='1\",\"market_order_id\":\"' OR '1'='1\"}],\"message\":\"Bulk square off failed: none of the 3 could be closed.\",\"pending\":0,\"status\":\"error\",\"succeeded\":0,\"total\":3,\"total_pnl\":0}\n",
+    "is_500": false,
+    "json": {
+      "failed": 3,
+      "failures": [
+        {
+          "error": "No open position for non_existent_id_12345",
+          "market_order_id": "non_existent_id_12345"
+        },
+        {
+          "error": "No open position for ../../etc/passwd",
+          "market_order_id": "../../etc/passwd"
+        },
+        {
+          "error": "No open position for ' OR '1'='1",
+          "market_order_id": "' OR '1'='1"
+        }
+      ],
+      "message": "Bulk square off failed: none of the 3 could be closed.",
+      "pending": 0,
+      "status": "error",
+      "succeeded": 0,
+      "total": 3,
+      "total_pnl": 0
+    }
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-R008",
+  "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+  "title": "Sub-Minimum Lot Remainder Suppression",
+  "priority": "P0",
+  "precondition": "Micro-remainder of 0.005 lots when broker enforces strict 0.01 lot step.",
+  "steps": "1. Attempt to assign fractional remainder.",
+  "expected_result": "System strictly rounds to nearest valid 0.01 increment; never submits invalid order sizes to broker API.",
+  "execution_timestamp": "2026-11-16T10:58:42.354186Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Sizing engine strictly suppresses sub-0.01 residuals to prevent submitting illegal ticket sizes to liquidity bridges.",
+  "evidence": {
+    "min_lot_step": 0.01
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

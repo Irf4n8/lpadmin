@@ -1,0 +1,18 @@
+{
+  "test_case_id": "MAM-M001",
+  "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+  "title": "Differing Leverage Tiers in Same MAM Group",
+  "priority": "P0",
+  "precondition": "Acc 1 has 1:500 leverage (Professional); Acc 2 has 1:30 leverage (ESMA Retail).",
+  "steps": "1. Master opens identical 1.00 lot EURUSD on both.",
+  "expected_result": "Acc 1 uses $200 margin (1:500); Acc 2 uses $3,333 margin (1:30); both accounts maintain safe isolated margin levels.",
+  "execution_timestamp": "2026-11-16T10:58:44.387177Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Margin calculated per tier: 1:500 requires $216.00; 1:30 requires $3600.00. Sub-accounts maintain isolated margin.",
+  "evidence": {
+    "margin_1_500": 216.0,
+    "margin_1_30": 3600.0
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

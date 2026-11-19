@@ -1,0 +1,21 @@
+{
+  "test_case_id": "MAM-R009",
+  "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+  "title": "Audit Trail of Remainder Allocation Assignment",
+  "priority": "P1",
+  "precondition": "Trade executes with 0.01 remainder assigned to Acc #2.",
+  "steps": "1. Query trade execution journal.",
+  "expected_result": "Journal explicitly tags child order #2: 'Base: 0.33, Remainder: +0.01, Rule: HIGHEST_EQUITY'; 100% audit transparency.",
+  "execution_timestamp": "2026-11-16T10:58:42.354791Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Trade execution records tag child orders with base volume and remainder adjustment reason for full audit transparency.",
+  "evidence": {
+    "audit_fields": [
+      "base_volume",
+      "remainder_lots",
+      "remainder_rule"
+    ]
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

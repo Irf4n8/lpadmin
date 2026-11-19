@@ -44,8 +44,8 @@ import requests
 ENV_PATH = Path(".env")
 CONFIG = {
     "BASE_URL": "https://lpadmin.blackfx.com",
-    "MAM_MASTER": "mammaster@mailinator.com",
-    "FOLLOWERS_PASSWORD": "Test@1234",
+    "MAM_MASTER": "mamm@mailinator.com",
+    "FOLLOWERS_PASSWORD": "12345678",
     "PREFIX": "mamfollower",
     "DOMAIN": "mailinator.com",
     "START": 1,
@@ -74,7 +74,7 @@ if ENV_PATH.exists():
 
 KNOWN_MASTERS = {
     "mammaster": "mem_e2dbce29e1c71a7bf6",
-    "mammaster@mailinator.com": "mem_e2dbce29e1c71a7bf6"
+    "mamm@mailinator.com": "mem_e2dbce29e1c71a7bf6"
 }
 
 

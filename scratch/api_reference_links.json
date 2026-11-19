@@ -1,0 +1,1006 @@
+[
+  {
+    "text": "Documentation",
+    "href": "#docs/overview"
+  },
+  {
+    "text": "Explore the docs",
+    "href": "#docs/overview"
+  },
+  {
+    "text": "Authentication guide \u2197",
+    "href": "#docs/authentication"
+  },
+  {
+    "text": "AuthenticationFrom API key to your first authenticated request.\u2197",
+    "href": "#docs/authentication"
+  },
+  {
+    "text": "Order entryMarket orders, pending orders, and the full trade lifecycle.\u2197",
+    "href": "#docs/trading"
+  },
+  {
+    "text": "API referenceRequests, parameters, and responses for every trader endpoint.\u2197",
+    "href": "#docs/reference"
+  },
+  {
+    "text": "Introduction",
+    "href": "#docs/overview"
+  },
+  {
+    "text": "Authentication",
+    "href": "#docs/authentication"
+  },
+  {
+    "text": "Order lifecycle",
+    "href": "#docs/trading"
+  },
+  {
+    "text": "Errors & conventions",
+    "href": "#docs/errors"
+  },
+  {
+    "text": "All endpoints",
+    "href": "#docs/reference"
+  },
+  {
+    "text": "",
+    "href": "#docs/memberLogin"
+  },
+  {
+    "text": "",
+    "href": "#docs/memberMe"
+  },
+  {
+    "text": "",
+    "href": "#docs/memberLogout"
+  },
+  {
+    "text": "",
+    "href": "#docs/listAPIKeys"
+  },
+  {
+    "text": "",
+    "href": "#docs/createAPIKey"
+  },
+  {
+    "text": "",
+    "href": "#docs/revokeAPIKey"
+  },
+  {
+    "text": "",
+    "href": "#docs/exchangeAPIKey"
+  },
+  {
+    "text": "",
+    "href": "#docs/getBrandLogo"
+  },
+  {
+    "text": "",
+    "href": "#docs/listInstances"
+  },
+  {
+    "text": "",
+    "href": "#docs/listMyAccounts"
+  },
+  {
+    "text": "",
+    "href": "#docs/openAccount"
+  },
+  {
+    "text": "",
+    "href": "#docs/archiveMyAccount"
+  },
+  {
+    "text": "",
+    "href": "#docs/listPropPrograms"
+  },
+  {
+    "text": "",
+    "href": "#docs/enrolPropProgram"
+  },
+  {
+    "text": "",
+    "href": "#docs/listMyPropEnrolments"
+  },
+  {
+    "text": "",
+    "href": "#docs/getMyPropAccount"
+  },
+  {
+    "text": "",
+    "href": "#docs/listPropPayouts"
+  },
+  {
+    "text": "",
+    "href": "#docs/requestPropPayout"
+  },
+  {
+    "text": "",
+    "href": "#docs/listBrokerConnections"
+  },
+  {
+    "text": "",
+    "href": "#docs/getBrokerConnectionBinance"
+  },
+  {
+    "text": "",
+    "href": "#docs/saveBrokerCredentialsBinance"
+  },
+  {
+    "text": "",
+    "href": "#docs/brokerInstrumentsBinance"
+  },
+  {
+    "text": "",
+    "href": "#docs/brokerCommissionBinance"
+  },
+  {
+    "text": "",
+    "href": "#docs/brokerConnectBinance"
+  },
+  {
+    "text": "",
+    "href": "#docs/brokerTestBinance"
+  },
+  {
+    "text": "",
+    "href": "#docs/brokerDisconnectBinance"
+  },
+  {
+    "text": "",
+    "href": "#docs/brokerLeverageBinance"
+  },
+  {
+    "text": "",
+    "href": "#docs/brokerProtectionDefaultsBinance"
+  },
+  {
+    "text": "",
+    "href": "#docs/brokerEntryDefaultsBinance"
+  },
+  {
+    "text": "",
+    "href": "#docs/getBrokerConnectionZerodha"
+  },
+  {
+    "text": "",
+    "href": "#docs/saveBrokerCredentialsZerodha"
+  },
+  {
+    "text": "",
+    "href": "#docs/brokerInstrumentsZerodha"
+  },
+  {
+    "text": "",
+    "href": "#docs/brokerCommissionZerodha"
+  },
+  {
+    "text": "",
+    "href": "#docs/brokerConnectZerodha"
+  },
+  {
+    "text": "",
+    "href": "#docs/brokerTestZerodha"
+  },
+  {
+    "text": "",
+    "href": "#docs/brokerDisconnectZerodha"
+  },
+  {
+    "text": "",
+    "href": "#docs/brokerLeverageZerodha"
+  },
+  {
+    "text": "",
+    "href": "#docs/brokerProtectionDefaultsZerodha"
+  },
+  {
+    "text": "",
+    "href": "#docs/brokerEntryDefaultsZerodha"
+  },
+  {
+    "text": "",
+    "href": "#docs/placeMarketOrder"
+  },
+  {
+    "text": "",
+    "href": "#docs/listOrders"
+  },
+  {
+    "text": "",
+    "href": "#docs/placePendingOrder"
+  },
+  {
+    "text": "",
+    "href": "#docs/modifyOrder"
+  },
+  {
+    "text": "",
+    "href": "#docs/cancelOrder"
+  },
+  {
+    "text": "",
+    "href": "#docs/getOrder"
+  },
+  {
+    "text": "",
+    "href": "#docs/placeBasket"
+  },
+  {
+    "text": "",
+    "href": "#docs/bulkCancelOrders"
+  },
+  {
+    "text": "",
+    "href": "#docs/listPositions"
+  },
+  {
+    "text": "",
+    "href": "#docs/setPositionProtection"
+  },
+  {
+    "text": "",
+    "href": "#docs/squareOffPosition"
+  },
+  {
+    "text": "",
+    "href": "#docs/reducePosition"
+  },
+  {
+    "text": "",
+    "href": "#docs/bulkSquareOffPositions"
+  },
+  {
+    "text": "",
+    "href": "#docs/squareOffGroup"
+  },
+  {
+    "text": "",
+    "href": "#docs/setGroupTrigger"
+  },
+  {
+    "text": "",
+    "href": "#docs/getAllOpen"
+  },
+  {
+    "text": "",
+    "href": "#docs/listHistory"
+  },
+  {
+    "text": "",
+    "href": "#docs/getFunds"
+  },
+  {
+    "text": "",
+    "href": "#docs/getPracticeBalanceLimits"
+  },
+  {
+    "text": "",
+    "href": "#docs/setPracticeBalance"
+  },
+  {
+    "text": "",
+    "href": "#docs/getAccountTerms"
+  },
+  {
+    "text": "",
+    "href": "#docs/getMoneyOperation"
+  },
+  {
+    "text": "",
+    "href": "#docs/mintOrderSocketTicket"
+  },
+  {
+    "text": "",
+    "href": "#docs/orderEventStream"
+  },
+  {
+    "text": "",
+    "href": "#docs/marketExtremes"
+  },
+  {
+    "text": "",
+    "href": "#docs/listMemberAlerts"
+  },
+  {
+    "text": "",
+    "href": "#docs/createMemberAlert"
+  },
+  {
+    "text": "",
+    "href": "#docs/updateMemberAlert"
+  },
+  {
+    "text": "",
+    "href": "#docs/deleteMemberAlert"
+  },
+  {
+    "text": "",
+    "href": "#docs/listMemberAlertEvents"
+  },
+  {
+    "text": "",
+    "href": "#docs/markMemberAlertSeen"
+  },
+  {
+    "text": "",
+    "href": "#docs/getLicenceState"
+  },
+  {
+    "text": "",
+    "href": "#docs/instanceHealth"
+  },
+  {
+    "text": "",
+    "href": "#docs/instanceInfo"
+  },
+  {
+    "text": "",
+    "href": "#docs/getWallets"
+  },
+  {
+    "text": "",
+    "href": "#docs/listWalletHistory"
+  },
+  {
+    "text": "",
+    "href": "#docs/transferWallet"
+  },
+  {
+    "text": "",
+    "href": "#docs/portalSummary"
+  },
+  {
+    "text": "",
+    "href": "#docs/portalUpdateProfile"
+  },
+  {
+    "text": "",
+    "href": "#docs/portalPaymentMethods"
+  },
+  {
+    "text": "",
+    "href": "#docs/portalCreateDeposit"
+  },
+  {
+    "text": "",
+    "href": "#docs/portalListDeposits"
+  },
+  {
+    "text": "",
+    "href": "#docs/portalListPayoutMethods"
+  },
+  {
+    "text": "",
+    "href": "#docs/portalSavePayoutMethod"
+  },
+  {
+    "text": "",
+    "href": "#docs/portalDeletePayoutMethod"
+  },
+  {
+    "text": "",
+    "href": "#docs/portalWithdrawalOTP"
+  },
+  {
+    "text": "",
+    "href": "#docs/portalConfirmWithdrawal"
+  },
+  {
+    "text": "",
+    "href": "#docs/portalListWithdrawals"
+  },
+  {
+    "text": "",
+    "href": "#docs/portalCreateTransfer"
+  },
+  {
+    "text": "",
+    "href": "#docs/portalListTransfers"
+  },
+  {
+    "text": "",
+    "href": "#docs/portalHistory"
+  },
+  {
+    "text": "",
+    "href": "#docs/portalListDocuments"
+  },
+  {
+    "text": "",
+    "href": "#docs/portalUploadDocument"
+  },
+  {
+    "text": "",
+    "href": "#docs/portalGetDocument"
+  },
+  {
+    "text": "",
+    "href": "#docs/portalDeleteDocument"
+  },
+  {
+    "text": "",
+    "href": "#docs/getIBSummary"
+  },
+  {
+    "text": "",
+    "href": "#docs/listIBPayouts"
+  },
+  {
+    "text": "",
+    "href": "#docs/listIBDownline"
+  },
+  {
+    "text": "",
+    "href": "#docs/setIBReferrer"
+  },
+  {
+    "text": "",
+    "href": "#docs/copyListMasters"
+  },
+  {
+    "text": "",
+    "href": "#docs/copyBecomeMaster"
+  },
+  {
+    "text": "",
+    "href": "#docs/copyListFollows"
+  },
+  {
+    "text": "",
+    "href": "#docs/copyFollow"
+  },
+  {
+    "text": "",
+    "href": "#docs/copyUnfollow"
+  },
+  {
+    "text": "",
+    "href": "#docs/mamListMasters"
+  },
+  {
+    "text": "",
+    "href": "#docs/mamBecomeMaster"
+  },
+  {
+    "text": "",
+    "href": "#docs/mamListFollows"
+  },
+  {
+    "text": "",
+    "href": "#docs/mamFollow"
+  },
+  {
+    "text": "",
+    "href": "#docs/mamUnfollow"
+  },
+  {
+    "text": "",
+    "href": "#docs/mamListShares"
+  },
+  {
+    "text": "",
+    "href": "#docs/pammListMasters"
+  },
+  {
+    "text": "",
+    "href": "#docs/pammBecomeMaster"
+  },
+  {
+    "text": "",
+    "href": "#docs/pammListFollows"
+  },
+  {
+    "text": "",
+    "href": "#docs/pammJoin"
+  },
+  {
+    "text": "",
+    "href": "#docs/pammUnfollow"
+  },
+  {
+    "text": "",
+    "href": "#docs/pammListAllocations"
+  },
+  {
+    "text": "",
+    "href": "#docs/aiCredits"
+  },
+  {
+    "text": "",
+    "href": "#docs/aiModels"
+  },
+  {
+    "text": "",
+    "href": "#docs/aiEstimate"
+  },
+  {
+    "text": "",
+    "href": "#docs/aiGenerate"
+  },
+  {
+    "text": "",
+    "href": "#docs/getUriCatalogue"
+  },
+  {
+    "text": "POST Trader login (email + password) -> session token /oms/_auth/login",
+    "href": "#docs/memberLogin"
+  },
+  {
+    "text": "GET Who am I /oms/_auth/me",
+    "href": "#docs/memberMe"
+  },
+  {
+    "text": "POST End a login session /oms/_auth/logout",
+    "href": "#docs/memberLogout"
+  },
+  {
+    "text": "GET List the member's API keys /oms/_auth/keys",
+    "href": "#docs/listAPIKeys"
+  },
+  {
+    "text": "POST Create an API key (shown once) /oms/_auth/keys",
+    "href": "#docs/createAPIKey"
+  },
+  {
+    "text": "DELETE Revoke an API key /oms/_auth/keys/{key_id}",
+    "href": "#docs/revokeAPIKey"
+  },
+  {
+    "text": "POST Exchange an API key for an access token /oms/_auth/token",
+    "href": "#docs/exchangeAPIKey"
+  },
+  {
+    "text": "GET Client brand logo /oms/_brand/logo",
+    "href": "#docs/getBrandLogo"
+  },
+  {
+    "text": "GET Accounts this install offers /oms/_instances",
+    "href": "#docs/listInstances"
+  },
+  {
+    "text": "GET The member's trading accounts /oms/_accounts",
+    "href": "#docs/listMyAccounts"
+  },
+  {
+    "text": "POST Open an additional account /oms/_accounts",
+    "href": "#docs/openAccount"
+  },
+  {
+    "text": "POST Archive an additional account /oms/_accounts/{account_id}/archive",
+    "href": "#docs/archiveMyAccount"
+  },
+  {
+    "text": "GET Prop challenge programs on sale /oms/_prop/programs",
+    "href": "#docs/listPropPrograms"
+  },
+  {
+    "text": "POST Buy a prop challenge /oms/_prop/enrol",
+    "href": "#docs/enrolPropProgram"
+  },
+  {
+    "text": "GET The person's prop challenges /oms/_prop/enrolments",
+    "href": "#docs/listMyPropEnrolments"
+  },
+  {
+    "text": "GET One challenge account /oms/_prop/accounts/{account_id}",
+    "href": "#docs/getMyPropAccount"
+  },
+  {
+    "text": "GET A funded account's payouts /oms/_prop/accounts/{account_id}/payouts",
+    "href": "#docs/listPropPayouts"
+  },
+  {
+    "text": "POST Request a payout from a funded account /oms/_prop/accounts/{account_id}/payouts",
+    "href": "#docs/requestPropPayout"
+  },
+  {
+    "text": "GET My venue connections /oms/_brokers",
+    "href": "#docs/listBrokerConnections"
+  },
+  {
+    "text": "GET My Binance connection /oms/_brokers/binance",
+    "href": "#docs/getBrokerConnectionBinance"
+  },
+  {
+    "text": "PUT Save Binance credentials and settings /oms/_brokers/binance",
+    "href": "#docs/saveBrokerCredentialsBinance"
+  },
+  {
+    "text": "GET Search Binance instruments /oms/_brokers/binance/instruments",
+    "href": "#docs/brokerInstrumentsBinance"
+  },
+  {
+    "text": "GET Binance fee rate for a symbol /oms/_brokers/binance/commission",
+    "href": "#docs/brokerCommissionBinance"
+  },
+  {
+    "text": "POST See your broker for details. /oms/_brokers/binance/connect",
+    "href": "#docs/brokerConnectBinance"
+  },
+  {
+    "text": "POST Test the Binance connection /oms/_brokers/binance/test",
+    "href": "#docs/brokerTestBinance"
+  },
+  {
+    "text": "POST Disconnect Binance /oms/_brokers/binance/disconnect",
+    "href": "#docs/brokerDisconnectBinance"
+  },
+  {
+    "text": "POST Read or set futures leverage / margin mode (Binance) /oms/_brokers/binance/leverage",
+    "href": "#docs/brokerLeverageBinance"
+  },
+  {
+    "text": "POST Save default exit (SL/TP) execution policy (Binance) /oms/_brokers/binance/protection-defaults",
+    "href": "#docs/brokerProtectionDefaultsBinance"
+  },
+  {
+    "text": "POST Save default pending-entry execution mode (Binance) /oms/_brokers/binance/entry-defaults",
+    "href": "#docs/brokerEntryDefaultsBinance"
+  },
+  {
+    "text": "GET My Zerodha connection /oms/_brokers/zerodha",
+    "href": "#docs/getBrokerConnectionZerodha"
+  },
+  {
+    "text": "PUT Save Zerodha credentials and settings /oms/_brokers/zerodha",
+    "href": "#docs/saveBrokerCredentialsZerodha"
+  },
+  {
+    "text": "GET Search Zerodha instruments /oms/_brokers/zerodha/instruments",
+    "href": "#docs/brokerInstrumentsZerodha"
+  },
+  {
+    "text": "GET Zerodha fee rate for a symbol /oms/_brokers/zerodha/commission",
+    "href": "#docs/brokerCommissionZerodha"
+  },
+  {
+    "text": "POST Start the Kite login /oms/_brokers/zerodha/connect",
+    "href": "#docs/brokerConnectZerodha"
+  },
+  {
+    "text": "POST Test the Zerodha connection /oms/_brokers/zerodha/test",
+    "href": "#docs/brokerTestZerodha"
+  },
+  {
+    "text": "POST Disconnect Zerodha /oms/_brokers/zerodha/disconnect",
+    "href": "#docs/brokerDisconnectZerodha"
+  },
+  {
+    "text": "POST Read or set futures leverage / margin mode (Zerodha) /oms/_brokers/zerodha/leverage",
+    "href": "#docs/brokerLeverageZerodha"
+  },
+  {
+    "text": "POST Save default exit (SL/TP) execution policy (Zerodha) /oms/_brokers/zerodha/protection-defaults",
+    "href": "#docs/brokerProtectionDefaultsZerodha"
+  },
+  {
+    "text": "POST Save default pending-entry execution mode (Zerodha) /oms/_brokers/zerodha/entry-defaults",
+    "href": "#docs/brokerEntryDefaultsZerodha"
+  },
+  {
+    "text": "POST Place a market order /oms/{instance}/orders",
+    "href": "#docs/placeMarketOrder"
+  },
+  {
+    "text": "GET List the member's orders /oms/{instance}/orders",
+    "href": "#docs/listOrders"
+  },
+  {
+    "text": "POST Place a pending order (LIMIT / STOP / bracket) /oms/{instance}/orders/pending",
+    "href": "#docs/placePendingOrder"
+  },
+  {
+    "text": "PUT Modify a pending order /oms/{instance}/orders/{order_id}/modify",
+    "href": "#docs/modifyOrder"
+  },
+  {
+    "text": "DELETE Cancel a pending order /oms/{instance}/orders/{order_id}",
+    "href": "#docs/cancelOrder"
+  },
+  {
+    "text": "GET Get one order /oms/{instance}/orders/{order_id}",
+    "href": "#docs/getOrder"
+  },
+  {
+    "text": "POST Basket entry (multi-leg, all-or-nothing) /oms/{instance}/orders/basket",
+    "href": "#docs/placeBasket"
+  },
+  {
+    "text": "POST Cancel several pending orders /oms/{instance}/orders/bulk/cancel",
+    "href": "#docs/bulkCancelOrders"
+  },
+  {
+    "text": "GET List positions /oms/{instance}/positions",
+    "href": "#docs/listPositions"
+  },
+  {
+    "text": "PUT Set SL / TP / server trailing on an open position /oms/{instance}/positions/{market_order_id}/protection",
+    "href": "#docs/setPositionProtection"
+  },
+  {
+    "text": "POST Close a whole position /oms/{instance}/positions/{market_order_id}/squareoff",
+    "href": "#docs/squareOffPosition"
+  },
+  {
+    "text": "POST Partially close a position /oms/{instance}/positions/{market_order_id}/reduce",
+    "href": "#docs/reducePosition"
+  },
+  {
+    "text": "POST Close several positions /oms/{instance}/positions/bulk/squareoff",
+    "href": "#docs/bulkSquareOffPositions"
+  },
+  {
+    "text": "POST Basket exit: close a group (or one named leg) /oms/{instance}/positions/group/squareoff",
+    "href": "#docs/squareOffGroup"
+  },
+  {
+    "text": "POST Arm, retune or clear a group's combined-P&L SL/TP /oms/{instance}/positions/group/trigger",
+    "href": "#docs/setGroupTrigger"
+  },
+  {
+    "text": "GET Combined snapshot: positions, orders, pending, funds /oms/{instance}/all_open",
+    "href": "#docs/getAllOpen"
+  },
+  {
+    "text": "GET Closed executions (trade history) /oms/{instance}/history",
+    "href": "#docs/listHistory"
+  },
+  {
+    "text": "GET Trading-account funds /oms/{instance}/funds",
+    "href": "#docs/getFunds"
+  },
+  {
+    "text": "GET May this account set its own practice balance, and within what bounds /oms/{instance}/funds/practice",
+    "href": "#docs/getPracticeBalanceLimits"
+  },
+  {
+    "text": "POST Set or reset the practice balance (paper accounts only) /oms/{instance}/funds/practice",
+    "href": "#docs/setPracticeBalance"
+  },
+  {
+    "text": "GET This account's commercial terms /oms/{instance}/account",
+    "href": "#docs/getAccountTerms"
+  },
+  {
+    "text": "GET Poll a money operation /oms/{instance}/money/operations/{id}",
+    "href": "#docs/getMoneyOperation"
+  },
+  {
+    "text": "POST Mint a single-use order-event socket ticket /oms/{instance}/ws-ticket",
+    "href": "#docs/mintOrderSocketTicket"
+  },
+  {
+    "text": "GET Order/position event WebSocket /oms/{instance}/ws",
+    "href": "#docs/orderEventStream"
+  },
+  {
+    "text": "GET Day ranges and new-high/new-low events /oms/{instance}/market/extremes",
+    "href": "#docs/marketExtremes"
+  },
+  {
+    "text": "GET List member alerts /oms/{instance}/alerts",
+    "href": "#docs/listMemberAlerts"
+  },
+  {
+    "text": "POST Create a persistent member alert /oms/{instance}/alerts",
+    "href": "#docs/createMemberAlert"
+  },
+  {
+    "text": "PUT Partially edit or activate/deactivate an alert /oms/{instance}/alerts/{alert_id}",
+    "href": "#docs/updateMemberAlert"
+  },
+  {
+    "text": "DELETE Delete an owned alert /oms/{instance}/alerts/{alert_id}",
+    "href": "#docs/deleteMemberAlert"
+  },
+  {
+    "text": "GET List stored fired events /oms/{instance}/alerts/events",
+    "href": "#docs/listMemberAlertEvents"
+  },
+  {
+    "text": "POST Mark an owned event seen /oms/{instance}/alerts/events/{event_id}/seen",
+    "href": "#docs/markMemberAlertSeen"
+  },
+  {
+    "text": "GET Public licence state and vendor contact /oms/_licence",
+    "href": "#docs/getLicenceState"
+  },
+  {
+    "text": "GET Instance health (no auth) /oms/{instance}/health",
+    "href": "#docs/instanceHealth"
+  },
+  {
+    "text": "GET Instance metadata (no auth) /oms/{instance}/info",
+    "href": "#docs/instanceInfo"
+  },
+  {
+    "text": "GET Wallet balances, this trading account and consolidated totals /oms/{instance}/wallets",
+    "href": "#docs/getWallets"
+  },
+  {
+    "text": "GET Wallet ledger /oms/{instance}/wallets/history",
+    "href": "#docs/listWalletHistory"
+  },
+  {
+    "text": "POST Move money between a wallet and this trading account /oms/{instance}/wallets/transfer",
+    "href": "#docs/transferWallet"
+  },
+  {
+    "text": "GET Portal landing view /oms/{instance}/portal/summary",
+    "href": "#docs/portalSummary"
+  },
+  {
+    "text": "POST Update the editable profile fields /oms/{instance}/portal/profile",
+    "href": "#docs/portalUpdateProfile"
+  },
+  {
+    "text": "GET Payment methods the broker offers /oms/{instance}/portal/methods",
+    "href": "#docs/portalPaymentMethods"
+  },
+  {
+    "text": "POST Create a funding (deposit) request /oms/{instance}/portal/deposits",
+    "href": "#docs/portalCreateDeposit"
+  },
+  {
+    "text": "GET This member's deposit requests /oms/{instance}/portal/deposits",
+    "href": "#docs/portalListDeposits"
+  },
+  {
+    "text": "GET Saved payout details /oms/{instance}/portal/payout-methods",
+    "href": "#docs/portalListPayoutMethods"
+  },
+  {
+    "text": "POST Save or update payout details /oms/{instance}/portal/payout-methods",
+    "href": "#docs/portalSavePayoutMethod"
+  },
+  {
+    "text": "DELETE Remove saved payout details /oms/{instance}/portal/payout-methods/{payout_id}",
+    "href": "#docs/portalDeletePayoutMethod"
+  },
+  {
+    "text": "POST Payout step 1: validate and issue a one-time code /oms/{instance}/portal/withdrawals/otp",
+    "href": "#docs/portalWithdrawalOTP"
+  },
+  {
+    "text": "POST Payout step 2: confirm the code and create the request /oms/{instance}/portal/withdrawals",
+    "href": "#docs/portalConfirmWithdrawal"
+  },
+  {
+    "text": "GET This member's withdrawal requests /oms/{instance}/portal/withdrawals",
+    "href": "#docs/portalListWithdrawals"
+  },
+  {
+    "text": "POST Move money between the member's own accounts /oms/{instance}/portal/transfers",
+    "href": "#docs/portalCreateTransfer"
+  },
+  {
+    "text": "GET Internal transfer history /oms/{instance}/portal/transfers",
+    "href": "#docs/portalListTransfers"
+  },
+  {
+    "text": "GET Unified money-movement history /oms/{instance}/portal/history",
+    "href": "#docs/portalHistory"
+  },
+  {
+    "text": "GET KYC documents and their review state /oms/{instance}/portal/documents",
+    "href": "#docs/portalListDocuments"
+  },
+  {
+    "text": "POST Upload one KYC document slot /oms/{instance}/portal/documents",
+    "href": "#docs/portalUploadDocument"
+  },
+  {
+    "text": "GET Download one stored document /oms/{instance}/portal/documents/{slot}",
+    "href": "#docs/portalGetDocument"
+  },
+  {
+    "text": "DELETE Remove one uploaded document /oms/{instance}/portal/documents/{slot}",
+    "href": "#docs/portalDeleteDocument"
+  },
+  {
+    "text": "GET IB overview /oms/{instance}/ib/summary",
+    "href": "#docs/getIBSummary"
+  },
+  {
+    "text": "GET Commission credited to this member /oms/{instance}/ib/payouts",
+    "href": "#docs/listIBPayouts"
+  },
+  {
+    "text": "GET Referral tree below this member /oms/{instance}/ib/downline",
+    "href": "#docs/listIBDownline"
+  },
+  {
+    "text": "POST Record who referred this account (one-time) /oms/{instance}/ib/referrer",
+    "href": "#docs/setIBReferrer"
+  },
+  {
+    "text": "GET Copy manager directory /oms/{instance}/copy/masters",
+    "href": "#docs/copyListMasters"
+  },
+  {
+    "text": "POST Become or update a copy master /oms/{instance}/copy/master",
+    "href": "#docs/copyBecomeMaster"
+  },
+  {
+    "text": "GET Copy relationships, both sides /oms/{instance}/copy/follows",
+    "href": "#docs/copyListFollows"
+  },
+  {
+    "text": "POST Follow a copy master /oms/{instance}/copy/follow",
+    "href": "#docs/copyFollow"
+  },
+  {
+    "text": "POST Stop copying a master /oms/{instance}/copy/unfollow",
+    "href": "#docs/copyUnfollow"
+  },
+  {
+    "text": "GET MAM manager directory /oms/{instance}/mam/masters",
+    "href": "#docs/mamListMasters"
+  },
+  {
+    "text": "POST Become or update a MAM master /oms/{instance}/mam/master",
+    "href": "#docs/mamBecomeMaster"
+  },
+  {
+    "text": "GET MAM relationships, both sides /oms/{instance}/mam/follows",
+    "href": "#docs/mamListFollows"
+  },
+  {
+    "text": "POST Join a MAM manager /oms/{instance}/mam/follow",
+    "href": "#docs/mamFollow"
+  },
+  {
+    "text": "POST Leave a MAM manager /oms/{instance}/mam/unfollow",
+    "href": "#docs/mamUnfollow"
+  },
+  {
+    "text": "GET MAM profit-share statement /oms/{instance}/mam/shares",
+    "href": "#docs/mamListShares"
+  },
+  {
+    "text": "GET PAMM manager directory /oms/{instance}/pamm/masters",
+    "href": "#docs/pammListMasters"
+  },
+  {
+    "text": "POST Become or update a PAMM master /oms/{instance}/pamm/master",
+    "href": "#docs/pammBecomeMaster"
+  },
+  {
+    "text": "GET PAMM subscriptions and pool /oms/{instance}/pamm/follows",
+    "href": "#docs/pammListFollows"
+  },
+  {
+    "text": "POST Deposit into a PAMM pool /oms/{instance}/pamm/join",
+    "href": "#docs/pammJoin"
+  },
+  {
+    "text": "POST Settle and leave a PAMM pool /oms/{instance}/pamm/unfollow",
+    "href": "#docs/pammUnfollow"
+  },
+  {
+    "text": "GET PAMM allocation statement /oms/{instance}/pamm/allocations",
+    "href": "#docs/pammListAllocations"
+  },
+  {
+    "text": "GET My assistant credit balance /oms/_ai/credits",
+    "href": "#docs/aiCredits"
+  },
+  {
+    "text": "GET Available assistant models /oms/_ai/models",
+    "href": "#docs/aiModels"
+  },
+  {
+    "text": "POST Price a conversation before sending it /oms/_ai/estimate",
+    "href": "#docs/aiEstimate"
+  },
+  {
+    "text": "POST Ask the BlackScript assistant /oms/_ai/generate",
+    "href": "#docs/aiGenerate"
+  },
+  {
+    "text": "GET Self-documenting URI catalogue /uri",
+    "href": "#docs/getUriCatalogue"
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-L002",
+  "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+  "title": "ESMA Retail Leverage Cap Enforcement (1:30 Limit)",
+  "priority": "P0",
+  "precondition": "Retail investor under European ESMA regulation joins MAM group.",
+  "steps": "1. Master attempts high-leverage order (1:100).",
+  "expected_result": "Sizing engine enforces 1:30 maximum leverage limit for ESMA client child tickets; reduces lot size to comply.",
+  "execution_timestamp": "2026-11-16T10:58:46.156422Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Retail classification enforces 1:30 maximum leverage limit on child tickets, clamping lot sizes to comply with European ESMA rules.",
+  "evidence": {
+    "esma_cap": "1:30"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

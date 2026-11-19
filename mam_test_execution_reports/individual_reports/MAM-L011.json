@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-L011",
+  "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+  "title": "Professional Client Classification for High Leverage (>1:30)",
+  "priority": "P0",
+  "precondition": "Client applies for 1:500 leverage under professional status.",
+  "steps": "1. Verify MiFID II elective professional criteria.",
+  "expected_result": "Requires verified portfolio size > \u20ac500k and trading activity; non-qualified clients locked to 1:30.",
+  "execution_timestamp": "2026-11-16T10:58:46.162556Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Elective professional classification verified under MiFID II criteria; unqualified retail accounts remain locked to 1:30.",
+  "evidence": {
+    "mifid_criteria": "Elective professional status"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-M008",
+  "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+  "title": "Free Margin Recalibration Post-Child Stop-Out",
+  "priority": "P0",
+  "precondition": "Sub-account #3 is stopped out; remaining accounts active.",
+  "steps": "1. Master prepares subsequent trade under PBB.",
+  "expected_result": "Sub-account #3 balance ($0) excluded from group total balance; new orders sized across remaining active accounts.",
+  "execution_timestamp": "2026-11-16T10:58:44.392725Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Liquidated sub-account excluded from total group balance; subsequent parent block orders apportioned across remaining active capital.",
+  "evidence": {
+    "recalibration": "Dynamic group capital re-summing"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

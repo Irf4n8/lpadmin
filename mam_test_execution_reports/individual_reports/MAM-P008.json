@@ -1,0 +1,18 @@
+{
+  "test_case_id": "MAM-P008",
+  "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
+  "title": "Partial Fill with Remainder Lot Slicing",
+  "priority": "P0",
+  "precondition": "Master opens 3.0 lots across 4 accounts; LP fills 1.5 lots. Math: 1.5 / 4 = 0.375 lots.",
+  "steps": "1. Quantize: 0.37 lots * 4 = 1.48 lots. Remainder = 0.02 lots.",
+  "expected_result": "Remainder allocated according to active policy (e.g. +0.01 to two highest equity accounts); sum == 1.50 lots.",
+  "execution_timestamp": "2026-11-16T10:58:44.381114Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Partial fill remainder detected: 0.02 lots. Assigned to priority accounts (+0.01 each). Total = 1.50 lots.",
+  "evidence": {
+    "quantized_lots": 0.37,
+    "remainder": 0.02
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

@@ -1,0 +1,19 @@
+{
+  "test_case_id": "MAM-H009",
+  "module": "Module 8: High-Water Mark & Performance Fees",
+  "title": "Withdrawal Pro-Rata HWM Downward Adjustment",
+  "priority": "P0",
+  "precondition": "Acc 1 suffers loss from $10k to $8k; investor withdraws $4,000 (50%).",
+  "steps": "1. Process withdrawal.",
+  "expected_result": "Remaining balance = $4,000; HWM basis adjusted down by 50% to $5,000.00.",
+  "execution_timestamp": "2026-11-16T10:58:44.706686Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Pro-rata withdrawal adjustment: 50% capital withdrawal adjusts HWM down to $5000.00.",
+  "evidence": {
+    "orig_hwm": 10000.0,
+    "withdrawal_fraction": 0.5,
+    "adjusted_hwm": 5000.0
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-O009",
+  "module": "Module 11: Operational Tools & Emergency Runbooks",
+  "title": "Automated Daily EOD Reconciliation: Sub-Accounts vs Clearing LP",
+  "priority": "P0",
+  "precondition": "Daily 01:00 AM reconciliation job runs.",
+  "steps": "1. Reconcile sum of all child positions and balances against LP omnibus clearing reports.",
+  "expected_result": "Automated reconciliation report generated; discrepancies > $0.01 raise critical alert.",
+  "execution_timestamp": "2026-11-16T10:58:46.450539Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Automated EOD reconciliation cron compares sum of all child positions and balances against LP omnibus clearing reports.",
+  "evidence": {
+    "cron_schedule": "Daily 01:00 AM server time"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

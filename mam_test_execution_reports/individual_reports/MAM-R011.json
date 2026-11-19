@@ -1,0 +1,18 @@
+{
+  "test_case_id": "MAM-R011",
+  "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+  "title": "Multi-Asset Remainder Handling (Crypto with 8 Decimals vs FX with 2 Decimals)",
+  "priority": "P1",
+  "precondition": "Group trades both EURUSD (0.01 lot step) and BTCUSD (0.00000001 lot step).",
+  "steps": "1. Execute trades in both assets.",
+  "expected_result": "Remainder engine respects asset-specific minimum lot steps and precision scales; zero rounding error.",
+  "execution_timestamp": "2026-11-16T10:58:42.355835Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Precision engine dynamically switches between 2-decimal FX step (0.01) and crypto satoshi step (1e-8).",
+  "evidence": {
+    "fx_precision": 2,
+    "crypto_precision": 8
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

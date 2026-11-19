@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-P009",
+  "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
+  "title": "Multi-Tier Liquidity Depth Exhaustion",
+  "priority": "P1",
+  "precondition": "Master submits 50-lot order during low-liquidity Asian session.",
+  "steps": "1. Order fills across 5 liquidity tiers with widening spread.",
+  "expected_result": "Sizing engine handles multi-tier execution reports without dropping child ticket links.",
+  "execution_timestamp": "2026-11-16T10:58:44.381785Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Multi-tier LP depth reports are parsed and aggregated into a single unified child ticket allocation.",
+  "evidence": {
+    "bridge_capacity": "Multi-tier LP routing"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

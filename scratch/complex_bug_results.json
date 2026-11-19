@@ -1,0 +1,70 @@
+[
+  {
+    "name": "Stored XSS / HTML Injection in Master display_name",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/mam/master",
+    "payload": {
+      "share_percent": 50.0,
+      "display_name": "<script>alert('XSS_MAM')</script><img src=x onerror=alert(1)>"
+    },
+    "status": 400,
+    "response": "{\"error\":\"The name can be at most 40 characters.\"}\n"
+  },
+  {
+    "name": "Order Placement with Negative Account Balance",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/orders",
+    "payload": {
+      "symbol": "BINANCE:BTCUSDT",
+      "side": "BUY",
+      "type": "MARKET",
+      "qty": 0.01
+    },
+    "status": 400,
+    "response": "{\"error\":\"insufficient free margin: required 64.40, free -10000.00\",\"order\":{\"order_id\":\"ord_ce335888ef20aadf79\",\"market_order_id\":\"ord_ce335888ef20aadf79\",\"symbol\":\"BINANCE:BTCUSDT\",\"side\":\"BUY\",\"type\":\"MARKET\",\"state\":\"REJECTED\",\"reject_reason\":\"insufficient free margin: required 64.40, free -10000.00\",\"requested_qty\":0.01,\"filled_qty\":0,\"created_at\":\"2026-11-18T10:26:55.294251372Z\",\"updated_at\":\"2026-11-18T10:26:55.294251372Z\"},\"order_id\":\"ord_ce335888ef20aadf79\"}\n"
+  },
+  {
+    "name": "MAM Replication to Account with Negative Balance",
+    "status": 200,
+    "follower_balance": -10000.0,
+    "replicated_positions_count": 0,
+    "follower_positions": []
+  },
+  {
+    "name": "Zero Share Percent in MAM Master (0% Profit Share)",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/mam/master",
+    "payload": {
+      "share_percent": 0.0,
+      "display_name": "ZeroFeeMaster"
+    },
+    "status": 200,
+    "response": "{\"master\":{\"client_id\":\"mem_11434b0b9d9d210899\",\"display_name\":\"ZeroFeeMaster\",\"share_percent\":0,\"status\":\"active\"},\"success\":true}\n"
+  },
+  {
+    "name": "Invalid Method in MAM Follow",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/mam/follow",
+    "payload": {
+      "master_client_id": "mem_11434b0b9d9d210899",
+      "method": "martingale_hack",
+      "multiplier": 1.0,
+      "share_percent": 50.0
+    },
+    "status": 200,
+    "response": "{\"follow\":{\"follow_id\":\"mfl_290505635a1f10a01b\",\"master_client_id\":\"mem_11434b0b9d9d210899\",\"follower_client_id\":\"mem_0ea679062ffd38adf7\",\"instance\":\"real\",\"starting_balance\":10000000,\"share_percent\":50,\"method\":\"martingale_hack\",\"multiplier\":1,\"status\":\"active\",\"joined_at\":\"2026-11-18T10:26:58.159694Z\"},\"success\":true}\n"
+  },
+  {
+    "name": "Extreme Multiplier in MAM Follow (100,000,000x)",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/mam/follow",
+    "payload": {
+      "master_client_id": "mem_11434b0b9d9d210899",
+      "method": "multiplier",
+      "multiplier": 100000000.0,
+      "share_percent": 50.0
+    },
+    "status": 400,
+    "response": "{\"error\":\"The multiplier can't be above 100.\"}\n"
+  }
+]

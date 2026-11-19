@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-D006",
+  "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
+  "title": "Emergency LPOA Revocation Mid-Trade: Transfer Positions Option",
+  "priority": "P0",
+  "precondition": "Investor selects 'Transfer positions to independent control'.",
+  "steps": "1. Confirm LPOA revocation.",
+  "expected_result": "LPOA unlinked; open child tickets remain open in investor account; manager loses modification rights; client given full direct control.",
+  "execution_timestamp": "2026-11-16T10:58:44.614381Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Transfer positions option revokes manager trading rights, granting client independent manual control over active child tickets.",
+  "evidence": {
+    "exit_mode": "Transfer positions to independent control"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

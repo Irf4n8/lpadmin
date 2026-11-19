@@ -1,0 +1,31 @@
+{
+  "test_case_id": "MAM-P004",
+  "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
+  "title": "Volume-Weighted Average Price (VWAP) Aggregation",
+  "priority": "P0",
+  "precondition": "Block order of 20.0 lots fills across 3 LP price tiers: 5.0 @ 1.0800, 10.0 @ 1.0802, 5.0 @ 1.0804.",
+  "steps": "1. Calculate VWAP = (5*1.0800 + 10*1.0802 + 5*1.0804) / 20 = 1.080200.",
+  "expected_result": "All child tickets booked at exact identical VWAP price (1.080200); zero price discrimination among investors.",
+  "execution_timestamp": "2026-11-16T10:58:44.378114Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "VWAP calculated with 6-decimal precision: 1.080200. All child tickets receive identical fair price.",
+  "evidence": {
+    "fills": [
+      [
+        5.0,
+        1.08
+      ],
+      [
+        10.0,
+        1.0802
+      ],
+      [
+        5.0,
+        1.0804
+      ]
+    ],
+    "calculated_vwap": 1.0802
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

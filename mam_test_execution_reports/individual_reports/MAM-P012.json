@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-P012",
+  "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
+  "title": "Slippage Tolerance Violation on Child Orders",
+  "priority": "P0",
+  "precondition": "Master sets max slippage tolerance = 2.0 pips; market slips 3.5 pips.",
+  "steps": "1. LP returns fill outside tolerance.",
+  "expected_result": "Child order rejected or executed with price improvement; investor protected from off-market fills.",
+  "execution_timestamp": "2026-11-16T10:58:44.384044Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Configured slippage tolerance protects investors by rejecting fills outside maximum allowable pips.",
+  "evidence": {
+    "tolerance_field": "max_slippage_pips"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

@@ -35,19 +35,19 @@ if "/blackadmin" in BASE_URL:
 
 ADMIN_EMAIL = os.getenv("ADMIN_ID", os.getenv("ADMIN_EMAIL", "lpadmin@blacktrader.com"))
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "")
-MEMBER_PASSWORD = os.getenv("FOLLOWERS_PASSWORD", os.getenv("MEMBER_PASSWORD", "Test@1234"))
-MAM_MASTER = os.getenv("MAM_MASTER", "mammaster@mailinator.com")
+MEMBER_PASSWORD = os.getenv("FOLLOWERS_PASSWORD", os.getenv("MEMBER_PASSWORD", "12345678"))
+MAM_MASTER = os.getenv("MAM_MASTER", "mamm@mailinator.com")
 DEFAULT_BALANCE = float(os.getenv("DEFAULT_BALANCE", "100000000"))
-DEFAULT_PREFIX = os.getenv("DEFAULT_EMAIL_PREFIX", "mamfollower")
+DEFAULT_PREFIX = os.getenv("DEFAULT_EMAIL_PREFIX", "mamf")
 DEFAULT_DOMAIN = os.getenv("DEFAULT_EMAIL_DOMAIN", "mailinator.com")
 DEFAULT_INSTANCES = os.getenv("DEFAULT_INSTANCES", "paper,real")
 
 
 # --- Dashboard / copy-trading topology (additive; defaults match the previously hardcoded dashboard values) ---
-MASTER_EMAIL = os.getenv("MASTER_EMAIL", "ctmaster@mailinator.com")
-MASTER_ID = os.getenv("MASTER_ID", "mem_aac4ca423a6925dca7")
+MASTER_EMAIL = os.getenv("MASTER_EMAIL", "mamm@mailinator.com")
+MASTER_ID = os.getenv("MASTER_ID", "mem_11434b0b9d9d210899")
 FOLLOWER_COUNT = int(os.getenv("FOLLOWER_COUNT", "100"))
-FOLLOWER_PREFIX = os.getenv("FOLLOWER_PREFIX", "follower")
+FOLLOWER_PREFIX = os.getenv("FOLLOWER_PREFIX", "mamf")
 
 # Dashboard server. Token is optional: when set, every request must carry it (open /?token=<DASHBOARD_TOKEN> once).
 DASHBOARD_HOST = os.getenv("DASHBOARD_HOST", "0.0.0.0")

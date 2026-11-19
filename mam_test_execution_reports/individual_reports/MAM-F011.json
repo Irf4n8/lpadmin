@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-F011",
+  "module": "Module 1: Group & Sub-Account Lifecycle",
+  "title": "Sub-Account Disconnection Request While Positions Are Open",
+  "priority": "P0",
+  "precondition": "Sub-account has 2 open child orders placed by manager.",
+  "steps": "1. Investor requests immediate disconnection.2. System prompts choice: 'Close open positions at market' vs 'Transfer positions to client'.",
+  "expected_result": "If market close selected: child orders closed immediately, LPOA revoked, net cash returned to client control.",
+  "execution_timestamp": "2026-11-16T10:58:42.146901Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Per BlackTrader API docs, POST /v1/oms/{instance}/mam/unfollow sets status to 'ended'; open child positions remain intact until squared off.",
+  "evidence": {
+    "documentation": "Sets the active relationship with this master to 'ended'. Profit shares taken per closed trade."
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

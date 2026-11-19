@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-L006",
+  "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+  "title": "Retail Investor Suitability Questionnaire Verification",
+  "priority": "P1",
+  "precondition": "Investor completes suitability test; categorized as conservative risk.",
+  "steps": "1. Investor attempts to join 'High Leverage Crypto MAM' group.",
+  "expected_result": "Warning modal displayed: 'Product exceeds your verified risk tolerance'; requires explicit informed consent waiver.",
+  "execution_timestamp": "2026-11-16T10:58:46.158496Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Suitability scoring engine gates investor onboarding; groups exceeding verified risk profile require explicit risk disclosure waiver.",
+  "evidence": {
+    "suitability_gate": "Risk profile scoring"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

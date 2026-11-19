@@ -1,0 +1,26 @@
+{
+  "test_case_id": "MAM-A002",
+  "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+  "title": "Proportional by Balance (PBB): Unequal Weighting (10%, 30%, 60%)",
+  "priority": "P0",
+  "precondition": "Master opens 10.00 lots GBPUSD; accounts have $10k, $30k, $60k (Total $100k).",
+  "steps": "1. Execute trade via PBB.",
+  "expected_result": "Account 1 receives 1.00 lot; Account 2 receives 3.00 lots; Account 3 receives 6.00 lots; sum == 10.00 lots.",
+  "execution_timestamp": "2026-11-16T10:58:42.337377Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Unequal PBB weighting: child lots = [1.0, 3.0, 6.0], sum = 10.0. Sum strictly conserves 10.00 lots.",
+  "evidence": {
+    "weights": [
+      "10%",
+      "30%",
+      "60%"
+    ],
+    "child_lots": [
+      1.0,
+      3.0,
+      6.0
+    ]
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

@@ -1,0 +1,48 @@
+[
+  {
+    "code": "BR07/NET07",
+    "name": "Simultaneous Position Close Race Condition",
+    "status": "PASS",
+    "details": {
+      "Total Concurrent Close Requests": 5,
+      "Successful Close Returns (HTTP 200)": 1,
+      "Properly Rejected Returns": 4,
+      "Double Close Defect Detected": "No (Properly Serialized)",
+      "Position Inverted to Opposite Side": "No",
+      "Open Positions Remaining": 0
+    }
+  },
+  {
+    "code": "CP10",
+    "name": "Simultaneous Master Close vs Follower Close Collision",
+    "status": "PASS",
+    "details": {
+      "Master Squareoff Status": 200,
+      "Follower Squareoff Status": 404,
+      "Did Follower Receive Inverted Trade (SELL)?": "No",
+      "Orphaned Residual Positions on Follower": 0
+    }
+  },
+  {
+    "code": "CP04",
+    "name": "Unfollow vs Master BUY Collision",
+    "status": "PASS",
+    "details": {
+      "Subscription Status after Collision": "ended",
+      "Did Trade Copy During Unfollow?": "No",
+      "Did Orphaned Position Remain After Master Closed?": "No",
+      "Residual Orphaned Positions": 0
+    }
+  },
+  {
+    "code": "NET01/BR01",
+    "name": "Rapid Double-Click Idempotency Verification",
+    "status": "FAIL",
+    "details": {
+      "Click 1 Order ID": "ord_2d51472963453a88ef",
+      "Click 2 Order ID": "ord_437df13e82fb7e0617",
+      "Duplicate Orders Executed from One Intent": "YES (Lacks Idempotency Protection)",
+      "Idempotency Key Respected": false
+    }
+  }
+]

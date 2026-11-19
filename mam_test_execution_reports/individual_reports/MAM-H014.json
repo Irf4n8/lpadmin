@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-H014",
+  "module": "Module 8: High-Water Mark & Performance Fees",
+  "title": "Sub-Account Monthly Statement Fee Itemization",
+  "priority": "P1",
+  "precondition": "Monthly statement generated for investor.",
+  "steps": "1. Open statement in PDF.",
+  "expected_result": "Detailed breakdown: Gross Trading P&L, Management Fee, Performance Fee, Net Ending Equity, Current HWM.",
+  "execution_timestamp": "2026-11-16T10:58:44.834272Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Unified money-movement history (/v1/oms/{instance}/portal/history) itemizes Gross P&L, fees, and net ending equity.",
+  "evidence": {
+    "endpoint": "GET /v1/oms/{instance}/portal/history"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

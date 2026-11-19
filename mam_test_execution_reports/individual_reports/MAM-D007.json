@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-D007",
+  "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
+  "title": "Manager Group Resizing Post-Investor Disconnection",
+  "priority": "P0",
+  "precondition": "Investor holding 20% of group balance disconnects mid-cycle.",
+  "steps": "1. Master executes next trade.",
+  "expected_result": "Total group balance recalculated excluding disconnected client; new orders apportioned among remaining 80% capital.",
+  "execution_timestamp": "2026-11-16T10:58:44.615069Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Total group balance recalculated excluding disconnected client; new orders apportioned among remaining active capital.",
+  "evidence": {
+    "resizing_rule": "Active group capital recomputed"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-P014",
+  "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
+  "title": "Asymmetric Rejection Auto-Retry on Secondary Liquidity Bridge",
+  "priority": "P0",
+  "precondition": "Primary LP connection drops for 200ms.",
+  "steps": "1. Bridge triggers failover.",
+  "expected_result": "In-flight child orders failover cleanly to secondary LP; zero duplicate tickets.",
+  "execution_timestamp": "2026-11-16T10:58:44.385582Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Bridge failover automatically shifts pending order flow to secondary gateway without losing state.",
+  "evidence": {
+    "bridge_failover": "Active-passive gateway"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

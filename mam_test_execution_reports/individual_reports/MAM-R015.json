@@ -1,0 +1,22 @@
+{
+  "test_case_id": "MAM-R015",
+  "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+  "title": "Remainder Lot Impact on Broker Volume Rebates",
+  "priority": "P1",
+  "precondition": "Broker pays $3.00/lot commission rebate.",
+  "steps": "1. Reconcile volume rebates.",
+  "expected_result": "Rebate calculated on exact executed child ticket lots; sum of child rebates equals parent block rebate.",
+  "execution_timestamp": "2026-11-16T10:58:42.358976Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Rebate reconciliation: Sum of child rebates ($3.00) perfectly equals parent rebate ($3.00).",
+  "evidence": {
+    "child_rebates": [
+      1.02,
+      0.99,
+      0.99
+    ],
+    "parent_rebate": 3.0
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

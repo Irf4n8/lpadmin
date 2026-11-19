@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-M015",
+  "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+  "title": "Sub-Account Currency Conversion Margin Cushion",
+  "priority": "P1",
+  "precondition": "EUR account trading USD instrument with fluctuating EUR/USD spot rate.",
+  "steps": "1. Currency exchange rate moves by 2%.",
+  "expected_result": "Margin requirement in account currency adjusts dynamically; margin level reflects accurate FX conversion.",
+  "execution_timestamp": "2026-11-16T10:58:44.399731Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Dynamic FX conversion incorporates margin safety buffer against spot rate fluctuations for foreign currency sub-accounts.",
+  "evidence": {
+    "fx_cushion_buffer": "2% margin cushion"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

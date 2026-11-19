@@ -1,0 +1,19 @@
+{
+  "test_case_id": "MAM-H008",
+  "module": "Module 8: High-Water Mark & Performance Fees",
+  "title": "Deposit Proportional HWM Upward Adjustment",
+  "priority": "P0",
+  "precondition": "Acc 1 has $10k balance (HWM $10k); deposits additional $5,000 cash.",
+  "steps": "1. Process deposit.",
+  "expected_result": "Acc 1 HWM basis increases dollar-for-dollar to $15,000.00; investor deposit never taxed as profit.",
+  "execution_timestamp": "2026-11-16T10:58:44.705999Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Deposit upward adjustment: HWM baseline increases dollar-for-dollar to $15000.00; deposit is never taxed as profit.",
+  "evidence": {
+    "base_hwm": 10000.0,
+    "deposit": 5000.0,
+    "adjusted_hwm": 15000.0
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

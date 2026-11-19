@@ -14,8 +14,8 @@ import re
 from typing import Dict, Any, Optional
 
 DEFAULT_BASE_URL = "https://lpadmin.blackfx.com"
-DEFAULT_TRADER_EMAIL = "mammaster@mailinator.com"
-DEFAULT_TRADER_PASSWORD = "Test@1234"
+DEFAULT_TRADER_EMAIL = "mamm@mailinator.com"
+DEFAULT_TRADER_PASSWORD = "12345678"
 
 
 def load_env(env_path: str = ".env") -> Dict[str, str]:

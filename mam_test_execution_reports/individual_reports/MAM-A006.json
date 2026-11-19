@@ -1,0 +1,26 @@
+{
+  "test_case_id": "MAM-A006",
+  "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+  "title": "Lot Multiplier Allocation Method",
+  "priority": "P0",
+  "precondition": "Acc 1 assigned 0.5x multiplier; Acc 2 assigned 2.0x multiplier; Acc 3 assigned 1.0x multiplier.",
+  "steps": "1. Master opens 1.00 lot AUDUSD.",
+  "expected_result": "Acc 1 receives 0.50 lot; Acc 2 receives 2.00 lots; Acc 3 receives 1.00 lot; orders sent to broker.",
+  "execution_timestamp": "2026-11-16T10:58:42.339812Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Lot multiplier output: Acc 1 = 0.5, Acc 2 = 2.0, Acc 3 = 1.0.",
+  "evidence": {
+    "multipliers": [
+      0.5,
+      2.0,
+      1.0
+    ],
+    "child_lots": [
+      0.5,
+      2.0,
+      1.0
+    ]
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

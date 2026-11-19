@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-D010",
+  "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
+  "title": "Simultaneous Multi-Account Cash Deposits Before Master Trade",
+  "priority": "P0",
+  "precondition": "5 investors deposit $5,000 each in same 1-minute window.",
+  "steps": "1. Deposits clear.2. Master opens trade.",
+  "expected_result": "All 5 deposits included in group balance snapshot; sizing engine distributes lots accurately.",
+  "execution_timestamp": "2026-11-16T10:58:44.617241Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "ACID transaction isolation commits concurrent deposits safely; sizing snapshot captures updated committed balances.",
+  "evidence": {
+    "isolation_level": "READ COMMITTED"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

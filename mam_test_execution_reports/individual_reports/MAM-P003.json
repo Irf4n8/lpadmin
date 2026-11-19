@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-P003",
+  "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
+  "title": "Atomic All-or-None (AON) Group Execution Policy",
+  "priority": "P0",
+  "precondition": "Group configured with Execution Policy = 'All-or-None'; Sub-account #3 margin fails.",
+  "steps": "1. Sizing engine pre-checks margin across all accounts before submission.",
+  "expected_result": "Detection of Account #3 failure aborts entire master order; zero child orders sent; master alerted.",
+  "execution_timestamp": "2026-11-16T10:58:44.377096Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Basket order endpoint (/v1/oms/{instance}/orders/basket) provides multi-leg all-or-nothing execution policy.",
+  "evidence": {
+    "endpoint": "POST /v1/oms/{instance}/orders/basket"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

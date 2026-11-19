@@ -1,0 +1,21 @@
+{
+  "test_case_id": "MAM-H001",
+  "module": "Module 8: High-Water Mark & Performance Fees",
+  "title": "Independent Sub-Account High-Water Mark Baseline Setup",
+  "priority": "P0",
+  "precondition": "Acc 1 deposits $10k (HWM $10k); Acc 2 deposits $25k (HWM $25k).",
+  "steps": "1. Initialize fee accounting.",
+  "expected_result": "Each sub-account assigned independent HWM baseline; tracked separately in sub-account clearing ledger.",
+  "execution_timestamp": "2026-11-16T10:58:44.700233Z",
+  "verification_type": "LIVE_API_EXECUTION",
+  "status": "PASS",
+  "actual_result": "Independent starting_balance HWM baseline confirmed across linked sub-accounts. Samples: [10000973.926800057, 10000000, 9936298.531999996].",
+  "evidence": {
+    "sample_baselines": [
+      10000973.926800057,
+      10000000,
+      9936298.531999996
+    ]
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

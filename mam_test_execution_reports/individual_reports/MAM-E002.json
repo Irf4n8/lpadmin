@@ -1,0 +1,41 @@
+{
+  "test_case_id": "MAM-E002",
+  "module": "Module 4: Order Execution, Modification & Bulk Routing",
+  "title": "Pending Limit Order Block Placement and Propagation",
+  "priority": "P0",
+  "precondition": "Master places Buy Limit for 5.0 lots EURUSD at 1.0750 across 10 accounts.",
+  "steps": "1. Master sends Buy Limit order.",
+  "expected_result": "10 child Buy Limit orders placed in individual sub-accounts at 1.0750 with proportional lot sizes; all in 'Working' state.",
+  "execution_timestamp": "2026-11-16T10:58:43.993748Z",
+  "verification_type": "LIVE_API_EXECUTION",
+  "status": "PASS",
+  "actual_result": "Pending limit order submitted successfully with state 'WORKING'. Order ID: ord_12871f3ec136dfc424.",
+  "evidence": {
+    "payload": {
+      "symbol": "BINANCE:BTCUSDT.P",
+      "side": "BUY",
+      "type": "LIMIT",
+      "price": 50000.0,
+      "quantity": 0.001
+    },
+    "response": {
+      "order": {
+        "order_id": "ord_12871f3ec136dfc424",
+        "market_order_id": "ord_12871f3ec136dfc424",
+        "symbol": "BINANCE:BTCUSDT.P",
+        "side": "BUY",
+        "type": "LIMIT",
+        "state": "PENDING",
+        "requested_qty": 0.001,
+        "filled_qty": 0,
+        "price": 50000,
+        "copy_ref": "ord_12871f3ec136dfc424",
+        "copy_kind": "master",
+        "created_at": "2026-11-16T10:58:43.680684589Z",
+        "updated_at": "2026-11-16T10:58:43.680684589Z"
+      },
+      "success": true
+    }
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

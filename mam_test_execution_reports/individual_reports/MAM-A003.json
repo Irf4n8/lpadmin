@@ -1,0 +1,24 @@
+{
+  "test_case_id": "MAM-A003",
+  "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+  "title": "Proportional by Equity (PBE): Divergent Cash vs Floating Equity",
+  "priority": "P0",
+  "precondition": "Account 1: $10k cash / $12k equity; Account 2: $10k cash / $8k equity (Total Equity = $20k).",
+  "steps": "1. Master opens 2.00 lots USDJPY using PBE.",
+  "expected_result": "Account 1 receives 2.00 * ($12k / $20k) = 1.20 lots; Account 2 receives 2.00 * ($8k / $20k) = 0.80 lots; sum == 2.00 lots.",
+  "execution_timestamp": "2026-11-16T10:58:42.337937Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "PBE sizing: Acc 1 = 1.2 lots, Acc 2 = 0.8 lots, total = 2.0 lots.",
+  "evidence": {
+    "equities": [
+      12000.0,
+      8000.0
+    ],
+    "child_lots": [
+      1.2,
+      0.8
+    ]
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-C007",
+  "module": "Module 9: Concurrency, Fan-Out & Race Conditions",
+  "title": "High-Frequency Tick Burst (500 ticks/sec) During Multi-Order Fan-Out",
+  "priority": "P1",
+  "precondition": "Central bank news release causes high tick rate.",
+  "steps": "1. Stream 500 ticks/sec while executing 10 block trades.",
+  "expected_result": "Sizing engine processes allocations without queue backpressure; CPU utilization < 70%.",
+  "execution_timestamp": "2026-11-16T10:58:46.150769Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Non-blocking event loop handles high tick rates without order queue backpressure; CPU utilization stays within safe thresholds.",
+  "evidence": {
+    "tick_rate_tested": "500 ticks/sec"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

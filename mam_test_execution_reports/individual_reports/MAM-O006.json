@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-O006",
+  "module": "Module 11: Operational Tools & Emergency Runbooks",
+  "title": "Individual Sub-Account Emergency Unlink by Administrator",
+  "priority": "P0",
+  "precondition": "Investor account compromised by external phishing incident.",
+  "steps": "1. Admin clicks 'Emergency Unlink Sub-Account'.",
+  "expected_result": "Sub-account immediately detached from MAM group; open child positions closed or locked; credentials reset.",
+  "execution_timestamp": "2026-11-16T10:58:46.245804Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Admin emergency unlink detaches compromised account, closes active child positions, and resets credentials.",
+  "evidence": {
+    "admin_endpoint": "Emergency Unlink Sub-Account"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

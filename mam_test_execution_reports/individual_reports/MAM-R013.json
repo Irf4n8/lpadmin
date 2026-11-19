@@ -1,0 +1,19 @@
+{
+  "test_case_id": "MAM-R013",
+  "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+  "title": "Equal Balance Remainder Tie-Breaker Using Account Timestamp",
+  "priority": "P1",
+  "precondition": "Acc 1 and Acc 2 have exact same equity ($10,000.00); 0.01 remainder generated.",
+  "steps": "1. Process allocation.",
+  "expected_result": "Resolves tie using oldest account creation timestamp; deterministic behavior.",
+  "execution_timestamp": "2026-11-16T10:58:42.357107Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Timestamp tie-breaker selects older registered account (2026-11-10T10:00:00Z).",
+  "evidence": {
+    "t1": "2026-11-10T10:00:00Z",
+    "t2": "2026-11-12T10:00:00Z",
+    "oldest": "2026-11-10T10:00:00Z"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

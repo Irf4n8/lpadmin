@@ -1,0 +1,186 @@
+[
+  {
+    "category": "Wallets",
+    "title": "Transfer Negative Amount from Real to Wallet",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/wallets/transfer",
+    "payload": {
+      "from": "real",
+      "to": "wallet",
+      "amount": -500.0
+    },
+    "status": 400,
+    "response": "{\"error\":\"wallet must be client or ib\"}\n"
+  },
+  {
+    "category": "Wallets",
+    "title": "Transfer Zero Amount from Real to Wallet",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/wallets/transfer",
+    "payload": {
+      "from": "real",
+      "to": "wallet",
+      "amount": 0.0
+    },
+    "status": 400,
+    "response": "{\"error\":\"wallet must be client or ib\"}\n"
+  },
+  {
+    "category": "Portal",
+    "title": "Internal Transfer with Negative Amount",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/portal/transfers",
+    "payload": {
+      "from": "real",
+      "to": "wallet",
+      "amount": -1000.0
+    },
+    "status": 400,
+    "response": "{\"error\":\"amount must be greater than zero\"}\n"
+  },
+  {
+    "category": "Withdrawals",
+    "title": "Withdrawal OTP Request with Negative Amount",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/portal/withdrawals/otp",
+    "payload": {
+      "amount": -500.0,
+      "method_id": "dummy_method"
+    },
+    "status": 403,
+    "response": "{\"error\":\"KYC is not verified\"}\n"
+  },
+  {
+    "category": "Withdrawals",
+    "title": "Withdrawal OTP Request with Zero Amount",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/portal/withdrawals/otp",
+    "payload": {
+      "amount": 0.0,
+      "method_id": "dummy_method"
+    },
+    "status": 403,
+    "response": "{\"error\":\"KYC is not verified\"}\n"
+  },
+  {
+    "category": "Orders",
+    "title": "Basket Entry with Negative Leg Qty",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/orders/basket",
+    "payload": {
+      "legs": [
+        {
+          "symbol": "BINANCE:BTCUSDT",
+          "side": "BUY",
+          "qty": -0.01
+        }
+      ]
+    },
+    "status": 400,
+    "response": "{\"error\":\"leg 1: symbol, side and a positive qty are required\"}\n"
+  },
+  {
+    "category": "Orders",
+    "title": "Basket Entry with Empty Legs Array",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/orders/basket",
+    "payload": {
+      "legs": []
+    },
+    "status": 400,
+    "response": "{\"error\":\"legs array is required\"}\n"
+  },
+  {
+    "category": "Protection",
+    "title": "Inverted Take-Profit on BUY (tp = 1.0)",
+    "method": "PUT",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/positions/ord_2a42fdb27058399da5/protection",
+    "payload": {
+      "tp": 1.0,
+      "sl": 0.0
+    },
+    "status": 400,
+    "response": "{\"error\":\"TP crosses current price\"}\n"
+  },
+  {
+    "category": "Protection",
+    "title": "Inverted Stop-Loss on BUY (sl = 500000.0)",
+    "method": "PUT",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/positions/ord_2a42fdb27058399da5/protection",
+    "payload": {
+      "sl": 500000.0,
+      "tp": 0.0
+    },
+    "status": 400,
+    "response": "{\"error\":\"SL crosses current price\"}\n"
+  },
+  {
+    "category": "Protection",
+    "title": "Negative SL and TP values",
+    "method": "PUT",
+    "url": "https://lpadmin.blackfx.com/v1/oms/real/positions/ord_2a42fdb27058399da5/protection",
+    "payload": {
+      "sl": -500.0,
+      "tp": -100.0
+    },
+    "status": 400,
+    "response": "{\"error\":\"SL must be a finite nonnegative price\"}\n"
+  },
+  {
+    "category": "Admin",
+    "title": "Set Invalid Member Account Type ('super_admin_tier')",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/admin/api/members/mem_0ea679062ffd38adf7/account-type",
+    "payload": {
+      "account_type": "super_admin_tier"
+    },
+    "status": 400,
+    "response": "{\"error\":\"account_type must be live or demo\"}\n"
+  },
+  {
+    "category": "Admin",
+    "title": "Grant Zero Credit via Admin API",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/admin/api/members/mem_0ea679062ffd38adf7/credit",
+    "payload": {
+      "instance": "real",
+      "amount": 0.0,
+      "reason": "Zero test"
+    },
+    "status": 400,
+    "response": "{\"error\":\"Instance must name a live OMS instance.\"}\n"
+  },
+  {
+    "category": "Admin",
+    "title": "Review Non-Existent Deposit ID",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/admin/api/deposits/dep_99999999999999/review",
+    "payload": {
+      "status": "approved",
+      "reason": "Test"
+    },
+    "status": 400,
+    "response": "{\"error\":\"status must be success or rejected\"}\n"
+  },
+  {
+    "category": "Accounts",
+    "title": "Open Additional Account without Parameters (Crash test)",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/_accounts",
+    "payload": {},
+    "status": 400,
+    "response": "{\"error\":\"instance is required\"}\n"
+  },
+  {
+    "category": "Prop",
+    "title": "Buy Prop Challenge with Zero / Negative Amount",
+    "method": "POST",
+    "url": "https://lpadmin.blackfx.com/v1/oms/_prop/enrol",
+    "payload": {
+      "program_id": "test_challenge",
+      "fee": -100.0
+    },
+    "status": 404,
+    "response": "{\"error\":\"not available\"}\n"
+  }
+]

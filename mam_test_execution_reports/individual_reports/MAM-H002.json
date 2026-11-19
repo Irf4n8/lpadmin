@@ -1,0 +1,19 @@
+{
+  "test_case_id": "MAM-H002",
+  "module": "Module 8: High-Water Mark & Performance Fees",
+  "title": "Monthly Performance Fee Deduction from Individual Sub-Account",
+  "priority": "P0",
+  "precondition": "Acc 1 balance grows from $10k to $12k (+ $2k profit); Perf Fee = 20%.",
+  "steps": "1. Trigger monthly fee settlement.2. Sizing engine computes Fee = $2k * 20% = $400.00.",
+  "expected_result": "Exactly $400.00 debited from Acc 1 cash balance; credited to Manager Fee Wallet; new HWM = $11,600.00.",
+  "execution_timestamp": "2026-11-16T10:58:44.701268Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Performance fee calculated: $400.00 deducted from sub-account. New HWM established at $11600.00.",
+  "evidence": {
+    "profit": 2000.0,
+    "fee": 400.0,
+    "new_hwm": 11600.0
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

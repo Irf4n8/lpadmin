@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-C015",
+  "module": "Module 9: Concurrency, Fan-Out & Race Conditions",
+  "title": "Distributed Lock (Redlock) Timeout on Allocation Service",
+  "priority": "P1",
+  "precondition": "Sizing worker thread encounters transient freeze.",
+  "steps": "1. Lock TTL expires after 10 seconds.",
+  "expected_result": "Standby worker acquires lock and resumes allocation; alerts raised via PagerDuty.",
+  "execution_timestamp": "2026-11-16T10:58:46.155585Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Distributed lock TTL (10 seconds) expires upon worker freeze, allowing standby worker to acquire lock and resume allocations.",
+  "evidence": {
+    "lock_ttl": "10s"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

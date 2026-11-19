@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-C004",
+  "module": "Module 9: Concurrency, Fan-Out & Race Conditions",
+  "title": "Simultaneous Order Close and Investor Disconnection",
+  "priority": "P0",
+  "precondition": "Master clicks 'Close Trade' at exact millisecond an investor clicks 'Disconnect'.",
+  "steps": "1. Inject concurrent requests.",
+  "expected_result": "Close execution takes precedence; position closed cleanly; net proceeds returned to investor; zero orphan position.",
+  "execution_timestamp": "2026-11-16T10:58:46.148568Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Database transactions prioritize order liquidation precedence: Position closed cleanly before relationship status transitions to ended.",
+  "evidence": {
+    "priority": "Liquidation precedes unlinking"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

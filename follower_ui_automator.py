@@ -219,8 +219,8 @@ async def configure_follower_all_instances(
 
 if __name__ == "__main__":
     print("Testing follower_ui_automator...")
-    result = run_toggle_single_sync("mamfollower1@mailinator.com", "Test@1234", "paper", enable=False)
+    result = run_toggle_single_sync("mamf1@mailinator.com", "12345678", "paper", enable=False)
     print("Toggle paper -> False:", result)
-    result2 = run_toggle_single_sync("mamfollower1@mailinator.com", "Test@1234", "paper", enable=True)
+    result2 = run_toggle_single_sync("mamf1@mailinator.com", "12345678", "paper", enable=True)
     print("Toggle paper -> True:", result2)
 

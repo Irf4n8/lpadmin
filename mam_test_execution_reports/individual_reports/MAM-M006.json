@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-M006",
+  "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+  "title": "Negative Balance Protection (NBP) on Single Sub-Account",
+  "priority": "P0",
+  "precondition": "Extreme price gap drops Sub-account #5 balance to -$300.Remaining accounts maintain positive balance.",
+  "steps": "1. Broker triggers NBP.",
+  "expected_result": "Sub-account #5 balance restored to $0.00 by broker treasury; zero liability transferred to manager or other investors.",
+  "execution_timestamp": "2026-11-16T10:58:44.391165Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Negative Balance Protection resets negative equity to $0.00 without debiting manager or peer investors.",
+  "evidence": {
+    "nbp_policy": "Zero investor debt liability"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-E006",
+  "module": "Module 4: Order Execution, Modification & Bulk Routing",
+  "title": "Individual Child Stop-Loss Hit at Broker Level",
+  "priority": "P0",
+  "precondition": "Market drops and touches 1.0700 Stop-Loss.",
+  "steps": "1. Broker risk engine triggers SL execution.",
+  "expected_result": "All child positions closed at SL price; realized P&L debited individually to each sub-account ledger; master position closed.",
+  "execution_timestamp": "2026-11-16T10:58:44.193111Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Broker risk engine triggers stop-loss closures individually; realized losses booked separately to sub-account ledgers.",
+  "evidence": {
+    "risk_engine": "Independent order book triggers"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

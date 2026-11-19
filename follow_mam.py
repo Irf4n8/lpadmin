@@ -30,10 +30,10 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import requests
 
 DEFAULT_BASE_URL = "https://lpadmin.blackfx.com"
-DEFAULT_MEMBER_PASSWORD = "Test@1234"
+DEFAULT_MEMBER_PASSWORD = "12345678"
 KNOWN_MAM_MASTERS = {
     "mammaster": "mem_e2dbce29e1c71a7bf6",
-    "mammaster@mailinator.com": "mem_e2dbce29e1c71a7bf6"
+    "mamm@mailinator.com": "mem_e2dbce29e1c71a7bf6"
 }
 
 

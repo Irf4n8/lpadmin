@@ -1,0 +1,19 @@
+{
+  "test_case_id": "MAM-H011",
+  "module": "Module 8: High-Water Mark & Performance Fees",
+  "title": "Broker Platform Fee Retainage Split",
+  "priority": "P1",
+  "precondition": "Platform contract: 85% to Manager; 15% to Broker technology treasury.",
+  "steps": "1. Process $1,000 fee.",
+  "expected_result": "$850 credited to Manager; $150 retained in Broker account; statements reconciled.",
+  "execution_timestamp": "2026-11-16T10:58:44.751598Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Platform fee retainage split: Manager = $850.00, Broker Treasury = $150.00.",
+  "evidence": {
+    "fee": 1000.0,
+    "manager": 850.0,
+    "broker": 150.0
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-E007",
+  "module": "Module 4: Order Execution, Modification & Bulk Routing",
+  "title": "Individual Child Take-Profit Hit at Broker Level",
+  "priority": "P0",
+  "precondition": "Market rallies and touches 1.0900 Take-Profit.",
+  "steps": "1. Broker risk engine triggers TP execution.",
+  "expected_result": "All child positions closed at TP price; realized profit credited individually to each sub-account ledger.",
+  "execution_timestamp": "2026-11-16T10:58:44.194245Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Take-profit closures trigger individually; realized profits booked to sub-account ledgers and subject to HWM profit sharing.",
+  "evidence": {
+    "risk_engine": "Independent order book triggers"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

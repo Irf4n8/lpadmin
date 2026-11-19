@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-L009",
+  "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+  "title": "Anti-Front-Running Compliance Surveillance",
+  "priority": "P1",
+  "precondition": "Manager trades personal non-MAM account right before placing large MAM block.",
+  "steps": "1. Compliance surveillance algorithm scans order timing.",
+  "expected_result": "Trade flagged 'FRONT_RUNNING_SUSPICION'; dispatched to Compliance Officer dashboard for review.",
+  "execution_timestamp": "2026-11-16T10:58:46.160624Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Surveillance algorithm flags manager personal trades executed within 60 seconds prior to large block MAM orders.",
+  "evidence": {
+    "surveillance_tag": "FRONT_RUNNING_SUSPICION"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

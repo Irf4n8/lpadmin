@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-P010",
+  "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
+  "title": "Child Order Timeout and Auto-Reconciliation",
+  "priority": "P0",
+  "precondition": "Broker bridge experiences 2-second timeout on Child Order #7.",
+  "steps": "1. System queries order status via FIX order status request.",
+  "expected_result": "Reconciles fill state automatically; prevents orphan double-submission on retry.",
+  "execution_timestamp": "2026-11-16T10:58:44.382616Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "OMS background reconciliation worker periodically queries in-flight orders, resolving timed-out states without duplicate fills.",
+  "evidence": {
+    "reconciliation_worker": "Auto-poll fill status"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

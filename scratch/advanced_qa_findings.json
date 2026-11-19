@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "title": "Trailing Stop Loss Validation",
+    "result": "COMPLETED",
+    "details": {
+      "Negative Trailing Distance Status": 400,
+      "Negative Trailing Distance Body": "{\"error\":\"invalid JSON body\"}\n",
+      "Zero Trailing Distance Status": 400,
+      "Zero Trailing Distance Body": "{\"error\":\"invalid JSON body\"}\n",
+      "Extreme Trailing Distance (1M) Status": 400,
+      "Extreme Trailing Distance Body": "{\"error\":\"invalid JSON body\"}\n"
+    }
+  },
+  {
+    "id": 2,
+    "title": "MAM Sub-Minimum Lot Size Handling",
+    "result": "COMPLETED",
+    "details": {
+      "Master Placed Qty": "0.001 BTC",
+      "Follower Multiplier": "0.01x",
+      "Calculated Theoretical Qty": "0.00001 BTC",
+      "Follower Actually Replicated": "1e-05 BTC",
+      "Did Position Open?": "Yes"
+    }
+  },
+  {
+    "id": 3,
+    "title": "Basket Order Atomic Execution Integrity",
+    "result": "COMPLETED",
+    "details": {
+      "Basket Response Status": 400,
+      "Basket Response Body": "{\"error\":\"leg 2 (INVALID:FAKE_COIN_999): feed stale for INVALID:FAKE_COIN_999 (no live tick in 90s)\"}\n",
+      "Open Positions Leaked From Failed Basket": 0,
+      "Atomicity Preserved": true
+    }
+  },
+  {
+    "id": 4,
+    "title": "Unfollow With Active Open Positions Handling",
+    "result": "COMPLETED",
+    "details": {
+      "Unfollow Request Status": 200,
+      "Unfollow Allowed While Position Open": "Yes",
+      "Position Left Open on Follower After Unfollow": 1,
+      "Did Master Close Still Cascade to Unfollowed Account?": "Yes (Closed with Master)",
+      "Final Orphan Count": 0
+    }
+  }
+]

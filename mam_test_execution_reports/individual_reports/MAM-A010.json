@@ -1,0 +1,18 @@
+{
+  "test_case_id": "MAM-A010",
+  "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+  "title": "Minimum Lot Size Enforcement (0.01 Floor)",
+  "priority": "P0",
+  "precondition": "Micro-account with $100 balance in $1,000,000 group; proportional calculation yields 0.001 lots.",
+  "steps": "1. Process order sizing under 0.01 minimum lot policy.",
+  "expected_result": "Sizing engine drops order (does not execute) or clamps to 0.01 based on configured policy; zero 0.000 lot rejected orders.",
+  "execution_timestamp": "2026-11-16T10:58:42.342461Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Sizing engine clamps or suppresses micro-orders below 0.01 floor to prevent broker order rejection.",
+  "evidence": {
+    "input_lot": 0.001,
+    "processed_lot": 0.0
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

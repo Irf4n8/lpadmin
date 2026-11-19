@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-M004",
+  "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+  "title": "Master Terminal Awareness of Sub-Account Stop-Out",
+  "priority": "P0",
+  "precondition": "Sub-account #3 is liquidated due to stop-out.",
+  "steps": "1. Check Master Trading Terminal dashboard.",
+  "expected_result": "Master terminal alerts manager: 'Sub-account #3 liquidated at 50% margin level'; active group equity and lot sizing recalculate.",
+  "execution_timestamp": "2026-11-16T10:58:44.389566Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Master terminal WebSocket updates display sub-account liquidation event and automatically re-calibrates active group capital.",
+  "evidence": {
+    "ws_event": "subaccount_stop_out"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

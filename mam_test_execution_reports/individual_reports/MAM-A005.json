@@ -1,0 +1,18 @@
+{
+  "test_case_id": "MAM-A005",
+  "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+  "title": "Predefined Percentage Allocation: Validation of Sum == 100%",
+  "priority": "P0",
+  "precondition": "Manager attempts to save percentage settings summing to 95% or 105%.",
+  "steps": "1. Enter 50%, 30%, 15% (Total 95%). Click Save.",
+  "expected_result": "System blocks save with error: 'Total allocation percentage must equal exactly 100.0% (Current: 95.0%)'.",
+  "execution_timestamp": "2026-11-16T10:58:42.339234Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Sum of allocation percentages 95.0% fails constraint check (must equal exactly 100.0%).",
+  "evidence": {
+    "sum_percentage": 95.0,
+    "constraint": "sum == 100.0%"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

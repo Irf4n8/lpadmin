@@ -1,0 +1,212 @@
+{
+  "globalKeys": [
+    "document",
+    "documentPictureInPicture"
+  ],
+  "links": [
+    {
+      "tag": "A",
+      "text": "Skip to content",
+      "href": "#developer-content",
+      "class": "dev-skip"
+    },
+    {
+      "tag": "A",
+      "text": "lpadmin.blackfx.com\n/\nDevelopers",
+      "href": "/",
+      "class": "dev-brand"
+    },
+    {
+      "tag": "A",
+      "text": "My account",
+      "href": "/account",
+      "class": "dev-account-link"
+    },
+    {
+      "tag": "A",
+      "text": "Open workspace \u2197",
+      "href": "/dashboard",
+      "class": "dev-btn dev-workspace"
+    },
+    {
+      "tag": "A",
+      "text": "API",
+      "href": "#keys",
+      "class": "dev-tab"
+    },
+    {
+      "tag": "A",
+      "text": "Documentation",
+      "href": "#docs/overview",
+      "class": "dev-tab"
+    },
+    {
+      "tag": "A",
+      "text": "Explore the docs",
+      "href": "#docs/overview",
+      "class": "dev-btn dev-primary"
+    },
+    {
+      "tag": "A",
+      "text": "Authentication guide \u2197",
+      "href": "#docs/authentication",
+      "class": "dev-text-link"
+    },
+    {
+      "tag": "A",
+      "text": "Log in",
+      "href": "/login",
+      "class": "dev-btn dev-primary"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Copy",
+      "href": null,
+      "class": "btn btn-sm"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "I\u2019ve saved my key",
+      "href": null,
+      "class": "dev-text-link"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Create API key",
+      "href": null,
+      "class": "btn dev-btn dev-primary"
+    },
+    {
+      "tag": "A",
+      "text": "AuthenticationFrom API key to your first authenticated request.\u2197",
+      "href": "#docs/authentication",
+      "class": "dev-resource"
+    },
+    {
+      "tag": "A",
+      "text": "Order entryMarket orders, pending orders, and the full trade lifecycle.\u2197",
+      "href": "#docs/trading",
+      "class": "dev-resource"
+    },
+    {
+      "tag": "A",
+      "text": "API referenceRequests, parameters, and responses for every trader endpoint.\u2197",
+      "href": "#docs/reference",
+      "class": "dev-resource"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Browse documentation",
+      "href": null,
+      "class": "dev-mobile-nav"
+    },
+    {
+      "tag": "A",
+      "text": "Introduction",
+      "href": "#docs/overview",
+      "class": "dev-nav-link"
+    },
+    {
+      "tag": "A",
+      "text": "Authentication",
+      "href": "#docs/authentication",
+      "class": "dev-nav-link"
+    },
+    {
+      "tag": "A",
+      "text": "Order lifecycle",
+      "href": "#docs/trading",
+      "class": "dev-nav-link"
+    },
+    {
+      "tag": "A",
+      "text": "Errors & conventions",
+      "href": "#docs/errors",
+      "class": "dev-nav-link"
+    },
+    {
+      "tag": "A",
+      "text": "All endpoints",
+      "href": "#docs/reference",
+      "class": "dev-nav-link"
+    },
+    {
+      "tag": "A",
+      "text": "POST\nTrader login (email + password) -> session token",
+      "href": "#docs/memberLogin",
+      "class": "dev-nav-link dev-operation-link"
+    },
+    {
+      "tag": "A",
+      "text": "GET\nWho am I",
+      "href": "#docs/memberMe",
+      "class": "dev-nav-link dev-operation-link"
+    },
+    {
+      "tag": "A",
+      "text": "POST\nEnd a login session",
+      "href": "#docs/memberLogout",
+      "class": "dev-nav-link dev-operation-link"
+    },
+    {
+      "tag": "A",
+      "text": "GET\nList the member's API keys",
+      "href": "#docs/listAPIKeys",
+      "class": "dev-nav-link dev-operation-link"
+    },
+    {
+      "tag": "A",
+      "text": "POST\nCreate an API key (shown once)",
+      "href": "#docs/createAPIKey",
+      "class": "dev-nav-link dev-operation-link"
+    },
+    {
+      "tag": "A",
+      "text": "DELETE\nRevoke an API key",
+      "href": "#docs/revokeAPIKey",
+      "class": "dev-nav-link dev-operation-link"
+    },
+    {
+      "tag": "A",
+      "text": "POST\nExchange an API key for an access token",
+      "href": "#docs/exchangeAPIKey",
+      "class": "dev-nav-link dev-operation-link"
+    },
+    {
+      "tag": "A",
+      "text": "2\nExchange it for a token\n\nSend your key to the token endpoint. Access tokens last for one hour.",
+      "href": "#docs/exchangeAPIKey",
+      "class": "dev-start-step"
+    },
+    {
+      "tag": "A",
+      "text": "3\nRead your account\n\nDiscover your available instances, then call funds with a Bearer token.",
+      "href": "#docs/getFunds",
+      "class": "dev-start-step"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "cURL",
+      "href": null,
+      "class": "dev-language"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "fetch",
+      "href": null,
+      "class": "dev-language"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Python",
+      "href": null,
+      "class": "dev-language"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Copy",
+      "href": null,
+      "class": "dev-copy"
+    }
+  ]
+}

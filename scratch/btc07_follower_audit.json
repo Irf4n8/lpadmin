@@ -1,0 +1,1138 @@
+{
+  "master_trades": [
+    {
+      "history_id": 223810,
+      "order_id": "ord_2319e19191b19dbf8b",
+      "position_id": "pos_642584afc4f54c9bb2",
+      "symbol": "BINANCE:BTCUSDT.P",
+      "side": "BUY",
+      "qty": 1,
+      "entry_price": 73474.2,
+      "exit_price": 73479.9,
+      "realized_pnl": 5.69999999999709,
+      "executed_at": "2026-11-12T10:45:43.10016Z",
+      "exit_type": "MARKET",
+      "exit_source": "squareoff",
+      "entry_type": "MARKET",
+      "entry_copy_kind": "master",
+      "opened_at": "2026-11-12T10:43:20.501049Z"
+    },
+    {
+      "history_id": 223746,
+      "order_id": "ord_ebd30b092360e0c80c",
+      "position_id": "pos_612a1da1f56b0fdb2c",
+      "symbol": "BINANCE:BTCUSDT.P",
+      "side": "BUY",
+      "qty": 1,
+      "entry_price": 73480,
+      "exit_price": 73461.7,
+      "realized_pnl": -18.30000000000291,
+      "executed_at": "2026-11-12T10:45:40.101063Z",
+      "exit_type": "MARKET",
+      "exit_source": "squareoff",
+      "entry_type": "MARKET",
+      "entry_copy_kind": "master",
+      "opened_at": "2026-11-12T10:43:17.420775Z"
+    }
+  ],
+  "follower_trades": [
+    {
+      "follower": 1,
+      "history_id": 223861,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.551123Z",
+      "executed_at": "2026-11-12T10:45:43.194605Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 1,
+      "history_id": 223797,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.45161Z",
+      "executed_at": "2026-11-12T10:45:40.173182Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 2,
+      "history_id": 223853,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.547596Z",
+      "executed_at": "2026-11-12T10:45:43.186662Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 2,
+      "history_id": 223789,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.446629Z",
+      "executed_at": "2026-11-12T10:45:40.166228Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 3,
+      "history_id": 223872,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.556608Z",
+      "executed_at": "2026-11-12T10:45:43.204915Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 3,
+      "history_id": 223808,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.455713Z",
+      "executed_at": "2026-11-12T10:45:40.183923Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 5,
+      "history_id": 223855,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.548679Z",
+      "executed_at": "2026-11-12T10:45:43.188742Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 5,
+      "history_id": 223791,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.447881Z",
+      "executed_at": "2026-11-12T10:45:40.168019Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 6,
+      "history_id": 223859,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.550288Z",
+      "executed_at": "2026-11-12T10:45:43.192816Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 6,
+      "history_id": 223795,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.450144Z",
+      "executed_at": "2026-11-12T10:45:40.171182Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 7,
+      "history_id": 223854,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.548309Z",
+      "executed_at": "2026-11-12T10:45:43.187886Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 7,
+      "history_id": 223790,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.447271Z",
+      "executed_at": "2026-11-12T10:45:40.167154Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 8,
+      "history_id": 223867,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.554505Z",
+      "executed_at": "2026-11-12T10:45:43.200765Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 8,
+      "history_id": 223803,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.454324Z",
+      "executed_at": "2026-11-12T10:45:40.178961Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 9,
+      "history_id": 223869,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.555386Z",
+      "executed_at": "2026-11-12T10:45:43.202361Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 9,
+      "history_id": 223805,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.45488Z",
+      "executed_at": "2026-11-12T10:45:40.181255Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 10,
+      "history_id": 223868,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.554989Z",
+      "executed_at": "2026-11-12T10:45:43.201565Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 10,
+      "history_id": 223804,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.454607Z",
+      "executed_at": "2026-11-12T10:45:40.180236Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 11,
+      "history_id": 223860,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.550745Z",
+      "executed_at": "2026-11-12T10:45:43.193683Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 11,
+      "history_id": 223796,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.450799Z",
+      "executed_at": "2026-11-12T10:45:40.172347Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 12,
+      "history_id": 223856,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.549148Z",
+      "executed_at": "2026-11-12T10:45:43.189458Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 12,
+      "history_id": 223792,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.448331Z",
+      "executed_at": "2026-11-12T10:45:40.168873Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 13,
+      "history_id": 223858,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.549904Z",
+      "executed_at": "2026-11-12T10:45:43.191838Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 13,
+      "history_id": 223794,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.44966Z",
+      "executed_at": "2026-11-12T10:45:40.170476Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 14,
+      "history_id": 223865,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.553556Z",
+      "executed_at": "2026-11-12T10:45:43.198543Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 14,
+      "history_id": 223801,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.453563Z",
+      "executed_at": "2026-11-12T10:45:40.177389Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 15,
+      "history_id": 223870,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.555847Z",
+      "executed_at": "2026-11-12T10:45:43.202965Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 15,
+      "history_id": 223806,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.455174Z",
+      "executed_at": "2026-11-12T10:45:40.182367Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 16,
+      "history_id": 223864,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.552942Z",
+      "executed_at": "2026-11-12T10:45:43.197529Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 16,
+      "history_id": 223800,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.45308Z",
+      "executed_at": "2026-11-12T10:45:40.176502Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 17,
+      "history_id": 223871,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.55625Z",
+      "executed_at": "2026-11-12T10:45:43.203619Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 17,
+      "history_id": 223807,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.455444Z",
+      "executed_at": "2026-11-12T10:45:40.183182Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 18,
+      "history_id": 223866,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.554021Z",
+      "executed_at": "2026-11-12T10:45:43.199675Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 18,
+      "history_id": 223802,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.45393Z",
+      "executed_at": "2026-11-12T10:45:40.178139Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 19,
+      "history_id": 223863,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.552471Z",
+      "executed_at": "2026-11-12T10:45:43.196474Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 19,
+      "history_id": 223799,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.452594Z",
+      "executed_at": "2026-11-12T10:45:40.175344Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 20,
+      "history_id": 223857,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.549532Z",
+      "executed_at": "2026-11-12T10:45:43.190597Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 20,
+      "history_id": 223793,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.448856Z",
+      "executed_at": "2026-11-12T10:45:40.169687Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 33,
+      "history_id": 223845,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.538965Z",
+      "executed_at": "2026-11-12T10:45:43.177321Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 33,
+      "history_id": 223781,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.442007Z",
+      "executed_at": "2026-11-12T10:45:40.158491Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 34,
+      "history_id": 223850,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.54432Z",
+      "executed_at": "2026-11-12T10:45:43.183666Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 34,
+      "history_id": 223786,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.445071Z",
+      "executed_at": "2026-11-12T10:45:40.163Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 35,
+      "history_id": 223846,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.539454Z",
+      "executed_at": "2026-11-12T10:45:43.178281Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 35,
+      "history_id": 223782,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.442542Z",
+      "executed_at": "2026-11-12T10:45:40.159266Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 36,
+      "history_id": 223849,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.542397Z",
+      "executed_at": "2026-11-12T10:45:43.181986Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 36,
+      "history_id": 223785,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.444462Z",
+      "executed_at": "2026-11-12T10:45:40.161934Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 37,
+      "history_id": 223847,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.539829Z",
+      "executed_at": "2026-11-12T10:45:43.179928Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 37,
+      "history_id": 223783,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.443171Z",
+      "executed_at": "2026-11-12T10:45:40.160141Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 38,
+      "history_id": 223852,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.54692Z",
+      "executed_at": "2026-11-12T10:45:43.185724Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 38,
+      "history_id": 223788,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.445988Z",
+      "executed_at": "2026-11-12T10:45:40.165207Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 39,
+      "history_id": 223848,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.541323Z",
+      "executed_at": "2026-11-12T10:45:43.181054Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 39,
+      "history_id": 223784,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.443752Z",
+      "executed_at": "2026-11-12T10:45:40.161122Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 40,
+      "history_id": 223851,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.54592Z",
+      "executed_at": "2026-11-12T10:45:43.184674Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 40,
+      "history_id": 223787,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.445543Z",
+      "executed_at": "2026-11-12T10:45:40.163892Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 60,
+      "history_id": 223844,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.537788Z",
+      "executed_at": "2026-11-12T10:45:43.175759Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 60,
+      "history_id": 223780,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.441437Z",
+      "executed_at": "2026-11-12T10:45:40.157686Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 61,
+      "history_id": 223843,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.536899Z",
+      "executed_at": "2026-11-12T10:45:43.174752Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 61,
+      "history_id": 223779,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.440861Z",
+      "executed_at": "2026-11-12T10:45:40.156736Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 62,
+      "history_id": 223842,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.535944Z",
+      "executed_at": "2026-11-12T10:45:43.173727Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 62,
+      "history_id": 223778,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.440175Z",
+      "executed_at": "2026-11-12T10:45:40.155757Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 63,
+      "history_id": 223839,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.534493Z",
+      "executed_at": "2026-11-12T10:45:43.168361Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 63,
+      "history_id": 223775,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.43891Z",
+      "executed_at": "2026-11-12T10:45:40.152288Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 64,
+      "history_id": 223841,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.535443Z",
+      "executed_at": "2026-11-12T10:45:43.171265Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 64,
+      "history_id": 223777,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.439733Z",
+      "executed_at": "2026-11-12T10:45:40.154941Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 65,
+      "history_id": 223830,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.523502Z",
+      "executed_at": "2026-11-12T10:45:43.149384Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 65,
+      "history_id": 223766,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.431978Z",
+      "executed_at": "2026-11-12T10:45:40.141676Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 66,
+      "history_id": 223840,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.534997Z",
+      "executed_at": "2026-11-12T10:45:43.170231Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 66,
+      "history_id": 223776,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.439435Z",
+      "executed_at": "2026-11-12T10:45:40.153248Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 67,
+      "history_id": 223835,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.528933Z",
+      "executed_at": "2026-11-12T10:45:43.160443Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 67,
+      "history_id": 223771,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.435745Z",
+      "executed_at": "2026-11-12T10:45:40.1483Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 68,
+      "history_id": 223834,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.527057Z",
+      "executed_at": "2026-11-12T10:45:43.155165Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 68,
+      "history_id": 223770,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.434827Z",
+      "executed_at": "2026-11-12T10:45:40.147159Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 69,
+      "history_id": 223838,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.532873Z",
+      "executed_at": "2026-11-12T10:45:43.166639Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 69,
+      "history_id": 223774,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.43829Z",
+      "executed_at": "2026-11-12T10:45:40.150955Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 70,
+      "history_id": 223837,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.532355Z",
+      "executed_at": "2026-11-12T10:45:43.165563Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 70,
+      "history_id": 223773,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.437649Z",
+      "executed_at": "2026-11-12T10:45:40.15006Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 72,
+      "history_id": 223832,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.524804Z",
+      "executed_at": "2026-11-12T10:45:43.153097Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 72,
+      "history_id": 223768,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.433323Z",
+      "executed_at": "2026-11-12T10:45:40.144685Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 75,
+      "history_id": 223833,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.525248Z",
+      "executed_at": "2026-11-12T10:45:43.154327Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 75,
+      "history_id": 223769,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.433998Z",
+      "executed_at": "2026-11-12T10:45:40.145977Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 77,
+      "history_id": 223836,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.531439Z",
+      "executed_at": "2026-11-12T10:45:43.163854Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 77,
+      "history_id": 223772,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.43635Z",
+      "executed_at": "2026-11-12T10:45:40.149246Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 79,
+      "history_id": 223831,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.524334Z",
+      "executed_at": "2026-11-12T10:45:43.15187Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 79,
+      "history_id": 223767,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.432485Z",
+      "executed_at": "2026-11-12T10:45:40.143536Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 82,
+      "history_id": 223827,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.521957Z",
+      "executed_at": "2026-11-12T10:45:43.146204Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 82,
+      "history_id": 223763,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.43051Z",
+      "executed_at": "2026-11-12T10:45:40.137306Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 83,
+      "history_id": 223821,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.518696Z",
+      "executed_at": "2026-11-12T10:45:43.135996Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 83,
+      "history_id": 223757,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.427731Z",
+      "executed_at": "2026-11-12T10:45:40.129959Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 84,
+      "history_id": 223829,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.523088Z",
+      "executed_at": "2026-11-12T10:45:43.148472Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 84,
+      "history_id": 223765,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.431503Z",
+      "executed_at": "2026-11-12T10:45:40.139881Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 85,
+      "history_id": 223822,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.519446Z",
+      "executed_at": "2026-11-12T10:45:43.137297Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 85,
+      "history_id": 223758,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.428181Z",
+      "executed_at": "2026-11-12T10:45:40.130942Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 86,
+      "history_id": 223823,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.519892Z",
+      "executed_at": "2026-11-12T10:45:43.138292Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 86,
+      "history_id": 223759,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.428735Z",
+      "executed_at": "2026-11-12T10:45:40.132109Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 87,
+      "history_id": 223828,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.522356Z",
+      "executed_at": "2026-11-12T10:45:43.147527Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 87,
+      "history_id": 223764,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.431079Z",
+      "executed_at": "2026-11-12T10:45:40.138604Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 88,
+      "history_id": 223815,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.509877Z",
+      "executed_at": "2026-11-12T10:45:43.116352Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 88,
+      "history_id": 223751,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.425705Z",
+      "executed_at": "2026-11-12T10:45:40.122649Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 89,
+      "history_id": 223817,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.514047Z",
+      "executed_at": "2026-11-12T10:45:43.129017Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 89,
+      "history_id": 223753,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.426317Z",
+      "executed_at": "2026-11-12T10:45:40.125658Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 90,
+      "history_id": 223816,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.511671Z",
+      "executed_at": "2026-11-12T10:45:43.127563Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 90,
+      "history_id": 223752,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.42604Z",
+      "executed_at": "2026-11-12T10:45:40.123947Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 91,
+      "history_id": 223826,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.521593Z",
+      "executed_at": "2026-11-12T10:45:43.144452Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 91,
+      "history_id": 223762,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.430029Z",
+      "executed_at": "2026-11-12T10:45:40.135383Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 92,
+      "history_id": 223813,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.504569Z",
+      "executed_at": "2026-11-12T10:45:43.113817Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 92,
+      "history_id": 223749,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.424937Z",
+      "executed_at": "2026-11-12T10:45:40.118115Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 93,
+      "history_id": 223819,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.516771Z",
+      "executed_at": "2026-11-12T10:45:43.133463Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 93,
+      "history_id": 223755,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.426978Z",
+      "executed_at": "2026-11-12T10:45:40.127543Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 94,
+      "history_id": 223824,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.520285Z",
+      "executed_at": "2026-11-12T10:45:43.140116Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 94,
+      "history_id": 223760,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.429166Z",
+      "executed_at": "2026-11-12T10:45:40.132945Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 95,
+      "history_id": 223814,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.507652Z",
+      "executed_at": "2026-11-12T10:45:43.11538Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 95,
+      "history_id": 223750,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.425304Z",
+      "executed_at": "2026-11-12T10:45:40.119763Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 96,
+      "history_id": 223825,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.521192Z",
+      "executed_at": "2026-11-12T10:45:43.141701Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 96,
+      "history_id": 223761,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.429478Z",
+      "executed_at": "2026-11-12T10:45:40.134549Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 97,
+      "history_id": 223820,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.517387Z",
+      "executed_at": "2026-11-12T10:45:43.134775Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 97,
+      "history_id": 223756,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.427411Z",
+      "executed_at": "2026-11-12T10:45:40.128601Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 98,
+      "history_id": 223811,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.503506Z",
+      "executed_at": "2026-11-12T10:45:43.105102Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 98,
+      "history_id": 223747,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.423435Z",
+      "executed_at": "2026-11-12T10:45:40.103753Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 99,
+      "history_id": 223812,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.504104Z",
+      "executed_at": "2026-11-12T10:45:43.112445Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 99,
+      "history_id": 223748,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.424334Z",
+      "executed_at": "2026-11-12T10:45:40.105324Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    },
+    {
+      "follower": 100,
+      "history_id": 223818,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:20.515947Z",
+      "executed_at": "2026-11-12T10:45:43.132045Z",
+      "entry_price": 73474.2,
+      "exit_price": 73479.9
+    },
+    {
+      "follower": 100,
+      "history_id": 223754,
+      "qty": 2,
+      "opened_at": "2026-11-12T10:43:17.426584Z",
+      "executed_at": "2026-11-12T10:45:40.12659Z",
+      "entry_price": 73480,
+      "exit_price": 73461.7
+    }
+  ]
+}

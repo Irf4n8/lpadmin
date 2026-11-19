@@ -1,0 +1,20 @@
+{
+  "test_case_id": "MAM-E013",
+  "module": "Module 4: Order Execution, Modification & Bulk Routing",
+  "title": "Pending Stop Order (Buy Stop / Sell Stop) Propagation",
+  "priority": "P1",
+  "precondition": "Master places Buy Stop 2.0 lots at 1.0850 above current market.",
+  "steps": "1. Master sends Buy Stop.",
+  "expected_result": "Proportional child Buy Stop orders placed across all linked accounts.",
+  "execution_timestamp": "2026-11-16T10:58:44.372459Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Pending STOP orders supported via POST /v1/oms/{instance}/orders/pending with type='STOP'.",
+  "evidence": {
+    "supported_types": [
+      "LIMIT",
+      "STOP"
+    ]
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

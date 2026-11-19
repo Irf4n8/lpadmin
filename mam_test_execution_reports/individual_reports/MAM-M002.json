@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-M002",
+  "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+  "title": "Isolated Margin Call Warning on Single Sub-Account",
+  "priority": "P0",
+  "precondition": "Sub-account #3 suffers adverse floating loss; margin level drops to 100%.",
+  "steps": "1. Broker risk monitor scans accounts.",
+  "expected_result": "Sub-account #3 flagged 'MARGIN_CALL'; email alert dispatched to investor and manager; remaining 9 accounts unaffected.",
+  "execution_timestamp": "2026-11-16T10:58:44.388027Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "When sub-account equity equals used margin (margin_level == 100%), OMS triggers isolated MARGIN_CALL alert without group cross-impact.",
+  "evidence": {
+    "threshold": "100% margin level"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

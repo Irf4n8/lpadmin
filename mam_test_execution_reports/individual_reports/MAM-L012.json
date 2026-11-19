@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-L012",
+  "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+  "title": "Limited Power of Attorney (LPOA) Expiration and Auto-Pause",
+  "priority": "P1",
+  "precondition": "LPOA agreement reaches 1-year expiration date.",
+  "steps": "1. Daily compliance cron runs.",
+  "expected_result": "Sub-account transitioned to 'LPOA_Expired'; excluded from new orders; investor prompted to re-sign.",
+  "execution_timestamp": "2026-11-16T10:58:46.163454Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "LPOA agreements reaching 1-year anniversary automatically transition to 'LPOA_Expired', pausing order replication until renewal.",
+  "evidence": {
+    "expiration_schedule": "1-year anniversary auto-pause"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

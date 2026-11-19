@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-M007",
+  "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+  "title": "Sub-Account Margin Requirement Pre-Trade Check",
+  "priority": "P0",
+  "precondition": "Master prepares to place 5.0 lots EURUSD; Acc #2 has $50 free margin.",
+  "steps": "1. Sizing engine executes pre-trade validation.",
+  "expected_result": "Flags Acc #2 before execution; skips or trims Acc #2 order to prevent immediate post-fill stop-out.",
+  "execution_timestamp": "2026-11-16T10:58:44.391903Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Pre-trade margin validator calculates post-execution margin level, dropping tickets that would cause immediate liquidation.",
+  "evidence": {
+    "validation_check": "free_margin >= required_margin"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

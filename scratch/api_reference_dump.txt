@@ -1,0 +1,381 @@
+API REFERENCE
+Every endpoint, in one place.
+
+120 trader operations, grouped by what you want to do. Search by name, method, or path in the sidebar.
+
+Authentication
+POST
+Trader login (email + password) -> session token
+/oms/_auth/login
+GET
+Who am I
+/oms/_auth/me
+POST
+End a login session
+/oms/_auth/logout
+GET
+List the member's API keys
+/oms/_auth/keys
+POST
+Create an API key (shown once)
+/oms/_auth/keys
+DELETE
+Revoke an API key
+/oms/_auth/keys/{key_id}
+POST
+Exchange an API key for an access token
+/oms/_auth/token
+Accounts & venues
+GET
+Client brand logo
+/oms/_brand/logo
+GET
+Accounts this install offers
+/oms/_instances
+GET
+The member's trading accounts
+/oms/_accounts
+POST
+Open an additional account
+/oms/_accounts
+POST
+Archive an additional account
+/oms/_accounts/{account_id}/archive
+GET
+Prop challenge programs on sale
+/oms/_prop/programs
+POST
+Buy a prop challenge
+/oms/_prop/enrol
+GET
+The person's prop challenges
+/oms/_prop/enrolments
+GET
+One challenge account
+/oms/_prop/accounts/{account_id}
+GET
+A funded account's payouts
+/oms/_prop/accounts/{account_id}/payouts
+POST
+Request a payout from a funded account
+/oms/_prop/accounts/{account_id}/payouts
+GET
+My venue connections
+/oms/_brokers
+GET
+My Binance connection
+/oms/_brokers/binance
+PUT
+Save Binance credentials and settings
+/oms/_brokers/binance
+GET
+Search Binance instruments
+/oms/_brokers/binance/instruments
+GET
+Binance fee rate for a symbol
+/oms/_brokers/binance/commission
+POST
+See your broker for details.
+/oms/_brokers/binance/connect
+POST
+Test the Binance connection
+/oms/_brokers/binance/test
+POST
+Disconnect Binance
+/oms/_brokers/binance/disconnect
+POST
+Read or set futures leverage / margin mode (Binance)
+/oms/_brokers/binance/leverage
+POST
+Save default exit (SL/TP) execution policy (Binance)
+/oms/_brokers/binance/protection-defaults
+POST
+Save default pending-entry execution mode (Binance)
+/oms/_brokers/binance/entry-defaults
+GET
+My Zerodha connection
+/oms/_brokers/zerodha
+PUT
+Save Zerodha credentials and settings
+/oms/_brokers/zerodha
+GET
+Search Zerodha instruments
+/oms/_brokers/zerodha/instruments
+GET
+Zerodha fee rate for a symbol
+/oms/_brokers/zerodha/commission
+POST
+Start the Kite login
+/oms/_brokers/zerodha/connect
+POST
+Test the Zerodha connection
+/oms/_brokers/zerodha/test
+POST
+Disconnect Zerodha
+/oms/_brokers/zerodha/disconnect
+POST
+Read or set futures leverage / margin mode (Zerodha)
+/oms/_brokers/zerodha/leverage
+POST
+Save default exit (SL/TP) execution policy (Zerodha)
+/oms/_brokers/zerodha/protection-defaults
+POST
+Save default pending-entry execution mode (Zerodha)
+/oms/_brokers/zerodha/entry-defaults
+Orders
+POST
+Place a market order
+/oms/{instance}/orders
+GET
+List the member's orders
+/oms/{instance}/orders
+POST
+Place a pending order (LIMIT / STOP / bracket)
+/oms/{instance}/orders/pending
+PUT
+Modify a pending order
+/oms/{instance}/orders/{order_id}/modify
+DELETE
+Cancel a pending order
+/oms/{instance}/orders/{order_id}
+GET
+Get one order
+/oms/{instance}/orders/{order_id}
+POST
+Basket entry (multi-leg, all-or-nothing)
+/oms/{instance}/orders/basket
+POST
+Cancel several pending orders
+/oms/{instance}/orders/bulk/cancel
+Positions
+GET
+List positions
+/oms/{instance}/positions
+PUT
+Set SL / TP / server trailing on an open position
+/oms/{instance}/positions/{market_order_id}/protection
+POST
+Close a whole position
+/oms/{instance}/positions/{market_order_id}/squareoff
+POST
+Partially close a position
+/oms/{instance}/positions/{market_order_id}/reduce
+POST
+Close several positions
+/oms/{instance}/positions/bulk/squareoff
+POST
+Basket exit: close a group (or one named leg)
+/oms/{instance}/positions/group/squareoff
+POST
+Arm, retune or clear a group's combined-P&L SL/TP
+/oms/{instance}/positions/group/trigger
+GET
+Combined snapshot: positions, orders, pending, funds
+/oms/{instance}/all_open
+GET
+Closed executions (trade history)
+/oms/{instance}/history
+Account & funds
+GET
+Trading-account funds
+/oms/{instance}/funds
+GET
+May this account set its own practice balance, and within what bounds
+/oms/{instance}/funds/practice
+POST
+Set or reset the practice balance (paper accounts only)
+/oms/{instance}/funds/practice
+GET
+This account's commercial terms
+/oms/{instance}/account
+GET
+Poll a money operation
+/oms/{instance}/money/operations/{id}
+Streams
+POST
+Mint a single-use order-event socket ticket
+/oms/{instance}/ws-ticket
+GET
+Order/position event WebSocket
+/oms/{instance}/ws
+Market signals and alerts
+GET
+Day ranges and new-high/new-low events
+/oms/{instance}/market/extremes
+GET
+List member alerts
+/oms/{instance}/alerts
+POST
+Create a persistent member alert
+/oms/{instance}/alerts
+PUT
+Partially edit or activate/deactivate an alert
+/oms/{instance}/alerts/{alert_id}
+DELETE
+Delete an owned alert
+/oms/{instance}/alerts/{alert_id}
+GET
+List stored fired events
+/oms/{instance}/alerts/events
+POST
+Mark an owned event seen
+/oms/{instance}/alerts/events/{event_id}/seen
+Instance
+GET
+Public licence state and vendor contact
+/oms/_licence
+GET
+Instance health (no auth)
+/oms/{instance}/health
+GET
+Instance metadata (no auth)
+/oms/{instance}/info
+Wallets
+GET
+Wallet balances, this trading account and consolidated totals
+/oms/{instance}/wallets
+GET
+Wallet ledger
+/oms/{instance}/wallets/history
+POST
+Move money between a wallet and this trading account
+/oms/{instance}/wallets/transfer
+Client portal
+GET
+Portal landing view
+/oms/{instance}/portal/summary
+POST
+Update the editable profile fields
+/oms/{instance}/portal/profile
+GET
+Payment methods the broker offers
+/oms/{instance}/portal/methods
+POST
+Create a funding (deposit) request
+/oms/{instance}/portal/deposits
+GET
+This member's deposit requests
+/oms/{instance}/portal/deposits
+GET
+Saved payout details
+/oms/{instance}/portal/payout-methods
+POST
+Save or update payout details
+/oms/{instance}/portal/payout-methods
+DELETE
+Remove saved payout details
+/oms/{instance}/portal/payout-methods/{payout_id}
+POST
+Payout step 1: validate and issue a one-time code
+/oms/{instance}/portal/withdrawals/otp
+POST
+Payout step 2: confirm the code and create the request
+/oms/{instance}/portal/withdrawals
+GET
+This member's withdrawal requests
+/oms/{instance}/portal/withdrawals
+POST
+Move money between the member's own accounts
+/oms/{instance}/portal/transfers
+GET
+Internal transfer history
+/oms/{instance}/portal/transfers
+GET
+Unified money-movement history
+/oms/{instance}/portal/history
+GET
+KYC documents and their review state
+/oms/{instance}/portal/documents
+POST
+Upload one KYC document slot
+/oms/{instance}/portal/documents
+GET
+Download one stored document
+/oms/{instance}/portal/documents/{slot}
+DELETE
+Remove one uploaded document
+/oms/{instance}/portal/documents/{slot}
+IB
+GET
+IB overview
+/oms/{instance}/ib/summary
+GET
+Commission credited to this member
+/oms/{instance}/ib/payouts
+GET
+Referral tree below this member
+/oms/{instance}/ib/downline
+POST
+Record who referred this account (one-time)
+/oms/{instance}/ib/referrer
+Copy trading
+GET
+Copy manager directory
+/oms/{instance}/copy/masters
+POST
+Become or update a copy master
+/oms/{instance}/copy/master
+GET
+Copy relationships, both sides
+/oms/{instance}/copy/follows
+POST
+Follow a copy master
+/oms/{instance}/copy/follow
+POST
+Stop copying a master
+/oms/{instance}/copy/unfollow
+MAM
+GET
+MAM manager directory
+/oms/{instance}/mam/masters
+POST
+Become or update a MAM master
+/oms/{instance}/mam/master
+GET
+MAM relationships, both sides
+/oms/{instance}/mam/follows
+POST
+Join a MAM manager
+/oms/{instance}/mam/follow
+POST
+Leave a MAM manager
+/oms/{instance}/mam/unfollow
+GET
+MAM profit-share statement
+/oms/{instance}/mam/shares
+PAMM
+GET
+PAMM manager directory
+/oms/{instance}/pamm/masters
+POST
+Become or update a PAMM master
+/oms/{instance}/pamm/master
+GET
+PAMM subscriptions and pool
+/oms/{instance}/pamm/follows
+POST
+Deposit into a PAMM pool
+/oms/{instance}/pamm/join
+POST
+Settle and leave a PAMM pool
+/oms/{instance}/pamm/unfollow
+GET
+PAMM allocation statement
+/oms/{instance}/pamm/allocations
+AI assistant
+GET
+My assistant credit balance
+/oms/_ai/credits
+GET
+Available assistant models
+/oms/_ai/models
+POST
+Price a conversation before sending it
+/oms/_ai/estimate
+POST
+Ask the BlackScript assistant
+/oms/_ai/generate
+Catalogue
+GET
+Self-documenting URI catalogue
+/uri

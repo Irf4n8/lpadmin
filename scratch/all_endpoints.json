@@ -1,0 +1,1892 @@
+[
+  {
+    "folder": "Admin API/Authentication",
+    "name": "Admin login",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/login",
+    "body": "{\n  \"email\": \"{{admin_email}}\",\n  \"password\": \"{{admin_password}}\",\n  \"remember\": true\n}"
+  },
+  {
+    "folder": "Admin API/Authentication",
+    "name": "Admin logout",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/logout",
+    "body": "{}"
+  },
+  {
+    "folder": "Admin API/Overview",
+    "name": "config",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/config",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Overview",
+    "name": "software?check=1",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/software?check=1",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Overview",
+    "name": "license",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/license",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Overview",
+    "name": "home",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/home",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Overview",
+    "name": "me",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/me",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Overview",
+    "name": "settings",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/settings",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Overview",
+    "name": "brand",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/brand",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Overview",
+    "name": "modules",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/modules",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Overview",
+    "name": "ai-credits",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/ai-credits",
+    "body": null
+  },
+  {
+    "folder": "Admin API/OMS",
+    "name": "feed status",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/feed/status",
+    "body": null
+  },
+  {
+    "folder": "Admin API/OMS",
+    "name": "feed",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/feed",
+    "body": null
+  },
+  {
+    "folder": "Admin API/OMS",
+    "name": "instances",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/instances",
+    "body": null
+  },
+  {
+    "folder": "Admin API/OMS",
+    "name": "trading-rules",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/trading-rules",
+    "body": null
+  },
+  {
+    "folder": "Admin API/OMS",
+    "name": "trades",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/trades?member={{member_id}}&limit={{limit}}&offset={{offset}}",
+    "body": null
+  },
+  {
+    "folder": "Admin API/OMS",
+    "name": "member credit",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/members/{{member_id}}/credit?instance={{instance}}",
+    "body": null
+  },
+  {
+    "folder": "Admin API/OMS",
+    "name": "liquidity",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/liquidity",
+    "body": null
+  },
+  {
+    "folder": "Admin API/OMS",
+    "name": "liquidity reconcile",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/liquidity/reconcile",
+    "body": null
+  },
+  {
+    "folder": "Admin API/OMS",
+    "name": "symbols search",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/group-symbols?q={{symbol_query}}",
+    "body": null
+  },
+  {
+    "folder": "Admin API/OMS",
+    "name": "groups",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/groups",
+    "body": null
+  },
+  {
+    "folder": "Admin API/OMS",
+    "name": "money operation",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/money/operations/{{operation_id}}",
+    "body": null
+  },
+  {
+    "folder": "Admin API/People",
+    "name": "members",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/members",
+    "body": null
+  },
+  {
+    "folder": "Admin API/People",
+    "name": "kyc list",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/kyc",
+    "body": null
+  },
+  {
+    "folder": "Admin API/People",
+    "name": "member kyc",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/kyc/{{member_id}}",
+    "body": null
+  },
+  {
+    "folder": "Admin API/People",
+    "name": "member API keys",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/members/{{member_id}}/api-keys",
+    "body": null
+  },
+  {
+    "folder": "Admin API/People",
+    "name": "staff",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/staff",
+    "body": null
+  },
+  {
+    "folder": "Admin API/People",
+    "name": "staff pages",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/staff/pages",
+    "body": null
+  },
+  {
+    "folder": "Admin API/People",
+    "name": "download KYC document",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/kyc/{{member_id}}/{{slot}}",
+    "body": null
+  },
+  {
+    "folder": "Admin API/People",
+    "name": "account requests (pending)",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/accounts/requests?status=pending",
+    "body": null
+  },
+  {
+    "folder": "Admin API/People",
+    "name": "account requests (all)",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/accounts/requests?status=all",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Money",
+    "name": "payment methods",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/payment-methods",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Money",
+    "name": "deposits",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/deposits?limit={{limit}}",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Money",
+    "name": "withdrawals",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/withdrawals?limit={{limit}}",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Money",
+    "name": "member deposits",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/deposits?member={{member_id}}",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Money",
+    "name": "member withdrawals",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/withdrawals?member={{member_id}}",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Money",
+    "name": "deposit proof",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/deposits/{{deposit_id}}/proof",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Mutations: members",
+    "name": "Create member (with engines)",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/members",
+    "body": "{\n  \"email\": \"newtrader@mailinator.com\",\n  \"password\": \"{{member_password}}\",\n  \"name\": \"\",\n  \"paper_engine\": \"hedging\",\n  \"real_engine\": \"hedging\"\n}"
+  },
+  {
+    "folder": "Admin API/Mutations: members",
+    "name": "Set member balance",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/members/{{member_id}}/balance",
+    "body": "{\n  \"instance\": \"{{instance}}\",\n  \"balance\": 1000000,\n  \"remark\": \"Test funding\",\n  \"force\": false\n}"
+  },
+  {
+    "folder": "Admin API/Mutations: members",
+    "name": "Set member status",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/members/{{member_id}}/status",
+    "body": "{\n  \"status\": \"disabled\"\n}"
+  },
+  {
+    "folder": "Admin API/Mutations: members",
+    "name": "Set member book",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/members/{{member_id}}/book",
+    "body": "{\n  \"book\": \"b\"\n}"
+  },
+  {
+    "folder": "Admin API/Mutations: members",
+    "name": "Set member password",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/members/{{member_id}}/password",
+    "body": "{\n  \"password\": \"\"\n}"
+  },
+  {
+    "folder": "Admin API/Mutations: members",
+    "name": "Set member plan",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/members/{{member_id}}/plan",
+    "body": "{\n  \"plan\": \"\"\n}"
+  },
+  {
+    "folder": "Admin API/Mutations: members",
+    "name": "Assign member group",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/members/{{member_id}}/group",
+    "body": "{\n  \"group_code\": \"\"\n}"
+  },
+  {
+    "folder": "Admin API/Mutations: members",
+    "name": "Set member account type",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/members/{{member_id}}/account-type",
+    "body": "{\n  \"account_type\": \"\"\n}"
+  },
+  {
+    "folder": "Admin API/Mutations: members",
+    "name": "Create member trading account",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/members/{{member_id}}/accounts",
+    "body": "{\n  \"instance\": \"{{instance}}\",\n  \"label\": \"\",\n  \"group_code\": \"\",\n  \"leverage\": 0\n}"
+  },
+  {
+    "folder": "Admin API/Mutations: members",
+    "name": "Grant member credit",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/members/{{member_id}}/credit",
+    "body": "{\n  \"amount\": 0,\n  \"last_day\": \"\",\n  \"note\": \"\"\n}"
+  },
+  {
+    "folder": "Admin API/Mutations: members",
+    "name": "Revoke member credit",
+    "method": "DELETE",
+    "url": "{{baseUrl}}/admin/api/members/{{member_id}}/credit/{{grant_id}}?instance={{instance}}",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Mutations: members",
+    "name": "Adjust member AI credits",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/members/{{member_id}}/ai-credits",
+    "body": "{\n  \"op\": \"\",\n  \"amount\": 0\n}"
+  },
+  {
+    "folder": "Admin API/Mutations: members",
+    "name": "Mint member chart token",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/members/{{member_id}}/chart-token",
+    "body": "{}"
+  },
+  {
+    "folder": "Admin API/Mutations: members",
+    "name": "Revoke member API key",
+    "method": "DELETE",
+    "url": "{{baseUrl}}/admin/api/members/{{member_id}}/api-keys/{{key_id}}",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Mutations: members",
+    "name": "Archive account",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/accounts/{{account_id}}/archive",
+    "body": "{}"
+  },
+  {
+    "folder": "Admin API/Mutations: members",
+    "name": "Unarchive account",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/accounts/{{account_id}}/unarchive",
+    "body": "{}"
+  },
+  {
+    "folder": "Admin API/Mutations: members",
+    "name": "Approve account request",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/accounts/requests/{{request_id}}/approve",
+    "body": "{}"
+  },
+  {
+    "folder": "Admin API/Mutations: members",
+    "name": "Reject account request",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/accounts/requests/{{request_id}}/reject",
+    "body": "{}"
+  },
+  {
+    "folder": "Admin API/Mutations: money and verification",
+    "name": "Review member KYC (verify or refuse)",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/kyc/{{member_id}}/review",
+    "body": "{\n  \"status\": \"verified\",\n  \"slot\": \"\",\n  \"reason\": \"\",\n  \"scope\": \"\"\n}"
+  },
+  {
+    "folder": "Admin API/Mutations: money and verification",
+    "name": "Review deposit",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/deposits/{{deposit_id}}/review",
+    "body": "{\n  \"status\": \"\",\n  \"reason\": \"\"\n}"
+  },
+  {
+    "folder": "Admin API/Mutations: money and verification",
+    "name": "Review withdrawal",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/withdrawals/{{withdrawal_id}}/review",
+    "body": "{\n  \"status\": \"\",\n  \"reason\": \"\"\n}"
+  },
+  {
+    "folder": "Admin API/Mutations: money and verification",
+    "name": "Update liquidity money",
+    "method": "PUT",
+    "url": "{{baseUrl}}/admin/api/liquidity/money",
+    "body": "{}"
+  },
+  {
+    "folder": "Admin API/Mutations: money and verification",
+    "name": "Test liquidity",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/liquidity/test",
+    "body": "{}"
+  },
+  {
+    "folder": "Admin API/Mutations: staff, groups, instances",
+    "name": "Create staff member",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/staff",
+    "body": "{\n  \"email\": \"\",\n  \"name\": \"\",\n  \"password\": \"\",\n  \"pages\": [],\n  \"read_only\": false\n}"
+  },
+  {
+    "folder": "Admin API/Mutations: staff, groups, instances",
+    "name": "Update staff member",
+    "method": "PATCH",
+    "url": "{{baseUrl}}/admin/api/staff/{{staff_id}}",
+    "body": "{\n  \"pages\": [],\n  \"read_only\": false,\n  \"name\": \"\"\n}"
+  },
+  {
+    "folder": "Admin API/Mutations: staff, groups, instances",
+    "name": "Remove staff member",
+    "method": "DELETE",
+    "url": "{{baseUrl}}/admin/api/staff/{{staff_id}}",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Mutations: staff, groups, instances",
+    "name": "Create or update account group",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/groups",
+    "body": "{}"
+  },
+  {
+    "folder": "Admin API/Mutations: staff, groups, instances",
+    "name": "Delete account group",
+    "method": "DELETE",
+    "url": "{{baseUrl}}/admin/api/groups/{{group_code}}",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Mutations: staff, groups, instances",
+    "name": "Enable or disable instance",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/instances/{{instance_slug}}/enabled",
+    "body": "{\n  \"enabled\": true\n}"
+  },
+  {
+    "folder": "Admin API/Mutations: staff, groups, instances",
+    "name": "Rename instance",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/instances/{{instance_slug}}/name",
+    "body": "{\n  \"name\": \"\"\n}"
+  },
+  {
+    "folder": "Admin API/Mutations: staff, groups, instances",
+    "name": "Set instance icon",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/instances/{{instance_slug}}/icon",
+    "body": "{\n  \"icon\": \"\"\n}"
+  },
+  {
+    "folder": "Admin API/Mutations: staff, groups, instances",
+    "name": "Set instance visibility",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/instances/{{instance_slug}}/visibility",
+    "body": "{\n  \"visible\": true\n}"
+  },
+  {
+    "folder": "Admin API/Mutations: staff, groups, instances",
+    "name": "Chart: list published scripts",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/admin/listPublished",
+    "body": "{}"
+  },
+  {
+    "folder": "Admin API/Dangerous: do not run casually",
+    "name": "Update software",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/software/update",
+    "body": "{\n  \"version\": \"{{target_version}}\"\n}"
+  },
+  {
+    "folder": "Admin API/Not available on lpadmin",
+    "name": "partner keys",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/partner-keys",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Not available on lpadmin",
+    "name": "prop programs",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/prop/programs",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Not available on lpadmin",
+    "name": "prop program",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/prop/programs/{{program_id}}",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Not available on lpadmin",
+    "name": "prop settings",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/prop/settings",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Not available on lpadmin",
+    "name": "prop enrolments",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/prop/enrolments?limit={{limit}}&offset={{offset}}",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Not available on lpadmin",
+    "name": "prop payouts",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/prop/payouts?limit={{limit}}&offset={{offset}}",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Not available on lpadmin",
+    "name": "prop account",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/prop/accounts/{{account_id}}",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Not available on lpadmin",
+    "name": "Fund prop enrolment",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/prop/enrolments/{{enrolment_id}}/fund",
+    "body": "{}"
+  },
+  {
+    "folder": "Admin API/Not available on lpadmin",
+    "name": "Approve prop payout",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/prop/payouts/{{payout_id}}/approve",
+    "body": "{}"
+  },
+  {
+    "folder": "Admin API/Not available on lpadmin",
+    "name": "Reject prop payout",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/prop/payouts/{{payout_id}}/reject",
+    "body": "{\n  \"reason\": \"\"\n}"
+  },
+  {
+    "folder": "Admin API/Not available on lpadmin",
+    "name": "Reset prop challenge",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/prop/accounts/{{account_id}}/reset",
+    "body": "{\n  \"reason\": \"\"\n}"
+  },
+  {
+    "folder": "Admin API/Not available on lpadmin",
+    "name": "Fail prop challenge",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/prop/accounts/{{account_id}}/fail",
+    "body": "{\n  \"reason\": \"\"\n}"
+  },
+  {
+    "folder": "Admin API/Not available on lpadmin",
+    "name": "Update prop program",
+    "method": "PUT",
+    "url": "{{baseUrl}}/admin/api/prop/programs/{{program_id}}",
+    "body": "{}"
+  },
+  {
+    "folder": "Admin API/Not available on lpadmin",
+    "name": "Set prop program status",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/prop/programs/{{program_id}}/status",
+    "body": "{\n  \"status\": \"\"\n}"
+  },
+  {
+    "folder": "Admin API/Not available on lpadmin",
+    "name": "Delete prop program",
+    "method": "DELETE",
+    "url": "{{baseUrl}}/admin/api/prop/programs/{{program_id}}",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Catalogue extras",
+    "name": "orderbook",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/orderbook",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Catalogue extras",
+    "name": "central liquidity money",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/liquidity/central/money",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Catalogue extras",
+    "name": "central liquidity ledger",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/liquidity/central/ledger",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Catalogue extras",
+    "name": "central members",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/blackfx/central/members",
+    "body": null
+  },
+  {
+    "folder": "Admin API/Catalogue extras",
+    "name": "orderbook convert",
+    "method": "POST",
+    "url": "{{baseUrl}}/admin/api/orderbook/convert",
+    "body": "{}"
+  },
+  {
+    "folder": "Admin API/Catalogue extras",
+    "name": "Update central liquidity money",
+    "method": "PUT",
+    "url": "{{baseUrl}}/admin/api/liquidity/central/money",
+    "body": "{}"
+  },
+  {
+    "folder": "Admin API/Catalogue extras",
+    "name": "central member",
+    "method": "GET",
+    "url": "{{baseUrl}}/admin/api/blackfx/central/members/{{member_id}}",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Authentication",
+    "name": "Trader login (email + password) -> session token",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/_auth/login",
+    "body": "{\n  \"email\": \"string\",\n  \"password\": \"string\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Authentication",
+    "name": "Who am I",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/_auth/me",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Authentication",
+    "name": "End a login session",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/_auth/logout",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Authentication",
+    "name": "List the member's API keys",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/_auth/keys",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Authentication",
+    "name": "Create an API key (shown once)",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/_auth/keys",
+    "body": "{\n  \"label\": \"string\",\n  \"read_only\": false\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Authentication",
+    "name": "Revoke an API key",
+    "method": "DELETE",
+    "url": "{{baseUrl}}/v1/oms/_auth/keys/{{key_id}}",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Authentication",
+    "name": "Exchange an API key for an access token",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/_auth/token",
+    "body": "{\n  \"api_key\": \"string\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Instance",
+    "name": "Instance health (no auth)",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/health",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Instance",
+    "name": "Instance metadata (no auth)",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/info",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Account & funds",
+    "name": "Trading-account funds",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/funds",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Account & funds",
+    "name": "May this account set its own practice balance, and within what bounds",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/funds/practice",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Account & funds",
+    "name": "Set or reset the practice balance (paper accounts only)",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/funds/practice",
+    "body": "{\n  \"balance\": 0,\n  \"operation_key\": \"string\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Account & funds",
+    "name": "This account's commercial terms",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/account",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Orders",
+    "name": "Place a market order",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/orders",
+    "body": "{\n  \"symbol\": \"BINANCE:BTCUSDT.P\",\n  \"side\": \"BUY\",\n  \"type\": \"MARKET\",\n  \"qty\": 0.1\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Orders",
+    "name": "List the member's orders",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/orders",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Orders",
+    "name": "Place a pending order (LIMIT / STOP / bracket)",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/orders/pending",
+    "body": "{\n  \"symbol\": \"BINANCE:BTCUSDT.P\",\n  \"side\": \"BUY\",\n  \"type\": \"LIMIT\",\n  \"qty\": 0.1,\n  \"price\": 60000\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Orders",
+    "name": "Modify a pending order",
+    "method": "PUT",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/orders/{{order_id}}/modify",
+    "body": "{\n  \"price\": 0,\n  \"trigger_price\": 0,\n  \"qty\": 0\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Orders",
+    "name": "Cancel a pending order",
+    "method": "DELETE",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/orders/{{order_id}}",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Orders",
+    "name": "Get one order",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/orders/{{order_id}}",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Orders",
+    "name": "Basket entry (multi-leg, all-or-nothing)",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/orders/basket",
+    "body": "{\n  \"legs\": [\n    {\n      \"symbol\": \"string\",\n      \"side\": \"BUY\",\n      \"qty\": 0,\n      \"quantity\": 0,\n      \"tag\": \"string\",\n      \"sname\": \"string\"\n    }\n  ],\n  \"group_id\": \"string\",\n  \"tag\": \"string\",\n  \"pname\": \"string\",\n  \"sl\": 0,\n  \"tp\": 0,\n  \"source\": \"string\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Orders",
+    "name": "Cancel several pending orders",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/orders/bulk/cancel",
+    "body": "{\n  \"order_ids\": [\n    \"{{order_id}}\"\n  ]\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Positions",
+    "name": "List positions",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/positions",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Positions",
+    "name": "Set SL / TP / server trailing on an open position",
+    "method": "PUT",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/positions/{{market_order_id}}/protection",
+    "body": "{\n  \"tp\": 70000,\n  \"sl\": 60000\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Positions",
+    "name": "Close a whole position",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/positions/{{market_order_id}}/squareoff",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Positions",
+    "name": "Partially close a position",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/positions/{{market_order_id}}/reduce",
+    "body": "{\n  \"qty\": 0.04\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Positions",
+    "name": "Close several positions",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/positions/bulk/squareoff",
+    "body": "{\n  \"market_order_ids\": [\n    \"{{market_order_id}}\"\n  ]\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Positions",
+    "name": "Basket exit: close a group (or one named leg)",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/positions/group/squareoff",
+    "body": "{\n  \"group_id\": \"string\",\n  \"tag\": \"string\",\n  \"sname\": \"string\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Positions",
+    "name": "Arm, retune or clear a group's combined-P&L SL/TP",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/positions/group/trigger",
+    "body": "{\n  \"group_id\": \"string\",\n  \"sl\": null,\n  \"tp\": null,\n  \"tag\": \"string\",\n  \"pname\": \"string\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Positions",
+    "name": "Combined snapshot: positions, orders, pending, funds",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/all_open",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Positions",
+    "name": "Closed executions (trade history)",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/history",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Streams",
+    "name": "Mint a single-use order-event socket ticket",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/ws-ticket",
+    "body": "{\n  \"kind\": \"orders\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Streams",
+    "name": "Order/position event WebSocket",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/ws",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Wallets",
+    "name": "Wallet balances, this trading account and consolidated totals",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/wallets",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Wallets",
+    "name": "Wallet ledger",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/wallets/history",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Wallets",
+    "name": "Move money between a wallet and this trading account",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/wallets/transfer",
+    "body": "{\n  \"from\": \"real\",\n  \"to\": \"wallet\",\n  \"amount\": 100\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Client portal",
+    "name": "Portal landing view",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/portal/summary",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Client portal",
+    "name": "Update the editable profile fields",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/portal/profile",
+    "body": "{\n  \"name\": \"string\",\n  \"phone\": \"string\",\n  \"address1\": \"string\",\n  \"address2\": \"string\",\n  \"city\": \"string\",\n  \"state\": \"string\",\n  \"zip\": \"string\",\n  \"country\": \"string\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Client portal",
+    "name": "Payment methods the broker offers",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/portal/methods",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Client portal",
+    "name": "Create a funding (deposit) request",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/portal/deposits",
+    "body": ""
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Client portal",
+    "name": "This member's deposit requests",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/portal/deposits",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Client portal",
+    "name": "Saved payout details",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/portal/payout-methods",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Client portal",
+    "name": "Save or update payout details",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/portal/payout-methods",
+    "body": "{\n  \"kind\": \"bank\",\n  \"payout_id\": \"string\",\n  \"label\": \"string\",\n  \"method_id\": \"string\",\n  \"address\": \"string\",\n  \"network\": \"string\",\n  \"details\": {}\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Client portal",
+    "name": "Remove saved payout details",
+    "method": "DELETE",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/portal/payout-methods/{{payout_id}}",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Client portal",
+    "name": "Payout step 1: validate and issue a one-time code",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/portal/withdrawals/otp",
+    "body": "{\n  \"amount\": 100,\n  \"method_id\": \"{{payout_id}}\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Client portal",
+    "name": "Payout step 2: confirm the code and create the request",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/portal/withdrawals",
+    "body": "{\n  \"otp_id\": \"string\",\n  \"code\": \"string\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Client portal",
+    "name": "This member's withdrawal requests",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/portal/withdrawals",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Client portal",
+    "name": "Move money between the member's own accounts",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/portal/transfers",
+    "body": "{\n  \"from\": \"real\",\n  \"to\": \"wallet\",\n  \"amount\": 100\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Client portal",
+    "name": "Internal transfer history",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/portal/transfers",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Client portal",
+    "name": "Unified money-movement history",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/portal/history",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Client portal",
+    "name": "KYC documents and their review state",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/portal/documents",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Client portal",
+    "name": "Upload one KYC document slot",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/portal/documents",
+    "body": ""
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Client portal",
+    "name": "Download one stored document",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/portal/documents/{{slot}}",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Client portal",
+    "name": "Remove one uploaded document",
+    "method": "DELETE",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/portal/documents/{{slot}}",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Copy trading",
+    "name": "Copy manager directory",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/copy/masters",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Copy trading",
+    "name": "Become or update a copy master",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/copy/master",
+    "body": "{\n  \"kind\": \"copy_manager\",\n  \"display_name\": \"my master\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Copy trading",
+    "name": "Copy relationships, both sides",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/copy/follows",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Copy trading",
+    "name": "Follow a copy master",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/copy/follow",
+    "body": "{\n  \"master_client_id\": \"{{master_client_id}}\",\n  \"method\": \"multiplier\",\n  \"multiplier\": 1.0,\n  \"reverse\": false,\n  \"copy_mode\": \"public\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Copy trading",
+    "name": "Stop copying a master",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/copy/unfollow",
+    "body": "{\n  \"master_client_id\": \"{{master_client_id}}\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/MAM",
+    "name": "MAM manager directory",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/mam/masters",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/MAM",
+    "name": "Become or update a MAM master",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/mam/master",
+    "body": "{\n  \"client_id\": \"string\",\n  \"display_name\": \"string\",\n  \"share_percent\": 0,\n  \"status\": \"active\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/MAM",
+    "name": "MAM relationships, both sides",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/mam/follows",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/MAM",
+    "name": "Join a MAM manager",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/mam/follow",
+    "body": "{\n  \"master_client_id\": \"string\",\n  \"method\": \"string\",\n  \"multiplier\": 0\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/MAM",
+    "name": "Leave a MAM manager",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/mam/unfollow",
+    "body": "{\n  \"master_client_id\": \"string\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/MAM",
+    "name": "MAM profit-share statement",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/mam/shares",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/PAMM",
+    "name": "PAMM manager directory",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/pamm/masters",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/PAMM",
+    "name": "Become or update a PAMM master",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/pamm/master",
+    "body": "{\n  \"client_id\": \"string\",\n  \"display_name\": \"string\",\n  \"share_percent\": 0,\n  \"status\": \"active\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/PAMM",
+    "name": "PAMM subscriptions and pool",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/pamm/follows",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/PAMM",
+    "name": "Deposit into a PAMM pool",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/pamm/join",
+    "body": "{\n  \"master_client_id\": \"string\",\n  \"deposit\": 0,\n  \"operation_key\": \"string\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/PAMM",
+    "name": "Settle and leave a PAMM pool",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/pamm/unfollow",
+    "body": "{\n  \"master_client_id\": \"string\",\n  \"operation_key\": \"string\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/PAMM",
+    "name": "PAMM allocation statement",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/pamm/allocations",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/IB",
+    "name": "IB overview",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/ib/summary",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/IB",
+    "name": "Commission credited to this member",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/ib/payouts",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/IB",
+    "name": "Referral tree below this member",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/ib/downline",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/IB",
+    "name": "Record who referred this account (one-time)",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/ib/referrer",
+    "body": "{\n  \"referral_code\": \"string\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Client brand logo",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/_brand/logo",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Accounts this install offers",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/_instances",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "The member's trading accounts",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/_accounts",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Open an additional account",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/_accounts",
+    "body": "{\n  \"instance\": \"string\",\n  \"label\": \"string\",\n  \"leverage\": 0\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Archive an additional account",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/_accounts/{{account_id}}/archive",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Prop challenge programs on sale",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/_prop/programs",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Buy a prop challenge",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/_prop/enrol",
+    "body": "{\n  \"program_id\": \"string\",\n  \"client_ref\": \"string\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "The person's prop challenges",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/_prop/enrolments",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "One challenge account",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/_prop/accounts/{{account_id}}",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "A funded account's payouts",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/_prop/accounts/{{account_id}}/payouts",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Request a payout from a funded account",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/_prop/accounts/{{account_id}}/payouts",
+    "body": "{\n  \"amount\": 0,\n  \"client_ref\": \"string\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "My venue connections",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/_brokers",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "My Binance connection",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/_brokers/binance",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Save Binance credentials and settings",
+    "method": "PUT",
+    "url": "{{baseUrl}}/v1/oms/_brokers/binance",
+    "body": "{\n  \"api_key\": \"string\",\n  \"api_secret\": \"string\",\n  \"access_token\": \"string\",\n  \"client_id\": \"string\",\n  \"environment\": \"live\",\n  \"spot_mode\": \"spot\",\n  \"market_types\": [\n    \"string\"\n  ],\n  \"isolated_symbols\": [\n    \"string\"\n  ]\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Search Binance instruments",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/_brokers/binance/instruments",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Binance fee rate for a symbol",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/_brokers/binance/commission?symbol=BTCUSDT&market=futures",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "See your broker for details.",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/_brokers/binance/connect",
+    "body": "{\n  \"market\": \"string\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Test the Binance connection",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/_brokers/binance/test",
+    "body": "{\n  \"market\": \"string\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Disconnect Binance",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/_brokers/binance/disconnect",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Read or set futures leverage / margin mode (Binance)",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/_brokers/binance/leverage",
+    "body": "{\n  \"symbol\": \"string\",\n  \"leverage\": 0,\n  \"margin_type\": \"string\",\n  \"default_leverage\": 0,\n  \"default_margin_mode\": \"string\",\n  \"symbol_override\": {\n    \"market\": \"string\",\n    \"symbol\": \"string\",\n    \"margin_mode\": \"string\",\n    \"leverage\": 0\n  }\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Save default exit (SL/TP) execution policy (Binance)",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/_brokers/binance/protection-defaults",
+    "body": "{\n  \"scope\": \"\",\n  \"manual\": {},\n  \"mode\": \"string\",\n  \"max_attempts\": 0,\n  \"retry_ms\": 0,\n  \"max_adverse_bps\": 0,\n  \"sl\": {},\n  \"tp\": {}\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Save default pending-entry execution mode (Binance)",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/_brokers/binance/entry-defaults",
+    "body": "{\n  \"mode\": \"string\",\n  \"policy\": {}\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "My Zerodha connection",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/_brokers/zerodha",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Save Zerodha credentials and settings",
+    "method": "PUT",
+    "url": "{{baseUrl}}/v1/oms/_brokers/zerodha",
+    "body": "{\n  \"api_key\": \"string\",\n  \"api_secret\": \"string\",\n  \"access_token\": \"string\",\n  \"client_id\": \"string\",\n  \"environment\": \"live\",\n  \"spot_mode\": \"spot\",\n  \"market_types\": [\n    \"string\"\n  ],\n  \"isolated_symbols\": [\n    \"string\"\n  ]\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Search Zerodha instruments",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/_brokers/zerodha/instruments",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Zerodha fee rate for a symbol",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/_brokers/zerodha/commission?symbol=BTCUSDT&market=futures",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Start the Kite login",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/_brokers/zerodha/connect",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Test the Zerodha connection",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/_brokers/zerodha/test",
+    "body": "{\n  \"market\": \"string\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Disconnect Zerodha",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/_brokers/zerodha/disconnect",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Read or set futures leverage / margin mode (Zerodha)",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/_brokers/zerodha/leverage",
+    "body": "{\n  \"symbol\": \"string\",\n  \"leverage\": 0,\n  \"margin_type\": \"string\",\n  \"default_leverage\": 0,\n  \"default_margin_mode\": \"string\",\n  \"symbol_override\": {\n    \"market\": \"string\",\n    \"symbol\": \"string\",\n    \"margin_mode\": \"string\",\n    \"leverage\": 0\n  }\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Save default exit (SL/TP) execution policy (Zerodha)",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/_brokers/zerodha/protection-defaults",
+    "body": "{\n  \"scope\": \"\",\n  \"manual\": {},\n  \"mode\": \"string\",\n  \"max_attempts\": 0,\n  \"retry_ms\": 0,\n  \"max_adverse_bps\": 0,\n  \"sl\": {},\n  \"tp\": {}\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Accounts & venues",
+    "name": "Save default pending-entry execution mode (Zerodha)",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/_brokers/zerodha/entry-defaults",
+    "body": "{\n  \"mode\": \"string\",\n  \"policy\": {}\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Market signals and alerts",
+    "name": "Day ranges and new-high/new-low events",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/market/extremes?symbols=BINANCE:BTCUSDT.P",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Market signals and alerts",
+    "name": "List member alerts",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/alerts",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Market signals and alerts",
+    "name": "Create a persistent member alert",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/alerts",
+    "body": "{\n  \"symbol\": \"string\",\n  \"kind\": \"price_above\",\n  \"value\": null,\n  \"note\": null,\n  \"notify_email\": null,\n  \"repeat\": null,\n  \"active\": null\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Market signals and alerts",
+    "name": "Partially edit or activate/deactivate an alert",
+    "method": "PUT",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/alerts/{{alert_id}}",
+    "body": "{\n  \"value\": null,\n  \"note\": null,\n  \"notify_email\": null,\n  \"repeat\": null,\n  \"active\": null\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Market signals and alerts",
+    "name": "Delete an owned alert",
+    "method": "DELETE",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/alerts/{{alert_id}}",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Market signals and alerts",
+    "name": "List stored fired events",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/alerts/events",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Market signals and alerts",
+    "name": "Mark an owned event seen",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/alerts/events/{{event_id}}/seen",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/AI assistant",
+    "name": "My assistant credit balance",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/_ai/credits",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/AI assistant",
+    "name": "Available assistant models",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/_ai/models",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/AI assistant",
+    "name": "Price a conversation before sending it",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/_ai/estimate",
+    "body": "{\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"string\"\n    }\n  ],\n  \"model\": \"string\",\n  \"stream\": false,\n  \"request_id\": \"string\",\n  \"session_id\": \"string\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/AI assistant",
+    "name": "Ask the BlackScript assistant",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/oms/_ai/generate",
+    "body": "{\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"string\"\n    }\n  ],\n  \"model\": \"string\",\n  \"stream\": false,\n  \"request_id\": \"string\",\n  \"session_id\": \"string\"\n}"
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Catalogue",
+    "name": "Self-documenting URI catalogue",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/uri",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Other",
+    "name": "Public licence state and vendor contact",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/_licence",
+    "body": null
+  },
+  {
+    "folder": "Trader API (official, 120 operations)/Other",
+    "name": "Poll a money operation",
+    "method": "GET",
+    "url": "{{baseUrl}}/v1/oms/{{instance}}/money/operations/{{operation_id}}",
+    "body": null
+  },
+  {
+    "folder": "Client-site (home) API",
+    "name": "Register",
+    "method": "POST",
+    "url": "{{baseUrl}}/api/auth/register",
+    "body": "{\n  \"email\": \"\",\n  \"password\": \"\",\n  \"name\": \"\",\n  \"code\": \"\"\n}"
+  },
+  {
+    "folder": "Client-site (home) API",
+    "name": "Registration code",
+    "method": "POST",
+    "url": "{{baseUrl}}/api/auth/register/code",
+    "body": "{\n  \"email\": \"\"\n}"
+  },
+  {
+    "folder": "Client-site (home) API",
+    "name": "Login (cookie session)",
+    "method": "POST",
+    "url": "{{baseUrl}}/api/auth/login",
+    "body": "{\n  \"email\": \"{{trader_email}}\",\n  \"password\": \"{{trader_password}}\"\n}"
+  },
+  {
+    "folder": "Client-site (home) API",
+    "name": "Logout",
+    "method": "POST",
+    "url": "{{baseUrl}}/api/auth/logout",
+    "body": "{}"
+  },
+  {
+    "folder": "Client-site (home) API",
+    "name": "Who am I (session)",
+    "method": "GET",
+    "url": "{{baseUrl}}/api/auth/me",
+    "body": null
+  },
+  {
+    "folder": "Client-site (home) API",
+    "name": "Update profile",
+    "method": "POST",
+    "url": "{{baseUrl}}/api/auth/profile",
+    "body": "{\n  \"name\": \"\"\n}"
+  },
+  {
+    "folder": "Client-site (home) API",
+    "name": "Password reset code",
+    "method": "POST",
+    "url": "{{baseUrl}}/api/auth/password/code",
+    "body": "{\n  \"email\": \"\"\n}"
+  },
+  {
+    "folder": "Client-site (home) API",
+    "name": "Password reset",
+    "method": "POST",
+    "url": "{{baseUrl}}/api/auth/password/reset",
+    "body": "{\n  \"email\": \"\",\n  \"code\": \"\",\n  \"password\": \"\"\n}"
+  },
+  {
+    "folder": "Client-site (home) API",
+    "name": "Change password",
+    "method": "POST",
+    "url": "{{baseUrl}}/api/auth/change-password",
+    "body": "{\n  \"current_password\": \"\",\n  \"new_password\": \"\"\n}"
+  },
+  {
+    "folder": "Client-site (home) API",
+    "name": "Mint chart token",
+    "method": "POST",
+    "url": "{{baseUrl}}/api/auth/chart-token",
+    "body": "{}"
+  },
+  {
+    "folder": "Client-site (home) API",
+    "name": "Linked accounts",
+    "method": "GET",
+    "url": "{{baseUrl}}/api/auth/accounts",
+    "body": null
+  },
+  {
+    "folder": "Client-site (home) API",
+    "name": "List API keys",
+    "method": "GET",
+    "url": "{{baseUrl}}/api/auth/api-keys",
+    "body": null
+  },
+  {
+    "folder": "Client-site (home) API",
+    "name": "Create API key",
+    "method": "POST",
+    "url": "{{baseUrl}}/api/auth/api-keys",
+    "body": "{\n  \"label\": \"my tool\",\n  \"read_only\": true\n}"
+  },
+  {
+    "folder": "Client-site (home) API",
+    "name": "Revoke API key",
+    "method": "DELETE",
+    "url": "{{baseUrl}}/api/auth/api-keys/{{key_id}}",
+    "body": null
+  },
+  {
+    "folder": "Client-site (home) API",
+    "name": "Verify user",
+    "method": "POST",
+    "url": "{{baseUrl}}/api/verify-user",
+    "body": "{\n  \"token\": \"{{verification_token}}\"\n}"
+  },
+  {
+    "folder": "Client-site (home) API",
+    "name": "Client-site config",
+    "method": "GET",
+    "url": "{{baseUrl}}/api/config",
+    "body": null
+  },
+  {
+    "folder": "Client-site (home) API",
+    "name": "Client-site health",
+    "method": "GET",
+    "url": "{{baseUrl}}/api/health",
+    "body": null
+  },
+  {
+    "folder": "Chart API",
+    "name": "layout/saveLayout",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/layout/saveLayout",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "layout/listMyLayouts",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/layout/listMyLayouts",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "layout/getMyLayout",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/layout/getMyLayout",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "layout/myRecentLayouts",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/layout/myRecentLayouts",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "layout/listPublicLayouts",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/layout/listPublicLayouts",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "layout/deleteMyLayout",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/layout/deleteMyLayout",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "algo/listAlgo",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/algo/listAlgo",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "algo/getAlgo",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/algo/getAlgo",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "algo/createAlgo",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/algo/createAlgo",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "algo/cloneAlgo",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/algo/cloneAlgo",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "algo/saveAlgo",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/algo/saveAlgo",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "algo/setAlgoStatus",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/algo/setAlgoStatus",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "algo/deleteAlgo",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/algo/deleteAlgo",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "plugin/uploadPlugin",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/plugin/uploadPlugin",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "plugin/savePlugin",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/plugin/savePlugin",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "plugin/listMyPlugins",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/plugin/listMyPlugins",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "plugin/getMyPlugin",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/plugin/getMyPlugin",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "plugin/listPublicPlugins",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/plugin/listPublicPlugins",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "plugin/getPublicPlugin",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/plugin/getPublicPlugin",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "plugin/deleteMyPlugin",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/plugin/deleteMyPlugin",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "template/saveTemplate",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/template/saveTemplate",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "template/listTemplates",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/template/listTemplates",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "template/getTemplate",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/template/getTemplate",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "template/deleteTemplate",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/template/deleteTemplate",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "template/setDefaultTemplate",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/template/setDefaultTemplate",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "screener/saveScreener",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/screener/saveScreener",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "screener/listScreener",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/screener/listScreener",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "screener/getScreener",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/screener/getScreener",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "screener/myRecentScreeners",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/screener/myRecentScreeners",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "screener/copyScreener",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/screener/copyScreener",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "screener/renameScreener",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/screener/renameScreener",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "screener/listPublicScreeners",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/screener/listPublicScreeners",
+    "body": "{}"
+  },
+  {
+    "folder": "Chart API",
+    "name": "screener/deleteScreener",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/chart/screener/deleteScreener",
+    "body": "{}"
+  },
+  {
+    "folder": "Partner API",
+    "name": "members",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/partner/members",
+    "body": "{}"
+  },
+  {
+    "folder": "Partner API",
+    "name": "members/login",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/partner/members/login",
+    "body": "{}"
+  },
+  {
+    "folder": "Partner API",
+    "name": "members/{{public_id}}/accounts",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/partner/members/{{public_id}}/accounts",
+    "body": "{}"
+  },
+  {
+    "folder": "Partner API",
+    "name": "enrolments",
+    "method": "POST",
+    "url": "{{baseUrl}}/v1/partner/enrolments",
+    "body": "{}"
+  },
+  {
+    "folder": "Control plane (owner only)",
+    "name": "Server families action",
+    "method": "POST",
+    "url": "{{baseUrl}}/api/server/families/{{unit}}/{{action}}",
+    "body": "{}"
+  },
+  {
+    "folder": "Control plane (owner only)",
+    "name": "User LP money (read)",
+    "method": "GET",
+    "url": "{{baseUrl}}/api/users/{{member_id}}/lp-money",
+    "body": null
+  },
+  {
+    "folder": "Control plane (owner only)",
+    "name": "User LP money (update)",
+    "method": "PUT",
+    "url": "{{baseUrl}}/api/users/{{member_id}}/lp-money",
+    "body": "{}"
+  }
+]

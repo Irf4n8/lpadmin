@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-O002",
+  "module": "Module 11: Operational Tools & Emergency Runbooks",
+  "title": "Admin Forced Liquidation of Master MAM Positions",
+  "priority": "P0",
+  "precondition": "Manager unavailable during extreme market emergency.",
+  "steps": "1. Admin clicks 'Force Liquidate MAM Group'.",
+  "expected_result": "OMS sends mass market close for all child orders; confirms 100% flat position state across all linked accounts.",
+  "execution_timestamp": "2026-11-16T10:58:46.242334Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Admin portal triggers forced mass market squareoff across all linked child tickets, guaranteeing flat position state.",
+  "evidence": {
+    "admin_action": "Force Liquidate MAM Group"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

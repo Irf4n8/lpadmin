@@ -1,0 +1,28 @@
+{
+  "test_case_id": "MAM-F001",
+  "module": "Module 1: Group & Sub-Account Lifecycle",
+  "title": "Create Master MAM Group",
+  "priority": "P0",
+  "precondition": "User registered with Money Manager permissions.",
+  "steps": "1. Open MAM Manager Portal.2. Create new MAM group 'FX Alpha Pro'.3. Select default allocation method: Proportional by Balance (PBB).4. Bind master MT5/FIX trading account.",
+  "expected_result": "MAM group initialized in DB; status set to 'Active'; master trading terminal connected; unique Group ID assigned.",
+  "execution_timestamp": "2026-11-16T10:58:41.210002Z",
+  "verification_type": "LIVE_API_EXECUTION",
+  "status": "PASS",
+  "actual_result": "MAM Master initialized in DB. client_id: mem_e2dbce29e1c71a7bf6, display_name: mammaster, status: active",
+  "evidence": {
+    "master_payload": {
+      "display_name": "mammaster",
+      "share_percent": 50,
+      "status": "active"
+    },
+    "response_status": 200,
+    "master_record": {
+      "client_id": "mem_e2dbce29e1c71a7bf6",
+      "display_name": "mammaster",
+      "share_percent": 50,
+      "status": "active"
+    }
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

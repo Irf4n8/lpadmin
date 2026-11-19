@@ -1,0 +1,26 @@
+{
+  "test_case_id": "MAM-R006",
+  "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+  "title": "Extreme Fractional Division: 1.00 Lot Across 7 Sub-Accounts",
+  "priority": "P0",
+  "precondition": "7 equal accounts ($10k each). Math: 1.00 / 7 = 0.142857 lots each.",
+  "steps": "1. Quantize: 7 * 0.14 = 0.98 lots. Remainder = 0.02 lots.",
+  "expected_result": "Two highest-priority accounts receive 0.15 lots; remaining five receive 0.14 lots; sum == exactly 1.00 lot.",
+  "execution_timestamp": "2026-11-16T10:58:42.352550Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Extreme 7-account division: Two priority accounts receive 0.15, five receive 0.14. Sum = 1.0.",
+  "evidence": {
+    "child_lots": [
+      0.15,
+      0.15,
+      0.14,
+      0.14,
+      0.14,
+      0.14,
+      0.14
+    ],
+    "sum": 1.0
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

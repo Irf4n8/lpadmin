@@ -1,0 +1,17 @@
+{
+  "test_case_id": "MAM-D005",
+  "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
+  "title": "Emergency LPOA Revocation Mid-Trade: Market Close Option",
+  "priority": "P0",
+  "precondition": "Investor decides to exit MAM immediately while holding 2 open positions.",
+  "steps": "1. Click 'Emergency Disconnect'.2. Select 'Close all positions at market'.",
+  "expected_result": "Sizing engine immediately closes investor's 2 child positions at market; LPOA unlinked; net cash freed.",
+  "execution_timestamp": "2026-11-16T10:58:44.613726Z",
+  "verification_type": "API_CONTRACT_VERIFICATION",
+  "status": "PASS",
+  "actual_result": "Emergency disconnect with market close liquidates investor child positions at live market price and revokes LPOA.",
+  "evidence": {
+    "exit_mode": "Close all at market"
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

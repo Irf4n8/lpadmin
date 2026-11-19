@@ -1,0 +1,19 @@
+{
+  "test_case_id": "MAM-R001",
+  "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+  "title": "Fractional Remainder Detection (1.00 Lot Across 3 Equal Accounts)",
+  "priority": "P0",
+  "precondition": "Master opens 1.00 lot across 3 accounts ($10k each). Exact math: 0.333333 lots each.",
+  "steps": "1. Quantize child lots to 0.01: Acc 1 = 0.33, Acc 2 = 0.33, Acc 3 = 0.33 (Total 0.99 lots).2. Remainder engine identifies unallocated residual: 1.00 - 0.99 = 0.01 lot.",
+  "expected_result": "Remainder of exactly 0.01 lot detected; routed to designated remainder policy handler.",
+  "execution_timestamp": "2026-11-16T10:58:42.347989Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Remainder detection algorithm accurately identified unallocated residual of 0.01 lots.",
+  "evidence": {
+    "master_lots": 1.0,
+    "allocated_sum": 0.99,
+    "remainder": 0.01
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}

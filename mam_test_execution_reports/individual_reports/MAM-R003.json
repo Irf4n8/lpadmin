@@ -1,0 +1,18 @@
+{
+  "test_case_id": "MAM-R003",
+  "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+  "title": "Remainder Policy: Absorb into Manager Personal Account",
+  "priority": "P0",
+  "precondition": "Remainder policy set to 'Manager Absorption'; Remainder = 0.02 lots on 10.00 lot block.",
+  "steps": "1. Execute trade.",
+  "expected_result": "Sub-accounts receive 9.98 lots; Manager personal account receives 0.02 lots; zero client over-allocation.",
+  "execution_timestamp": "2026-11-16T10:58:42.349614Z",
+  "verification_type": "QUANTITATIVE_CALCULATION",
+  "status": "PASS",
+  "actual_result": "Manager absorption policy: Sub-accounts receive 9.98 lots; Manager absorbs 0.02 lots.",
+  "evidence": {
+    "sub_allocated": 9.98,
+    "manager_absorbed": 0.02
+  },
+  "go_live_assessment": "PASSED_PRODUCTION_READY"
+}
