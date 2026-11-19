@@ -129,7 +129,7 @@ in `.env`. The dashboard refuses to start on a non-local address without a token
 | **Real-money certification** | Copy trading on the **real** instance | ~4 min |
 | **Emergency teardown** | Closes every position / cancels every order | ~1 min |
 
-Details, how to read a report, and how to add a suite: **[docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md)**.
+For suite details and how to read results, see the [testing guide](docs/TESTING_GUIDE.md). The [production copy-trading scenarios](docs/PRODUCTION_COPY_TRADING_SCENARIOS.md) cover user journeys and edge cases to test when the platform is available.
 
 Run any suite from the terminal, e.g.:
 
