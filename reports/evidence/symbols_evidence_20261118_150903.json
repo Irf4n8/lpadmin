@@ -1,0 +1,288 @@
+{
+ "suite": "Symbol Coverage",
+ "verdict": "WARN",
+ "timestamp": "2026-11-18T09:39:09.360611+00:00",
+ "started": "2026-11-18T15:09:03",
+ "duration_sec": 5.7,
+ "instance": "real",
+ "symbol_source": "https://terminal.blacktrader.com/feed/symbol_list",
+ "universe": 3245,
+ "tested": 18,
+ "mode": "sample",
+ "followers_range": [
+  1,
+  10
+ ],
+ "followers_linked": 10,
+ "tally": {
+  "PASS": 9,
+  "FAIL": 0,
+  "WARN": 8,
+  "SKIP": 1
+ },
+ "groups": {
+  "CFD_247": {
+   "PASS": 0,
+   "FAIL": 0,
+   "WARN": 1,
+   "SKIP": 0
+  },
+  "CMDTY": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "CRYPTO/COMMODITY_PERP": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "CRYPTO/CRYPTO_PERP": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "CRYPTO/CRYPTO_PERP_COINM": {
+   "PASS": 0,
+   "FAIL": 0,
+   "WARN": 1,
+   "SKIP": 0
+  },
+  "CRYPTO/CRYPTO_SPOT": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "CRYPTO/STOCK_PERP": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "CRYPTO_CFD": {
+   "PASS": 0,
+   "FAIL": 0,
+   "WARN": 1,
+   "SKIP": 0
+  },
+  "EU_STOCKS": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "FOREX": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "GREEKS": {
+   "PASS": 0,
+   "FAIL": 0,
+   "WARN": 1,
+   "SKIP": 0
+  },
+  "IN_FUTURES": {
+   "PASS": 0,
+   "FAIL": 0,
+   "WARN": 1,
+   "SKIP": 0
+  },
+  "IN_INDEX": {
+   "PASS": 0,
+   "FAIL": 0,
+   "WARN": 1,
+   "SKIP": 0
+  },
+  "IN_OPTIONS": {
+   "PASS": 0,
+   "FAIL": 0,
+   "WARN": 1,
+   "SKIP": 0
+  },
+  "IN_STOCKS": {
+   "PASS": 0,
+   "FAIL": 0,
+   "WARN": 1,
+   "SKIP": 0
+  },
+  "METAL": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "SPOT_INDICES": {
+   "PASS": 1,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 0
+  },
+  "US_STOCKS": {
+   "PASS": 0,
+   "FAIL": 0,
+   "WARN": 0,
+   "SKIP": 1
+  }
+ },
+ "results": [
+  {
+   "symbol": "BINANCE:BTCUSDT.P",
+   "type": "CRYPTO",
+   "group": "CRYPTO/CRYPTO_PERP",
+   "qty": 0.002,
+   "status": "PASS",
+   "detail": "copied to 10 followers and closed",
+   "entry": 64634.7
+  },
+  {
+   "symbol": "BINANCE:AAOIUSDT.P",
+   "type": "CRYPTO",
+   "group": "CRYPTO/STOCK_PERP",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 10 followers and closed",
+   "entry": 40.97
+  },
+  {
+   "symbol": "BINANCE:BTCUSDT",
+   "type": "CRYPTO",
+   "group": "CRYPTO/CRYPTO_SPOT",
+   "qty": 2e-05,
+   "status": "PASS",
+   "detail": "copied to 10 followers and closed",
+   "entry": 64663.05
+  },
+  {
+   "symbol": "BINANCE:BTCUSD_PERP.P",
+   "type": "CRYPTO",
+   "group": "CRYPTO/CRYPTO_PERP_COINM",
+   "qty": 2.0,
+   "status": "WARN",
+   "detail": "master order rejected: HTTP 400 {\"error\":\"insufficient free margin: required 12909.78, free 899.90\",\"order\":{\"order_id\":\"ord_a7ca3479fd680374ea\",\"market_order_id\":\"ord_a7ca3479fd680374ea\",\"sym"
+  },
+  {
+   "symbol": "BINANCE:BZUSDT.P",
+   "type": "CRYPTO",
+   "group": "CRYPTO/COMMODITY_PERP",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 10 followers and closed",
+   "entry": 89.47
+  },
+  {
+   "symbol": "BLACK:AAPL.OQ",
+   "type": "US_STOCKS",
+   "group": "US_STOCKS",
+   "qty": 2.0,
+   "status": "SKIP",
+   "detail": "market closed"
+  },
+  {
+   "symbol": "BLACK:BTCUSD",
+   "type": "CRYPTO_CFD",
+   "group": "CRYPTO_CFD",
+   "qty": 0.02,
+   "status": "WARN",
+   "detail": "master order rejected: HTTP 400 {\"error\":\"insufficient free margin: required 1293.26, free 886.71\",\"order\":{\"order_id\":\"ord_e1b847b648828e8763\",\"market_order_id\":\"ord_e1b847b648828e8763\",\"symb"
+  },
+  {
+   "symbol": "BLACK:ADSGn.DE",
+   "type": "EU_STOCKS",
+   "group": "EU_STOCKS",
+   "qty": 2.0,
+   "status": "PASS",
+   "detail": "copied to 10 followers and closed",
+   "entry": 171.06
+  },
+  {
+   "symbol": "BLACK:XAUUSD",
+   "type": "METAL",
+   "group": "METAL",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 10 followers and closed",
+   "entry": 3782.25
+  },
+  {
+   "symbol": "BLACK:EURUSD",
+   "type": "FOREX",
+   "group": "FOREX",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 10 followers and closed",
+   "entry": 1.09706
+  },
+  {
+   "symbol": "BLACK:US500cash-1",
+   "type": "SPOT_INDICES",
+   "group": "SPOT_INDICES",
+   "qty": 2.0,
+   "status": "PASS",
+   "detail": "copied to 10 followers and closed",
+   "entry": 7389.4
+  },
+  {
+   "symbol": "BLACK:BRENTcash-1",
+   "type": "CMDTY",
+   "group": "CMDTY",
+   "qty": 0.02,
+   "status": "PASS",
+   "detail": "copied to 10 followers and closed",
+   "entry": 90.06
+  },
+  {
+   "symbol": "BLACK:GOLD.247",
+   "type": "CFD_247",
+   "group": "CFD_247",
+   "qty": 0.02,
+   "status": "WARN",
+   "detail": "master order rejected: HTTP 400 {\"error\":\"insufficient free margin: required 7573.20, free 789.00\",\"order\":{\"order_id\":\"ord_7a0a0d7a3259308303\",\"market_order_id\":\"ord_7a0a0d7a3259308303\",\"symb"
+  },
+  {
+   "symbol": "NSE:NIFTY",
+   "type": "IN_INDEX",
+   "group": "IN_INDEX",
+   "qty": 2.0,
+   "status": "WARN",
+   "detail": "master order rejected: HTTP 400 {\"error\":\"insufficient free margin: required 5040.61, free 779.96\",\"order\":{\"order_id\":\"ord_75950106693dfe42d4\",\"market_order_id\":\"ord_75950106693dfe42d4\",\"symb"
+  },
+  {
+   "symbol": "BSE:SENSEX 03DEC2026 76300 CE",
+   "type": "IN_OPTIONS",
+   "group": "IN_OPTIONS",
+   "qty": 40.0,
+   "status": "WARN",
+   "detail": "master order rejected: HTTP 400 {\"error\":\"insufficient free margin: required 257054.00, free 779.96\",\"order\":{\"order_id\":\"ord_8947504b98b4bd32e6\",\"market_order_id\":\"ord_8947504b98b4bd32e6\",\"sy"
+  },
+  {
+   "symbol": "BSE:SENSEX DEC2026 FUT",
+   "type": "IN_FUTURES",
+   "group": "IN_FUTURES",
+   "qty": 40.0,
+   "status": "WARN",
+   "detail": "master order rejected: HTTP 400 {\"error\":\"insufficient free margin: required 329999.80, free 789.00\",\"order\":{\"order_id\":\"ord_36d62ea31219bb42e3\",\"market_order_id\":\"ord_36d62ea31219bb42e3\",\"sy"
+  },
+  {
+   "symbol": "GX:1!BANKNIFTY@FAIR",
+   "type": "GREEKS",
+   "group": "GREEKS",
+   "qty": 2.0,
+   "status": "WARN",
+   "detail": "master order rejected: HTTP 400 {\"error\":\"insufficient free margin: required 123814.40, free 39.82\",\"order\":{\"order_id\":\"ord_7d471ab667ccd4579b\",\"market_order_id\":\"ord_7d471ab667ccd4579b\",\"sym"
+  },
+  {
+   "symbol": "NSE:RELIANCE",
+   "type": "IN_STOCKS",
+   "group": "IN_STOCKS",
+   "qty": 2.0,
+   "status": "WARN",
+   "detail": "master order rejected: HTTP 400 {\"error\":\"insufficient free margin: required 546.76, free 39.82\",\"order\":{\"order_id\":\"ord_d015788d0830617a03\",\"market_order_id\":\"ord_d015788d0830617a03\",\"symbol"
+  }
+ ]
+}

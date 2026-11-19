@@ -261,7 +261,7 @@ def test_midtrade_dynamic_capital_shock(
     print(f"[SCENARIO-3] Testing Mid-Trade Dynamic Capital Shock (Deposit on Follower #{target_follower_index})...")
     print("=" * 80)
 
-    target_email = f"follower{target_follower_index}@mailinator.com"
+    target_email = f"{DEFAULT_PREFIX}{target_follower_index}@{DEFAULT_DOMAIN}"
     cleanup_all(client, master_email, follower_emails, instance)
     time.sleep(1.0)
 
@@ -582,7 +582,7 @@ def main():
 
     client = BlackTraderClient(base_url=BASE_URL, max_workers=10)
     master_email = MASTER_EMAIL
-    follower_emails = [f"follower{i}@mailinator.com" for i in range(args.start, args.end + 1)]
+    follower_emails = [f"{DEFAULT_PREFIX}{i}@{DEFAULT_DOMAIN}" for i in range(args.start, args.end + 1)]
 
     print("=" * 80)
     print("BLACKTRADER OMS: EXTREME SCENARIOS & CONCURRENCY RACE CONDITION SUITE")

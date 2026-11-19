@@ -1,0 +1,56 @@
+{
+  "suite_name": "Pending Orders Live Trigger & Execution Suite",
+  "timestamp": "2026-11-18T09:56:09.060207+00:00",
+  "followers_count": 10,
+  "results": [
+    {
+      "name": "Pending BUY LIMIT Live Trigger & Execution",
+      "status": "PASS",
+      "executed": true,
+      "pass_count": 10,
+      "total": 10
+    },
+    {
+      "name": "Pending BUY LIMIT with TP/SL Live Execution",
+      "status": "PASS",
+      "executed": true,
+      "pass_count": 10,
+      "tpsl_verified": 10,
+      "total": 10
+    },
+    {
+      "name": "Pending SELL LIMIT Live Trigger & Execution",
+      "status": "PASS",
+      "executed": true,
+      "pass_count": 10,
+      "total": 10
+    },
+    {
+      "name": "Pending SELL LIMIT with TP/SL Live Execution",
+      "status": "PASS",
+      "executed": true,
+      "pass_count": 10,
+      "tpsl_verified": 10,
+      "total": 10
+    },
+    {
+      "name": "Pending BUY STOP Live Trigger & Execution",
+      "status": "PASS",
+      "executed": true,
+      "pass_count": 10,
+      "total": 10
+    },
+    {
+      "name": "Pending SELL STOP Live Trigger & Execution",
+      "status": "PASS",
+      "executed": true,
+      "pass_count": 10,
+      "total": 10
+    },
+    {
+      "name": "Final Teardown & Zero Orphan Verification",
+      "status": "PASS",
+      "orphan_count": 0
+    }
+  ]
+}

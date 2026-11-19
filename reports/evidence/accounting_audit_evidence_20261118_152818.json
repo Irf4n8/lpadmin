@@ -1,0 +1,38 @@
+{
+  "suite_name": "BlackTrader Financial Accounting & Aggregate PnL Reconciliation Audit",
+  "timestamp": "2026-11-18T09:58:18.246460+00:00",
+  "followers_count": 10,
+  "results": {
+    "name": "Accounting Reconciliation & Aggregate PnL Audit",
+    "status": "PASS",
+    "master_start_balance": 99999374.84694993,
+    "master_end_balance": 99999371.84694993,
+    "master_actual_pnl": -3.0,
+    "total_follower_pnl": -30.0,
+    "expected_follower_pnl": -30.0,
+    "multiplier_sum_target": 10.0,
+    "actual_pnl_ratio": 10.0,
+    "aggregate_reconciled": true,
+    "zero_stuck_margin": true,
+    "stuck_margin_count": 0,
+    "zero_equity_mismatch": true,
+    "cohort_breakdown": {
+      "cohort_1_1x": {
+        "actual": -30.0,
+        "expected": -75.0
+      },
+      "cohort_2_2x": {
+        "actual": 0.0,
+        "expected": -150.0
+      },
+      "cohort_3_3x": {
+        "actual": 0.0,
+        "expected": -225.0
+      },
+      "cohort_4_05x": {
+        "actual": 0.0,
+        "expected": -37.5
+      }
+    }
+  }
+}

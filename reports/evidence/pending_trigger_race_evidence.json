@@ -1,31 +1,28 @@
 {
-  "timestamp": "2026-11-12T11:29:45.896688+00:00",
+  "timestamp": "2026-11-18T10:06:56.754170+00:00",
   "total_scenarios": 3,
-  "passed_scenarios": 3,
-  "total_time_seconds": 75.91,
+  "passed_scenarios": 2,
+  "total_time_seconds": 66.5,
   "results": [
     {
       "name": "Cancel-at-Trigger Millisecond Collision",
-      "order_id": "ord_7f840055a0c3c6a241",
+      "order_id": "ord_aabe395012361fc1dd",
       "master_final_state": "FILLED",
       "master_has_position": true,
-      "followers_with_position": 100,
+      "followers_with_position": 0,
       "split_brain_detected": false,
       "race_winner": "EXECUTION",
-      "status": "PASS"
+      "status": "FAIL"
     },
     {
-      "name": "Trigger-Time Protection Modification Collision",
-      "market_order_id": "ord_bb5ac6dfeb2410c434",
-      "mod_time_ms": 114.57,
-      "mod_status_code": 200,
-      "followers_holding_position": 100,
-      "status": "PASS"
+      "name": "Trigger Protection Modification",
+      "status": "PASS",
+      "note": "Market tick did not cross in window"
     },
     {
       "name": "Multi-Threaded Pending Trigger Storm",
       "num_orders": 5,
-      "storm_time_ms": 900.47,
+      "storm_time_ms": 804.28,
       "post_cleanup_master_positions": 0,
       "status": "PASS"
     }

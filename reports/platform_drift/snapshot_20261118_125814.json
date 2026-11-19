@@ -1,0 +1,508 @@
+{
+ "admin_build_id": "6zSKgmwT1AQAPEKcTCETm",
+ "admin_chunks": [
+  "_app-c77b88cf8642368e.js",
+  "framework-2c534e0e662575a2.js",
+  "index-73d2a5a255804920.js",
+  "main-9abf8a423be5ea0c.js",
+  "polyfills-42372ed130431b0a.js",
+  "webpack-32a33782e6c58335.js"
+ ],
+ "api": {
+  "admin/config": {
+   "shape": {
+    "chart_scopes": [
+     "str"
+    ],
+    "oms_products": [],
+    "plan_modules": {
+     "basic": [
+      "str"
+     ],
+     "free": [
+      "str"
+     ],
+     "premium": [
+      "str"
+     ],
+     "pro": [
+      "str"
+     ]
+    }
+   },
+   "status": 200
+  },
+  "admin/deposits": {
+   "shape": {
+    "deposits": [
+     {
+      "amount": "int",
+      "client_id": "str",
+      "created_at": "str",
+      "currency": "str",
+      "email": "str",
+      "has_proof": "bool",
+      "method": "str",
+      "reason": "str",
+      "request_id": "str",
+      "reviewed_at": "str",
+      "status": "str"
+     }
+    ],
+    "success": "bool"
+   },
+   "status": 200
+  },
+  "admin/kyc": {
+   "shape": {
+    "members": [
+     {
+      "documents": "int",
+      "email": "str",
+      "kyc_status": "str",
+      "member_id": "str",
+      "name": "str"
+     }
+    ],
+    "success": "bool"
+   },
+   "status": 200
+  },
+  "admin/members": {
+   "shape": {
+    "count": "int",
+    "members": [
+     {
+      "account_type": "str",
+      "ai_credits": "int",
+      "ai_credits_used": "int",
+      "allowed_modules": "null",
+      "balances": {
+       "paper": "int",
+       "real": "int"
+      },
+      "book": "str",
+      "created_at": "str",
+      "email": "str",
+      "group_code": "str",
+      "member_id": "str",
+      "name": "str",
+      "paper_engine": "str",
+      "plan": "str",
+      "public_id": "str",
+      "real_engine": "str",
+      "source": "str",
+      "status": "str"
+     }
+    ],
+    "success": "bool"
+   },
+   "status": 200
+  },
+  "admin/withdrawals": {
+   "shape": {
+    "success": "bool",
+    "withdrawals": []
+   },
+   "status": 200
+  },
+  "oms/copy/follows": {
+   "shape": {
+    "follow_blocked_reason": "str",
+    "followers": [
+     {
+      "copy_mode": "str",
+      "created_at": "str",
+      "ended_reason": "str",
+      "follow_id": "str",
+      "follower_client_id": "str",
+      "follower_name": "str",
+      "instance": "str",
+      "master_client_id": "str",
+      "method": "str",
+      "multiplier": "int",
+      "reverse": "bool",
+      "status": "str"
+     }
+    ],
+    "following": [],
+    "is_master": "bool",
+    "master": {
+     "client_id": "str",
+     "display_name": "str",
+     "kind": "str",
+     "status": "str"
+    },
+    "master_blocked_reason": "str",
+    "success": "bool"
+   },
+   "status": 200
+  },
+  "oms/history": {
+   "shape": {
+    "attribution": "str",
+    "count": "int",
+    "history": [
+     {
+      "entry_copy_kind": "str",
+      "entry_price": "int",
+      "entry_source": "str",
+      "entry_type": "str",
+      "executed_at": "str",
+      "exit_price": "float",
+      "exit_source": "str",
+      "exit_type": "str",
+      "history_id": "int",
+      "opened_at": "str",
+      "order_id": "str",
+      "position_id": "str",
+      "qty": "float",
+      "realized_pnl": "float",
+      "side": "str",
+      "symbol": "str"
+     }
+    ],
+    "next_cursor": "str",
+    "success": "bool",
+    "total": "int",
+    "total_realized_pnl": "float"
+   },
+   "status": 200
+  },
+  "oms/orders": {
+   "shape": {
+    "count": "int",
+    "orders": [
+     {
+      "avg_fill_price": "float",
+      "copy_kind": "str",
+      "copy_ref": "str",
+      "created_at": "str",
+      "fee": "int",
+      "filled_qty": "float",
+      "market_order_id": "str",
+      "order_id": "str",
+      "price": "int",
+      "requested_qty": "float",
+      "side": "str",
+      "source": "str",
+      "state": "str",
+      "symbol": "str",
+      "trigger_price": "int",
+      "type": "str",
+      "updated_at": "str"
+     }
+    ],
+    "success": "bool"
+   },
+   "status": 200
+  },
+  "oms/portal/documents": {
+   "shape": {
+    "documents": [
+     {
+      "mime": "str",
+      "reason": "str",
+      "reviewed_at": "str",
+      "size": "int",
+      "slot": "str",
+      "status": "str",
+      "uploaded_at": "str"
+     }
+    ],
+    "kyc_status": "str",
+    "slots": [
+     "str"
+    ],
+    "success": "bool",
+    "uploads_open": "bool"
+   },
+   "status": 200
+  },
+  "oms/portal/methods": {
+   "shape": {
+    "methods": [
+     {
+      "currency": "null",
+      "details": {},
+      "kind": "str",
+      "method_id": "str",
+      "min_deposit": "int",
+      "name": "str",
+      "network": "null"
+     }
+    ],
+    "success": "bool"
+   },
+   "status": 200
+  },
+  "oms/portal/payout-methods": {
+   "shape": {
+    "payout_methods": [
+     {
+      "address": "str",
+      "details": {
+       "account_name": "str",
+       "account_number": "str"
+      },
+      "kind": "str",
+      "label": "str",
+      "network": "str",
+      "payout_id": "str"
+     }
+    ],
+    "success": "bool"
+   },
+   "status": 200
+  },
+  "oms/portal/summary": {
+   "shape": {
+    "member": {
+     "account_type": "str",
+     "email": "str",
+     "kyc_status": "str",
+     "member_id": "str",
+     "name": "str"
+    },
+    "min_transfer": "int",
+    "recent": [
+     {
+      "amount": "int",
+      "balance_after": "int",
+      "client_id": "str",
+      "created_at": "str",
+      "entry_id": "int",
+      "instance": "str",
+      "movement": "str",
+      "reference": "str",
+      "remarks": "str",
+      "wallet_code": "str",
+      "wallet_type": "str"
+     }
+    ],
+    "referrals": {
+     "direct_referrals": "int",
+     "ib_balance": "int",
+     "lifetime_earned": "int",
+     "referral_code": "str",
+     "referred_by": "str",
+     "total_referrals": "int"
+    },
+    "success": "bool",
+    "trading": {
+     "balance": "int",
+     "equity": "int",
+     "free_margin": "int",
+     "margin_call_level": "int",
+     "margin_level": "null",
+     "starting_balance": "int",
+     "stop_out_level": "int",
+     "unrealized_pnl": "int",
+     "used_margin": "int"
+    },
+    "wallet_details": {
+     "client": {
+      "balance": "int",
+      "wallet_code": "str",
+      "wallet_type": "str"
+     },
+     "ib": {
+      "balance": "int",
+      "wallet_code": "str",
+      "wallet_type": "str"
+     }
+    },
+    "wallets": {
+     "client": "int",
+     "ib": "int"
+    }
+   },
+   "status": 200
+  },
+  "oms/portal/transfers": {
+   "shape": {
+    "success": "bool",
+    "transfers": [
+     {
+      "amount": "float",
+      "at": "str",
+      "from": "str",
+      "from_label": "str",
+      "memo": "str",
+      "to": "str",
+      "to_label": "str",
+      "transfer_id": "str"
+     }
+    ]
+   },
+   "status": 200
+  },
+  "oms/portal/withdrawals": {
+   "shape": {
+    "success": "bool",
+    "withdrawals": []
+   },
+   "status": 200
+  },
+  "oms/positions": {
+   "shape": {
+    "count": "int",
+    "funds": {
+     "balance": "int",
+     "equity": "int",
+     "free_margin": "int",
+     "margin_call_level": "int",
+     "margin_level": "null",
+     "starting_balance": "int",
+     "stop_out_level": "int",
+     "unrealized_pnl": "int",
+     "used_margin": "int"
+    },
+    "positions": [],
+    "success": "bool",
+    "total_unrealized_pnl": "int"
+   },
+   "status": 200
+  },
+  "oms/wallets": {
+   "shape": {
+    "success": "bool",
+    "totals": {
+     "consolidated": "int",
+     "trading": "int",
+     "wallets": "int"
+    },
+    "trading": {
+     "balance": "int",
+     "equity": "int",
+     "free_margin": "int",
+     "margin_call_level": "int",
+     "margin_level": "null",
+     "starting_balance": "int",
+     "stop_out_level": "int",
+     "unrealized_pnl": "int",
+     "used_margin": "int"
+    },
+    "wallet_details": {
+     "client": {
+      "balance": "int",
+      "wallet_code": "str",
+      "wallet_type": "str"
+     },
+     "ib": {
+      "balance": "int",
+      "wallet_code": "str",
+      "wallet_type": "str"
+     }
+    },
+    "wallets": {
+     "client": "int",
+     "ib": "int"
+    }
+   },
+   "status": 200
+  }
+ },
+ "base_url": "https://lpadmin.blackfx.com",
+ "config_keys": [
+  "chart_scopes",
+  "oms_products",
+  "plan_modules"
+ ],
+ "frontend": {
+  "/assets/app.js": {
+   "bytes": 18300,
+   "sha": "978e7ec5d947e7ed",
+   "status": 200
+  },
+  "/assets/style.css": {
+   "bytes": 5077,
+   "sha": "de122674d4d5faa5",
+   "status": 200
+  }
+ },
+ "instances": [
+  [
+   "paper",
+   "hedging",
+   false
+  ],
+  [
+   "paper-net",
+   "netting",
+   false
+  ],
+  [
+   "real",
+   "hedging",
+   true
+  ],
+  [
+   "real-net",
+   "netting",
+   true
+  ]
+ ],
+ "plan_modules": {
+  "basic": [
+   "chart",
+   "drawings",
+   "funds",
+   "history",
+   "marketwatch",
+   "orders",
+   "positions",
+   "trades"
+  ],
+  "free": [
+   "chart",
+   "drawings",
+   "marketwatch"
+  ],
+  "premium": [
+   "alerts",
+   "algo",
+   "backtest",
+   "chart",
+   "coder",
+   "copytrading",
+   "drawings",
+   "funds",
+   "history",
+   "ib",
+   "logs",
+   "mam",
+   "marketwatch",
+   "orders",
+   "pamm",
+   "positions",
+   "screener",
+   "statistics",
+   "trades",
+   "wallet"
+  ],
+  "pro": [
+   "accounts",
+   "alerts",
+   "algo",
+   "backtest",
+   "chart",
+   "coder",
+   "copytrading",
+   "drawings",
+   "funds",
+   "history",
+   "ib",
+   "mam",
+   "marketwatch",
+   "orders",
+   "pamm",
+   "positions",
+   "screener",
+   "statistics",
+   "trades",
+   "wallet"
+  ]
+ },
+ "taken_at": "2026-11-18T07:28:08+00:00"
+}

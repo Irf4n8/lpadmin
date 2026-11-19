@@ -1,0 +1,322 @@
+{
+  "suite": "End-to-End Copy-Trading Test",
+  "verdict": "FAIL",
+  "timestamp": "2026-11-18T09:39:03.589765+00:00",
+  "started": "2026-11-18T15:08:32",
+  "duration_sec": 31.6,
+  "instance": "real",
+  "platform": "https://lpadmin.blackfx.com",
+  "master": "master2@mailinator.com",
+  "master_id": "mem_2cf075c020dcca6a05",
+  "followers_range": [
+    1,
+    10
+  ],
+  "followers_linked": 10,
+  "lot": 0.1,
+  "max_sync_seconds": 0.17,
+  "tally": {
+    "PASS": 9,
+    "FAIL": 1,
+    "SKIP": 5,
+    "WARN": 1
+  },
+  "results": [
+    {
+      "name": "E01 Preflight: platform + logins",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "platform_http": 200,
+        "accounts": 11,
+        "logins_ok": 11,
+        "login_seconds": 1.9
+      },
+      "id": "E01",
+      "title": "Preflight: platform + logins",
+      "seconds": 1.9
+    },
+    {
+      "name": "E02 Copy topology (who is linked)",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "followers_in_range": 10,
+        "linked": 10,
+        "unlinked": [],
+        "link_mix": {
+          "multiplier 1x": 5,
+          "equity 1x": 5
+        }
+      },
+      "id": "E02",
+      "title": "Copy topology (who is linked)",
+      "seconds": 0.4
+    },
+    {
+      "name": "E03 Clean slate",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "accounts_with_positions": 0,
+        "accounts_with_pending": 0
+      },
+      "id": "E03",
+      "title": "Clean slate",
+      "seconds": 4.4
+    },
+    {
+      "name": "E04 Baseline snapshot",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "master_balance": 1000.0,
+        "master_equity": 1000.0,
+        "follower_balance_min": 1000.0
+      },
+      "id": "E04",
+      "title": "Baseline snapshot",
+      "seconds": 0.3
+    },
+    {
+      "name": "E05 Open market BUY & fan-out",
+      "status": "FAIL",
+      "findings": [
+        {
+          "severity": "HIGH",
+          "message": "master market BUY 0.2 rejected: HTTP 400 {'error': '{\"error\":\"insufficient free margin: required 1292.70, free 1000.00\",\"order\":{\"order_id\":\"ord_063292345f777a9578\",\"market_order_id\":\"ord_063292345f777a9578\",\"symbol\":\"BINANCE:BTCUSDT.P\",\"sid"
+        }
+      ],
+      "metrics": {},
+      "id": "E05",
+      "title": "Open market BUY & fan-out",
+      "seconds": 0.1
+    },
+    {
+      "name": "E06 Set TP/SL syncs to followers",
+      "status": "SKIP",
+      "findings": [
+        {
+          "severity": "INFO",
+          "message": "skipped: needs the position opened in E05"
+        }
+      ],
+      "metrics": {},
+      "id": "E06",
+      "title": "Set TP/SL syncs to followers",
+      "seconds": 0.0
+    },
+    {
+      "name": "E07 Modify TP/SL re-syncs",
+      "status": "SKIP",
+      "findings": [
+        {
+          "severity": "INFO",
+          "message": "skipped: needs the position opened in E05"
+        }
+      ],
+      "metrics": {},
+      "id": "E07",
+      "title": "Modify TP/SL re-syncs",
+      "seconds": 0.0
+    },
+    {
+      "name": "E08 Partial close mirrors",
+      "status": "SKIP",
+      "findings": [
+        {
+          "severity": "INFO",
+          "message": "skipped: needs the position opened in E05"
+        }
+      ],
+      "metrics": {},
+      "id": "E08",
+      "title": "Partial close mirrors",
+      "seconds": 0.0
+    },
+    {
+      "name": "E09 Pyramid + hedge leg mirror",
+      "status": "SKIP",
+      "findings": [
+        {
+          "severity": "INFO",
+          "message": "skipped: needs the position opened in E05"
+        }
+      ],
+      "metrics": {},
+      "id": "E09",
+      "title": "Pyramid + hedge leg mirror",
+      "seconds": 0.0
+    },
+    {
+      "name": "E10 Close one position",
+      "status": "SKIP",
+      "findings": [
+        {
+          "severity": "INFO",
+          "message": "skipped: needs the position opened in E05"
+        }
+      ],
+      "metrics": {},
+      "id": "E10",
+      "title": "Close one position",
+      "seconds": 0.0
+    },
+    {
+      "name": "E11 Close all -> everyone flat",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "accounts_with_positions": 0,
+        "accounts_with_margin": 0
+      },
+      "id": "E11",
+      "title": "Close all -> everyone flat",
+      "seconds": 2.2
+    },
+    {
+      "name": "E12 Pending orders place + cancel",
+      "status": "PASS",
+      "findings": [
+        {
+          "severity": "INFO",
+          "message": "10/10 followers received pending copies of the master's 4 pending orders"
+        }
+      ],
+      "metrics": {
+        "master_pending_placed": 4,
+        "followers_with_pending_copies": 10,
+        "accounts_with_leftover_pending": 0
+      },
+      "id": "E12",
+      "title": "Pending orders place + cancel",
+      "seconds": 8.3
+    },
+    {
+      "name": "E13 Every market type (symbol sweep)",
+      "status": "WARN",
+      "findings": [
+        {
+          "severity": "MED",
+          "message": "BINANCE:BTCUSD_PERP.P (CRYPTO/CRYPTO_PERP_COINM): master order rejected: HTTP 400 {\"error\":\"insufficient free margin: required 12909.78, free 928.11\",\"order\":{\"order_id\":\"ord_728337c87a07891308\",\"market_order_id\":\"ord_728337c87a07891308\",\"sym"
+        },
+        {
+          "severity": "MED",
+          "message": "BLACK:BTCUSD (CRYPTO_CFD): master order rejected: HTTP 400 {\"error\":\"insufficient free margin: required 1293.26, free 928.11\",\"order\":{\"order_id\":\"ord_0704137090f8231db9\",\"market_order_id\":\"ord_0704137090f8231db9\",\"symb"
+        },
+        {
+          "severity": "MED",
+          "message": "BLACK:GOLD.247 (CFD_247): master order rejected: HTTP 400 {\"error\":\"insufficient free margin: required 7572.20, free 77.40\",\"order\":{\"order_id\":\"ord_2142ee431af8ae9a92\",\"market_order_id\":\"ord_2142ee431af8ae9a92\",\"symbo"
+        },
+        {
+          "severity": "MED",
+          "message": "NSE:NIFTY (IN_INDEX): master order rejected: HTTP 400 {\"error\":\"insufficient free margin: required 5041.63, free 77.40\",\"order\":{\"order_id\":\"ord_fcddcad321b5263fcb\",\"market_order_id\":\"ord_fcddcad321b5263fcb\",\"symbo"
+        },
+        {
+          "severity": "MED",
+          "message": "BSE:SENSEX 03DEC2026 76300 CE (IN_OPTIONS): master order rejected: HTTP 400 {\"error\":\"insufficient free margin: required 257054.00, free 68.35\",\"order\":{\"order_id\":\"ord_24653c541e3656fc91\",\"market_order_id\":\"ord_24653c541e3656fc91\",\"sym"
+        },
+        {
+          "severity": "MED",
+          "message": "BSE:SENSEX DEC2026 FUT (IN_FUTURES): master order rejected: HTTP 400 {\"error\":\"insufficient free margin: required 329999.80, free 68.35\",\"order\":{\"order_id\":\"ord_9f72cf70a74cbeee10\",\"market_order_id\":\"ord_9f72cf70a74cbeee10\",\"sym"
+        },
+        {
+          "severity": "MED",
+          "message": "GX:1!BANKNIFTY@FAIR (GREEKS): master order rejected: HTTP 400 {\"error\":\"insufficient free margin: required 123822.20, free 68.35\",\"order\":{\"order_id\":\"ord_5966d7e43309586a45\",\"market_order_id\":\"ord_5966d7e43309586a45\",\"sym"
+        },
+        {
+          "severity": "MED",
+          "message": "NSE:RELIANCE (IN_STOCKS): master order rejected: HTTP 400 {\"error\":\"insufficient free margin: required 546.96, free 68.35\",\"order\":{\"order_id\":\"ord_dd0054909b60a1a3d7\",\"market_order_id\":\"ord_dd0054909b60a1a3d7\",\"symbol"
+        },
+        {
+          "severity": "INFO",
+          "message": "market closed now, not tested this run: US_STOCKS (re-run in session, e.g. NSE/BSE 03:45-10:00 UTC)"
+        }
+      ],
+      "metrics": {
+        "universe": 3245,
+        "groups_tested": 18,
+        "pass": 9,
+        "fail": 0,
+        "warn": 8,
+        "skip": 1,
+        "per_group": {
+          "CRYPTO/CRYPTO_PERP": "PASS BINANCE:BTCUSDT.P",
+          "CRYPTO/STOCK_PERP": "PASS BINANCE:AAOIUSDT.P",
+          "CRYPTO/CRYPTO_SPOT": "PASS BINANCE:BTCUSDT",
+          "CRYPTO/CRYPTO_PERP_COINM": "WARN BINANCE:BTCUSD_PERP.P",
+          "CRYPTO/COMMODITY_PERP": "PASS BINANCE:BZUSDT.P",
+          "US_STOCKS": "SKIP BLACK:AAPL.OQ",
+          "CRYPTO_CFD": "WARN BLACK:BTCUSD",
+          "EU_STOCKS": "PASS BLACK:ADSGn.DE",
+          "METAL": "PASS BLACK:XAUUSD",
+          "FOREX": "PASS BLACK:EURUSD",
+          "SPOT_INDICES": "PASS BLACK:US500cash-1",
+          "CMDTY": "PASS BLACK:BRENTcash-1",
+          "CFD_247": "WARN BLACK:GOLD.247",
+          "IN_INDEX": "WARN NSE:NIFTY",
+          "IN_OPTIONS": "WARN BSE:SENSEX 03DEC2026 76300 CE",
+          "IN_FUTURES": "WARN BSE:SENSEX DEC2026 FUT",
+          "GREEKS": "WARN GX:1!BANKNIFTY@FAIR",
+          "IN_STOCKS": "WARN NSE:RELIANCE"
+        }
+      },
+      "id": "E13",
+      "title": "Every market type (symbol sweep)",
+      "seconds": 2.1
+    },
+    {
+      "name": "E14 Invalid orders rejected",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "http_codes": {
+          "qty 0": 400,
+          "negative qty": 400,
+          "unknown symbol": 400,
+          "bad side": 400
+        }
+      },
+      "id": "E14",
+      "title": "Invalid orders rejected",
+      "seconds": 6.9
+    },
+    {
+      "name": "E15 Accounting reconciles",
+      "status": "PASS",
+      "findings": [
+        {
+          "severity": "INFO",
+          "message": "realized PnL this run: master -1.4106; followers -1.4106 .. -1.4106"
+        },
+        {
+          "severity": "INFO",
+          "message": "copy fidelity: follower PnL minus (master PnL x factor) is at most +0.0000 (f1) - caused by followers filling at different prices than the master"
+        }
+      ],
+      "metrics": {
+        "master_closed_trades": 10,
+        "master_realized_pnl": -1.4106,
+        "follower_realized_pnl_min": -1.4106,
+        "follower_realized_pnl_max": -1.4106,
+        "pnl_gap_vs_master_max": 0.0,
+        "pnl_gap_worst_follower": "f1"
+      },
+      "id": "E15",
+      "title": "Accounting reconciles",
+      "seconds": 1.4
+    },
+    {
+      "name": "E16 Final audit (clean accounts)",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "accounts_checked": 11,
+        "issues": 0
+      },
+      "id": "E16",
+      "title": "Final audit (clean accounts)",
+      "seconds": 3.5
+    }
+  ]
+}

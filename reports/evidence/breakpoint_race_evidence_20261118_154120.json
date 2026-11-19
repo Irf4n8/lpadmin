@@ -1,0 +1,179 @@
+{
+  "suite": "Breakpoint & Race Hunter",
+  "timestamp": "2026-11-18T10:11:20.085072+00:00",
+  "instance": "real",
+  "followers": 10,
+  "results": [
+    {
+      "name": "B1 Duplicate squareoff storm",
+      "status": "FAIL",
+      "findings": [
+        {
+          "severity": "HIGH",
+          "message": "follower did not receive copied position - cannot run scenario"
+        }
+      ],
+      "metrics": {}
+    },
+    {
+      "name": "B2 Over-reduce race",
+      "status": "FAIL",
+      "findings": [
+        {
+          "severity": "HIGH",
+          "message": "no follower position"
+        }
+      ],
+      "metrics": {}
+    },
+    {
+      "name": "B3 Protection write storm",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "writes": 20,
+        "http_5xx": 0,
+        "final_tp": 65215.19,
+        "final_sl": 63923.81
+      }
+    },
+    {
+      "name": "B4 Double-cancel storm",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "cancels": 20,
+        "http_200": 1,
+        "http_5xx": 0
+      }
+    },
+    {
+      "name": "B5 Load ramp (breaking point)",
+      "status": "FAIL",
+      "findings": [
+        {
+          "severity": "HIGH",
+          "message": "@25 concurrent: 1 followers MISSING copies (149/150 positions) after 25s"
+        },
+        {
+          "severity": "MED",
+          "message": "@25 concurrent: non-200 responses {400: 10}"
+        },
+        {
+          "severity": "INFO",
+          "message": "first degradation at: 25 concurrent master orders"
+        }
+      ],
+      "metrics": {
+        "levels": [
+          {
+            "threads": 10,
+            "placed": 10,
+            "status_codes": {
+              "200": 10
+            },
+            "p50_s": 0.133,
+            "p95_s": 0.168,
+            "max_s": 0.265,
+            "burst_s": 0.269,
+            "fanout_lag_s": 0.4,
+            "followers_short": 0,
+            "followers_duplicated": 0,
+            "positions_expected": 100,
+            "positions_actual": 100
+          },
+          {
+            "threads": 25,
+            "placed": 15,
+            "status_codes": {
+              "200": 15,
+              "400": 10
+            },
+            "p50_s": 0.434,
+            "p95_s": 0.971,
+            "max_s": 1.227,
+            "burst_s": 1.232,
+            "fanout_lag_s": 25.23,
+            "followers_short": 1,
+            "followers_duplicated": 0,
+            "positions_expected": 150,
+            "positions_actual": 149
+          }
+        ],
+        "first_degradation_at_threads": 25
+      }
+    },
+    {
+      "name": "B6 Follow/unfollow flapping",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "probe_link_rows": 0,
+        "probe_positions_after_single_master_order": 1
+      }
+    },
+    {
+      "name": "B7 Margin exhaustion",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "master_orders": 0,
+        "follower_positions": 0,
+        "follower_balance": 1000.0,
+        "follower_equity": 1000.0,
+        "follower_used_margin": 0.0
+      }
+    },
+    {
+      "name": "B8 Input fuzz",
+      "status": "FAIL",
+      "findings": [
+        {
+          "severity": "HIGH",
+          "message": "5xx on invalid input {\"qty\": 1, \"side\": \"BUY\", \"symbol\": \"BINANCE:BTCUSDT.P\", \"type\": \"WEIRD\"} -> 599 EXC RetryError: HTTPSConnectionPool(host='lpadmin.blackfx.com', port=443): Max r"
+        }
+      ],
+      "metrics": {
+        "requests": 90,
+        "http_5xx": 5,
+        "http_200": 0,
+        "positions_created": 0
+      }
+    },
+    {
+      "name": "B9 Bulk vs individual close",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "positions_opened": 6,
+        "http_5xx": 0,
+        "positions_left": 0,
+        "final_balance": 888.3820000000002,
+        "final_equity": 888.3820000000002,
+        "final_used_margin": 0.0
+      }
+    },
+    {
+      "name": "B10 Auth/token refresh storm",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "logins": 30,
+        "login_failures": 0,
+        "post_storm_read_failures": 0
+      }
+    },
+    {
+      "name": "B11 Final consistency audit",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "accounts": 11,
+        "orphan_positions": 0,
+        "pending_orders": 0,
+        "stuck_margin": 0,
+        "equity_balance_drift": 0
+      }
+    }
+  ]
+}

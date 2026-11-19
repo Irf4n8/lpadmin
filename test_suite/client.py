@@ -131,11 +131,16 @@ class BlackTraderClient:
         resp = self.request_with_retry("POST", f"{self.base_url}/admin/api/members/{member_id}/status", headers=headers, json={"status": status})
         return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else {"error": resp.text}}
 
-    def set_member_balance(self, member_id: str, balance: float, instance: str = "real") -> Dict[str, Any]:
-        """Update a member's balance via admin API."""
+    def set_member_balance(self, member_id: str, balance: float, instance: str = "real", force: bool = True) -> Dict[str, Any]:
+        """Update a member's balance via admin API.
+
+        force=True (default, what every existing test relies on) bypasses the stop-out guard, so a balance below the
+        used margin of open positions is accepted and the account can end up negative. Pass force=False to exercise the
+        platform's guard: it answers HTTP 400 "...leaves equity at X, below the used margin of Y... stop-out".
+        """
         token = self.get_admin_token()
         headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
-        payload = {"instance": instance, "balance": balance, "remark": "Automated Test Adjustment", "force": True}
+        payload = {"instance": instance, "balance": balance, "remark": "Automated Test Adjustment", "force": force}
         resp = self.request_with_retry("POST", f"{self.base_url}/admin/api/members/{member_id}/balance", headers=headers, json=payload)
         return {"status_code": resp.status_code, "data": resp.json() if resp.status_code == 200 else {"error": resp.text}}
 
