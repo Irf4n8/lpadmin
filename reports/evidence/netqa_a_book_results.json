@@ -1,0 +1,168 @@
+{
+  "master": "netqamaster@mailinator.com",
+  "followers": [
+    "netqa1@mailinator.com",
+    "netqa2@mailinator.com",
+    "netqa3@mailinator.com",
+    "netqa4@mailinator.com",
+    "netqa5@mailinator.com",
+    "netqa6@mailinator.com",
+    "netqa7@mailinator.com",
+    "netqa8@mailinator.com",
+    "netqa9@mailinator.com",
+    "netqa10@mailinator.com"
+  ],
+  "instance": "real-net",
+  "book": "a",
+  "results": [
+    {
+      "name": "N1 open netted position",
+      "status": "PASS",
+      "failures": [],
+      "notes": [
+        "master positions = 1",
+        "master long = 0.003",
+        "followers match model: 10/10 OK (master long 0.003, short 0.0, 1 pos)"
+      ]
+    },
+    {
+      "name": "N2 opposite order reduces (one position)",
+      "status": "PASS",
+      "failures": [],
+      "notes": [
+        "master positions (opposite order must NET, not open a 2nd leg) = 1",
+        "master long reduced to 2L = 0.002",
+        "master short = 0.0",
+        "followers match model: 10/10 OK (master long 0.002, short 0.0, 1 pos)"
+      ]
+    },
+    {
+      "name": "N3 oversized opposite order flips",
+      "status": "PASS",
+      "failures": [],
+      "notes": [
+        "master positions after flip = 1",
+        "master long after flip = 0.0",
+        "master short = 5L - 3L = 0.002",
+        "followers match model: 10/10 OK (master long 0.0, short 0.002, 1 pos)"
+      ]
+    },
+    {
+      "name": "N4 exact opposite order closes",
+      "status": "PASS",
+      "failures": [],
+      "notes": [
+        "master positions (exact opposite order closes) = 0",
+        "followers flat: 10/10 OK (master long 0.0, short 0.0, 0 pos)"
+      ]
+    },
+    {
+      "name": "N5 TP/SL on netted position survives add",
+      "status": "FAIL",
+      "failures": [
+        "follower TP/SL equal master after add (0/10) netqa1 tp None sl None; netqa2 tp None sl None; netqa3 tp None sl None; netqa4 tp None sl None"
+      ],
+      "notes": [
+        "master TP/SL survive adding to the netted position",
+        "master netted size = 0.003",
+        "followers match model: 10/10 OK (master long 0.003, short 0.0, 1 pos)"
+      ]
+    },
+    {
+      "name": "P1 pending fan-out + cancel",
+      "status": "FAIL",
+      "failures": [
+        "pending orders fanned out to followers (0/10) netqa1, netqa2, netqa3, netqa4, netqa5"
+      ],
+      "notes": [
+        "master pending orders placed = 3",
+        "diagnostic: 0/10 of the missing followers got the orders within 10 s more",
+        "diagnostic: netqa1 orders on BINANCE:BTCUSDT.P: [('FILLED', 'MARKET', 'SELL', None), ('FILLED', 'MARKET', 'BUY', None), ('FILLED', 'MARKET', 'SELL', None), ('FILLED', 'MARKET', 'BUY', None)]",
+        "all pending orders cancelled everywhere"
+      ]
+    },
+    {
+      "name": "C1 concurrent BUY/SELL race",
+      "status": "PASS",
+      "failures": [],
+      "notes": [
+        "orders accepted = 10",
+        "no 5xx under concurrent BUY/SELL",
+        "master holds <=1 position (netting invariant)",
+        "netting result is one-sided",
+        "master net equals 6L - 4L = 0.002",
+        "followers match model: 10/10 OK (master long 0.002, short 0.0, 1 pos)"
+      ]
+    }
+  ],
+  "post_run": {
+    "netqamaster@mailinator.com": {
+      "positions": 0,
+      "pending": 0,
+      "used_margin": 0
+    },
+    "netqa1@mailinator.com": {
+      "positions": 0,
+      "pending": 0,
+      "used_margin": 0
+    },
+    "netqa2@mailinator.com": {
+      "positions": 0,
+      "pending": 0,
+      "used_margin": 0
+    },
+    "netqa3@mailinator.com": {
+      "positions": 0,
+      "pending": 0,
+      "used_margin": 0
+    },
+    "netqa4@mailinator.com": {
+      "positions": 0,
+      "pending": 0,
+      "used_margin": 0
+    },
+    "netqa5@mailinator.com": {
+      "positions": 0,
+      "pending": 0,
+      "used_margin": 0
+    },
+    "netqa6@mailinator.com": {
+      "positions": 0,
+      "pending": 0,
+      "used_margin": 0
+    },
+    "netqa7@mailinator.com": {
+      "positions": 0,
+      "pending": 0,
+      "used_margin": 0
+    },
+    "netqa8@mailinator.com": {
+      "positions": 0,
+      "pending": 0,
+      "used_margin": 0
+    },
+    "netqa9@mailinator.com": {
+      "positions": 0,
+      "pending": 0,
+      "used_margin": 0
+    },
+    "netqa10@mailinator.com": {
+      "positions": 0,
+      "pending": 0,
+      "used_margin": 0
+    }
+  },
+  "routing_after": {
+    "netqamaster@mailinator.com": "b",
+    "netqa1@mailinator.com": "b",
+    "netqa2@mailinator.com": "b",
+    "netqa3@mailinator.com": "b",
+    "netqa4@mailinator.com": "b",
+    "netqa5@mailinator.com": "b",
+    "netqa6@mailinator.com": "b",
+    "netqa7@mailinator.com": "b",
+    "netqa8@mailinator.com": "b",
+    "netqa9@mailinator.com": "b",
+    "netqa10@mailinator.com": "b"
+  }
+}

@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-BlackTrader Race Conditions & Concurrency Stress Test Suite (100 Followers)
-===========================================================================
+BlackTrader Race Conditions & Concurrency Stress Test Suite
+=============================================================
+Follower count is configurable via --start/--end (defaults to FOLLOWER_COUNT in config/settings).
 Exhaustively tests race conditions, concurrency collisions, and asynchronous state hazards:
 
 1. RACE-1: In-Flight Open-Close Race (Flash Trade)
@@ -10,15 +11,16 @@ Exhaustively tests race conditions, concurrency collisions, and asynchronous sta
 
 2. RACE-2: Simultaneous Dual Master Orders (Zero-Delta Microsecond Collision)
    - Two concurrent threads place opposing orders (BUY & SELL) on master at the exact same instant.
-   - Verifies both fan out cleanly to 100 followers without cross-talk or lock contention.
+   - Verifies both fan out cleanly to all followers without cross-talk or lock contention.
 
 3. RACE-3: Multi-Threaded HFT Storm (10 Parallel Threads)
    - 10 worker threads simultaneously place orders on the master in a true parallel burst.
-   - Verifies 10 master orders filled and 1,000 follower positions created without drops or duplicates.
+   - Verifies all master orders filled and follower positions created without drops or duplicates.
 
 4. RACE-4: Mid-Flight Unfollow vs Order Placement Race
-   - Master fires an order at the exact millisecond 5 followers fire unfollow requests.
-   - Verifies no 500 errors, remaining 95 followers receive the order cleanly, and probe followers are isolated.
+   - Master fires an order at the exact millisecond the last 5 followers fire unfollow requests.
+   - Verifies no 500 errors, remaining followers receive the order cleanly, probe followers are isolated,
+     and the probe cohort is re-linked afterwards with its original pre-race follow settings.
 
 5. RACE-5: Immediate TP/SL Protection Collision
    - Master places order and attaches TP/SL protection immediately before fan-out completes.
@@ -29,7 +31,7 @@ Exhaustively tests race conditions, concurrency collisions, and asynchronous sta
    - Verifies platform linkage state machine stability.
 
 7. RACE-7: Full Teardown & Zero Orphan Verification
-   - Reconciles balances, equity, and positions across all 101 accounts (target: 0 orphans).
+   - Reconciles balances, equity, and positions across all accounts (target: 0 orphans).
 
 Usage:
     python test_suite/race_conditions_runner.py
@@ -256,8 +258,23 @@ def test_unfollow_vs_order_race(
         print("[SKIP] RACE-4: " + PAPER_UNFOLLOW_REASON)
         return {"name": "Mid-Flight Unfollow vs Order Race", "status": "SKIPPED", "error": PAPER_UNFOLLOW_REASON}
 
-    probe_cohort = follower_emails[-5:]  # Followers 96-100
-    control_cohort = follower_emails[:-5]  # Followers 1-95
+    probe_cohort = follower_emails[-5:]  # Last 5 of the configured follower set
+    control_cohort = follower_emails[:-5]  # Remaining followers
+
+    # Snapshot each probe follower's current copy settings BEFORE unfollowing, so we can
+    # restore their exact method/multiplier/reverse/copy_mode afterwards instead of guessing.
+    pre_race_followers = client.get_copy_followers(master_email, instance=instance, active_only=False)
+    settings_by_name = {f.get("follower_name"): f for f in pre_race_followers}
+    probe_settings = {}
+    for em in probe_cohort:
+        name = em.split("@")[0]
+        f = settings_by_name.get(name)
+        probe_settings[em] = {
+            "method": f.get("method", "multiplier") if f else "multiplier",
+            "multiplier": f.get("multiplier", 1.0) if f else 1.0,
+            "reverse": f.get("reverse", False) if f else False,
+            "copy_mode": f.get("copy_mode", "public") if f else "public",
+        }
 
     def master_action():
         return client.place_order(master_email, symbol=symbol, side="BUY", qty=0.1, instance=instance)
@@ -295,21 +312,44 @@ def test_unfollow_vs_order_race(
     for em in probe_cohort:
         client.bulk_squareoff(em, instance=instance)
 
-    # Re-link probe cohort so 100-follower baseline is preserved
-    copy_method = "equity"  # preserve current mode
-    with ThreadPoolExecutor(max_workers=5) as executor:
-        list(executor.map(lambda em: client.follow_master(em, master_client_id, instance=instance, method=copy_method), probe_cohort))
-    time.sleep(1.5)
+    # Re-link probe cohort, restoring each follower's own pre-race settings (not a guessed mode),
+    # retrying and verifying so the active test group is never left in an unfollowed state.
+    def relink(email):
+        s = probe_settings[email]
+        return client.follow_master(
+            email, master_client_id, instance=instance,
+            method=s["method"], multiplier=s["multiplier"],
+            reverse=s["reverse"], copy_mode=s["copy_mode"]
+        )
 
-    status = "PASS" if master_mkt_id and control_pass_count == len(control_cohort) else "FAIL"
-    print(f"[{status}] Unfollow vs Order Race: Control cohort 100% intact, probe cohort isolated without platform crash.")
+    relink_failures = list(probe_cohort)
+    for attempt in range(3):
+        if not relink_failures:
+            break
+        with ThreadPoolExecutor(max_workers=5) as executor:
+            relink_res = dict(zip(relink_failures, executor.map(relink, relink_failures)))
+        time.sleep(1.5)
+        still_active = {f.get("follower_name") for f in client.get_copy_followers(master_email, instance=instance, active_only=True)}
+        relink_failures = [em for em in relink_failures if em.split("@")[0] not in still_active]
+        if relink_failures:
+            print(f"[*] Re-link attempt {attempt + 1}: {len(relink_failures)} probe follower(s) still not active, retrying: {relink_failures}")
+
+    probe_relink_ok = len(relink_failures) == 0
+    if not probe_relink_ok:
+        print(f"[WARN] Probe cohort re-link FAILED for: {relink_failures}. Manual follow_master() needed to restore the active test group.")
+
+    status = "PASS" if master_mkt_id and control_pass_count == len(control_cohort) and probe_relink_ok else "FAIL"
+    print(f"[{status}] Unfollow vs Order Race: Control cohort 100% intact, probe cohort isolated without platform crash, probe cohort re-linked={probe_relink_ok}.")
 
     return {
         "name": "Mid-Flight Unfollow vs Order Placement Race",
         "status": status,
         "control_cohort_passed": control_pass_count == len(control_cohort),
         "control_pass_count": control_pass_count,
+        "control_cohort_count": len(control_cohort),
         "probe_cohort_count": len(probe_cohort),
+        "probe_relink_ok": probe_relink_ok,
+        "probe_relink_failures": relink_failures,
         "race_duration_sec": round(race_duration, 3)
     }
 
@@ -450,6 +490,19 @@ def main():
     passed = sum(1 for r in results if r.get("status") == "PASS")
     total = len(results)
 
+    n_followers = len(follower_emails)
+    n_accounts = n_followers + 1  # + master
+    storm_threads = res3.get("target_orders", 10)
+    storm_target_positions = storm_threads * n_followers
+    storm_verified_positions = res3.get("storm_orders_placed", 0) * res3.get("full_followers_count", 0)
+    control_count = res4.get("control_cohort_count", max(n_followers - 5, 0))
+    probe_count = res4.get("probe_cohort_count", min(5, n_followers))
+    probe_relink_note = (
+        "all probe followers re-linked to their original settings"
+        if res4.get("probe_relink_ok", True)
+        else f"probe relink FAILED for {res4.get('probe_relink_failures')} — manual follow_master() required"
+    )
+
     md_content = f"""# Race Conditions & Concurrency Stress Test Evidence Report
 
 **Generated:** {datetime.now(timezone.utc).isoformat()}  
@@ -464,12 +517,12 @@ def main():
 
 | Scenario | Status | Verified / Target | Duration / Latency | Key Findings |
 | :--- | :---: | :---: | :---: | :--- |
-| **In-Flight Open-Close Race (Flash Trade)** | {'✅ PASS' if res1.get('status') == 'PASS' else '❌ FAIL'} | 100/100 Clean | Close: {res1.get('close_duration_sec', 'N/A')}s | Zero orphan positions; OMS correctly sequenced in-flight close. |
-| **Simultaneous Dual Orders (Zero-Delta Collision)** | {'✅ PASS' if res2.get('status') == 'PASS' else '❌ FAIL'} | {res2.get('dual_ok_count', 0)}/100 | Dispatch: {res2.get('dispatch_duration_sec', 'N/A')}s | Simultaneous BUY & SELL coexisted without lock collisions. |
-| **Multi-Threaded HFT Storm (10 Threads)** | {'✅ PASS' if res3.get('status') == 'PASS' else '❌ FAIL'} | {res3.get('full_followers_count', 0)}/100 | Storm: {res3.get('storm_duration_sec', 'N/A')}s | 10 parallel master orders produced 1,000 follower positions. |
-| **Mid-Flight Unfollow vs Order Race** | {'✅ PASS' if res4.get('status') == 'PASS' else '❌ FAIL'} | {res4.get('control_pass_count', 0)}/95 Control | Race: {res4.get('race_duration_sec', 'N/A')}s | 95 control followers filled; 5 probe followers cleanly decoupled. |
-| **Immediate TP/SL Protection Collision** | {'✅ PASS' if res5.get('status') == 'PASS' else '❌ FAIL'} | {res5.get('protected_count', 0)}/100 | Delta: {res5.get('protection_latency_sec', 'N/A')}s | Protection attached <10ms after open without missing stop orders. |
-| **Final Teardown & Zero Orphan Verification** | {'✅ PASS' if no_orphans_pass else '❌ FAIL'} | {total_orphans} Orphans | N/A | 101/101 accounts verified clean. |
+| **In-Flight Open-Close Race (Flash Trade)** | {'✅ PASS' if res1.get('status') == 'PASS' else '❌ FAIL'} | {n_followers}/{n_followers} Clean | Close: {res1.get('close_duration_sec', 'N/A')}s | Zero orphan positions; OMS correctly sequenced in-flight close. |
+| **Simultaneous Dual Orders (Zero-Delta Collision)** | {'✅ PASS' if res2.get('status') == 'PASS' else '❌ FAIL'} | {res2.get('dual_ok_count', 0)}/{n_followers} | Dispatch: {res2.get('dispatch_duration_sec', 'N/A')}s | Simultaneous BUY & SELL coexisted without lock collisions. |
+| **Multi-Threaded HFT Storm ({storm_threads} Threads)** | {'✅ PASS' if res3.get('status') == 'PASS' else '❌ FAIL'} | {res3.get('full_followers_count', 0)}/{n_followers} | Storm: {res3.get('storm_duration_sec', 'N/A')}s | {storm_threads} parallel master orders produced {storm_verified_positions} follower positions (target {storm_target_positions}). |
+| **Mid-Flight Unfollow vs Order Race** | {'✅ PASS' if res4.get('status') == 'PASS' else '❌ FAIL'} | {res4.get('control_pass_count', 0)}/{control_count} Control | Race: {res4.get('race_duration_sec', 'N/A')}s | {control_count} control followers filled; {probe_count} probe followers cleanly decoupled, {probe_relink_note}. |
+| **Immediate TP/SL Protection Collision** | {'✅ PASS' if res5.get('status') == 'PASS' else '❌ FAIL'} | {res5.get('protected_count', 0)}/{n_followers} | Delta: {res5.get('protection_latency_sec', 'N/A')}s | Protection attached <10ms after open without missing stop orders. |
+| **Final Teardown & Zero Orphan Verification** | {'✅ PASS' if no_orphans_pass else '❌ FAIL'} | {total_orphans} Orphans | N/A | {n_accounts}/{n_accounts} accounts verified clean. |
 
 ---
 

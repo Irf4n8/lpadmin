@@ -355,6 +355,8 @@ def test_netting_suite_never_converts_an_active_link(monkeypatch):
     """A follow on real/real-net CONVERTS the follower's single link record, and unfollow then ends it for good."""
     from test_suite import netting_hedging_runner as R
     monkeypatch.setattr(R.time, "sleep", lambda s: None)
+    monkeypatch.setattr(R, "DEFAULT_PREFIX", "follower")
+    monkeypatch.setattr(R, "DEFAULT_DOMAIN", "mailinator.com")
     fake = _FakeClient()
     emails, factors, created, _ = R.instance_setup(fake, "real", "ctmaster@mailinator.com", 3, False)
     assert "follower1@mailinator.com" not in fake.followed and "follower1@mailinator.com" not in created
@@ -418,3 +420,72 @@ def test_exclusive_funding_zeroes_the_other_wallets(client, monkeypatch):
     assert r.status_code == 200 and d["failed"] == 0 and d["ok"] == d["requested"]
     w = wallets[a.MASTER_EMAIL]
     assert w == {"real": 100_000_000.0, "paper": 0.0, "paper-net": 0.0, "real-net": 0.0}
+
+
+def test_live_log_snapshot_updates_after_append_and_replacement(client, tmp_path, monkeypatch):
+    import dashboard.app as dashboard
+
+    log = tmp_path / "live.log"
+    monkeypatch.setattr(dashboard, "LATEST_LOG_FILE", log)
+    monkeypatch.setattr(dashboard, "CURRENT_TASK", {"suite": "test", "started_at": None, "status": "IDLE"})
+    assert client.get("/api/logs", headers=LOCAL).get_json() == {"logs": ""}
+
+    log.write_bytes(b"[PASS] first\r\n" + b"ordinary\n" * 299 + b"[FAIL] last")
+    data = client.get("/api/logs", headers=LOCAL).get_json()
+    assert data == {"logs": "ordinary\n" * 299 + "[FAIL] last", "total_lines": 301}
+    data = client.get("/api/status", headers=LOCAL).get_json()
+    assert (data["pass_count"], data["fail_count"]) == (1, 1)
+
+    with log.open("ab") as file:
+        file.write(b"\n[PASS] appended\n")
+    data = client.get("/api/status", headers=LOCAL).get_json()
+    assert (data["pass_count"], data["fail_count"]) == (2, 1)
+
+    replacement = tmp_path / "replacement.log"
+    replacement.write_text("[FAIL] new run\n", encoding="utf-8")
+    replacement.replace(log)
+    assert client.get("/api/logs", headers=LOCAL).get_json() == {"logs": "[FAIL] new run\n", "total_lines": 1}
+
+
+def test_concurrent_token_cache_misses_share_one_login(monkeypatch):
+    from concurrent.futures import ThreadPoolExecutor
+    from threading import Barrier, Event
+    from types import SimpleNamespace
+    from test_suite import client as client_module
+
+    users = 4
+    start = Barrier(users)
+    login_started = Event()
+    release_login = Event()
+    requests = []
+
+    class AuthSession:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *_):
+            requests.append("closed")
+
+        def post(self, url, **kwargs):
+            endpoint = url.rsplit("/", 1)[-1]
+            requests.append(endpoint)
+            if endpoint == "login":
+                login_started.set()
+                assert release_login.wait(timeout=2)
+            return SimpleNamespace(status_code=200, json=lambda: {"token": "test-token"})
+
+    trader = client_module.BlackTraderClient()
+    monkeypatch.setattr(client_module.requests, "Session", AuthSession)
+
+    def get_token():
+        start.wait(timeout=2)
+        return trader.get_trader_token("test@example.com")
+
+    with ThreadPoolExecutor(max_workers=users) as executor:
+        futures = [executor.submit(get_token) for _ in range(users)]
+        login_in_progress = login_started.wait(timeout=2)
+        release_login.set()
+        assert login_in_progress
+        assert [future.result() for future in futures] == ["test-token"] * users
+
+    assert requests == ["login", "chart-token", "closed"]

@@ -50,6 +50,8 @@ class BlackTraderClient:
         self.max_workers = max_workers
         self.timeout = timeout
         self._lock = threading.Lock()
+        self._admin_lock = threading.Lock()
+        self._trader_locks: Dict[str, threading.Lock] = {}
         self._tokens: Dict[str, str] = {}  # email -> chart_token
         self._admin_token: Optional[str] = None
 
@@ -103,7 +105,7 @@ class BlackTraderClient:
     # Authentication & Tokens
     # -------------------------------------------------------------------------
     def get_admin_token(self) -> str:
-        with self._lock:
+        with self._admin_lock:
             if self._admin_token:
                 return self._admin_token
             resp = self.request_with_retry(
@@ -172,28 +174,32 @@ class BlackTraderClient:
             if not force_refresh and email in self._tokens:
                 return self._tokens[email]
 
-        # Use an isolated session to prevent cookie race conditions between concurrent threads
-        auth_session = requests.Session()
-        login_resp = auth_session.post(
-            f"{self.base_url}/api/auth/login",
-            json={"email": email, "password": password},
-            timeout=self.timeout
-        )
-        if login_resp.status_code != 200:
-            raise RuntimeError(f"Trader login failed for {email}: HTTP {login_resp.status_code} - {login_resp.text}")
+            login_lock = self._trader_locks.setdefault(email, threading.Lock())
 
-        # Mint chart token using session cookie
-        token_resp = auth_session.post(
-            f"{self.base_url}/api/auth/chart-token",
-            timeout=self.timeout
-        )
-        if token_resp.status_code != 200:
-            raise RuntimeError(f"Failed to mint chart token for {email}: HTTP {token_resp.status_code} - {token_resp.text}")
+        with login_lock:
+            with self._lock:
+                if not force_refresh and email in self._tokens:
+                    return self._tokens[email]
 
-        token = token_resp.json().get("token")
-        with self._lock:
-            self._tokens[email] = token
-        return token
+            # Keep the login cookie isolated to this account.
+            with requests.Session() as auth_session:
+                login_resp = auth_session.post(
+                    f"{self.base_url}/api/auth/login",
+                    json={"email": email, "password": password},
+                    timeout=self.timeout,
+                )
+                if login_resp.status_code != 200:
+                    raise RuntimeError(f"Trader login failed for {email}: HTTP {login_resp.status_code} - {login_resp.text}")
+
+                token_resp = auth_session.post(f"{self.base_url}/api/auth/chart-token", timeout=self.timeout)
+                if token_resp.status_code != 200:
+                    raise RuntimeError(f"Failed to mint chart token for {email}: HTTP {token_resp.status_code} - {token_resp.text}")
+
+                token = token_resp.json().get("token")
+
+            with self._lock:
+                self._tokens[email] = token
+            return token
 
     # -------------------------------------------------------------------------
     # OMS API Calls (Paper / Real)

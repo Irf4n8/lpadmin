@@ -1,0 +1,122 @@
+{
+  "master_entries": [
+    "ord_c6dd0ec14cdf979bb0",
+    "ord_ca79997446078e2c89",
+    "ord_29d896272637ffacdf",
+    "ord_5e4a67ad5fa1780a33"
+  ],
+  "accounts": {
+    "f1": {
+      "entry_counts": {
+        "ord_c6dd0ec14cdf979bb0": 1,
+        "ord_ca79997446078e2c89": 1,
+        "ord_29d896272637ffacdf": 1,
+        "ord_5e4a67ad5fa1780a33": 1
+      },
+      "matched_exits": 4,
+      "distinct_closed_entries": 4,
+      "historical_same_size_buys": 61
+    },
+    "f2": {
+      "entry_counts": {
+        "ord_c6dd0ec14cdf979bb0": 1,
+        "ord_ca79997446078e2c89": 1,
+        "ord_29d896272637ffacdf": 1,
+        "ord_5e4a67ad5fa1780a33": 1
+      },
+      "matched_exits": 4,
+      "distinct_closed_entries": 4,
+      "historical_same_size_buys": 61
+    },
+    "f3": {
+      "entry_counts": {
+        "ord_c6dd0ec14cdf979bb0": 1,
+        "ord_ca79997446078e2c89": 1,
+        "ord_29d896272637ffacdf": 1,
+        "ord_5e4a67ad5fa1780a33": 1
+      },
+      "matched_exits": 4,
+      "distinct_closed_entries": 4,
+      "historical_same_size_buys": 61
+    },
+    "f4": {
+      "entry_counts": {
+        "ord_c6dd0ec14cdf979bb0": 1,
+        "ord_ca79997446078e2c89": 1,
+        "ord_29d896272637ffacdf": 1,
+        "ord_5e4a67ad5fa1780a33": 1
+      },
+      "matched_exits": 4,
+      "distinct_closed_entries": 4,
+      "historical_same_size_buys": 61
+    },
+    "f5": {
+      "entry_counts": {
+        "ord_c6dd0ec14cdf979bb0": 1,
+        "ord_ca79997446078e2c89": 1,
+        "ord_29d896272637ffacdf": 1,
+        "ord_5e4a67ad5fa1780a33": 1
+      },
+      "matched_exits": 4,
+      "distinct_closed_entries": 4,
+      "historical_same_size_buys": 64
+    },
+    "f6": {
+      "entry_counts": {
+        "ord_c6dd0ec14cdf979bb0": 1,
+        "ord_ca79997446078e2c89": 1,
+        "ord_29d896272637ffacdf": 1,
+        "ord_5e4a67ad5fa1780a33": 1
+      },
+      "matched_exits": 4,
+      "distinct_closed_entries": 4,
+      "historical_same_size_buys": 61
+    },
+    "f7": {
+      "entry_counts": {
+        "ord_c6dd0ec14cdf979bb0": 1,
+        "ord_ca79997446078e2c89": 1,
+        "ord_29d896272637ffacdf": 1,
+        "ord_5e4a67ad5fa1780a33": 1
+      },
+      "matched_exits": 4,
+      "distinct_closed_entries": 4,
+      "historical_same_size_buys": 61
+    },
+    "f8": {
+      "entry_counts": {
+        "ord_c6dd0ec14cdf979bb0": 1,
+        "ord_ca79997446078e2c89": 1,
+        "ord_29d896272637ffacdf": 1,
+        "ord_5e4a67ad5fa1780a33": 1
+      },
+      "matched_exits": 4,
+      "distinct_closed_entries": 4,
+      "historical_same_size_buys": 61
+    },
+    "f9": {
+      "entry_counts": {
+        "ord_c6dd0ec14cdf979bb0": 1,
+        "ord_ca79997446078e2c89": 1,
+        "ord_29d896272637ffacdf": 1,
+        "ord_5e4a67ad5fa1780a33": 1
+      },
+      "matched_exits": 4,
+      "distinct_closed_entries": 4,
+      "historical_same_size_buys": 61
+    },
+    "f10": {
+      "entry_counts": {
+        "ord_c6dd0ec14cdf979bb0": 1,
+        "ord_ca79997446078e2c89": 1,
+        "ord_29d896272637ffacdf": 1,
+        "ord_5e4a67ad5fa1780a33": 1
+      },
+      "matched_exits": 4,
+      "distinct_closed_entries": 4,
+      "historical_same_size_buys": 61
+    }
+  },
+  "runner_exit": 0,
+  "prior_order_count": 3002
+}

@@ -1,0 +1,131 @@
+{
+  "utc": "2026-11-19T07:13:44.674046+00:00",
+  "accounts": 11,
+  "instances": {
+    "real": {
+      "link_http": 200,
+      "exposure": [
+        {
+          "account": "master2",
+          "positions": 0,
+          "pending": 0
+        },
+        {
+          "account": "f1",
+          "positions": 0,
+          "pending": 0
+        },
+        {
+          "account": "f2",
+          "positions": 0,
+          "pending": 0
+        },
+        {
+          "account": "f3",
+          "positions": 0,
+          "pending": 0
+        },
+        {
+          "account": "f4",
+          "positions": 0,
+          "pending": 0
+        },
+        {
+          "account": "f5",
+          "positions": 0,
+          "pending": 0
+        },
+        {
+          "account": "f6",
+          "positions": 0,
+          "pending": 0
+        },
+        {
+          "account": "f7",
+          "positions": 0,
+          "pending": 0
+        },
+        {
+          "account": "f8",
+          "positions": 0,
+          "pending": 0
+        },
+        {
+          "account": "f9",
+          "positions": 0,
+          "pending": 0
+        },
+        {
+          "account": "f10",
+          "positions": 0,
+          "pending": 0
+        }
+      ],
+      "active_links": 10
+    },
+    "real-net": {
+      "link_http": 404,
+      "exposure": [
+        {
+          "account": "master2",
+          "positions": null,
+          "pending": null
+        },
+        {
+          "account": "f1",
+          "positions": null,
+          "pending": null
+        },
+        {
+          "account": "f2",
+          "positions": null,
+          "pending": null
+        },
+        {
+          "account": "f3",
+          "positions": null,
+          "pending": null
+        },
+        {
+          "account": "f4",
+          "positions": null,
+          "pending": null
+        },
+        {
+          "account": "f5",
+          "positions": null,
+          "pending": null
+        },
+        {
+          "account": "f6",
+          "positions": null,
+          "pending": null
+        },
+        {
+          "account": "f7",
+          "positions": null,
+          "pending": null
+        },
+        {
+          "account": "f8",
+          "positions": null,
+          "pending": null
+        },
+        {
+          "account": "f9",
+          "positions": null,
+          "pending": null
+        },
+        {
+          "account": "f10",
+          "positions": null,
+          "pending": null
+        }
+      ],
+      "active_links": 0
+    }
+  },
+  "routing": {
+    "b": 11
+  }
+}

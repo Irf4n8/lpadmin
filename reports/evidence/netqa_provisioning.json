@@ -1,0 +1,88 @@
+{
+  "members": {
+    "netqa10@mailinator.com": "b",
+    "netqa9@mailinator.com": "b",
+    "netqa8@mailinator.com": "b",
+    "netqa7@mailinator.com": "b",
+    "netqa6@mailinator.com": "b",
+    "netqa5@mailinator.com": "b",
+    "netqa4@mailinator.com": "b",
+    "netqa3@mailinator.com": "b",
+    "netqa2@mailinator.com": "b",
+    "netqa1@mailinator.com": "b"
+  },
+  "netting_checks": {
+    "/positions": [
+      200,
+      null
+    ],
+    "/orders": [
+      200,
+      null
+    ],
+    "/copy/follows": [
+      200,
+      null
+    ],
+    "/copy/masters": [
+      200,
+      null
+    ]
+  },
+  "links": {
+    "netqa10@mailinator.com": {
+      "http": 200,
+      "verified": true
+    },
+    "netqa9@mailinator.com": {
+      "http": 200,
+      "verified": true
+    },
+    "netqa8@mailinator.com": {
+      "http": 200,
+      "verified": true
+    },
+    "netqa7@mailinator.com": {
+      "http": 200,
+      "verified": true
+    },
+    "netqa6@mailinator.com": {
+      "http": 200,
+      "verified": true
+    },
+    "netqa5@mailinator.com": {
+      "http": 200,
+      "verified": true
+    },
+    "netqa4@mailinator.com": {
+      "http": 200,
+      "verified": true
+    },
+    "netqa3@mailinator.com": {
+      "http": 200,
+      "verified": true
+    },
+    "netqa2@mailinator.com": {
+      "http": 200,
+      "verified": true
+    },
+    "netqa1@mailinator.com": {
+      "http": 200,
+      "verified": true
+    }
+  },
+  "master_netting": {
+    "/positions": {
+      "status_code": 404,
+      "data": {
+        "error": "no such OMS instance: real-net"
+      }
+    },
+    "/orders": {
+      "status_code": 404,
+      "data": {
+        "error": "no such OMS instance: real-net"
+      }
+    }
+  }
+}

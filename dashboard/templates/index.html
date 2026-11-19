@@ -4019,16 +4019,26 @@
       if (e.key === '/' && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) { e.preventDefault(); $('suiteSearch').focus(); }
     });
     const visible = () => !document.hidden;
-    setInterval(() => visible() && fetchStatus(), 1000);
-    setInterval(() => visible() && activeTab === 'terminal' && fetchLogs(), 1500);
-    setInterval(() => visible() && activeTab === 'tape' && fetchLiveOrders(), 3000);
-    setInterval(() => visible() && activeTab === 'followers' && fetchFollowers(), 3000);
-    setInterval(() => visible() && activeTab === 'reports' && fetchReports(), 5000);
-    setInterval(() => visible() && (activeTab === 'regression' || REG?.current?.status === 'RUNNING') && fetchRegression(), 4000);
-    setInterval(() => visible() && activeTab === 'e2e' && fetchMarkets(), 60000);
-    setInterval(() => visible() && fetchSummary(), 15000);
-    setInterval(() => visible() && fetchBooks(), 60000);
-    setInterval(() => visible() && !lastStatus?.is_running && fetchHealth(false), 60000);
+    function pollWhen(fetchData, interval, enabled = () => true) {
+      let pending = false;
+      setInterval(async () => {
+        if (pending || !visible() || !enabled()) return;
+        pending = true;
+        try { await fetchData(); }
+        catch (error) { console.debug('Dashboard refresh failed', error); }
+        finally { pending = false; }
+      }, interval);
+    }
+    pollWhen(fetchStatus, 1000);
+    pollWhen(fetchLogs, 1500, () => activeTab === 'terminal');
+    pollWhen(fetchLiveOrders, 3000, () => activeTab === 'tape');
+    pollWhen(fetchFollowers, 3000, () => activeTab === 'followers');
+    pollWhen(fetchReports, 5000, () => activeTab === 'reports');
+    pollWhen(fetchRegression, 4000, () => activeTab === 'regression' || REG?.current?.status === 'RUNNING');
+    pollWhen(fetchMarkets, 60000, () => activeTab === 'e2e');
+    pollWhen(fetchSummary, 15000);
+    pollWhen(fetchBooks, 60000);
+    pollWhen(() => fetchHealth(false), 60000, () => !lastStatus?.is_running);
     document.addEventListener('visibilitychange', () => { if (visible()) { fetchStatus(); fetchLogs(); } });
 
     (async function init() {
@@ -4147,7 +4157,7 @@
       await openBrokerModal(); fetchModes(); fetchFollowers(true);
       if (bad) $('brokerResult').innerHTML = `<span style="color:var(--danger)">${bad} failed: ` + esc((data.results || []).slice(0, 3).map(r => r.email.split('@')[0] + ' – ' + r.error).join('; ')) + '</span>';
     }
-    fetchModes(); setInterval(() => document.visibilityState === 'visible' && fetchModes(), 60000);
+    fetchModes(); pollWhen(fetchModes, 60000);
   </script>
 </body>
 </html>

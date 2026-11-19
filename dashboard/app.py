@@ -14,12 +14,15 @@ import json
 import os
 import re
 import shutil
+import stat
 import subprocess
 import sys
 import threading
 import time
+from collections import deque
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
+from functools import lru_cache
 from pathlib import Path
 from flask import Flask, Response, g, jsonify, make_response, render_template, request, send_from_directory
 
@@ -141,23 +144,38 @@ def history_update(run_id: str, **fields) -> None:
         _save_history(items)
 
 
-_COUNT_CACHE = {}
+_LOG_LOCK = threading.Lock()
+_LOG_SNAPSHOT = None
+
+
+def _live_log_snapshot(path: Path) -> tuple:
+    global _LOG_SNAPSHOT
+    with _LOG_LOCK, path.open(encoding="utf-8", errors="replace") as log:
+        st = os.fstat(log.fileno())
+        fingerprint = (st.st_dev, st.st_ino, st.st_size, st.st_mtime_ns, st.st_ctime_ns)
+        if _LOG_SNAPSHOT is not None and _LOG_SNAPSHOT[0] == fingerprint:
+            return _LOG_SNAPSHOT[1]
+
+        tail = deque(maxlen=300)
+        passed = failed = total = 0
+        for line in log:
+            tail.append(line)
+            passed += line.count("[PASS]")
+            failed += line.count("[FAIL]")
+            total += 1
+
+        snapshot = ("".join(tail), total, passed, failed)
+        _LOG_SNAPSHOT = (fingerprint, snapshot)
+        return snapshot
 
 
 def count_log_results(path: Path) -> tuple:
-    """Count [PASS] / [FAIL] markers in a log (cached by mtime+size)."""
+    """Count [PASS] / [FAIL] markers using the shared live log snapshot."""
     try:
-        st = path.stat()
+        _, _, passed, failed = _live_log_snapshot(path)
     except OSError:
         return 0, 0
-    key = (str(path), st.st_mtime_ns, st.st_size)
-    if key in _COUNT_CACHE:
-        return _COUNT_CACHE[key]
-    text = path.read_text(encoding="utf-8", errors="replace")
-    res = (text.count("[PASS]"), text.count("[FAIL]"))
-    _COUNT_CACHE.clear()
-    _COUNT_CACHE[key] = res
-    return res
+    return passed, failed
 
 
 def monitor_process(proc, run_id, log_handle):
@@ -248,14 +266,13 @@ def get_status():
 
 @app.route("/api/logs")
 def get_logs():
-    if not LATEST_LOG_FILE.exists():
-        return jsonify({"logs": ""})
     try:
-        with open(LATEST_LOG_FILE, "r", encoding="utf-8", errors="replace") as f:
-            lines = f.readlines()
-        return jsonify({"logs": "".join(lines[-300:]), "total_lines": len(lines)})
-    except Exception as e:
-        return jsonify({"logs": f"Error reading logs: {str(e)}"})
+        logs, total, _, _ = _live_log_snapshot(LATEST_LOG_FILE)
+        return jsonify({"logs": logs, "total_lines": total})
+    except FileNotFoundError:
+        return jsonify({"logs": ""})
+    except OSError as e:
+        return jsonify({"logs": f"Error reading logs: {e}"})
 
 
 @app.route("/api/logs/download")
@@ -547,7 +564,6 @@ def stop_suite():
 # Evidence summary (real numbers for the header cards)
 # -------------------------------------------------------------------------------------
 _FAMILY_RE = re.compile(r"^(?P<fam>.+?)_(?P<ts>\d{8}_\d{6})$")
-_SUMMARY_CACHE = {}
 
 
 def _count_statuses(obj, acc):
@@ -613,6 +629,13 @@ def platform_overview():
     return jsonify(out)
 
 
+@lru_cache(maxsize=256)
+def _evidence_counts(path: Path, fingerprint: tuple) -> dict:
+    counts = {"passed": 0, "failed": 0, "warned": 0}
+    _count_statuses(json.loads(path.read_text(encoding="utf-8")), counts)
+    return counts
+
+
 @app.route("/api/summary")
 def get_summary():
     families = {}
@@ -621,20 +644,19 @@ def get_summary():
             continue
         m = _FAMILY_RE.match(p.stem)
         fam = m.group("fam") if m else p.stem
-        mt = p.stat().st_mtime
-        if fam not in families or mt > families[fam][1]:
-            families[fam] = (p, mt)
+        try:
+            st = p.stat()
+        except FileNotFoundError:
+            continue
+        if fam not in families or st.st_mtime_ns > families[fam][1].st_mtime_ns:
+            families[fam] = (p, st)
     rows = []
-    for fam, (p, mt) in families.items():
-        key = (p.name, mt)
-        if key not in _SUMMARY_CACHE:
-            acc = {"passed": 0, "failed": 0, "warned": 0}
-            try:
-                _count_statuses(json.loads(p.read_text(encoding="utf-8")), acc)
-            except Exception:
-                pass
-            _SUMMARY_CACHE[key] = acc
-        acc = _SUMMARY_CACHE[key]
+    for fam, (p, st) in families.items():
+        try:
+            acc = _evidence_counts(p, (st.st_ino, st.st_size, st.st_mtime_ns, st.st_ctime_ns))
+        except (OSError, ValueError, RecursionError):
+            continue
+        mt = st.st_mtime
         if acc["passed"] + acc["failed"] + acc["warned"] == 0:
             continue
         rows.append({"family": fam, "label": fam.replace("_", " ").replace(" evidence", "").title(), "file": p.name,
@@ -774,47 +796,57 @@ def get_reports():
     search_dirs = [BASE_DIR / "reports", BASE_DIR / "reports" / "evidence"]
 
     for d in search_dirs:
-        if not d.exists():
+        candidates = []
+        try:
+            for f in d.iterdir():
+                if f.suffix not in (".json", ".md", ".csv", ".jtl") or f.name.startswith("baseline") or f.name in seen_files:
+                    continue
+                try:
+                    st = f.stat()
+                except FileNotFoundError:
+                    continue
+                if stat.S_ISREG(st.st_mode):
+                    candidates.append((f, st))
+        except FileNotFoundError:
             continue
-        for f in sorted(d.iterdir(), key=os.path.getmtime, reverse=True):
-            if f.is_file() and f.suffix in [".json", ".md", ".csv", ".jtl"] and not f.name.startswith("baseline") and f.name not in seen_files:
-                seen_files.add(f.name)
-                mtime = datetime.fromtimestamp(f.stat().st_mtime).strftime("%Y-%m-%d %H:%M:%S")
-                category = "Other"
-                if f.name.startswith("e2e"):
-                    category = "End-to-End"
-                elif f.name.startswith("symbols"):
-                    category = "Symbol Coverage"
-                elif "jmeter" in f.name:
-                    category = "JMeter Load Test"
-                elif "real_money" in f.name:
-                    category = "Real Money Mode"
-                elif "balance" in f.name:
-                    category = "Balance Mode"
-                elif "equity" in f.name:
-                    category = "Equity Mode"
-                elif "race" in f.name:
-                    category = "Race Conditions"
-                elif "parity" in f.name or "symmetric" in f.name:
-                    category = "Buy/Sell Parity"
-                elif "pending" in f.name:
-                    category = "Pending Trigger"
-                elif "extended" in f.name:
-                    category = "Extended Edge Cases"
-                elif "state" in f.name:
-                    category = "Account States"
-                elif "reconciliation" in f.name or "accounting" in f.name:
-                    category = "Reconciliation"
-                elif "evidence" in f.name:
-                    category = "Core Multiplier"
+        for f, st in sorted(candidates, key=lambda entry: entry[1].st_mtime_ns, reverse=True):
+            seen_files.add(f.name)
+            mtime = datetime.fromtimestamp(st.st_mtime).strftime("%Y-%m-%d %H:%M:%S")
+            category = "Other"
+            if f.name.startswith("e2e"):
+                category = "End-to-End"
+            elif f.name.startswith("symbols"):
+                category = "Symbol Coverage"
+            elif "jmeter" in f.name:
+                category = "JMeter Load Test"
+            elif "real_money" in f.name:
+                category = "Real Money Mode"
+            elif "balance" in f.name:
+                category = "Balance Mode"
+            elif "equity" in f.name:
+                category = "Equity Mode"
+            elif "race" in f.name:
+                category = "Race Conditions"
+            elif "parity" in f.name or "symmetric" in f.name:
+                category = "Buy/Sell Parity"
+            elif "pending" in f.name:
+                category = "Pending Trigger"
+            elif "extended" in f.name:
+                category = "Extended Edge Cases"
+            elif "state" in f.name:
+                category = "Account States"
+            elif "reconciliation" in f.name or "accounting" in f.name:
+                category = "Reconciliation"
+            elif "evidence" in f.name:
+                category = "Core Multiplier"
 
-                reports.append({
-                    "filename": f.name,
-                    "category": category,
-                    "type": f.suffix.replace(".", "").upper(),
-                    "size_kb": round(f.stat().st_size / 1024, 1),
-                    "modified_at": mtime
-                })
+            reports.append({
+                "filename": f.name,
+                "category": category,
+                "type": f.suffix.replace(".", "").upper(),
+                "size_kb": round(st.st_size / 1024, 1),
+                "modified_at": mtime
+            })
     return jsonify({"reports": reports})
 
 

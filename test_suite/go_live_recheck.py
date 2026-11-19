@@ -70,4 +70,5 @@ def main():
     out = ROOT / "reports" / "evidence" / f"go_live_recheck_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
     out.write_text(json.dumps(OUT, indent=2, default=str)); print("[*] evidence:", out)
 
-main()
+if __name__ == "__main__":
+    main()
