@@ -1,0 +1,563 @@
+[
+  {
+    "id": "PROD-RACE-GUI-DUAL-BALANCE-1",
+    "name": "Two simultaneous Admin Set balance submissions cannot corrupt cash or MAM benchmark",
+    "status": "PASS",
+    "started_at": "2026-11-20T10:27:59.623245+00:00",
+    "finished_at": "2026-11-20T10:28:08.132993+00:00",
+    "details": {
+      "responses": [
+        {
+          "email": "mamf1@mailinator.com",
+          "value": 900000,
+          "started_at": "2026-11-20T10:28:05.893171+00:00",
+          "finished_at": "2026-11-20T10:28:06.166926+00:00",
+          "http": 200,
+          "payload": {
+            "instance": "real",
+            "balance": 900000,
+            "remark": "Set from the member profile (real)",
+            "operation_key": "1504f492-20b0-4d9f-a3e7-2cc952945989"
+          },
+          "body": {
+            "balance": 900000,
+            "delta": -100000,
+            "funds": {
+              "balance": 900000,
+              "equity": 900000,
+              "free_margin": 900000,
+              "margin_call_level": 100,
+              "margin_level": null,
+              "starting_balance": 900000,
+              "stop_out_level": 50,
+              "unrealized_pnl": 0,
+              "used_margin": 0
+            },
+            "instance": "real",
+            "success": true
+          }
+        },
+        {
+          "email": "mamf1@mailinator.com",
+          "value": 1100000,
+          "started_at": "2026-11-20T10:28:05.964646+00:00",
+          "finished_at": "2026-11-20T10:28:06.215544+00:00",
+          "http": 200,
+          "payload": {
+            "instance": "real",
+            "balance": 1100000,
+            "remark": "Set from the member profile (real)",
+            "operation_key": "1a81ce7a-709f-484b-bcef-344ef98a68a8"
+          },
+          "body": {
+            "balance": 1100000,
+            "delta": 200000,
+            "funds": {
+              "balance": 1100000,
+              "equity": 1100000,
+              "free_margin": 1100000,
+              "margin_call_level": 100,
+              "margin_level": null,
+              "starting_balance": 1100000,
+              "stop_out_level": 50,
+              "unrealized_pnl": 0,
+              "used_margin": 0
+            },
+            "instance": "real",
+            "success": true
+          }
+        }
+      ],
+      "final_funds": {
+        "balance": 1100000,
+        "equity": 1100000,
+        "free_margin": 1100000,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 1100000,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "relationship": {
+        "follow_id": "mfl_290505635a1f10a01b",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_0ea679062ffd38adf7",
+        "instance": "real",
+        "starting_balance": 1100000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T10:28:00.381206Z"
+      },
+      "expected_hwm": 1100000,
+      "assertion": "Two accepted absolute GUI balance writes must end at one submitted value and apply only the net cash delta to the benchmark."
+    },
+    "trace": "http_102641.jsonl.gz"
+  },
+  {
+    "id": "PROD-RACE-GUI-DUAL-BALANCE-2",
+    "name": "Two simultaneous Admin Set balance submissions cannot corrupt cash or MAM benchmark",
+    "status": "PASS",
+    "started_at": "2026-11-20T10:28:08.134969+00:00",
+    "finished_at": "2026-11-20T10:28:16.518114+00:00",
+    "details": {
+      "responses": [
+        {
+          "email": "mamf1@mailinator.com",
+          "value": 901000,
+          "started_at": "2026-11-20T10:28:14.849358+00:00",
+          "finished_at": "2026-11-20T10:28:15.079047+00:00",
+          "http": 200,
+          "payload": {
+            "instance": "real",
+            "balance": 901000,
+            "remark": "Set from the member profile (real)",
+            "operation_key": "a8a06ea6-b23e-4d42-803a-f0acca4deffd"
+          },
+          "body": {
+            "balance": 901000,
+            "delta": -99000,
+            "funds": {
+              "balance": 901000,
+              "equity": 901000,
+              "free_margin": 901000,
+              "margin_call_level": 100,
+              "margin_level": null,
+              "starting_balance": 901000,
+              "stop_out_level": 50,
+              "unrealized_pnl": 0,
+              "used_margin": 0
+            },
+            "instance": "real",
+            "success": true
+          }
+        },
+        {
+          "email": "mamf1@mailinator.com",
+          "value": 1101000,
+          "started_at": "2026-11-20T10:28:14.739580+00:00",
+          "finished_at": "2026-11-20T10:28:15.096299+00:00",
+          "http": 200,
+          "payload": {
+            "instance": "real",
+            "balance": 1101000,
+            "remark": "Set from the member profile (real)",
+            "operation_key": "a9a42483-a0a1-4000-b9c0-bee74af16e5d"
+          },
+          "body": {
+            "balance": 1101000,
+            "delta": 200000,
+            "funds": {
+              "balance": 1101000,
+              "equity": 1101000,
+              "free_margin": 1101000,
+              "margin_call_level": 100,
+              "margin_level": null,
+              "starting_balance": 1101000,
+              "stop_out_level": 50,
+              "unrealized_pnl": 0,
+              "used_margin": 0
+            },
+            "instance": "real",
+            "success": true
+          }
+        }
+      ],
+      "final_funds": {
+        "balance": 1101000,
+        "equity": 1101000,
+        "free_margin": 1101000,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 1101000,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "relationship": {
+        "follow_id": "mfl_290505635a1f10a01b",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_0ea679062ffd38adf7",
+        "instance": "real",
+        "starting_balance": 1101000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T10:28:00.381206Z"
+      },
+      "expected_hwm": 1101000,
+      "assertion": "Two accepted absolute GUI balance writes must end at one submitted value and apply only the net cash delta to the benchmark."
+    },
+    "trace": "http_102641.jsonl.gz"
+  },
+  {
+    "id": "PROD-RACE-GUI-DUAL-BALANCE-3",
+    "name": "Two simultaneous Admin Set balance submissions cannot corrupt cash or MAM benchmark",
+    "status": "PASS",
+    "started_at": "2026-11-20T10:28:16.526265+00:00",
+    "finished_at": "2026-11-20T10:28:25.797669+00:00",
+    "details": {
+      "responses": [
+        {
+          "email": "mamf1@mailinator.com",
+          "value": 902000,
+          "started_at": "2026-11-20T10:28:24.017568+00:00",
+          "finished_at": "2026-11-20T10:28:24.248085+00:00",
+          "http": 200,
+          "payload": {
+            "instance": "real",
+            "balance": 902000,
+            "remark": "Set from the member profile (real)",
+            "operation_key": "2ba68d85-7fe7-4f90-944c-f6ac22596e42"
+          },
+          "body": {
+            "balance": 902000,
+            "delta": -98000,
+            "funds": {
+              "balance": 1102000,
+              "equity": 1102000,
+              "free_margin": 1102000,
+              "margin_call_level": 100,
+              "margin_level": null,
+              "starting_balance": 1102000,
+              "stop_out_level": 50,
+              "unrealized_pnl": 0,
+              "used_margin": 0
+            },
+            "instance": "real",
+            "success": true
+          }
+        },
+        {
+          "email": "mamf1@mailinator.com",
+          "value": 1102000,
+          "started_at": "2026-11-20T10:28:23.963255+00:00",
+          "finished_at": "2026-11-20T10:28:24.252130+00:00",
+          "http": 200,
+          "payload": {
+            "instance": "real",
+            "balance": 1102000,
+            "remark": "Set from the member profile (real)",
+            "operation_key": "867a660e-fcd8-4247-ad16-e38f16e0f957"
+          },
+          "body": {
+            "balance": 1102000,
+            "delta": 200000,
+            "funds": {
+              "balance": 1102000,
+              "equity": 1102000,
+              "free_margin": 1102000,
+              "margin_call_level": 100,
+              "margin_level": null,
+              "starting_balance": 1102000,
+              "stop_out_level": 50,
+              "unrealized_pnl": 0,
+              "used_margin": 0
+            },
+            "instance": "real",
+            "success": true
+          }
+        }
+      ],
+      "final_funds": {
+        "balance": 1102000,
+        "equity": 1102000,
+        "free_margin": 1102000,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 1102000,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "relationship": {
+        "follow_id": "mfl_290505635a1f10a01b",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_0ea679062ffd38adf7",
+        "instance": "real",
+        "starting_balance": 1102000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T10:28:00.381206Z"
+      },
+      "expected_hwm": 1102000,
+      "assertion": "Two accepted absolute GUI balance writes must end at one submitted value and apply only the net cash delta to the benchmark."
+    },
+    "trace": "http_102641.jsonl.gz"
+  },
+  {
+    "id": "PROD-RACE-GUI-BALANCE-REJOIN-1",
+    "name": "Admin balance update racing MAM rejoin preserves the follower benchmark",
+    "status": "PASS",
+    "started_at": "2026-11-20T10:28:25.800146+00:00",
+    "finished_at": "2026-11-20T10:28:38.997047+00:00",
+    "details": {
+      "ui_response": {
+        "email": "mamf1@mailinator.com",
+        "value": 1200000,
+        "started_at": "2026-11-20T10:28:32.716872+00:00",
+        "finished_at": "2026-11-20T10:28:33.132374+00:00",
+        "http": 200,
+        "payload": {
+          "instance": "real",
+          "balance": 1200000,
+          "remark": "Set from the member profile (real)",
+          "operation_key": "be4baccf-1ee7-49a3-8a67-a22cbf6b265d"
+        },
+        "body": {
+          "balance": 1200000,
+          "delta": 200000,
+          "funds": {
+            "balance": 1200000,
+            "equity": 1200000,
+            "free_margin": 1200000,
+            "margin_call_level": 100,
+            "margin_level": null,
+            "starting_balance": 1200000,
+            "stop_out_level": 50,
+            "unrealized_pnl": 0,
+            "used_margin": 0
+          },
+          "instance": "real",
+          "success": true
+        }
+      },
+      "follow_response": {
+        "http": 200,
+        "body": {
+          "follow": {
+            "follow_id": "mfl_290505635a1f10a01b",
+            "master_client_id": "mem_11434b0b9d9d210899",
+            "follower_client_id": "mem_0ea679062ffd38adf7",
+            "instance": "real",
+            "starting_balance": 1200000,
+            "share_percent": 50,
+            "method": "multiplier",
+            "multiplier": 1,
+            "status": "active",
+            "joined_at": "2026-11-20T10:28:35.365919Z"
+          },
+          "success": true
+        }
+      },
+      "final_funds_before_restore": {
+        "balance": 1200000,
+        "equity": 1200000,
+        "free_margin": 1200000,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 1200000,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "active_relationships_before_restore": [
+        {
+          "follow_id": "mfl_290505635a1f10a01b",
+          "master_client_id": "mem_11434b0b9d9d210899",
+          "follower_client_id": "mem_0ea679062ffd38adf7",
+          "instance": "real",
+          "starting_balance": 1200000,
+          "share_percent": 50,
+          "method": "multiplier",
+          "multiplier": 1,
+          "status": "active",
+          "joined_at": "2026-11-20T10:28:35.365919Z"
+        }
+      ],
+      "assertion": "Whether rejoin or cash commit wins first, the active relationship benchmark must equal the final cash balance."
+    },
+    "trace": "http_102641.jsonl.gz"
+  },
+  {
+    "id": "PROD-RACE-GUI-BALANCE-REJOIN-2",
+    "name": "Admin balance update racing MAM rejoin preserves the follower benchmark",
+    "status": "PASS",
+    "started_at": "2026-11-20T10:28:38.999597+00:00",
+    "finished_at": "2026-11-20T10:28:48.708153+00:00",
+    "details": {
+      "ui_response": {
+        "email": "mamf1@mailinator.com",
+        "value": 1201000,
+        "started_at": "2026-11-20T10:28:45.301125+00:00",
+        "finished_at": "2026-11-20T10:28:45.563517+00:00",
+        "http": 200,
+        "payload": {
+          "instance": "real",
+          "balance": 1201000,
+          "remark": "Set from the member profile (real)",
+          "operation_key": "cd51728a-2dc1-46c6-b319-d07bc978292f"
+        },
+        "body": {
+          "balance": 1201000,
+          "delta": 201000,
+          "funds": {
+            "balance": 1201000,
+            "equity": 1201000,
+            "free_margin": 1201000,
+            "margin_call_level": 100,
+            "margin_level": null,
+            "starting_balance": 1201000,
+            "stop_out_level": 50,
+            "unrealized_pnl": 0,
+            "used_margin": 0
+          },
+          "instance": "real",
+          "success": true
+        }
+      },
+      "follow_response": {
+        "http": 200,
+        "body": {
+          "follow": {
+            "follow_id": "mfl_290505635a1f10a01b",
+            "master_client_id": "mem_11434b0b9d9d210899",
+            "follower_client_id": "mem_0ea679062ffd38adf7",
+            "instance": "real",
+            "starting_balance": 1201000,
+            "share_percent": 50,
+            "method": "multiplier",
+            "multiplier": 1,
+            "status": "active",
+            "joined_at": "2026-11-20T10:28:47.127773Z"
+          },
+          "success": true
+        }
+      },
+      "final_funds_before_restore": {
+        "balance": 1201000,
+        "equity": 1201000,
+        "free_margin": 1201000,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 1201000,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "active_relationships_before_restore": [
+        {
+          "follow_id": "mfl_290505635a1f10a01b",
+          "master_client_id": "mem_11434b0b9d9d210899",
+          "follower_client_id": "mem_0ea679062ffd38adf7",
+          "instance": "real",
+          "starting_balance": 1201000,
+          "share_percent": 50,
+          "method": "multiplier",
+          "multiplier": 1,
+          "status": "active",
+          "joined_at": "2026-11-20T10:28:47.127773Z"
+        }
+      ],
+      "assertion": "Whether rejoin or cash commit wins first, the active relationship benchmark must equal the final cash balance."
+    },
+    "trace": "http_102641.jsonl.gz"
+  },
+  {
+    "id": "PROD-RACE-GUI-BALANCE-REJOIN-3",
+    "name": "Admin balance update racing MAM rejoin preserves the follower benchmark",
+    "status": "PASS",
+    "started_at": "2026-11-20T10:28:48.710874+00:00",
+    "finished_at": "2026-11-20T10:29:03.206004+00:00",
+    "details": {
+      "ui_response": {
+        "email": "mamf1@mailinator.com",
+        "value": 1202000,
+        "started_at": "2026-11-20T10:28:54.543413+00:00",
+        "finished_at": "2026-11-20T10:28:54.711106+00:00",
+        "http": 200,
+        "payload": {
+          "instance": "real",
+          "balance": 1202000,
+          "remark": "Set from the member profile (real)",
+          "operation_key": "dff0ff43-954f-4669-b0f8-7efe2cf23be8"
+        },
+        "body": {
+          "balance": 1202000,
+          "delta": 202000,
+          "funds": {
+            "balance": 1202000,
+            "equity": 1202000,
+            "free_margin": 1202000,
+            "margin_call_level": 100,
+            "margin_level": null,
+            "starting_balance": 1202000,
+            "stop_out_level": 50,
+            "unrealized_pnl": 0,
+            "used_margin": 0
+          },
+          "instance": "real",
+          "success": true
+        }
+      },
+      "follow_response": {
+        "http": 200,
+        "body": {
+          "follow": {
+            "follow_id": "mfl_290505635a1f10a01b",
+            "master_client_id": "mem_11434b0b9d9d210899",
+            "follower_client_id": "mem_0ea679062ffd38adf7",
+            "instance": "real",
+            "starting_balance": 1202000,
+            "share_percent": 50,
+            "method": "multiplier",
+            "multiplier": 1,
+            "status": "active",
+            "joined_at": "2026-11-20T10:29:01.298605Z"
+          },
+          "success": true
+        }
+      },
+      "final_funds_before_restore": {
+        "balance": 1202000,
+        "equity": 1202000,
+        "free_margin": 1202000,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 1202000,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "active_relationships_before_restore": [
+        {
+          "follow_id": "mfl_290505635a1f10a01b",
+          "master_client_id": "mem_11434b0b9d9d210899",
+          "follower_client_id": "mem_0ea679062ffd38adf7",
+          "instance": "real",
+          "starting_balance": 1202000,
+          "share_percent": 50,
+          "method": "multiplier",
+          "multiplier": 1,
+          "status": "active",
+          "joined_at": "2026-11-20T10:29:01.298605Z"
+        }
+      ],
+      "assertion": "Whether rejoin or cash commit wins first, the active relationship benchmark must equal the final cash balance."
+    },
+    "trace": "http_102641.jsonl.gz"
+  },
+  {
+    "id": "PROD-RACE-FINAL-STATE",
+    "name": "Production-race cleanup leaves flat accounts, no orders, and one valid link per follower",
+    "status": "PASS",
+    "started_at": "2026-11-20T10:29:38.663085+00:00",
+    "finished_at": "2026-11-20T10:29:38.663129+00:00",
+    "details": {
+      "position_or_balance_errors": {},
+      "relationship_errors": {},
+      "working_orders": {},
+      "restored_balances": {
+        "mamm@mailinator.com": 1000000,
+        "mamf1@mailinator.com": 1000000,
+        "mamf2@mailinator.com": 1000000
+      }
+    },
+    "trace": "http_102641.jsonl.gz"
+  }
+]
