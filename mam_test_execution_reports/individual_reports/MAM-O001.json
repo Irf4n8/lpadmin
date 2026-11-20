@@ -1,18 +1,15 @@
 {
-  "test_case_id": "MAM-O001",
+  "id": "MAM-O001",
   "module": "Module 11: Operational Tools & Emergency Runbooks",
   "title": "Broker Global Emergency Kill-Switch on MAM Group",
-  "priority": "P0",
   "precondition": "Rogue manager algorithm or severe market anomaly detected.",
   "steps": "1. Broker Risk Officer triggers 'Emergency Kill-Switch' on MAM Group #101.2. Confirm with 2FA.",
-  "expected_result": "All master trading immediately halted; all working limit orders cancelled; all 500 child positions closed at market in < 1,500ms.",
-  "execution_timestamp": "2026-11-16T10:58:46.241368Z",
-  "verification_type": "LIVE_API_EXECUTION",
-  "status": "PASS",
-  "actual_result": "Broker emergency kill-switch bulk squareoff gateway responded in 75.2ms (SLA < 1,500ms).",
-  "evidence": {
-    "response_status": 400,
-    "execution_time_ms": 75.24633407592773
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "All master trading immediately halted; all working limit orders cancelled; all 500 child positions closed at market in < 1,500ms.",
+  "priority": "P0",
+  "test_case_id": "MAM-O001",
+  "status": "BLOCKED",
+  "coverage_note": "Requires operator/backoffice infrastructure, deployment/failover controls, immutable logs, or external clearing evidence not supplied.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

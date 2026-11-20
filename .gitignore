@@ -59,3 +59,7 @@ Thumbs.db
 *.swp
 *.swo
 *~
+~$*.xlsx
+
+# Large local QA HTTP traces (summaries and SHA-256 manifest are committed)
+reports/live_recheck_20261120/deep_run/http_*.jsonl.gz

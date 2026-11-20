@@ -1,32 +1,20 @@
 {
-  "test_case_id": "MAM-F006",
+  "id": "MAM-F006",
   "module": "Module 1: Group & Sub-Account Lifecycle",
   "title": "Switch MAM Allocation Method on Active Group",
-  "priority": "P0",
   "precondition": "MAM group active with 10 accounts; manager changes method from PBB to PBE.",
   "steps": "1. Manager switches allocation mode to Proportional by Equity (PBE).2. Submit update when zero trades are open.",
-  "expected_result": "Allocation engine updates configuration; subsequent orders apportioned by live equity; audit log recorded.",
-  "execution_timestamp": "2026-11-16T10:58:41.801742Z",
-  "verification_type": "LIVE_API_EXECUTION",
-  "status": "PASS",
-  "actual_result": "MAM allocation method dynamic update executed and confirmed via OMS follow API.",
-  "evidence": {
-    "switch_status": 200,
-    "response": {
-      "follow": {
-        "follow_id": "mfl_d13553509d15882cc0",
-        "master_client_id": "mem_e2dbce29e1c71a7bf6",
-        "follower_client_id": "mem_3513ad4d841ac5689a",
-        "instance": "real",
-        "starting_balance": 10000000,
-        "share_percent": 50,
-        "method": "equity",
-        "multiplier": 1,
-        "status": "active",
-        "joined_at": "2026-11-16T10:58:41.557795Z"
-      },
-      "success": true
-    }
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Allocation engine updates configuration; subsequent orders apportioned by live equity; audit log recorded.",
+  "priority": "P0",
+  "test_case_id": "MAM-F006",
+  "status": "PARTIAL",
+  "coverage_note": "Balance/equity sizing on current MAM tested; immutable configuration audit trail not inspected.",
+  "executed_check_ids": [
+    "SIZE-BALANCE",
+    "SIZE-EQUITY"
+  ],
+  "evidence_files": [
+    "reports/live_recheck_20261120/deep_run/results_054627.json"
+  ],
+  "release_signoff": false
 }

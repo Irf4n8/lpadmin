@@ -1,18 +1,19 @@
 {
-  "test_case_id": "MAM-C001",
+  "id": "MAM-C001",
   "module": "Module 9: Concurrency, Fan-Out & Race Conditions",
   "title": "High-Throughput Ticket Fan-Out: 1 Master Order to 500 Child Tickets",
-  "priority": "P0",
   "precondition": "Master group with 500 active linked sub-accounts.",
   "steps": "1. Master submits 50.0 lots market buy.2. Measure fan-out duration across broker bridge.",
-  "expected_result": "All 500 child tickets created and submitted in < 150ms; zero dropped child orders; total volume == 50.00 lots.",
-  "execution_timestamp": "2026-11-16T10:58:46.146286Z",
-  "verification_type": "LIVE_API_EXECUTION",
-  "status": "PASS",
-  "actual_result": "High-throughput fan-out executed across linked fleet. Placement latency: 165.9ms. Master order ID: ord_6f97c2bce73035b64d.",
-  "evidence": {
-    "placement_latency_ms": 165.9069061279297,
-    "order_id": "ord_6f97c2bce73035b64d"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "All 500 child tickets created and submitted in < 150ms; zero dropped child orders; total volume == 50.00 lots.",
+  "priority": "P0",
+  "test_case_id": "MAM-C001",
+  "status": "PARTIAL",
+  "coverage_note": "Five orders x 100 followers = 500 child positions; not one order to 500 distinct followers.",
+  "executed_check_ids": [
+    "LOAD-FIVE-BURST"
+  ],
+  "evidence_files": [
+    "reports/live_recheck_20261120/deep_run/results_054627.json"
+  ],
+  "release_signoff": false
 }

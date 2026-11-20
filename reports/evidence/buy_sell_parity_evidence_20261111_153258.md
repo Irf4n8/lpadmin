@@ -1,14 +1,7 @@
-# Buy/Sell Full Parity & Order Type Evidence Report
+# Superseded QA report
 
-**Generated:** 2026-11-11T10:02:58.724270+00:00  
-**Master:** `ctmaster@mailinator.com`  
-**Followers Tested:** 100  
-**Overall Result:** **5/5 SCENARIOS PASSED**
+This report was replaced on 20 November 2026 after assertion review and live real-hedging retesting. Its old pass/fail counts are not current release evidence.
 
-| Scenario | Orders Placed | Followers Verified | Status | Details |
-| :--- | :---: | :---: | :---: | :--- |
-| **Market SELL Partial Close (10 orders)** | 10 | 100/100 | ✅ PASS | Clean: N/A |
-| **Market SELL Dynamic TP/SL (10 orders)** | 10 | 100/100 | ✅ PASS | Clean: N/A |
-| **Pending BUY STOP Orders Fan-Out & Cancel (10 orders)** | 10 | 100/100 | ✅ PASS | Clean: 100 |
-| **Pending SELL STOP Orders Fan-Out & Cancel (10 orders)** | 10 | 100/100 | ✅ PASS | Clean: 100 |
-| **Final Teardown & Zero Orphan Verification** | 10 | 100/100 | ✅ PASS | Clean: N/A |
+See `MAM_QA_MASTER_TEST_EXECUTION_REPORT.md` and `reports/live_recheck_20261120/validated_results.json` for current results, detailed evidence, and blocked cases.
+
+The exact prior report is preserved in `reports/live_recheck_20261120/historical_reports_before_rewrite.zip`. No old result has been silently promoted to PASS.

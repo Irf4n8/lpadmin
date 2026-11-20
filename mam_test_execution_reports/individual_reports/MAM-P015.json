@@ -1,17 +1,19 @@
 {
-  "test_case_id": "MAM-P015",
+  "id": "MAM-P015",
   "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
   "title": "Orphan Child Order Auto-Cleanup on Parent Order Cancellation",
-  "priority": "P0",
   "precondition": "Master cancels parent order while 2 child orders are in-flight.",
   "steps": "1. Cancellation report arrives.",
-  "expected_result": "In-flight child orders cancelled or closed immediately; zero orphan positions left active.",
-  "execution_timestamp": "2026-11-16T10:58:44.386361Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Parent order cancellation initiates downstream cascade cancelling all associated in-flight child tickets.",
-  "evidence": {
-    "cancellation_cascade": "Parent to child propagation"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "In-flight child orders cancelled or closed immediately; zero orphan positions left active.",
+  "priority": "P0",
+  "test_case_id": "MAM-P015",
+  "status": "PARTIAL",
+  "coverage_note": "Pending cancellation/orphan state tested; injected LP child-submission failure not available.",
+  "executed_check_ids": [
+    "PENDING-100-FANOUT-LIMIT"
+  ],
+  "evidence_files": [
+    "reports/live_recheck_20261120/deep_run/results_060312.json"
+  ],
+  "release_signoff": false
 }

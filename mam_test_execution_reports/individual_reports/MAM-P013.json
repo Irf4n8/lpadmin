@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-P013",
+  "id": "MAM-P013",
   "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
   "title": "Fill Price Averaging Across Multi-Currency Accounts",
-  "priority": "P1",
   "precondition": "Sub-accounts in USD, EUR, GBP; block executes on EURUSD.",
   "steps": "1. Apply VWAP fill price.",
-  "expected_result": "Identical base execution price assigned; FX currency conversion applies only to realized P&L and margin.",
-  "execution_timestamp": "2026-11-16T10:58:44.384830Z",
-  "verification_type": "QUANTITATIVE_CALCULATION",
-  "status": "PASS",
-  "actual_result": "Identical VWAP base price assigned to all child tickets; FX conversion applies only to margin and realized P&L.",
-  "evidence": {
-    "vwap_base": "Currency invariant"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Identical base execution price assigned; FX currency conversion applies only to realized P&L and margin.",
+  "priority": "P1",
+  "test_case_id": "MAM-P013",
+  "status": "BLOCKED",
+  "coverage_note": "Requires LP partial-fill, depth, rejection, or routing fault injection; these dedicated accounts are B-book and no LP simulator was supplied.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

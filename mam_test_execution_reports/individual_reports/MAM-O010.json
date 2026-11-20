@@ -1,18 +1,15 @@
 {
-  "test_case_id": "MAM-O010",
+  "id": "MAM-O010",
   "module": "Module 11: Operational Tools & Emergency Runbooks",
   "title": "Disaster Recovery Warm Standby Cluster Failover",
-  "priority": "P0",
   "precondition": "Primary cloud region experiences catastrophic data center failure.",
   "steps": "1. Trigger automated DNS and database failover to secondary cloud region.",
-  "expected_result": "Standby MAM engine assumes active traffic within 120 seconds; zero dropped trades (RPO = 0s, RTO < 120s).",
-  "execution_timestamp": "2026-11-16T10:58:46.451159Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Warm standby failover architecture guarantees RPO = 0s (zero lost trades) and RTO < 120s via active-passive database replication.",
-  "evidence": {
-    "rpo_seconds": 0,
-    "rto_seconds": 120
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Standby MAM engine assumes active traffic within 120 seconds; zero dropped trades (RPO = 0s, RTO < 120s).",
+  "priority": "P0",
+  "test_case_id": "MAM-O010",
+  "status": "BLOCKED",
+  "coverage_note": "Requires operator/backoffice infrastructure, deployment/failover controls, immutable logs, or external clearing evidence not supplied.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

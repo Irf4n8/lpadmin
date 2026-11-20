@@ -1,19 +1,21 @@
 {
-  "test_case_id": "MAM-A015",
+  "id": "MAM-A015",
   "module": "Module 2: MAM Allocation Methods & Sizing Engine",
   "title": "Small Scalp Order Sizing (0.10 Lots Across 10 Accounts)",
-  "priority": "P0",
   "precondition": "Master opens minimal 0.10 lots across 10 equal sub-accounts.",
   "steps": "1. Calculate child lots: 0.10 / 10 = 0.01 lots each.",
-  "expected_result": "Exactly 10 child orders of 0.01 lots generated; executed cleanly.",
-  "execution_timestamp": "2026-11-16T10:58:42.347139Z",
-  "verification_type": "QUANTITATIVE_CALCULATION",
-  "status": "PASS",
-  "actual_result": "Scalp order sizing: 10 accounts receive exactly 0.01 lots each. Sum = 0.10 lots.",
-  "evidence": {
-    "master_lots": 0.1,
-    "accounts": 10,
-    "child_lot": 0.01
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Exactly 10 child orders of 0.01 lots generated; executed cleanly.",
+  "priority": "P0",
+  "test_case_id": "MAM-A015",
+  "status": "PARTIAL",
+  "coverage_note": "Small-ticket copy sizing tested; original conserved .10 block across ten accounts differs from current copy model.",
+  "executed_check_ids": [
+    "SIZE-LOT-RULE-0.01-0.25",
+    "MARKET-BUY"
+  ],
+  "evidence_files": [
+    "reports/live_recheck_20261120/deep_run/results_054434.json",
+    "reports/live_recheck_20261120/deep_run/results_060733.json"
+  ],
+  "release_signoff": false
 }

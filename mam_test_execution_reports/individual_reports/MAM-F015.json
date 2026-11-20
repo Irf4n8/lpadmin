@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-F015",
+  "id": "MAM-F015",
   "module": "Module 1: Group & Sub-Account Lifecycle",
   "title": "Manager Voluntary Group Archival / Dissolution",
-  "priority": "P0",
   "precondition": "Manager retires MAM group with 15 linked accounts.",
   "steps": "1. Manager closes all open group positions.2. Manager clicks 'Close & Dissolve MAM Group'.",
-  "expected_result": "Group dissolved; LPOAs revoked for all 15 clients; full independent trading rights restored; historical records archived.",
-  "execution_timestamp": "2026-11-16T10:58:42.336448Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Manager status update to 'inactive' or archival in database revokes active fan-out across all linked sub-accounts.",
-  "evidence": {
-    "api_support": "POST /v1/oms/{instance}/mam/master with status='inactive'"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Group dissolved; LPOAs revoked for all 15 clients; full independent trading rights restored; historical records archived.",
+  "priority": "P0",
+  "test_case_id": "MAM-F015",
+  "status": "BLOCKED",
+  "coverage_note": "LPOA contracts, independent group-management/archival controls or required role fixtures are not available in the verified API/UI flow.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

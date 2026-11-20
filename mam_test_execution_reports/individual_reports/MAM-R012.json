@@ -1,18 +1,15 @@
 {
-  "test_case_id": "MAM-R012",
+  "id": "MAM-R012",
   "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
   "title": "Cumulative Remainder Lot Drift Over 1,000 Consecutive Trades",
-  "priority": "P0",
   "precondition": "1,000 trades executed with 0.01 remainder each under Round-Robin policy.",
   "steps": "1. Measure cumulative volume across all 3 sub-accounts.",
-  "expected_result": "Total volume delta across all accounts is <= 0.01 lots; zero cumulative bias.",
-  "execution_timestamp": "2026-11-16T10:58:42.356330Z",
-  "verification_type": "QUANTITATIVE_CALCULATION",
-  "status": "PASS",
-  "actual_result": "Cumulative remainder drift over 1,000 simulated trades is strictly bounded to 0.01 lots.",
-  "evidence": {
-    "trades_simulated": 1000,
-    "max_delta_lots": 0.01
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Total volume delta across all accounts is <= 0.01 lots; zero cumulative bias.",
+  "priority": "P0",
+  "test_case_id": "MAM-R012",
+  "status": "BLOCKED",
+  "coverage_note": "No configurable remainder-distribution ledger, rebate ledger, or exact block-allocation policy was available for this requirement.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

@@ -1,18 +1,15 @@
 {
-  "test_case_id": "MAM-E012",
+  "id": "MAM-E012",
   "module": "Module 4: Order Execution, Modification & Bulk Routing",
   "title": "Sub-Account Real-Time P&L Stream to Mobile App",
-  "priority": "P1",
   "precondition": "Master trade is fluctuating by +15 pips.",
   "steps": "1. Investor views individual MT5/mobile app.",
-  "expected_result": "Client sees their exact floating P&L and margin level in real time with < 250ms WebSocket latency.",
-  "execution_timestamp": "2026-11-16T10:58:44.371383Z",
-  "verification_type": "LIVE_API_EXECUTION",
-  "status": "PASS",
-  "actual_result": "Live WebSocket feed verified active on /v1/oms/real/ws (HTTP 426 Upgrade protocol handshake validated).",
-  "evidence": {
-    "endpoint": "/v1/oms/real/ws",
-    "handshake_response": "WebSocket protocol violation: Upgrade header \"\" does not contain websocket"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Client sees their exact floating P&L and margin level in real time with < 250ms WebSocket latency.",
+  "priority": "P1",
+  "test_case_id": "MAM-E012",
+  "status": "BLOCKED",
+  "coverage_note": "This exact execution/terminal/event-ordering fixture was not available or not executed; related market cases do not prove it.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

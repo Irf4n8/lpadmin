@@ -1,19 +1,15 @@
 {
-  "test_case_id": "MAM-L015",
+  "id": "MAM-L015",
   "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
   "title": "Automated Statutory Tax Withholding on Manager Performance Fees",
-  "priority": "P2",
   "precondition": "Manager resident in jurisdiction requiring 20% withholding tax on fees.",
   "steps": "1. Settle monthly performance fee ($1,000).",
-  "expected_result": "$800 credited to manager wallet; $200 transferred to tax escrow sub-account; tax statement generated.",
-  "execution_timestamp": "2026-11-16T10:58:46.165356Z",
-  "verification_type": "QUANTITATIVE_CALCULATION",
-  "status": "PASS",
-  "actual_result": "Statutory tax withholding computed: $800.00 credited to manager wallet; $200.00 transferred to tax escrow.",
-  "evidence": {
-    "fee": 1000.0,
-    "tax_withheld": 200.0,
-    "net_manager": 800.0
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "$800 credited to manager wallet; $200 transferred to tax escrow sub-account; tax statement generated.",
+  "priority": "P2",
+  "test_case_id": "MAM-L015",
+  "status": "BLOCKED",
+  "coverage_note": "Requires compliance policy fixtures, jurisdiction controls, document/audit access and authorized evidence. Trading API success cannot establish compliance.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

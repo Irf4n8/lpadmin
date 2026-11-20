@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "unique_live_checks": 81,
+  "live_totals": {
+    "PASS": 81
+  },
+  "original_cases": 165,
+  "all_evidence_links_verified": true,
+  "raw_assertions_preserved": true,
+  "final_accounts": 101,
+  "active_target_followers": 100,
+  "open_positions": 0,
+  "working_orders": 0,
+  "balance_each": 1000000,
+  "master_share_percent": 50,
+  "follower_method": "multiplier",
+  "multiplier": 1
+}

@@ -1,0 +1,439 @@
+{
+  "executed_at": "2026-11-20T06:13:13.316229+00:00",
+  "mode": "offline; outbound sockets blocked",
+  "results": [
+    {
+      "name": "Python syntax",
+      "expected": "All Python files parse",
+      "actual": {
+        "files": 290,
+        "errors": []
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "F003 API failure handling",
+      "expected": "Must not PASS when both endpoints return 503",
+      "actual": {
+        "status": "PASS",
+        "evidence": {
+          "licence": {},
+          "portal_docs": 503
+        }
+      },
+      "status": "FAIL"
+    },
+    {
+      "name": "Calculation-only production certification",
+      "expected": "No production-ready claim without platform verification",
+      "actual": {
+        "assessment": "PASSED_PRODUCTION_READY",
+        "client_calls": 0
+      },
+      "status": "FAIL"
+    },
+    {
+      "name": "bulk_squareoff on read failure",
+      "expected": "Must not return success when inventory read fails",
+      "actual": {
+        "status_code": 200,
+        "data": {
+          "message": "No open positions"
+        }
+      },
+      "status": "FAIL"
+    },
+    {
+      "name": "bulk_cancel on read failure",
+      "expected": "Must not return success when inventory read fails",
+      "actual": {
+        "status_code": 200,
+        "data": {
+          "message": "No pending orders"
+        }
+      },
+      "status": "FAIL"
+    },
+    {
+      "name": "Full close with failed close and failed verification",
+      "expected": "FAIL or BLOCKED",
+      "actual": {
+        "name": "Full Close (1 orders closed)",
+        "status": "PASS",
+        "pass_count": 1,
+        "orphan_count": 0,
+        "total_followers": 1,
+        "orders_closed": 1,
+        "details": {
+          "f": {
+            "closed": true,
+            "open_positions": 0
+          }
+        }
+      },
+      "status": "FAIL"
+    },
+    {
+      "name": "Authentication missing chart token",
+      "expected": false,
+      "actual": true,
+      "status": "FAIL"
+    },
+    {
+      "name": "Order POST retry after ambiguous timeout",
+      "expected": "No automatic replay without an idempotency guarantee",
+      "actual": {
+        "attempts": 2,
+        "idempotency_header": false
+      },
+      "status": "FAIL"
+    },
+    {
+      "name": "Reject nonfinite lot",
+      "expected": "Finite positive lot or validation error",
+      "actual": "inf",
+      "status": "FAIL"
+    },
+    {
+      "name": "Real instance confirmation guard",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "name": "Follower range normalization",
+      "expected": [
+        "2",
+        "5"
+      ],
+      "actual": [
+        "2",
+        "5"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "MARKET BUY protection reference",
+      "expected": "Correct side and entry reference",
+      "actual": {
+        "cmp": 60000,
+        "base_price": 60000,
+        "trigger_price": null,
+        "tp_price": 60100.0,
+        "sl_price": 59900.0,
+        "precision": 1,
+        "point_multiplier": 1.0
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "MARKET SELL protection reference",
+      "expected": "Correct side and entry reference",
+      "actual": {
+        "cmp": 60000,
+        "base_price": 60000,
+        "trigger_price": null,
+        "tp_price": 59900.0,
+        "sl_price": 60100.0,
+        "precision": 1,
+        "point_multiplier": 1.0
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "LIMIT BUY protection reference",
+      "expected": "Correct side and entry reference",
+      "actual": {
+        "cmp": 60000,
+        "base_price": 59950.0,
+        "trigger_price": 59950.0,
+        "tp_price": 60050.0,
+        "sl_price": 59850.0,
+        "precision": 1,
+        "point_multiplier": 1.0
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "LIMIT SELL protection reference",
+      "expected": "Correct side and entry reference",
+      "actual": {
+        "cmp": 60000,
+        "base_price": 60050.0,
+        "trigger_price": 60050.0,
+        "tp_price": 59950.0,
+        "sl_price": 60150.0,
+        "precision": 1,
+        "point_multiplier": 1.0
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "STOP BUY protection reference",
+      "expected": "Correct side and entry reference",
+      "actual": {
+        "cmp": 60000,
+        "base_price": 60050.0,
+        "trigger_price": 60050.0,
+        "tp_price": 60150.0,
+        "sl_price": 59950.0,
+        "precision": 1,
+        "point_multiplier": 1.0
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "STOP SELL protection reference",
+      "expected": "Correct side and entry reference",
+      "actual": {
+        "cmp": 60000,
+        "base_price": 59950.0,
+        "trigger_price": 59950.0,
+        "tp_price": 59850.0,
+        "sl_price": 60050.0,
+        "precision": 1,
+        "point_multiplier": 1.0
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "ISO Z latency calculation",
+      "expected": 100.0,
+      "actual": 100.0,
+      "status": "PASS"
+    },
+    {
+      "name": "CLI help: main.py",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "CLI help: test_suite/runner.py",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "CLI help: test_suite/balance_mode_runner.py",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "CLI help: test_suite/equity_mode_runner.py",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "CLI help: test_suite/buy_sell_symmetric_runner.py",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "CLI help: test_suite/race_conditions_runner.py",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "CLI help: test_suite/extreme_scenarios_and_race_runner.py",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "CLI help: test_suite/pending_trigger_race_runner.py",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "CLI help: test_suite/pending_live_execution_runner.py",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "CLI help: test_suite/advanced_order_types_runner.py",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "CLI help: test_suite/state_changes_and_hedging_runner.py",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "CLI help: test_suite/extended_runner.py",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "CLI help: test_suite/accounting_reconciliation_runner.py",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "CLI reversed follower range",
+      "expected": "Validation error or normalized range",
+      "actual": "IndexError: list index out of range",
+      "status": "FAIL"
+    },
+    {
+      "name": "Testops rejects unknown suite",
+      "expected": 400,
+      "actual": 400,
+      "status": "PASS"
+    },
+    {
+      "name": "Testops rejects unconfirmed real execution",
+      "expected": 412,
+      "actual": 412,
+      "status": "PASS"
+    },
+    {
+      "name": "Testops malformed params",
+      "expected": 400,
+      "actual": "AttributeError: 'list' object has no attribute 'get'",
+      "status": "FAIL"
+    }
+  ],
+  "totals": {
+    "PASS": 25,
+    "FAIL": 10
+  },
+  "historical_report_not_retested": {
+    "total": 165,
+    "claimed_passed": 165,
+    "verification_types": {
+      "LIVE_API_EXECUTION": 21,
+      "API_CONTRACT_VERIFICATION": 93,
+      "QUANTITATIVE_CALCULATION": 51
+    }
+  },
+  "unconditional_pass_call_sites": [
+    1003,
+    1174,
+    1881,
+    1013,
+    1184,
+    1355,
+    1731,
+    1891,
+    2058,
+    188,
+    837,
+    1024,
+    1194,
+    1365,
+    1741,
+    1901,
+    2068,
+    848,
+    1204,
+    1375,
+    1751,
+    1911,
+    2078,
+    217,
+    648,
+    1048,
+    1214,
+    1385,
+    1761,
+    1921,
+    2088,
+    445,
+    876,
+    1058,
+    1224,
+    1395,
+    1771,
+    1931,
+    2098,
+    246,
+    456,
+    886,
+    1068,
+    1234,
+    1405,
+    1598,
+    1781,
+    1941,
+    258,
+    469,
+    684,
+    897,
+    1244,
+    1415,
+    1791,
+    1951,
+    2128,
+    271,
+    694,
+    907,
+    1091,
+    1254,
+    1429,
+    1801,
+    1961,
+    2138,
+    493,
+    1101,
+    1264,
+    1439,
+    1811,
+    1971,
+    2148,
+    298,
+    717,
+    938,
+    1111,
+    1274,
+    1453,
+    1821,
+    1981,
+    2158,
+    308,
+    525,
+    1121,
+    1284,
+    1463,
+    1831,
+    1991,
+    2168,
+    321,
+    535,
+    961,
+    1131,
+    1294,
+    1473,
+    1672,
+    2001,
+    2180,
+    340,
+    971,
+    1141,
+    1304,
+    1483,
+    1682,
+    1853,
+    2011,
+    350,
+    981,
+    1151,
+    1314,
+    1493,
+    1692,
+    1863,
+    2025,
+    2204
+  ]
+}

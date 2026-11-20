@@ -1,0 +1,65 @@
+[
+  {
+    "id": "SETUP-BALANCE",
+    "name": "GUI set/read back 1,000,000 on all 101 real-hedging accounts",
+    "status": "PASS",
+    "started_at": "2026-11-20T05:45:57.363469+00:00",
+    "finished_at": "2026-11-20T05:45:57.363484+00:00",
+    "details": {
+      "accounts": 101,
+      "balance_each": 1000000,
+      "mechanism": "Actual admin GUI clicks + API readback"
+    },
+    "trace": "http_054434.jsonl"
+  },
+  {
+    "id": "MARKET-BUY",
+    "name": "BLACK BTCUSD BUY -> 100 followers -> master close",
+    "status": "PASS",
+    "started_at": "2026-11-20T05:45:57.364481+00:00",
+    "finished_at": "2026-11-20T05:46:01.341634+00:00",
+    "details": {
+      "master_order_id": "ord_e0d22e2a5f3e7043be",
+      "accounts": 101,
+      "incorrect_positions": {},
+      "remaining_after_master_close": {},
+      "close": {
+        "http": 200,
+        "body": {
+          "exit_price": 61790.23,
+          "market_order_id": "ord_e0d22e2a5f3e7043be",
+          "price_source": "live",
+          "realized_pnl": 0.3136000000000058,
+          "success": true,
+          "symbol": "BLACK:BTCUSD"
+        }
+      }
+    },
+    "trace": "http_054434.jsonl"
+  },
+  {
+    "id": "MARKET-SELL",
+    "name": "BLACK BTCUSD SELL -> 100 followers -> master close",
+    "status": "PASS",
+    "started_at": "2026-11-20T05:46:01.342679+00:00",
+    "finished_at": "2026-11-20T05:46:07.298460+00:00",
+    "details": {
+      "master_order_id": "ord_f01c2bd3de52e66192",
+      "accounts": 101,
+      "incorrect_positions": {},
+      "remaining_after_master_close": {},
+      "close": {
+        "http": 200,
+        "body": {
+          "exit_price": 61804.03,
+          "market_order_id": "ord_f01c2bd3de52e66192",
+          "price_source": "live",
+          "realized_pnl": -0.2430000000000291,
+          "success": true,
+          "symbol": "BLACK:BTCUSD"
+        }
+      }
+    },
+    "trace": "http_054434.jsonl"
+  }
+]

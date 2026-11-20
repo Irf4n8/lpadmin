@@ -1,25 +1,7 @@
-# Bug-Inducing QA Scenario Report: BTC03 - Rapid Double-Tap Inversion Race Condition (Flip Direction within 500ms)
+# Superseded QA report
 
-**Execution Timestamp**: `2026-11-12T10:16:06.100627+00:00`  
-**Scenario Outcome**: `✅ HANDLED CLEANLY`  
-**Target Bug Category**: `Async Execution Race Condition & Direction Flip`  
-**Execution Duration**: `161.09s`  
-**Exit Rule**: `120-Second Mandatory Live Countdown`
+This report was replaced on 20 November 2026 after assertion review and live real-hedging retesting. Its old pass/fail counts are not current release evidence.
 
----
-## Scenario Specifications & Real-World User Workflow
-- **User Story**: Master executes rapid BUY -> Square-off -> immediate SELL to test async follower queue collision and stuck opposite positions.
-- **Symbol**: `BINANCE:BTCUSDT.P` | **Side**: `BUY` | **Master Lot**: `1.25`
-- **Master Entry Price**: `$73,423.05` | **TP**: `None` | **SL**: `None`
+See `MAM_QA_MASTER_TEST_EXECUTION_REPORT.md` and `reports/live_recheck_20261120/validated_results.json` for current results, detailed evidence, and blocked cases.
 
----
-## Replication & Execution Telemetry
-| Metric | Observed Value | Expected Behavior |
-| :--- | :--- | :--- |
-| **Replication Rate** | `100.0%` (100/100) | 100% Replication |
-| **Lot Sizing Match Rate** | `100.0%` | Sizing Formula Precision |
-| **Residual Open Trades After Square-off** | `0` | `0` (Zero Orphan Trades) |
-
----
-## Identified Bugs, Vulnerabilities & System Anomalies
-- **No bugs observed.** The system handled this edge case gracefully without desynchronization, orphan positions, or calculation errors.
+The exact prior report is preserved in `reports/live_recheck_20261120/historical_reports_before_rewrite.zip`. No old result has been silently promoted to PASS.

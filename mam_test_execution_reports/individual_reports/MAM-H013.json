@@ -1,17 +1,21 @@
 {
-  "test_case_id": "MAM-H013",
+  "id": "MAM-H013",
   "module": "Module 8: High-Water Mark & Performance Fees",
   "title": "Fee Deduction Concurrency with Open Positions",
-  "priority": "P0",
   "precondition": "Sub-account has active open trades during monthly fee settlement.",
   "steps": "1. Deduct fee from free margin cash.",
-  "expected_result": "Free margin decreases safely; margin level verified before debit to prevent triggering stop-out.",
-  "execution_timestamp": "2026-11-16T10:58:44.833778Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Fee settlement checks free margin before executing cash debit, preventing fee deduction from triggering margin stop-outs.",
-  "evidence": {
-    "safety_rule": "fee <= free_margin"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Free margin decreases safely; margin level verified before debit to prevent triggering stop-out.",
+  "priority": "P0",
+  "test_case_id": "MAM-H013",
+  "status": "PARTIAL",
+  "coverage_note": "Cash update/settlement/HWM races tested; retain fee evidence for whether positive manager share occurred.",
+  "executed_check_ids": [
+    "RACE-GUI-LEDGER-1",
+    "RACE-GUI-LEDGER-2",
+    "RACE-GUI-LEDGER-3"
+  ],
+  "evidence_files": [
+    "reports/live_recheck_20261120/deep_run/results_055545.json"
+  ],
+  "release_signoff": false
 }

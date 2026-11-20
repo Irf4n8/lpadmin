@@ -1,0 +1,192 @@
+[
+  {
+    "id": "FEE-HWM-FIRST-REPRO",
+    "name": "Reproduce manager share at first profitable benchmark crossing",
+    "status": "FAIL",
+    "started_at": "2026-11-20T06:11:32.963894+00:00",
+    "finished_at": "2026-11-20T06:11:46.916267+00:00",
+    "details": {
+      "balance_before_entry": {
+        "balance": 1000000,
+        "equity": 1000000,
+        "free_margin": 1000000,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 1000000,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "balance_after_close": {
+        "balance": 1000015,
+        "equity": 999974.56,
+        "free_margin": 876083.9600000001,
+        "margin_call_level": 100,
+        "margin_level": 807.1432053763563,
+        "starting_balance": 1000000,
+        "stop_out_level": 50,
+        "unrealized_pnl": -40.44000000000233,
+        "used_margin": 123890.6
+      },
+      "relationship": {
+        "follow_id": "mfl_290505635a1f10a01b",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_0ea679062ffd38adf7",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T06:11:33.789046Z"
+      },
+      "history": [
+        {
+          "history_id": 1434286,
+          "order_id": "ord_720d264a2e9a5d14be",
+          "position_id": "pos_135b96d4fae81d9ee7",
+          "group_id": "qa_dcdb06af0f5e4a0c",
+          "symbol": "BLACK:BTCUSD",
+          "side": "SELL",
+          "qty": 2,
+          "entry_price": 61942.78,
+          "exit_price": 61933.78,
+          "realized_pnl": 18,
+          "executed_at": "2026-11-20T06:11:46.909481Z",
+          "exit_type": "MARKET",
+          "exit_source": "mam_close",
+          "entry_source": "mam",
+          "entry_type": "MARKET",
+          "entry_copy_kind": "mam",
+          "opened_at": "2026-11-20T06:11:34.518342Z"
+        }
+      ],
+      "shares": [
+        {
+          "above_hwm": false,
+          "at": "2026-11-20T06:11:46.910431Z",
+          "balance_before": 1000000,
+          "follow_id": "mfl_290505635a1f10a01b",
+          "follower": "mem_0ea679062ffd38adf7",
+          "follower_share": 18,
+          "instance": "real",
+          "master": "mem_11434b0b9d9d210899",
+          "master_share": 0,
+          "order_pnl": 18,
+          "share_id": 177012,
+          "starting_balance": 1000000,
+          "trade_id": 1434286
+        }
+      ],
+      "already_above_before_trade": false,
+      "assertion": "Positive manager share on profit above benchmark; first-crossing policy awaiting product confirmation"
+    },
+    "trace": "http_061052.jsonl.gz"
+  },
+  {
+    "id": "FEE-HWM-ABOVE-CONTROL",
+    "name": "Control: profitable close when balance already exceeds benchmark",
+    "status": "PASS",
+    "started_at": "2026-11-20T06:11:46.917305+00:00",
+    "finished_at": "2026-11-20T06:11:56.142050+00:00",
+    "details": {
+      "balance_before_entry": {
+        "balance": 1000015,
+        "equity": 999974.56,
+        "free_margin": 876083.9600000001,
+        "margin_call_level": 100,
+        "margin_level": 807.1432053763563,
+        "starting_balance": 1000000,
+        "stop_out_level": 50,
+        "unrealized_pnl": -40.44000000000233,
+        "used_margin": 123890.6
+      },
+      "balance_after_close": {
+        "balance": 1000022.77,
+        "equity": 999929.37,
+        "free_margin": 752178.01,
+        "margin_call_level": 100,
+        "margin_level": 403.60197013651106,
+        "starting_balance": 1000000,
+        "stop_out_level": 50,
+        "unrealized_pnl": -93.40000000000873,
+        "used_margin": 247751.36
+      },
+      "relationship": {
+        "follow_id": "mfl_290505635a1f10a01b",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_0ea679062ffd38adf7",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T06:11:33.789046Z"
+      },
+      "history": [
+        {
+          "history_id": 1434363,
+          "order_id": "ord_b54e8922b5545901de",
+          "position_id": "pos_edc3e6176d6bcd4da6",
+          "group_id": "qa_e0b850ef29cb4778",
+          "symbol": "BLACK:BTCUSD",
+          "side": "SELL",
+          "qty": 2,
+          "entry_price": 61925.07,
+          "exit_price": 61914.3,
+          "realized_pnl": 21.539999999993597,
+          "executed_at": "2026-11-20T06:11:56.084078Z",
+          "exit_type": "MARKET",
+          "exit_source": "mam_close",
+          "entry_source": "mam",
+          "entry_type": "MARKET",
+          "entry_copy_kind": "mam",
+          "opened_at": "2026-11-20T06:11:48.340069Z"
+        }
+      ],
+      "shares": [
+        {
+          "above_hwm": true,
+          "at": "2026-11-20T06:11:56.085881Z",
+          "balance_before": 1000015,
+          "follow_id": "mfl_290505635a1f10a01b",
+          "follower": "mem_0ea679062ffd38adf7",
+          "follower_share": 10.77,
+          "instance": "real",
+          "master": "mem_11434b0b9d9d210899",
+          "master_share": 10.77,
+          "order_pnl": 21.539999999993597,
+          "share_id": 177088,
+          "starting_balance": 1000000,
+          "trade_id": 1434363
+        }
+      ],
+      "already_above_before_trade": true,
+      "assertion": "Positive manager share on profit above benchmark; first-crossing policy awaiting product confirmation"
+    },
+    "trace": "http_061052.jsonl.gz"
+  },
+  {
+    "id": "FINAL-ACCOUNT-STATE",
+    "name": "GUI reset and readback: 101 balances, flat inventory, no pending orders and 100 active multiplier-one links",
+    "status": "PASS",
+    "started_at": "2026-11-20T06:12:17.157205+00:00",
+    "finished_at": "2026-11-20T06:13:08.768448+00:00",
+    "details": {
+      "accounts_verified": 101,
+      "balance_each": 1000000,
+      "positions_and_balance_errors": {},
+      "relationship_errors": {},
+      "working_order_count": 0,
+      "snapshot": "final_account_state.json",
+      "master_configuration": {
+        "client_id": "mem_11434b0b9d9d210899",
+        "display_name": "Zero Fee Master",
+        "share_percent": 50,
+        "status": "active"
+      }
+    },
+    "trace": "http_061052.jsonl.gz"
+  }
+]

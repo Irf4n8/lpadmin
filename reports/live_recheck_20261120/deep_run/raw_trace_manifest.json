@@ -1,0 +1,50 @@
+[
+  {
+    "file": "http_054010.jsonl.gz",
+    "size_bytes": 3968410,
+    "sha256": "c6bbaee3dbf3b761db748c46bbf58ea76065bc6d6e090396665952055feab23c",
+    "repository_status": "Excluded from Git because raw HTTP evidence archives exceed practical repository limits; retained locally."
+  },
+  {
+    "file": "http_054434.jsonl.gz",
+    "size_bytes": 32679,
+    "sha256": "04ce7af7b0dced7d1bcd86d20b0131dd3f91c16ca3ca9113792681cec679ba85",
+    "repository_status": "Excluded from Git because raw HTTP evidence archives exceed practical repository limits; retained locally."
+  },
+  {
+    "file": "http_054627.jsonl.gz",
+    "size_bytes": 155026799,
+    "sha256": "f4a1b7b93f19fff667cc6516bd8ea3161a3a76bd61778a7391a7855e36547338",
+    "repository_status": "Excluded from Git because raw HTTP evidence archives exceed practical repository limits; retained locally."
+  },
+  {
+    "file": "http_055545.jsonl.gz",
+    "size_bytes": 116542387,
+    "sha256": "d8ec318d9c3c5f85f0173eb409219bcacffa6dfc4ca418bcdfa5e903d9c88712",
+    "repository_status": "Excluded from Git because raw HTTP evidence archives exceed practical repository limits; retained locally."
+  },
+  {
+    "file": "http_060312.jsonl.gz",
+    "size_bytes": 70906305,
+    "sha256": "893f0befd6fda23032853128cc78dabb2c60f26be8cc082dac0863d57004cfdd",
+    "repository_status": "Excluded from Git because raw HTTP evidence archives exceed practical repository limits; retained locally."
+  },
+  {
+    "file": "http_060733.jsonl.gz",
+    "size_bytes": 30735464,
+    "sha256": "e5e58077d48c8b9a60d58d40d24ddb12d013d7ff217203ce1dc78bc3f44f8709",
+    "repository_status": "Excluded from Git because raw HTTP evidence archives exceed practical repository limits; retained locally."
+  },
+  {
+    "file": "http_061052.jsonl.gz",
+    "size_bytes": 20377956,
+    "sha256": "4e12ac7b585e3904b717c4be192ec33102522d4b257d5cdc4191926c3d3f46ac",
+    "repository_status": "Excluded from Git because raw HTTP evidence archives exceed practical repository limits; retained locally."
+  },
+  {
+    "file": "http_061323.jsonl.gz",
+    "size_bytes": 20553465,
+    "sha256": "fda49d39cf064efe713d5ab45baf943e460e0b3ae0dab93b272e01b14ee5c7c9",
+    "repository_status": "Excluded from Git because raw HTTP evidence archives exceed practical repository limits; retained locally."
+  }
+]

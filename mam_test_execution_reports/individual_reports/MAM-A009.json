@@ -1,19 +1,21 @@
 {
-  "test_case_id": "MAM-A009",
+  "id": "MAM-A009",
   "module": "Module 2: MAM Allocation Methods & Sizing Engine",
   "title": "Quantization to Broker Lot Step (0.01 Lot Step Enforcement)",
-  "priority": "P0",
   "precondition": "PBB sizing calculation yields 0.3456 lots for a sub-account.",
   "steps": "1. Apply broker lot step rounding.",
-  "expected_result": "Order sized to 0.35 lots (or 0.34 lots per policy); zero sub-0.01 fractional lot orders submitted to broker.",
-  "execution_timestamp": "2026-11-16T10:58:42.341792Z",
-  "verification_type": "QUANTITATIVE_CALCULATION",
-  "status": "PASS",
-  "actual_result": "Raw sizing 0.3456 lots successfully quantized to valid broker step: 0.34 lots.",
-  "evidence": {
-    "raw_lot": 0.3456,
-    "quantized_lot": 0.34,
-    "step": 0.01
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Order sized to 0.35 lots (or 0.34 lots per policy); zero sub-0.01 fractional lot orders submitted to broker.",
+  "priority": "P0",
+  "test_case_id": "MAM-A009",
+  "status": "PARTIAL",
+  "coverage_note": "Observed rounding to valid .01 entry steps; original .34999999 boundary fixture not executed.",
+  "executed_check_ids": [
+    "SIZE-LOT-RULE-0.03-0.5",
+    "SIZE-LOT-RULE-0.01-1.5",
+    "SIZE-LOT-RULE-0.01-2.75"
+  ],
+  "evidence_files": [
+    "reports/live_recheck_20261120/deep_run/results_060733.json"
+  ],
+  "release_signoff": false
 }

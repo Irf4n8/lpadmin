@@ -1,20 +1,15 @@
 {
-  "test_case_id": "MAM-F012",
+  "id": "MAM-F012",
   "module": "Module 1: Group & Sub-Account Lifecycle",
   "title": "Manager Pause / Resume of Individual Sub-Account Participation",
-  "priority": "P1",
   "precondition": "Sub-account #7 experiences temporary compliance flag.",
   "steps": "1. Manager or Admin toggles sub-account #7 to 'Paused'.2. Master executes new trade.",
-  "expected_result": "Sub-account #7 excluded from new order allocation; existing positions maintained; remaining sub-accounts receive trades.",
-  "execution_timestamp": "2026-11-16T10:58:42.147443Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Sub-account state toggling between active and ended safely halts order fan-out without closing open positions.",
-  "evidence": {
-    "status_transitions": [
-      "active",
-      "ended"
-    ]
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Sub-account #7 excluded from new order allocation; existing positions maintained; remaining sub-accounts receive trades.",
+  "priority": "P1",
+  "test_case_id": "MAM-F012",
+  "status": "BLOCKED",
+  "coverage_note": "LPOA contracts, independent group-management/archival controls or required role fixtures are not available in the verified API/UI flow.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

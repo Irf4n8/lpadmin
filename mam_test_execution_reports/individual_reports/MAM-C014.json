@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-C014",
+  "id": "MAM-C014",
   "module": "Module 9: Concurrency, Fan-Out & Race Conditions",
   "title": "Network Latency Variance Across Geographically Distributed Broker Nodes",
-  "priority": "P1",
   "precondition": "Sub-accounts distributed across London, New York, and Tokyo broker servers.",
   "steps": "1. Fire block order.",
-  "expected_result": "Asynchronous ticket dispatch absorbs latency variance; fill reports aggregated cleanly.",
-  "execution_timestamp": "2026-11-16T10:58:46.155178Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Asynchronous non-blocking dispatch absorbs multi-region network latency variance; fill reports aggregated cleanly.",
-  "evidence": {
-    "dispatch_mode": "Asynchronous thread pool"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Asynchronous ticket dispatch absorbs latency variance; fill reports aggregated cleanly.",
+  "priority": "P1",
+  "test_case_id": "MAM-C014",
+  "status": "BLOCKED",
+  "coverage_note": "Requires infrastructure hooks, a different account population, distributed nodes, gateway idempotency contract, or long-duration load tooling not supplied.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

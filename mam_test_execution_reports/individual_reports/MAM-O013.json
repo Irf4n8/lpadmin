@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-O013",
+  "id": "MAM-O013",
   "module": "Module 11: Operational Tools & Emergency Runbooks",
   "title": "Historical Performance Tear-Sheet Generator for Prospective Clients",
-  "priority": "P1",
   "precondition": "Prospective investor reviews MAM group track record.",
   "steps": "1. Generate performance tear-sheet.",
-  "expected_result": "Accurately calculates Time-Weighted Return (TWR), Max Drawdown, Sharpe Ratio, and Monthly Return Matrix.",
-  "execution_timestamp": "2026-11-16T10:58:46.536496Z",
-  "verification_type": "LIVE_API_EXECUTION",
-  "status": "PASS",
-  "actual_result": "MAM Masters directory computes growth statistics, realized P&L, and rank for prospective investor tear-sheets.",
-  "evidence": {
-    "masters_in_directory": 13
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Accurately calculates Time-Weighted Return (TWR), Max Drawdown, Sharpe Ratio, and Monthly Return Matrix.",
+  "priority": "P1",
+  "test_case_id": "MAM-O013",
+  "status": "BLOCKED",
+  "coverage_note": "Requires operator/backoffice infrastructure, deployment/failover controls, immutable logs, or external clearing evidence not supplied.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

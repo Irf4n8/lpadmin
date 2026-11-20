@@ -1,0 +1,15 @@
+LIVE MAM RETEST COMPLETED FOR THE EXECUTED SCOPE — NOT A RELEASE SIGN-OFF
+Generated: 2026-11-20T06:16:57.893812+00:00
+Real hedging only; BLACK:BTCUSD; dedicated simulated accounts confirmed by user.
+Unique validated live checks: 81; results: {'PASS': 81}.
+Raw attempts retained: 96. Corrected assertions are disclosed in the main report.
+Separate read-only checks: 323 PASS. Separate offline audit: 25 PASS, 10 FAIL.
+Original 165-case coverage: {'BLOCKED': 103, 'PARTIAL': 62}; partial and blocked are not passes.
+Final account state: {"recorded_at": "2026-11-20T06:16:22.643454+00:00", "accounts": 101, "open_positions": 0, "working_orders": 0, "balances": [1000000], "evidence_file": "reports/live_recheck_20261120/deep_run/final_account_state.json"}
+All 100 target follower links were checked in FINAL-ACCOUNT-STATE. GUI cash resets and original modified settings are recorded.
+The user authorized trading, cleanup and cash/configuration changes and confirmed an exclusive test window.
+No backend/database/fault-injection/time-control access is available. Such requirements remain unverified.
+Current report: ../../MAM_QA_MASTER_TEST_EXECUTION_REPORT.md
+Browsable index: REPORT.html
+Detailed evidence: validated_results.json and deep_run/results_*.json
+Prior reports: historical_reports_before_rewrite.zip

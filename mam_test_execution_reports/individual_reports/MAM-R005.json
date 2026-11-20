@@ -1,18 +1,15 @@
 {
-  "test_case_id": "MAM-R005",
+  "id": "MAM-R005",
   "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
   "title": "Remainder Policy: Truncate / Discard Sub-Cent Residuals",
-  "priority": "P1",
   "precondition": "Broker allows parent order adjustment; remainder = 0.01 lot.Policy: 'Reduce Parent Order to Match Quantized Sum'.",
   "steps": "1. Master sends 1.00 lot; children sum to 0.99 lots.",
-  "expected_result": "Parent order adjusted to 0.99 lots at LP; zero unallocated child discrepancy.",
-  "execution_timestamp": "2026-11-16T10:58:42.351717Z",
-  "verification_type": "QUANTITATIVE_CALCULATION",
-  "status": "PASS",
-  "actual_result": "Parent order adjusted at LP from 1.0 to 0.99 lots; zero child discrepancy.",
-  "evidence": {
-    "original_master": 1.0,
-    "adjusted_master": 0.99
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Parent order adjusted to 0.99 lots at LP; zero unallocated child discrepancy.",
+  "priority": "P1",
+  "test_case_id": "MAM-R005",
+  "status": "BLOCKED",
+  "coverage_note": "No configurable remainder-distribution ledger, rebate ledger, or exact block-allocation policy was available for this requirement.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

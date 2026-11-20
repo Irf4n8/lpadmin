@@ -1,0 +1,3541 @@
+{
+  "mamm@mailinator.com": {
+    "follow_blocked_reason": "Master accounts can't follow another master.",
+    "followers": [
+      {
+        "follow_id": "mfl_0899828685bfbcc8bf",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_e28651be6fdb613b1b",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:28.557776Z",
+        "follower_name": "mamf74"
+      },
+      {
+        "follow_id": "mfl_f7be45b65514af34a1",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_4c8ab576b3edd7bfbe",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:19.135417Z",
+        "follower_name": "mamf9"
+      },
+      {
+        "follow_id": "mfl_44e769c938bb9b228f",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_53c1b20d3d1ade2a20",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:18.285473Z",
+        "follower_name": "mamf93"
+      },
+      {
+        "follow_id": "mfl_c519a76f5070445cde",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_f5614218d62fb11e01",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.858933Z",
+        "follower_name": "mamf69"
+      },
+      {
+        "follow_id": "mfl_8c55451aae75fb8801",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_e013cb6410c37e3c23",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.856192Z",
+        "follower_name": "mamf100"
+      },
+      {
+        "follow_id": "mfl_fc2aca7fccb67ff61f",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_d8bdb3be2534acb6e7",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.72289Z",
+        "follower_name": "mamf94"
+      },
+      {
+        "follow_id": "mfl_568f28635e9fdd8c12",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_2cad63fb3cac797d1a",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.683902Z",
+        "follower_name": "mamf99"
+      },
+      {
+        "follow_id": "mfl_13f8c5acba8af0e59d",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_b31f859e241c1f0f8c",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.682395Z",
+        "follower_name": "mamf91"
+      },
+      {
+        "follow_id": "mfl_246f459c955c4145c0",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_8e1bd718139cb2f3c4",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.659452Z",
+        "follower_name": "mamf87"
+      },
+      {
+        "follow_id": "mfl_c2952978c2d6ec0b09",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_8dedfd53b483ab971c",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.659422Z",
+        "follower_name": "mamf98"
+      },
+      {
+        "follow_id": "mfl_7c563d41c82411c75a",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_f3394a56a63cf7877a",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.592493Z",
+        "follower_name": "mamf89"
+      },
+      {
+        "follow_id": "mfl_f067f4a96d69024484",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_3a2417a1ddb9a2b8d9",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.592329Z",
+        "follower_name": "mamf97"
+      },
+      {
+        "follow_id": "mfl_a4b64fd30957fb207c",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_3569ed47c6b192bc02",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.548667Z",
+        "follower_name": "mamf96"
+      },
+      {
+        "follow_id": "mfl_f668388ffadef4c3ee",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_c20506b44a9b0612b8",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.471334Z",
+        "follower_name": "mamf95"
+      },
+      {
+        "follow_id": "mfl_0e1b1ecefc03e10672",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_49bcc4c45bf4bb1174",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.409943Z",
+        "follower_name": "mamf90"
+      },
+      {
+        "follow_id": "mfl_5dfd8bbde0e22ef3b0",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_44918ddb2b424becc7",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.396889Z",
+        "follower_name": "mamf92"
+      },
+      {
+        "follow_id": "mfl_7ba358297837b5adf4",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_b9ccc6a845537da56a",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.393162Z",
+        "follower_name": "mamf73"
+      },
+      {
+        "follow_id": "mfl_e018b89f431d2063bf",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_3c28994a42562f3f3d",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.380541Z",
+        "follower_name": "mamf88"
+      },
+      {
+        "follow_id": "mfl_2bc0c27f1da174e154",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_2af03474686c556c38",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.31386Z",
+        "follower_name": "mamf71"
+      },
+      {
+        "follow_id": "mfl_1a29865e2cf902f71c",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_068413a484a33e56b2",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.291819Z",
+        "follower_name": "mamf83"
+      },
+      {
+        "follow_id": "mfl_5c9707de022f50967e",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_cd5aaf87ef0175a33a",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.158183Z",
+        "follower_name": "mamf72"
+      },
+      {
+        "follow_id": "mfl_d79a824a469db1857f",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_364fc655ee08826e21",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.062014Z",
+        "follower_name": "mamf85"
+      },
+      {
+        "follow_id": "mfl_8297d1b688d7717a42",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_2ed7e597330e7da3eb",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.048873Z",
+        "follower_name": "mamf81"
+      },
+      {
+        "follow_id": "mfl_57915f10346afcc042",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_fdcabfc95e2308ca49",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.986367Z",
+        "follower_name": "mamf82"
+      },
+      {
+        "follow_id": "mfl_20dea17b58a6dbe065",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_fabc9349977d253acc",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.940042Z",
+        "follower_name": "mamf84"
+      },
+      {
+        "follow_id": "mfl_967f81a65080071c27",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_b81340ec540fa1a7c4",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.915847Z",
+        "follower_name": "mamf86"
+      },
+      {
+        "follow_id": "mfl_886dea2a5c4e5925f0",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_0d551a3e318feb0a28",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.832178Z",
+        "follower_name": "mamf75"
+      },
+      {
+        "follow_id": "mfl_146a4d3b67fe94ecd0",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_1f02599394ccaabd2e",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.829456Z",
+        "follower_name": "mamf77"
+      },
+      {
+        "follow_id": "mfl_543fb8acd0de77ba58",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_65ea2ded3baf6367a6",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.824899Z",
+        "follower_name": "mamf79"
+      },
+      {
+        "follow_id": "mfl_7cae4632acf9a8a7b4",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_3ed870e510d0544fca",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.808168Z",
+        "follower_name": "mamf80"
+      },
+      {
+        "follow_id": "mfl_2d98832c45deeea6b0",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_cdc813120de076c28a",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.744376Z",
+        "follower_name": "mamf76"
+      },
+      {
+        "follow_id": "mfl_b5f68f1ccc5401c077",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_ea9df8dffe955c1394",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.57944Z",
+        "follower_name": "mamf66"
+      },
+      {
+        "follow_id": "mfl_9a43052d064cec4427",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_072376d9cee18c097c",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.524944Z",
+        "follower_name": "mamf78"
+      },
+      {
+        "follow_id": "mfl_b1c75eb7a97fd5d5db",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_74dd23f9d86149e607",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.327833Z",
+        "follower_name": "mamf11"
+      },
+      {
+        "follow_id": "mfl_87229cc7bf801d50ed",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_0364c7880d818b84a5",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.170835Z",
+        "follower_name": "mamf65"
+      },
+      {
+        "follow_id": "mfl_2212ff883770923d53",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_0b68a25300a13b59d4",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.057415Z",
+        "follower_name": "mamf68"
+      },
+      {
+        "follow_id": "mfl_e0901057a199758964",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_5a9aa0409c76223ba0",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.057285Z",
+        "follower_name": "mamf70"
+      },
+      {
+        "follow_id": "mfl_286e0707a94c5d338b",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_f318943cb6af9ebc45",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.05439Z",
+        "follower_name": "mamf67"
+      },
+      {
+        "follow_id": "mfl_2fedc99f587de09afb",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_fb6a7c9bd8af963c13",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:15.80636Z",
+        "follower_name": "mamf61"
+      },
+      {
+        "follow_id": "mfl_027fb13277e3fdac53",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_e1d49fdcf3dc6ae86d",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:15.774597Z",
+        "follower_name": "mamf64"
+      },
+      {
+        "follow_id": "mfl_423376831a1fb923d3",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_88c7692c7398baca30",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:15.742408Z",
+        "follower_name": "mamf57"
+      },
+      {
+        "follow_id": "mfl_ab5464a58df810ff77",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_a3bf936eb24b99d2dd",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:15.621277Z",
+        "follower_name": "mamf51"
+      },
+      {
+        "follow_id": "mfl_9356cfaa73c4c3aa26",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_e782a3452487690ad3",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:15.445556Z",
+        "follower_name": "mamf59"
+      },
+      {
+        "follow_id": "mfl_dd32662c28d4b21877",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_d33396bfba453e1c2d",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:15.07585Z",
+        "follower_name": "mamf52"
+      },
+      {
+        "follow_id": "mfl_64d9f849d883217f87",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_95af47b7cba3a01a17",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:15.068127Z",
+        "follower_name": "mamf63"
+      },
+      {
+        "follow_id": "mfl_db922752117bc170bc",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_1a95f08eabf722fb46",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.993765Z",
+        "follower_name": "mamf62"
+      },
+      {
+        "follow_id": "mfl_fc4bc56fd82b71ea08",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_609242b122d17a4d4c",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.76346Z",
+        "follower_name": "mamf55"
+      },
+      {
+        "follow_id": "mfl_6102025930567bf054",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_94128fe11dbe98caf3",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.752278Z",
+        "follower_name": "mamf60"
+      },
+      {
+        "follow_id": "mfl_f390c4d241d90a722e",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_581e565ff037c3993e",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.747774Z",
+        "follower_name": "mamf50"
+      },
+      {
+        "follow_id": "mfl_79a0233c0f14bf65eb",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_42a3eb64903038f310",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.666104Z",
+        "follower_name": "mamf58"
+      },
+      {
+        "follow_id": "mfl_424d899f337d2840b0",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_acb34925426ae26c5e",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.610139Z",
+        "follower_name": "mamf56"
+      },
+      {
+        "follow_id": "mfl_c88c7c2933fea63499",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_a56e82042830265d30",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.604401Z",
+        "follower_name": "mamf45"
+      },
+      {
+        "follow_id": "mfl_dd999ec07df26d9ba1",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_361afcc393ec9fcf77",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.591549Z",
+        "follower_name": "mamf43"
+      },
+      {
+        "follow_id": "mfl_a93bafdbb197d3a4de",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_a51e749c0ce0a72b65",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.43952Z",
+        "follower_name": "mamf36"
+      },
+      {
+        "follow_id": "mfl_4117a2491750e7eea6",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_98ed106eb9024a0eb4",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.423062Z",
+        "follower_name": "mamf53"
+      },
+      {
+        "follow_id": "mfl_0dd6484516c6b6fe59",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_9d6848dc9613ce60b2",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.419663Z",
+        "follower_name": "mamf54"
+      },
+      {
+        "follow_id": "mfl_37bdd2746fb42d7cc2",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_7abb5909f888eebe4a",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.13704Z",
+        "follower_name": "mamf48"
+      },
+      {
+        "follow_id": "mfl_de42f2e12f3d04c647",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_0cb58ad31b621c4762",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:13.900268Z",
+        "follower_name": "mamf49"
+      },
+      {
+        "follow_id": "mfl_53a6d2f9fb61d25dc1",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_4904493f0a1348d387",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:13.878757Z",
+        "follower_name": "mamf47"
+      },
+      {
+        "follow_id": "mfl_e7b64b5c72c7743ff7",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_5db438cb99a6fe7aa5",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:13.791186Z",
+        "follower_name": "mamf46"
+      },
+      {
+        "follow_id": "mfl_583eabe9d812613fc6",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_cd231d264c4ba45714",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:13.775818Z",
+        "follower_name": "mamf38"
+      },
+      {
+        "follow_id": "mfl_4224853501ca093299",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_edeac294a06dff3ffa",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:13.618909Z",
+        "follower_name": "mamf37"
+      },
+      {
+        "follow_id": "mfl_4d13f3516e1cf8a8b0",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_0f409db8eea687b194",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:13.193226Z",
+        "follower_name": "mamf44"
+      },
+      {
+        "follow_id": "mfl_621ef6a05c927d11b1",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_969182536f3c0c2c32",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:12.934334Z",
+        "follower_name": "mamf34"
+      },
+      {
+        "follow_id": "mfl_93a8e242514f67d6f5",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_2cdc4bc0da4c3ea812",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:12.623721Z",
+        "follower_name": "mamf42"
+      },
+      {
+        "follow_id": "mfl_e1033ae7192af46820",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_dec424fa7674ddcdf1",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:12.409663Z",
+        "follower_name": "mamf35"
+      },
+      {
+        "follow_id": "mfl_a5447c097c08856a95",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_660979e50feaf919ba",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:12.393867Z",
+        "follower_name": "mamf41"
+      },
+      {
+        "follow_id": "mfl_a7966872a218be84be",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_7ef8a48a1bbf6db01e",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:12.380739Z",
+        "follower_name": "mamf39"
+      },
+      {
+        "follow_id": "mfl_52e9e0e919e7358579",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_79baf3441343a78e80",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:12.379581Z",
+        "follower_name": "mamf40"
+      },
+      {
+        "follow_id": "mfl_7cdaa55cfa4830790e",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_141d34a21a247bc906",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.891166Z",
+        "follower_name": "mamf4"
+      },
+      {
+        "follow_id": "mfl_b82d8b2dea623176ea",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_0b78d8f907c281624f",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.873888Z",
+        "follower_name": "mamf15"
+      },
+      {
+        "follow_id": "mfl_7c8b8f25c678258957",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_a312e3fe94e03c02a4",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.869223Z",
+        "follower_name": "mamf27"
+      },
+      {
+        "follow_id": "mfl_a1d68a0bdf3db6f4ff",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_16dfd975be68b40c6a",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.85041Z",
+        "follower_name": "mamf33"
+      },
+      {
+        "follow_id": "mfl_0e7e2165fc2b98ca5d",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_85a72969dd7e5a08b5",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.84606Z",
+        "follower_name": "mamf32"
+      },
+      {
+        "follow_id": "mfl_cbc86051f891267684",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_b0a5cab71abe8904cd",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.781247Z",
+        "follower_name": "mamf30"
+      },
+      {
+        "follow_id": "mfl_abd1ab0f30f9a895a8",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_06a3d388d57d040b7d",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.656765Z",
+        "follower_name": "mamf29"
+      },
+      {
+        "follow_id": "mfl_506a1d194da97ad41c",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_4bfe6abd41456944cd",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.633012Z",
+        "follower_name": "mamf31"
+      },
+      {
+        "follow_id": "mfl_a768def15a2b9daf06",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_21d6ea41f470029c6b",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.576511Z",
+        "follower_name": "mamf24"
+      },
+      {
+        "follow_id": "mfl_4b9ec69441878d8062",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_8f052eebda9fec7ef2",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.428851Z",
+        "follower_name": "mamf26"
+      },
+      {
+        "follow_id": "mfl_8784448e5e79506c78",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_a7943ab4920fefb965",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.143451Z",
+        "follower_name": "mamf28"
+      },
+      {
+        "follow_id": "mfl_8745e273fd6e6016e7",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_09c5ca8d4984555e39",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.086617Z",
+        "follower_name": "mamf22"
+      },
+      {
+        "follow_id": "mfl_34f0c059e20407bb5a",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_7a8a5f7cf181a7b51d",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.075299Z",
+        "follower_name": "mamf14"
+      },
+      {
+        "follow_id": "mfl_4f045228f1159220c9",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_808d62d51efb2f46db",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.979972Z",
+        "follower_name": "mamf25"
+      },
+      {
+        "follow_id": "mfl_652f2254a6c7442eb9",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_761e39f83d27137624",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.825962Z",
+        "follower_name": "mamf3"
+      },
+      {
+        "follow_id": "mfl_290505635a1f10a01b",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_0ea679062ffd38adf7",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.751189Z",
+        "follower_name": "mamf1"
+      },
+      {
+        "follow_id": "mfl_f92849d00405d71162",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_87cc39bb4ddf52a026",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.749786Z",
+        "follower_name": "mamf2"
+      },
+      {
+        "follow_id": "mfl_80b37665b7c71b6974",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_1748419c2a6cd46a21",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.674236Z",
+        "follower_name": "mamf18"
+      },
+      {
+        "follow_id": "mfl_a2a73e17029e138ffe",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_14eac0c78bf297b071",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.665624Z",
+        "follower_name": "mamf13"
+      },
+      {
+        "follow_id": "mfl_e15492c9678faea3e0",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_b876cf98c339228a3b",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.571305Z",
+        "follower_name": "mamf23"
+      },
+      {
+        "follow_id": "mfl_417c0acf9c5a3f66b7",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_49996c35d653f63da7",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.561361Z",
+        "follower_name": "mamf7"
+      },
+      {
+        "follow_id": "mfl_4af80fa038fa3c45e6",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_1b5f8442b816d0d218",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.527571Z",
+        "follower_name": "mamf21"
+      },
+      {
+        "follow_id": "mfl_074c3d10f6a84211a1",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_7df398ec85abffbcdb",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.403242Z",
+        "follower_name": "mamf8"
+      },
+      {
+        "follow_id": "mfl_725ff9d1fdfedc2181",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_a0f2ccd57f7a1bd1e6",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.286471Z",
+        "follower_name": "mamf10"
+      },
+      {
+        "follow_id": "mfl_a9533458522a20d99d",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_434d7065226801fb39",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.273692Z",
+        "follower_name": "mamf16"
+      },
+      {
+        "follow_id": "mfl_46459358e3e805ebbe",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_aab22517b0f8ee19dd",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.163423Z",
+        "follower_name": "mamf5"
+      },
+      {
+        "follow_id": "mfl_680d478dc05e366b79",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_91d14b869a032373df",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:09.941675Z",
+        "follower_name": "mamf6"
+      },
+      {
+        "follow_id": "mfl_35942c1a39d7de46cc",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_81a99b042cd8709c89",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:09.925639Z",
+        "follower_name": "mamf17"
+      },
+      {
+        "follow_id": "mfl_cb45629548584ceb86",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_458a795d1c13142825",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:09.920009Z",
+        "follower_name": "mamf19"
+      },
+      {
+        "follow_id": "mfl_3bbe1c4eb919c54de8",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_83a6e548c453b2710b",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:09.848717Z",
+        "follower_name": "mamf12"
+      },
+      {
+        "follow_id": "mfl_8aab5fff5515a6f7d1",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_89eaa07816e760cbc9",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:09.75472Z",
+        "follower_name": "mamf20"
+      }
+    ],
+    "following": [],
+    "is_master": true,
+    "master": {
+      "client_id": "mem_11434b0b9d9d210899",
+      "display_name": "Zero Fee Master",
+      "share_percent": 50,
+      "status": "active"
+    },
+    "master_blocked_reason": "",
+    "success": true
+  },
+  "mamf1@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_290505635a1f10a01b",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_0ea679062ffd38adf7",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.751189Z"
+      },
+      {
+        "follow_id": "mfl_90a15083a4d015385f",
+        "master_client_id": "mem_5fef0e0b83f2b84ea1",
+        "follower_client_id": "mem_0ea679062ffd38adf7",
+        "instance": "real",
+        "starting_balance": 9999987.9431,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 2,
+        "status": "ended",
+        "joined_at": "2026-11-19T07:46:53.641866Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf2@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_f92849d00405d71162",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_87cc39bb4ddf52a026",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.749786Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf3@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_652f2254a6c7442eb9",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_761e39f83d27137624",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.825962Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf4@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_7cdaa55cfa4830790e",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_141d34a21a247bc906",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.891166Z"
+      },
+      {
+        "follow_id": "mfl_8197270a86aa16ce7f",
+        "master_client_id": "mem_150ad50c5e2e01b70a",
+        "follower_client_id": "mem_141d34a21a247bc906",
+        "instance": "real",
+        "starting_balance": 999997.6119,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-19T10:01:20.620006Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf5@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_46459358e3e805ebbe",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_aab22517b0f8ee19dd",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.163423Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf6@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_680d478dc05e366b79",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_91d14b869a032373df",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:09.941675Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf7@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_417c0acf9c5a3f66b7",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_49996c35d653f63da7",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.561361Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf8@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_074c3d10f6a84211a1",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_7df398ec85abffbcdb",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.403242Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf9@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_f7be45b65514af34a1",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_4c8ab576b3edd7bfbe",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:19.135417Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf10@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_725ff9d1fdfedc2181",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_a0f2ccd57f7a1bd1e6",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.286471Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf11@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_b1c75eb7a97fd5d5db",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_74dd23f9d86149e607",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.327833Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf12@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_3bbe1c4eb919c54de8",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_83a6e548c453b2710b",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:09.848717Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf13@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_a2a73e17029e138ffe",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_14eac0c78bf297b071",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.665624Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf14@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_34f0c059e20407bb5a",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_7a8a5f7cf181a7b51d",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.075299Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf15@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_b82d8b2dea623176ea",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_0b78d8f907c281624f",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.873888Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf16@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_a9533458522a20d99d",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_434d7065226801fb39",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.273692Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf17@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_35942c1a39d7de46cc",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_81a99b042cd8709c89",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:09.925639Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf18@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_80b37665b7c71b6974",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_1748419c2a6cd46a21",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.674236Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf19@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_cb45629548584ceb86",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_458a795d1c13142825",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:09.920009Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf20@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_8aab5fff5515a6f7d1",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_89eaa07816e760cbc9",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:09.75472Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf21@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_4af80fa038fa3c45e6",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_1b5f8442b816d0d218",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.527571Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf22@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_8745e273fd6e6016e7",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_09c5ca8d4984555e39",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.086617Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf23@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_e15492c9678faea3e0",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_b876cf98c339228a3b",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.571305Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf24@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_a768def15a2b9daf06",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_21d6ea41f470029c6b",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.576511Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf25@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_4f045228f1159220c9",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_808d62d51efb2f46db",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:10.979972Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf26@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_4b9ec69441878d8062",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_8f052eebda9fec7ef2",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.428851Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf27@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_7c8b8f25c678258957",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_a312e3fe94e03c02a4",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.869223Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf28@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_8784448e5e79506c78",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_a7943ab4920fefb965",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.143451Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf29@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_abd1ab0f30f9a895a8",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_06a3d388d57d040b7d",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.656765Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf30@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_cbc86051f891267684",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_b0a5cab71abe8904cd",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.781247Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf31@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_506a1d194da97ad41c",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_4bfe6abd41456944cd",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.633012Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf32@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_0e7e2165fc2b98ca5d",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_85a72969dd7e5a08b5",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.84606Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf33@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_a1d68a0bdf3db6f4ff",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_16dfd975be68b40c6a",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:11.85041Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf34@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_621ef6a05c927d11b1",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_969182536f3c0c2c32",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:12.934334Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf35@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_e1033ae7192af46820",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_dec424fa7674ddcdf1",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:12.409663Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf36@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_a93bafdbb197d3a4de",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_a51e749c0ce0a72b65",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.43952Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf37@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_4224853501ca093299",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_edeac294a06dff3ffa",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:13.618909Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf38@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_583eabe9d812613fc6",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_cd231d264c4ba45714",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:13.775818Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf39@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_a7966872a218be84be",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_7ef8a48a1bbf6db01e",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:12.380739Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf40@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_52e9e0e919e7358579",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_79baf3441343a78e80",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:12.379581Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf41@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_a5447c097c08856a95",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_660979e50feaf919ba",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:12.393867Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf42@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_93a8e242514f67d6f5",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_2cdc4bc0da4c3ea812",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:12.623721Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf43@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_dd999ec07df26d9ba1",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_361afcc393ec9fcf77",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.591549Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf44@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_4d13f3516e1cf8a8b0",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_0f409db8eea687b194",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:13.193226Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf45@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_c88c7c2933fea63499",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_a56e82042830265d30",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.604401Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf46@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_e7b64b5c72c7743ff7",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_5db438cb99a6fe7aa5",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:13.791186Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf47@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_53a6d2f9fb61d25dc1",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_4904493f0a1348d387",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:13.878757Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf48@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_37bdd2746fb42d7cc2",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_7abb5909f888eebe4a",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.13704Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf49@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_de42f2e12f3d04c647",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_0cb58ad31b621c4762",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:13.900268Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf50@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_f390c4d241d90a722e",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_581e565ff037c3993e",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.747774Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf51@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_ab5464a58df810ff77",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_a3bf936eb24b99d2dd",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:15.621277Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf52@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_dd32662c28d4b21877",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_d33396bfba453e1c2d",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:15.07585Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf53@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_4117a2491750e7eea6",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_98ed106eb9024a0eb4",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.423062Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf54@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_0dd6484516c6b6fe59",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_9d6848dc9613ce60b2",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.419663Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf55@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_fc4bc56fd82b71ea08",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_609242b122d17a4d4c",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.76346Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf56@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_424d899f337d2840b0",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_acb34925426ae26c5e",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.610139Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf57@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_423376831a1fb923d3",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_88c7692c7398baca30",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:15.742408Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf58@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_79a0233c0f14bf65eb",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_42a3eb64903038f310",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.666104Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf59@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_9356cfaa73c4c3aa26",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_e782a3452487690ad3",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:15.445556Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf60@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_6102025930567bf054",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_94128fe11dbe98caf3",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.752278Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf61@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_2fedc99f587de09afb",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_fb6a7c9bd8af963c13",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:15.80636Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf62@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_db922752117bc170bc",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_1a95f08eabf722fb46",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:14.993765Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf63@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_64d9f849d883217f87",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_95af47b7cba3a01a17",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:15.068127Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf64@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_027fb13277e3fdac53",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_e1d49fdcf3dc6ae86d",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:15.774597Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf65@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_87229cc7bf801d50ed",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_0364c7880d818b84a5",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.170835Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf66@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_b5f68f1ccc5401c077",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_ea9df8dffe955c1394",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.57944Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf67@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_286e0707a94c5d338b",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_f318943cb6af9ebc45",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.05439Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf68@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_2212ff883770923d53",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_0b68a25300a13b59d4",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.057415Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf69@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_c519a76f5070445cde",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_f5614218d62fb11e01",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.858933Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf70@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_e0901057a199758964",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_5a9aa0409c76223ba0",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.057285Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf71@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_2bc0c27f1da174e154",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_2af03474686c556c38",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.31386Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf72@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_5c9707de022f50967e",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_cd5aaf87ef0175a33a",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.158183Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf73@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_7ba358297837b5adf4",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_b9ccc6a845537da56a",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.393162Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf74@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_0899828685bfbcc8bf",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_e28651be6fdb613b1b",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:28.557776Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf75@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_886dea2a5c4e5925f0",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_0d551a3e318feb0a28",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.832178Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf76@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_2d98832c45deeea6b0",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_cdc813120de076c28a",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.744376Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf77@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_146a4d3b67fe94ecd0",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_1f02599394ccaabd2e",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.829456Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf78@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_9a43052d064cec4427",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_072376d9cee18c097c",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.524944Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf79@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_543fb8acd0de77ba58",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_65ea2ded3baf6367a6",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.824899Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf80@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_7cae4632acf9a8a7b4",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_3ed870e510d0544fca",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.808168Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf81@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_8297d1b688d7717a42",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_2ed7e597330e7da3eb",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.048873Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf82@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_57915f10346afcc042",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_fdcabfc95e2308ca49",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.986367Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf83@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_1a29865e2cf902f71c",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_068413a484a33e56b2",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.291819Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf84@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_20dea17b58a6dbe065",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_fabc9349977d253acc",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.940042Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf85@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_d79a824a469db1857f",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_364fc655ee08826e21",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.062014Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf86@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_967f81a65080071c27",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_b81340ec540fa1a7c4",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:16.915847Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf87@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_246f459c955c4145c0",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_8e1bd718139cb2f3c4",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.659452Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf88@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_e018b89f431d2063bf",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_3c28994a42562f3f3d",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.380541Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf89@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_7c563d41c82411c75a",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_f3394a56a63cf7877a",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.592493Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf90@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_0e1b1ecefc03e10672",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_49bcc4c45bf4bb1174",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.409943Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf91@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_13f8c5acba8af0e59d",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_b31f859e241c1f0f8c",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.682395Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf92@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_5dfd8bbde0e22ef3b0",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_44918ddb2b424becc7",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.396889Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf93@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_44e769c938bb9b228f",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_53c1b20d3d1ade2a20",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:18.285473Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf94@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_fc2aca7fccb67ff61f",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_d8bdb3be2534acb6e7",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.72289Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf95@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_f668388ffadef4c3ee",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_c20506b44a9b0612b8",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.471334Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf96@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_a4b64fd30957fb207c",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_3569ed47c6b192bc02",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.548667Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf97@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_f067f4a96d69024484",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_3a2417a1ddb9a2b8d9",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.592329Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf98@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_c2952978c2d6ec0b09",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_8dedfd53b483ab971c",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.659422Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf99@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_568f28635e9fdd8c12",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_2cad63fb3cac797d1a",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.683902Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  },
+  "mamf100@mailinator.com": {
+    "follow_blocked_reason": "",
+    "followers": [],
+    "following": [
+      {
+        "follow_id": "mfl_8c55451aae75fb8801",
+        "master_client_id": "mem_11434b0b9d9d210899",
+        "follower_client_id": "mem_e013cb6410c37e3c23",
+        "instance": "real",
+        "starting_balance": 1000000,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-20T05:32:17.856192Z"
+      }
+    ],
+    "is_master": false,
+    "master": null,
+    "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+    "success": true
+  }
+}

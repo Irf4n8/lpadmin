@@ -1,17 +1,7 @@
-# Pending Orders Live Execution (No Cancel) Evidence Report
+# Superseded QA report
 
-**Generated:** 2026-11-11T13:02:09.562431+00:00  
-**Master Trader:** `ctmaster@mailinator.com`  
-**Followers Tested:** 100 (`follower1@mailinator.com` to `follower100@mailinator.com`)  
-**Execution Policy:** **NO CANCELLATION** — Orders placed and waited until triggered and filled.  
-**Overall Result:** **6/7 SCENARIOS PASSED**
+This report was replaced on 20 November 2026 after assertion review and live real-hedging retesting. Its old pass/fail counts are not current release evidence.
 
-| Scenario | Executed & Filled | Followers Verified | Status |
-| :--- | :---: | :---: | :---: |
-| **Pending BUY LIMIT Live Trigger & Execution** | YES | 100/100 | ✅ PASS |
-| **Pending BUY LIMIT with TP/SL Live Execution** | YES | 100/100 | ✅ PASS |
-| **Pending SELL LIMIT Live Trigger & Execution** | YES | 100/100 | ✅ PASS |
-| **Pending SELL LIMIT with TP/SL Live Execution** | YES | 100/100 | ✅ PASS |
-| **Pending BUY STOP Live Trigger & Execution** | NO | 0/100 | ❌ FAIL |
-| **Pending SELL STOP Live Trigger & Execution** | YES | 100/100 | ✅ PASS |
-| **Final Teardown & Zero Orphan Verification** | YES | 100/100 | ✅ PASS |
+See `MAM_QA_MASTER_TEST_EXECUTION_REPORT.md` and `reports/live_recheck_20261120/validated_results.json` for current results, detailed evidence, and blocked cases.
+
+The exact prior report is preserved in `reports/live_recheck_20261120/historical_reports_before_rewrite.zip`. No old result has been silently promoted to PASS.

@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-D013",
+  "id": "MAM-D013",
   "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
   "title": "Investor Profit-Only Withdrawal While Holding Open Trade Tickets",
-  "priority": "P1",
   "precondition": "Sub-account balance = $12,000 ($2,000 realized profit); 1 open trade.",
   "steps": "1. Investor selects 'Withdraw Realized Profit ($2,000)'.",
-  "expected_result": "$2,000 debited from cash; free margin verified; open child ticket preserved safely.",
-  "execution_timestamp": "2026-11-16T10:58:44.619371Z",
-  "verification_type": "QUANTITATIVE_CALCULATION",
-  "status": "PASS",
-  "actual_result": "Realized profit withdrawal debited from cash without closing active child tickets as long as free margin remains adequate.",
-  "evidence": {
-    "validation": "realized_profit <= free_margin"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "$2,000 debited from cash; free margin verified; open child ticket preserved safely.",
+  "priority": "P1",
+  "test_case_id": "MAM-D013",
+  "status": "BLOCKED",
+  "coverage_note": "Requires investor payment/withdrawal, lockup, reversal, or emergency LPOA workflow. Admin Set balance is not a substitute.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

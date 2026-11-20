@@ -1,20 +1,19 @@
 {
-  "test_case_id": "MAM-F010",
+  "id": "MAM-F010",
   "module": "Module 1: Group & Sub-Account Lifecycle",
   "title": "Sub-Account Voluntary Disconnection (Revoking LPOA) With Zero Trades",
-  "priority": "P0",
   "precondition": "Sub-account linked to MAM group; zero trades open.",
   "steps": "1. Investor clicks 'Revoke LPOA / Disconnect from MAM'.2. Confirm disconnection.",
-  "expected_result": "Sub-account unlinked cleanly; trading rights restored to client; status set to 'Independent'; manager notified.",
-  "execution_timestamp": "2026-11-16T10:58:42.145850Z",
-  "verification_type": "LIVE_API_EXECUTION",
-  "status": "PASS",
-  "actual_result": "Voluntary disconnection verified: relationship status set to 'ended', and cleanly re-activated to 'active'.",
-  "evidence": {
-    "unfollow_response": {
-      "follow_id": "mfl_53042aff04900fa325",
-      "success": true
-    }
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Sub-account unlinked cleanly; trading rights restored to client; status set to 'Independent'; manager notified.",
+  "priority": "P0",
+  "test_case_id": "MAM-F010",
+  "status": "PARTIAL",
+  "coverage_note": "Unfollow prevents new copies; LPOA revocation, Independent status and manager notification not verified.",
+  "executed_check_ids": [
+    "MAM-UNFOLLOW-FLAT"
+  ],
+  "evidence_files": [
+    "reports/live_recheck_20261120/deep_run/results_054627.json"
+  ],
+  "release_signoff": false
 }

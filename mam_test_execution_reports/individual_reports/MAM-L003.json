@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-L003",
+  "id": "MAM-L003",
   "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
   "title": "Digital LPOA Cryptographic Storage and Audit Retrieval",
-  "priority": "P1",
   "precondition": "Investor signed digital LPOA upon joining.",
   "steps": "1. Compliance Officer requests copy of legal authorization.",
-  "expected_result": "System retrieves immutable timestamped PDF with client digital signature and IP address hash.",
-  "execution_timestamp": "2026-11-16T10:58:46.156853Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Signed LPOA contracts archived with timestamp, client IP hash, and digital signature, retrievable via compliance audit API.",
-  "evidence": {
-    "archive_format": "Cryptographically hashed PDF"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "System retrieves immutable timestamped PDF with client digital signature and IP address hash.",
+  "priority": "P1",
+  "test_case_id": "MAM-L003",
+  "status": "BLOCKED",
+  "coverage_note": "Requires compliance policy fixtures, jurisdiction controls, document/audit access and authorized evidence. Trading API success cannot establish compliance.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-C012",
+  "id": "MAM-C012",
   "module": "Module 9: Concurrency, Fan-Out & Race Conditions",
   "title": "Concurrent Child Order Mass Cancellation Across 1,000 Accounts",
-  "priority": "P0",
   "precondition": "1,000 child limit orders working at broker.",
   "steps": "1. Master cancels parent order.",
-  "expected_result": "Mass cancellation cancels all 1,000 child orders within 600ms; zero orphan limit orders.",
-  "execution_timestamp": "2026-11-16T10:58:46.153959Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Mass cancellation endpoint (POST /v1/oms/{instance}/orders/bulk/cancel) cancels all working child limit orders in unison.",
-  "evidence": {
-    "endpoint": "POST /v1/oms/{instance}/orders/bulk/cancel"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Mass cancellation cancels all 1,000 child orders within 600ms; zero orphan limit orders.",
+  "priority": "P0",
+  "test_case_id": "MAM-C012",
+  "status": "BLOCKED",
+  "coverage_note": "Requires infrastructure hooks, a different account population, distributed nodes, gateway idempotency contract, or long-duration load tooling not supplied.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

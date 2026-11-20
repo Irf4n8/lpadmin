@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-O003",
+  "id": "MAM-O003",
   "module": "Module 11: Operational Tools & Emergency Runbooks",
   "title": "Manual Child Ticket Re-Apportionment Console",
-  "priority": "P0",
   "precondition": "Sub-account #5 order failed due to broker bridge glitch during block fill.",
   "steps": "1. Ops engineer opens 'MAM Ticket Reconciliation Console'.2. Selects parent order and clicks 'Re-Apportion Child Ticket #5'.",
-  "expected_result": "Child ticket created manually with original execution price; sub-account P&L restored perfectly.",
-  "execution_timestamp": "2026-11-16T10:58:46.242750Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Reconciliation console allows operations engineers to manually re-apportion child tickets using parent order execution price.",
-  "evidence": {
-    "ops_console": "MAM Ticket Reconciliation Console"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Child ticket created manually with original execution price; sub-account P&L restored perfectly.",
+  "priority": "P0",
+  "test_case_id": "MAM-O003",
+  "status": "BLOCKED",
+  "coverage_note": "Requires operator/backoffice infrastructure, deployment/failover controls, immutable logs, or external clearing evidence not supplied.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

@@ -1,17 +1,19 @@
 {
-  "test_case_id": "MAM-O007",
+  "id": "MAM-O007",
   "module": "Module 11: Operational Tools & Emergency Runbooks",
   "title": "Administrative Goodwill Balance Adjustment Workflow",
-  "priority": "P1",
   "precondition": "Sub-account experienced execution delay; broker grants $150 compensation.",
   "steps": "1. Admin enters goodwill credit with audit reason.",
-  "expected_result": "$150 credited to client ledger; corporate treasury debited; immutable audit note generated.",
-  "execution_timestamp": "2026-11-16T10:58:46.448206Z",
-  "verification_type": "LIVE_API_EXECUTION",
-  "status": "PASS",
-  "actual_result": "Administrative goodwill balance adjustment processed and recorded with immutable audit remark in ledger.",
-  "evidence": {
-    "admin_balance_adjustment": true
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "$150 credited to client ledger; corporate treasury debited; immutable audit note generated.",
+  "priority": "P1",
+  "test_case_id": "MAM-O007",
+  "status": "PARTIAL",
+  "coverage_note": "Actual Admin > Member > Real Hedging > Set balance verified for 101 accounts; treasury debit/immutable audit not certified.",
+  "executed_check_ids": [
+    "SETUP-BALANCE"
+  ],
+  "evidence_files": [
+    "reports/live_recheck_20261120/deep_run/results_054434.json"
+  ],
+  "release_signoff": false
 }

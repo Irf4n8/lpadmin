@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-E011",
+  "id": "MAM-E011",
   "module": "Module 4: Order Execution, Modification & Bulk Routing",
   "title": "Out-of-Order Execution Report Handling",
-  "priority": "P0",
   "precondition": "High network congestion causes Child Order #4 fill report to arrive after Child Order #5.",
   "steps": "1. Process execution reports.",
-  "expected_result": "MAM event bus re-sequences messages using sequential tick sequence numbers; avoids race condition or state corruption.",
-  "execution_timestamp": "2026-11-16T10:58:44.322636Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "OMS event bus utilizes sequential tick IDs and idempotency tracking to re-sequence out-of-order execution reports.",
-  "evidence": {
-    "event_bus": "Sequence numbering & tick ordering"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "MAM event bus re-sequences messages using sequential tick sequence numbers; avoids race condition or state corruption.",
+  "priority": "P0",
+  "test_case_id": "MAM-E011",
+  "status": "BLOCKED",
+  "coverage_note": "This exact execution/terminal/event-ordering fixture was not available or not executed; related market cases do not prove it.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

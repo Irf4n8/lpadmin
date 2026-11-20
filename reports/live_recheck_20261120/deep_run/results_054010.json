@@ -1,0 +1,13 @@
+[
+  {
+    "id": "SETUP-CLEAN",
+    "name": "Close existing scoped real positions and cancel pending orders",
+    "status": "BLOCKED",
+    "started_at": "2026-11-20T05:41:33.293322+00:00",
+    "finished_at": "2026-11-20T05:42:59.409988+00:00",
+    "details": {
+      "error": "RuntimeError: Read failed mamf74@mailinator.com positions: {'http': None, 'body': {'transport_error': \"('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))\"}}"
+    },
+    "trace": "http_054010.jsonl"
+  }
+]

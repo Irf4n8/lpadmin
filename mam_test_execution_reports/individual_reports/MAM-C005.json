@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-C005",
+  "id": "MAM-C005",
   "module": "Module 9: Concurrency, Fan-Out & Race Conditions",
   "title": "Idempotency Key Deduplication on Master Block Order",
-  "priority": "P0",
   "precondition": "Network timeout causes master trading GUI to retry order submission with same `Idempotency-Key`.",
   "steps": "1. Submit identical order twice.",
-  "expected_result": "Second request deduplicated at API gateway; single block executed; zero double-order fan-out.",
-  "execution_timestamp": "2026-11-16T10:58:46.149183Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "OMS API gateway caches Idempotency-Key headers, deduplicating retried requests and preventing duplicate child fan-outs.",
-  "evidence": {
-    "header": "Idempotency-Key"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Second request deduplicated at API gateway; single block executed; zero double-order fan-out.",
+  "priority": "P0",
+  "test_case_id": "MAM-C005",
+  "status": "BLOCKED",
+  "coverage_note": "Requires infrastructure hooks, a different account population, distributed nodes, gateway idempotency contract, or long-duration load tooling not supplied.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

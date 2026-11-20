@@ -1,17 +1,19 @@
 {
-  "test_case_id": "MAM-F005",
+  "id": "MAM-F005",
   "module": "Module 1: Group & Sub-Account Lifecycle",
   "title": "Link Sub-Account Below Minimum Balance Threshold",
-  "priority": "P1",
   "precondition": "MAM group requires min $1,000 balance; investor account has $450.",
   "steps": "1. Attempt to link sub-account to MAM group.",
-  "expected_result": "Linking rejected with validation error: 'Account balance ($450.00) is below group minimum requirement ($1,000.00)'; account remains unlinked.",
-  "execution_timestamp": "2026-11-16T10:58:41.597127Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Sub-account balance baseline frozen; sizing engine validates balance on trade fan-out, dropping orders if balance is insufficient.",
-  "evidence": {
-    "rule": "Engine drops order below minimum lot allocation or zero balance"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Linking rejected with validation error: 'Account balance ($450.00) is below group minimum requirement ($1,000.00)'; account remains unlinked.",
+  "priority": "P1",
+  "test_case_id": "MAM-F005",
+  "status": "PARTIAL",
+  "coverage_note": "Zero-capital trade rejection tested; a configured minimum-balance JOIN threshold was not established.",
+  "executed_check_ids": [
+    "MARGIN-ISOLATION"
+  ],
+  "evidence_files": [
+    "reports/live_recheck_20261120/deep_run/results_054627.json"
+  ],
+  "release_signoff": false
 }

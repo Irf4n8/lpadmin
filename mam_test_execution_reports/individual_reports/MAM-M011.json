@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-M011",
+  "id": "MAM-M011",
   "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
   "title": "Sub-Account Stop-Out Recovery via Fresh Deposit While Group Trades",
-  "priority": "P0",
   "precondition": "Acc #3 stopped out; investor immediately deposits $5,000 cash.",
   "steps": "1. Deposit clears.2. Master executes next trade.",
-  "expected_result": "Acc #3 re-enters active group participation on subsequent trade; historical loss preserved on statement.",
-  "execution_timestamp": "2026-11-16T10:58:44.396515Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Fresh deposit restores positive margin, automatically qualifying sub-account for participation in subsequent parent orders.",
-  "evidence": {
-    "state_recovery": "Positive free margin clears lockout"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Acc #3 re-enters active group participation on subsequent trade; historical loss preserved on statement.",
+  "priority": "P0",
+  "test_case_id": "MAM-M011",
+  "status": "BLOCKED",
+  "coverage_note": "Requires configured stop-out/leverage/news/swap/notification fixtures beyond the verified account margin cases.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

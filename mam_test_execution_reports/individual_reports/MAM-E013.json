@@ -1,20 +1,22 @@
 {
-  "test_case_id": "MAM-E013",
+  "id": "MAM-E013",
   "module": "Module 4: Order Execution, Modification & Bulk Routing",
   "title": "Pending Stop Order (Buy Stop / Sell Stop) Propagation",
-  "priority": "P1",
   "precondition": "Master places Buy Stop 2.0 lots at 1.0850 above current market.",
   "steps": "1. Master sends Buy Stop.",
-  "expected_result": "Proportional child Buy Stop orders placed across all linked accounts.",
-  "execution_timestamp": "2026-11-16T10:58:44.372459Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Pending STOP orders supported via POST /v1/oms/{instance}/orders/pending with type='STOP'.",
-  "evidence": {
-    "supported_types": [
-      "LIMIT",
-      "STOP"
-    ]
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Proportional child Buy Stop orders placed across all linked accounts.",
+  "priority": "P1",
+  "test_case_id": "MAM-E013",
+  "status": "PARTIAL",
+  "coverage_note": "STOP entry/copy/cancel paths tested on BLACK:BTCUSD; see pending-ticket case for actual pre-trigger behavior.",
+  "executed_check_ids": [
+    "PENDING-100-FANOUT-STOP",
+    "PENDING-TRIGGER-STOP-BUY",
+    "PENDING-TRIGGER-STOP-SELL"
+  ],
+  "evidence_files": [
+    "reports/live_recheck_20261120/deep_run/results_054627.json",
+    "reports/live_recheck_20261120/deep_run/results_060312.json"
+  ],
+  "release_signoff": false
 }

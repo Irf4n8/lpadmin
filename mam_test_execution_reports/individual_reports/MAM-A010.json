@@ -1,18 +1,19 @@
 {
-  "test_case_id": "MAM-A010",
+  "id": "MAM-A010",
   "module": "Module 2: MAM Allocation Methods & Sizing Engine",
   "title": "Minimum Lot Size Enforcement (0.01 Floor)",
-  "priority": "P0",
   "precondition": "Micro-account with $100 balance in $1,000,000 group; proportional calculation yields 0.001 lots.",
   "steps": "1. Process order sizing under 0.01 minimum lot policy.",
-  "expected_result": "Sizing engine drops order (does not execute) or clamps to 0.01 based on configured policy; zero 0.000 lot rejected orders.",
-  "execution_timestamp": "2026-11-16T10:58:42.342461Z",
-  "verification_type": "QUANTITATIVE_CALCULATION",
-  "status": "PASS",
-  "actual_result": "Sizing engine clamps or suppresses micro-orders below 0.01 floor to prevent broker order rejection.",
-  "evidence": {
-    "input_lot": 0.001,
-    "processed_lot": 0.0
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Sizing engine drops order (does not execute) or clamps to 0.01 based on configured policy; zero 0.000 lot rejected orders.",
+  "priority": "P0",
+  "test_case_id": "MAM-A010",
+  "status": "PARTIAL",
+  "coverage_note": "BLACK:BTCUSD multiplier-derived .0025 copy size clamps to .01. The original $100 proportional micro-account fixture is different and was not executed.",
+  "executed_check_ids": [
+    "SIZE-LOT-RULE-0.01-0.25"
+  ],
+  "evidence_files": [
+    "reports/live_recheck_20261120/deep_run/results_060733.json"
+  ],
+  "release_signoff": false
 }

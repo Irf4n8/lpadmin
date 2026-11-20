@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-P007",
+  "id": "MAM-P007",
   "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
   "title": "Sub-Account Account Frozen / Trading Disabled by Compliance",
-  "priority": "P0",
   "precondition": "Sub-account #4 frozen due to expired KYC; Master submits order.",
   "steps": "1. Process allocation.",
-  "expected_result": "Sub-account #4 skipped cleanly with 'Account Frozen'; remaining active accounts receive proportionally scaled orders.",
-  "execution_timestamp": "2026-11-16T10:58:44.380518Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Frozen or compliance-flagged sub-accounts are skipped during fan-out while active accounts fill normally.",
-  "evidence": {
-    "filter_condition": "account_status == 'active'"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Sub-account #4 skipped cleanly with 'Account Frozen'; remaining active accounts receive proportionally scaled orders.",
+  "priority": "P0",
+  "test_case_id": "MAM-P007",
+  "status": "BLOCKED",
+  "coverage_note": "Requires LP partial-fill, depth, rejection, or routing fault injection; these dedicated accounts are B-book and no LP simulator was supplied.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

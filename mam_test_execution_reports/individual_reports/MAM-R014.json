@@ -1,31 +1,20 @@
 {
-  "test_case_id": "MAM-R014",
+  "id": "MAM-R014",
   "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
   "title": "Remainder Handling on Partial Order Close",
-  "priority": "P0",
   "precondition": "10.0 lot order closed by 50% (5.0 lots closed); child orders have odd lot sizes.",
   "steps": "1. Partial close executes.",
-  "expected_result": "Remainder logic applies to closing volume symmetrically; remaining child positions sum to exactly 5.00 lots.",
-  "execution_timestamp": "2026-11-16T10:58:42.358158Z",
-  "verification_type": "QUANTITATIVE_CALCULATION",
-  "status": "PASS",
-  "actual_result": "Partial close remainder logic applied symmetrically. Remaining child volume: [1.67, 1.66, 1.66], sum = 4.99.",
-  "evidence": {
-    "open": [
-      3.34,
-      3.33,
-      3.33
-    ],
-    "closed": [
-      1.67,
-      1.67,
-      1.67
-    ],
-    "remaining": [
-      1.67,
-      1.66,
-      1.66
-    ]
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Remainder logic applies to closing volume symmetrically; remaining child positions sum to exactly 5.00 lots.",
+  "priority": "P0",
+  "test_case_id": "MAM-R014",
+  "status": "PARTIAL",
+  "coverage_note": "Proportional remaining quantities tested; configured block-remainder policy not available for verification.",
+  "executed_check_ids": [
+    "LIFE-PARTIAL",
+    "SIZE-MULTIPLIERS"
+  ],
+  "evidence_files": [
+    "reports/live_recheck_20261120/deep_run/results_054627.json"
+  ],
+  "release_signoff": false
 }

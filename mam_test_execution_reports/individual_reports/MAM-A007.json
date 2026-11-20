@@ -1,20 +1,15 @@
 {
-  "test_case_id": "MAM-A007",
+  "id": "MAM-A007",
   "module": "Module 2: MAM Allocation Methods & Sizing Engine",
   "title": "Fixed Lot Allocation Method",
-  "priority": "P1",
   "precondition": "Acc 1 configured Fixed Lot = 0.10; Acc 2 configured Fixed Lot = 0.50.",
   "steps": "1. Master opens 5.00 lots on master terminal.",
-  "expected_result": "Acc 1 executes exactly 0.10 lot; Acc 2 executes exactly 0.50 lot regardless of master lot size.",
-  "execution_timestamp": "2026-11-16T10:58:42.340421Z",
-  "verification_type": "QUANTITATIVE_CALCULATION",
-  "status": "PASS",
-  "actual_result": "Fixed lot sizing verified: Child tickets execute constant sizes [0.1, 0.5] irrespective of parent order volume.",
-  "evidence": {
-    "fixed_lots": [
-      0.1,
-      0.5
-    ]
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Acc 1 executes exactly 0.10 lot; Acc 2 executes exactly 0.50 lot regardless of master lot size.",
+  "priority": "P1",
+  "test_case_id": "MAM-A007",
+  "status": "BLOCKED",
+  "coverage_note": "The specified allocation policy/currency/conserved-block fixture is not represented by the tested multiplier/balance/equity copy model.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

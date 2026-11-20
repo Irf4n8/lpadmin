@@ -1,18 +1,19 @@
 {
-  "test_case_id": "MAM-D011",
+  "id": "MAM-D011",
   "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
   "title": "Large Institutional Whale Deposit Mid-Trade",
-  "priority": "P0",
   "precondition": "Group balance = $50,000; Whale deposits $500,000 into Sub-account #10.",
   "steps": "1. Deposit clears.2. Master executes subsequent trade.",
-  "expected_result": "Group balance updates to $550k; Whale receives 90.9% of subsequent trade volume without impacting existing open trades.",
-  "execution_timestamp": "2026-11-16T10:58:44.618004Z",
-  "verification_type": "QUANTITATIVE_CALCULATION",
-  "status": "PASS",
-  "actual_result": "Whale deposit updates total capital to $550000.00. Whale receives 90.9% of subsequent order volume.",
-  "evidence": {
-    "new_group_balance": 550000.0,
-    "whale_weight": 0.9090909090909091
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Group balance updates to $550k; Whale receives 90.9% of subsequent trade volume without impacting existing open trades.",
+  "priority": "P0",
+  "test_case_id": "MAM-D011",
+  "status": "PARTIAL",
+  "coverage_note": "Doubling follower cash affects future sizing; institutional deposit channel not exercised.",
+  "executed_check_ids": [
+    "GUI-BALANCE-NEXT-ORDER"
+  ],
+  "evidence_files": [
+    "reports/live_recheck_20261120/deep_run/results_060312.json"
+  ],
+  "release_signoff": false
 }

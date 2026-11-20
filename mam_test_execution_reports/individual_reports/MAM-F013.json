@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-F013",
+  "id": "MAM-F013",
   "module": "Module 1: Group & Sub-Account Lifecycle",
   "title": "Multi-Group Manager Configuration",
-  "priority": "P1",
   "precondition": "Money Manager manages 3 distinct MAM groups (Conservative, Moderate, Aggressive).",
   "steps": "1. Manager switches between group profiles in trading terminal.",
-  "expected_result": "Sizing profiles, sub-account rosters, and execution routes completely isolated; zero cross-contamination of trades.",
-  "execution_timestamp": "2026-11-16T10:58:42.205182Z",
-  "verification_type": "LIVE_API_EXECUTION",
-  "status": "PASS",
-  "actual_result": "MAM engine supports distinct master groups. Discovered 13 registered master(s) in directory.",
-  "evidence": {
-    "masters_count": 13
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Sizing profiles, sub-account rosters, and execution routes completely isolated; zero cross-contamination of trades.",
+  "priority": "P1",
+  "test_case_id": "MAM-F013",
+  "status": "BLOCKED",
+  "coverage_note": "LPOA contracts, independent group-management/archival controls or required role fixtures are not available in the verified API/UI flow.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

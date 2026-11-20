@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-E015",
+  "id": "MAM-E015",
   "module": "Module 4: Order Execution, Modification & Bulk Routing",
   "title": "Broker Requote / Price Off Quotes Handling on Parent Order",
-  "priority": "P0",
   "precondition": "Master attempts instant order during illiquid market; broker requotes.",
   "steps": "1. Master terminal receives requote prompt.",
-  "expected_result": "Child orders NOT sent until master accepts or rejects requote; zero partial child order orphan execution.",
-  "execution_timestamp": "2026-11-16T10:58:44.374270Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Requote or price rejection on master block blocks downstream fan-out, preventing orphan child executions.",
-  "evidence": {
-    "concurrency_rule": "Parent fill pre-requisite for child execution"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Child orders NOT sent until master accepts or rejects requote; zero partial child order orphan execution.",
+  "priority": "P0",
+  "test_case_id": "MAM-E015",
+  "status": "BLOCKED",
+  "coverage_note": "This exact execution/terminal/event-ordering fixture was not available or not executed; related market cases do not prove it.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

@@ -1,18 +1,15 @@
 {
-  "test_case_id": "MAM-P001",
+  "id": "MAM-P001",
   "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
   "title": "Liquidity Provider Partial Fill (50% Block Filled)",
-  "priority": "P0",
   "precondition": "Master sends 10.0 lots across 10 equal sub-accounts; LP only fills 5.0 lots.",
   "steps": "1. Broker bridge returns partial fill execution report of 5.0 lots.",
-  "expected_result": "MAM engine apportions the 5.0 filled lots proportionally (0.50 lots per sub-account); remaining 5.0 lots remain working or cancel per TIF.",
-  "execution_timestamp": "2026-11-16T10:58:44.374943Z",
-  "verification_type": "QUANTITATIVE_CALCULATION",
-  "status": "PASS",
-  "actual_result": "Partial fill handled proportionally: 5.0 lots filled yields 0.5 lots per sub-account. Remaining 5.0 lots remain working or cancel.",
-  "evidence": {
-    "master_fill": 5.0,
-    "child_fill": 0.5
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "MAM engine apportions the 5.0 filled lots proportionally (0.50 lots per sub-account); remaining 5.0 lots remain working or cancel per TIF.",
+  "priority": "P0",
+  "test_case_id": "MAM-P001",
+  "status": "BLOCKED",
+  "coverage_note": "Requires LP partial-fill, depth, rejection, or routing fault injection; these dedicated accounts are B-book and no LP simulator was supplied.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

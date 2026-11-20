@@ -1,24 +1,15 @@
 {
-  "test_case_id": "MAM-A008",
+  "id": "MAM-A008",
   "module": "Module 2: MAM Allocation Methods & Sizing Engine",
   "title": "Equal Risk / Leverage-Weighted Allocation",
-  "priority": "P1",
   "precondition": "Acc 1 has 1:100 leverage ($10k equity); Acc 2 has 1:30 leverage ($10k equity).",
   "steps": "1. Master opens trade under Equal Risk policy.",
-  "expected_result": "Child order sizes adjusted to match identical risk-per-dollar based on available leverage caps.",
-  "execution_timestamp": "2026-11-16T10:58:42.341087Z",
-  "verification_type": "QUANTITATIVE_CALCULATION",
-  "status": "PASS",
-  "actual_result": "Equal risk calculation computes leverage-adjusted weights: [0.7692307692307693, 0.23076923076923078].",
-  "evidence": {
-    "leverage_profiles": [
-      100,
-      30
-    ],
-    "weights": [
-      0.7692307692307693,
-      0.23076923076923078
-    ]
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Child order sizes adjusted to match identical risk-per-dollar based on available leverage caps.",
+  "priority": "P1",
+  "test_case_id": "MAM-A008",
+  "status": "BLOCKED",
+  "coverage_note": "The specified allocation policy/currency/conserved-block fixture is not represented by the tested multiplier/balance/equity copy model.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

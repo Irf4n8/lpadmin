@@ -1,0 +1,2777 @@
+[
+  {
+    "id": "MAM-F001",
+    "module": "Module 1: Group & Sub-Account Lifecycle",
+    "title": "Create Master MAM Group",
+    "precondition": "User registered with Money Manager permissions.",
+    "steps": "1. Open MAM Manager Portal.2. Create new MAM group 'FX Alpha Pro'.3. Select default allocation method: Proportional by Balance (PBB).4. Bind master MT5/FIX trading account.",
+    "expected": "MAM group initialized in DB; status set to 'Active'; master trading terminal connected; unique Group ID assigned.",
+    "priority": "P0",
+    "test_case_id": "MAM-F001",
+    "status": "BLOCKED",
+    "coverage_note": "Existing authorized master verified; creation of a new master group and MT5/FIX binding were not performed.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-F002",
+    "module": "Module 1: Group & Sub-Account Lifecycle",
+    "title": "Configure Manager Performance Fee and Allocation Profile",
+    "precondition": "MAM group created in draft mode.",
+    "steps": "1. Set Performance Fee = 20%, Management Fee = 1% AUM.2. Set Min Account Balance = $1,000, Max Group Capacity = 100 accounts.3. Publish group offer.",
+    "expected": "Offer terms stored with immutable version v1.0; displayed accurately to prospective clients.",
+    "priority": "P0",
+    "test_case_id": "MAM-F002",
+    "status": "PARTIAL",
+    "coverage_note": "Fee update/readback/restore tested; monthly crystallization and allocation-profile workflow not verified.",
+    "executed_check_ids": [
+      "MAM-FEE-CONFIG"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-F003",
+    "module": "Module 1: Group & Sub-Account Lifecycle",
+    "title": "Digital Limited Power of Attorney (LPOA) Contract Signing",
+    "precondition": "Investor selects MAM group to join.",
+    "steps": "1. Investor reviews LPOA terms granting manager trading rights while retaining withdrawal control.2. Submit digital signature and 2FA authentication.",
+    "expected": "Cryptographically signed LPOA PDF generated and stored; trading authorization granted in broker clearing DB.",
+    "priority": "P0",
+    "test_case_id": "MAM-F003",
+    "status": "BLOCKED",
+    "coverage_note": "LPOA contracts, independent group-management/archival controls or required role fixtures are not available in the verified API/UI flow.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-F004",
+    "module": "Module 1: Group & Sub-Account Lifecycle",
+    "title": "Link Sub-Account to MAM Master Group",
+    "precondition": "Investor account KYC verified and funded with $5,000.",
+    "steps": "1. Investor selects MAM group #101.2. Confirm account linking under signed LPOA.",
+    "expected": "Sub-account added to MAM group roster; trading rights transferred to manager; investor status set to 'Bound_Active'.",
+    "priority": "P0",
+    "test_case_id": "MAM-F004",
+    "status": "PARTIAL",
+    "coverage_note": "API leave/rejoin tested; signed LPOA and Bound_Active rights-transfer workflow not verified.",
+    "executed_check_ids": [
+      "MAM-UNFOLLOW-FLAT",
+      "MAM-JOIN-MIDTRADE"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-F005",
+    "module": "Module 1: Group & Sub-Account Lifecycle",
+    "title": "Link Sub-Account Below Minimum Balance Threshold",
+    "precondition": "MAM group requires min $1,000 balance; investor account has $450.",
+    "steps": "1. Attempt to link sub-account to MAM group.",
+    "expected": "Linking rejected with validation error: 'Account balance ($450.00) is below group minimum requirement ($1,000.00)'; account remains unlinked.",
+    "priority": "P1",
+    "test_case_id": "MAM-F005",
+    "status": "PARTIAL",
+    "coverage_note": "Zero-capital trade rejection tested; a configured minimum-balance JOIN threshold was not established.",
+    "executed_check_ids": [
+      "MARGIN-ISOLATION"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-F006",
+    "module": "Module 1: Group & Sub-Account Lifecycle",
+    "title": "Switch MAM Allocation Method on Active Group",
+    "precondition": "MAM group active with 10 accounts; manager changes method from PBB to PBE.",
+    "steps": "1. Manager switches allocation mode to Proportional by Equity (PBE).2. Submit update when zero trades are open.",
+    "expected": "Allocation engine updates configuration; subsequent orders apportioned by live equity; audit log recorded.",
+    "priority": "P0",
+    "test_case_id": "MAM-F006",
+    "status": "PARTIAL",
+    "coverage_note": "Balance/equity sizing on current MAM tested; immutable configuration audit trail not inspected.",
+    "executed_check_ids": [
+      "SIZE-BALANCE",
+      "SIZE-EQUITY"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-F007",
+    "module": "Module 1: Group & Sub-Account Lifecycle",
+    "title": "Switch Allocation Method While Positions Are Open",
+    "precondition": "MAM group has 3 active open trades.",
+    "steps": "1. Manager attempts to change allocation method from PBB to Lot Multiplier.",
+    "expected": "Action blocked with error: 'Cannot change allocation method while open positions exist. Please close all group positions first'.",
+    "priority": "P0",
+    "test_case_id": "MAM-F007",
+    "status": "PARTIAL",
+    "coverage_note": "Future-vs-existing sizing tested; original group allocation-profile transition differs from these follower settings.",
+    "executed_check_ids": [
+      "MAM-MULTIPLIER-MIDTRADE",
+      "GUI-BALANCE-NEXT-ORDER"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json",
+      "reports/live_recheck_20261120/deep_run/results_060312.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-F008",
+    "module": "Module 1: Group & Sub-Account Lifecycle",
+    "title": "Multi-Currency Sub-Account Inclusion (USD, EUR, GBP in One Group)",
+    "precondition": "Master account denominated in USD; sub-accounts in USD, EUR, and GBP.",
+    "steps": "1. Link EUR account (\u20ac10,000) and GBP account (\u00a310,000).",
+    "expected": "Sizing engine converts sub-account balances to USD base using live broker spot FX rates for accurate proportional weighting.",
+    "priority": "P0",
+    "test_case_id": "MAM-F008",
+    "status": "BLOCKED",
+    "coverage_note": "LPOA contracts, independent group-management/archival controls or required role fixtures are not available in the verified API/UI flow.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-F009",
+    "module": "Module 1: Group & Sub-Account Lifecycle",
+    "title": "Group Maximum Capacity Cap Gating",
+    "precondition": "MAM group configured with Max Capacity = 25 sub-accounts; 25 accounts linked.",
+    "steps": "1. 26th investor attempts to link sub-account.",
+    "expected": "Linking rejected: 'MAM group has reached maximum investor capacity (25 accounts)'; placed on waiting list.",
+    "priority": "P1",
+    "test_case_id": "MAM-F009",
+    "status": "BLOCKED",
+    "coverage_note": "LPOA contracts, independent group-management/archival controls or required role fixtures are not available in the verified API/UI flow.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-F010",
+    "module": "Module 1: Group & Sub-Account Lifecycle",
+    "title": "Sub-Account Voluntary Disconnection (Revoking LPOA) With Zero Trades",
+    "precondition": "Sub-account linked to MAM group; zero trades open.",
+    "steps": "1. Investor clicks 'Revoke LPOA / Disconnect from MAM'.2. Confirm disconnection.",
+    "expected": "Sub-account unlinked cleanly; trading rights restored to client; status set to 'Independent'; manager notified.",
+    "priority": "P0",
+    "test_case_id": "MAM-F010",
+    "status": "PARTIAL",
+    "coverage_note": "Unfollow prevents new copies; LPOA revocation, Independent status and manager notification not verified.",
+    "executed_check_ids": [
+      "MAM-UNFOLLOW-FLAT"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-F011",
+    "module": "Module 1: Group & Sub-Account Lifecycle",
+    "title": "Sub-Account Disconnection Request While Positions Are Open",
+    "precondition": "Sub-account has 2 open child orders placed by manager.",
+    "steps": "1. Investor requests immediate disconnection.2. System prompts choice: 'Close open positions at market' vs 'Transfer positions to client'.",
+    "expected": "If market close selected: child orders closed immediately, LPOA revoked, net cash returned to client control.",
+    "priority": "P0",
+    "test_case_id": "MAM-F011",
+    "status": "PARTIAL",
+    "coverage_note": "Open/unfollow ordering observed; no contractual close-or-transfer selection workflow was established.",
+    "executed_check_ids": [
+      "RACE-UNFOLLOW-OPEN-1",
+      "RACE-UNFOLLOW-OPEN-2",
+      "RACE-UNFOLLOW-OPEN-3"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-F012",
+    "module": "Module 1: Group & Sub-Account Lifecycle",
+    "title": "Manager Pause / Resume of Individual Sub-Account Participation",
+    "precondition": "Sub-account #7 experiences temporary compliance flag.",
+    "steps": "1. Manager or Admin toggles sub-account #7 to 'Paused'.2. Master executes new trade.",
+    "expected": "Sub-account #7 excluded from new order allocation; existing positions maintained; remaining sub-accounts receive trades.",
+    "priority": "P1",
+    "test_case_id": "MAM-F012",
+    "status": "BLOCKED",
+    "coverage_note": "LPOA contracts, independent group-management/archival controls or required role fixtures are not available in the verified API/UI flow.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-F013",
+    "module": "Module 1: Group & Sub-Account Lifecycle",
+    "title": "Multi-Group Manager Configuration",
+    "precondition": "Money Manager manages 3 distinct MAM groups (Conservative, Moderate, Aggressive).",
+    "steps": "1. Manager switches between group profiles in trading terminal.",
+    "expected": "Sizing profiles, sub-account rosters, and execution routes completely isolated; zero cross-contamination of trades.",
+    "priority": "P1",
+    "test_case_id": "MAM-F013",
+    "status": "BLOCKED",
+    "coverage_note": "LPOA contracts, independent group-management/archival controls or required role fixtures are not available in the verified API/UI flow.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-F014",
+    "module": "Module 1: Group & Sub-Account Lifecycle",
+    "title": "Sub-Account Direct Trading Prevention (LPOA Lockout)",
+    "precondition": "Sub-account actively bound to MAM manager.",
+    "steps": "1. Investor attempts to manually open an order from personal MT5 terminal.",
+    "expected": "Order rejected by broker server with 'Trade Disabled (Account managed under LPOA)'; investor cannot interfere with manager strategy.",
+    "priority": "P0",
+    "test_case_id": "MAM-F014",
+    "status": "PARTIAL",
+    "coverage_note": "Current platform permits independent follower trades. Original LPOA direct-trading lockout requirement is not demonstrated.",
+    "executed_check_ids": [
+      "ISOLATE-MANUAL-FOLLOWER"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_055545.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-F015",
+    "module": "Module 1: Group & Sub-Account Lifecycle",
+    "title": "Manager Voluntary Group Archival / Dissolution",
+    "precondition": "Manager retires MAM group with 15 linked accounts.",
+    "steps": "1. Manager closes all open group positions.2. Manager clicks 'Close & Dissolve MAM Group'.",
+    "expected": "Group dissolved; LPOAs revoked for all 15 clients; full independent trading rights restored; historical records archived.",
+    "priority": "P0",
+    "test_case_id": "MAM-F015",
+    "status": "BLOCKED",
+    "coverage_note": "LPOA contracts, independent group-management/archival controls or required role fixtures are not available in the verified API/UI flow.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-A001",
+    "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+    "title": "Proportional by Balance (PBB): 3 Accounts with Equal Balances",
+    "precondition": "Master opens 3.00 lots EURUSD; 3 sub-accounts hold $10k, $10k, $10k (Total $30k).",
+    "steps": "1. Allocation engine applies formula: Child_Lots = Master_Lots * (Account_Balance / Total_Balance).",
+    "expected": "Each sub-account receives exactly 1.00 lot (3.00 * $10k / $30k); sum of child lots == 3.00 lots.",
+    "priority": "P0",
+    "test_case_id": "MAM-A001",
+    "status": "PARTIAL",
+    "coverage_note": "Current MAM uses follower/master balance ratios. Original conserved block allocation across subaccounts is a different sizing model.",
+    "executed_check_ids": [
+      "SIZE-BALANCE"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-A002",
+    "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+    "title": "Proportional by Balance (PBB): Unequal Weighting (10%, 30%, 60%)",
+    "precondition": "Master opens 10.00 lots GBPUSD; accounts have $10k, $30k, $60k (Total $100k).",
+    "steps": "1. Execute trade via PBB.",
+    "expected": "Account 1 receives 1.00 lot; Account 2 receives 3.00 lots; Account 3 receives 6.00 lots; sum == 10.00 lots.",
+    "priority": "P0",
+    "test_case_id": "MAM-A002",
+    "status": "PARTIAL",
+    "coverage_note": "Three balance ratios tested; original conserved 10/30/60 percent block allocation not demonstrated.",
+    "executed_check_ids": [
+      "SIZE-BALANCE"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-A003",
+    "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+    "title": "Proportional by Equity (PBE): Divergent Cash vs Floating Equity",
+    "precondition": "Account 1: $10k cash / $12k equity; Account 2: $10k cash / $8k equity (Total Equity = $20k).",
+    "steps": "1. Master opens 2.00 lots USDJPY using PBE.",
+    "expected": "Account 1 receives 2.00 * ($12k / $20k) = 1.20 lots; Account 2 receives 2.00 * ($8k / $20k) = 0.80 lots; sum == 2.00 lots.",
+    "priority": "P0",
+    "test_case_id": "MAM-A003",
+    "status": "PARTIAL",
+    "coverage_note": "Equity-ratio sizing tested with flat accounts; divergent floating-equity fixture not yet executed.",
+    "executed_check_ids": [
+      "SIZE-EQUITY"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-A004",
+    "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+    "title": "Predefined Percentage Allocation: Exact Percentage Distribution",
+    "precondition": "Manager configures fixed percentages: Acc 1 = 25%, Acc 2 = 35%, Acc 3 = 40% (Sum = 100%).",
+    "steps": "1. Master executes 4.00 lots EURUSD.",
+    "expected": "Acc 1 gets 1.00 lot (25%); Acc 2 gets 1.40 lots (35%); Acc 3 gets 1.60 lots (40%); sum == 4.00 lots.",
+    "priority": "P0",
+    "test_case_id": "MAM-A004",
+    "status": "BLOCKED",
+    "coverage_note": "The specified allocation policy/currency/conserved-block fixture is not represented by the tested multiplier/balance/equity copy model.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-A005",
+    "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+    "title": "Predefined Percentage Allocation: Validation of Sum == 100%",
+    "precondition": "Manager attempts to save percentage settings summing to 95% or 105%.",
+    "steps": "1. Enter 50%, 30%, 15% (Total 95%). Click Save.",
+    "expected": "System blocks save with error: 'Total allocation percentage must equal exactly 100.0% (Current: 95.0%)'.",
+    "priority": "P0",
+    "test_case_id": "MAM-A005",
+    "status": "BLOCKED",
+    "coverage_note": "The specified allocation policy/currency/conserved-block fixture is not represented by the tested multiplier/balance/equity copy model.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-A006",
+    "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+    "title": "Lot Multiplier Allocation Method",
+    "precondition": "Acc 1 assigned 0.5x multiplier; Acc 2 assigned 2.0x multiplier; Acc 3 assigned 1.0x multiplier.",
+    "steps": "1. Master opens 1.00 lot AUDUSD.",
+    "expected": "Acc 1 receives 0.50 lot; Acc 2 receives 2.00 lots; Acc 3 receives 1.00 lot; orders sent to broker.",
+    "priority": "P0",
+    "test_case_id": "MAM-A006",
+    "status": "PARTIAL",
+    "coverage_note": "BLACK:BTCUSD multiplier tiers and partial close tested across 100 followers; the exact 1.00-lot AUDUSD broker-routing fixture was not executed.",
+    "executed_check_ids": [
+      "SIZE-MULTIPLIERS"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-A007",
+    "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+    "title": "Fixed Lot Allocation Method",
+    "precondition": "Acc 1 configured Fixed Lot = 0.10; Acc 2 configured Fixed Lot = 0.50.",
+    "steps": "1. Master opens 5.00 lots on master terminal.",
+    "expected": "Acc 1 executes exactly 0.10 lot; Acc 2 executes exactly 0.50 lot regardless of master lot size.",
+    "priority": "P1",
+    "test_case_id": "MAM-A007",
+    "status": "BLOCKED",
+    "coverage_note": "The specified allocation policy/currency/conserved-block fixture is not represented by the tested multiplier/balance/equity copy model.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-A008",
+    "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+    "title": "Equal Risk / Leverage-Weighted Allocation",
+    "precondition": "Acc 1 has 1:100 leverage ($10k equity); Acc 2 has 1:30 leverage ($10k equity).",
+    "steps": "1. Master opens trade under Equal Risk policy.",
+    "expected": "Child order sizes adjusted to match identical risk-per-dollar based on available leverage caps.",
+    "priority": "P1",
+    "test_case_id": "MAM-A008",
+    "status": "BLOCKED",
+    "coverage_note": "The specified allocation policy/currency/conserved-block fixture is not represented by the tested multiplier/balance/equity copy model.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-A009",
+    "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+    "title": "Quantization to Broker Lot Step (0.01 Lot Step Enforcement)",
+    "precondition": "PBB sizing calculation yields 0.3456 lots for a sub-account.",
+    "steps": "1. Apply broker lot step rounding.",
+    "expected": "Order sized to 0.35 lots (or 0.34 lots per policy); zero sub-0.01 fractional lot orders submitted to broker.",
+    "priority": "P0",
+    "test_case_id": "MAM-A009",
+    "status": "PARTIAL",
+    "coverage_note": "Observed rounding to valid .01 entry steps; original .34999999 boundary fixture not executed.",
+    "executed_check_ids": [
+      "SIZE-LOT-RULE-0.03-0.5",
+      "SIZE-LOT-RULE-0.01-1.5",
+      "SIZE-LOT-RULE-0.01-2.75"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_060733.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-A010",
+    "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+    "title": "Minimum Lot Size Enforcement (0.01 Floor)",
+    "precondition": "Micro-account with $100 balance in $1,000,000 group; proportional calculation yields 0.001 lots.",
+    "steps": "1. Process order sizing under 0.01 minimum lot policy.",
+    "expected": "Sizing engine drops order (does not execute) or clamps to 0.01 based on configured policy; zero 0.000 lot rejected orders.",
+    "priority": "P0",
+    "test_case_id": "MAM-A010",
+    "status": "PARTIAL",
+    "coverage_note": "BLACK:BTCUSD multiplier-derived .0025 copy size clamps to .01. The original $100 proportional micro-account fixture is different and was not executed.",
+    "executed_check_ids": [
+      "SIZE-LOT-RULE-0.01-0.25"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_060733.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-A011",
+    "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+    "title": "Zero-Sum Lot Conservation Law",
+    "precondition": "Master opens 15.00 lots across 50 sub-accounts.",
+    "steps": "1. Calculate: Sum of all child sub-account lots.",
+    "expected": "\u2211(Child_Lots) == Master_Lots (15.000000 lots). Zero lost or created volume.",
+    "priority": "P0",
+    "test_case_id": "MAM-A011",
+    "status": "BLOCKED",
+    "coverage_note": "The specified allocation policy/currency/conserved-block fixture is not represented by the tested multiplier/balance/equity copy model.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-A012",
+    "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+    "title": "Multi-Currency Balance Conversion at Live Spot Rates",
+    "precondition": "Group contains USD, EUR, and JPY sub-accounts under PBB.1 EUR = 1.08 USD, 1 USD = 150 JPY.",
+    "steps": "1. Master opens trade.",
+    "expected": "EUR and JPY balances dynamically converted to USD to determine true equity weighting; orders apportioned accurately.",
+    "priority": "P1",
+    "test_case_id": "MAM-A012",
+    "status": "BLOCKED",
+    "coverage_note": "The specified allocation policy/currency/conserved-block fixture is not represented by the tested multiplier/balance/equity copy model.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-A013",
+    "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+    "title": "Dynamic Equity Fluctuations During Rapid Order Burst",
+    "precondition": "Master submits 5 rapid market orders while existing trades are fluctuating.",
+    "steps": "1. Sizing engine queries live sub-account equity for each order under PBE.",
+    "expected": "Each order reflects latest live equity snapshot; P99 sizing latency < 5ms.",
+    "priority": "P1",
+    "test_case_id": "MAM-A013",
+    "status": "PARTIAL",
+    "coverage_note": "Cash-change/entry races tested; original floating-equity snapshot stress requires a separate oracle.",
+    "executed_check_ids": [
+      "RACE-GUI-BALANCE-ENTRY-1",
+      "RACE-GUI-BALANCE-ENTRY-2",
+      "RACE-GUI-BALANCE-ENTRY-3"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_060312.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-A014",
+    "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+    "title": "Large Block Order Allocation (100.0 Lots Across 20 Accounts)",
+    "precondition": "Master executes institutional 100.0 lot order.",
+    "steps": "1. Apportion 100.0 lots across 20 sub-accounts.",
+    "expected": "All child orders sized accurately without integer overflow; total child lots == 100.00.",
+    "priority": "P0",
+    "test_case_id": "MAM-A014",
+    "status": "PARTIAL",
+    "coverage_note": "500 child positions across 100 followers tested; not the specified single 100-lot block.",
+    "executed_check_ids": [
+      "LOAD-FIVE-BURST"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-A015",
+    "module": "Module 2: MAM Allocation Methods & Sizing Engine",
+    "title": "Small Scalp Order Sizing (0.10 Lots Across 10 Accounts)",
+    "precondition": "Master opens minimal 0.10 lots across 10 equal sub-accounts.",
+    "steps": "1. Calculate child lots: 0.10 / 10 = 0.01 lots each.",
+    "expected": "Exactly 10 child orders of 0.01 lots generated; executed cleanly.",
+    "priority": "P0",
+    "test_case_id": "MAM-A015",
+    "status": "PARTIAL",
+    "coverage_note": "Small-ticket copy sizing tested; original conserved .10 block across ten accounts differs from current copy model.",
+    "executed_check_ids": [
+      "SIZE-LOT-RULE-0.01-0.25",
+      "MARKET-BUY"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054434.json",
+      "reports/live_recheck_20261120/deep_run/results_060733.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-R001",
+    "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+    "title": "Fractional Remainder Detection (1.00 Lot Across 3 Equal Accounts)",
+    "precondition": "Master opens 1.00 lot across 3 accounts ($10k each). Exact math: 0.333333 lots each.",
+    "steps": "1. Quantize child lots to 0.01: Acc 1 = 0.33, Acc 2 = 0.33, Acc 3 = 0.33 (Total 0.99 lots).2. Remainder engine identifies unallocated residual: 1.00 - 0.99 = 0.01 lot.",
+    "expected": "Remainder of exactly 0.01 lot detected; routed to designated remainder policy handler.",
+    "priority": "P0",
+    "test_case_id": "MAM-R001",
+    "status": "PARTIAL",
+    "coverage_note": "Copy-size rounding observed; conserved one-lot division across three accounts and remainder ledger not exercised.",
+    "executed_check_ids": [
+      "SIZE-LOT-RULE-0.03-0.5"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_060733.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-R002",
+    "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+    "title": "Remainder Policy: Assign to Highest Equity Sub-Account",
+    "precondition": "Remainder = 0.01 lot; Acc 1 has $10,050; Acc 2 has $10,000; Acc 3 has $9,950.",
+    "steps": "1. Execute 'Highest Equity' remainder policy.",
+    "expected": "Acc 1 receives 0.33 + 0.01 = 0.34 lots; Acc 2 receives 0.33 lots; Acc 3 receives 0.33 lots; total == 1.00 lot.",
+    "priority": "P0",
+    "test_case_id": "MAM-R002",
+    "status": "BLOCKED",
+    "coverage_note": "No configurable remainder-distribution ledger, rebate ledger, or exact block-allocation policy was available for this requirement.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-R003",
+    "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+    "title": "Remainder Policy: Absorb into Manager Personal Account",
+    "precondition": "Remainder policy set to 'Manager Absorption'; Remainder = 0.02 lots on 10.00 lot block.",
+    "steps": "1. Execute trade.",
+    "expected": "Sub-accounts receive 9.98 lots; Manager personal account receives 0.02 lots; zero client over-allocation.",
+    "priority": "P0",
+    "test_case_id": "MAM-R003",
+    "status": "BLOCKED",
+    "coverage_note": "No configurable remainder-distribution ledger, rebate ledger, or exact block-allocation policy was available for this requirement.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-R004",
+    "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+    "title": "Remainder Policy: Round-Robin Rotation Across Sub-Accounts",
+    "precondition": "3 equal accounts; 3 consecutive trades generating 0.01 remainder each.",
+    "steps": "1. Trade 1: Remainder to Acc 1 (0.34, 0.33, 0.33).2. Trade 2: Remainder to Acc 2 (0.33, 0.34, 0.33).3. Trade 3: Remainder to Acc 3 (0.33, 0.33, 0.34).",
+    "expected": "Remainder rotating sequentially; perfectly equal cumulative volume across all 3 accounts over time.",
+    "priority": "P0",
+    "test_case_id": "MAM-R004",
+    "status": "BLOCKED",
+    "coverage_note": "No configurable remainder-distribution ledger, rebate ledger, or exact block-allocation policy was available for this requirement.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-R005",
+    "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+    "title": "Remainder Policy: Truncate / Discard Sub-Cent Residuals",
+    "precondition": "Broker allows parent order adjustment; remainder = 0.01 lot.Policy: 'Reduce Parent Order to Match Quantized Sum'.",
+    "steps": "1. Master sends 1.00 lot; children sum to 0.99 lots.",
+    "expected": "Parent order adjusted to 0.99 lots at LP; zero unallocated child discrepancy.",
+    "priority": "P1",
+    "test_case_id": "MAM-R005",
+    "status": "BLOCKED",
+    "coverage_note": "No configurable remainder-distribution ledger, rebate ledger, or exact block-allocation policy was available for this requirement.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-R006",
+    "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+    "title": "Extreme Fractional Division: 1.00 Lot Across 7 Sub-Accounts",
+    "precondition": "7 equal accounts ($10k each). Math: 1.00 / 7 = 0.142857 lots each.",
+    "steps": "1. Quantize: 7 * 0.14 = 0.98 lots. Remainder = 0.02 lots.",
+    "expected": "Two highest-priority accounts receive 0.15 lots; remaining five receive 0.14 lots; sum == exactly 1.00 lot.",
+    "priority": "P0",
+    "test_case_id": "MAM-R006",
+    "status": "BLOCKED",
+    "coverage_note": "No configurable remainder-distribution ledger, rebate ledger, or exact block-allocation policy was available for this requirement.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-R007",
+    "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+    "title": "Zero Remainder Perfect Division",
+    "precondition": "Master opens 2.00 lots across 4 accounts ($10k each). Math: 2.00 / 4 = 0.50 lots each.",
+    "steps": "1. Process allocation.",
+    "expected": "Each account receives 0.500000 lots; Remainder == 0.00 lots; zero policy intervention needed.",
+    "priority": "P0",
+    "test_case_id": "MAM-R007",
+    "status": "PARTIAL",
+    "coverage_note": "Exact multiplier products verified; block remainder-distribution model not exercised.",
+    "executed_check_ids": [
+      "SIZE-MULTIPLIERS"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-R008",
+    "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+    "title": "Sub-Minimum Lot Remainder Suppression",
+    "precondition": "Micro-remainder of 0.005 lots when broker enforces strict 0.01 lot step.",
+    "steps": "1. Attempt to assign fractional remainder.",
+    "expected": "System strictly rounds to nearest valid 0.01 increment; never submits invalid order sizes to broker API.",
+    "priority": "P0",
+    "test_case_id": "MAM-R008",
+    "status": "PARTIAL",
+    "coverage_note": "Actual policy clamps below-minimum copies to .01; original remainder suppression policy is a separate requirement.",
+    "executed_check_ids": [
+      "SIZE-LOT-RULE-0.01-0.25"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_060733.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-R009",
+    "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+    "title": "Audit Trail of Remainder Allocation Assignment",
+    "precondition": "Trade executes with 0.01 remainder assigned to Acc #2.",
+    "steps": "1. Query trade execution journal.",
+    "expected": "Journal explicitly tags child order #2: 'Base: 0.33, Remainder: +0.01, Rule: HIGHEST_EQUITY'; 100% audit transparency.",
+    "priority": "P1",
+    "test_case_id": "MAM-R009",
+    "status": "BLOCKED",
+    "coverage_note": "No configurable remainder-distribution ledger, rebate ledger, or exact block-allocation policy was available for this requirement.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-R010",
+    "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+    "title": "Deterministic Remainder Ordering During Equity Ties",
+    "precondition": "Acc 1 and Acc 2 have exact same equity ($10,000.00) and priority.Remainder = 0.01 lot.",
+    "steps": "1. Execute allocation.",
+    "expected": "System resolves tie deterministically via lower Account_ID or oldest account registration timestamp; zero random behavior.",
+    "priority": "P1",
+    "test_case_id": "MAM-R010",
+    "status": "BLOCKED",
+    "coverage_note": "No configurable remainder-distribution ledger, rebate ledger, or exact block-allocation policy was available for this requirement.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-R011",
+    "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+    "title": "Multi-Asset Remainder Handling (Crypto with 8 Decimals vs FX with 2 Decimals)",
+    "precondition": "Group trades both EURUSD (0.01 lot step) and BTCUSD (0.00000001 lot step).",
+    "steps": "1. Execute trades in both assets.",
+    "expected": "Remainder engine respects asset-specific minimum lot steps and precision scales; zero rounding error.",
+    "priority": "P1",
+    "test_case_id": "MAM-R011",
+    "status": "BLOCKED",
+    "coverage_note": "No configurable remainder-distribution ledger, rebate ledger, or exact block-allocation policy was available for this requirement.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-R012",
+    "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+    "title": "Cumulative Remainder Lot Drift Over 1,000 Consecutive Trades",
+    "precondition": "1,000 trades executed with 0.01 remainder each under Round-Robin policy.",
+    "steps": "1. Measure cumulative volume across all 3 sub-accounts.",
+    "expected": "Total volume delta across all accounts is <= 0.01 lots; zero cumulative bias.",
+    "priority": "P0",
+    "test_case_id": "MAM-R012",
+    "status": "BLOCKED",
+    "coverage_note": "No configurable remainder-distribution ledger, rebate ledger, or exact block-allocation policy was available for this requirement.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-R013",
+    "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+    "title": "Equal Balance Remainder Tie-Breaker Using Account Timestamp",
+    "precondition": "Acc 1 and Acc 2 have exact same equity ($10,000.00); 0.01 remainder generated.",
+    "steps": "1. Process allocation.",
+    "expected": "Resolves tie using oldest account creation timestamp; deterministic behavior.",
+    "priority": "P1",
+    "test_case_id": "MAM-R013",
+    "status": "BLOCKED",
+    "coverage_note": "No configurable remainder-distribution ledger, rebate ledger, or exact block-allocation policy was available for this requirement.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-R014",
+    "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+    "title": "Remainder Handling on Partial Order Close",
+    "precondition": "10.0 lot order closed by 50% (5.0 lots closed); child orders have odd lot sizes.",
+    "steps": "1. Partial close executes.",
+    "expected": "Remainder logic applies to closing volume symmetrically; remaining child positions sum to exactly 5.00 lots.",
+    "priority": "P0",
+    "test_case_id": "MAM-R014",
+    "status": "PARTIAL",
+    "coverage_note": "Proportional remaining quantities tested; configured block-remainder policy not available for verification.",
+    "executed_check_ids": [
+      "LIFE-PARTIAL",
+      "SIZE-MULTIPLIERS"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-R015",
+    "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
+    "title": "Remainder Lot Impact on Broker Volume Rebates",
+    "precondition": "Broker pays $3.00/lot commission rebate.",
+    "steps": "1. Reconcile volume rebates.",
+    "expected": "Rebate calculated on exact executed child ticket lots; sum of child rebates equals parent block rebate.",
+    "priority": "P1",
+    "test_case_id": "MAM-R015",
+    "status": "BLOCKED",
+    "coverage_note": "No configurable remainder-distribution ledger, rebate ledger, or exact block-allocation policy was available for this requirement.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-E001",
+    "module": "Module 4: Order Execution, Modification & Bulk Routing",
+    "title": "Market Order Block Execution and Real-Time Child Ticket Minting",
+    "precondition": "Master opens 10.0 lots EURUSD market buy across 20 sub-accounts.",
+    "steps": "1. Master sends Market Buy order.",
+    "expected": "20 distinct child tickets generated and submitted to broker bridge; average placement latency < 50ms; 20 open positions active in client terminals.",
+    "priority": "P0",
+    "test_case_id": "MAM-E001",
+    "status": "PARTIAL",
+    "coverage_note": "101-account fan-out verified; LP bridge delivery and original <50ms SLA not certified. Server timestamps reported separately.",
+    "executed_check_ids": [
+      "MARKET-BUY",
+      "LOAD-FIVE-BURST"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054434.json",
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-E002",
+    "module": "Module 4: Order Execution, Modification & Bulk Routing",
+    "title": "Pending Limit Order Block Placement and Propagation",
+    "precondition": "Master places Buy Limit for 5.0 lots EURUSD at 1.0750 across 10 accounts.",
+    "steps": "1. Master sends Buy Limit order.",
+    "expected": "10 child Buy Limit orders placed in individual sub-accounts at 1.0750 with proportional lot sizes; all in 'Working' state.",
+    "priority": "P0",
+    "test_case_id": "MAM-E002",
+    "status": "PARTIAL",
+    "coverage_note": "Pending ticket fan-out checked on BLACK:BTCUSD; original EURUSD price/allocation fixture replaced by user instruction.",
+    "executed_check_ids": [
+      "PENDING-100-FANOUT-LIMIT"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_060312.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-E003",
+    "module": "Module 4: Order Execution, Modification & Bulk Routing",
+    "title": "Pending Limit Order Trigger and Simultaneous Fill",
+    "precondition": "Market price reaches 1.0750 limit price.",
+    "steps": "1. Broker order matching triggers master limit order.",
+    "expected": "All 10 child limit orders fill simultaneously; positions transition to 'Open' with identical entry price.",
+    "priority": "P0",
+    "test_case_id": "MAM-E003",
+    "status": "PARTIAL",
+    "coverage_note": "Marketable limits fill/copy; natural resting-limit crossing, identical fills and simultaneity are not established by these cases.",
+    "executed_check_ids": [
+      "PENDING-TRIGGER-LIMIT-BUY",
+      "PENDING-TRIGGER-LIMIT-SELL"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-E004",
+    "module": "Module 4: Order Execution, Modification & Bulk Routing",
+    "title": "Master Modifies Stop-Loss and Take-Profit on Open Block",
+    "precondition": "10 sub-accounts have open EURUSD child positions.Master updates SL to 1.0700 and TP to 1.0900.",
+    "steps": "1. Master modifies SL/TP on master ticket.",
+    "expected": "Bulk modification fan-out updates SL=1.0700 and TP=1.0900 across all 10 child tickets within 200ms; zero desynchronized child orders.",
+    "priority": "P0",
+    "test_case_id": "MAM-E004",
+    "status": "PARTIAL",
+    "coverage_note": "Brackets and prices verified across 101 accounts; original <200ms SLA not certified.",
+    "executed_check_ids": [
+      "LIFE-PROTECTION-RETEST",
+      "RACE-INDEPENDENT-SL-TP"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_055545.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-E005",
+    "module": "Module 4: Order Execution, Modification & Bulk Routing",
+    "title": "Master Cancels Pending Limit Order Prior to Fill",
+    "precondition": "Master cancels pending 5.0 lot Buy Limit.",
+    "steps": "1. Master sends Cancel command.",
+    "expected": "All 10 child pending limit orders cancelled immediately across all sub-accounts; zero orphan working orders.",
+    "priority": "P0",
+    "test_case_id": "MAM-E005",
+    "status": "PARTIAL",
+    "coverage_note": "All-account pending ticket cancellation checked; see exact child-ticket evidence.",
+    "executed_check_ids": [
+      "PENDING-100-FANOUT-LIMIT"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_060312.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-E006",
+    "module": "Module 4: Order Execution, Modification & Bulk Routing",
+    "title": "Individual Child Stop-Loss Hit at Broker Level",
+    "precondition": "Market drops and touches 1.0700 Stop-Loss.",
+    "steps": "1. Broker risk engine triggers SL execution.",
+    "expected": "All child positions closed at SL price; realized P&L debited individually to each sub-account ledger; master position closed.",
+    "priority": "P0",
+    "test_case_id": "MAM-E006",
+    "status": "PARTIAL",
+    "coverage_note": "Natural bracket exits observed if triggered; a deliberately isolated single-child SL hit is a separate fixture.",
+    "executed_check_ids": [
+      "LIVE-BRACKET-BUY",
+      "LIVE-BRACKET-SELL"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_055545.json",
+      "reports/live_recheck_20261120/deep_run/results_060312.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-E007",
+    "module": "Module 4: Order Execution, Modification & Bulk Routing",
+    "title": "Individual Child Take-Profit Hit at Broker Level",
+    "precondition": "Market rallies and touches 1.0900 Take-Profit.",
+    "steps": "1. Broker risk engine triggers TP execution.",
+    "expected": "All child positions closed at TP price; realized profit credited individually to each sub-account ledger.",
+    "priority": "P0",
+    "test_case_id": "MAM-E007",
+    "status": "PARTIAL",
+    "coverage_note": "Natural bracket exits observed if triggered; a deliberately isolated single-child TP hit is a separate fixture.",
+    "executed_check_ids": [
+      "LIVE-BRACKET-BUY",
+      "LIVE-BRACKET-SELL"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_055545.json",
+      "reports/live_recheck_20261120/deep_run/results_060312.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-E008",
+    "module": "Module 4: Order Execution, Modification & Bulk Routing",
+    "title": "Partial Close of Master Order (50% Volume Reduction)",
+    "precondition": "Master holds open 10.0 lots EURUSD; submits partial close for 5.0 lots.",
+    "steps": "1. Master executes partial close of 5.0 lots.",
+    "expected": "Each of the 20 child tickets partially closed by exactly 50%; remaining volume = 5.0 lots across accounts; realized P&L booked.",
+    "priority": "P0",
+    "test_case_id": "MAM-E008",
+    "status": "PARTIAL",
+    "coverage_note": "50% child reduction and quantity conservation per position tested; original conserved block sizing differs.",
+    "executed_check_ids": [
+      "LIFE-PARTIAL",
+      "SIZE-MULTIPLIERS",
+      "RACE-MULTI-REDUCE-1"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json",
+      "reports/live_recheck_20261120/deep_run/results_055545.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-E009",
+    "module": "Module 4: Order Execution, Modification & Bulk Routing",
+    "title": "Trailing Stop Block Execution Across Sub-Accounts",
+    "precondition": "Master configures 25-pip Trailing Stop on profitable position.",
+    "steps": "1. Price advances 60 pips then retraces 25 pips.",
+    "expected": "Trailing stop trails peak price accurately across all child tickets and triggers unified close at broker.",
+    "priority": "P1",
+    "test_case_id": "MAM-E009",
+    "status": "BLOCKED",
+    "coverage_note": "This exact execution/terminal/event-ordering fixture was not available or not executed; related market cases do not prove it.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-E010",
+    "module": "Module 4: Order Execution, Modification & Bulk Routing",
+    "title": "Full Market Close-All Command by Master",
+    "precondition": "Master holds 5 distinct open currency positions across 15 sub-accounts (75 total child tickets).",
+    "steps": "1. Master clicks 'Close All Positions'.",
+    "expected": "Mass close fan-out liquidates all 75 child positions at market; execution completes in < 1,500ms; zero remaining open positions.",
+    "priority": "P0",
+    "test_case_id": "MAM-E010",
+    "status": "PARTIAL",
+    "coverage_note": "Concurrent parent closes verified flat; UI Close All workflow and <1500ms SLA not certified.",
+    "executed_check_ids": [
+      "LOAD-FIVE-BURST",
+      "FINAL-FLAT"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json",
+      "reports/live_recheck_20261120/deep_run/results_060312.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-E011",
+    "module": "Module 4: Order Execution, Modification & Bulk Routing",
+    "title": "Out-of-Order Execution Report Handling",
+    "precondition": "High network congestion causes Child Order #4 fill report to arrive after Child Order #5.",
+    "steps": "1. Process execution reports.",
+    "expected": "MAM event bus re-sequences messages using sequential tick sequence numbers; avoids race condition or state corruption.",
+    "priority": "P0",
+    "test_case_id": "MAM-E011",
+    "status": "BLOCKED",
+    "coverage_note": "This exact execution/terminal/event-ordering fixture was not available or not executed; related market cases do not prove it.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-E012",
+    "module": "Module 4: Order Execution, Modification & Bulk Routing",
+    "title": "Sub-Account Real-Time P&L Stream to Mobile App",
+    "precondition": "Master trade is fluctuating by +15 pips.",
+    "steps": "1. Investor views individual MT5/mobile app.",
+    "expected": "Client sees their exact floating P&L and margin level in real time with < 250ms WebSocket latency.",
+    "priority": "P1",
+    "test_case_id": "MAM-E012",
+    "status": "BLOCKED",
+    "coverage_note": "This exact execution/terminal/event-ordering fixture was not available or not executed; related market cases do not prove it.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-E013",
+    "module": "Module 4: Order Execution, Modification & Bulk Routing",
+    "title": "Pending Stop Order (Buy Stop / Sell Stop) Propagation",
+    "precondition": "Master places Buy Stop 2.0 lots at 1.0850 above current market.",
+    "steps": "1. Master sends Buy Stop.",
+    "expected": "Proportional child Buy Stop orders placed across all linked accounts.",
+    "priority": "P1",
+    "test_case_id": "MAM-E013",
+    "status": "PARTIAL",
+    "coverage_note": "STOP entry/copy/cancel paths tested on BLACK:BTCUSD; see pending-ticket case for actual pre-trigger behavior.",
+    "executed_check_ids": [
+      "PENDING-100-FANOUT-STOP",
+      "PENDING-TRIGGER-STOP-BUY",
+      "PENDING-TRIGGER-STOP-SELL"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json",
+      "reports/live_recheck_20261120/deep_run/results_060312.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-E014",
+    "module": "Module 4: Order Execution, Modification & Bulk Routing",
+    "title": "Order Expiration (Good 'Til Cancelled vs Day Order)",
+    "precondition": "Master sets Day Order with expiration at 17:00 NY close.",
+    "steps": "1. 17:00 arrives with limit order unfilled.",
+    "expected": "All child limit orders expire and cancel cleanly in unison; zero stuck pending orders.",
+    "priority": "P1",
+    "test_case_id": "MAM-E014",
+    "status": "BLOCKED",
+    "coverage_note": "This exact execution/terminal/event-ordering fixture was not available or not executed; related market cases do not prove it.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-E015",
+    "module": "Module 4: Order Execution, Modification & Bulk Routing",
+    "title": "Broker Requote / Price Off Quotes Handling on Parent Order",
+    "precondition": "Master attempts instant order during illiquid market; broker requotes.",
+    "steps": "1. Master terminal receives requote prompt.",
+    "expected": "Child orders NOT sent until master accepts or rejects requote; zero partial child order orphan execution.",
+    "priority": "P0",
+    "test_case_id": "MAM-E015",
+    "status": "BLOCKED",
+    "coverage_note": "This exact execution/terminal/event-ordering fixture was not available or not executed; related market cases do not prove it.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-P001",
+    "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
+    "title": "Liquidity Provider Partial Fill (50% Block Filled)",
+    "precondition": "Master sends 10.0 lots across 10 equal sub-accounts; LP only fills 5.0 lots.",
+    "steps": "1. Broker bridge returns partial fill execution report of 5.0 lots.",
+    "expected": "MAM engine apportions the 5.0 filled lots proportionally (0.50 lots per sub-account); remaining 5.0 lots remain working or cancel per TIF.",
+    "priority": "P0",
+    "test_case_id": "MAM-P001",
+    "status": "BLOCKED",
+    "coverage_note": "Requires LP partial-fill, depth, rejection, or routing fault injection; these dedicated accounts are B-book and no LP simulator was supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-P002",
+    "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
+    "title": "Single Sub-Account Insufficient Margin Rejection (Partial Group Rejection)",
+    "precondition": "Master sends 10-account block; Sub-account #8 has insufficient free margin.",
+    "steps": "1. Broker risk engine evaluates margin for all 10 accounts.",
+    "expected": "Sub-account #8 order rejected with 'Insufficient Margin'; remaining 9 sub-accounts fill successfully; Master notified.",
+    "priority": "P0",
+    "test_case_id": "MAM-P002",
+    "status": "PARTIAL",
+    "coverage_note": "Insufficient-margin follower isolation verified; master notification presentation not verified.",
+    "executed_check_ids": [
+      "MARGIN-ISOLATION",
+      "RACE-MARGIN-RESERVATION-1"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json",
+      "reports/live_recheck_20261120/deep_run/results_055545.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-P003",
+    "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
+    "title": "Atomic All-or-None (AON) Group Execution Policy",
+    "precondition": "Group configured with Execution Policy = 'All-or-None'; Sub-account #3 margin fails.",
+    "steps": "1. Sizing engine pre-checks margin across all accounts before submission.",
+    "expected": "Detection of Account #3 failure aborts entire master order; zero child orders sent; master alerted.",
+    "priority": "P0",
+    "test_case_id": "MAM-P003",
+    "status": "BLOCKED",
+    "coverage_note": "Requires LP partial-fill, depth, rejection, or routing fault injection; these dedicated accounts are B-book and no LP simulator was supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-P004",
+    "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
+    "title": "Volume-Weighted Average Price (VWAP) Aggregation",
+    "precondition": "Block order of 20.0 lots fills across 3 LP price tiers: 5.0 @ 1.0800, 10.0 @ 1.0802, 5.0 @ 1.0804.",
+    "steps": "1. Calculate VWAP = (5*1.0800 + 10*1.0802 + 5*1.0804) / 20 = 1.080200.",
+    "expected": "All child tickets booked at exact identical VWAP price (1.080200); zero price discrimination among investors.",
+    "priority": "P0",
+    "test_case_id": "MAM-P004",
+    "status": "BLOCKED",
+    "coverage_note": "Requires LP partial-fill, depth, rejection, or routing fault injection; these dedicated accounts are B-book and no LP simulator was supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-P005",
+    "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
+    "title": "Direct Pass-Through Price Execution (Independent Fills)",
+    "precondition": "Group configured for Direct STP routing where each sub-account executes independently.",
+    "steps": "1. Orders hit LP book sequentially.",
+    "expected": "Child tickets receive individual execution prices; variance logged transparently on each account statement.",
+    "priority": "P1",
+    "test_case_id": "MAM-P005",
+    "status": "BLOCKED",
+    "coverage_note": "Requires LP partial-fill, depth, rejection, or routing fault injection; these dedicated accounts are B-book and no LP simulator was supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-P006",
+    "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
+    "title": "Slippage Anomaly Detection on Child Orders",
+    "precondition": "Child order #3 experiences 5-pip slippage while group average is 0.5 pips.",
+    "steps": "1. Post-trade execution analysis runs.",
+    "expected": "Trade flagged 'SLIPPAGE_ANOMALY'; audit log recorded for broker dispute reconciliation.",
+    "priority": "P1",
+    "test_case_id": "MAM-P006",
+    "status": "PARTIAL",
+    "coverage_note": "Actual per-account fills and price PnL reconciled; configurable slippage-anomaly detection not verified.",
+    "executed_check_ids": [
+      "ACCOUNTING-101"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_055545.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-P007",
+    "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
+    "title": "Sub-Account Account Frozen / Trading Disabled by Compliance",
+    "precondition": "Sub-account #4 frozen due to expired KYC; Master submits order.",
+    "steps": "1. Process allocation.",
+    "expected": "Sub-account #4 skipped cleanly with 'Account Frozen'; remaining active accounts receive proportionally scaled orders.",
+    "priority": "P0",
+    "test_case_id": "MAM-P007",
+    "status": "BLOCKED",
+    "coverage_note": "Requires LP partial-fill, depth, rejection, or routing fault injection; these dedicated accounts are B-book and no LP simulator was supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-P008",
+    "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
+    "title": "Partial Fill with Remainder Lot Slicing",
+    "precondition": "Master opens 3.0 lots across 4 accounts; LP fills 1.5 lots. Math: 1.5 / 4 = 0.375 lots.",
+    "steps": "1. Quantize: 0.37 lots * 4 = 1.48 lots. Remainder = 0.02 lots.",
+    "expected": "Remainder allocated according to active policy (e.g. +0.01 to two highest equity accounts); sum == 1.50 lots.",
+    "priority": "P0",
+    "test_case_id": "MAM-P008",
+    "status": "BLOCKED",
+    "coverage_note": "Requires LP partial-fill, depth, rejection, or routing fault injection; these dedicated accounts are B-book and no LP simulator was supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-P009",
+    "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
+    "title": "Multi-Tier Liquidity Depth Exhaustion",
+    "precondition": "Master submits 50-lot order during low-liquidity Asian session.",
+    "steps": "1. Order fills across 5 liquidity tiers with widening spread.",
+    "expected": "Sizing engine handles multi-tier execution reports without dropping child ticket links.",
+    "priority": "P1",
+    "test_case_id": "MAM-P009",
+    "status": "BLOCKED",
+    "coverage_note": "Requires LP partial-fill, depth, rejection, or routing fault injection; these dedicated accounts are B-book and no LP simulator was supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-P010",
+    "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
+    "title": "Child Order Timeout and Auto-Reconciliation",
+    "precondition": "Broker bridge experiences 2-second timeout on Child Order #7.",
+    "steps": "1. System queries order status via FIX order status request.",
+    "expected": "Reconciles fill state automatically; prevents orphan double-submission on retry.",
+    "priority": "P0",
+    "test_case_id": "MAM-P010",
+    "status": "BLOCKED",
+    "coverage_note": "Requires LP partial-fill, depth, rejection, or routing fault injection; these dedicated accounts are B-book and no LP simulator was supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-P011",
+    "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
+    "title": "Liquidity Provider Rejection on Single Child Order During Fast Market",
+    "precondition": "Fast market causes LP to reject 1 of 20 child tickets.",
+    "steps": "1. Process rejection.",
+    "expected": "Rejection isolated; auto-retry routes child order to secondary LP bridge within 100ms; remaining 19 orders fill.",
+    "priority": "P0",
+    "test_case_id": "MAM-P011",
+    "status": "BLOCKED",
+    "coverage_note": "Requires LP partial-fill, depth, rejection, or routing fault injection; these dedicated accounts are B-book and no LP simulator was supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-P012",
+    "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
+    "title": "Slippage Tolerance Violation on Child Orders",
+    "precondition": "Master sets max slippage tolerance = 2.0 pips; market slips 3.5 pips.",
+    "steps": "1. LP returns fill outside tolerance.",
+    "expected": "Child order rejected or executed with price improvement; investor protected from off-market fills.",
+    "priority": "P0",
+    "test_case_id": "MAM-P012",
+    "status": "BLOCKED",
+    "coverage_note": "Requires LP partial-fill, depth, rejection, or routing fault injection; these dedicated accounts are B-book and no LP simulator was supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-P013",
+    "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
+    "title": "Fill Price Averaging Across Multi-Currency Accounts",
+    "precondition": "Sub-accounts in USD, EUR, GBP; block executes on EURUSD.",
+    "steps": "1. Apply VWAP fill price.",
+    "expected": "Identical base execution price assigned; FX currency conversion applies only to realized P&L and margin.",
+    "priority": "P1",
+    "test_case_id": "MAM-P013",
+    "status": "BLOCKED",
+    "coverage_note": "Requires LP partial-fill, depth, rejection, or routing fault injection; these dedicated accounts are B-book and no LP simulator was supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-P014",
+    "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
+    "title": "Asymmetric Rejection Auto-Retry on Secondary Liquidity Bridge",
+    "precondition": "Primary LP connection drops for 200ms.",
+    "steps": "1. Bridge triggers failover.",
+    "expected": "In-flight child orders failover cleanly to secondary LP; zero duplicate tickets.",
+    "priority": "P0",
+    "test_case_id": "MAM-P014",
+    "status": "BLOCKED",
+    "coverage_note": "Requires LP partial-fill, depth, rejection, or routing fault injection; these dedicated accounts are B-book and no LP simulator was supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-P015",
+    "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
+    "title": "Orphan Child Order Auto-Cleanup on Parent Order Cancellation",
+    "precondition": "Master cancels parent order while 2 child orders are in-flight.",
+    "steps": "1. Cancellation report arrives.",
+    "expected": "In-flight child orders cancelled or closed immediately; zero orphan positions left active.",
+    "priority": "P0",
+    "test_case_id": "MAM-P015",
+    "status": "PARTIAL",
+    "coverage_note": "Pending cancellation/orphan state tested; injected LP child-submission failure not available.",
+    "executed_check_ids": [
+      "PENDING-100-FANOUT-LIMIT"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_060312.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-M001",
+    "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+    "title": "Differing Leverage Tiers in Same MAM Group",
+    "precondition": "Acc 1 has 1:500 leverage (Professional); Acc 2 has 1:30 leverage (ESMA Retail).",
+    "steps": "1. Master opens identical 1.00 lot EURUSD on both.",
+    "expected": "Acc 1 uses $200 margin (1:500); Acc 2 uses $3,333 margin (1:30); both accounts maintain safe isolated margin levels.",
+    "priority": "P0",
+    "test_case_id": "MAM-M001",
+    "status": "PARTIAL",
+    "coverage_note": "Current account terms inspected; differing leverage-tier mutation not executed.",
+    "executed_check_ids": [
+      "ACCOUNTING-101"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_055545.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-M002",
+    "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+    "title": "Isolated Margin Call Warning on Single Sub-Account",
+    "precondition": "Sub-account #3 suffers adverse floating loss; margin level drops to 100%.",
+    "steps": "1. Broker risk monitor scans accounts.",
+    "expected": "Sub-account #3 flagged 'MARGIN_CALL'; email alert dispatched to investor and manager; remaining 9 accounts unaffected.",
+    "priority": "P0",
+    "test_case_id": "MAM-M002",
+    "status": "BLOCKED",
+    "coverage_note": "Requires configured stop-out/leverage/news/swap/notification fixtures beyond the verified account margin cases.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-M003",
+    "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+    "title": "Isolated Stop-Out Forced Liquidation on Single Sub-Account",
+    "precondition": "Sub-account #3 margin level touches broker stop-out threshold (50%).",
+    "steps": "1. Broker executes forced liquidation on Sub-account #3.",
+    "expected": "Sub-account #3 child position closed at market; remaining 9 sub-accounts and master position REMAIN OPEN; zero group contagion.",
+    "priority": "P0",
+    "test_case_id": "MAM-M003",
+    "status": "BLOCKED",
+    "coverage_note": "Requires configured stop-out/leverage/news/swap/notification fixtures beyond the verified account margin cases.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-M004",
+    "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+    "title": "Master Terminal Awareness of Sub-Account Stop-Out",
+    "precondition": "Sub-account #3 is liquidated due to stop-out.",
+    "steps": "1. Check Master Trading Terminal dashboard.",
+    "expected": "Master terminal alerts manager: 'Sub-account #3 liquidated at 50% margin level'; active group equity and lot sizing recalculate.",
+    "priority": "P0",
+    "test_case_id": "MAM-M004",
+    "status": "BLOCKED",
+    "coverage_note": "Requires configured stop-out/leverage/news/swap/notification fixtures beyond the verified account margin cases.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-M005",
+    "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+    "title": "Multiple Sub-Accounts Approaching Margin Call Simultaneously",
+    "precondition": "Severe market drawdown pushes 4 out of 10 accounts below 120% margin level.",
+    "steps": "1. Monitor risk dashboard.",
+    "expected": "Real-time risk matrix flags vulnerable accounts in red; suggests partial position reduction to preserve group solvency.",
+    "priority": "P1",
+    "test_case_id": "MAM-M005",
+    "status": "BLOCKED",
+    "coverage_note": "Requires configured stop-out/leverage/news/swap/notification fixtures beyond the verified account margin cases.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-M006",
+    "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+    "title": "Negative Balance Protection (NBP) on Single Sub-Account",
+    "precondition": "Extreme price gap drops Sub-account #5 balance to -$300.Remaining accounts maintain positive balance.",
+    "steps": "1. Broker triggers NBP.",
+    "expected": "Sub-account #5 balance restored to $0.00 by broker treasury; zero liability transferred to manager or other investors.",
+    "priority": "P0",
+    "test_case_id": "MAM-M006",
+    "status": "BLOCKED",
+    "coverage_note": "Requires configured stop-out/leverage/news/swap/notification fixtures beyond the verified account margin cases.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-M007",
+    "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+    "title": "Sub-Account Margin Requirement Pre-Trade Check",
+    "precondition": "Master prepares to place 5.0 lots EURUSD; Acc #2 has $50 free margin.",
+    "steps": "1. Sizing engine executes pre-trade validation.",
+    "expected": "Flags Acc #2 before execution; skips or trims Acc #2 order to prevent immediate post-fill stop-out.",
+    "priority": "P0",
+    "test_case_id": "MAM-M007",
+    "status": "PARTIAL",
+    "coverage_note": "Pre-entry margin enforcement and competing reservations verified; see exact observed terms.",
+    "executed_check_ids": [
+      "MARGIN-ISOLATION",
+      "RACE-MARGIN-RESERVATION-1",
+      "RACE-MARGIN-RESERVATION-2",
+      "RACE-MARGIN-RESERVATION-3"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json",
+      "reports/live_recheck_20261120/deep_run/results_055545.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-M008",
+    "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+    "title": "Free Margin Recalibration Post-Child Stop-Out",
+    "precondition": "Sub-account #3 is stopped out; remaining accounts active.",
+    "steps": "1. Master prepares subsequent trade under PBB.",
+    "expected": "Sub-account #3 balance ($0) excluded from group total balance; new orders sized across remaining active accounts.",
+    "priority": "P0",
+    "test_case_id": "MAM-M008",
+    "status": "BLOCKED",
+    "coverage_note": "Requires configured stop-out/leverage/news/swap/notification fixtures beyond the verified account margin cases.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-M009",
+    "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+    "title": "Overnight Swap Impact on Independent Margin Levels",
+    "precondition": "Triple swap Wednesday debited across accounts with varying equity.",
+    "steps": "1. Swap debited per child ticket.",
+    "expected": "Each sub-account's margin level updates independently based on individual cash balance.",
+    "priority": "P1",
+    "test_case_id": "MAM-M009",
+    "status": "BLOCKED",
+    "coverage_note": "Requires configured stop-out/leverage/news/swap/notification fixtures beyond the verified account margin cases.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-M010",
+    "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+    "title": "Maximum Leverage Limit on Master Terminal Sizing",
+    "precondition": "Manager attempts order that would push lowest-leverage sub-account past 1:30 limit.",
+    "steps": "1. Submit oversized order.",
+    "expected": "Order clamped or blocked: 'Order exceeds maximum leverage limit for retail sub-accounts in group'.",
+    "priority": "P1",
+    "test_case_id": "MAM-M010",
+    "status": "BLOCKED",
+    "coverage_note": "Requires configured stop-out/leverage/news/swap/notification fixtures beyond the verified account margin cases.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-M011",
+    "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+    "title": "Sub-Account Stop-Out Recovery via Fresh Deposit While Group Trades",
+    "precondition": "Acc #3 stopped out; investor immediately deposits $5,000 cash.",
+    "steps": "1. Deposit clears.2. Master executes next trade.",
+    "expected": "Acc #3 re-enters active group participation on subsequent trade; historical loss preserved on statement.",
+    "priority": "P0",
+    "test_case_id": "MAM-M011",
+    "status": "BLOCKED",
+    "coverage_note": "Requires configured stop-out/leverage/news/swap/notification fixtures beyond the verified account margin cases.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-M012",
+    "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+    "title": "Hedging Margin Requirement on Sub-Accounts",
+    "precondition": "Master opens Buy 1.0 EURUSD then Sell 1.0 EURUSD on hedged broker bridge.",
+    "steps": "1. Measure margin on child accounts.",
+    "expected": "Broker hedged margin reduction (0% to 50% margin requirement) applied accurately to each child ticket.",
+    "priority": "P1",
+    "test_case_id": "MAM-M012",
+    "status": "PARTIAL",
+    "coverage_note": "Long/short coexistence verified on real hedging; configured special hedging margin offsets not certified.",
+    "executed_check_ids": [
+      "LIFE-HEDGE"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-M013",
+    "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+    "title": "Sub-Account Margin Call Notification to Money Manager GUI",
+    "precondition": "Sub-account #4 touches 100% margin level.",
+    "steps": "1. Monitor Manager Terminal.",
+    "expected": "Visual alert banner highlights Sub-account #4 in red; manager prompted to reduce group exposure.",
+    "priority": "P1",
+    "test_case_id": "MAM-M013",
+    "status": "BLOCKED",
+    "coverage_note": "Requires configured stop-out/leverage/news/swap/notification fixtures beyond the verified account margin cases.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-M014",
+    "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+    "title": "Dynamic Leverage Reduction on High-Impact Economic News",
+    "precondition": "Broker automatically reduces leverage from 1:500 to 1:100 during NFP release.",
+    "steps": "1. Broker updates leverage profile.",
+    "expected": "Sizing engine recalculates available group margin; prevents opening oversized orders under reduced leverage.",
+    "priority": "P1",
+    "test_case_id": "MAM-M014",
+    "status": "BLOCKED",
+    "coverage_note": "Requires configured stop-out/leverage/news/swap/notification fixtures beyond the verified account margin cases.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-M015",
+    "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
+    "title": "Sub-Account Currency Conversion Margin Cushion",
+    "precondition": "EUR account trading USD instrument with fluctuating EUR/USD spot rate.",
+    "steps": "1. Currency exchange rate moves by 2%.",
+    "expected": "Margin requirement in account currency adjusts dynamically; margin level reflects accurate FX conversion.",
+    "priority": "P1",
+    "test_case_id": "MAM-M015",
+    "status": "BLOCKED",
+    "coverage_note": "Requires configured stop-out/leverage/news/swap/notification fixtures beyond the verified account margin cases.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-D001",
+    "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
+    "title": "Sub-Account Cash Deposit While Trades Are Open",
+    "precondition": "Sub-account has 1 open child trade (0.50 lots EURUSD); margin level = 200%.",
+    "steps": "1. Investor deposits $2,000 into sub-account via client portal.",
+    "expected": "$2,000 credited immediately; account margin level increases to 600%; open position untouched; next trade gets higher proportional weight.",
+    "priority": "P0",
+    "test_case_id": "MAM-D001",
+    "status": "PARTIAL",
+    "coverage_note": "User-requested admin GUI cash update tested; original investor payment-deposit channel not exercised.",
+    "executed_check_ids": [
+      "BAL-OPEN-POSITION",
+      "GUI-BALANCE-NEXT-ORDER"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json",
+      "reports/live_recheck_20261120/deep_run/results_060312.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-D002",
+    "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
+    "title": "Partial Withdrawal with Sufficient Free Margin",
+    "precondition": "Sub-account equity = $10,000; Used margin = $1,000; Free margin = $9,000.",
+    "steps": "1. Investor requests withdrawal of $3,000.",
+    "expected": "$3,000 debited; free margin drops to $6,000; margin level remains healthy (700%); open trade preserved safely.",
+    "priority": "P0",
+    "test_case_id": "MAM-D002",
+    "status": "PARTIAL",
+    "coverage_note": "Admin cash reduction tested; investor withdrawal workflow not exercised.",
+    "executed_check_ids": [
+      "BAL-WITHDRAW-HWM"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-D003",
+    "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
+    "title": "Withdrawal Request Exceeding Free Margin",
+    "precondition": "Sub-account equity = $10,000; Used margin = $8,000; Free margin = $2,000.",
+    "steps": "1. Investor requests withdrawal of $4,000.",
+    "expected": "System blocks withdrawal: 'Requested amount ($4,000) exceeds available free margin ($2,000)'; suggests max allowable withdrawal.",
+    "priority": "P0",
+    "test_case_id": "MAM-D003",
+    "status": "BLOCKED",
+    "coverage_note": "Requires investor payment/withdrawal, lockup, reversal, or emergency LPOA workflow. Admin Set balance is not a substitute.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-D004",
+    "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
+    "title": "Withdrawal Request During Severe Margin Stress (<120% Margin Level)",
+    "precondition": "Sub-account under heavy drawdown with margin level = 115%.",
+    "steps": "1. Investor attempts partial withdrawal.",
+    "expected": "Withdrawal blocked: 'Withdrawals disabled when account margin level is below 150% to prevent immediate liquidation'.",
+    "priority": "P0",
+    "test_case_id": "MAM-D004",
+    "status": "BLOCKED",
+    "coverage_note": "Requires investor payment/withdrawal, lockup, reversal, or emergency LPOA workflow. Admin Set balance is not a substitute.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-D005",
+    "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
+    "title": "Emergency LPOA Revocation Mid-Trade: Market Close Option",
+    "precondition": "Investor decides to exit MAM immediately while holding 2 open positions.",
+    "steps": "1. Click 'Emergency Disconnect'.2. Select 'Close all positions at market'.",
+    "expected": "Sizing engine immediately closes investor's 2 child positions at market; LPOA unlinked; net cash freed.",
+    "priority": "P0",
+    "test_case_id": "MAM-D005",
+    "status": "PARTIAL",
+    "coverage_note": "Unfollow ordering observed; emergency LPOA market-close option not exposed/verified.",
+    "executed_check_ids": [
+      "RACE-UNFOLLOW-OPEN-1"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-D006",
+    "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
+    "title": "Emergency LPOA Revocation Mid-Trade: Transfer Positions Option",
+    "precondition": "Investor selects 'Transfer positions to independent control'.",
+    "steps": "1. Confirm LPOA revocation.",
+    "expected": "LPOA unlinked; open child tickets remain open in investor account; manager loses modification rights; client given full direct control.",
+    "priority": "P0",
+    "test_case_id": "MAM-D006",
+    "status": "BLOCKED",
+    "coverage_note": "Requires investor payment/withdrawal, lockup, reversal, or emergency LPOA workflow. Admin Set balance is not a substitute.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-D007",
+    "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
+    "title": "Manager Group Resizing Post-Investor Disconnection",
+    "precondition": "Investor holding 20% of group balance disconnects mid-cycle.",
+    "steps": "1. Master executes next trade.",
+    "expected": "Total group balance recalculated excluding disconnected client; new orders apportioned among remaining 80% capital.",
+    "priority": "P0",
+    "test_case_id": "MAM-D007",
+    "status": "PARTIAL",
+    "coverage_note": "Active roster changes tested; conserved block allocation redistribution is a different model.",
+    "executed_check_ids": [
+      "MAM-UNFOLLOW-FLAT",
+      "MAM-JOIN-MIDTRADE"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-D008",
+    "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
+    "title": "Pending Withdrawal Queued Until Trade Close",
+    "precondition": "Sub-account configured with 'Queue Withdrawals Until Zero Positions' policy.",
+    "steps": "1. Investor requests withdrawal while trade active.",
+    "expected": "Request registered as 'Pending_Trade_Close'; automatically executed the moment manager closes all positions.",
+    "priority": "P1",
+    "test_case_id": "MAM-D008",
+    "status": "BLOCKED",
+    "coverage_note": "Requires investor payment/withdrawal, lockup, reversal, or emergency LPOA workflow. Admin Set balance is not a substitute.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-D009",
+    "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
+    "title": "Locked Capital Period Early Exit Penalty Enforcement",
+    "precondition": "MAM offer specifies 30-day lockup; early exit penalty = 3%.",
+    "steps": "1. Investor exits on Day 12 with $10,000.",
+    "expected": "$300 early exit fee credited to manager; $9,700 returned to client wallet.",
+    "priority": "P1",
+    "test_case_id": "MAM-D009",
+    "status": "BLOCKED",
+    "coverage_note": "Requires investor payment/withdrawal, lockup, reversal, or emergency LPOA workflow. Admin Set balance is not a substitute.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-D010",
+    "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
+    "title": "Simultaneous Multi-Account Cash Deposits Before Master Trade",
+    "precondition": "5 investors deposit $5,000 each in same 1-minute window.",
+    "steps": "1. Deposits clear.2. Master opens trade.",
+    "expected": "All 5 deposits included in group balance snapshot; sizing engine distributes lots accurately.",
+    "priority": "P0",
+    "test_case_id": "MAM-D010",
+    "status": "PARTIAL",
+    "coverage_note": "One GUI cash change overlaps entry; five simultaneous cleared payment deposits not executed.",
+    "executed_check_ids": [
+      "RACE-GUI-BALANCE-ENTRY-1"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_060312.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-D011",
+    "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
+    "title": "Large Institutional Whale Deposit Mid-Trade",
+    "precondition": "Group balance = $50,000; Whale deposits $500,000 into Sub-account #10.",
+    "steps": "1. Deposit clears.2. Master executes subsequent trade.",
+    "expected": "Group balance updates to $550k; Whale receives 90.9% of subsequent trade volume without impacting existing open trades.",
+    "priority": "P0",
+    "test_case_id": "MAM-D011",
+    "status": "PARTIAL",
+    "coverage_note": "Doubling follower cash affects future sizing; institutional deposit channel not exercised.",
+    "executed_check_ids": [
+      "GUI-BALANCE-NEXT-ORDER"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_060312.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-D012",
+    "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
+    "title": "Chargeback / Reversed Deposit on Active MAM Sub-Account",
+    "precondition": "Investor deposited $2,000 via card; card issuer issues fraud chargeback while trade open.",
+    "steps": "1. Admin processes chargeback.",
+    "expected": "$2,000 debited; if margin drops below stop-out, positions liquidated cleanly; account locked.",
+    "priority": "P0",
+    "test_case_id": "MAM-D012",
+    "status": "BLOCKED",
+    "coverage_note": "Requires investor payment/withdrawal, lockup, reversal, or emergency LPOA workflow. Admin Set balance is not a substitute.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-D013",
+    "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
+    "title": "Investor Profit-Only Withdrawal While Holding Open Trade Tickets",
+    "precondition": "Sub-account balance = $12,000 ($2,000 realized profit); 1 open trade.",
+    "steps": "1. Investor selects 'Withdraw Realized Profit ($2,000)'.",
+    "expected": "$2,000 debited from cash; free margin verified; open child ticket preserved safely.",
+    "priority": "P1",
+    "test_case_id": "MAM-D013",
+    "status": "BLOCKED",
+    "coverage_note": "Requires investor payment/withdrawal, lockup, reversal, or emergency LPOA workflow. Admin Set balance is not a substitute.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-D014",
+    "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
+    "title": "Investor Full Withdrawal with Automatic Position Liquidation",
+    "precondition": "Investor requests 100% full account balance withdrawal while child orders open.",
+    "steps": "1. Confirm full exit.",
+    "expected": "System automatically market-closes investor's child tickets; debits full cash balance; revokes LPOA.",
+    "priority": "P0",
+    "test_case_id": "MAM-D014",
+    "status": "BLOCKED",
+    "coverage_note": "Requires investor payment/withdrawal, lockup, reversal, or emergency LPOA workflow. Admin Set balance is not a substitute.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-D015",
+    "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
+    "title": "Multiple Simultaneous Sub-Account Withdrawals Under Volatility",
+    "precondition": "5 investors withdraw simultaneously during market move.",
+    "steps": "1. Process requests in parallel.",
+    "expected": "Database locks sub-account rows independently; all 5 withdrawals process safely without group cross-interference.",
+    "priority": "P0",
+    "test_case_id": "MAM-D015",
+    "status": "BLOCKED",
+    "coverage_note": "Requires investor payment/withdrawal, lockup, reversal, or emergency LPOA workflow. Admin Set balance is not a substitute.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-H001",
+    "module": "Module 8: High-Water Mark & Performance Fees",
+    "title": "Independent Sub-Account High-Water Mark Baseline Setup",
+    "precondition": "Acc 1 deposits $10k (HWM $10k); Acc 2 deposits $25k (HWM $25k).",
+    "steps": "1. Initialize fee accounting.",
+    "expected": "Each sub-account assigned independent HWM baseline; tracked separately in sub-account clearing ledger.",
+    "priority": "P0",
+    "test_case_id": "MAM-H001",
+    "status": "PARTIAL",
+    "coverage_note": "Existing relationship benchmarks read and adjusted; independent initial HWM creation workflow not separately certified.",
+    "executed_check_ids": [
+      "BAL-DEPOSIT-HWM",
+      "BAL-WITHDRAW-HWM"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-H002",
+    "module": "Module 8: High-Water Mark & Performance Fees",
+    "title": "Monthly Performance Fee Deduction from Individual Sub-Account",
+    "precondition": "Acc 1 balance grows from $10k to $12k (+ $2k profit); Perf Fee = 20%.",
+    "steps": "1. Trigger monthly fee settlement.2. Sizing engine computes Fee = $2k * 20% = $400.00.",
+    "expected": "Exactly $400.00 debited from Acc 1 cash balance; credited to Manager Fee Wallet; new HWM = $11,600.00.",
+    "priority": "P0",
+    "test_case_id": "MAM-H002",
+    "status": "PARTIAL",
+    "coverage_note": "User-confirmed first-profit exemption and subsequent per-close share tested. Original monthly crystallization is not verified.",
+    "executed_check_ids": [
+      "FEE-HWM-POLICY-FIRST",
+      "FEE-HWM-POLICY-ABOVE",
+      "ACCOUNTING-101"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_055545.json",
+      "reports/live_recheck_20261120/deep_run/results_061323.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-H003",
+    "module": "Module 8: High-Water Mark & Performance Fees",
+    "title": "Drawdown Period: Zero Performance Fee Charged Below Sub-Account HWM",
+    "precondition": "Acc 1 HWM = $11,600; balance drops to $9,500 due to market losses.",
+    "steps": "1. Execute monthly fee settlement.",
+    "expected": "Fee = $0.00. Manager receives zero fee; Acc 1 HWM remains $11,600.",
+    "priority": "P0",
+    "test_case_id": "MAM-H003",
+    "status": "BLOCKED",
+    "coverage_note": "Requires time-controlled fee cycles, HWM recovery history, management fees, tax/rebate/statement configuration not available in this run.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-H004",
+    "module": "Module 8: High-Water Mark & Performance Fees",
+    "title": "Recovery Period: Fee Charged ONLY After Breaching Historical Peak",
+    "precondition": "Acc 1 rebounds from $9,500 to $11,000 (+ $1,500 bounce).",
+    "steps": "1. Execute fee settlement.",
+    "expected": "Despite +$1,500 gain, balance ($11,000) is below $11,600 HWM; fee == $0.00; zero fee charged.",
+    "priority": "P0",
+    "test_case_id": "MAM-H004",
+    "status": "BLOCKED",
+    "coverage_note": "Requires time-controlled fee cycles, HWM recovery history, management fees, tax/rebate/statement configuration not available in this run.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-H005",
+    "module": "Module 8: High-Water Mark & Performance Fees",
+    "title": "Exceeding Prior HWM After Full Recovery",
+    "precondition": "Acc 1 grows from $11,000 to $13,000.",
+    "steps": "1. Calculate Net New Profit = $13,000 - $11,600 = $1,400.00.2. Compute Fee = $1,400 * 20% = $280.00.",
+    "expected": "$280.00 debited from Acc 1; new HWM set to $12,720.00 ($13k - $280 fee).",
+    "priority": "P0",
+    "test_case_id": "MAM-H005",
+    "status": "BLOCKED",
+    "coverage_note": "Requires time-controlled fee cycles, HWM recovery history, management fees, tax/rebate/statement configuration not available in this run.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-H006",
+    "module": "Module 8: High-Water Mark & Performance Fees",
+    "title": "Independent Fee Outcomes: Acc 1 Profitable vs Acc 2 Underwater",
+    "precondition": "Acc 1 joined earlier (in profit); Acc 2 joined right before drawdown (underwater).",
+    "steps": "1. Run monthly settlement across MAM group.",
+    "expected": "Acc 1 pays performance fee on net new profit; Acc 2 pays $0.00 fee; complete accounting isolation.",
+    "priority": "P0",
+    "test_case_id": "MAM-H006",
+    "status": "PARTIAL",
+    "coverage_note": "Individual fee rows reconciled; simultaneous deliberately profitable/underwater contrast fixture not executed.",
+    "executed_check_ids": [
+      "ACCOUNTING-101"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_055545.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-H007",
+    "module": "Module 8: High-Water Mark & Performance Fees",
+    "title": "Annualized Management Fee (AUM Fee) Daily Accrual",
+    "precondition": "MAM group configured with 2.0% Annual Management Fee.",
+    "steps": "1. Run daily EOD accrual job.",
+    "expected": "Daily factor (2% / 365) debited from each sub-account based on individual equity; accrued to manager.",
+    "priority": "P0",
+    "test_case_id": "MAM-H007",
+    "status": "BLOCKED",
+    "coverage_note": "Requires time-controlled fee cycles, HWM recovery history, management fees, tax/rebate/statement configuration not available in this run.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-H008",
+    "module": "Module 8: High-Water Mark & Performance Fees",
+    "title": "Deposit Proportional HWM Upward Adjustment",
+    "precondition": "Acc 1 has $10k balance (HWM $10k); deposits additional $5,000 cash.",
+    "steps": "1. Process deposit.",
+    "expected": "Acc 1 HWM basis increases dollar-for-dollar to $15,000.00; investor deposit never taxed as profit.",
+    "priority": "P0",
+    "test_case_id": "MAM-H008",
+    "status": "PARTIAL",
+    "coverage_note": "Dollar-for-dollar benchmark movement for admin credit verified; investor payment channel not exercised.",
+    "executed_check_ids": [
+      "BAL-DEPOSIT-HWM"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-H009",
+    "module": "Module 8: High-Water Mark & Performance Fees",
+    "title": "Withdrawal Pro-Rata HWM Downward Adjustment",
+    "precondition": "Acc 1 suffers loss from $10k to $8k; investor withdraws $4,000 (50%).",
+    "steps": "1. Process withdrawal.",
+    "expected": "Remaining balance = $4,000; HWM basis adjusted down by 50% to $5,000.00.",
+    "priority": "P0",
+    "test_case_id": "MAM-H009",
+    "status": "PARTIAL",
+    "coverage_note": "Current contract moves benchmark by cash delta; original proportional 50% HWM reduction is a different rule.",
+    "executed_check_ids": [
+      "BAL-WITHDRAW-HWM"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-H010",
+    "module": "Module 8: High-Water Mark & Performance Fees",
+    "title": "Manager Fee Transfer to Designated Master Trading Wallet",
+    "precondition": "Total performance fees across 20 sub-accounts = $4,580.00.",
+    "steps": "1. Conclude fee settlement.",
+    "expected": "Single consolidated credit of $4,580.00 posted to Manager Wallet; ledger entry 'MAM_PERF_FEE_PAYOUT'.",
+    "priority": "P0",
+    "test_case_id": "MAM-H010",
+    "status": "PARTIAL",
+    "coverage_note": "Fee rows and aggregate manager balance receipts checked; distinct designated-wallet routing not exercised.",
+    "executed_check_ids": [
+      "ACCOUNTING-101",
+      "FEE-HWM-POLICY-ABOVE"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_055545.json",
+      "reports/live_recheck_20261120/deep_run/results_061323.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-H011",
+    "module": "Module 8: High-Water Mark & Performance Fees",
+    "title": "Broker Platform Fee Retainage Split",
+    "precondition": "Platform contract: 85% to Manager; 15% to Broker technology treasury.",
+    "steps": "1. Process $1,000 fee.",
+    "expected": "$850 credited to Manager; $150 retained in Broker account; statements reconciled.",
+    "priority": "P1",
+    "test_case_id": "MAM-H011",
+    "status": "BLOCKED",
+    "coverage_note": "Requires time-controlled fee cycles, HWM recovery history, management fees, tax/rebate/statement configuration not available in this run.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-H012",
+    "module": "Module 8: High-Water Mark & Performance Fees",
+    "title": "Introducing Broker (IB) Commission Rebate from MAM Fees",
+    "precondition": "Affiliate referred 3 sub-accounts with 10% IB fee share.",
+    "steps": "1. Settle monthly fees.",
+    "expected": "IB wallet automatically credited 10% of fees generated by referred accounts.",
+    "priority": "P1",
+    "test_case_id": "MAM-H012",
+    "status": "BLOCKED",
+    "coverage_note": "Requires time-controlled fee cycles, HWM recovery history, management fees, tax/rebate/statement configuration not available in this run.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-H013",
+    "module": "Module 8: High-Water Mark & Performance Fees",
+    "title": "Fee Deduction Concurrency with Open Positions",
+    "precondition": "Sub-account has active open trades during monthly fee settlement.",
+    "steps": "1. Deduct fee from free margin cash.",
+    "expected": "Free margin decreases safely; margin level verified before debit to prevent triggering stop-out.",
+    "priority": "P0",
+    "test_case_id": "MAM-H013",
+    "status": "PARTIAL",
+    "coverage_note": "Cash update/settlement/HWM races tested; retain fee evidence for whether positive manager share occurred.",
+    "executed_check_ids": [
+      "RACE-GUI-LEDGER-1",
+      "RACE-GUI-LEDGER-2",
+      "RACE-GUI-LEDGER-3"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_055545.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-H014",
+    "module": "Module 8: High-Water Mark & Performance Fees",
+    "title": "Sub-Account Monthly Statement Fee Itemization",
+    "precondition": "Monthly statement generated for investor.",
+    "steps": "1. Open statement in PDF.",
+    "expected": "Detailed breakdown: Gross Trading P&L, Management Fee, Performance Fee, Net Ending Equity, Current HWM.",
+    "priority": "P1",
+    "test_case_id": "MAM-H014",
+    "status": "BLOCKED",
+    "coverage_note": "Requires time-controlled fee cycles, HWM recovery history, management fees, tax/rebate/statement configuration not available in this run.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-H015",
+    "module": "Module 8: High-Water Mark & Performance Fees",
+    "title": "Clawback Prevention Across Consecutive Cycles",
+    "precondition": "Month 1: Manager earns $800 fee; Month 2: Sub-account sustains $2,000 loss.",
+    "steps": "1. Inspect manager fee wallet.",
+    "expected": "Month 1 fees remain untouched (zero clawback); manager must recover to HWM before earning future fees.",
+    "priority": "P0",
+    "test_case_id": "MAM-H015",
+    "status": "BLOCKED",
+    "coverage_note": "Requires time-controlled fee cycles, HWM recovery history, management fees, tax/rebate/statement configuration not available in this run.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-C001",
+    "module": "Module 9: Concurrency, Fan-Out & Race Conditions",
+    "title": "High-Throughput Ticket Fan-Out: 1 Master Order to 500 Child Tickets",
+    "precondition": "Master group with 500 active linked sub-accounts.",
+    "steps": "1. Master submits 50.0 lots market buy.2. Measure fan-out duration across broker bridge.",
+    "expected": "All 500 child tickets created and submitted in < 150ms; zero dropped child orders; total volume == 50.00 lots.",
+    "priority": "P0",
+    "test_case_id": "MAM-C001",
+    "status": "PARTIAL",
+    "coverage_note": "Five orders x 100 followers = 500 child positions; not one order to 500 distinct followers.",
+    "executed_check_ids": [
+      "LOAD-FIVE-BURST"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-C002",
+    "module": "Module 9: Concurrency, Fan-Out & Race Conditions",
+    "title": "Concurrent Master Order Placement During Sub-Account Deposit Storm",
+    "precondition": "50 investors depositing simultaneously while master executes 3 rapid orders.",
+    "steps": "1. Fire parallel deposits and trade orders.",
+    "expected": "ACID transaction isolation prevents race conditions; each trade sized on clean committed balance snapshot.",
+    "priority": "P0",
+    "test_case_id": "MAM-C002",
+    "status": "PARTIAL",
+    "coverage_note": "GUI cash/entry overlaps tested; full deposit storm and internal snapshot isolation not instrumented.",
+    "executed_check_ids": [
+      "RACE-GUI-BALANCE-ENTRY-1",
+      "RACE-GUI-BALANCE-ENTRY-2",
+      "RACE-GUI-BALANCE-ENTRY-3"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_060312.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-C003",
+    "module": "Module 9: Concurrency, Fan-Out & Race Conditions",
+    "title": "Mass SL/TP Modification Fan-Out Across 500 Child Tickets",
+    "precondition": "500 child tickets open; master updates Stop-Loss.",
+    "steps": "1. Master submits SL update.",
+    "expected": "All 500 child orders modified within 500ms; zero timeout errors on broker gateway.",
+    "priority": "P0",
+    "test_case_id": "MAM-C003",
+    "status": "PARTIAL",
+    "coverage_note": "101 accounts modified; original 500 distinct child-ticket population and SLA not exercised.",
+    "executed_check_ids": [
+      "LIFE-PROTECTION-RETEST"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_055545.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-C004",
+    "module": "Module 9: Concurrency, Fan-Out & Race Conditions",
+    "title": "Simultaneous Order Close and Investor Disconnection",
+    "precondition": "Master clicks 'Close Trade' at exact millisecond an investor clicks 'Disconnect'.",
+    "steps": "1. Inject concurrent requests.",
+    "expected": "Close execution takes precedence; position closed cleanly; net proceeds returned to investor; zero orphan position.",
+    "priority": "P0",
+    "test_case_id": "MAM-C004",
+    "status": "PARTIAL",
+    "coverage_note": "Related races tested; exact concurrent close/disconnect with contractual settlement policy still requires explicit verification.",
+    "executed_check_ids": [
+      "RACE-UNFOLLOW-OPEN-1",
+      "RACE-MASTER-CHILD-CLOSE"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-C005",
+    "module": "Module 9: Concurrency, Fan-Out & Race Conditions",
+    "title": "Idempotency Key Deduplication on Master Block Order",
+    "precondition": "Network timeout causes master trading GUI to retry order submission with same `Idempotency-Key`.",
+    "steps": "1. Submit identical order twice.",
+    "expected": "Second request deduplicated at API gateway; single block executed; zero double-order fan-out.",
+    "priority": "P0",
+    "test_case_id": "MAM-C005",
+    "status": "BLOCKED",
+    "coverage_note": "Requires infrastructure hooks, a different account population, distributed nodes, gateway idempotency contract, or long-duration load tooling not supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-C006",
+    "module": "Module 9: Concurrency, Fan-Out & Race Conditions",
+    "title": "Database Row Locking on Sub-Account Balance Ledger",
+    "precondition": "20 parallel threads updating sub-account balance.",
+    "steps": "1. Measure lock contention with `SELECT ... FOR UPDATE`.",
+    "expected": "Transactions serialize smoothly; lock wait time < 50ms; zero deadlock exceptions.",
+    "priority": "P0",
+    "test_case_id": "MAM-C006",
+    "status": "PARTIAL",
+    "coverage_note": "Observable ledger/margin invariants tested; database row-lock wait timing requires backend instrumentation.",
+    "executed_check_ids": [
+      "RACE-GUI-LEDGER-1",
+      "RACE-MARGIN-RESERVATION-1"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_055545.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-C007",
+    "module": "Module 9: Concurrency, Fan-Out & Race Conditions",
+    "title": "High-Frequency Tick Burst (500 ticks/sec) During Multi-Order Fan-Out",
+    "precondition": "Central bank news release causes high tick rate.",
+    "steps": "1. Stream 500 ticks/sec while executing 10 block trades.",
+    "expected": "Sizing engine processes allocations without queue backpressure; CPU utilization < 70%.",
+    "priority": "P1",
+    "test_case_id": "MAM-C007",
+    "status": "BLOCKED",
+    "coverage_note": "Requires infrastructure hooks, a different account population, distributed nodes, gateway idempotency contract, or long-duration load tooling not supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-C008",
+    "module": "Module 9: Concurrency, Fan-Out & Race Conditions",
+    "title": "Dead-Letter Queue (DLQ) Handling for Failed Child Order Submissions",
+    "precondition": "Sub-account #42 order fails due to momentary socket timeout.",
+    "steps": "1. Route failed child order to DLQ.",
+    "expected": "DLQ consumer initiates exponential retry (3 attempts); recovers fill status without manual intervention.",
+    "priority": "P0",
+    "test_case_id": "MAM-C008",
+    "status": "BLOCKED",
+    "coverage_note": "Requires infrastructure hooks, a different account population, distributed nodes, gateway idempotency contract, or long-duration load tooling not supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-C009",
+    "module": "Module 9: Concurrency, Fan-Out & Race Conditions",
+    "title": "WebSocket Broadcast Fan-Out to 500 Connected Mobile Apps",
+    "precondition": "500 investors viewing active trade on mobile app.",
+    "steps": "1. Master trade fills.",
+    "expected": "WebSocket event broadcast notifies all 500 clients within 300ms; memory footprint stable.",
+    "priority": "P1",
+    "test_case_id": "MAM-C009",
+    "status": "BLOCKED",
+    "coverage_note": "Requires infrastructure hooks, a different account population, distributed nodes, gateway idempotency contract, or long-duration load tooling not supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-C010",
+    "module": "Module 9: Concurrency, Fan-Out & Race Conditions",
+    "title": "Memory Leak Profiling Under 100,000 Simulated Child Ticket Lifecycles",
+    "precondition": "Run synthetic continuous trading simulation for 48 hours.",
+    "steps": "1. Monitor RSS memory usage of MAM allocation microservice.",
+    "expected": "Memory footprint flat-lines at baseline (< 400MB); zero uncollected order objects.",
+    "priority": "P1",
+    "test_case_id": "MAM-C010",
+    "status": "BLOCKED",
+    "coverage_note": "Requires infrastructure hooks, a different account population, distributed nodes, gateway idempotency contract, or long-duration load tooling not supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-C011",
+    "module": "Module 9: Concurrency, Fan-Out & Race Conditions",
+    "title": "1,000 Sub-Accounts Ticket Fan-Out Stress Test",
+    "precondition": "Group loaded with 1,000 active linked sub-accounts.",
+    "steps": "1. Master executes block order.",
+    "expected": "All 1,000 child tickets generated and submitted in < 250ms; zero socket drops; broker gateway stable.",
+    "priority": "P0",
+    "test_case_id": "MAM-C011",
+    "status": "BLOCKED",
+    "coverage_note": "Requires infrastructure hooks, a different account population, distributed nodes, gateway idempotency contract, or long-duration load tooling not supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-C012",
+    "module": "Module 9: Concurrency, Fan-Out & Race Conditions",
+    "title": "Concurrent Child Order Mass Cancellation Across 1,000 Accounts",
+    "precondition": "1,000 child limit orders working at broker.",
+    "steps": "1. Master cancels parent order.",
+    "expected": "Mass cancellation cancels all 1,000 child orders within 600ms; zero orphan limit orders.",
+    "priority": "P0",
+    "test_case_id": "MAM-C012",
+    "status": "BLOCKED",
+    "coverage_note": "Requires infrastructure hooks, a different account population, distributed nodes, gateway idempotency contract, or long-duration load tooling not supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-C013",
+    "module": "Module 9: Concurrency, Fan-Out & Race Conditions",
+    "title": "Database Deadlock Prevention via Deterministic Account ID Sorting",
+    "precondition": "50 concurrent transactions updating sub-accounts in random order.",
+    "steps": "1. Sizing engine sorts account locks strictly by ascending `sub_account_id`.",
+    "expected": "Zero deadlocks detected; 100% transaction success rate.",
+    "priority": "P0",
+    "test_case_id": "MAM-C013",
+    "status": "PARTIAL",
+    "coverage_note": "No over-close in repeated races; database lock ordering cannot be inferred from API outcomes.",
+    "executed_check_ids": [
+      "RACE-MULTI-REDUCE-1",
+      "RACE-MULTI-REDUCE-2",
+      "RACE-MULTI-REDUCE-3"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_055545.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-C014",
+    "module": "Module 9: Concurrency, Fan-Out & Race Conditions",
+    "title": "Network Latency Variance Across Geographically Distributed Broker Nodes",
+    "precondition": "Sub-accounts distributed across London, New York, and Tokyo broker servers.",
+    "steps": "1. Fire block order.",
+    "expected": "Asynchronous ticket dispatch absorbs latency variance; fill reports aggregated cleanly.",
+    "priority": "P1",
+    "test_case_id": "MAM-C014",
+    "status": "BLOCKED",
+    "coverage_note": "Requires infrastructure hooks, a different account population, distributed nodes, gateway idempotency contract, or long-duration load tooling not supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-C015",
+    "module": "Module 9: Concurrency, Fan-Out & Race Conditions",
+    "title": "Distributed Lock (Redlock) Timeout on Allocation Service",
+    "precondition": "Sizing worker thread encounters transient freeze.",
+    "steps": "1. Lock TTL expires after 10 seconds.",
+    "expected": "Standby worker acquires lock and resumes allocation; alerts raised via PagerDuty.",
+    "priority": "P1",
+    "test_case_id": "MAM-C015",
+    "status": "BLOCKED",
+    "coverage_note": "Requires infrastructure hooks, a different account population, distributed nodes, gateway idempotency contract, or long-duration load tooling not supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-L001",
+    "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+    "title": "US NFA Rule 2-43(b) FIFO Enforcement on Sub-Account Positions",
+    "precondition": "Sub-accounts operate under US regulatory regime.",
+    "steps": "1. Master opens 2 consecutive EURUSD positions.2. Master submits partial close.",
+    "expected": "MAM engine strictly closes oldest child position first in every sub-account to maintain FIFO compliance.",
+    "priority": "P0",
+    "test_case_id": "MAM-L001",
+    "status": "BLOCKED",
+    "coverage_note": "Requires compliance policy fixtures, jurisdiction controls, document/audit access and authorized evidence. Trading API success cannot establish compliance.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-L002",
+    "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+    "title": "ESMA Retail Leverage Cap Enforcement (1:30 Limit)",
+    "precondition": "Retail investor under European ESMA regulation joins MAM group.",
+    "steps": "1. Master attempts high-leverage order (1:100).",
+    "expected": "Sizing engine enforces 1:30 maximum leverage limit for ESMA client child tickets; reduces lot size to comply.",
+    "priority": "P0",
+    "test_case_id": "MAM-L002",
+    "status": "BLOCKED",
+    "coverage_note": "Requires compliance policy fixtures, jurisdiction controls, document/audit access and authorized evidence. Trading API success cannot establish compliance.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-L003",
+    "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+    "title": "Digital LPOA Cryptographic Storage and Audit Retrieval",
+    "precondition": "Investor signed digital LPOA upon joining.",
+    "steps": "1. Compliance Officer requests copy of legal authorization.",
+    "expected": "System retrieves immutable timestamped PDF with client digital signature and IP address hash.",
+    "priority": "P1",
+    "test_case_id": "MAM-L003",
+    "status": "BLOCKED",
+    "coverage_note": "Requires compliance policy fixtures, jurisdiction controls, document/audit access and authorized evidence. Trading API success cannot establish compliance.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-L004",
+    "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+    "title": "Expired KYC / AML Auto-Gating of Sub-Account",
+    "precondition": "Investor KYC document reaches expiration date.",
+    "steps": "1. Master submits new order.",
+    "expected": "Sub-account excluded from new orders; existing open positions preserved until KYC renewal.",
+    "priority": "P1",
+    "test_case_id": "MAM-L004",
+    "status": "BLOCKED",
+    "coverage_note": "Requires compliance policy fixtures, jurisdiction controls, document/audit access and authorized evidence. Trading API success cannot establish compliance.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-L005",
+    "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+    "title": "Sanctioned Territory IP Geoblocking on LPOA Submissions",
+    "precondition": "Connection originates from OFAC sanctioned country.",
+    "steps": "1. Attempt to execute LPOA contract.",
+    "expected": "Gateway blocks request with 403 Forbidden; compliance alert triggered.",
+    "priority": "P0",
+    "test_case_id": "MAM-L005",
+    "status": "BLOCKED",
+    "coverage_note": "Requires compliance policy fixtures, jurisdiction controls, document/audit access and authorized evidence. Trading API success cannot establish compliance.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-L006",
+    "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+    "title": "Retail Investor Suitability Questionnaire Verification",
+    "precondition": "Investor completes suitability test; categorized as conservative risk.",
+    "steps": "1. Investor attempts to join 'High Leverage Crypto MAM' group.",
+    "expected": "Warning modal displayed: 'Product exceeds your verified risk tolerance'; requires explicit informed consent waiver.",
+    "priority": "P1",
+    "test_case_id": "MAM-L006",
+    "status": "BLOCKED",
+    "coverage_note": "Requires compliance policy fixtures, jurisdiction controls, document/audit access and authorized evidence. Trading API success cannot establish compliance.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-L007",
+    "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+    "title": "Immutable Transaction Audit Logging for Regulatory Audits",
+    "precondition": "Master opens and closes 50 block trades.Compliance requests complete blotter.",
+    "steps": "1. Generate regulatory trade blotter.",
+    "expected": "Contains Parent Order ID, LP Fill ID, Child Ticket IDs, Timestamp (ms), Execution Prices, and Allocation Math Proof.",
+    "priority": "P0",
+    "test_case_id": "MAM-L007",
+    "status": "BLOCKED",
+    "coverage_note": "Requires compliance policy fixtures, jurisdiction controls, document/audit access and authorized evidence. Trading API success cannot establish compliance.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-L008",
+    "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+    "title": "Segregated Sub-Account Custody Verification",
+    "precondition": "Financial audit inspects investor sub-accounts.",
+    "steps": "1. Verify client fund segregation.",
+    "expected": "Each sub-account maintains distinct account number in clearing database; funds fully segregated from manager operating capital.",
+    "priority": "P0",
+    "test_case_id": "MAM-L008",
+    "status": "BLOCKED",
+    "coverage_note": "Requires compliance policy fixtures, jurisdiction controls, document/audit access and authorized evidence. Trading API success cannot establish compliance.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-L009",
+    "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+    "title": "Anti-Front-Running Compliance Surveillance",
+    "precondition": "Manager trades personal non-MAM account right before placing large MAM block.",
+    "steps": "1. Compliance surveillance algorithm scans order timing.",
+    "expected": "Trade flagged 'FRONT_RUNNING_SUSPICION'; dispatched to Compliance Officer dashboard for review.",
+    "priority": "P1",
+    "test_case_id": "MAM-L009",
+    "status": "BLOCKED",
+    "coverage_note": "Requires compliance policy fixtures, jurisdiction controls, document/audit access and authorized evidence. Trading API success cannot establish compliance.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-L010",
+    "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+    "title": "GDPR Right to Be Forgotten with Regulatory Ledger Retention",
+    "precondition": "Exited investor requests account deletion.",
+    "steps": "1. Process GDPR request.",
+    "expected": "PII data anonymized in CRM; financial transaction logs preserved for mandatory 7-year statutory retention period.",
+    "priority": "P2",
+    "test_case_id": "MAM-L010",
+    "status": "BLOCKED",
+    "coverage_note": "Requires compliance policy fixtures, jurisdiction controls, document/audit access and authorized evidence. Trading API success cannot establish compliance.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-L011",
+    "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+    "title": "Professional Client Classification for High Leverage (>1:30)",
+    "precondition": "Client applies for 1:500 leverage under professional status.",
+    "steps": "1. Verify MiFID II elective professional criteria.",
+    "expected": "Requires verified portfolio size > \u20ac500k and trading activity; non-qualified clients locked to 1:30.",
+    "priority": "P0",
+    "test_case_id": "MAM-L011",
+    "status": "BLOCKED",
+    "coverage_note": "Requires compliance policy fixtures, jurisdiction controls, document/audit access and authorized evidence. Trading API success cannot establish compliance.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-L012",
+    "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+    "title": "Limited Power of Attorney (LPOA) Expiration and Auto-Pause",
+    "precondition": "LPOA agreement reaches 1-year expiration date.",
+    "steps": "1. Daily compliance cron runs.",
+    "expected": "Sub-account transitioned to 'LPOA_Expired'; excluded from new orders; investor prompted to re-sign.",
+    "priority": "P1",
+    "test_case_id": "MAM-L012",
+    "status": "BLOCKED",
+    "coverage_note": "Requires compliance policy fixtures, jurisdiction controls, document/audit access and authorized evidence. Trading API success cannot establish compliance.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-L013",
+    "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+    "title": "Anti-Money Laundering (AML) Closed-Loop Withdrawal Verification",
+    "precondition": "Investor funded via Bank Wire; requests withdrawal to Crypto wallet.",
+    "steps": "1. System validates payment method.",
+    "expected": "Rejected by AML engine: 'Withdrawal must return to original funding source (Bank Wire)'; compliance flag logged.",
+    "priority": "P0",
+    "test_case_id": "MAM-L013",
+    "status": "BLOCKED",
+    "coverage_note": "Requires compliance policy fixtures, jurisdiction controls, document/audit access and authorized evidence. Trading API success cannot establish compliance.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-L014",
+    "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+    "title": "MiFID II Best Execution Audit Reporting on Child Tickets",
+    "precondition": "Regulatory audit requests Best Execution proof on block trade #501.",
+    "steps": "1. Generate Best Execution report.",
+    "expected": "Compares child fill prices against consolidated market tape at time of execution; proves execution within benchmark.",
+    "priority": "P1",
+    "test_case_id": "MAM-L014",
+    "status": "BLOCKED",
+    "coverage_note": "Requires compliance policy fixtures, jurisdiction controls, document/audit access and authorized evidence. Trading API success cannot establish compliance.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-L015",
+    "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
+    "title": "Automated Statutory Tax Withholding on Manager Performance Fees",
+    "precondition": "Manager resident in jurisdiction requiring 20% withholding tax on fees.",
+    "steps": "1. Settle monthly performance fee ($1,000).",
+    "expected": "$800 credited to manager wallet; $200 transferred to tax escrow sub-account; tax statement generated.",
+    "priority": "P2",
+    "test_case_id": "MAM-L015",
+    "status": "BLOCKED",
+    "coverage_note": "Requires compliance policy fixtures, jurisdiction controls, document/audit access and authorized evidence. Trading API success cannot establish compliance.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-O001",
+    "module": "Module 11: Operational Tools & Emergency Runbooks",
+    "title": "Broker Global Emergency Kill-Switch on MAM Group",
+    "precondition": "Rogue manager algorithm or severe market anomaly detected.",
+    "steps": "1. Broker Risk Officer triggers 'Emergency Kill-Switch' on MAM Group #101.2. Confirm with 2FA.",
+    "expected": "All master trading immediately halted; all working limit orders cancelled; all 500 child positions closed at market in < 1,500ms.",
+    "priority": "P0",
+    "test_case_id": "MAM-O001",
+    "status": "BLOCKED",
+    "coverage_note": "Requires operator/backoffice infrastructure, deployment/failover controls, immutable logs, or external clearing evidence not supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-O002",
+    "module": "Module 11: Operational Tools & Emergency Runbooks",
+    "title": "Admin Forced Liquidation of Master MAM Positions",
+    "precondition": "Manager unavailable during extreme market emergency.",
+    "steps": "1. Admin clicks 'Force Liquidate MAM Group'.",
+    "expected": "OMS sends mass market close for all child orders; confirms 100% flat position state across all linked accounts.",
+    "priority": "P0",
+    "test_case_id": "MAM-O002",
+    "status": "PARTIAL",
+    "coverage_note": "Authorized account cleanup tested with trader APIs; admin forced-liquidation workflow not exercised.",
+    "executed_check_ids": [
+      "FINAL-FLAT"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_060312.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-O003",
+    "module": "Module 11: Operational Tools & Emergency Runbooks",
+    "title": "Manual Child Ticket Re-Apportionment Console",
+    "precondition": "Sub-account #5 order failed due to broker bridge glitch during block fill.",
+    "steps": "1. Ops engineer opens 'MAM Ticket Reconciliation Console'.2. Selects parent order and clicks 'Re-Apportion Child Ticket #5'.",
+    "expected": "Child ticket created manually with original execution price; sub-account P&L restored perfectly.",
+    "priority": "P0",
+    "test_case_id": "MAM-O003",
+    "status": "BLOCKED",
+    "coverage_note": "Requires operator/backoffice infrastructure, deployment/failover controls, immutable logs, or external clearing evidence not supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-O004",
+    "module": "Module 11: Operational Tools & Emergency Runbooks",
+    "title": "Investor Trade Dispute Tick-by-Tick Reconstruction Tool",
+    "precondition": "Investor disputes child ticket fill price on trade #1002.",
+    "steps": "1. Support loads Dispute Audit Tool.",
+    "expected": "Displays parent LP order fill reports, VWAP calculation proof, exact timestamp, and sub-account lot sizing math; proves zero broker manipulation.",
+    "priority": "P1",
+    "test_case_id": "MAM-O004",
+    "status": "BLOCKED",
+    "coverage_note": "Requires operator/backoffice infrastructure, deployment/failover controls, immutable logs, or external clearing evidence not supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-O005",
+    "module": "Module 11: Operational Tools & Emergency Runbooks",
+    "title": "Zero-Downtime Rolling Deployment of MAM Allocation Gateway",
+    "precondition": "Deploying v2.2 update during active trading session.",
+    "steps": "1. Execute Kubernetes rolling deployment.",
+    "expected": "In-flight block allocations complete on existing containers; new containers take over traffic; zero dropped child tickets.",
+    "priority": "P0",
+    "test_case_id": "MAM-O005",
+    "status": "BLOCKED",
+    "coverage_note": "Requires operator/backoffice infrastructure, deployment/failover controls, immutable logs, or external clearing evidence not supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-O006",
+    "module": "Module 11: Operational Tools & Emergency Runbooks",
+    "title": "Individual Sub-Account Emergency Unlink by Administrator",
+    "precondition": "Investor account compromised by external phishing incident.",
+    "steps": "1. Admin clicks 'Emergency Unlink Sub-Account'.",
+    "expected": "Sub-account immediately detached from MAM group; open child positions closed or locked; credentials reset.",
+    "priority": "P0",
+    "test_case_id": "MAM-O006",
+    "status": "PARTIAL",
+    "coverage_note": "Follower API unlink tested; administrator emergency unlink workflow not exercised.",
+    "executed_check_ids": [
+      "MAM-UNFOLLOW-FLAT"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-O007",
+    "module": "Module 11: Operational Tools & Emergency Runbooks",
+    "title": "Administrative Goodwill Balance Adjustment Workflow",
+    "precondition": "Sub-account experienced execution delay; broker grants $150 compensation.",
+    "steps": "1. Admin enters goodwill credit with audit reason.",
+    "expected": "$150 credited to client ledger; corporate treasury debited; immutable audit note generated.",
+    "priority": "P1",
+    "test_case_id": "MAM-O007",
+    "status": "PARTIAL",
+    "coverage_note": "Actual Admin > Member > Real Hedging > Set balance verified for 101 accounts; treasury debit/immutable audit not certified.",
+    "executed_check_ids": [
+      "SETUP-BALANCE"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054434.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-O008",
+    "module": "Module 11: Operational Tools & Emergency Runbooks",
+    "title": "Real-Time SRE Alerting on Ticket Fan-Out Latency Spikes (>250ms)",
+    "precondition": "Ticket fan-out latency exceeds 250ms SLA.",
+    "steps": "1. Monitor Datadog / Prometheus alert rule.",
+    "expected": "PagerDuty high-priority alert triggers on-call SRE team immediately.",
+    "priority": "P1",
+    "test_case_id": "MAM-O008",
+    "status": "BLOCKED",
+    "coverage_note": "Requires operator/backoffice infrastructure, deployment/failover controls, immutable logs, or external clearing evidence not supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-O009",
+    "module": "Module 11: Operational Tools & Emergency Runbooks",
+    "title": "Automated Daily EOD Reconciliation: Sub-Accounts vs Clearing LP",
+    "precondition": "Daily 01:00 AM reconciliation job runs.",
+    "steps": "1. Reconcile sum of all child positions and balances against LP omnibus clearing reports.",
+    "expected": "Automated reconciliation report generated; discrepancies > $0.01 raise critical alert.",
+    "priority": "P0",
+    "test_case_id": "MAM-O009",
+    "status": "PARTIAL",
+    "coverage_note": "Account-level reconciliation performed; external clearing LP/EOD reconciliation not accessible on this B-book run.",
+    "executed_check_ids": [
+      "ACCOUNTING-101"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_055545.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-O010",
+    "module": "Module 11: Operational Tools & Emergency Runbooks",
+    "title": "Disaster Recovery Warm Standby Cluster Failover",
+    "precondition": "Primary cloud region experiences catastrophic data center failure.",
+    "steps": "1. Trigger automated DNS and database failover to secondary cloud region.",
+    "expected": "Standby MAM engine assumes active traffic within 120 seconds; zero dropped trades (RPO = 0s, RTO < 120s).",
+    "priority": "P0",
+    "test_case_id": "MAM-O010",
+    "status": "BLOCKED",
+    "coverage_note": "Requires operator/backoffice infrastructure, deployment/failover controls, immutable logs, or external clearing evidence not supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-O011",
+    "module": "Module 11: Operational Tools & Emergency Runbooks",
+    "title": "Emergency Sub-Account Position Force-Close Without Disconnecting LPOA",
+    "precondition": "Single sub-account requires immediate derisking by risk manager.",
+    "steps": "1. Risk Officer clicks 'Force Close Sub-Account Positions'.",
+    "expected": "Child positions closed at market; LPOA remains bound for future trading; manager alerted.",
+    "priority": "P1",
+    "test_case_id": "MAM-O011",
+    "status": "PARTIAL",
+    "coverage_note": "Individual follower close tested; separate administrator force-close privilege path not exercised.",
+    "executed_check_ids": [
+      "LIFE-FOLLOWER-CLOSE"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_054627.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-O012",
+    "module": "Module 11: Operational Tools & Emergency Runbooks",
+    "title": "Manager Balance Decoupling from Client Sub-Accounts",
+    "precondition": "Manager personal trading account sustains loss on independent trades.",
+    "steps": "1. Verify client sub-account balances.",
+    "expected": "Client sub-account balances and margin remain 100% unaffected; complete legal and technical isolation.",
+    "priority": "P0",
+    "test_case_id": "MAM-O012",
+    "status": "PARTIAL",
+    "coverage_note": "Master cash change isolation tested; personal-account loss and legal custody separation not certified.",
+    "executed_check_ids": [
+      "GUI-MASTER-CASH-ISOLATION"
+    ],
+    "evidence_files": [
+      "reports/live_recheck_20261120/deep_run/results_060312.json"
+    ],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-O013",
+    "module": "Module 11: Operational Tools & Emergency Runbooks",
+    "title": "Historical Performance Tear-Sheet Generator for Prospective Clients",
+    "precondition": "Prospective investor reviews MAM group track record.",
+    "steps": "1. Generate performance tear-sheet.",
+    "expected": "Accurately calculates Time-Weighted Return (TWR), Max Drawdown, Sharpe Ratio, and Monthly Return Matrix.",
+    "priority": "P1",
+    "test_case_id": "MAM-O013",
+    "status": "BLOCKED",
+    "coverage_note": "Requires operator/backoffice infrastructure, deployment/failover controls, immutable logs, or external clearing evidence not supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-O014",
+    "module": "Module 11: Operational Tools & Emergency Runbooks",
+    "title": "Audit Log Cryptographic Hashing (SHA-256 Chaining)",
+    "precondition": "System records trade allocations.",
+    "steps": "1. Inspect audit ledger database.",
+    "expected": "Each log entry contains hash of previous log entry (blockchain-style tamper evident chain); prevents database alteration.",
+    "priority": "P0",
+    "test_case_id": "MAM-O014",
+    "status": "BLOCKED",
+    "coverage_note": "Requires operator/backoffice infrastructure, deployment/failover controls, immutable logs, or external clearing evidence not supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  },
+  {
+    "id": "MAM-O015",
+    "module": "Module 11: Operational Tools & Emergency Runbooks",
+    "title": "Automated Daily Reconciliation Dispatched to Broker Risk Committee",
+    "precondition": "Daily 02:00 AM reporting cron runs.",
+    "steps": "1. Compile reconciliation matrix.",
+    "expected": "Automated email report dispatched to Risk Committee confirming zero penny discrepancy across all active MAM groups.",
+    "priority": "P1",
+    "test_case_id": "MAM-O015",
+    "status": "BLOCKED",
+    "coverage_note": "Requires operator/backoffice infrastructure, deployment/failover controls, immutable logs, or external clearing evidence not supplied.",
+    "executed_check_ids": [],
+    "evidence_files": [],
+    "release_signoff": false
+  }
+]

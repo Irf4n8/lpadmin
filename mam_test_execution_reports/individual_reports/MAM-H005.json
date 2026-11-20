@@ -1,19 +1,15 @@
 {
-  "test_case_id": "MAM-H005",
+  "id": "MAM-H005",
   "module": "Module 8: High-Water Mark & Performance Fees",
   "title": "Exceeding Prior HWM After Full Recovery",
-  "priority": "P0",
   "precondition": "Acc 1 grows from $11,000 to $13,000.",
   "steps": "1. Calculate Net New Profit = $13,000 - $11,600 = $1,400.00.2. Compute Fee = $1,400 * 20% = $280.00.",
-  "expected_result": "$280.00 debited from Acc 1; new HWM set to $12,720.00 ($13k - $280 fee).",
-  "execution_timestamp": "2026-11-16T10:58:44.702926Z",
-  "verification_type": "QUANTITATIVE_CALCULATION",
-  "status": "PASS",
-  "actual_result": "HWM breach calculation: Net new profit = $1400.00. Fee = $280.00. New HWM = $12720.00.",
-  "evidence": {
-    "net_new_profit": 1400.0,
-    "fee": 280.0,
-    "new_hwm": 12720.0
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "$280.00 debited from Acc 1; new HWM set to $12,720.00 ($13k - $280 fee).",
+  "priority": "P0",
+  "test_case_id": "MAM-H005",
+  "status": "BLOCKED",
+  "coverage_note": "Requires time-controlled fee cycles, HWM recovery history, management fees, tax/rebate/statement configuration not available in this run.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

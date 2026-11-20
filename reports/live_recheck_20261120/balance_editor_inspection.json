@@ -1,0 +1,20 @@
+{
+  "mode": "Open real-hedging balance editor; do not save",
+  "editor_html": "<span style=\"font-size: 13px; color: var(--muted);\">Trading balance \u00b7 Real (Hedging)</span><span class=\"badge warn\">real money</span><input class=\"input sm\" step=\"any\" type=\"number\" value=\"1000000\" style=\"width: 140px; text-align: right;\"><button class=\"btn sm primary\">Set</button><button class=\"btn sm\">Cancel</button>",
+  "editor_text": "Trading balance \u00b7 Real (Hedging)\nreal money\nSet\nCancel",
+  "inputs": [
+    {
+      "type": "number",
+      "value": "1000000",
+      "placeholder": "",
+      "min": "",
+      "max": "",
+      "step": "any"
+    }
+  ],
+  "buttons": [
+    "Set",
+    "Cancel"
+  ],
+  "status": "INSPECTED_NOT_SUBMITTED"
+}

@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-L001",
+  "id": "MAM-L001",
   "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
   "title": "US NFA Rule 2-43(b) FIFO Enforcement on Sub-Account Positions",
-  "priority": "P0",
   "precondition": "Sub-accounts operate under US regulatory regime.",
   "steps": "1. Master opens 2 consecutive EURUSD positions.2. Master submits partial close.",
-  "expected_result": "MAM engine strictly closes oldest child position first in every sub-account to maintain FIFO compliance.",
-  "execution_timestamp": "2026-11-16T10:58:46.156013Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Jurisdictional FIFO engine closes oldest child position first in sub-accounts subject to US NFA regulatory regime.",
-  "evidence": {
-    "rule": "First-In, First-Out liquidation order"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "MAM engine strictly closes oldest child position first in every sub-account to maintain FIFO compliance.",
+  "priority": "P0",
+  "test_case_id": "MAM-L001",
+  "status": "BLOCKED",
+  "coverage_note": "Requires compliance policy fixtures, jurisdiction controls, document/audit access and authorized evidence. Trading API success cannot establish compliance.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

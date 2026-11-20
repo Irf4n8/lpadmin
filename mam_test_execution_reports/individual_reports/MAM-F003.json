@@ -1,23 +1,15 @@
 {
-  "test_case_id": "MAM-F003",
+  "id": "MAM-F003",
   "module": "Module 1: Group & Sub-Account Lifecycle",
   "title": "Digital Limited Power of Attorney (LPOA) Contract Signing",
-  "priority": "P0",
   "precondition": "Investor selects MAM group to join.",
   "steps": "1. Investor reviews LPOA terms granting manager trading rights while retaining withdrawal control.2. Submit digital signature and 2FA authentication.",
-  "expected_result": "Cryptographically signed LPOA PDF generated and stored; trading authorization granted in broker clearing DB.",
-  "execution_timestamp": "2026-11-16T10:58:41.467277Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Digital LPOA authorization is enforced at OMS clearing level via digital relationship row and KYC/document portal.",
-  "evidence": {
-    "licence": {
-      "state": "ok",
-      "reason": "",
-      "message": "",
-      "contact": "support@blacktrader.com"
-    },
-    "portal_docs": 200
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Cryptographically signed LPOA PDF generated and stored; trading authorization granted in broker clearing DB.",
+  "priority": "P0",
+  "test_case_id": "MAM-F003",
+  "status": "BLOCKED",
+  "coverage_note": "LPOA contracts, independent group-management/archival controls or required role fixtures are not available in the verified API/UI flow.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

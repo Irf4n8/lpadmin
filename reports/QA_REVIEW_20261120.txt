@@ -1,0 +1,158 @@
+BLACKTRADER QA REVIEW — 20 NOVEMBER 2026
+
+Verdict: Do not use the existing green reports as release sign-off.
+Confirmed defects exist in test-result integrity, cleanup, authentication,
+retry behavior, and input validation. No application source was changed.
+
+SCOPE NOTICE AFTER LIVE RETEST
+This document reports the OFFLINE tooling audit only. Its statements about no
+remote mutations apply to that offline probe, not to the separate authorized live
+retest. Live API trading, actual Playwright admin balance changes, and concurrent
+operations were subsequently executed. Read MAM_QA_MASTER_TEST_EXECUTION_REPORT.md
+and reports/live_recheck_20261120/validated_results.json for the current combined
+assessment. The offline findings below were rerun and remain reproducible.
+
+SCOPE AND METHOD
+This repository contains Python trading automation, browser scripts, API clients,
+two dashboard implementations, JMeter assets, and historical evidence. It does
+not contain the complete remote trading backend. Reviewed the main execution,
+reporting, configuration, client, and dashboard paths. Parsed all 280 original
+Python files successfully; this is syntax coverage, not behavioral coverage.
+
+Executed 35 offline checks: 25 PASS, 10 FAIL. These are targeted checks selected
+for this audit, not a rerun of the historical 165 live scenarios. Outbound socket
+connections were blocked in the reproducible probe runner. API failure responses
+were controlled mocks. No remote account, balance, order, or follower link was
+changed. Browser trading journeys, concurrency at the server, settlement, broker
+routing, and load performance remain UNVERIFIED.
+
+REPRODUCTION
+From the repository root:
+  python reports/qa_retest_20261120.py
+Expected current exit status: 1 (known failed checks).
+Detailed actual/expected evidence: reports/qa_retest_20261120.json
+Captured output: reports/qa_retest_20261120_console.txt
+The script writes only its own evidence; existing reports are preserved.
+
+CONFIRMED FINDINGS
+
+QA-01 HIGH — Failed API checks produce a PASS.
+Source: run_all_165_mam_tests.py:183-194 (MAM-F003).
+Reproduction: inject HTTP 503 for both licence and document endpoints.
+Actual: PASS, with portal_docs=503 and empty licence evidence.
+Expected: FAIL or BLOCKED; no claim that authorization is enforced.
+Impact: inaccessible or failing services can receive release approval.
+Fix direction: assert status, response schema, and the scenario's actual business
+postcondition; distinguish unavailable evidence from a verified outcome.
+
+QA-02 HIGH — Local arithmetic receives a production-ready label.
+Source: run_all_165_mam_tests.py:366 onward; format_result at line 2217.
+Reproduction: execute MAM-A001 with a mock client and count client calls.
+Actual: zero client calls, assessment PASSED_PRODUCTION_READY.
+Expected: calculation-only evidence explicitly separated from platform readiness.
+Historical report: 165 claimed passes comprise 21 LIVE_API_EXECUTION,
+93 API_CONTRACT_VERIFICATION, and 51 QUANTITATIVE_CALCULATION entries.
+Static scan found 116 format_result call sites with literal status="PASS".
+That count is a review indicator, not proof of 116 independently reproduced bugs.
+Neither contract labels nor local calculations establish end-to-end correctness.
+
+QA-03 HIGH — Bulk close reports success after the position read fails.
+Source: test_suite/client.py:195-208 and 329-338.
+Reproduction: get_positions receives HTTP 503, then call bulk_squareoff.
+Actual: status_code=200, message='No open positions'.
+Expected: propagate the read failure; position state is unknown.
+Impact: cleanup can falsely claim completion while positions remain open.
+
+QA-04 HIGH — Bulk cancellation reports success after the order read fails.
+Source: test_suite/client.py:210-221 and 350-359.
+Reproduction: get_orders receives HTTP 503, then call bulk_cancel.
+Actual: status_code=200, message='No pending orders'.
+Expected: propagate the failure instead of treating it as an empty inventory.
+
+QA-05 HIGH — Full-close verification passes when close and readback both fail.
+Source: test_suite/scenarios.py:213-244.
+Reproduction: squareoff returns 503; follower readback contains error='HTTP 503',
+count=0 and positions=[].
+Actual: PASS, orders_closed=1, orphan_count=0.
+Expected: FAIL or BLOCKED. A successful close and successful readback are required.
+The current scenario ignores the close result and readback error field.
+
+QA-06 MEDIUM — Authentication succeeds without a usable token.
+Source: run_basic_10_test_cases.py:72-83.
+Reproduction: login returns success; chart-token returns HTTP 200 and {}.
+Actual: authenticate() returns True, chart_token remains None.
+Expected: authentication fails when the required token is absent.
+Impact: downstream requests use an invalid bearer token and misidentify failures.
+
+QA-07 HIGH — Order POST is replayed after an ambiguous timeout.
+Source: test_suite/client.py:59-101.
+Reproduction: first session request raises Timeout, second returns 200.
+Actual: two POST attempts for the same order request; no idempotency key supplied.
+Expected: reconcile an uncertain write or use a documented idempotency mechanism.
+Impact: potential duplicate orders if the first request committed before its
+response was lost. Duplicate execution on the real server was NOT demonstrated.
+The HTTP adapter also permits POST retries, in addition to the outer retry loop.
+
+QA-08 MEDIUM — Infinite lot size passes dashboard command validation.
+Source: dashboard/suites.py, _num and build_command.
+Reproduction: build a supported suite command with lot='inf'.
+Actual: generated argv contains '--lot', 'inf'.
+Expected: reject nonfinite quantities with a clear validation error.
+Server acceptance of this value was NOT tested.
+
+QA-09 MEDIUM — Reversed CLI follower range crashes.
+Source: test_suite/runner.py:48-53.
+Reproduction: python test_suite/runner.py --start 2 --end 1
+Actual: IndexError: list index out of range before network execution.
+Expected: argparse validation error or documented normalization.
+Dashboard command generation normalizes the same range correctly.
+
+QA-10 MEDIUM — Malformed suite parameters raise an unhandled exception.
+Source: dashboard/testops.py, run_suite; dashboard/suites.py, effective_instance.
+Reproduction: run_suite with a valid suite and params=['invalid'].
+Actual: AttributeError: 'list' object has no attribute 'get'.
+Expected: structured HTTP 400 result. No process should be launched.
+The identical payload shape is also unvalidated in dashboard/app.py; Flask HTTP
+behavior was not executed because that dependency is absent in this interpreter.
+
+ENVIRONMENT AND ADDITIONAL STATIC CONCERNS
+- Active interpreter: Python 3.14.5. requests, python-dotenv, Playwright and pytest
+  are importable. Flask is not installed here despite being in requirements.txt.
+  'python -c "import dashboard.app"' fails with ModuleNotFoundError: flask.
+  This is an environment blocker, not proof that a clean dependency install fails.
+- Plaintext credential-like values appear in tracked README.md and
+  run_all_165_mam_tests.py. Values are intentionally omitted here; whether those
+  credentials are currently valid was not tested. Remove embedded credentials and
+  rotate any that are active.
+- config/settings.py defaults dashboard binding to 0.0.0.0 with an empty optional
+  DASHBOARD_TOKEN. That combination permits unauthenticated access if deployed
+  without overrides. Actual network exposure was not tested.
+- test_suite/runner.py writes failure results but does not return a nonzero exit
+  status based on those failures. The dashboard derives COMPLETED from exit code
+  zero. Static finding: a failed suite can be shown as completed; an end-to-end
+  dashboard execution was not run.
+- Runner cleanup is not protected by a broad finally block. An exception between
+  order creation and teardown can bypass cleanup. Static risk, not a live repro.
+
+WHAT PASSED
+- All original Python files parsed, plus the added audit script.
+- Main CLI help and all 12 available dashboard runner help commands completed.
+- Six market/limit/stop BUY/SELL price-reference and TP/SL direction checks.
+- Valid ISO-Z timestamps produced the expected 100 ms latency.
+- Dashboard follower-range normalization and real-instance confirmation guard.
+- Testops rejected unknown suites and unconfirmed real execution without spawning.
+These passes are narrow assertions; they do not certify complete trading flows.
+
+RECOMMENDED ORDER OF WORK
+1. Correct false-pass logic and preserve API errors through cleanup/readback.
+2. Separate calculation/contract evidence from actual live execution in reports.
+3. Resolve ambiguous write retries and require usable authentication tokens.
+4. Validate command/API inputs and propagate suite failure through process status.
+5. Install missing dependencies in the intended environment, then rerun controlled
+   integration and browser cases against designated test accounts with known state.
+
+The user subsequently confirmed dedicated simulated accounts and authorized live
+real-hedging tests, GUI balance changes and cleanup. Those tests were executed
+separately and are reported in MAM_QA_MASTER_TEST_EXECUTION_REPORT.md. This offline
+audit does not substitute for that evidence, and its ten tooling failures remain
+unfixed. Infrastructure and other inaccessible requirements remain unverified.

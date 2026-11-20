@@ -1,0 +1,8 @@
+{
+  "confirmed_by": "User in this QA session on 2026-11-20",
+  "rule": "A profitable close starting exactly at the benchmark pays no manager share. Subsequent profitable closes pay the configured share only when balance before the close already exceeds the benchmark.",
+  "user_example": "Benchmark 1000, first trade profit 7 is not shared; balance becomes 1007 and the second trade profit is shared.",
+  "brokerage_note": "Live account brokerage is separately reconciled; the user example does not specify brokerage.",
+  "superseded_assertion": "Expecting a positive manager share on the first profitable benchmark crossing was incorrect.",
+  "required_retests": ["FEE-HWM-POLICY-FIRST", "FEE-HWM-POLICY-ABOVE"]
+}

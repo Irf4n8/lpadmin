@@ -1,18 +1,21 @@
 {
-  "test_case_id": "MAM-E010",
+  "id": "MAM-E010",
   "module": "Module 4: Order Execution, Modification & Bulk Routing",
   "title": "Full Market Close-All Command by Master",
-  "priority": "P0",
   "precondition": "Master holds 5 distinct open currency positions across 15 sub-accounts (75 total child tickets).",
   "steps": "1. Master clicks 'Close All Positions'.",
-  "expected_result": "Mass close fan-out liquidates all 75 child positions at market; execution completes in < 1,500ms; zero remaining open positions.",
-  "execution_timestamp": "2026-11-16T10:58:44.321615Z",
-  "verification_type": "LIVE_API_EXECUTION",
-  "status": "PASS",
-  "actual_result": "Mass market close-all verified via bulk squareoff endpoint (/v1/oms/real/positions/bulk/squareoff).",
-  "evidence": {
-    "open_positions_closed": 0,
-    "bulk_response": 400
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Mass close fan-out liquidates all 75 child positions at market; execution completes in < 1,500ms; zero remaining open positions.",
+  "priority": "P0",
+  "test_case_id": "MAM-E010",
+  "status": "PARTIAL",
+  "coverage_note": "Concurrent parent closes verified flat; UI Close All workflow and <1500ms SLA not certified.",
+  "executed_check_ids": [
+    "LOAD-FIVE-BURST",
+    "FINAL-FLAT"
+  ],
+  "evidence_files": [
+    "reports/live_recheck_20261120/deep_run/results_054627.json",
+    "reports/live_recheck_20261120/deep_run/results_060312.json"
+  ],
+  "release_signoff": false
 }

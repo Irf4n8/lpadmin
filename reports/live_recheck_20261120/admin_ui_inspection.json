@@ -1,0 +1,5 @@
+{
+  "mode": "UI inspection only; no balance submission",
+  "status": "BLOCKED",
+  "error": "TimeoutError: Locator.wait_for: Timeout 25000ms exceeded.\nCall log:\n  - waiting for get_by_text(\"MEMBERS\", exact=True).first to be visible\n"
+}

@@ -1,25 +1,15 @@
 {
-  "test_case_id": "MAM-F008",
+  "id": "MAM-F008",
   "module": "Module 1: Group & Sub-Account Lifecycle",
   "title": "Multi-Currency Sub-Account Inclusion (USD, EUR, GBP in One Group)",
-  "priority": "P0",
   "precondition": "Master account denominated in USD; sub-accounts in USD, EUR, and GBP.",
   "steps": "1. Link EUR account (\u20ac10,000) and GBP account (\u00a310,000).",
-  "expected_result": "Sizing engine converts sub-account balances to USD base using live broker spot FX rates for accurate proportional weighting.",
-  "execution_timestamp": "2026-11-16T10:58:41.847849Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Funds API dynamically converts multi-currency cash balances to master base currency for proportional sizing.",
-  "evidence": {
-    "funds_snapshot": {
-      "balance": 10005759.541899899,
-      "equity": 10005759.541899899,
-      "free_margin": 10005759.541899899,
-      "margin_level": null,
-      "starting_balance": 10000000,
-      "unrealized_pnl": 0,
-      "used_margin": 0
-    }
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Sizing engine converts sub-account balances to USD base using live broker spot FX rates for accurate proportional weighting.",
+  "priority": "P0",
+  "test_case_id": "MAM-F008",
+  "status": "BLOCKED",
+  "coverage_note": "LPOA contracts, independent group-management/archival controls or required role fixtures are not available in the verified API/UI flow.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

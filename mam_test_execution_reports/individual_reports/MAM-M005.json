@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-M005",
+  "id": "MAM-M005",
   "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
   "title": "Multiple Sub-Accounts Approaching Margin Call Simultaneously",
-  "priority": "P1",
   "precondition": "Severe market drawdown pushes 4 out of 10 accounts below 120% margin level.",
   "steps": "1. Monitor risk dashboard.",
-  "expected_result": "Real-time risk matrix flags vulnerable accounts in red; suggests partial position reduction to preserve group solvency.",
-  "execution_timestamp": "2026-11-16T10:58:44.390266Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Risk dashboard aggregates fleet margin health and highlights accounts below 120% in real time.",
-  "evidence": {
-    "risk_matrix": "Real-time margin monitoring"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Real-time risk matrix flags vulnerable accounts in red; suggests partial position reduction to preserve group solvency.",
+  "priority": "P1",
+  "test_case_id": "MAM-M005",
+  "status": "BLOCKED",
+  "coverage_note": "Requires configured stop-out/leverage/news/swap/notification fixtures beyond the verified account margin cases.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

@@ -1,28 +1,7 @@
-# BlackTrader MAM QA Report: TC01 - Market BUY with TP Alone (+30 pts)
+# Superseded QA report
 
-**Execution Timestamp**: `2026-11-12T07:18:57.534067+00:00`  
-**Target Instrument**: `BINANCE:BTCUSDT.P`  
-**Order Side**: `BUY`  
-**Master Lot**: `1.25`  
-**Expected Follower Lot (2.0x)**: `2.50`  
-**Actual Detected Lot**: `2.50`  
-**Exit Setting Attached?**: `YES (Bracket)`  
-**Total Duration**: `48.19s`  
-**Test Verdict**: **🟢 PASS (Zero Bugs Detected)**
+This report was replaced on 20 November 2026 after assertion review and live real-hedging retesting. Its old pass/fail counts are not current release evidence.
 
----
-## Execution & Price Verification
+See `MAM_QA_MASTER_TEST_EXECUTION_REPORT.md` and `reports/live_recheck_20261120/validated_results.json` for current results, detailed evidence, and blocked cases.
 
-| Metric | Value | Status |
-|:---|:---|:---:|
-| **Live Market Price at Entry** | `$73,498.80` | Live Tick |
-| **Master Fill Price** | `$73,498.80` | Confirmed |
-| **Follower Sample Fill Price** | `$73,498.80` | Confirmed |
-| **Execution Slippage** | `+0.00 pts` | ✅ Optimal |
-| **Follower Replication Rate** | `100.0%` (100/100) | ✅ 100% |
-| **Lot Sizing Fidelity** | `100.0%` (100/100) | ✅ 100% |
-| **Residual Open Trades After Square-off** | `0` | ✅ Clean (0) |
-
----
-## Bugs & Anomalies Identified
-- **No bugs identified.** Exact replication, proper multiplier scaling, zero slippage anomalies, and synchronized square-off confirmed.
+The exact prior report is preserved in `reports/live_recheck_20261120/historical_reports_before_rewrite.zip`. No old result has been silently promoted to PASS.

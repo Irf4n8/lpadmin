@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-D003",
+  "id": "MAM-D003",
   "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
   "title": "Withdrawal Request Exceeding Free Margin",
-  "priority": "P0",
   "precondition": "Sub-account equity = $10,000; Used margin = $8,000; Free margin = $2,000.",
   "steps": "1. Investor requests withdrawal of $4,000.",
-  "expected_result": "System blocks withdrawal: 'Requested amount ($4,000) exceeds available free margin ($2,000)'; suggests max allowable withdrawal.",
-  "execution_timestamp": "2026-11-16T10:58:44.612163Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Withdrawal requests exceeding free margin are rejected with error: 'Requested amount exceeds available free margin'.",
-  "evidence": {
-    "validation_rule": "withdrawal_amount <= free_margin"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "System blocks withdrawal: 'Requested amount ($4,000) exceeds available free margin ($2,000)'; suggests max allowable withdrawal.",
+  "priority": "P0",
+  "test_case_id": "MAM-D003",
+  "status": "BLOCKED",
+  "coverage_note": "Requires investor payment/withdrawal, lockup, reversal, or emergency LPOA workflow. Admin Set balance is not a substitute.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

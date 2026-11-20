@@ -1,25 +1,7 @@
-# Bug-Inducing QA Scenario Report: BTC04 - Extreme Micro-Capital Asymmetry in Balance Mode ($50 vs $10M)
+# Superseded QA report
 
-**Execution Timestamp**: `2026-11-12T10:16:49.815930+00:00`  
-**Scenario Outcome**: `✅ HANDLED CLEANLY`  
-**Target Bug Category**: `Proportional Divide-By-Zero / Margin Squeeze`  
-**Execution Duration**: `43.59s`  
-**Exit Rule**: `Bracket Attached`
+This report was replaced on 20 November 2026 after assertion review and live real-hedging retesting. Its old pass/fail counts are not current release evidence.
 
----
-## Scenario Specifications & Real-World User Workflow
-- **User Story**: Tests Balance-Based sizing calculation on $50 account (expected 0.00001 lots) to verify if OMS rounds up causing instant liquidation.
-- **Symbol**: `BINANCE:BTCUSDT.P` | **Side**: `BUY` | **Master Lot**: `2.0`
-- **Master Entry Price**: `$73,433.08` | **TP**: `73458.08` | **SL**: `73408.08`
+See `MAM_QA_MASTER_TEST_EXECUTION_REPORT.md` and `reports/live_recheck_20261120/validated_results.json` for current results, detailed evidence, and blocked cases.
 
----
-## Replication & Execution Telemetry
-| Metric | Observed Value | Expected Behavior |
-| :--- | :--- | :--- |
-| **Replication Rate** | `100.0%` (100/100) | 100% Replication |
-| **Lot Sizing Match Rate** | `100.0%` | Sizing Formula Precision |
-| **Residual Open Trades After Square-off** | `0` | `0` (Zero Orphan Trades) |
-
----
-## Identified Bugs, Vulnerabilities & System Anomalies
-- **No bugs observed.** The system handled this edge case gracefully without desynchronization, orphan positions, or calculation errors.
+The exact prior report is preserved in `reports/live_recheck_20261120/historical_reports_before_rewrite.zip`. No old result has been silently promoted to PASS.

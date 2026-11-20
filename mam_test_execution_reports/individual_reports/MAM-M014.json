@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-M014",
+  "id": "MAM-M014",
   "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
   "title": "Dynamic Leverage Reduction on High-Impact Economic News",
-  "priority": "P1",
   "precondition": "Broker automatically reduces leverage from 1:500 to 1:100 during NFP release.",
   "steps": "1. Broker updates leverage profile.",
-  "expected_result": "Sizing engine recalculates available group margin; prevents opening oversized orders under reduced leverage.",
-  "execution_timestamp": "2026-11-16T10:58:44.398934Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Global leverage reduction schedules update OMS margin coefficients, automatically scaling down order capacity.",
-  "evidence": {
-    "news_schedule": "Automated leverage haircut"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Sizing engine recalculates available group margin; prevents opening oversized orders under reduced leverage.",
+  "priority": "P1",
+  "test_case_id": "MAM-M014",
+  "status": "BLOCKED",
+  "coverage_note": "Requires configured stop-out/leverage/news/swap/notification fixtures beyond the verified account margin cases.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

@@ -1,25 +1,7 @@
-# Bug-Inducing QA Scenario Report: BTC09 - Sub-Lot Micro Multiplier with Odd Decimals (0.75x Multiplier on 1.33 Lots)
+# Superseded QA report
 
-**Execution Timestamp**: `2026-11-12T10:21:56.940814+00:00`  
-**Scenario Outcome**: `✅ HANDLED CLEANLY`  
-**Target Bug Category**: `Sub-Lot Decimal Precision & Truncation Boundary Bug`  
-**Execution Duration**: `39.44s`  
-**Exit Rule**: `Bracket Attached`
+This report was replaced on 20 November 2026 after assertion review and live real-hedging retesting. Its old pass/fail counts are not current release evidence.
 
----
-## Scenario Specifications & Real-World User Workflow
-- **User Story**: Tests fractional product calculation (1.33 * 0.75 = 0.9975 lots) sitting 0.0025 below broker 1.00 min lot to test truncation vs rejection.
-- **Symbol**: `BINANCE:BTCUSDT.P` | **Side**: `BUY` | **Master Lot**: `1.33`
-- **Master Entry Price**: `$73,526.58` | **TP**: `73551.58` | **SL**: `73501.58`
+See `MAM_QA_MASTER_TEST_EXECUTION_REPORT.md` and `reports/live_recheck_20261120/validated_results.json` for current results, detailed evidence, and blocked cases.
 
----
-## Replication & Execution Telemetry
-| Metric | Observed Value | Expected Behavior |
-| :--- | :--- | :--- |
-| **Replication Rate** | `100.0%` (100/100) | 100% Replication |
-| **Lot Sizing Match Rate** | `100.0%` | Sizing Formula Precision |
-| **Residual Open Trades After Square-off** | `0` | `0` (Zero Orphan Trades) |
-
----
-## Identified Bugs, Vulnerabilities & System Anomalies
-- **No bugs observed.** The system handled this edge case gracefully without desynchronization, orphan positions, or calculation errors.
+The exact prior report is preserved in `reports/live_recheck_20261120/historical_reports_before_rewrite.zip`. No old result has been silently promoted to PASS.

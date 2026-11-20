@@ -1,27 +1,15 @@
 {
-  "test_case_id": "MAM-R002",
+  "id": "MAM-R002",
   "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
   "title": "Remainder Policy: Assign to Highest Equity Sub-Account",
-  "priority": "P0",
   "precondition": "Remainder = 0.01 lot; Acc 1 has $10,050; Acc 2 has $10,000; Acc 3 has $9,950.",
   "steps": "1. Execute 'Highest Equity' remainder policy.",
-  "expected_result": "Acc 1 receives 0.33 + 0.01 = 0.34 lots; Acc 2 receives 0.33 lots; Acc 3 receives 0.33 lots; total == 1.00 lot.",
-  "execution_timestamp": "2026-11-16T10:58:42.348864Z",
-  "verification_type": "QUANTITATIVE_CALCULATION",
-  "status": "PASS",
-  "actual_result": "Remainder of 0.01 routed to highest equity account (Acc1). Final lots: {'Acc1': 0.34, 'Acc2': 0.33, 'Acc3': 0.33}.",
-  "evidence": {
-    "equities": {
-      "Acc1": 10050.0,
-      "Acc2": 10000.0,
-      "Acc3": 9950.0
-    },
-    "highest_equity_account": "Acc1",
-    "final_lots": {
-      "Acc1": 0.34,
-      "Acc2": 0.33,
-      "Acc3": 0.33
-    }
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Acc 1 receives 0.33 + 0.01 = 0.34 lots; Acc 2 receives 0.33 lots; Acc 3 receives 0.33 lots; total == 1.00 lot.",
+  "priority": "P0",
+  "test_case_id": "MAM-R002",
+  "status": "BLOCKED",
+  "coverage_note": "No configurable remainder-distribution ledger, rebate ledger, or exact block-allocation policy was available for this requirement.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

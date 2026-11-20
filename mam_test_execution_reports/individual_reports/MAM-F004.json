@@ -1,35 +1,20 @@
 {
-  "test_case_id": "MAM-F004",
+  "id": "MAM-F004",
   "module": "Module 1: Group & Sub-Account Lifecycle",
   "title": "Link Sub-Account to MAM Master Group",
-  "priority": "P0",
   "precondition": "Investor account KYC verified and funded with $5,000.",
   "steps": "1. Investor selects MAM group #101.2. Confirm account linking under signed LPOA.",
-  "expected_result": "Sub-account added to MAM group roster; trading rights transferred to manager; investor status set to 'Bound_Active'.",
-  "execution_timestamp": "2026-11-16T10:58:41.595986Z",
-  "verification_type": "LIVE_API_EXECUTION",
-  "status": "PASS",
-  "actual_result": "Sub-account successfully linked to MAM Master group on real instance with status 'active'.",
-  "evidence": {
-    "follow_payload": {
-      "master_client_id": "mem_e2dbce29e1c71a7bf6",
-      "multiplier": 2.0
-    },
-    "response": {
-      "follow": {
-        "follow_id": "mfl_d13553509d15882cc0",
-        "master_client_id": "mem_e2dbce29e1c71a7bf6",
-        "follower_client_id": "mem_3513ad4d841ac5689a",
-        "instance": "real",
-        "starting_balance": 10000000,
-        "share_percent": 50,
-        "method": "multiplier",
-        "multiplier": 2,
-        "status": "active",
-        "joined_at": "2026-11-16T10:58:41.427762Z"
-      },
-      "success": true
-    }
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Sub-account added to MAM group roster; trading rights transferred to manager; investor status set to 'Bound_Active'.",
+  "priority": "P0",
+  "test_case_id": "MAM-F004",
+  "status": "PARTIAL",
+  "coverage_note": "API leave/rejoin tested; signed LPOA and Bound_Active rights-transfer workflow not verified.",
+  "executed_check_ids": [
+    "MAM-UNFOLLOW-FLAT",
+    "MAM-JOIN-MIDTRADE"
+  ],
+  "evidence_files": [
+    "reports/live_recheck_20261120/deep_run/results_054627.json"
+  ],
+  "release_signoff": false
 }

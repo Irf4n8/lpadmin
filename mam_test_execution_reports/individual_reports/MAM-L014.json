@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-L014",
+  "id": "MAM-L014",
   "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
   "title": "MiFID II Best Execution Audit Reporting on Child Tickets",
-  "priority": "P1",
   "precondition": "Regulatory audit requests Best Execution proof on block trade #501.",
   "steps": "1. Generate Best Execution report.",
-  "expected_result": "Compares child fill prices against consolidated market tape at time of execution; proves execution within benchmark.",
-  "execution_timestamp": "2026-11-16T10:58:46.164781Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Best execution audit reporting cross-references child fill prices against consolidated market tape at time of execution.",
-  "evidence": {
-    "mifid_compliance": "RTS 27 / RTS 28 Best Execution audit"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Compares child fill prices against consolidated market tape at time of execution; proves execution within benchmark.",
+  "priority": "P1",
+  "test_case_id": "MAM-L014",
+  "status": "BLOCKED",
+  "coverage_note": "Requires compliance policy fixtures, jurisdiction controls, document/audit access and authorized evidence. Trading API success cannot establish compliance.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

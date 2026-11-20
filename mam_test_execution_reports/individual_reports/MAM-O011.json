@@ -1,17 +1,19 @@
 {
-  "test_case_id": "MAM-O011",
+  "id": "MAM-O011",
   "module": "Module 11: Operational Tools & Emergency Runbooks",
   "title": "Emergency Sub-Account Position Force-Close Without Disconnecting LPOA",
-  "priority": "P1",
   "precondition": "Single sub-account requires immediate derisking by risk manager.",
   "steps": "1. Risk Officer clicks 'Force Close Sub-Account Positions'.",
-  "expected_result": "Child positions closed at market; LPOA remains bound for future trading; manager alerted.",
-  "execution_timestamp": "2026-11-16T10:58:46.451866Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Risk officer force-closes sub-account child positions at market while keeping LPOA bound for future strategy trades.",
-  "evidence": {
-    "risk_action": "Force-close without unlinking"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Child positions closed at market; LPOA remains bound for future trading; manager alerted.",
+  "priority": "P1",
+  "test_case_id": "MAM-O011",
+  "status": "PARTIAL",
+  "coverage_note": "Individual follower close tested; separate administrator force-close privilege path not exercised.",
+  "executed_check_ids": [
+    "LIFE-FOLLOWER-CLOSE"
+  ],
+  "evidence_files": [
+    "reports/live_recheck_20261120/deep_run/results_054627.json"
+  ],
+  "release_signoff": false
 }

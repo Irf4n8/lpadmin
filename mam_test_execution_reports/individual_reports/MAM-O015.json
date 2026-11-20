@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-O015",
+  "id": "MAM-O015",
   "module": "Module 11: Operational Tools & Emergency Runbooks",
   "title": "Automated Daily Reconciliation Dispatched to Broker Risk Committee",
-  "priority": "P1",
   "precondition": "Daily 02:00 AM reporting cron runs.",
   "steps": "1. Compile reconciliation matrix.",
-  "expected_result": "Automated email report dispatched to Risk Committee confirming zero penny discrepancy across all active MAM groups.",
-  "execution_timestamp": "2026-11-16T10:58:46.538078Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Automated EOD reporting pipeline compiles balance and position matrices and dispatches zero-discrepancy report to Risk Committee.",
-  "evidence": {
-    "distribution": "Daily 02:00 AM email dispatch"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Automated email report dispatched to Risk Committee confirming zero penny discrepancy across all active MAM groups.",
+  "priority": "P1",
+  "test_case_id": "MAM-O015",
+  "status": "BLOCKED",
+  "coverage_note": "Requires operator/backoffice infrastructure, deployment/failover controls, immutable logs, or external clearing evidence not supplied.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

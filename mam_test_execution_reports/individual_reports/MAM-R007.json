@@ -1,23 +1,19 @@
 {
-  "test_case_id": "MAM-R007",
+  "id": "MAM-R007",
   "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
   "title": "Zero Remainder Perfect Division",
-  "priority": "P0",
   "precondition": "Master opens 2.00 lots across 4 accounts ($10k each). Math: 2.00 / 4 = 0.50 lots each.",
   "steps": "1. Process allocation.",
-  "expected_result": "Each account receives 0.500000 lots; Remainder == 0.00 lots; zero policy intervention needed.",
-  "execution_timestamp": "2026-11-16T10:58:42.353465Z",
-  "verification_type": "QUANTITATIVE_CALCULATION",
-  "status": "PASS",
-  "actual_result": "Zero remainder detected; perfect symmetric apportionment of 0.50 lots across all 4 sub-accounts.",
-  "evidence": {
-    "lots": [
-      0.5,
-      0.5,
-      0.5,
-      0.5
-    ],
-    "remainder": 0.0
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Each account receives 0.500000 lots; Remainder == 0.00 lots; zero policy intervention needed.",
+  "priority": "P0",
+  "test_case_id": "MAM-R007",
+  "status": "PARTIAL",
+  "coverage_note": "Exact multiplier products verified; block remainder-distribution model not exercised.",
+  "executed_check_ids": [
+    "SIZE-MULTIPLIERS"
+  ],
+  "evidence_files": [
+    "reports/live_recheck_20261120/deep_run/results_054627.json"
+  ],
+  "release_signoff": false
 }

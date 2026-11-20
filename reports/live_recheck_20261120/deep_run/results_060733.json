@@ -1,0 +1,283 @@
+[
+  {
+    "id": "SIZE-LOT-RULE-0.01-0.25",
+    "name": "Copied new entry respects BLACK BTCUSD lot minimum and step",
+    "status": "PASS",
+    "started_at": "2026-11-20T06:08:11.570079+00:00",
+    "finished_at": "2026-11-20T06:08:18.215123+00:00",
+    "details": {
+      "master_qty": 0.01,
+      "multiplier": 0.25,
+      "unrounded_product": 0.0025,
+      "child_positions": [
+        {
+          "algo_id": null,
+          "avg_entry_price": 61912.61,
+          "closed_at": null,
+          "comment": null,
+          "current_price": 61910.14,
+          "full_margin": 619.1261000000001,
+          "group_id": "qa_e1a0d5cc1c774f66",
+          "margin_percent": 100,
+          "margin_used": 619.1261000000001,
+          "market_order_id": "ord_68eaa2eabe7c1a1c29",
+          "net_qty": 0.01,
+          "oco_key": null,
+          "opened_at": "2026-11-20T06:08:13.033475Z",
+          "position_id": "pos_50954ad86855be97c1",
+          "side": "BUY",
+          "source": "mam",
+          "status": "OPEN",
+          "strategy_name": null,
+          "symbol": "BLACK:BTCUSD",
+          "tag": "QA_20261120",
+          "trailing": null,
+          "unrealized_pnl": -0.024700000000011643
+        }
+      ],
+      "invalid_entry_quantities": [],
+      "orphans": {},
+      "expected_child_quantity": 0.01,
+      "other_account_errors": {},
+      "oracle": "Regression of observed .01 minimum and nearest-step rounding; exactly one child required, no missing-copy pass"
+    },
+    "trace": "http_060733.jsonl.gz"
+  },
+  {
+    "id": "SIZE-LOT-RULE-0.03-0.5",
+    "name": "Copied new entry respects BLACK BTCUSD lot minimum and step",
+    "status": "PASS",
+    "started_at": "2026-11-20T06:08:18.216431+00:00",
+    "finished_at": "2026-11-20T06:08:23.792394+00:00",
+    "details": {
+      "master_qty": 0.03,
+      "multiplier": 0.5,
+      "unrounded_product": 0.015,
+      "child_positions": [
+        {
+          "algo_id": null,
+          "avg_entry_price": 61921.14,
+          "closed_at": null,
+          "comment": null,
+          "current_price": 61921.75,
+          "full_margin": 1238.4228,
+          "group_id": "qa_e17cb12fb7904c0d",
+          "margin_percent": 100,
+          "margin_used": 1238.4228,
+          "market_order_id": "ord_759b17846b34c6e50e",
+          "net_qty": 0.02,
+          "oco_key": null,
+          "opened_at": "2026-11-20T06:08:20.040856Z",
+          "position_id": "pos_25775ff04c3abbfb5a",
+          "side": "BUY",
+          "source": "mam",
+          "status": "OPEN",
+          "strategy_name": null,
+          "symbol": "BLACK:BTCUSD",
+          "tag": "QA_20261120",
+          "trailing": null,
+          "unrealized_pnl": 0.012200000000011643
+        }
+      ],
+      "invalid_entry_quantities": [],
+      "orphans": {},
+      "expected_child_quantity": 0.02,
+      "other_account_errors": {},
+      "oracle": "Regression of observed .01 minimum and nearest-step rounding; exactly one child required, no missing-copy pass"
+    },
+    "trace": "http_060733.jsonl.gz"
+  },
+  {
+    "id": "SIZE-LOT-RULE-0.01-1.5",
+    "name": "Copied new entry respects BLACK BTCUSD lot minimum and step",
+    "status": "PASS",
+    "started_at": "2026-11-20T06:08:23.793364+00:00",
+    "finished_at": "2026-11-20T06:08:30.211218+00:00",
+    "details": {
+      "master_qty": 0.01,
+      "multiplier": 1.5,
+      "unrounded_product": 0.015,
+      "child_positions": [
+        {
+          "algo_id": null,
+          "avg_entry_price": 61944.45,
+          "closed_at": null,
+          "comment": null,
+          "current_price": 61941.48,
+          "full_margin": 1238.889,
+          "group_id": "qa_94d23d2714e74a1f",
+          "margin_percent": 100,
+          "margin_used": 1238.889,
+          "market_order_id": "ord_82cb901c6bb48f4e08",
+          "net_qty": 0.02,
+          "oco_key": null,
+          "opened_at": "2026-11-20T06:08:25.092375Z",
+          "position_id": "pos_7c5712354f1506e209",
+          "side": "BUY",
+          "source": "mam",
+          "status": "OPEN",
+          "strategy_name": null,
+          "symbol": "BLACK:BTCUSD",
+          "tag": "QA_20261120",
+          "trailing": null,
+          "unrealized_pnl": -0.059399999999877766
+        }
+      ],
+      "invalid_entry_quantities": [],
+      "orphans": {},
+      "expected_child_quantity": 0.02,
+      "other_account_errors": {},
+      "oracle": "Regression of observed .01 minimum and nearest-step rounding; exactly one child required, no missing-copy pass"
+    },
+    "trace": "http_060733.jsonl.gz"
+  },
+  {
+    "id": "SIZE-LOT-RULE-0.01-2.75",
+    "name": "Copied new entry respects BLACK BTCUSD lot minimum and step",
+    "status": "PASS",
+    "started_at": "2026-11-20T06:08:30.212484+00:00",
+    "finished_at": "2026-11-20T06:08:35.617208+00:00",
+    "details": {
+      "master_qty": 0.01,
+      "multiplier": 2.75,
+      "unrounded_product": 0.0275,
+      "child_positions": [
+        {
+          "algo_id": null,
+          "avg_entry_price": 61925.5,
+          "closed_at": null,
+          "comment": null,
+          "current_price": 61927.12,
+          "full_margin": 1857.7649999999999,
+          "group_id": "qa_dddbdc06438a40d7",
+          "margin_percent": 100,
+          "margin_used": 1857.7649999999999,
+          "market_order_id": "ord_2db5c24c9e6fefe64b",
+          "net_qty": 0.03,
+          "oco_key": null,
+          "opened_at": "2026-11-20T06:08:31.728174Z",
+          "position_id": "pos_5c4f64221ba3a91f17",
+          "side": "BUY",
+          "source": "mam",
+          "status": "OPEN",
+          "strategy_name": null,
+          "symbol": "BLACK:BTCUSD",
+          "tag": "QA_20261120",
+          "trailing": null,
+          "unrealized_pnl": 0.04860000000007858
+        }
+      ],
+      "invalid_entry_quantities": [],
+      "orphans": {},
+      "expected_child_quantity": 0.03,
+      "other_account_errors": {},
+      "oracle": "Regression of observed .01 minimum and nearest-step rounding; exactly one child required, no missing-copy pass"
+    },
+    "trace": "http_060733.jsonl.gz"
+  },
+  {
+    "id": "FEE-LIVE-PROFIT",
+    "name": "Observe actual profitable close and corresponding manager/follower profit split",
+    "status": "FAIL",
+    "started_at": "2026-11-20T06:08:54.664636+00:00",
+    "finished_at": "2026-11-20T06:09:07.999036+00:00",
+    "details": {
+      "initial_relationship": {
+        "follow_blocked_reason": "",
+        "followers": [],
+        "following": [
+          {
+            "follow_id": "mfl_290505635a1f10a01b",
+            "master_client_id": "mem_11434b0b9d9d210899",
+            "follower_client_id": "mem_0ea679062ffd38adf7",
+            "instance": "real",
+            "starting_balance": 1000000,
+            "share_percent": 50,
+            "method": "multiplier",
+            "multiplier": 1,
+            "status": "active",
+            "joined_at": "2026-11-20T06:08:57.257015Z"
+          },
+          {
+            "follow_id": "mfl_90a15083a4d015385f",
+            "master_client_id": "mem_5fef0e0b83f2b84ea1",
+            "follower_client_id": "mem_0ea679062ffd38adf7",
+            "instance": "real",
+            "starting_balance": 9999987.9431,
+            "share_percent": 50,
+            "method": "multiplier",
+            "multiplier": 2,
+            "status": "ended",
+            "joined_at": "2026-11-19T07:46:53.641866Z"
+          }
+        ],
+        "is_master": false,
+        "master": null,
+        "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+        "success": true
+      },
+      "history": [
+        {
+          "history_id": 1434193,
+          "order_id": "ord_3e0cbd6a63cf0c94f7",
+          "position_id": "pos_b5f9b7a173a1cc7ca5",
+          "group_id": "qa_626dcd74c4bb4265",
+          "symbol": "BLACK:BTCUSD",
+          "side": "BUY",
+          "qty": 2,
+          "entry_price": 61898.29,
+          "exit_price": 61903.94,
+          "realized_pnl": 11.30000000000291,
+          "executed_at": "2026-11-20T06:09:06.8372Z",
+          "exit_type": "MARKET",
+          "exit_source": "mam_close",
+          "entry_source": "mam",
+          "entry_type": "MARKET",
+          "entry_copy_kind": "mam",
+          "opened_at": "2026-11-20T06:08:57.409523Z"
+        }
+      ],
+      "shares": [
+        {
+          "above_hwm": false,
+          "at": "2026-11-20T06:09:06.837693Z",
+          "balance_before": 1000000,
+          "follow_id": "mfl_290505635a1f10a01b",
+          "follower": "mem_0ea679062ffd38adf7",
+          "follower_share": 11.3,
+          "instance": "real",
+          "master": "mem_11434b0b9d9d210899",
+          "master_share": 0,
+          "order_pnl": 11.30000000000291,
+          "share_id": 176920,
+          "starting_balance": 1000000,
+          "trade_id": 1434193
+        }
+      ],
+      "assertion": "Above-fees profitable first trade generates a positive manager share and conserves rounded split PnL"
+    },
+    "trace": "http_060733.jsonl.gz"
+  },
+  {
+    "id": "FINAL-ACCOUNT-STATE",
+    "name": "GUI reset and readback: 101 balances, flat inventory, no pending orders and 100 active multiplier-one links",
+    "status": "PASS",
+    "started_at": "2026-11-20T06:09:28.994802+00:00",
+    "finished_at": "2026-11-20T06:10:20.021940+00:00",
+    "details": {
+      "accounts_verified": 101,
+      "balance_each": 1000000,
+      "positions_and_balance_errors": {},
+      "relationship_errors": {},
+      "working_order_count": 0,
+      "snapshot": "final_account_state.json",
+      "master_configuration": {
+        "client_id": "mem_11434b0b9d9d210899",
+        "display_name": "Zero Fee Master",
+        "share_percent": 50,
+        "status": "active"
+      }
+    },
+    "trace": "http_060733.jsonl.gz"
+  }
+]

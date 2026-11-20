@@ -1,0 +1,22 @@
+[
+  {
+    "case": "MARKET-BUY",
+    "sample_count": 100,
+    "min_ms": 7.283,
+    "mean_ms": 102.00407,
+    "p95_ms": 186.801,
+    "max_ms": 196.516,
+    "measure": "Server position opened_at difference, not browser/LP latency",
+    "threshold_asserted": false
+  },
+  {
+    "case": "MARKET-SELL",
+    "sample_count": 100,
+    "min_ms": 5.598,
+    "mean_ms": 79.70812,
+    "p95_ms": 145.114,
+    "max_ms": 152.362,
+    "measure": "Server position opened_at difference, not browser/LP latency",
+    "threshold_asserted": false
+  }
+]

@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-D004",
+  "id": "MAM-D004",
   "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
   "title": "Withdrawal Request During Severe Margin Stress (<120% Margin Level)",
-  "priority": "P0",
   "precondition": "Sub-account under heavy drawdown with margin level = 115%.",
   "steps": "1. Investor attempts partial withdrawal.",
-  "expected_result": "Withdrawal blocked: 'Withdrawals disabled when account margin level is below 150% to prevent immediate liquidation'.",
-  "execution_timestamp": "2026-11-16T10:58:44.612967Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Withdrawals automatically blocked when account margin level is below 150% to prevent triggering immediate liquidation.",
-  "evidence": {
-    "safety_threshold": "150% margin level"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Withdrawal blocked: 'Withdrawals disabled when account margin level is below 150% to prevent immediate liquidation'.",
+  "priority": "P0",
+  "test_case_id": "MAM-D004",
+  "status": "BLOCKED",
+  "coverage_note": "Requires investor payment/withdrawal, lockup, reversal, or emergency LPOA workflow. Admin Set balance is not a substitute.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

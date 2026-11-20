@@ -1,0 +1,1719 @@
+{
+  "mamm@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999983.8234000001,
+      "equity": 999983.8234000001,
+      "free_margin": 999983.8234000001,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf1@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999999.2012,
+      "equity": 999999.2012,
+      "free_margin": 999999.2012,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf2@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999792.0445000004,
+      "equity": 999792.0445000004,
+      "free_margin": 999792.0445000004,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf3@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999792.0456000004,
+      "equity": 999792.0456000004,
+      "free_margin": 999792.0456000004,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf4@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.3124000004,
+      "equity": 999755.3124000004,
+      "free_margin": 999755.3124000004,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf5@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.2917000003,
+      "equity": 999755.2917000003,
+      "free_margin": 999755.2917000003,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf6@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1783000005,
+      "equity": 999755.1783000005,
+      "free_margin": 999755.1783000005,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf7@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1576000006,
+      "equity": 999755.1576000006,
+      "free_margin": 999755.1576000006,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf8@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.2042000005,
+      "equity": 999755.2042000005,
+      "free_margin": 999755.2042000005,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf9@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.2216000004,
+      "equity": 999755.2216000004,
+      "free_margin": 999755.2216000004,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf10@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.2179000003,
+      "equity": 999755.2179000003,
+      "free_margin": 999755.2179000003,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf11@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.2263000002,
+      "equity": 999755.2263000002,
+      "free_margin": 999755.2263000002,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf12@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.2005000005,
+      "equity": 999755.2005000005,
+      "free_margin": 999755.2005000005,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf13@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.2415000006,
+      "equity": 999755.2415000006,
+      "free_margin": 999755.2415000006,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf14@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.2133000006,
+      "equity": 999755.2133000006,
+      "free_margin": 999755.2133000006,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf15@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.2567000005,
+      "equity": 999755.2567000005,
+      "free_margin": 999755.2567000005,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf16@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.2228000002,
+      "equity": 999755.2228000002,
+      "free_margin": 999755.2228000002,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf17@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1739000002,
+      "equity": 999755.1739000002,
+      "free_margin": 999755.1739000002,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf18@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1839000003,
+      "equity": 999755.1839000003,
+      "free_margin": 999755.1839000003,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf19@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.3474000002,
+      "equity": 999755.3474000002,
+      "free_margin": 999755.3474000002,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf20@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.2018000003,
+      "equity": 999755.2018000003,
+      "free_margin": 999755.2018000003,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf21@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.2432000004,
+      "equity": 999755.2432000004,
+      "free_margin": 999755.2432000004,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf22@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.3185000003,
+      "equity": 999755.3185000003,
+      "free_margin": 999755.3185000003,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf23@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.2986000003,
+      "equity": 999755.2986000003,
+      "free_margin": 999755.2986000003,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf24@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1605000007,
+      "equity": 999755.1605000007,
+      "free_margin": 999755.1605000007,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf25@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.2942000004,
+      "equity": 999755.2942000004,
+      "free_margin": 999755.2942000004,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf26@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.2734000002,
+      "equity": 999755.2734000002,
+      "free_margin": 999755.2734000002,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf27@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1281000001,
+      "equity": 999755.1281000001,
+      "free_margin": 999755.1281000001,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf28@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0829999999,
+      "equity": 999755.0829999999,
+      "free_margin": 999755.0829999999,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf29@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999754.9832000002,
+      "equity": 999754.9832000002,
+      "free_margin": 999754.9832000002,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf30@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1355000002,
+      "equity": 999755.1355000002,
+      "free_margin": 999755.1355000002,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf31@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1407000002,
+      "equity": 999755.1407000002,
+      "free_margin": 999755.1407000002,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf32@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1460000003,
+      "equity": 999755.1460000003,
+      "free_margin": 999755.1460000003,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf33@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1456000002,
+      "equity": 999755.1456000002,
+      "free_margin": 999755.1456000002,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf34@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1347,
+      "equity": 999755.1347,
+      "free_margin": 999755.1347,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf35@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1501000002,
+      "equity": 999755.1501000002,
+      "free_margin": 999755.1501000002,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf36@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.2282000001,
+      "equity": 999755.2282000001,
+      "free_margin": 999755.2282000001,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf37@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1198000002,
+      "equity": 999755.1198000002,
+      "free_margin": 999755.1198000002,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf38@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1267999999,
+      "equity": 999755.1267999999,
+      "free_margin": 999755.1267999999,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf39@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1166000001,
+      "equity": 999755.1166000001,
+      "free_margin": 999755.1166000001,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf40@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.13,
+      "equity": 999755.13,
+      "free_margin": 999755.13,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf41@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0213999995,
+      "equity": 999755.0213999995,
+      "free_margin": 999755.0213999995,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf42@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0495,
+      "equity": 999755.0495,
+      "free_margin": 999755.0495,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf43@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1464999998,
+      "equity": 999755.1464999998,
+      "free_margin": 999755.1464999998,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf44@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1013,
+      "equity": 999755.1013,
+      "free_margin": 999755.1013,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf45@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1333999999,
+      "equity": 999755.1333999999,
+      "free_margin": 999755.1333999999,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf46@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1216,
+      "equity": 999755.1216,
+      "free_margin": 999755.1216,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf47@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1163999999,
+      "equity": 999755.1163999999,
+      "free_margin": 999755.1163999999,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf48@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1098999999,
+      "equity": 999755.1098999999,
+      "free_margin": 999755.1098999999,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf49@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0435999999,
+      "equity": 999755.0435999999,
+      "free_margin": 999755.0435999999,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf50@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.2373999999,
+      "equity": 999755.2373999999,
+      "free_margin": 999755.2373999999,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf51@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0323999998,
+      "equity": 999755.0323999998,
+      "free_margin": 999755.0323999998,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf52@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999754.9620999998,
+      "equity": 999754.9620999998,
+      "free_margin": 999754.9620999998,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf53@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0309999998,
+      "equity": 999755.0309999998,
+      "free_margin": 999755.0309999998,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf54@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0193999999,
+      "equity": 999755.0193999999,
+      "free_margin": 999755.0193999999,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf55@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0767999999,
+      "equity": 999755.0767999999,
+      "free_margin": 999755.0767999999,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf56@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0716999999,
+      "equity": 999755.0716999999,
+      "free_margin": 999755.0716999999,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf57@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0774999999,
+      "equity": 999755.0774999999,
+      "free_margin": 999755.0774999999,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf58@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0929999999,
+      "equity": 999755.0929999999,
+      "free_margin": 999755.0929999999,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf59@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0423999999,
+      "equity": 999755.0423999999,
+      "free_margin": 999755.0423999999,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf60@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0186,
+      "equity": 999755.0186,
+      "free_margin": 999755.0186,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf61@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999754.9587999999,
+      "equity": 999754.9587999999,
+      "free_margin": 999754.9587999999,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf62@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0543000001,
+      "equity": 999755.0543000001,
+      "free_margin": 999755.0543000001,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf63@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0939,
+      "equity": 999755.0939,
+      "free_margin": 999755.0939,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf64@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0994999998,
+      "equity": 999755.0994999998,
+      "free_margin": 999755.0994999998,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf65@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1018999998,
+      "equity": 999755.1018999998,
+      "free_margin": 999755.1018999998,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf66@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0950999999,
+      "equity": 999755.0950999999,
+      "free_margin": 999755.0950999999,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf67@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1551,
+      "equity": 999755.1551,
+      "free_margin": 999755.1551,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf68@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1249,
+      "equity": 999755.1249,
+      "free_margin": 999755.1249,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf69@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1318999999,
+      "equity": 999755.1318999999,
+      "free_margin": 999755.1318999999,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf70@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0896000004,
+      "equity": 999755.0896000004,
+      "free_margin": 999755.0896000004,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf71@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0632,
+      "equity": 999755.0632,
+      "free_margin": 999755.0632,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf72@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0758,
+      "equity": 999755.0758,
+      "free_margin": 999755.0758,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf73@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0938000001,
+      "equity": 999755.0938000001,
+      "free_margin": 999755.0938000001,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf74@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0923000001,
+      "equity": 999755.0923000001,
+      "free_margin": 999755.0923000001,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf75@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1066,
+      "equity": 999755.1066,
+      "free_margin": 999755.1066,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf76@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999754.9850000001,
+      "equity": 999754.9850000001,
+      "free_margin": 999754.9850000001,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf77@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999754.9598000001,
+      "equity": 999754.9598000001,
+      "free_margin": 999754.9598000001,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf78@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999754.9586,
+      "equity": 999754.9586,
+      "free_margin": 999754.9586,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf79@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999754.9782,
+      "equity": 999754.9782,
+      "free_margin": 999754.9782,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf80@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0132,
+      "equity": 999755.0132,
+      "free_margin": 999755.0132,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf81@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999754.9976,
+      "equity": 999754.9976,
+      "free_margin": 999754.9976,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf82@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0054,
+      "equity": 999755.0054,
+      "free_margin": 999755.0054,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf83@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0008,
+      "equity": 999755.0008,
+      "free_margin": 999755.0008,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf84@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1350000001,
+      "equity": 999755.1350000001,
+      "free_margin": 999755.1350000001,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf85@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.2122000001,
+      "equity": 999755.2122000001,
+      "free_margin": 999755.2122000001,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf86@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1985,
+      "equity": 999755.1985,
+      "free_margin": 999755.1985,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf87@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1408,
+      "equity": 999755.1408,
+      "free_margin": 999755.1408,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf88@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1627999999,
+      "equity": 999755.1627999999,
+      "free_margin": 999755.1627999999,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf89@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.2349000002,
+      "equity": 999755.2349000002,
+      "free_margin": 999755.2349000002,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf90@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1311,
+      "equity": 999755.1311,
+      "free_margin": 999755.1311,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf91@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0780000002,
+      "equity": 999755.0780000002,
+      "free_margin": 999755.0780000002,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf92@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0830000001,
+      "equity": 999755.0830000001,
+      "free_margin": 999755.0830000001,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf93@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1142000002,
+      "equity": 999755.1142000002,
+      "free_margin": 999755.1142000002,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf94@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0562000003,
+      "equity": 999755.0562000003,
+      "free_margin": 999755.0562000003,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf95@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.0785000003,
+      "equity": 999755.0785000003,
+      "free_margin": 999755.0785000003,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf96@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1461000004,
+      "equity": 999755.1461000004,
+      "free_margin": 999755.1461000004,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf97@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1428000004,
+      "equity": 999755.1428000004,
+      "free_margin": 999755.1428000004,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf98@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1446000003,
+      "equity": 999755.1446000003,
+      "free_margin": 999755.1446000003,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf99@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1741000004,
+      "equity": 999755.1741000004,
+      "free_margin": 999755.1741000004,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "mamf100@mailinator.com": {
+    "count": 0,
+    "funds": {
+      "balance": 999755.1533000005,
+      "equity": 999755.1533000005,
+      "free_margin": 999755.1533000005,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 1000000,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  }
+}

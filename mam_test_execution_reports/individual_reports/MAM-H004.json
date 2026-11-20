@@ -1,19 +1,15 @@
 {
-  "test_case_id": "MAM-H004",
+  "id": "MAM-H004",
   "module": "Module 8: High-Water Mark & Performance Fees",
   "title": "Recovery Period: Fee Charged ONLY After Breaching Historical Peak",
-  "priority": "P0",
   "precondition": "Acc 1 rebounds from $9,500 to $11,000 (+ $1,500 bounce).",
   "steps": "1. Execute fee settlement.",
-  "expected_result": "Despite +$1,500 gain, balance ($11,000) is below $11,600 HWM; fee == $0.00; zero fee charged.",
-  "execution_timestamp": "2026-11-16T10:58:44.702356Z",
-  "verification_type": "QUANTITATIVE_CALCULATION",
-  "status": "PASS",
-  "actual_result": "Recovery period calculation: Despite +$1,500 gain, balance ($11000.0) remains under HWM ($11600.0). Fee charged == $0.00.",
-  "evidence": {
-    "rebound_balance": 11000.0,
-    "hwm": 11600.0,
-    "fee": 0.0
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Despite +$1,500 gain, balance ($11,000) is below $11,600 HWM; fee == $0.00; zero fee charged.",
+  "priority": "P0",
+  "test_case_id": "MAM-H004",
+  "status": "BLOCKED",
+  "coverage_note": "Requires time-controlled fee cycles, HWM recovery history, management fees, tax/rebate/statement configuration not available in this run.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

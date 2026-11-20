@@ -1,18 +1,19 @@
 {
-  "test_case_id": "MAM-H006",
+  "id": "MAM-H006",
   "module": "Module 8: High-Water Mark & Performance Fees",
   "title": "Independent Fee Outcomes: Acc 1 Profitable vs Acc 2 Underwater",
-  "priority": "P0",
   "precondition": "Acc 1 joined earlier (in profit); Acc 2 joined right before drawdown (underwater).",
   "steps": "1. Run monthly settlement across MAM group.",
-  "expected_result": "Acc 1 pays performance fee on net new profit; Acc 2 pays $0.00 fee; complete accounting isolation.",
-  "execution_timestamp": "2026-11-16T10:58:44.704110Z",
-  "verification_type": "QUANTITATIVE_CALCULATION",
-  "status": "PASS",
-  "actual_result": "Independent accounting isolation: Acc 1 pays $400.00; Acc 2 pays $0.00.",
-  "evidence": {
-    "acc1_fee": 400.0,
-    "acc2_fee": 0.0
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Acc 1 pays performance fee on net new profit; Acc 2 pays $0.00 fee; complete accounting isolation.",
+  "priority": "P0",
+  "test_case_id": "MAM-H006",
+  "status": "PARTIAL",
+  "coverage_note": "Individual fee rows reconciled; simultaneous deliberately profitable/underwater contrast fixture not executed.",
+  "executed_check_ids": [
+    "ACCOUNTING-101"
+  ],
+  "evidence_files": [
+    "reports/live_recheck_20261120/deep_run/results_055545.json"
+  ],
+  "release_signoff": false
 }

@@ -1,17 +1,19 @@
 {
-  "test_case_id": "MAM-P006",
+  "id": "MAM-P006",
   "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
   "title": "Slippage Anomaly Detection on Child Orders",
-  "priority": "P1",
   "precondition": "Child order #3 experiences 5-pip slippage while group average is 0.5 pips.",
   "steps": "1. Post-trade execution analysis runs.",
-  "expected_result": "Trade flagged 'SLIPPAGE_ANOMALY'; audit log recorded for broker dispute reconciliation.",
-  "execution_timestamp": "2026-11-16T10:58:44.379888Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Execution monitor flags fills with slippage deviating > 3 standard deviations from block average for reconciliation.",
-  "evidence": {
-    "audit_tag": "SLIPPAGE_ANOMALY"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Trade flagged 'SLIPPAGE_ANOMALY'; audit log recorded for broker dispute reconciliation.",
+  "priority": "P1",
+  "test_case_id": "MAM-P006",
+  "status": "PARTIAL",
+  "coverage_note": "Actual per-account fills and price PnL reconciled; configurable slippage-anomaly detection not verified.",
+  "executed_check_ids": [
+    "ACCOUNTING-101"
+  ],
+  "evidence_files": [
+    "reports/live_recheck_20261120/deep_run/results_055545.json"
+  ],
+  "release_signoff": false
 }

@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-P005",
+  "id": "MAM-P005",
   "module": "Module 5: Partial Fills, Asymmetric Rejections & Slippage",
   "title": "Direct Pass-Through Price Execution (Independent Fills)",
-  "priority": "P1",
   "precondition": "Group configured for Direct STP routing where each sub-account executes independently.",
   "steps": "1. Orders hit LP book sequentially.",
-  "expected_result": "Child tickets receive individual execution prices; variance logged transparently on each account statement.",
-  "execution_timestamp": "2026-11-16T10:58:44.379140Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Direct pass-through STP mode records exact LP individual execution prices per sub-account ticket.",
-  "evidence": {
-    "execution_mode": "Direct STP"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Child tickets receive individual execution prices; variance logged transparently on each account statement.",
+  "priority": "P1",
+  "test_case_id": "MAM-P005",
+  "status": "BLOCKED",
+  "coverage_note": "Requires LP partial-fill, depth, rejection, or routing fault injection; these dedicated accounts are B-book and no LP simulator was supplied.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

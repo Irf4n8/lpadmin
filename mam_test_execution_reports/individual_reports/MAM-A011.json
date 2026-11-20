@@ -1,19 +1,15 @@
 {
-  "test_case_id": "MAM-A011",
+  "id": "MAM-A011",
   "module": "Module 2: MAM Allocation Methods & Sizing Engine",
   "title": "Zero-Sum Lot Conservation Law",
-  "priority": "P0",
   "precondition": "Master opens 15.00 lots across 50 sub-accounts.",
   "steps": "1. Calculate: Sum of all child sub-account lots.",
-  "expected_result": "\u2211(Child_Lots) == Master_Lots (15.000000 lots). Zero lost or created volume.",
-  "execution_timestamp": "2026-11-16T10:58:42.343105Z",
-  "verification_type": "QUANTITATIVE_CALCULATION",
-  "status": "PASS",
-  "actual_result": "Zero-sum conservation: 50 accounts * 0.30 lots = 15.0 lots (Master: 15.0 lots).",
-  "evidence": {
-    "accounts": 50,
-    "sum_lots": 15.0,
-    "delta": 0.0
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "\u2211(Child_Lots) == Master_Lots (15.000000 lots). Zero lost or created volume.",
+  "priority": "P0",
+  "test_case_id": "MAM-A011",
+  "status": "BLOCKED",
+  "coverage_note": "The specified allocation policy/currency/conserved-block fixture is not represented by the tested multiplier/balance/equity copy model.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

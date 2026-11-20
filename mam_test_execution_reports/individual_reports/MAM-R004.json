@@ -1,38 +1,15 @@
 {
-  "test_case_id": "MAM-R004",
+  "id": "MAM-R004",
   "module": "Module 3: Fractional Lot Rounding & Remainder Allocation",
   "title": "Remainder Policy: Round-Robin Rotation Across Sub-Accounts",
-  "priority": "P0",
   "precondition": "3 equal accounts; 3 consecutive trades generating 0.01 remainder each.",
   "steps": "1. Trade 1: Remainder to Acc 1 (0.34, 0.33, 0.33).2. Trade 2: Remainder to Acc 2 (0.33, 0.34, 0.33).3. Trade 3: Remainder to Acc 3 (0.33, 0.33, 0.34).",
-  "expected_result": "Remainder rotating sequentially; perfectly equal cumulative volume across all 3 accounts over time.",
-  "execution_timestamp": "2026-11-16T10:58:42.350641Z",
-  "verification_type": "QUANTITATIVE_CALCULATION",
-  "status": "PASS",
-  "actual_result": "Round-Robin rotation verified over 3 trades. Cumulative volumes: {'Acc1': 1.0, 'Acc2': 1.0, 'Acc3': 1.0}. Delta == 0.00.",
-  "evidence": {
-    "trades": [
-      {
-        "Acc1": 0.34,
-        "Acc2": 0.33,
-        "Acc3": 0.33
-      },
-      {
-        "Acc1": 0.33,
-        "Acc2": 0.34,
-        "Acc3": 0.33
-      },
-      {
-        "Acc1": 0.33,
-        "Acc2": 0.33,
-        "Acc3": 0.34
-      }
-    ],
-    "cumulative_totals": {
-      "Acc1": 1.0,
-      "Acc2": 1.0,
-      "Acc3": 1.0
-    }
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Remainder rotating sequentially; perfectly equal cumulative volume across all 3 accounts over time.",
+  "priority": "P0",
+  "test_case_id": "MAM-R004",
+  "status": "BLOCKED",
+  "coverage_note": "No configurable remainder-distribution ledger, rebate ledger, or exact block-allocation policy was available for this requirement.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

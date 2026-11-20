@@ -1,17 +1,21 @@
 {
-  "test_case_id": "MAM-F007",
+  "id": "MAM-F007",
   "module": "Module 1: Group & Sub-Account Lifecycle",
   "title": "Switch Allocation Method While Positions Are Open",
-  "priority": "P0",
   "precondition": "MAM group has 3 active open trades.",
   "steps": "1. Manager attempts to change allocation method from PBB to Lot Multiplier.",
-  "expected_result": "Action blocked with error: 'Cannot change allocation method while open positions exist. Please close all group positions first'.",
-  "execution_timestamp": "2026-11-16T10:58:41.802608Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "In-flight open positions preserve original allocation weighting; updates apply deterministically to subsequent parent block orders.",
-  "evidence": {
-    "design_pattern": "Immutable trade snapshot per open order"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Action blocked with error: 'Cannot change allocation method while open positions exist. Please close all group positions first'.",
+  "priority": "P0",
+  "test_case_id": "MAM-F007",
+  "status": "PARTIAL",
+  "coverage_note": "Future-vs-existing sizing tested; original group allocation-profile transition differs from these follower settings.",
+  "executed_check_ids": [
+    "MAM-MULTIPLIER-MIDTRADE",
+    "GUI-BALANCE-NEXT-ORDER"
+  ],
+  "evidence_files": [
+    "reports/live_recheck_20261120/deep_run/results_054627.json",
+    "reports/live_recheck_20261120/deep_run/results_060312.json"
+  ],
+  "release_signoff": false
 }

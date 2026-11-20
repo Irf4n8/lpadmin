@@ -1,19 +1,15 @@
 {
-  "test_case_id": "MAM-H007",
+  "id": "MAM-H007",
   "module": "Module 8: High-Water Mark & Performance Fees",
   "title": "Annualized Management Fee (AUM Fee) Daily Accrual",
-  "priority": "P0",
   "precondition": "MAM group configured with 2.0% Annual Management Fee.",
   "steps": "1. Run daily EOD accrual job.",
-  "expected_result": "Daily factor (2% / 365) debited from each sub-account based on individual equity; accrued to manager.",
-  "execution_timestamp": "2026-11-16T10:58:44.705110Z",
-  "verification_type": "QUANTITATIVE_CALCULATION",
-  "status": "PASS",
-  "actual_result": "Daily AUM management fee accrual on $10k equity is $0.5479/day.",
-  "evidence": {
-    "equity": 10000.0,
-    "annual_rate": "2.0%",
-    "daily_fee": 0.5479
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Daily factor (2% / 365) debited from each sub-account based on individual equity; accrued to manager.",
+  "priority": "P0",
+  "test_case_id": "MAM-H007",
+  "status": "BLOCKED",
+  "coverage_note": "Requires time-controlled fee cycles, HWM recovery history, management fees, tax/rebate/statement configuration not available in this run.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

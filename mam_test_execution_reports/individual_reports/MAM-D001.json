@@ -1,18 +1,21 @@
 {
-  "test_case_id": "MAM-D001",
+  "id": "MAM-D001",
   "module": "Module 7: Deposits, Withdrawals & Mid-Trade Disconnections",
   "title": "Sub-Account Cash Deposit While Trades Are Open",
-  "priority": "P0",
   "precondition": "Sub-account has 1 open child trade (0.50 lots EURUSD); margin level = 200%.",
   "steps": "1. Investor deposits $2,000 into sub-account via client portal.",
-  "expected_result": "$2,000 credited immediately; account margin level increases to 600%; open position untouched; next trade gets higher proportional weight.",
-  "execution_timestamp": "2026-11-16T10:58:44.608904Z",
-  "verification_type": "LIVE_API_EXECUTION",
-  "status": "PASS",
-  "actual_result": "Live cash deposit processed successfully via Admin Balance API. Free margin immediately reflects increased equity.",
-  "evidence": {
-    "deposit_applied": 10000000,
-    "status_code": 200
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "$2,000 credited immediately; account margin level increases to 600%; open position untouched; next trade gets higher proportional weight.",
+  "priority": "P0",
+  "test_case_id": "MAM-D001",
+  "status": "PARTIAL",
+  "coverage_note": "User-requested admin GUI cash update tested; original investor payment-deposit channel not exercised.",
+  "executed_check_ids": [
+    "BAL-OPEN-POSITION",
+    "GUI-BALANCE-NEXT-ORDER"
+  ],
+  "evidence_files": [
+    "reports/live_recheck_20261120/deep_run/results_054627.json",
+    "reports/live_recheck_20261120/deep_run/results_060312.json"
+  ],
+  "release_signoff": false
 }

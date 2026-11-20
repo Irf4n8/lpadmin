@@ -1,17 +1,15 @@
 {
-  "test_case_id": "MAM-L004",
+  "id": "MAM-L004",
   "module": "Module 10: Regulatory Compliance, LPOA & FIFO",
   "title": "Expired KYC / AML Auto-Gating of Sub-Account",
-  "priority": "P1",
   "precondition": "Investor KYC document reaches expiration date.",
   "steps": "1. Master submits new order.",
-  "expected_result": "Sub-account excluded from new orders; existing open positions preserved until KYC renewal.",
-  "execution_timestamp": "2026-11-16T10:58:46.157381Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Sub-accounts with expired KYC documents are automatically excluded from new order allocation while preserving open positions.",
-  "evidence": {
-    "kyc_gating": "Auto-exclude from new orders"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Sub-account excluded from new orders; existing open positions preserved until KYC renewal.",
+  "priority": "P1",
+  "test_case_id": "MAM-L004",
+  "status": "BLOCKED",
+  "coverage_note": "Requires compliance policy fixtures, jurisdiction controls, document/audit access and authorized evidence. Trading API success cannot establish compliance.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

@@ -1,18 +1,15 @@
 {
-  "test_case_id": "MAM-M003",
+  "id": "MAM-M003",
   "module": "Module 6: Independent Sub-Account Margin, Leverage & Stop-Outs",
   "title": "Isolated Stop-Out Forced Liquidation on Single Sub-Account",
-  "priority": "P0",
   "precondition": "Sub-account #3 margin level touches broker stop-out threshold (50%).",
   "steps": "1. Broker executes forced liquidation on Sub-account #3.",
-  "expected_result": "Sub-account #3 child position closed at market; remaining 9 sub-accounts and master position REMAIN OPEN; zero group contagion.",
-  "execution_timestamp": "2026-11-16T10:58:44.388789Z",
-  "verification_type": "API_CONTRACT_VERIFICATION",
-  "status": "PASS",
-  "actual_result": "Stop-out liquidation is strictly isolated: Sub-account position liquidated at market; master and remaining sub-accounts stay open.",
-  "evidence": {
-    "stop_out_threshold": "50% margin level",
-    "contagion_risk": "ZERO"
-  },
-  "go_live_assessment": "PASSED_PRODUCTION_READY"
+  "expected": "Sub-account #3 child position closed at market; remaining 9 sub-accounts and master position REMAIN OPEN; zero group contagion.",
+  "priority": "P0",
+  "test_case_id": "MAM-M003",
+  "status": "BLOCKED",
+  "coverage_note": "Requires configured stop-out/leverage/news/swap/notification fixtures beyond the verified account margin cases.",
+  "executed_check_ids": [],
+  "evidence_files": [],
+  "release_signoff": false
 }

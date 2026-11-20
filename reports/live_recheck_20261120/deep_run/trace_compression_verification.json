@@ -1,0 +1,20 @@
+[
+  {
+    "original": "http_054010.jsonl",
+    "archive": "http_054010.jsonl.gz",
+    "uncompressed_sha256": "e28312ff1ec7a51f9074d55edb044f27e813d7b0bcb705cd6e46a2349cc702ac",
+    "verified_identical": true
+  },
+  {
+    "original": "http_054434.jsonl",
+    "archive": "http_054434.jsonl.gz",
+    "uncompressed_sha256": "0e24688bf49f4e08ac47fa31741aabd62c8e9da5b9f108885f06a23f94a2b96d",
+    "verified_identical": true
+  },
+  {
+    "original": "http_054627.jsonl",
+    "archive": "http_054627.jsonl.gz",
+    "uncompressed_sha256": "a4f7bf205234048d580badf7169402e5e0df21434654822ae7aa871ef1499a77",
+    "verified_identical": true
+  }
+]

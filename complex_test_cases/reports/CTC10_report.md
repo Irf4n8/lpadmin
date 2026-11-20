@@ -1,44 +1,7 @@
-# Enterprise Test Case Report: CTC10 - Fleet Inversion & Heterogeneous Mode Coexistence (Multiplier, Equity & Balance)
+# Superseded QA report
 
-**Execution Timestamp**: `2026-11-12T09:32:58.495945+00:00`  
-**Overall Result**: `✅ PASSED`  
-**Execution Duration**: `164.73s`  
-**Exit Rule**: `120-Second Mandatory Live Countdown`
+This report was replaced on 20 November 2026 after assertion review and live real-hedging retesting. Its old pass/fail counts are not current release evidence.
 
----
-## Test Case Specifications & Dashboard Actions
-- **Description**: Partitions fleet across Multiplier (F1-33), Equity (F34-66), and Balance (F67-100) modes.
-- **Symbol**: `BINANCE:BTCUSDT.P` | **Side**: `SELL` | **Master Lot**: `1.5`
-- **Master Entry Price**: `$73,475.65` | **TP**: `None` | **SL**: `None`
+See `MAM_QA_MASTER_TEST_EXECUTION_REPORT.md` and `reports/live_recheck_20261120/validated_results.json` for current results, detailed evidence, and blocked cases.
 
-### Dashboard Configuration Actions Applied
-- **CATEGORY**: Set F1-F33 to Multiplier 2.0x (`target=range`)
-- **CATEGORY**: Set F34-F66 to Equity Mode (`target=range`)
-- **CATEGORY**: Set F67-F100 to Balance Mode (`target=range`)
-
----
-## Replication & Lot Sizing Verification
-| Metric | Result | Benchmark |
-| :--- | :--- | :--- |
-| **Replication Rate** | `100.0%` (100/100) | ✅ 100% |
-| **Lot Sizing Match Rate** | `100.0%` | ✅ Verified |
-| **Residual Open After Square-off** | `0` | ✅ Clean (0) |
-
----
-## Sample Follower Execution Audit
-| Follower Email | Expected Lot | Actual Lot | Match? | Entry Price | Floating PnL |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `mamfollower1@mailinator.com` | `3.00` | `3.00` | ✅ YES | `$73,438.60` | `$-21.60` |
-| `mamfollower2@mailinator.com` | `3.00` | `3.00` | ✅ YES | `$73,438.60` | `$-21.60` |
-| `mamfollower3@mailinator.com` | `3.00` | `3.00` | ✅ YES | `$73,438.60` | `$-21.60` |
-| `mamfollower4@mailinator.com` | `3.00` | `3.00` | ✅ YES | `$73,438.60` | `$-21.60` |
-| `mamfollower5@mailinator.com` | `3.00` | `3.00` | ✅ YES | `$73,438.60` | `$-21.60` |
-| `mamfollower6@mailinator.com` | `3.00` | `3.00` | ✅ YES | `$73,438.60` | `$-21.60` |
-| `mamfollower7@mailinator.com` | `3.00` | `3.00` | ✅ YES | `$73,438.60` | `$-21.60` |
-| `mamfollower8@mailinator.com` | `3.00` | `3.00` | ✅ YES | `$73,438.60` | `$-21.60` |
-| `mamfollower9@mailinator.com` | `3.00` | `3.00` | ✅ YES | `$73,438.60` | `$-21.60` |
-| `mamfollower10@mailinator.com` | `3.00` | `3.00` | ✅ YES | `$73,438.60` | `$-21.60` |
-
----
-## Identified Bugs & Anomalies
-- **No bugs identified.** Flawless dashboard configuration, exact quantity scaling across followers, zero slippage anomalies, and synchronized square-off confirmed.
+The exact prior report is preserved in `reports/live_recheck_20261120/historical_reports_before_rewrite.zip`. No old result has been silently promoted to PASS.
