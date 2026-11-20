@@ -1,0 +1,368 @@
+{
+  "sequential": {
+    "order": {
+      "status_code": 200,
+      "data": {
+        "order": {
+          "order_id": "ord_5bb9f5081c7d3ab264",
+          "market_order_id": "ord_5bb9f5081c7d3ab264",
+          "symbol": "BINANCE:BTCUSDT.P",
+          "side": "BUY",
+          "type": "MARKET",
+          "state": "FILLED",
+          "requested_qty": 0.01,
+          "filled_qty": 0.01,
+          "avg_fill_price": 61531.9,
+          "created_at": "2026-11-20T04:42:18.327628081Z",
+          "updated_at": "2026-11-20T04:42:18.327628081Z"
+        },
+        "position": {
+          "position_id": "pos_18ec0e95b646161661",
+          "market_order_id": "ord_5bb9f5081c7d3ab264",
+          "symbol": "BINANCE:BTCUSDT.P",
+          "side": "BUY",
+          "net_qty": 0.01,
+          "avg_entry_price": 61531.9,
+          "full_margin": 61.53190000000001,
+          "margin_percent": 100,
+          "margin_used": 61.53190000000001,
+          "entry_markup": 0,
+          "status": "OPEN",
+          "opened_at": "2026-11-20T04:42:18.327822Z"
+        },
+        "success": true
+      }
+    },
+    "before": {
+      "count": 1,
+      "funds": {
+        "balance": 683.0331999999996,
+        "equity": 683.0321999999996,
+        "free_margin": 621.5002999999997,
+        "margin_call_level": 100,
+        "margin_level": 1110.0456836210153,
+        "starting_balance": 837.9391999999993,
+        "stop_out_level": 50,
+        "unrealized_pnl": -0.000999999999985448,
+        "used_margin": 61.53190000000001
+      },
+      "positions": [
+        {
+          "algo_id": null,
+          "avg_entry_price": 61531.9,
+          "closed_at": null,
+          "comment": null,
+          "current_price": 61531.8,
+          "full_margin": 61.53190000000001,
+          "group_id": null,
+          "margin_percent": 100,
+          "margin_used": 61.53190000000001,
+          "market_order_id": "ord_5bb9f5081c7d3ab264",
+          "net_qty": 0.01,
+          "oco_key": null,
+          "opened_at": "2026-11-20T04:42:18.327822Z",
+          "position_id": "pos_18ec0e95b646161661",
+          "side": "BUY",
+          "source": null,
+          "status": "OPEN",
+          "strategy_name": null,
+          "symbol": "BINANCE:BTCUSDT.P",
+          "tag": null,
+          "trailing": null,
+          "unrealized_pnl": -0.000999999999985448
+        }
+      ],
+      "success": true,
+      "total_unrealized_pnl": -0.000999999999985448
+    },
+    "responses": [
+      {
+        "status_code": 200,
+        "data": {
+          "exit_price": 61531.8,
+          "market_order_id": "ord_5bb9f5081c7d3ab264",
+          "price_source": "live",
+          "realized_pnl": -0.000999999999985448,
+          "success": true,
+          "symbol": "BINANCE:BTCUSDT.P"
+        },
+        "_latency": 0.054347708999999966
+      }
+    ],
+    "after": {
+      "count": 0,
+      "funds": {
+        "balance": 680.0321999999996,
+        "equity": 680.0321999999996,
+        "free_margin": 680.0321999999996,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 837.9391999999993,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "positions": [],
+      "success": true,
+      "total_unrealized_pnl": 0
+    },
+    "balance_delta": -3.0009999999999764
+  },
+  "concurrent": {
+    "order": {
+      "status_code": 200,
+      "data": {
+        "order": {
+          "order_id": "ord_99275d3c1050e0eb83",
+          "market_order_id": "ord_99275d3c1050e0eb83",
+          "symbol": "BINANCE:BTCUSDT.P",
+          "side": "BUY",
+          "type": "MARKET",
+          "state": "FILLED",
+          "requested_qty": 0.01,
+          "filled_qty": 0.01,
+          "avg_fill_price": 61541.9,
+          "created_at": "2026-11-20T04:42:20.177285359Z",
+          "updated_at": "2026-11-20T04:42:20.177285359Z"
+        },
+        "position": {
+          "position_id": "pos_3b53ac094386d3e413",
+          "market_order_id": "ord_99275d3c1050e0eb83",
+          "symbol": "BINANCE:BTCUSDT.P",
+          "side": "BUY",
+          "net_qty": 0.01,
+          "avg_entry_price": 61541.9,
+          "full_margin": 61.5419,
+          "margin_percent": 100,
+          "margin_used": 61.5419,
+          "entry_markup": 0,
+          "status": "OPEN",
+          "opened_at": "2026-11-20T04:42:20.177481Z"
+        },
+        "success": true
+      }
+    },
+    "before": {
+      "count": 1,
+      "funds": {
+        "balance": 680.0321999999996,
+        "equity": 680.0321999999996,
+        "free_margin": 618.4902999999996,
+        "margin_call_level": 100,
+        "margin_level": 1104.9905836511377,
+        "starting_balance": 837.9391999999993,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 61.541900000000005
+      },
+      "positions": [
+        {
+          "algo_id": null,
+          "avg_entry_price": 61541.9,
+          "closed_at": null,
+          "comment": null,
+          "current_price": 61541.9,
+          "full_margin": 61.5419,
+          "group_id": null,
+          "margin_percent": 100,
+          "margin_used": 61.5419,
+          "market_order_id": "ord_99275d3c1050e0eb83",
+          "net_qty": 0.01,
+          "oco_key": null,
+          "opened_at": "2026-11-20T04:42:20.177481Z",
+          "position_id": "pos_3b53ac094386d3e413",
+          "side": "BUY",
+          "source": null,
+          "status": "OPEN",
+          "strategy_name": null,
+          "symbol": "BINANCE:BTCUSDT.P",
+          "tag": null,
+          "trailing": null,
+          "unrealized_pnl": 0
+        }
+      ],
+      "success": true,
+      "total_unrealized_pnl": 0
+    },
+    "responses": [
+      {
+        "status_code": 404,
+        "data": {
+          "error": "{\"error\":\"No open position for ord_99275d3c1050e0eb83\"}\n"
+        },
+        "_latency": 0.16022583300000015
+      },
+      {
+        "status_code": 404,
+        "data": {
+          "error": "{\"error\":\"No open position for ord_99275d3c1050e0eb83\"}\n"
+        },
+        "_latency": 1.1528059159999997
+      },
+      {
+        "status_code": 404,
+        "data": {
+          "error": "{\"error\":\"No open position for ord_99275d3c1050e0eb83\"}\n"
+        },
+        "_latency": 0.667616292
+      },
+      {
+        "status_code": 404,
+        "data": {
+          "error": "{\"error\":\"No open position for ord_99275d3c1050e0eb83\"}\n"
+        },
+        "_latency": 0.4525212500000002
+      },
+      {
+        "status_code": 200,
+        "data": {
+          "exit_price": 61549.1,
+          "market_order_id": "ord_99275d3c1050e0eb83",
+          "price_source": "live",
+          "realized_pnl": 0.07199999999997089,
+          "success": true,
+          "symbol": "BINANCE:BTCUSDT.P"
+        },
+        "_latency": 0.35819575000000015
+      },
+      {
+        "status_code": 404,
+        "data": {
+          "error": "{\"error\":\"No open position for ord_99275d3c1050e0eb83\"}\n"
+        },
+        "_latency": 0.13772625000000005
+      },
+      {
+        "status_code": 404,
+        "data": {
+          "error": "{\"error\":\"No open position for ord_99275d3c1050e0eb83\"}\n"
+        },
+        "_latency": 0.13808262500000001
+      },
+      {
+        "status_code": 404,
+        "data": {
+          "error": "{\"error\":\"No open position for ord_99275d3c1050e0eb83\"}\n"
+        },
+        "_latency": 0.14028908300000031
+      },
+      {
+        "status_code": 404,
+        "data": {
+          "error": "{\"error\":\"No open position for ord_99275d3c1050e0eb83\"}\n"
+        },
+        "_latency": 0.14675862499999992
+      },
+      {
+        "status_code": 404,
+        "data": {
+          "error": "{\"error\":\"No open position for ord_99275d3c1050e0eb83\"}\n"
+        },
+        "_latency": 0.7333467499999999
+      },
+      {
+        "status_code": 404,
+        "data": {
+          "error": "{\"error\":\"No open position for ord_99275d3c1050e0eb83\"}\n"
+        },
+        "_latency": 0.15313795799999985
+      },
+      {
+        "status_code": 404,
+        "data": {
+          "error": "{\"error\":\"No open position for ord_99275d3c1050e0eb83\"}\n"
+        },
+        "_latency": 0.7481726659999999
+      },
+      {
+        "status_code": 404,
+        "data": {
+          "error": "{\"error\":\"No open position for ord_99275d3c1050e0eb83\"}\n"
+        },
+        "_latency": 0.15643658300000007
+      },
+      {
+        "status_code": 404,
+        "data": {
+          "error": "{\"error\":\"No open position for ord_99275d3c1050e0eb83\"}\n"
+        },
+        "_latency": 0.36757975
+      },
+      {
+        "status_code": 404,
+        "data": {
+          "error": "{\"error\":\"No open position for ord_99275d3c1050e0eb83\"}\n"
+        },
+        "_latency": 0.15231266700000035
+      },
+      {
+        "status_code": 404,
+        "data": {
+          "error": "{\"error\":\"No open position for ord_99275d3c1050e0eb83\"}\n"
+        },
+        "_latency": 0.1490621670000003
+      },
+      {
+        "status_code": 404,
+        "data": {
+          "error": "{\"error\":\"No open position for ord_99275d3c1050e0eb83\"}\n"
+        },
+        "_latency": 0.6521646250000002
+      },
+      {
+        "status_code": 404,
+        "data": {
+          "error": "{\"error\":\"No open position for ord_99275d3c1050e0eb83\"}\n"
+        },
+        "_latency": 0.15369899999999959
+      },
+      {
+        "status_code": 404,
+        "data": {
+          "error": "{\"error\":\"No open position for ord_99275d3c1050e0eb83\"}\n"
+        },
+        "_latency": 0.15514895800000028
+      },
+      {
+        "status_code": 404,
+        "data": {
+          "error": "{\"error\":\"No open position for ord_99275d3c1050e0eb83\"}\n"
+        },
+        "_latency": 0.45569087500000016
+      }
+    ],
+    "after": {
+      "count": 0,
+      "funds": {
+        "balance": 677.1041999999997,
+        "equity": 677.1041999999997,
+        "free_margin": 677.1041999999997,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 837.9391999999993,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "positions": [],
+      "success": true,
+      "total_unrealized_pnl": 0
+    },
+    "balance_delta": -2.9279999999999973
+  },
+  "probe_links": [
+    {
+      "follow_id": "cfl_60c810a53952eb63a1",
+      "master_client_id": "mem_2cf075c020dcca6a05",
+      "follower_client_id": "mem_23d1122db09c0a7b6d",
+      "instance": "real",
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public",
+      "status": "active",
+      "created_at": "2026-11-18T09:20:02.614901Z",
+      "follower_name": "f6"
+    }
+  ]
+}

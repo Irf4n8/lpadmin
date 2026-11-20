@@ -1,0 +1,446 @@
+{
+  "suite": "Fresh-account A/B-book netting execution",
+  "phase": "COMPLETE",
+  "host": "https://lpadmin.blackfx.com",
+  "updated_at": "2026-11-20T06:25:51.215070+00:00",
+  "started_at": "2026-11-20T06:22:53.632267+00:00",
+  "instance": "real-net",
+  "summary": {
+    "PASS": 15,
+    "FAIL": 5,
+    "BLOCKED": 1
+  },
+  "functional_summary": {
+    "PASS": 13,
+    "FAIL": 5
+  },
+  "accounts": [
+    "netqa.20261120t053625z.master@mailinator.com",
+    "netqa.20261120t053625z.follower1@mailinator.com",
+    "netqa.20261120t053625z.follower2@mailinator.com"
+  ],
+  "instances": [
+    {
+      "icon": "",
+      "live_adapter": false,
+      "mode": "hedging",
+      "name": "Paper (Hedging)",
+      "netting": false,
+      "real_money": false,
+      "slug": "paper",
+      "venue": "paper"
+    },
+    {
+      "icon": "",
+      "live_adapter": false,
+      "mode": "hedging",
+      "name": "Real (Hedging)",
+      "netting": false,
+      "real_money": true,
+      "slug": "real",
+      "venue": "paper"
+    },
+    {
+      "icon": "",
+      "live_adapter": false,
+      "mode": "netting",
+      "name": "Paper (Netting)",
+      "netting": true,
+      "real_money": false,
+      "slug": "paper-net",
+      "venue": "paper"
+    },
+    {
+      "icon": "",
+      "live_adapter": false,
+      "mode": "netting",
+      "name": "Real (Netting)",
+      "netting": true,
+      "real_money": true,
+      "slug": "real-net",
+      "venue": "paper"
+    }
+  ],
+  "evidence_directory": "/Users/irf4n/Copy Trading/lpadmin/reports/evidence/fresh_netting_20261120T062253Z",
+  "scope": "Copy Trading only. Fresh accounts; two followers. No MAM, PAMM or algo execution. Internal OMS netting and book configuration; independent external LP fills are not certified.",
+  "cases": [
+    {
+      "tc_id": "NT-B-N1",
+      "description": "Open netted position",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Open netted position",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; B-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "master positions = 1; master long = 0.03; followers match model: 2/2 OK (master long 0.03, short 0.0, 1 pos)",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        47
+      ],
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books b --only N1"
+    },
+    {
+      "tc_id": "NT-B-N2",
+      "description": "Opposite order reduces exposure",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Opposite order reduces exposure",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; B-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "master positions (opposite order must NET, not open a 2nd leg) = 1; master long reduced to 2L = 0.02; master short = 0.0; followers match model: 2/2 OK (master long 0.02, short 0.0, 1 pos)",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        74
+      ],
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books b --only N2"
+    },
+    {
+      "tc_id": "NT-B-N3",
+      "description": "Larger opposite order flips side",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Larger opposite order flips side",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; B-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "master positions after flip = 1; master long after flip = 0.0; master short = 5L - 3L = 0.02; followers match model: 2/2 OK (master long 0.0, short 0.02, 1 pos)",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        101
+      ],
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books b --only N3"
+    },
+    {
+      "tc_id": "NT-B-N4",
+      "description": "Exact opposite order closes",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Exact opposite order closes",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; B-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "master positions (exact opposite order closes) = 0; followers flat: 2/2 OK (master long 0.0, short 0.0, 0 pos)",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        127
+      ],
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books b --only N4"
+    },
+    {
+      "tc_id": "NT-B-N5",
+      "description": "TP/SL survives additions and copies",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "TP/SL survives additions and copies",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; B-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "Follower protection synchronized netqa.20261120t053625z.follower1@mailinator.com []; Follower protection synchronized netqa.20261120t053625z.follower2@mailinator.com []",
+      "status": "FAIL",
+      "severity": "High",
+      "defect_id": "SPEC-NT-B-N5",
+      "remarks": "",
+      "evidence": [
+        216
+      ],
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books b --only N5"
+    },
+    {
+      "tc_id": "NT-B-P1",
+      "description": "Pending fan-out and cancellation",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Pending fan-out and cancellation",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; B-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "pending orders fanned out to followers (0/2) netqa.20261120t053625z.follower1, netqa.20261120t053625z.follower2",
+      "status": "FAIL",
+      "severity": "High",
+      "defect_id": "SPEC-NT-B-P1",
+      "remarks": "",
+      "evidence": [
+        253
+      ],
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books b --only P1"
+    },
+    {
+      "tc_id": "NT-B-C1",
+      "description": "Concurrent mixed BUY/SELL",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Concurrent mixed BUY/SELL",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; B-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "orders accepted = 10; no 5xx under concurrent BUY/SELL; master holds <=1 position (netting invariant); netting result is one-sided; master net equals 6L - 4L = 0.02; followers match model: 2/2 OK (master long 0.02, short 0.0, 1 pos)",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        288
+      ],
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books b --only C1"
+    },
+    {
+      "tc_id": "NT-B-ISOLATION",
+      "description": "Follower manual close does not close master",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Follower manual close does not close master",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; B-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "followers match model: 2/2 OK (master long 0.03, short 0.0, 1 pos); Follower close HTTP = 200; Master long unchanged = 0.03; Master short unchanged = 0.0; Other follower long preserved = 0.06; Closed follower positions = 0",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        320
+      ],
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books b --only ISOLATION"
+    },
+    {
+      "tc_id": "NT-B-ROUTING",
+      "description": "Mixed A/B-book netting replication",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Mixed A/B-book netting replication",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; B-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "master positions = 1; master long = 0.03; followers match model: 2/2 OK (master long 0.03, short 0.0, 1 pos)",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "B master -> A follower1/B follower2.",
+      "evidence": [
+        350
+      ],
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books b --only ROUTING"
+    },
+    {
+      "tc_id": "NT-A-N1",
+      "description": "Open netted position",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Open netted position",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; A-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "master positions = 1; master long = 0.03; followers match model: 2/2 OK (master long 0.03, short 0.0, 1 pos)",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "A-book phase uses A master/A follower1/B follower2. Broker execution beyond internal OMS remains independently unverified.",
+      "evidence": [
+        396
+      ],
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books a --only N1"
+    },
+    {
+      "tc_id": "NT-A-N2",
+      "description": "Opposite order reduces exposure",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Opposite order reduces exposure",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; A-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "master positions (opposite order must NET, not open a 2nd leg) = 1; master long reduced to 2L = 0.02; master short = 0.0; followers match model: 2/2 OK (master long 0.02, short 0.0, 1 pos)",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "A-book phase uses A master/A follower1/B follower2. Broker execution beyond internal OMS remains independently unverified.",
+      "evidence": [
+        423
+      ],
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books a --only N2"
+    },
+    {
+      "tc_id": "NT-A-N3",
+      "description": "Larger opposite order flips side",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Larger opposite order flips side",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; A-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "master positions after flip = 1; master long after flip = 0.0; master short = 5L - 3L = 0.02; followers match model: 2/2 OK (master long 0.0, short 0.02, 1 pos)",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "A-book phase uses A master/A follower1/B follower2. Broker execution beyond internal OMS remains independently unverified.",
+      "evidence": [
+        450
+      ],
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books a --only N3"
+    },
+    {
+      "tc_id": "NT-A-N4",
+      "description": "Exact opposite order closes",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Exact opposite order closes",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; A-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "master positions (exact opposite order closes) = 0; followers flat: 2/2 OK (master long 0.0, short 0.0, 0 pos)",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "A-book phase uses A master/A follower1/B follower2. Broker execution beyond internal OMS remains independently unverified.",
+      "evidence": [
+        476
+      ],
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books a --only N4"
+    },
+    {
+      "tc_id": "NT-A-N5",
+      "description": "TP/SL survives additions and copies",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "TP/SL survives additions and copies",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; A-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "Follower protection synchronized netqa.20261120t053625z.follower1@mailinator.com []; Follower protection synchronized netqa.20261120t053625z.follower2@mailinator.com []",
+      "status": "FAIL",
+      "severity": "High",
+      "defect_id": "SPEC-NT-A-N5",
+      "remarks": "A-book phase uses A master/A follower1/B follower2. Broker execution beyond internal OMS remains independently unverified.",
+      "evidence": [
+        567
+      ],
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books a --only N5"
+    },
+    {
+      "tc_id": "NT-A-P1",
+      "description": "Pending fan-out and cancellation",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Pending fan-out and cancellation",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; A-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "pending orders fanned out to followers (0/2) netqa.20261120t053625z.follower1, netqa.20261120t053625z.follower2",
+      "status": "FAIL",
+      "severity": "High",
+      "defect_id": "SPEC-NT-A-P1",
+      "remarks": "A-book phase uses A master/A follower1/B follower2. Broker execution beyond internal OMS remains independently unverified.",
+      "evidence": [
+        604
+      ],
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books a --only P1"
+    },
+    {
+      "tc_id": "NT-A-C1",
+      "description": "Concurrent mixed BUY/SELL",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Concurrent mixed BUY/SELL",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; A-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "orders accepted: got 8, expected 10; master net equals 6L - 4L: got 0.04, expected 0.02; followers match model: 1/2 wrong - netqa.20261120t053625z.follower1 x1.0: has long 0.05/short 0.0, expected long 0.0400/short 0.0000",
+      "status": "FAIL",
+      "severity": "High",
+      "defect_id": "SPEC-NT-A-C1",
+      "remarks": "A-book phase uses A master/A follower1/B follower2. Broker execution beyond internal OMS remains independently unverified.",
+      "evidence": [
+        703
+      ],
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books a --only C1"
+    },
+    {
+      "tc_id": "NT-A-ISOLATION",
+      "description": "Follower manual close does not close master",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Follower manual close does not close master",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; A-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "followers match model: 2/2 OK (master long 0.03, short 0.0, 1 pos); Follower close HTTP = 200; Master long unchanged = 0.03; Master short unchanged = 0.0; Other follower long preserved = 0.06; Closed follower positions = 0",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        735
+      ],
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books a --only ISOLATION"
+    },
+    {
+      "tc_id": "NT-A-ROUTING",
+      "description": "Mixed A/B-book netting replication",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Mixed A/B-book netting replication",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; A-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "master positions = 1; master long = 0.03; followers match model: 2/2 OK (master long 0.03, short 0.0, 1 pos)",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "A master -> both B followers.",
+      "evidence": [
+        765
+      ],
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books a --only ROUTING"
+    },
+    {
+      "tc_id": "NT-SETUP",
+      "description": "Fresh netting fixture setup",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Fresh netting fixture setup",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; setup/audit",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "Fresh copy master and two followers linked on real-net at1x/2x; virtual funding read back; no existing accounts modified.",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        15
+      ],
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json"
+    },
+    {
+      "tc_id": "NT-RESTORE",
+      "description": "Final clean-account and fixture audit",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Final clean-account and fixture audit",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; setup/audit",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "{'restored': True, 'accounts': {'netqa.20261120t053625z.master@mailinator.com': {'ok': True, 'positions': 0, 'funds': {'balance': 0, 'equity': 0, 'free_margin': 0, 'margin_call_level': 100, 'margin_level': None, 'starting_balance': 0, 'stop_out_level': 50, 'unrealized_pnl': 0, 'used_margin': 0}, 'book': 'b', 'active_follows': 0}, 'netqa.20261120t053625z.follower1@mailinator.com': {'ok': True, 'positions': 0, 'funds': {'balance': 0, 'equity': 0, 'free_margin': 0, 'margin_call_level': 100, 'margin_level': None, 'starting_balance': 0, 'stop_out_level': 50, 'unrealized_pnl': 0, 'used_margin': 0}, 'book': 'b', 'active_follows': 0}, 'netqa.20261120t053625z.follower2@mailinator.com': {'ok': True, 'positions': 0, 'funds': {'balance': 0, 'equity': 0, 'free_margin': 0, 'margin_call_level': 100, 'margin_level': None, 'starting_balance': 0, 'stop_out_level': 50, 'unrealized_pnl': 0, 'used_margin': 0}, 'book': 'b', 'active_follows': 0}}, 'retained': 'Fresh test accounts and master roles retained; newly created follower links ended. Existing accounts never changed.'}",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        816
+      ],
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json"
+    },
+    {
+      "tc_id": "NT-LP",
+      "description": "Independent external LP execution evidence",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Independent external LP execution evidence",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; setup/audit",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "Independent external broker fill references and cash ledger were not available; instance venue is paper/live_adapter=false.",
+      "status": "BLOCKED",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        779
+      ],
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json"
+    }
+  ]
+}

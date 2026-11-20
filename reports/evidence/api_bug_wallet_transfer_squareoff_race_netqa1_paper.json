@@ -1,0 +1,202 @@
+{
+  "started": "2026-11-19T10:35:45.315860+00:00",
+  "account": "netqa1@mailinator.com",
+  "instance": "paper",
+  "before_existing": {
+    "count": 0,
+    "funds": {
+      "balance": 200,
+      "equity": 200,
+      "free_margin": 200,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 200,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "entry": {
+    "status_code": 200,
+    "data": {
+      "order": {
+        "order_id": "ord_ca85b43edbc38587f1",
+        "market_order_id": "ord_ca85b43edbc38587f1",
+        "symbol": "BINANCE:BTCUSDT.P",
+        "side": "BUY",
+        "type": "MARKET",
+        "state": "FILLED",
+        "requested_qty": 0.001,
+        "filled_qty": 0.001,
+        "avg_fill_price": 63792.4,
+        "created_at": "2026-11-19T10:35:46.938396852Z",
+        "updated_at": "2026-11-19T10:35:46.938396852Z"
+      },
+      "position": {
+        "position_id": "pos_4cf3384224e69d3721",
+        "market_order_id": "ord_ca85b43edbc38587f1",
+        "symbol": "BINANCE:BTCUSDT.P",
+        "side": "BUY",
+        "net_qty": 0.001,
+        "avg_entry_price": 63792.4,
+        "full_margin": 6.37924,
+        "margin_percent": 100,
+        "margin_used": 6.37924,
+        "entry_markup": 0,
+        "status": "OPEN",
+        "opened_at": "2026-11-19T10:35:46.938447Z"
+      },
+      "success": true
+    }
+  },
+  "before": {
+    "count": 1,
+    "funds": {
+      "balance": 200,
+      "equity": 200,
+      "free_margin": 193.62076,
+      "margin_call_level": 100,
+      "margin_level": 3135.1697067362256,
+      "starting_balance": 200,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 6.37924
+    },
+    "positions": [
+      {
+        "algo_id": null,
+        "avg_entry_price": 63792.4,
+        "closed_at": null,
+        "comment": null,
+        "current_price": 63792.4,
+        "full_margin": 6.37924,
+        "group_id": null,
+        "margin_percent": 100,
+        "margin_used": 6.37924,
+        "market_order_id": "ord_ca85b43edbc38587f1",
+        "net_qty": 0.001,
+        "oco_key": null,
+        "opened_at": "2026-11-19T10:35:46.938447Z",
+        "position_id": "pos_4cf3384224e69d3721",
+        "side": "BUY",
+        "source": null,
+        "status": "OPEN",
+        "strategy_name": null,
+        "symbol": "BINANCE:BTCUSDT.P",
+        "tag": null,
+        "trailing": null,
+        "unrealized_pnl": 0
+      }
+    ],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "squareoff": {
+    "status_code": 200,
+    "data": {
+      "exit_price": 63792.4,
+      "market_order_id": "ord_ca85b43edbc38587f1",
+      "price_source": "live",
+      "realized_pnl": 0,
+      "success": true,
+      "symbol": "BINANCE:BTCUSDT.P"
+    }
+  },
+  "transfer": {
+    "status_code": 200,
+    "data": {
+      "success": true,
+      "trading": {
+        "balance": 20,
+        "equity": 20,
+        "free_margin": 13.62076,
+        "margin_call_level": 100,
+        "margin_level": 313.51697067362255,
+        "starting_balance": 20,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 6.37924
+      },
+      "wallets": {
+        "client": 360,
+        "ib": 0
+      }
+    }
+  },
+  "after": {
+    "count": 0,
+    "funds": {
+      "balance": 17,
+      "equity": 17,
+      "free_margin": 17,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 20,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "wallets": {
+    "status_code": 200,
+    "data": {
+      "success": true,
+      "totals": {
+        "consolidated": 377,
+        "trading": 17,
+        "wallets": 360
+      },
+      "trading": {
+        "balance": 17,
+        "equity": 17,
+        "free_margin": 17,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 20,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "wallet_details": {
+        "client": {
+          "wallet_type": "client",
+          "wallet_code": "CW-E4477B16",
+          "balance": 360
+        },
+        "ib": {
+          "wallet_type": "ib",
+          "wallet_code": "IB-E4477B16",
+          "balance": 0
+        }
+      },
+      "wallets": {
+        "client": 360,
+        "ib": 0
+      }
+    }
+  },
+  "after_cleanup": {
+    "count": 0,
+    "funds": {
+      "balance": 17,
+      "equity": 17,
+      "free_margin": 17,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 20,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "finished": "2026-11-19T10:35:51.880259+00:00"
+}

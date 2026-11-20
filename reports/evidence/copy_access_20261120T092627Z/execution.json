@@ -1,0 +1,259 @@
+{
+  "suite": "Copy Trading access boundaries",
+  "timestamp": "20261120T092627Z",
+  "host": "https://lpadmin.blackfx.com",
+  "cases": [
+    {
+      "tc_id": "CTA-001",
+      "description": "Return the correct identity for follower 1",
+      "preconditions": "Two dedicated staging Copy Trading follower accounts exist.",
+      "steps": "1. Log in as this follower in a separate session.\n2. Read /api/auth/me.\n3. Compare account identity.",
+      "test_data": "Fresh follower 1 and follower 2; read-only requests; real-net.",
+      "expected": "Return this follower identity without the other follower identity.",
+      "actual": "Identity response HTTP 200; correct email=True",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Limited to the named endpoint and supplied credential condition.",
+      "script": "test_suite/copy_access_boundary_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_access_boundary_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_access_20261120T092627Z/execution.json"
+      ]
+    },
+    {
+      "tc_id": "CTA-010",
+      "description": "Block follower access to /api/admin/members",
+      "preconditions": "Two dedicated staging Copy Trading follower accounts exist.",
+      "steps": "1. Authenticate as a follower.\n2. Request the named admin endpoint.\n3. Check rejection.",
+      "test_data": "Fresh follower 1 and follower 2; read-only requests; real-net.",
+      "expected": "Reject a member session with HTTP 401 or 403.",
+      "actual": "Member-session GET returned HTTP 404",
+      "status": "FAIL",
+      "severity": "High",
+      "defect_id": "ACCESS-CTA-010",
+      "remarks": "Limited to the named endpoint and supplied credential condition.",
+      "script": "test_suite/copy_access_boundary_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_access_boundary_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_access_20261120T092627Z/execution.json"
+      ]
+    },
+    {
+      "tc_id": "CTA-011",
+      "description": "Block follower access to /api/admin/settings",
+      "preconditions": "Two dedicated staging Copy Trading follower accounts exist.",
+      "steps": "1. Authenticate as a follower.\n2. Request the named admin endpoint.\n3. Check rejection.",
+      "test_data": "Fresh follower 1 and follower 2; read-only requests; real-net.",
+      "expected": "Reject a member session with HTTP 401 or 403.",
+      "actual": "Member-session GET returned HTTP 404",
+      "status": "FAIL",
+      "severity": "High",
+      "defect_id": "ACCESS-CTA-011",
+      "remarks": "Limited to the named endpoint and supplied credential condition.",
+      "script": "test_suite/copy_access_boundary_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_access_boundary_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_access_20261120T092627Z/execution.json"
+      ]
+    },
+    {
+      "tc_id": "CTA-002",
+      "description": "Return the correct identity for follower 2",
+      "preconditions": "Two dedicated staging Copy Trading follower accounts exist.",
+      "steps": "1. Log in as this follower in a separate session.\n2. Read /api/auth/me.\n3. Compare account identity.",
+      "test_data": "Fresh follower 1 and follower 2; read-only requests; real-net.",
+      "expected": "Return this follower identity without the other follower identity.",
+      "actual": "Identity response HTTP 200; correct email=True",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Limited to the named endpoint and supplied credential condition.",
+      "script": "test_suite/copy_access_boundary_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_access_boundary_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_access_20261120T092627Z/execution.json"
+      ]
+    },
+    {
+      "tc_id": "CTA-012",
+      "description": "Block follower access to /api/admin/members",
+      "preconditions": "Two dedicated staging Copy Trading follower accounts exist.",
+      "steps": "1. Authenticate as a follower.\n2. Request the named admin endpoint.\n3. Check rejection.",
+      "test_data": "Fresh follower 1 and follower 2; read-only requests; real-net.",
+      "expected": "Reject a member session with HTTP 401 or 403.",
+      "actual": "Member-session GET returned HTTP 404",
+      "status": "FAIL",
+      "severity": "High",
+      "defect_id": "ACCESS-CTA-012",
+      "remarks": "Limited to the named endpoint and supplied credential condition.",
+      "script": "test_suite/copy_access_boundary_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_access_boundary_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_access_20261120T092627Z/execution.json"
+      ]
+    },
+    {
+      "tc_id": "CTA-013",
+      "description": "Block follower access to /api/admin/settings",
+      "preconditions": "Two dedicated staging Copy Trading follower accounts exist.",
+      "steps": "1. Authenticate as a follower.\n2. Request the named admin endpoint.\n3. Check rejection.",
+      "test_data": "Fresh follower 1 and follower 2; read-only requests; real-net.",
+      "expected": "Reject a member session with HTTP 401 or 403.",
+      "actual": "Member-session GET returned HTTP 404",
+      "status": "FAIL",
+      "severity": "High",
+      "defect_id": "ACCESS-CTA-013",
+      "remarks": "Limited to the named endpoint and supplied credential condition.",
+      "script": "test_suite/copy_access_boundary_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_access_boundary_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_access_20261120T092627Z/execution.json"
+      ]
+    },
+    {
+      "tc_id": "CTA-020",
+      "description": "Reject anonymous access to /positions",
+      "preconditions": "Two dedicated staging Copy Trading follower accounts exist.",
+      "steps": "1. Request the endpoint without a valid token.\n2. Check status; do not submit any write.",
+      "test_data": "Fresh follower 1 and follower 2; read-only requests; real-net.",
+      "expected": "Reject with HTTP 401 or 403.",
+      "actual": "Read returned HTTP 401",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Limited to the named endpoint and supplied credential condition.",
+      "script": "test_suite/copy_access_boundary_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_access_boundary_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_access_20261120T092627Z/execution.json"
+      ]
+    },
+    {
+      "tc_id": "CTA-021",
+      "description": "Reject anonymous access to /orders",
+      "preconditions": "Two dedicated staging Copy Trading follower accounts exist.",
+      "steps": "1. Request the endpoint without a valid token.\n2. Check status; do not submit any write.",
+      "test_data": "Fresh follower 1 and follower 2; read-only requests; real-net.",
+      "expected": "Reject with HTTP 401 or 403.",
+      "actual": "Read returned HTTP 401",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Limited to the named endpoint and supplied credential condition.",
+      "script": "test_suite/copy_access_boundary_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_access_boundary_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_access_20261120T092627Z/execution.json"
+      ]
+    },
+    {
+      "tc_id": "CTA-022",
+      "description": "Reject anonymous access to /history",
+      "preconditions": "Two dedicated staging Copy Trading follower accounts exist.",
+      "steps": "1. Request the endpoint without a valid token.\n2. Check status; do not submit any write.",
+      "test_data": "Fresh follower 1 and follower 2; read-only requests; real-net.",
+      "expected": "Reject with HTTP 401 or 403.",
+      "actual": "Read returned HTTP 401",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Limited to the named endpoint and supplied credential condition.",
+      "script": "test_suite/copy_access_boundary_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_access_boundary_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_access_20261120T092627Z/execution.json"
+      ]
+    },
+    {
+      "tc_id": "CTA-023",
+      "description": "Reject anonymous access to /copy/follows",
+      "preconditions": "Two dedicated staging Copy Trading follower accounts exist.",
+      "steps": "1. Request the endpoint without a valid token.\n2. Check status; do not submit any write.",
+      "test_data": "Fresh follower 1 and follower 2; read-only requests; real-net.",
+      "expected": "Reject with HTTP 401 or 403.",
+      "actual": "Read returned HTTP 401",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Limited to the named endpoint and supplied credential condition.",
+      "script": "test_suite/copy_access_boundary_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_access_boundary_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_access_20261120T092627Z/execution.json"
+      ]
+    },
+    {
+      "tc_id": "CTA-024",
+      "description": "Reject invalid-token access to /positions",
+      "preconditions": "Two dedicated staging Copy Trading follower accounts exist.",
+      "steps": "1. Request the endpoint without a valid token.\n2. Check status; do not submit any write.",
+      "test_data": "Fresh follower 1 and follower 2; read-only requests; real-net.",
+      "expected": "Reject with HTTP 401 or 403.",
+      "actual": "Read returned HTTP 401",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Limited to the named endpoint and supplied credential condition.",
+      "script": "test_suite/copy_access_boundary_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_access_boundary_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_access_20261120T092627Z/execution.json"
+      ]
+    },
+    {
+      "tc_id": "CTA-025",
+      "description": "Reject invalid-token access to /orders",
+      "preconditions": "Two dedicated staging Copy Trading follower accounts exist.",
+      "steps": "1. Request the endpoint without a valid token.\n2. Check status; do not submit any write.",
+      "test_data": "Fresh follower 1 and follower 2; read-only requests; real-net.",
+      "expected": "Reject with HTTP 401 or 403.",
+      "actual": "Read returned HTTP 401",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Limited to the named endpoint and supplied credential condition.",
+      "script": "test_suite/copy_access_boundary_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_access_boundary_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_access_20261120T092627Z/execution.json"
+      ]
+    },
+    {
+      "tc_id": "CTA-026",
+      "description": "Reject invalid-token access to /history",
+      "preconditions": "Two dedicated staging Copy Trading follower accounts exist.",
+      "steps": "1. Request the endpoint without a valid token.\n2. Check status; do not submit any write.",
+      "test_data": "Fresh follower 1 and follower 2; read-only requests; real-net.",
+      "expected": "Reject with HTTP 401 or 403.",
+      "actual": "Read returned HTTP 401",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Limited to the named endpoint and supplied credential condition.",
+      "script": "test_suite/copy_access_boundary_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_access_boundary_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_access_20261120T092627Z/execution.json"
+      ]
+    },
+    {
+      "tc_id": "CTA-027",
+      "description": "Reject invalid-token access to /copy/follows",
+      "preconditions": "Two dedicated staging Copy Trading follower accounts exist.",
+      "steps": "1. Request the endpoint without a valid token.\n2. Check status; do not submit any write.",
+      "test_data": "Fresh follower 1 and follower 2; read-only requests; real-net.",
+      "expected": "Reject with HTTP 401 or 403.",
+      "actual": "Read returned HTTP 401",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Limited to the named endpoint and supplied credential condition.",
+      "script": "test_suite/copy_access_boundary_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_access_boundary_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_access_20261120T092627Z/execution.json"
+      ]
+    }
+  ]
+}

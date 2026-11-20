@@ -1,0 +1,570 @@
+[
+  {
+    "time": "2026-11-20T06:06:50.324335+00:00",
+    "method": "GET",
+    "path": "/v1/oms/_instances",
+    "account": "netqa.20261120t053625z.master@mailinator.com",
+    "broker_header": null,
+    "status_code": 200,
+    "data": {
+      "instances": [
+        {
+          "icon": "",
+          "live_adapter": false,
+          "mode": "hedging",
+          "name": "Paper (Hedging)",
+          "netting": false,
+          "real_money": false,
+          "slug": "paper",
+          "venue": "paper"
+        },
+        {
+          "icon": "",
+          "live_adapter": false,
+          "mode": "hedging",
+          "name": "Real (Hedging)",
+          "netting": false,
+          "real_money": true,
+          "slug": "real",
+          "venue": "paper"
+        },
+        {
+          "icon": "",
+          "live_adapter": false,
+          "mode": "netting",
+          "name": "Paper (Netting)",
+          "netting": true,
+          "real_money": false,
+          "slug": "paper-net",
+          "venue": "paper"
+        },
+        {
+          "icon": "",
+          "live_adapter": false,
+          "mode": "netting",
+          "name": "Real (Netting)",
+          "netting": true,
+          "real_money": true,
+          "slug": "real-net",
+          "venue": "paper"
+        }
+      ]
+    }
+  },
+  {
+    "time": "2026-11-20T06:06:50.670075+00:00",
+    "method": "GET",
+    "path": "/v1/oms/_instances",
+    "account": "netqa.20261120t053625z.follower1@mailinator.com",
+    "broker_header": null,
+    "status_code": 200,
+    "data": {
+      "instances": [
+        {
+          "icon": "",
+          "live_adapter": false,
+          "mode": "hedging",
+          "name": "Paper (Hedging)",
+          "netting": false,
+          "real_money": false,
+          "slug": "paper",
+          "venue": "paper"
+        },
+        {
+          "icon": "",
+          "live_adapter": false,
+          "mode": "hedging",
+          "name": "Real (Hedging)",
+          "netting": false,
+          "real_money": true,
+          "slug": "real",
+          "venue": "paper"
+        },
+        {
+          "icon": "",
+          "live_adapter": false,
+          "mode": "netting",
+          "name": "Paper (Netting)",
+          "netting": true,
+          "real_money": false,
+          "slug": "paper-net",
+          "venue": "paper"
+        },
+        {
+          "icon": "",
+          "live_adapter": false,
+          "mode": "netting",
+          "name": "Real (Netting)",
+          "netting": true,
+          "real_money": true,
+          "slug": "real-net",
+          "venue": "paper"
+        }
+      ]
+    }
+  },
+  {
+    "time": "2026-11-20T06:06:51.000009+00:00",
+    "method": "GET",
+    "path": "/v1/oms/_instances",
+    "account": "netqa.20261120t053625z.follower2@mailinator.com",
+    "broker_header": null,
+    "status_code": 200,
+    "data": {
+      "instances": [
+        {
+          "icon": "",
+          "live_adapter": false,
+          "mode": "hedging",
+          "name": "Paper (Hedging)",
+          "netting": false,
+          "real_money": false,
+          "slug": "paper",
+          "venue": "paper"
+        },
+        {
+          "icon": "",
+          "live_adapter": false,
+          "mode": "hedging",
+          "name": "Real (Hedging)",
+          "netting": false,
+          "real_money": true,
+          "slug": "real",
+          "venue": "paper"
+        },
+        {
+          "icon": "",
+          "live_adapter": false,
+          "mode": "netting",
+          "name": "Paper (Netting)",
+          "netting": true,
+          "real_money": false,
+          "slug": "paper-net",
+          "venue": "paper"
+        },
+        {
+          "icon": "",
+          "live_adapter": false,
+          "mode": "netting",
+          "name": "Real (Netting)",
+          "netting": true,
+          "real_money": true,
+          "slug": "real-net",
+          "venue": "paper"
+        }
+      ]
+    }
+  },
+  {
+    "time": "2026-11-20T06:06:51.214969+00:00",
+    "method": "GET",
+    "path": "/admin/api/instances",
+    "account": null,
+    "broker_header": null,
+    "status_code": 200,
+    "data": {
+      "instances": [
+        {
+          "broker": "paper",
+          "enabled": true,
+          "exists": true,
+          "icon": "",
+          "label": "Paper (Hedging)",
+          "mode": "hedging",
+          "name": "Paper (Hedging)",
+          "product": "papertrade_gross",
+          "real_money": false,
+          "slug": "paper",
+          "venue": "paper",
+          "visible": true
+        },
+        {
+          "broker": "real",
+          "enabled": true,
+          "exists": true,
+          "icon": "",
+          "label": "Real (Hedging)",
+          "mode": "hedging",
+          "name": "Real (Hedging)",
+          "product": "whitelabel_gross",
+          "real_money": true,
+          "slug": "real",
+          "venue": "paper",
+          "visible": true
+        },
+        {
+          "broker": "paper-net",
+          "enabled": true,
+          "exists": true,
+          "icon": "",
+          "label": "Paper (Netting)",
+          "mode": "netting",
+          "name": "Paper (Netting)",
+          "product": "papertrade_net",
+          "real_money": false,
+          "slug": "paper-net",
+          "venue": "paper",
+          "visible": true
+        },
+        {
+          "broker": "real-net",
+          "enabled": true,
+          "exists": true,
+          "icon": "",
+          "label": "Real (Netting)",
+          "mode": "netting",
+          "name": "Real (Netting)",
+          "product": "whitelabel_net",
+          "real_money": true,
+          "slug": "real-net",
+          "venue": "paper",
+          "visible": true
+        },
+        {
+          "broker": "binance",
+          "enabled": false,
+          "exists": false,
+          "icon": "",
+          "label": "Binance",
+          "mode": "netting",
+          "name": "Binance",
+          "product": "papertrade_gross",
+          "real_money": true,
+          "slug": "binance",
+          "venue": "binance",
+          "visible": false
+        },
+        {
+          "broker": "zerodha",
+          "enabled": false,
+          "exists": false,
+          "icon": "",
+          "label": "Zerodha",
+          "mode": "netting",
+          "name": "Zerodha",
+          "product": "papertrade_gross",
+          "real_money": true,
+          "slug": "zerodha",
+          "venue": "zerodha",
+          "visible": false
+        },
+        {
+          "broker": "coinbase",
+          "enabled": false,
+          "exists": false,
+          "icon": "",
+          "label": "Coinbase",
+          "mode": "hedging",
+          "name": "Coinbase",
+          "product": "papertrade_gross",
+          "real_money": false,
+          "slug": "coinbase",
+          "venue": "coinbase",
+          "visible": false
+        }
+      ]
+    }
+  },
+  {
+    "path": "/api/config",
+    "selected_nonsecret_fields": {
+      "oms_domain": "https://lpadmin.blackfx.com/v1/oms",
+      "engine_choice": {
+        "paper": true,
+        "real": true
+      }
+    }
+  },
+  {
+    "time": "2026-11-20T06:06:51.430652+00:00",
+    "method": "GET",
+    "path": "/v1/oms/real-net/positions",
+    "account": "netqa.20261120t053625z.master@mailinator.com",
+    "broker_header": "real-net",
+    "status_code": 200,
+    "data": {
+      "count": 0,
+      "funds": {
+        "balance": 0,
+        "equity": 0,
+        "free_margin": 0,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 0,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "positions": [],
+      "success": true,
+      "total_unrealized_pnl": 0
+    }
+  },
+  {
+    "time": "2026-11-20T06:06:51.511326+00:00",
+    "method": "GET",
+    "path": "/v1/oms/real-net/orders",
+    "account": "netqa.20261120t053625z.master@mailinator.com",
+    "broker_header": "real-net",
+    "status_code": 200,
+    "data": {
+      "count": 0,
+      "orders": [],
+      "success": true
+    }
+  },
+  {
+    "time": "2026-11-20T06:06:51.578698+00:00",
+    "method": "GET",
+    "path": "/v1/oms/real-net/positions",
+    "account": "netqa.20261120t053625z.follower1@mailinator.com",
+    "broker_header": "real-net",
+    "status_code": 200,
+    "data": {
+      "count": 0,
+      "funds": {
+        "balance": 0,
+        "equity": 0,
+        "free_margin": 0,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 0,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "positions": [],
+      "success": true,
+      "total_unrealized_pnl": 0
+    }
+  },
+  {
+    "time": "2026-11-20T06:06:51.652061+00:00",
+    "method": "GET",
+    "path": "/v1/oms/real-net/orders",
+    "account": "netqa.20261120t053625z.follower1@mailinator.com",
+    "broker_header": "real-net",
+    "status_code": 200,
+    "data": {
+      "count": 0,
+      "orders": [],
+      "success": true
+    }
+  },
+  {
+    "time": "2026-11-20T06:06:51.739157+00:00",
+    "method": "GET",
+    "path": "/v1/oms/real-net/positions",
+    "account": "netqa.20261120t053625z.follower2@mailinator.com",
+    "broker_header": "real-net",
+    "status_code": 200,
+    "data": {
+      "count": 0,
+      "funds": {
+        "balance": 0,
+        "equity": 0,
+        "free_margin": 0,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 0,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "positions": [],
+      "success": true,
+      "total_unrealized_pnl": 0
+    }
+  },
+  {
+    "time": "2026-11-20T06:06:51.804232+00:00",
+    "method": "GET",
+    "path": "/v1/oms/real-net/orders",
+    "account": "netqa.20261120t053625z.follower2@mailinator.com",
+    "broker_header": "real-net",
+    "status_code": 200,
+    "data": {
+      "count": 0,
+      "orders": [],
+      "success": true
+    }
+  },
+  {
+    "time": "2026-11-20T06:06:51.873608+00:00",
+    "method": "GET",
+    "path": "/v1/oms/paper-net/positions",
+    "account": "netqa.20261120t053625z.master@mailinator.com",
+    "broker_header": "paper-net",
+    "status_code": 200,
+    "data": {
+      "count": 0,
+      "funds": {
+        "balance": 1000000,
+        "equity": 1000000,
+        "free_margin": 1000000,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 1000000,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "positions": [],
+      "success": true,
+      "total_unrealized_pnl": 0
+    }
+  },
+  {
+    "time": "2026-11-20T06:06:51.949573+00:00",
+    "method": "GET",
+    "path": "/v1/oms/paper-net/orders",
+    "account": "netqa.20261120t053625z.master@mailinator.com",
+    "broker_header": "paper-net",
+    "status_code": 200,
+    "data": {
+      "count": 0,
+      "orders": [],
+      "success": true
+    }
+  },
+  {
+    "time": "2026-11-20T06:06:52.007734+00:00",
+    "method": "GET",
+    "path": "/v1/oms/paper-net/positions",
+    "account": "netqa.20261120t053625z.follower1@mailinator.com",
+    "broker_header": "paper-net",
+    "status_code": 200,
+    "data": {
+      "count": 0,
+      "funds": {
+        "balance": 1000000,
+        "equity": 1000000,
+        "free_margin": 1000000,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 1000000,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "positions": [],
+      "success": true,
+      "total_unrealized_pnl": 0
+    }
+  },
+  {
+    "time": "2026-11-20T06:06:52.064248+00:00",
+    "method": "GET",
+    "path": "/v1/oms/paper-net/orders",
+    "account": "netqa.20261120t053625z.follower1@mailinator.com",
+    "broker_header": "paper-net",
+    "status_code": 200,
+    "data": {
+      "count": 0,
+      "orders": [],
+      "success": true
+    }
+  },
+  {
+    "time": "2026-11-20T06:06:52.157354+00:00",
+    "method": "GET",
+    "path": "/v1/oms/paper-net/positions",
+    "account": "netqa.20261120t053625z.follower2@mailinator.com",
+    "broker_header": "paper-net",
+    "status_code": 200,
+    "data": {
+      "count": 0,
+      "funds": {
+        "balance": 1000000,
+        "equity": 1000000,
+        "free_margin": 1000000,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 1000000,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "positions": [],
+      "success": true,
+      "total_unrealized_pnl": 0
+    }
+  },
+  {
+    "time": "2026-11-20T06:06:52.235775+00:00",
+    "method": "GET",
+    "path": "/v1/oms/paper-net/orders",
+    "account": "netqa.20261120t053625z.follower2@mailinator.com",
+    "broker_header": "paper-net",
+    "status_code": 200,
+    "data": {
+      "count": 0,
+      "orders": [],
+      "success": true
+    }
+  },
+  {
+    "time": "2026-11-20T06:06:52.339826+00:00",
+    "method": "GET",
+    "path": "/v1/oms/real/positions",
+    "account": "netqa.20261120t053625z.master@mailinator.com",
+    "broker_header": "real",
+    "status_code": 200,
+    "data": {
+      "count": 0,
+      "funds": {
+        "balance": 0,
+        "equity": 0,
+        "free_margin": 0,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 0,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "positions": [],
+      "success": true,
+      "total_unrealized_pnl": 0
+    }
+  },
+  {
+    "path": "/admin/api/members",
+    "selected_new_account_readback": [
+      {
+        "email": "netqa.20261120t053625z.follower2@mailinator.com",
+        "member_id": "mem_3f5451b016e128936c",
+        "book": "b",
+        "status": "active",
+        "balances": {
+          "paper-net": 1000000,
+          "real-net": 0
+        },
+        "account_type": "live"
+      },
+      {
+        "email": "netqa.20261120t053625z.follower1@mailinator.com",
+        "member_id": "mem_30066ff914e6edffdc",
+        "book": "b",
+        "status": "active",
+        "balances": {
+          "paper-net": 1000000,
+          "real-net": 0
+        },
+        "account_type": "live"
+      },
+      {
+        "email": "netqa.20261120t053625z.master@mailinator.com",
+        "member_id": "mem_da54f1b9ed8c6d2c26",
+        "book": "b",
+        "status": "active",
+        "balances": {
+          "paper-net": 1000000,
+          "real": 0,
+          "real-net": 0
+        },
+        "account_type": "live"
+      }
+    ]
+  }
+]

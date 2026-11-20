@@ -1,0 +1,58 @@
+{
+  "netqa.20261120t053625z.master@mailinator.com": {
+    "book": "b",
+    "balances": {
+      "paper-net": 1000000,
+      "real": 0,
+      "real-net": 0
+    },
+    "funds": {
+      "balance": 0,
+      "equity": 0,
+      "free_margin": 0,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 0,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    }
+  },
+  "netqa.20261120t053625z.follower1@mailinator.com": {
+    "book": "b",
+    "balances": {
+      "paper": 1000000,
+      "paper-net": 1000000,
+      "real-net": 0
+    },
+    "funds": {
+      "balance": 0,
+      "equity": 0,
+      "free_margin": 0,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 0,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    }
+  },
+  "netqa.20261120t053625z.follower2@mailinator.com": {
+    "book": "b",
+    "balances": {
+      "paper-net": 1000000,
+      "real-net": 0
+    },
+    "funds": {
+      "balance": 0,
+      "equity": 0,
+      "free_margin": 0,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 0,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    }
+  }
+}

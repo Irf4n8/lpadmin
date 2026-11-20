@@ -1,0 +1,164 @@
+Race Condition Test Cases – BlackTrader
+Testing Type: Race Condition / Network Throttling / Browser Switching / Multi-Tab / Concurrency
+
+Goal: Break the trading platform by changing browser state or network speed while orders and other operations are processing.
+
+Focus Areas: Duplicate orders, missed executions, stale prices, incorrect P&L, order-state mismatches, synchronization failures.
+
+1. Network Speed Testing Setup
+Open Chrome DevTools → Network → Throttling → Select a network profile.
+
+Select a network condition:
+
+Fast connection
+
+Slow 3G
+
+Offline
+
+Unstable / intermittent connection
+
+Slow network test: Select Slow 3G or a custom throttling profile. Submit an order and perform another action before the first response arrives.
+
+Note: Chrome Network throttling primarily affects browser requests. WebSocket behavior and server-side copy execution require separate verification.
+
+2. Critical Race Conditions – Slow Internet
+ID	Test Scenario	Bug to Identify	Priority
+NET01	Slow internet → Click BUY multiple times before response	Duplicate BUY orders	P0
+NET02	Slow internet → Place BUY → Immediately click SELL	Incorrect netting or hedging position	P0
+NET03	Place BUY → Disconnect before confirmation → Reconnect	Duplicate or missing order	P0
+NET04	Place pending order → Disconnect → Reconnect	Duplicate pending order	P0
+NET05	Modify SL → Immediately modify SL again	Old SL overwrites new SL	P0
+NET06	Modify TP → Immediately close position	Stale TP modification applied after close	P0
+NET07	Click Close Position repeatedly on slow internet	Duplicate close or reverse position	P0
+NET08	Click Cancel Order repeatedly	Incorrect cancellation or state mismatch	P1
+NET09	Place BUY → Refresh while loading	Duplicate order or missing confirmation	P0
+NET10	Place BUY → Switch to another module before response	Order lost from UI or submitted twice	P1
+NET11	Slow internet → Execute Market Order	Execution price mismatch beyond documented rules	P1
+NET12	Disconnect while order is partially filled	Incorrect executed quantity	P0
+NET13	Disconnect while SL/TP is triggered	Position status or P&L not reconciled	P0
+NET14	Slow internet → Switch broker during order submission	Order routed to wrong broker	P0
+NET15	Reconnect repeatedly during order execution	Duplicate processing of execution events	P0
+3. Browser Switching and Multi-Tab Race Conditions
+Use Chrome and Edge, or two Chrome windows with the same account.
+
+For session-isolation tests, use separate browser profiles.
+
+ID	Test Scenario	Bug to Identify
+BR01	Open same account in Chrome and Edge → Place BUY simultaneously	Duplicate or unintended orders
+BR02	Chrome places BUY → Edge closes position immediately	Incorrect final position
+BR03	Chrome modifies SL → Edge modifies SL simultaneously	Stale SL value or inconsistent UI
+BR04	Chrome cancels pending order → Edge modifies same order	Cancelled order reappears
+BR05	Chrome places order → Immediately close Chrome	Missing acknowledgement or duplicate order after reopen
+BR06	Place BUY in Chrome → Switch to Edge before response	Edge shows stale order status
+BR07	Open same account in two tabs → Close same position simultaneously	Double close or reverse position
+BR08	Chrome switches broker → Edge places order	Wrong broker selection or routing
+BR09	Chrome changes chart symbol → Edge executes trade	Wrong symbol used in order
+BR10	Log out in Chrome while Edge submits order	Incorrect session handling
+BR11	Refresh both browsers during order execution	Incorrect trade synchronization
+BR12	Chrome modifies TP → Edge closes position	TP modification applied to closed position
+BR13	Browser A edits watchlist → Browser B deletes same watchlist	Stale data or unexpected recreation
+BR14	Two tabs save the same algo settings simultaneously	Silent overwrite or mixed settings
+BR15	Switch between tabs rapidly during active trading	Missing live updates after tab resumes
+Important: Two deliberate BUY clicks can legitimately create two orders if the platform permits repeated submissions. The race-condition bug is an unintended duplicate submission from one logical action, or a violation of the platform's order controls.
+
+4. Copy Trading – Slow Internet and Browser Switching
+ID	Simultaneous Actions	Bug to Identify
+CP01	Master places BUY → Follower internet disconnects	Missing copied order after reconciliation
+CP02	Master places BUY → Follower switches browser	Duplicate copied order
+CP03	Master closes BUY → Follower refreshes	Orphan follower position
+CP04	Follower clicks Unfollow on slow internet → Master places BUY	Incorrect subscription cutoff
+CP05	Follower changes allocation → Master executes order	Incorrect copied quantity
+CP06	Follower clicks Pause → Immediately switches browser	Pause state not synchronized
+CP07	Master modifies SL → Follower browser goes offline	SL not synchronized after recovery
+CP08	Follower unfollows in Chrome → Follows again in Edge	Duplicate subscription
+CP09	Master executes 10 orders → Follower reconnects	Duplicate or missing copied orders
+CP10	Master closes trade → Follower manually closes same trade	Double close or reverse position
+Note: For server-side Copy Trading, closing the browser should not itself stop copying. Validate the backend execution records, not just the browser display.
+
+5. Algo Trading – Slow Internet and Browser Switching
+ID	Test Scenario	Bug to Identify
+AL01	Activate Algo → Immediately refresh	Duplicate algo instance
+AL02	Activate Algo in Chrome and Edge simultaneously	Duplicate execution instances
+AL03	Stop Algo → Switch browser while stopping	Algo continues unexpectedly
+AL04	Algo places BUY → Internet disconnects	Duplicate order after reconnect
+AL05	Change algo settings in Chrome → Save from Edge	Stale settings overwrite
+AL06	Algo places order → User manually closes it	Algo position-state mismatch
+AL07	Stop Algo → Immediately restart	Two instances running
+AL08	Algo places BUY → Switch broker simultaneously	Order routed to wrong broker
+AL09	Algo running → Browser crashes	Browser-based execution stops or cloud execution is affected incorrectly
+AL10	Cloud Algo running → Close all browser tabs	Cloud execution stops unexpectedly
+6. Step-by-Step Manual Race Test – NET03 (Disconnect Immediately After BUY)
+Execution Checklist (P0):
+
+Open BlackTrader using a paper trading account.
+
+Open Chrome DevTools → Network.
+
+Select Slow 3G.
+
+Prepare a BUY Market order.
+
+Click BUY once.
+
+Immediately change Network throttling to Offline before the response arrives.
+
+Wait a few seconds, then restore Online.
+
+Check Orders, Positions, History, and broker execution records.
+
+Repeat 10–20 times with different disconnect timings.
+
+Expected Result:
+
+The order must have a single authoritative final state.
+
+If the broker accepted the order before disconnection, it must appear after reconciliation.
+
+If rejected, no position should exist.
+
+An unknown response must not cause an accidental duplicate when retried.
+
+7. Most Effective Combinations to Find Bugs
+Combination	Failure Targeted
+Slow 3G + BUY + Refresh	Duplicate submission
+Slow 3G + Close Position + Double Click	Duplicate close
+Offline during execution + Reconnect	Order reconciliation
+Chrome + Edge + Same position close	Concurrent position modification
+Slow internet + Broker switch	Wrong-account routing
+Slow internet + Unfollow + Master BUY	Subscription race
+Slow internet + Algo Stop/Start	Duplicate algo instances
+Two browsers + SL modification	Stale updates
+8. How to Confirm a Race-Condition Bug
+After each test, verify the following:
+
+Order ID: Was one logical order submitted more than once?
+
+Execution ID: Did the broker execute duplicate trades?
+
+Quantity: Does the final position match the intended executed quantity?
+
+Account: Was the order routed to the selected broker?
+
+Status: Do Orders, Positions, and History agree?
+
+Recovery: Does the UI reconcile after reconnect without requiring a new order?
+
+Logs: Are there repeated API submissions, retries, or out-of-order WebSocket messages?
+
+For stronger evidence: Capture request timestamps, client request IDs, broker execution IDs, and screenshots before and after the race.
+
+9. Priority Scenarios to Start With
+Start with these six scenarios — they have particularly high potential to expose serious trading-platform concurrency defects:
+
+NET03 – Disconnect immediately after BUY
+
+NET07 – Click Close Position repeatedly on slow internet
+
+BR07 – Two tabs close same position simultaneously
+
+BR08 – Chrome switches broker → Edge places order
+
+CP04 – Follower clicks Unfollow on slow internet → Master places BUY
+
+AL07 – Stop Algo → Immediately restart

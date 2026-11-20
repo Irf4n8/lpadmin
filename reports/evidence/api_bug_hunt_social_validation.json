@@ -1,0 +1,51 @@
+[
+  {
+    "name": "copy_unknown_fields",
+    "http": 400,
+    "data": {
+      "error": "that account is not an active copy master"
+    }
+  },
+  {
+    "name": "copy_null_body",
+    "http": 400,
+    "data": {
+      "error": "invalid JSON body"
+    }
+  },
+  {
+    "name": "copy_array_body",
+    "http": 400,
+    "data": {
+      "error": "invalid JSON body"
+    }
+  },
+  {
+    "name": "mam_unknown_fields",
+    "http": 400,
+    "data": {
+      "error": "that account is not an active MAM master"
+    }
+  },
+  {
+    "name": "mam_null_body",
+    "http": 400,
+    "data": {
+      "error": "invalid JSON body"
+    }
+  },
+  {
+    "name": "pamm_bad_deposit",
+    "http": 400,
+    "data": {
+      "error": "deposit must be greater than zero"
+    }
+  },
+  {
+    "name": "pamm_string_deposit",
+    "http": 400,
+    "data": {
+      "error": "invalid JSON body"
+    }
+  }
+]

@@ -1,0 +1,186 @@
+{
+  "suite": "Breakpoint & Race Hunter",
+  "timestamp": "2026-11-20T04:34:53.890645+00:00",
+  "instance": "real",
+  "followers": 6,
+  "results": [
+    {
+      "name": "B1 Duplicate squareoff storm",
+      "status": "FAIL",
+      "findings": [
+        {
+          "severity": "HIGH",
+          "message": "follower did not receive copied position - cannot run scenario"
+        }
+      ],
+      "metrics": {}
+    },
+    {
+      "name": "B2 Over-reduce race",
+      "status": "FAIL",
+      "findings": [
+        {
+          "severity": "HIGH",
+          "message": "no follower position"
+        }
+      ],
+      "metrics": {}
+    },
+    {
+      "name": "B3 Protection write storm",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "writes": 20,
+        "http_5xx": 0,
+        "final_tp": 64641.26,
+        "final_sl": 58484.94
+      }
+    },
+    {
+      "name": "B4 Double-cancel storm",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "cancels": 20,
+        "http_200": 1,
+        "http_5xx": 0
+      }
+    },
+    {
+      "name": "B5 Load ramp (breaking point)",
+      "status": "WARN",
+      "findings": [
+        {
+          "severity": "MED",
+          "message": "@20 concurrent: non-200 responses {400: 8}"
+        },
+        {
+          "severity": "INFO",
+          "message": "first degradation at: 20 concurrent master orders"
+        }
+      ],
+      "metrics": {
+        "levels": [
+          {
+            "threads": 5,
+            "placed": 5,
+            "status_codes": {
+              "200": 5
+            },
+            "p50_s": 0.204,
+            "p95_s": 0.234,
+            "max_s": 0.257,
+            "burst_s": 0.259,
+            "fanout_lag_s": 0.06,
+            "followers_short": 0,
+            "followers_duplicated": 0,
+            "positions_expected": 30,
+            "positions_actual": 30
+          },
+          {
+            "threads": 10,
+            "placed": 10,
+            "status_codes": {
+              "200": 10
+            },
+            "p50_s": 0.182,
+            "p95_s": 0.259,
+            "max_s": 0.277,
+            "burst_s": 0.283,
+            "fanout_lag_s": 0.09,
+            "followers_short": 0,
+            "followers_duplicated": 0,
+            "positions_expected": 60,
+            "positions_actual": 60
+          },
+          {
+            "threads": 20,
+            "placed": 12,
+            "status_codes": {
+              "200": 12,
+              "400": 8
+            },
+            "p50_s": 0.284,
+            "p95_s": 0.323,
+            "max_s": 0.323,
+            "burst_s": 0.332,
+            "fanout_lag_s": 0.08,
+            "followers_short": 0,
+            "followers_duplicated": 0,
+            "positions_expected": 72,
+            "positions_actual": 72
+          }
+        ],
+        "first_degradation_at_threads": 20
+      }
+    },
+    {
+      "name": "B6 Follow/unfollow flapping",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "probe_link_rows": 0,
+        "probe_positions_after_single_master_order": 1
+      }
+    },
+    {
+      "name": "B7 Margin exhaustion",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "master_orders": 0,
+        "follower_positions": 0,
+        "follower_balance": 1000.0,
+        "follower_equity": 1000.0,
+        "follower_used_margin": 0.0
+      }
+    },
+    {
+      "name": "B8 Input fuzz",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "requests": 90,
+        "http_5xx": 0,
+        "http_200": 0,
+        "positions_created": 0
+      }
+    },
+    {
+      "name": "B9 Bulk vs individual close",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "positions_opened": 6,
+        "http_5xx": 0,
+        "positions_left": 0,
+        "final_balance": 715.4273999999986,
+        "final_equity": 715.4273999999986,
+        "final_used_margin": 0.0
+      }
+    },
+    {
+      "name": "B10 Auth/token refresh storm",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "logins": 30,
+        "login_failures": 0,
+        "post_storm_read_failures": 0
+      }
+    },
+    {
+      "name": "B11 Final consistency audit",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "accounts": 7,
+        "orphan_positions": 0,
+        "pending_orders": 0,
+        "stuck_margin": 0,
+        "equity_balance_drift": 0
+      }
+    }
+  ]
+}

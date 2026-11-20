@@ -1,0 +1,255 @@
+{
+  "suite": "Copy Trading browser completion",
+  "timestamp": "20261120T092209Z",
+  "host": "https://lpadmin.blackfx.com",
+  "cases": [
+    {
+      "tc_id": "CTUI-001",
+      "description": "Block dashboard access before login",
+      "preconditions": "Dedicated staging follower account; Chromium browser. No orders are submitted.",
+      "steps": "1. Open dashboard in a new browser context.\n2. Check redirect.",
+      "test_data": "Follower 1; desktop viewport 1440x900 unless specified.",
+      "expected": "Redirect to login.",
+      "actual": "Unauthenticated dashboard ended at https://lpadmin.blackfx.com/login",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Read-only UI check; does not prove in-flight trade recovery.",
+      "script": "test_suite/copy_browser_completion_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_browser_completion_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_browser_20261120T092209Z/CTUI-001.png"
+      ],
+      "duration_s": 2.52
+    },
+    {
+      "tc_id": "CTUI-002",
+      "description": "Mask the password field",
+      "preconditions": "Dedicated staging follower account; Chromium browser. No orders are submitted.",
+      "steps": "1. Open login.\n2. Enter a sample password.\n3. Inspect input type.",
+      "test_data": "Follower 1; desktop viewport 1440x900 unless specified.",
+      "expected": "Password input remains masked.",
+      "actual": "Password input has type=password; characters are masked by the browser.",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Read-only UI check; does not prove in-flight trade recovery.",
+      "script": "test_suite/copy_browser_completion_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_browser_completion_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_browser_20261120T092209Z/CTUI-002.png"
+      ],
+      "duration_s": 0.12
+    },
+    {
+      "tc_id": "CTUI-003",
+      "description": "Reject invalid login credentials",
+      "preconditions": "Dedicated staging follower account; Chromium browser. No orders are submitted.",
+      "steps": "1. Submit an unregistered email and wrong password.\n2. Check error and current page.",
+      "test_data": "Follower 1; desktop viewport 1440x900 unless specified.",
+      "expected": "Stay on login and display an error.",
+      "actual": "Login rejected with a visible error.",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Read-only UI check; does not prove in-flight trade recovery.",
+      "script": "test_suite/copy_browser_completion_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_browser_completion_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_browser_20261120T092209Z/CTUI-003.png"
+      ],
+      "duration_s": 3.85
+    },
+    {
+      "tc_id": "CTUI-004",
+      "description": "Log in with the dedicated follower",
+      "preconditions": "Dedicated staging follower account; Chromium browser. No orders are submitted.",
+      "steps": "1. Enter valid follower credentials.\n2. Submit login.",
+      "test_data": "Follower 1; desktop viewport 1440x900 unless specified.",
+      "expected": "Authenticated account page opens.",
+      "actual": "Valid follower login ended at https://lpadmin.blackfx.com/account",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Read-only UI check; does not prove in-flight trade recovery.",
+      "script": "test_suite/copy_browser_completion_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_browser_completion_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_browser_20261120T092209Z/CTUI-004.png"
+      ],
+      "duration_s": 3.86
+    },
+    {
+      "tc_id": "CTUI-005",
+      "description": "Keep login after account-page refresh",
+      "preconditions": "Dedicated staging follower account; Chromium browser. No orders are submitted.",
+      "steps": "1. Log in.\n2. Refresh the account page.",
+      "test_data": "Follower 1; desktop viewport 1440x900 unless specified.",
+      "expected": "Account stays authenticated.",
+      "actual": "Account remained authenticated after refresh.",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Read-only UI check; does not prove in-flight trade recovery.",
+      "script": "test_suite/copy_browser_completion_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_browser_completion_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_browser_20261120T092209Z/CTUI-005.png"
+      ],
+      "duration_s": 1.6
+    },
+    {
+      "tc_id": "CTUI-006",
+      "description": "Open the Copy Trading tab",
+      "preconditions": "Dedicated staging follower account; Chromium browser. No orders are submitted.",
+      "steps": "1. Open dashboard.\n2. Click Copy trading.\n3. Check rendered content.",
+      "test_data": "Follower 1; desktop viewport 1440x900 unless specified.",
+      "expected": "Copy Trading content renders.",
+      "actual": "Automation could not complete this check: RuntimeError: No visible Copy trading tab found",
+      "status": "BLOCKED",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Read-only UI check; does not prove in-flight trade recovery.",
+      "script": "test_suite/copy_browser_completion_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_browser_completion_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_browser_20261120T092209Z/CTUI-006.png"
+      ],
+      "duration_s": 5.11
+    },
+    {
+      "tc_id": "CTUI-007",
+      "description": "Reload the Copy Trading terminal",
+      "preconditions": "Dedicated staging follower account; Chromium browser. No orders are submitted.",
+      "steps": "1. Reload dashboard.\n2. Reopen Copy trading.",
+      "test_data": "Follower 1; desktop viewport 1440x900 unless specified.",
+      "expected": "Terminal renders again without losing the browser session.",
+      "actual": "Automation could not complete this check: RuntimeError: No visible Copy trading tab found",
+      "status": "BLOCKED",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Read-only UI check; does not prove in-flight trade recovery.",
+      "script": "test_suite/copy_browser_completion_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_browser_completion_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_browser_20261120T092209Z/CTUI-007.png"
+      ],
+      "duration_s": 5.11
+    },
+    {
+      "tc_id": "CTUI-008",
+      "description": "Share the login with a second tab",
+      "preconditions": "Dedicated staging follower account; Chromium browser. No orders are submitted.",
+      "steps": "1. Open account in another tab in the same browser context.",
+      "test_data": "Follower 1; desktop viewport 1440x900 unless specified.",
+      "expected": "Second tab has the same authenticated session.",
+      "actual": "A second tab in the same context opened the authenticated account page.",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Read-only UI check; does not prove in-flight trade recovery.",
+      "script": "test_suite/copy_browser_completion_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_browser_completion_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_browser_20261120T092209Z/CTUI-008.png"
+      ],
+      "duration_s": 1.35
+    },
+    {
+      "tc_id": "CTUI-009",
+      "description": "Keep a separate browser context signed out",
+      "preconditions": "Dedicated staging follower account; Chromium browser. No orders are submitted.",
+      "steps": "1. Open account in a new isolated context.",
+      "test_data": "Follower 1; desktop viewport 1440x900 unless specified.",
+      "expected": "Existing login is not inherited.",
+      "actual": "A separate browser context was redirected to login.",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Read-only UI check; does not prove in-flight trade recovery.",
+      "script": "test_suite/copy_browser_completion_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_browser_completion_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_browser_20261120T092209Z/CTUI-009.png"
+      ],
+      "duration_s": 1.45
+    },
+    {
+      "tc_id": "CTUI-010",
+      "description": "Recover dashboard loading after going offline",
+      "preconditions": "Dedicated staging follower account; Chromium browser. No orders are submitted.",
+      "steps": "1. Set browser offline.\n2. Attempt reload.\n3. Restore network and reopen dashboard.",
+      "test_data": "Follower 1; desktop viewport 1440x900 unless specified.",
+      "expected": "Dashboard loads after connection returns.",
+      "actual": "Automation could not complete this check: RuntimeError: No visible Copy trading tab found",
+      "status": "BLOCKED",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Read-only UI check; does not prove in-flight trade recovery.",
+      "script": "test_suite/copy_browser_completion_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_browser_completion_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_browser_20261120T092209Z/CTUI-010.png"
+      ],
+      "duration_s": 5.17
+    },
+    {
+      "tc_id": "CTUI-011",
+      "description": "Load dashboard on a slow browser connection",
+      "preconditions": "Dedicated staging follower account; Chromium browser. No orders are submitted.",
+      "steps": "1. Emulate 400 ms latency.\n2. Open dashboard.\n3. Restore network.",
+      "test_data": "Follower 1; desktop viewport 1440x900 unless specified.",
+      "expected": "Dashboard remains accessible under the emulated connection.",
+      "actual": "Automation could not complete this check: RuntimeError: No visible Copy trading tab found",
+      "status": "BLOCKED",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Read-only UI check; does not prove in-flight trade recovery.",
+      "script": "test_suite/copy_browser_completion_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_browser_completion_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_browser_20261120T092209Z/CTUI-011.png"
+      ],
+      "duration_s": 5.54
+    },
+    {
+      "tc_id": "CTUI-012",
+      "description": "Display the account page on a mobile viewport",
+      "preconditions": "Dedicated staging follower account; Chromium browser. No orders are submitted.",
+      "steps": "1. Set viewport to 390x844.\n2. Open account.\n3. Check horizontal overflow.",
+      "test_data": "Follower 1; desktop viewport 1440x900 unless specified.",
+      "expected": "Account renders without horizontal overflow.",
+      "actual": "Mobile account authenticated; horizontal overflow=False",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Read-only UI check; does not prove in-flight trade recovery.",
+      "script": "test_suite/copy_browser_completion_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_browser_completion_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_browser_20261120T092209Z/CTUI-012.png"
+      ],
+      "duration_s": 1.1
+    },
+    {
+      "tc_id": "CTUI-013",
+      "description": "Block dashboard access after logout",
+      "preconditions": "Dedicated staging follower account; Chromium browser. No orders are submitted.",
+      "steps": "1. Click Log out.\n2. Reopen dashboard.",
+      "test_data": "Follower 1; desktop viewport 1440x900 unless specified.",
+      "expected": "Dashboard redirects to login.",
+      "actual": "After logout, dashboard ended at https://lpadmin.blackfx.com/login",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Read-only UI check; does not prove in-flight trade recovery.",
+      "script": "test_suite/copy_browser_completion_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_browser_completion_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_browser_20261120T092209Z/CTUI-013.png"
+      ],
+      "duration_s": 2.66
+    }
+  ],
+  "scope": "Read-only browser checks; no live trade or injected broker fault claims."
+}

@@ -1,0 +1,407 @@
+{
+  "suite": "Fresh-account A/B-book netting execution",
+  "phase": "SETUP/EXECUTION ERROR",
+  "host": "https://lpadmin.blackfx.com",
+  "updated_at": "2026-11-20T06:20:01.495821+00:00",
+  "started_at": "2026-11-20T06:18:47.616675+00:00",
+  "instance": "real-net",
+  "summary": {
+    "PASS": 6,
+    "FAIL": 2,
+    "NOT RUN": 15
+  },
+  "functional_summary": {
+    "PASS": 4,
+    "FAIL": 2,
+    "NOT RUN": 14
+  },
+  "accounts": [
+    "netqa.20261120t053625z.master@mailinator.com",
+    "netqa.20261120t053625z.follower1@mailinator.com",
+    "netqa.20261120t053625z.follower2@mailinator.com"
+  ],
+  "instances": [
+    {
+      "icon": "",
+      "live_adapter": false,
+      "mode": "hedging",
+      "name": "Paper (Hedging)",
+      "netting": false,
+      "real_money": false,
+      "slug": "paper",
+      "venue": "paper"
+    },
+    {
+      "icon": "",
+      "live_adapter": false,
+      "mode": "hedging",
+      "name": "Real (Hedging)",
+      "netting": false,
+      "real_money": true,
+      "slug": "real",
+      "venue": "paper"
+    },
+    {
+      "icon": "",
+      "live_adapter": false,
+      "mode": "netting",
+      "name": "Paper (Netting)",
+      "netting": true,
+      "real_money": false,
+      "slug": "paper-net",
+      "venue": "paper"
+    },
+    {
+      "icon": "",
+      "live_adapter": false,
+      "mode": "netting",
+      "name": "Real (Netting)",
+      "netting": true,
+      "real_money": true,
+      "slug": "real-net",
+      "venue": "paper"
+    }
+  ],
+  "evidence_directory": "/Users/irf4n/Copy Trading/lpadmin/reports/evidence/fresh_netting_20261120T061847Z",
+  "scope": "Fresh accounts only; two followers. Internal OMS netting and book configuration; independent external LP fills are not certified.",
+  "cases": [
+    {
+      "tc_id": "NT-B-N1",
+      "description": "Open netted position",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Open netted position",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; B-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "master positions = 1; master long = 0.03; followers match model: 2/2 OK (master long 0.03, short 0.0, 1 pos)",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        46
+      ]
+    },
+    {
+      "tc_id": "NT-B-N2",
+      "description": "Opposite order reduces exposure",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Opposite order reduces exposure",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; B-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "master positions (opposite order must NET, not open a 2nd leg) = 1; master long reduced to 2L = 0.02; master short = 0.0; followers match model: 2/2 OK (master long 0.02, short 0.0, 1 pos)",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        72
+      ]
+    },
+    {
+      "tc_id": "NT-B-N3",
+      "description": "Larger opposite order flips side",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Larger opposite order flips side",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; B-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "master positions after flip = 1; master long after flip = 0.0; master short = 5L - 3L = 0.02; followers match model: 2/2 OK (master long 0.0, short 0.02, 1 pos)",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        98
+      ]
+    },
+    {
+      "tc_id": "NT-B-N4",
+      "description": "Exact opposite order closes",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Exact opposite order closes",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; B-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "master positions (exact opposite order closes) = 0; followers flat: 2/2 OK (master long 0.0, short 0.0, 0 pos)",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        123
+      ]
+    },
+    {
+      "tc_id": "NT-B-N5",
+      "description": "TP/SL survives additions and copies",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "TP/SL survives additions and copies",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; B-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "Follower protection synchronized netqa.20261120t053625z.follower1@mailinator.com []; Follower protection synchronized netqa.20261120t053625z.follower2@mailinator.com []",
+      "status": "FAIL",
+      "severity": "High",
+      "defect_id": "SPEC-NT-B-N5",
+      "remarks": "",
+      "evidence": [
+        201
+      ]
+    },
+    {
+      "tc_id": "NT-B-P1",
+      "description": "Pending fan-out and cancellation",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Pending fan-out and cancellation",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; B-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "pending orders fanned out to followers (0/2) netqa.20261120t053625z.follower1, netqa.20261120t053625z.follower2",
+      "status": "FAIL",
+      "severity": "High",
+      "defect_id": "SPEC-NT-B-P1",
+      "remarks": "",
+      "evidence": [
+        237
+      ]
+    },
+    {
+      "tc_id": "NT-B-C1",
+      "description": "Concurrent mixed BUY/SELL",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Concurrent mixed BUY/SELL",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; B-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "Not executed",
+      "status": "NOT RUN",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": []
+    },
+    {
+      "tc_id": "NT-B-ISOLATION",
+      "description": "Follower manual close does not close master",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Follower manual close does not close master",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; B-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "Not executed",
+      "status": "NOT RUN",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": []
+    },
+    {
+      "tc_id": "NT-B-MAM",
+      "description": "MAM master trades copy on netting",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "MAM master trades copy on netting",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; B-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "Not executed",
+      "status": "NOT RUN",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": []
+    },
+    {
+      "tc_id": "NT-B-ROUTING",
+      "description": "Mixed A/B-book netting replication",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Mixed A/B-book netting replication",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; B-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "Not executed",
+      "status": "NOT RUN",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": []
+    },
+    {
+      "tc_id": "NT-A-N1",
+      "description": "Open netted position",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Open netted position",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; A-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "Not executed",
+      "status": "NOT RUN",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": []
+    },
+    {
+      "tc_id": "NT-A-N2",
+      "description": "Opposite order reduces exposure",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Opposite order reduces exposure",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; A-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "Not executed",
+      "status": "NOT RUN",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": []
+    },
+    {
+      "tc_id": "NT-A-N3",
+      "description": "Larger opposite order flips side",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Larger opposite order flips side",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; A-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "Not executed",
+      "status": "NOT RUN",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": []
+    },
+    {
+      "tc_id": "NT-A-N4",
+      "description": "Exact opposite order closes",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Exact opposite order closes",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; A-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "Not executed",
+      "status": "NOT RUN",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": []
+    },
+    {
+      "tc_id": "NT-A-N5",
+      "description": "TP/SL survives additions and copies",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "TP/SL survives additions and copies",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; A-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "Not executed",
+      "status": "NOT RUN",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": []
+    },
+    {
+      "tc_id": "NT-A-P1",
+      "description": "Pending fan-out and cancellation",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Pending fan-out and cancellation",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; A-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "Not executed",
+      "status": "NOT RUN",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": []
+    },
+    {
+      "tc_id": "NT-A-C1",
+      "description": "Concurrent mixed BUY/SELL",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Concurrent mixed BUY/SELL",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; A-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "Not executed",
+      "status": "NOT RUN",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": []
+    },
+    {
+      "tc_id": "NT-A-ISOLATION",
+      "description": "Follower manual close does not close master",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Follower manual close does not close master",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; A-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "Not executed",
+      "status": "NOT RUN",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": []
+    },
+    {
+      "tc_id": "NT-A-MAM",
+      "description": "MAM master trades copy on netting",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "MAM master trades copy on netting",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; A-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "Not executed",
+      "status": "NOT RUN",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": []
+    },
+    {
+      "tc_id": "NT-A-ROUTING",
+      "description": "Mixed A/B-book netting replication",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Mixed A/B-book netting replication",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; A-book",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "Not executed",
+      "status": "NOT RUN",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": []
+    },
+    {
+      "tc_id": "NT-SETUP",
+      "description": "Fresh netting fixture setup",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Fresh netting fixture setup",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; setup/audit",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "Fresh copy master and two followers linked on real-net at1x/2x; virtual funding read back; no existing accounts modified.",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        15
+      ]
+    },
+    {
+      "tc_id": "NT-RESTORE",
+      "description": "Final clean-account and fixture audit",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Final clean-account and fixture audit",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; setup/audit",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "{'restored': True, 'accounts': {'netqa.20261120t053625z.master@mailinator.com': {'ok': True, 'positions': 0, 'funds': {'balance': 0, 'equity': 0, 'free_margin': 0, 'margin_call_level': 100, 'margin_level': None, 'starting_balance': 0, 'stop_out_level': 50, 'unrealized_pnl': 0, 'used_margin': 0}, 'book': 'b', 'active_follows': 0}, 'netqa.20261120t053625z.follower1@mailinator.com': {'ok': True, 'positions': 0, 'funds': {'balance': 0, 'equity': 0, 'free_margin': 0, 'margin_call_level': 100, 'margin_level': None, 'starting_balance': 0, 'stop_out_level': 50, 'unrealized_pnl': 0, 'used_margin': 0}, 'book': 'b', 'active_follows': 0}, 'netqa.20261120t053625z.follower2@mailinator.com': {'ok': True, 'positions': 0, 'funds': {'balance': 0, 'equity': 0, 'free_margin': 0, 'margin_call_level': 100, 'margin_level': None, 'starting_balance': 0, 'stop_out_level': 50, 'unrealized_pnl': 0, 'used_margin': 0}, 'book': 'b', 'active_follows': 0}}, 'retained': 'Fresh test accounts and master roles retained; newly created follower links ended. Existing accounts never changed.'}",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        308
+      ]
+    },
+    {
+      "tc_id": "NT-LP",
+      "description": "Independent external LP execution evidence",
+      "preconditions": "Fresh staging accounts; real-net mode; funded virtual wallets; no pre-existing exposure.",
+      "steps": "Independent external LP execution evidence",
+      "test_data": "BLACK:EURUSD; base .01 lot; followers1x/2x; setup/audit",
+      "expected": "Single-position netting, correct quantities, isolated follower state and consistent final accounting.",
+      "actual": "Not executed",
+      "status": "NOT RUN",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": []
+    }
+  ]
+}

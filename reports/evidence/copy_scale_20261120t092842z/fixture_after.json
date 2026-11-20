@@ -1,0 +1,410 @@
+{
+  "restored": true,
+  "accounts": [
+    {
+      "email": "ctscale.20261120t092842z.000@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.001@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.002@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.003@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.004@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.005@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.006@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.007@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.008@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.009@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.010@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.011@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.012@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.013@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.014@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.015@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.016@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.017@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.018@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.019@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.020@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.021@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.022@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.023@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.024@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.025@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.026@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.027@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.028@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.029@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.030@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.031@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.032@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.033@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.034@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.035@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.036@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.037@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.038@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.039@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.040@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.041@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.042@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.043@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.044@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.045@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.046@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.047@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.048@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.049@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.050@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.051@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.052@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.053@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.054@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.055@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.056@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.057@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.058@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.059@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.060@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.061@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.062@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.063@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.064@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.065@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.066@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.067@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.068@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.069@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.070@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.071@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.072@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.073@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.074@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.075@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.076@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.077@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.078@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.079@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.080@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.081@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.082@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.083@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.084@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.085@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.086@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.087@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.088@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.089@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.090@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.091@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.092@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.093@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.094@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.095@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.096@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.097@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.098@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.099@mailinator.com",
+      "ok": true
+    },
+    {
+      "email": "ctscale.20261120t092842z.100@mailinator.com",
+      "ok": true
+    }
+  ],
+  "retained": "Fresh accounts and master role retained; balances zeroed, links ended and positions closed."
+}

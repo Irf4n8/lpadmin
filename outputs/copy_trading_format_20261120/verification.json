@@ -1,0 +1,20 @@
+{
+  "columns": 11,
+  "rows": 273,
+  "counts": {
+    "FAIL": 13,
+    "PASS": 68,
+    "PARTIAL": 16,
+    "BLOCKED": 137,
+    "NOT RUN": 39
+  },
+  "summaryFormulasVerified": true,
+  "xlsxPath": "/Users/irf4n/Copy Trading/lpadmin/outputs/copy_trading_format_20261120/Copy_Trading_Test_Execution_Report_2026-11-20.xlsx",
+  "sourceDigests": {
+    "reports/master_spec_latest.json": "bbd60e2345386244fdd84abf6ee0650fd2b3d46bdda31d4088ce84d6c92dfac2",
+    "reports/a_book_latest.json": "94ed2b9ed4b974599cc6727bbcdd0f89b93639e41fce63dd15b681560c1c3b4a",
+    "reports/netting_latest.json": "a17d2a5bd9e0e3a67c416f9b9264da2e304730a21d554b58b476166dcf9a21bf",
+    "reports/network_browser_race_cases.json": "9bbea17f4da51c6b68573bfc077bd32c60b4d98966aa375e729c99f956f98ded",
+    "reports/netting_recheck_latest.json": "62e315533d045f68afde3af390c304d14c09a575624b3d08f3b9f18c8a0aa35f"
+  }
+}

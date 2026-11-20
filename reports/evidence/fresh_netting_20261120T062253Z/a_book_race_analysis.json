@@ -1,0 +1,20 @@
+{
+  "accepted": 8,
+  "accepted_net_qty": 0.04,
+  "rejected": [
+    {
+      "http": 400,
+      "side": "SELL",
+      "response": {
+        "error": "this position is already being closed at the liquidity provider"
+      }
+    },
+    {
+      "http": 400,
+      "side": "SELL",
+      "response": {
+        "error": "this position is already being closed at the liquidity provider"
+      }
+    }
+  ]
+}

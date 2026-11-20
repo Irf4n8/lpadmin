@@ -1,0 +1,81 @@
+{
+  "suite": "Isolated Copy Trading 100-follower scale",
+  "host": "https://lpadmin.blackfx.com",
+  "timestamp": "20261120t092842z",
+  "cases": [
+    {
+      "tc_id": "CTS-027",
+      "description": "Subscribe 50 distinct followers concurrently",
+      "preconditions": "One fresh master and 100 fresh followers; B-book Real Hedging; funded with 100,000 staging units.",
+      "steps": "1. Start with no follower links.\n2. Send fifty follow requests concurrently.\n3. Read master follower links and compare all fifty identities.",
+      "test_data": "BLACK:EURUSD; BUY 0.01 lot; multiplier 1x; 100 followers.",
+      "expected": "All fifty followers are linked exactly once.",
+      "actual": "50 follow requests completed in 2.155 seconds. Active unique links: 50.",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Observed API behavior only. Worker-node distribution, database locks and queue internals are not independently visible.",
+      "script": "test_suite/copy_scale_completion_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_scale_completion_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_scale_20261120t092842z/details.json"
+      ]
+    },
+    {
+      "tc_id": "CTS-024",
+      "description": "Copy one master BUY to 100 followers",
+      "preconditions": "One fresh master and 100 fresh followers; B-book Real Hedging; funded with 100,000 staging units.",
+      "steps": "1. Link all 100 followers.\n2. Submit master EURUSD BUY 0.01.\n3. Poll positions on every follower.\n4. Verify side, count and quantity.",
+      "test_data": "BLACK:EURUSD; BUY 0.01 lot; multiplier 1x; 100 followers.",
+      "expected": "Each of 100 followers receives one correctly sized BUY copy.",
+      "actual": "100/100 followers received one BUY position of 0.01 lot.",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Observed API behavior only. Worker-node distribution, database locks and queue internals are not independently visible.",
+      "script": "test_suite/copy_scale_completion_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_scale_completion_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_scale_20261120t092842z/details.json"
+      ]
+    },
+    {
+      "tc_id": "CTS-CLOSE",
+      "description": "Close the master and all 100 copied positions",
+      "preconditions": "One fresh master and 100 fresh followers; B-book Real Hedging; funded with 100,000 staging units.",
+      "steps": "1. Close the master position.\n2. Read all 101 accounts.\n3. Verify no position remains.",
+      "test_data": "BLACK:EURUSD; BUY 0.01 lot; multiplier 1x; 100 followers.",
+      "expected": "All 101 accounts become flat.",
+      "actual": "101/101 accounts have no open position after the master close.",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Observed API behavior only. Worker-node distribution, database locks and queue internals are not independently visible.",
+      "script": "test_suite/copy_scale_completion_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_scale_completion_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_scale_20261120t092842z/details.json"
+      ]
+    },
+    {
+      "tc_id": "CTS-028",
+      "description": "Unsubscribe 50 distinct followers concurrently",
+      "preconditions": "One fresh master and 100 fresh followers; B-book Real Hedging; funded with 100,000 staging units.",
+      "steps": "1. Start flat with 100 active links.\n2. Send fifty unfollow requests concurrently.\n3. Verify selected links are absent and the other fifty remain.",
+      "test_data": "BLACK:EURUSD; BUY 0.01 lot; multiplier 1x; 100 followers.",
+      "expected": "Remove the selected fifty links and retain the other fifty.",
+      "actual": "All fifty selected followers removed: True. Remaining active links: 50.",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Observed API behavior only. Worker-node distribution, database locks and queue internals are not independently visible.",
+      "script": "test_suite/copy_scale_completion_runner.py",
+      "reproduce_command": ".venv/bin/python test_suite/copy_scale_completion_runner.py --confirm-staging",
+      "evidence": [
+        "reports/evidence/copy_scale_20261120t092842z/details.json"
+      ]
+    }
+  ],
+  "cleanup_verified": true,
+  "evidence_directory": "/Users/irf4n/Copy Trading/lpadmin/reports/evidence/copy_scale_20261120t092842z"
+}

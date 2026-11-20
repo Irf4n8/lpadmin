@@ -1,0 +1,58 @@
+[
+  {
+    "id": "SPEC-CT-NET-N5",
+    "date": "2026-11-20",
+    "module": "Copy Trading / Netting",
+    "bug_found": "Netting followers do not receive master TP/SL protection",
+    "description": "NT-B-N5: round1: Follower protection synchronized netqa.20261120t053625z.follower1@mailinator.com []; Follower protection synchronized netqa.20261120t053625z.follower2@mailinator.com [] | NT-A-N5: round1: Follower protection synchronized netqa.20261120t053625z.follower1@mailinator.com []; Follower protection synchronized netqa.20261120t053625z.follower2@mailinator.com []",
+    "proof_img": "",
+    "proof_vid": "",
+    "type": "Bug",
+    "source_classification": "Fresh-account Copy Trading netting execution",
+    "status": "Open",
+    "verification": "Independently observed on fresh staging accounts",
+    "severity": "High",
+    "related_cases": [
+      "NT-B-N5",
+      "NT-A-N5"
+    ],
+    "remarks": "Per-case scripts and commands in netting report. MAM/PAMM excluded. External LP ledger evidence remains separately unverified."
+  },
+  {
+    "id": "SPEC-CT-NET-P1",
+    "date": "2026-11-20",
+    "module": "Copy Trading / Netting",
+    "bug_found": "Netting pending orders are not mirrored to followers",
+    "description": "NT-B-P1: round1: pending orders fanned out to followers (0/2) netqa.20261120t053625z.follower1, netqa.20261120t053625z.follower2 | NT-A-P1: round1: pending orders fanned out to followers (0/2) netqa.20261120t053625z.follower1, netqa.20261120t053625z.follower2",
+    "proof_img": "",
+    "proof_vid": "",
+    "type": "Bug",
+    "source_classification": "Fresh-account Copy Trading netting execution",
+    "status": "Open",
+    "verification": "Independently observed on fresh staging accounts",
+    "severity": "High",
+    "related_cases": [
+      "NT-B-P1",
+      "NT-A-P1"
+    ],
+    "remarks": "Per-case scripts and commands in netting report. MAM/PAMM excluded. External LP ledger evidence remains separately unverified."
+  },
+  {
+    "id": "SPEC-CT-NET-C1",
+    "date": "2026-11-20",
+    "module": "Copy Trading / Netting",
+    "bug_found": "A-book netting follower exposure diverges from accepted master trades",
+    "description": "NT-A-C1: Accepted9/10 master requests; accepted-order net target=0.03; follower model mismatch:  1/2 wrong - netqa.20261120t053625z.follower1 x1.0: has long 0.04/short 0.0, expected long 0.0300/short 0.0000; explicit LP-busy/other rejections=1. See accepted-order analysis and raw run.",
+    "proof_img": "",
+    "proof_vid": "",
+    "type": "Bug",
+    "source_classification": "Fresh-account Copy Trading netting execution",
+    "status": "Open",
+    "verification": "Independently observed on fresh staging accounts",
+    "severity": "High",
+    "related_cases": [
+      "NT-A-C1"
+    ],
+    "remarks": "Per-case scripts and commands in netting report. MAM/PAMM excluded. External LP ledger evidence remains separately unverified."
+  }
+]

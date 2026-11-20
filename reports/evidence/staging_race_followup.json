@@ -1,0 +1,683 @@
+{
+  "timestamp": "2026-11-20T04:36:00.719449+00:00",
+  "host": "https://lpadmin.blackfx.com",
+  "instance": "real",
+  "results": [
+    {
+      "name": "B1 Duplicate squareoff storm",
+      "status": "FAIL",
+      "findings": [
+        {
+          "severity": "HIGH",
+          "message": "DOUBLE CREDIT/DEBIT: balance moved -3.0000 but a single close realises +0.0000"
+        }
+      ],
+      "metrics": {
+        "concurrent_closes": 20,
+        "http_200": 1,
+        "http_5xx": 0,
+        "balance_delta": -3.0,
+        "single_realized_pnl": 0.0,
+        "distinct_pnl_values": 1
+      }
+    },
+    {
+      "name": "B2 Over-reduce race",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "start_qty": 0.01,
+        "reduce_chunk": 0.004,
+        "attempts": 5,
+        "accepted": 2,
+        "final_qty": 0.002,
+        "expected_qty": 0.002
+      }
+    },
+    {
+      "name": "B7 Margin exhaustion",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "master_orders": 11,
+        "follower_positions": 0,
+        "follower_balance": 10.0,
+        "follower_equity": 10.0,
+        "follower_used_margin": 0.0,
+        "test_follower_balance": 10.0,
+        "test_master_order_qty": 0.01
+      }
+    },
+    {
+      "name": "B11 Final consistency audit",
+      "status": "PASS",
+      "findings": [],
+      "metrics": {
+        "accounts": 7,
+        "orphan_positions": 0,
+        "pending_orders": 0,
+        "stuck_margin": 0,
+        "equity_balance_drift": 0
+      }
+    }
+  ],
+  "order_responses": [
+    {
+      "email": "master2@mailinator.com",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_2811f2a7f5b5a76dd4",
+            "market_order_id": "ord_2811f2a7f5b5a76dd4",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 61397,
+            "copy_ref": "ord_2811f2a7f5b5a76dd4",
+            "copy_kind": "master",
+            "created_at": "2026-11-20T04:36:04.959201363Z",
+            "updated_at": "2026-11-20T04:36:04.959201363Z"
+          },
+          "position": {
+            "position_id": "pos_7139a603eddd3b3f94",
+            "market_order_id": "ord_2811f2a7f5b5a76dd4",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 61397,
+            "full_margin": 61.397000000000006,
+            "margin_percent": 100,
+            "margin_used": 61.397000000000006,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T04:36:04.959261Z"
+          },
+          "success": true
+        }
+      }
+    },
+    {
+      "email": "master2@mailinator.com",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_ff54fa5090dc2065e2",
+            "market_order_id": "ord_ff54fa5090dc2065e2",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 61425,
+            "copy_ref": "ord_ff54fa5090dc2065e2",
+            "copy_kind": "master",
+            "created_at": "2026-11-20T04:36:10.149735003Z",
+            "updated_at": "2026-11-20T04:36:10.149735003Z"
+          },
+          "position": {
+            "position_id": "pos_7a4e85b9652819be4f",
+            "market_order_id": "ord_ff54fa5090dc2065e2",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 61425,
+            "full_margin": 61.425,
+            "margin_percent": 100,
+            "margin_used": 61.425,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T04:36:10.149996Z"
+          },
+          "success": true
+        }
+      }
+    },
+    {
+      "email": "master2@mailinator.com",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_a321f04292670f53ed",
+            "market_order_id": "ord_a321f04292670f53ed",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 61438.9,
+            "copy_ref": "ord_a321f04292670f53ed",
+            "copy_kind": "master",
+            "created_at": "2026-11-20T04:36:18.239760525Z",
+            "updated_at": "2026-11-20T04:36:18.239760525Z"
+          },
+          "position": {
+            "position_id": "pos_e7c02b7c279c87d810",
+            "market_order_id": "ord_a321f04292670f53ed",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 61438.9,
+            "full_margin": 61.438900000000004,
+            "margin_percent": 100,
+            "margin_used": 61.438900000000004,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T04:36:18.239922Z"
+          },
+          "success": true
+        },
+        "_latency": 0.07001283299999983
+      }
+    },
+    {
+      "email": "master2@mailinator.com",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_5071abee7257bf5016",
+            "market_order_id": "ord_5071abee7257bf5016",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 61438.9,
+            "copy_ref": "ord_5071abee7257bf5016",
+            "copy_kind": "master",
+            "created_at": "2026-11-20T04:36:18.261287843Z",
+            "updated_at": "2026-11-20T04:36:18.261287843Z"
+          },
+          "position": {
+            "position_id": "pos_6451401caa145cabaf",
+            "market_order_id": "ord_5071abee7257bf5016",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 61438.9,
+            "full_margin": 61.438900000000004,
+            "margin_percent": 100,
+            "margin_used": 61.438900000000004,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T04:36:18.261338Z"
+          },
+          "success": true
+        },
+        "_latency": 0.09185837500000105
+      }
+    },
+    {
+      "email": "master2@mailinator.com",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_6b186ec08d518bf03b",
+            "market_order_id": "ord_6b186ec08d518bf03b",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 61438.9,
+            "copy_ref": "ord_6b186ec08d518bf03b",
+            "copy_kind": "master",
+            "created_at": "2026-11-20T04:36:18.279934331Z",
+            "updated_at": "2026-11-20T04:36:18.279934331Z"
+          },
+          "position": {
+            "position_id": "pos_6ae203bba736c805ad",
+            "market_order_id": "ord_6b186ec08d518bf03b",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 61438.9,
+            "full_margin": 61.438900000000004,
+            "margin_percent": 100,
+            "margin_used": 61.438900000000004,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T04:36:18.27998Z"
+          },
+          "success": true
+        },
+        "_latency": 0.12046170900000064
+      }
+    },
+    {
+      "email": "master2@mailinator.com",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_c3cbcab00716a05bca",
+            "market_order_id": "ord_c3cbcab00716a05bca",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 61438.9,
+            "copy_ref": "ord_c3cbcab00716a05bca",
+            "copy_kind": "master",
+            "created_at": "2026-11-20T04:36:18.340462123Z",
+            "updated_at": "2026-11-20T04:36:18.340462123Z"
+          },
+          "position": {
+            "position_id": "pos_f201dfba85f4d9d55e",
+            "market_order_id": "ord_c3cbcab00716a05bca",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 61438.9,
+            "full_margin": 61.438900000000004,
+            "margin_percent": 100,
+            "margin_used": 61.438900000000004,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T04:36:18.340627Z"
+          },
+          "success": true
+        },
+        "_latency": 0.19117895900000192
+      }
+    },
+    {
+      "email": "master2@mailinator.com",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_6bdafd335e3e995d3a",
+            "market_order_id": "ord_6bdafd335e3e995d3a",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 61438.9,
+            "copy_ref": "ord_6bdafd335e3e995d3a",
+            "copy_kind": "master",
+            "created_at": "2026-11-20T04:36:18.369719861Z",
+            "updated_at": "2026-11-20T04:36:18.369719861Z"
+          },
+          "position": {
+            "position_id": "pos_602b4adf7a82c2c4a7",
+            "market_order_id": "ord_6bdafd335e3e995d3a",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 61438.9,
+            "full_margin": 61.438900000000004,
+            "margin_percent": 100,
+            "margin_used": 61.438900000000004,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T04:36:18.369776Z"
+          },
+          "success": true
+        },
+        "_latency": 0.20037970799999982
+      }
+    },
+    {
+      "email": "master2@mailinator.com",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_62cc8fc6622b78b9b3",
+            "market_order_id": "ord_62cc8fc6622b78b9b3",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 61438.9,
+            "copy_ref": "ord_62cc8fc6622b78b9b3",
+            "copy_kind": "master",
+            "created_at": "2026-11-20T04:36:18.302813568Z",
+            "updated_at": "2026-11-20T04:36:18.302813568Z"
+          },
+          "position": {
+            "position_id": "pos_497d666079cc95058a",
+            "market_order_id": "ord_62cc8fc6622b78b9b3",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 61438.9,
+            "full_margin": 61.438900000000004,
+            "margin_percent": 100,
+            "margin_used": 61.438900000000004,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T04:36:18.302866Z"
+          },
+          "success": true
+        },
+        "_latency": 0.22449195899999808
+      }
+    },
+    {
+      "email": "master2@mailinator.com",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_91d30434a5c3ad282b",
+            "market_order_id": "ord_91d30434a5c3ad282b",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 61438.9,
+            "copy_ref": "ord_91d30434a5c3ad282b",
+            "copy_kind": "master",
+            "created_at": "2026-11-20T04:36:18.387661795Z",
+            "updated_at": "2026-11-20T04:36:18.387661795Z"
+          },
+          "position": {
+            "position_id": "pos_a5f10054cfbae0c647",
+            "market_order_id": "ord_91d30434a5c3ad282b",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 61438.9,
+            "full_margin": 61.438900000000004,
+            "margin_percent": 100,
+            "margin_used": 61.438900000000004,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T04:36:18.387722Z"
+          },
+          "success": true
+        },
+        "_latency": 0.2267676250000008
+      }
+    },
+    {
+      "email": "master2@mailinator.com",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_3e33766a2f63632408",
+            "market_order_id": "ord_3e33766a2f63632408",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 61438.9,
+            "copy_ref": "ord_3e33766a2f63632408",
+            "copy_kind": "master",
+            "created_at": "2026-11-20T04:36:18.40833082Z",
+            "updated_at": "2026-11-20T04:36:18.40833082Z"
+          },
+          "position": {
+            "position_id": "pos_7bb205b3bdf463a404",
+            "market_order_id": "ord_3e33766a2f63632408",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 61438.9,
+            "full_margin": 61.438900000000004,
+            "margin_percent": 100,
+            "margin_used": 61.438900000000004,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T04:36:18.408397Z"
+          },
+          "success": true
+        },
+        "_latency": 0.2518029999999989
+      }
+    },
+    {
+      "email": "master2@mailinator.com",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_cbc7c80f38ef5adb2a",
+            "market_order_id": "ord_cbc7c80f38ef5adb2a",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 61438.9,
+            "copy_ref": "ord_cbc7c80f38ef5adb2a",
+            "copy_kind": "master",
+            "created_at": "2026-11-20T04:36:18.430095317Z",
+            "updated_at": "2026-11-20T04:36:18.430095317Z"
+          },
+          "position": {
+            "position_id": "pos_b5879721f5c3035fc1",
+            "market_order_id": "ord_cbc7c80f38ef5adb2a",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 61438.9,
+            "full_margin": 61.438900000000004,
+            "margin_percent": 100,
+            "margin_used": 61.438900000000004,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T04:36:18.430156Z"
+          },
+          "success": true
+        },
+        "_latency": 0.2680688750000009
+      }
+    },
+    {
+      "email": "master2@mailinator.com",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_64ff5a3677104e8a2f",
+            "market_order_id": "ord_64ff5a3677104e8a2f",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 61438.9,
+            "copy_ref": "ord_64ff5a3677104e8a2f",
+            "copy_kind": "master",
+            "created_at": "2026-11-20T04:36:18.451586101Z",
+            "updated_at": "2026-11-20T04:36:18.451586101Z"
+          },
+          "position": {
+            "position_id": "pos_e61dd3a036c7f2d7cb",
+            "market_order_id": "ord_64ff5a3677104e8a2f",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 61438.9,
+            "full_margin": 61.438900000000004,
+            "margin_percent": 100,
+            "margin_used": 61.438900000000004,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T04:36:18.451645Z"
+          },
+          "success": true
+        },
+        "_latency": 0.27706233299999994
+      }
+    },
+    {
+      "email": "master2@mailinator.com",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_782f4bb8d04ad085f7",
+            "market_order_id": "ord_782f4bb8d04ad085f7",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 61438.9,
+            "copy_ref": "ord_782f4bb8d04ad085f7",
+            "copy_kind": "master",
+            "created_at": "2026-11-20T04:36:18.471374954Z",
+            "updated_at": "2026-11-20T04:36:18.471374954Z"
+          },
+          "position": {
+            "position_id": "pos_31909872b08855ff49",
+            "market_order_id": "ord_782f4bb8d04ad085f7",
+            "symbol": "BINANCE:BTCUSDT.P",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 61438.9,
+            "full_margin": 61.438900000000004,
+            "margin_percent": 100,
+            "margin_used": 61.438900000000004,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T04:36:18.471429Z"
+          },
+          "success": true
+        },
+        "_latency": 0.3396277500000018
+      }
+    },
+    {
+      "email": "master2@mailinator.com",
+      "qty": 0.01,
+      "response": {
+        "status_code": 400,
+        "data": {
+          "error": "{\"error\":\"insufficient free margin: required 61.44, free 51.88\",\"order\":{\"order_id\":\"ord_0f35135a591d672c85\",\"market_order_id\":\"ord_0f35135a591d672c85\",\"symbol\":\"BINANCE:BTCUSDT.P\",\"side\":\"BUY\",\"type\":\"MARKET\",\"state\":\"REJECTED\",\"reject_reason\":\"insufficient free margin: required 61.44, free 51.88\",\"requested_qty\":0.01,\"filled_qty\":0,\"created_at\":\"2026-11-20T04:36:18.520239355Z\",\"updated_at\":\"2026-11-20T04:36:18.520239355Z\"},\"order_id\":\"ord_0f35135a591d672c85\"}\n"
+        },
+        "_latency": 0.3395339170000007
+      }
+    },
+    {
+      "email": "master2@mailinator.com",
+      "qty": 0.01,
+      "response": {
+        "status_code": 400,
+        "data": {
+          "error": "{\"error\":\"insufficient free margin: required 61.44, free 51.88\",\"order\":{\"order_id\":\"ord_e2a57467ddd89a3edf\",\"market_order_id\":\"ord_e2a57467ddd89a3edf\",\"symbol\":\"BINANCE:BTCUSDT.P\",\"side\":\"BUY\",\"type\":\"MARKET\",\"state\":\"REJECTED\",\"reject_reason\":\"insufficient free margin: required 61.44, free 51.88\",\"requested_qty\":0.01,\"filled_qty\":0,\"created_at\":\"2026-11-20T04:36:18.521136037Z\",\"updated_at\":\"2026-11-20T04:36:18.521136037Z\"},\"order_id\":\"ord_e2a57467ddd89a3edf\"}\n"
+        },
+        "_latency": 0.33958991699999785
+      }
+    },
+    {
+      "email": "master2@mailinator.com",
+      "qty": 0.01,
+      "response": {
+        "status_code": 400,
+        "data": {
+          "error": "{\"error\":\"insufficient free margin: required 61.44, free 51.88\",\"order\":{\"order_id\":\"ord_83f70afbb9c647155a\",\"market_order_id\":\"ord_83f70afbb9c647155a\",\"symbol\":\"BINANCE:BTCUSDT.P\",\"side\":\"BUY\",\"type\":\"MARKET\",\"state\":\"REJECTED\",\"reject_reason\":\"insufficient free margin: required 61.44, free 51.88\",\"requested_qty\":0.01,\"filled_qty\":0,\"created_at\":\"2026-11-20T04:36:18.521718509Z\",\"updated_at\":\"2026-11-20T04:36:18.521718509Z\"},\"order_id\":\"ord_83f70afbb9c647155a\"}\n"
+        },
+        "_latency": 0.3379797090000025
+      }
+    },
+    {
+      "email": "master2@mailinator.com",
+      "qty": 0.01,
+      "response": {
+        "status_code": 400,
+        "data": {
+          "error": "{\"error\":\"insufficient free margin: required 61.44, free 51.88\",\"order\":{\"order_id\":\"ord_6c107de4a882d1af76\",\"market_order_id\":\"ord_6c107de4a882d1af76\",\"symbol\":\"BINANCE:BTCUSDT.P\",\"side\":\"BUY\",\"type\":\"MARKET\",\"state\":\"REJECTED\",\"reject_reason\":\"insufficient free margin: required 61.44, free 51.88\",\"requested_qty\":0.01,\"filled_qty\":0,\"created_at\":\"2026-11-20T04:36:18.523717776Z\",\"updated_at\":\"2026-11-20T04:36:18.523717776Z\"},\"order_id\":\"ord_6c107de4a882d1af76\"}\n"
+        },
+        "_latency": 0.33903416600000114
+      }
+    },
+    {
+      "email": "master2@mailinator.com",
+      "qty": 0.01,
+      "response": {
+        "status_code": 400,
+        "data": {
+          "error": "{\"error\":\"insufficient free margin: required 61.44, free 51.88\",\"order\":{\"order_id\":\"ord_e623398ccbc3802572\",\"market_order_id\":\"ord_e623398ccbc3802572\",\"symbol\":\"BINANCE:BTCUSDT.P\",\"side\":\"BUY\",\"type\":\"MARKET\",\"state\":\"REJECTED\",\"reject_reason\":\"insufficient free margin: required 61.44, free 51.88\",\"requested_qty\":0.01,\"filled_qty\":0,\"created_at\":\"2026-11-20T04:36:18.522529523Z\",\"updated_at\":\"2026-11-20T04:36:18.522529523Z\"},\"order_id\":\"ord_e623398ccbc3802572\"}\n"
+        },
+        "_latency": 0.33592450000000085
+      }
+    },
+    {
+      "email": "master2@mailinator.com",
+      "qty": 0.01,
+      "response": {
+        "status_code": 400,
+        "data": {
+          "error": "{\"error\":\"insufficient free margin: required 61.44, free 51.88\",\"order\":{\"order_id\":\"ord_8612a3b93cef524c98\",\"market_order_id\":\"ord_8612a3b93cef524c98\",\"symbol\":\"BINANCE:BTCUSDT.P\",\"side\":\"BUY\",\"type\":\"MARKET\",\"state\":\"REJECTED\",\"reject_reason\":\"insufficient free margin: required 61.44, free 51.88\",\"requested_qty\":0.01,\"filled_qty\":0,\"created_at\":\"2026-11-20T04:36:18.525880844Z\",\"updated_at\":\"2026-11-20T04:36:18.525880844Z\"},\"order_id\":\"ord_8612a3b93cef524c98\"}\n"
+        },
+        "_latency": 0.33826208300000005
+      }
+    },
+    {
+      "email": "master2@mailinator.com",
+      "qty": 0.01,
+      "response": {
+        "status_code": 400,
+        "data": {
+          "error": "{\"error\":\"insufficient free margin: required 61.44, free 51.88\",\"order\":{\"order_id\":\"ord_61982e6acd08000c02\",\"market_order_id\":\"ord_61982e6acd08000c02\",\"symbol\":\"BINANCE:BTCUSDT.P\",\"side\":\"BUY\",\"type\":\"MARKET\",\"state\":\"REJECTED\",\"reject_reason\":\"insufficient free margin: required 61.44, free 51.88\",\"requested_qty\":0.01,\"filled_qty\":0,\"created_at\":\"2026-11-20T04:36:18.525202426Z\",\"updated_at\":\"2026-11-20T04:36:18.525202426Z\"},\"order_id\":\"ord_61982e6acd08000c02\"}\n"
+        },
+        "_latency": 0.3467846250000015
+      }
+    },
+    {
+      "email": "master2@mailinator.com",
+      "qty": 0.01,
+      "response": {
+        "status_code": 400,
+        "data": {
+          "error": "{\"error\":\"insufficient free margin: required 61.44, free 51.88\",\"order\":{\"order_id\":\"ord_bf097dd55c1b619e9e\",\"market_order_id\":\"ord_bf097dd55c1b619e9e\",\"symbol\":\"BINANCE:BTCUSDT.P\",\"side\":\"BUY\",\"type\":\"MARKET\",\"state\":\"REJECTED\",\"reject_reason\":\"insufficient free margin: required 61.44, free 51.88\",\"requested_qty\":0.01,\"filled_qty\":0,\"created_at\":\"2026-11-20T04:36:18.523117388Z\",\"updated_at\":\"2026-11-20T04:36:18.523117388Z\"},\"order_id\":\"ord_bf097dd55c1b619e9e\"}\n"
+        },
+        "_latency": 0.5740660829999982
+      }
+    },
+    {
+      "email": "master2@mailinator.com",
+      "qty": 0.01,
+      "response": {
+        "status_code": 400,
+        "data": {
+          "error": "{\"error\":\"insufficient free margin: required 61.44, free 51.88\",\"order\":{\"order_id\":\"ord_3efea0362fbf85f337\",\"market_order_id\":\"ord_3efea0362fbf85f337\",\"symbol\":\"BINANCE:BTCUSDT.P\",\"side\":\"BUY\",\"type\":\"MARKET\",\"state\":\"REJECTED\",\"reject_reason\":\"insufficient free margin: required 61.44, free 51.88\",\"requested_qty\":0.01,\"filled_qty\":0,\"created_at\":\"2026-11-20T04:36:18.526531023Z\",\"updated_at\":\"2026-11-20T04:36:18.526531023Z\"},\"order_id\":\"ord_3efea0362fbf85f337\"}\n"
+        },
+        "_latency": 0.5682678330000002
+      }
+    }
+  ]
+}

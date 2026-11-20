@@ -1,0 +1,27 @@
+{
+  "suite": "Netting vs Hedging",
+  "timestamp": "2026-11-20T06:07:45.453660+00:00",
+  "symbol": "BINANCE:ETHUSDT.P",
+  "lot": 0.1,
+  "blocks": [
+    {
+      "instance": "real",
+      "mode": "HEDGING",
+      "followers": 1,
+      "note": "temporary links + wallets created for this run",
+      "results": [
+        {
+          "name": "H1 BUY and SELL legs coexist",
+          "status": "PASS",
+          "failures": [],
+          "notes": [
+            "master positions (BUY leg + SELL leg stay separate) = 2",
+            "master long = 0.1",
+            "master short = 0.1",
+            "followers match model: 1/1 OK (master long 0.1, short 0.1, 2 pos)"
+          ]
+        }
+      ]
+    }
+  ]
+}

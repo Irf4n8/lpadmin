@@ -1,0 +1,895 @@
+{
+  "suite": "A-book staging and mixed-book execution",
+  "started_at": "2026-11-20T05:26:32.078632+00:00",
+  "updated_at": "2026-11-20T05:30:02.045388+00:00",
+  "phase": "COMPLETE",
+  "host": "https://lpadmin.blackfx.com",
+  "environment": "staging (user-confirmed)",
+  "instance": "real",
+  "instances": [
+    {
+      "icon": "",
+      "live_adapter": false,
+      "mode": "hedging",
+      "name": "Paper (Hedging)",
+      "netting": false,
+      "real_money": false,
+      "slug": "paper",
+      "venue": "paper"
+    },
+    {
+      "icon": "",
+      "live_adapter": false,
+      "mode": "hedging",
+      "name": "Real (Hedging)",
+      "netting": false,
+      "real_money": true,
+      "slug": "real",
+      "venue": "paper"
+    }
+  ],
+  "summary": {
+    "PASS": 17,
+    "BLOCKED": 1
+  },
+  "cases": [
+    {
+      "tc_id": "AB001",
+      "description": "Switch test accounts to A-book and verify read-back",
+      "preconditions": "User-authorized staging; ten test followers; original state captured.",
+      "steps": "Switch test accounts to A-book and verify read-back",
+      "test_data": "BLACK:EURUSD; qty .01/.02; instance real (hedging)",
+      "expected": "Requested account books are A after successful update.",
+      "actual": "Master and follower1 switched B->A; each admin read-back returned book=a.",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        106
+      ]
+    },
+    {
+      "tc_id": "AB002",
+      "description": "A-book direct BUY market order",
+      "preconditions": "User-authorized staging; ten test followers; original state captured.",
+      "steps": "A-book direct BUY market order",
+      "test_data": "BLACK:EURUSD; qty .01/.02; instance real (hedging)",
+      "expected": "Small BUY is filled on the configured route or explicitly rejected without phantom exposure.",
+      "actual": "A-book account accepted and shows one BUY position; order=ord_0c0fbf072d87349784",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Internal OMS acceptance; independent LP execution checked separately.",
+      "evidence": [
+        456
+      ]
+    },
+    {
+      "tc_id": "AB003",
+      "description": "A-book direct SELL market order",
+      "preconditions": "User-authorized staging; ten test followers; original state captured.",
+      "steps": "A-book direct SELL market order",
+      "test_data": "BLACK:EURUSD; qty .01/.02; instance real (hedging)",
+      "expected": "Small SELL is filled on the configured route or explicitly rejected without phantom exposure.",
+      "actual": "A-book account accepted and shows one SELL position; order=ord_23259641f98e6841d4",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Internal OMS acceptance; independent LP execution checked separately.",
+      "evidence": [
+        514
+      ]
+    },
+    {
+      "tc_id": "AB004",
+      "description": "A-book master to B-book followers",
+      "preconditions": "User-authorized staging; ten test followers; original state captured.",
+      "steps": "A-book master to B-book followers",
+      "test_data": "BLACK:EURUSD; qty .01/.02; instance real (hedging)",
+      "expected": "A filled A-book master order copies exactly once to each B-book follower.",
+      "actual": "A-book master filled ord_bc79ce5fc301ffeb65; B-book follower counts={'f1@mailinator.com': 1, 'f2@mailinator.com': 1, 'f3@mailinator.com': 1, 'f4@mailinator.com': 1, 'f5@mailinator.com': 1, 'f6@mailinator.com': 1, 'f7@mailinator.com': 1, 'f8@mailinator.com': 1, 'f9@mailinator.com': 1, 'f10@mailinator.com': 1}",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Book selection read back; independent broker venue still requires LP evidence.",
+      "evidence": [
+        187
+      ]
+    },
+    {
+      "tc_id": "AB005",
+      "description": "A-book master to A-book follower",
+      "preconditions": "User-authorized staging; ten test followers; original state captured.",
+      "steps": "A-book master to A-book follower",
+      "test_data": "BLACK:EURUSD; qty .01/.02; instance real (hedging)",
+      "expected": "A filled A-book master order copies exactly once to the A-book follower.",
+      "actual": "A-book master filled ord_5c98714442d657796c; A-book follower positions=1",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        257
+      ]
+    },
+    {
+      "tc_id": "AB006",
+      "description": "B-book master to A-book follower",
+      "preconditions": "User-authorized staging; ten test followers; original state captured.",
+      "steps": "B-book master to A-book follower",
+      "test_data": "BLACK:EURUSD; qty .01/.02; instance real (hedging)",
+      "expected": "B-book master fill produces exactly one correctly routed A-book follower copy.",
+      "actual": "B-book master filled ord_64159304ccf62a21f0; A-book follower count=1; all follower counts={'f1@mailinator.com': 1, 'f2@mailinator.com': 1, 'f3@mailinator.com': 1, 'f4@mailinator.com': 1, 'f5@mailinator.com': 1, 'f6@mailinator.com': 1, 'f7@mailinator.com': 1, 'f8@mailinator.com': 1, 'f9@mailinator.com': 1, 'f10@mailinator.com': 1}",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "A-book follower must fill independently of healthy B-book controls.",
+      "evidence": [
+        340
+      ]
+    },
+    {
+      "tc_id": "AB007",
+      "description": "A-book TP/SL changes",
+      "preconditions": "User-authorized staging; ten test followers; original state captured.",
+      "steps": "A-book TP/SL changes",
+      "test_data": "BLACK:EURUSD; qty .01/.02; instance real (hedging)",
+      "expected": "Valid TP/SL changes are acknowledged and visible on the position.",
+      "actual": "TP/SL HTTP200; both prices visible=True; response={'market_order_id': 'ord_a7f630aff0090f4099', 'sl': 1.04293, 'success': True, 'tp': 1.15271, 'trailing': None}",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "API acknowledgment recorded; external broker protection acknowledgment not independently available.",
+      "evidence": [
+        574
+      ]
+    },
+    {
+      "tc_id": "AB008",
+      "description": "A-book partial close",
+      "preconditions": "User-authorized staging; ten test followers; original state captured.",
+      "steps": "A-book partial close",
+      "test_data": "BLACK:EURUSD; qty .01/.02; instance real (hedging)",
+      "expected": "Closing half of .02 leaves .01 without negative quantity or side reversal.",
+      "actual": "Partial-close HTTP200; remaining signed quantity=0.01",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        576
+      ]
+    },
+    {
+      "tc_id": "AB009",
+      "description": "A-book master close propagation",
+      "preconditions": "User-authorized staging; ten test followers; original state captured.",
+      "steps": "A-book master close propagation",
+      "test_data": "BLACK:EURUSD; qty .01/.02; instance real (hedging)",
+      "expected": "Master close removes linked A-book and B-book copied positions.",
+      "actual": "Master close HTTP200; all A/B accounts flat=True",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        270
+      ]
+    },
+    {
+      "tc_id": "AB010",
+      "description": "A-book concurrent duplicate close",
+      "preconditions": "User-authorized staging; ten test followers; original state captured.",
+      "steps": "A-book concurrent duplicate close",
+      "test_data": "BLACK:EURUSD; qty .01/.02; instance real (hedging)",
+      "expected": "One position closes once; no reversal, residual margin or server errors.",
+      "actual": "Close HTTP statuses=[200, 400, 400, 400, 400, 400, 400, 400]; remaining=0; margin=0",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Position/HTTP invariant checked; independent broker cash ledger required for full double-credit reconciliation.",
+      "evidence": [
+        585
+      ]
+    },
+    {
+      "tc_id": "AB011",
+      "description": "A-book concurrent BUY/SELL",
+      "preconditions": "User-authorized staging; ten test followers; original state captured.",
+      "steps": "A-book concurrent BUY/SELL",
+      "test_data": "BLACK:EURUSD; qty .01/.02; instance real (hedging)",
+      "expected": "Two deliberate opposite orders create two distinct hedged positions.",
+      "actual": "HTTP=[200, 200]; positions=[('SELL', 0.01), ('BUY', 0.01)]",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        643
+      ]
+    },
+    {
+      "tc_id": "AB012",
+      "description": "A-book concurrent order burst",
+      "preconditions": "User-authorized staging; ten test followers; original state captured.",
+      "steps": "A-book concurrent order burst",
+      "test_data": "BLACK:EURUSD; qty .01/.02; instance real (hedging)",
+      "expected": "Six deliberate orders have unique IDs and exactly six positions; no phantom duplicates.",
+      "actual": "HTTP=[200, 200, 200, 200, 200, 200]; unique IDs=6; positions=6",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        706
+      ]
+    },
+    {
+      "tc_id": "AB013",
+      "description": "A-book pending LIMIT placement",
+      "preconditions": "User-authorized staging; ten test followers; original state captured.",
+      "steps": "A-book pending LIMIT placement",
+      "test_data": "BLACK:EURUSD; qty .01/.02; instance real (hedging)",
+      "expected": "Valid far-market LIMIT creates one pending order.",
+      "actual": "LIMIT HTTP200; ticket=ord_c1163051050adabbe4; price=0.76847",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        819
+      ]
+    },
+    {
+      "tc_id": "AB014",
+      "description": "A-book pending LIMIT modification",
+      "preconditions": "User-authorized staging; ten test followers; original state captured.",
+      "steps": "A-book pending LIMIT modification",
+      "test_data": "BLACK:EURUSD; qty .01/.02; instance real (hedging)",
+      "expected": "Existing pending price changes without recreating the ticket.",
+      "actual": "Modify HTTP200; target price=0.73005; pending tickets=[('ord_c1163051050adabbe4', 0.73005)]",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        821
+      ]
+    },
+    {
+      "tc_id": "AB015",
+      "description": "A-book concurrent pending cancellation",
+      "preconditions": "User-authorized staging; ten test followers; original state captured.",
+      "steps": "A-book concurrent pending cancellation",
+      "test_data": "BLACK:EURUSD; qty .01/.02; instance real (hedging)",
+      "expected": "Pending order disappears after cancellation; no 5xx or resurrection.",
+      "actual": "Cancel HTTP statuses=[400, 400, 400, 200, 400, 400]; remaining pending=0",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        829
+      ]
+    },
+    {
+      "tc_id": "AB016",
+      "description": "Flat follower book switch while master holds a position",
+      "preconditions": "User-authorized staging; ten test followers; original state captured.",
+      "steps": "Flat follower book switch while master holds a position",
+      "test_data": "BLACK:EURUSD; qty .01/.02; instance real (hedging)",
+      "expected": "Flat follower can switch B to A despite an open position on its master.",
+      "actual": "Follower B->A switch succeeded while follower flat and master position open.",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        193
+      ]
+    },
+    {
+      "tc_id": "AB017",
+      "description": "Independent external LP execution evidence",
+      "preconditions": "User-authorized staging; ten test followers; original state captured.",
+      "steps": "Independent external LP execution evidence",
+      "test_data": "BLACK:EURUSD; qty .01/.02; instance real (hedging)",
+      "expected": "An external broker execution reference and independent reconciliation establish LP execution.",
+      "actual": "Independent LP trade history/execution references and broker ledger were not available through this test kit.",
+      "status": "BLOCKED",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "Instance inventory reports live_adapter=false, venue=paper. Internal FILLED records do not independently certify LP execution.",
+      "evidence": [
+        884
+      ]
+    },
+    {
+      "tc_id": "AB018",
+      "description": "Restore routing and account fixtures",
+      "preconditions": "User-authorized staging; ten test followers; original state captured.",
+      "steps": "Restore routing and account fixtures",
+      "test_data": "BLACK:EURUSD; qty .01/.02; instance real (hedging)",
+      "expected": "Original books, balances, links and statuses restored; all eleven accounts flat.",
+      "actual": "Original routing, balances, links and account status restored; all eleven accounts flat.",
+      "status": "PASS",
+      "severity": "\u2014",
+      "defect_id": "\u2014",
+      "remarks": "",
+      "evidence": [
+        1062
+      ]
+    }
+  ],
+  "evidence_directory": "/Users/irf4n/Copy Trading/lpadmin/reports/evidence/a_book_20261120T052632Z",
+  "external_lp_execution": "Unverified unless an independent broker execution reference is recorded.",
+  "route_observations": [
+    {
+      "account": "master2@mailinator.com",
+      "side": "BUY",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_bc79ce5fc301ffeb65",
+            "market_order_id": "ord_bc79ce5fc301ffeb65",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 1.09787,
+            "copy_ref": "ord_bc79ce5fc301ffeb65",
+            "copy_kind": "master",
+            "created_at": "2026-11-20T05:27:02.19658Z",
+            "updated_at": "2026-11-20T05:27:02.19658Z"
+          },
+          "position": {
+            "position_id": "pos_0db747e40569ebb60c",
+            "market_order_id": "ord_bc79ce5fc301ffeb65",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 1.09787,
+            "full_margin": 10.978699999999998,
+            "margin_percent": 100,
+            "margin_used": 10.978699999999998,
+            "entry_markup": 0,
+            "copy_ref": "ord_bc79ce5fc301ffeb65",
+            "copy_kind": "master",
+            "status": "OPEN",
+            "opened_at": "2026-11-20T05:27:02.19658Z"
+          },
+          "success": true
+        }
+      }
+    },
+    {
+      "account": "master2@mailinator.com",
+      "side": "BUY",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_5c98714442d657796c",
+            "market_order_id": "ord_5c98714442d657796c",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 1.09785,
+            "copy_ref": "ord_5c98714442d657796c",
+            "copy_kind": "master",
+            "created_at": "2026-11-20T05:27:20.016411Z",
+            "updated_at": "2026-11-20T05:27:20.016411Z"
+          },
+          "position": {
+            "position_id": "pos_b42b3d55c3a0e41b83",
+            "market_order_id": "ord_5c98714442d657796c",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 1.09785,
+            "full_margin": 10.978499999999999,
+            "margin_percent": 100,
+            "margin_used": 10.978499999999999,
+            "entry_markup": 0,
+            "copy_ref": "ord_5c98714442d657796c",
+            "copy_kind": "master",
+            "status": "OPEN",
+            "opened_at": "2026-11-20T05:27:20.016411Z"
+          },
+          "success": true
+        }
+      }
+    },
+    {
+      "account": "master2@mailinator.com",
+      "side": "BUY",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_64159304ccf62a21f0",
+            "market_order_id": "ord_64159304ccf62a21f0",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 1.09786,
+            "copy_ref": "ord_64159304ccf62a21f0",
+            "copy_kind": "master",
+            "created_at": "2026-11-20T05:27:34.43303773Z",
+            "updated_at": "2026-11-20T05:27:34.43303773Z"
+          },
+          "position": {
+            "position_id": "pos_8f2ba393a06ef82d46",
+            "market_order_id": "ord_64159304ccf62a21f0",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 1.09786,
+            "full_margin": 10.978600000000002,
+            "margin_percent": 100,
+            "margin_used": 10.978600000000002,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T05:27:34.433107Z"
+          },
+          "success": true
+        }
+      }
+    },
+    {
+      "account": "f1@mailinator.com",
+      "side": "BUY",
+      "qty": 0.02,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_0c0fbf072d87349784",
+            "market_order_id": "ord_0c0fbf072d87349784",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.02,
+            "filled_qty": 0.02,
+            "avg_fill_price": 1.09786,
+            "created_at": "2026-11-20T05:28:01.706569Z",
+            "updated_at": "2026-11-20T05:28:01.706569Z"
+          },
+          "position": {
+            "position_id": "pos_eda39d1c52794f6901",
+            "market_order_id": "ord_0c0fbf072d87349784",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "net_qty": 0.02,
+            "avg_entry_price": 1.09786,
+            "full_margin": 21.957200000000004,
+            "margin_percent": 100,
+            "margin_used": 21.957200000000004,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T05:28:01.706569Z"
+          },
+          "success": true
+        }
+      }
+    },
+    {
+      "account": "f1@mailinator.com",
+      "side": "SELL",
+      "qty": 0.02,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_23259641f98e6841d4",
+            "market_order_id": "ord_23259641f98e6841d4",
+            "symbol": "BLACK:EURUSD",
+            "side": "SELL",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.02,
+            "filled_qty": 0.02,
+            "avg_fill_price": 1.09785,
+            "created_at": "2026-11-20T05:28:14.894309Z",
+            "updated_at": "2026-11-20T05:28:14.894309Z"
+          },
+          "position": {
+            "position_id": "pos_4a50aa151135da31c8",
+            "market_order_id": "ord_23259641f98e6841d4",
+            "symbol": "BLACK:EURUSD",
+            "side": "SELL",
+            "net_qty": 0.02,
+            "avg_entry_price": 1.09785,
+            "full_margin": 21.956999999999997,
+            "margin_percent": 100,
+            "margin_used": 21.956999999999997,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T05:28:14.894309Z"
+          },
+          "success": true
+        }
+      }
+    },
+    {
+      "account": "f1@mailinator.com",
+      "side": "BUY",
+      "qty": 0.02,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_a7f630aff0090f4099",
+            "market_order_id": "ord_a7f630aff0090f4099",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.02,
+            "filled_qty": 0.02,
+            "avg_fill_price": 1.09783,
+            "created_at": "2026-11-20T05:28:27.050628Z",
+            "updated_at": "2026-11-20T05:28:27.050628Z"
+          },
+          "position": {
+            "position_id": "pos_6d9b0693fd5b1ab2c4",
+            "market_order_id": "ord_a7f630aff0090f4099",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "net_qty": 0.02,
+            "avg_entry_price": 1.09783,
+            "full_margin": 21.9566,
+            "margin_percent": 100,
+            "margin_used": 21.9566,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T05:28:27.050628Z"
+          },
+          "success": true
+        }
+      }
+    },
+    {
+      "account": "f1@mailinator.com",
+      "side": "SELL",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_806a5f9cabf972a0b4",
+            "market_order_id": "ord_806a5f9cabf972a0b4",
+            "symbol": "BLACK:EURUSD",
+            "side": "SELL",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 1.09781,
+            "created_at": "2026-11-20T05:28:41.18892Z",
+            "updated_at": "2026-11-20T05:28:41.18892Z"
+          },
+          "position": {
+            "position_id": "pos_aff2ab34811160b700",
+            "market_order_id": "ord_806a5f9cabf972a0b4",
+            "symbol": "BLACK:EURUSD",
+            "side": "SELL",
+            "net_qty": 0.01,
+            "avg_entry_price": 1.09781,
+            "full_margin": 10.9781,
+            "margin_percent": 100,
+            "margin_used": 10.9781,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T05:28:41.18892Z"
+          },
+          "success": true
+        }
+      }
+    },
+    {
+      "account": "f1@mailinator.com",
+      "side": "BUY",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_c218015191382fb395",
+            "market_order_id": "ord_c218015191382fb395",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 1.09782,
+            "created_at": "2026-11-20T05:28:41.056053Z",
+            "updated_at": "2026-11-20T05:28:41.056053Z"
+          },
+          "position": {
+            "position_id": "pos_4a5e964d2ac7706378",
+            "market_order_id": "ord_c218015191382fb395",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 1.09782,
+            "full_margin": 10.9782,
+            "margin_percent": 100,
+            "margin_used": 10.9782,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T05:28:41.056053Z"
+          },
+          "success": true
+        }
+      }
+    },
+    {
+      "account": "f1@mailinator.com",
+      "side": "BUY",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_128fb0a1ac91e8c3fd",
+            "market_order_id": "ord_128fb0a1ac91e8c3fd",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 1.09782,
+            "created_at": "2026-11-20T05:28:56.664419Z",
+            "updated_at": "2026-11-20T05:28:56.664419Z"
+          },
+          "position": {
+            "position_id": "pos_53369a026f73d9eeae",
+            "market_order_id": "ord_128fb0a1ac91e8c3fd",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 1.09782,
+            "full_margin": 10.9782,
+            "margin_percent": 100,
+            "margin_used": 10.9782,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T05:28:56.664419Z"
+          },
+          "success": true
+        }
+      }
+    },
+    {
+      "account": "f1@mailinator.com",
+      "side": "BUY",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_363c72ff2a3786d18a",
+            "market_order_id": "ord_363c72ff2a3786d18a",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 1.09782,
+            "created_at": "2026-11-20T05:28:56.786614Z",
+            "updated_at": "2026-11-20T05:28:56.786614Z"
+          },
+          "position": {
+            "position_id": "pos_7444c2d2e42367ffb8",
+            "market_order_id": "ord_363c72ff2a3786d18a",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 1.09782,
+            "full_margin": 10.9782,
+            "margin_percent": 100,
+            "margin_used": 10.9782,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T05:28:56.786614Z"
+          },
+          "success": true
+        }
+      }
+    },
+    {
+      "account": "f1@mailinator.com",
+      "side": "BUY",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_3088555277ceb43d41",
+            "market_order_id": "ord_3088555277ceb43d41",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 1.09782,
+            "created_at": "2026-11-20T05:28:56.911879Z",
+            "updated_at": "2026-11-20T05:28:56.911879Z"
+          },
+          "position": {
+            "position_id": "pos_fe12935725442e43ff",
+            "market_order_id": "ord_3088555277ceb43d41",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 1.09782,
+            "full_margin": 10.9782,
+            "margin_percent": 100,
+            "margin_used": 10.9782,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T05:28:56.911879Z"
+          },
+          "success": true
+        }
+      }
+    },
+    {
+      "account": "f1@mailinator.com",
+      "side": "BUY",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_ed974c51270d43ac57",
+            "market_order_id": "ord_ed974c51270d43ac57",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 1.09782,
+            "created_at": "2026-11-20T05:28:57.033463Z",
+            "updated_at": "2026-11-20T05:28:57.033463Z"
+          },
+          "position": {
+            "position_id": "pos_af4bbf6ae533ace6d6",
+            "market_order_id": "ord_ed974c51270d43ac57",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 1.09782,
+            "full_margin": 10.9782,
+            "margin_percent": 100,
+            "margin_used": 10.9782,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T05:28:57.033463Z"
+          },
+          "success": true
+        }
+      }
+    },
+    {
+      "account": "f1@mailinator.com",
+      "side": "BUY",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_d51a43c647156dc029",
+            "market_order_id": "ord_d51a43c647156dc029",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 1.09782,
+            "created_at": "2026-11-20T05:28:57.156114Z",
+            "updated_at": "2026-11-20T05:28:57.156114Z"
+          },
+          "position": {
+            "position_id": "pos_00f7d5f20710cbb495",
+            "market_order_id": "ord_d51a43c647156dc029",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 1.09782,
+            "full_margin": 10.9782,
+            "margin_percent": 100,
+            "margin_used": 10.9782,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T05:28:57.156114Z"
+          },
+          "success": true
+        }
+      }
+    },
+    {
+      "account": "f1@mailinator.com",
+      "side": "BUY",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_df5afe0c444d9b681d",
+            "market_order_id": "ord_df5afe0c444d9b681d",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.01,
+            "filled_qty": 0.01,
+            "avg_fill_price": 1.09782,
+            "created_at": "2026-11-20T05:28:57.277179Z",
+            "updated_at": "2026-11-20T05:28:57.277179Z"
+          },
+          "position": {
+            "position_id": "pos_c2ab42601addf84f13",
+            "market_order_id": "ord_df5afe0c444d9b681d",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "net_qty": 0.01,
+            "avg_entry_price": 1.09782,
+            "full_margin": 10.9782,
+            "margin_percent": 100,
+            "margin_used": 10.9782,
+            "entry_markup": 0,
+            "status": "OPEN",
+            "opened_at": "2026-11-20T05:28:57.277179Z"
+          },
+          "success": true
+        }
+      }
+    },
+    {
+      "account": "f1@mailinator.com",
+      "side": "BUY",
+      "qty": 0.01,
+      "response": {
+        "status_code": 200,
+        "data": {
+          "order": {
+            "order_id": "ord_c1163051050adabbe4",
+            "market_order_id": "ord_c1163051050adabbe4",
+            "symbol": "BLACK:EURUSD",
+            "side": "BUY",
+            "type": "LIMIT",
+            "state": "PENDING",
+            "requested_qty": 0.01,
+            "filled_qty": 0,
+            "price": 0.76847,
+            "created_at": "2026-11-20T05:29:17.510430876Z",
+            "updated_at": "2026-11-20T05:29:17.510430876Z"
+          },
+          "success": true
+        }
+      }
+    }
+  ]
+}

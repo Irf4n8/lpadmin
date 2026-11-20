@@ -1,0 +1,162 @@
+{
+  "started": "2026-11-19T10:33:43.880119+00:00",
+  "account": "netqa1@mailinator.com",
+  "instance": "real-net",
+  "actions": [],
+  "before": {
+    "count": 0,
+    "funds": {
+      "balance": 200,
+      "equity": 200,
+      "free_margin": 200,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 200,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "entry": {
+    "status_code": 200,
+    "data": {
+      "netting": {
+        "action": "open",
+        "remaining_qty": 0.001
+      },
+      "order": {
+        "order_id": "ord_01277feeabe2e4bbad",
+        "market_order_id": "ord_01277feeabe2e4bbad",
+        "symbol": "BINANCE:BTCUSDT.P",
+        "side": "BUY",
+        "type": "MARKET",
+        "state": "FILLED",
+        "requested_qty": 0.001,
+        "filled_qty": 0.001,
+        "avg_fill_price": 63785.1,
+        "created_at": "2026-11-19T10:33:45.313316247Z",
+        "updated_at": "2026-11-19T10:33:45.313316247Z"
+      },
+      "position": {
+        "position_id": "pos_a9e699fe2d4e98eafb",
+        "market_order_id": "ord_01277feeabe2e4bbad",
+        "symbol": "BINANCE:BTCUSDT.P",
+        "side": "BUY",
+        "net_qty": 0.001,
+        "avg_entry_price": 63785.1,
+        "full_margin": 6.37851,
+        "margin_percent": 100,
+        "margin_used": 6.37851,
+        "entry_markup": 0,
+        "status": "OPEN",
+        "opened_at": "2026-11-19T10:33:45.313475Z"
+      },
+      "success": true
+    }
+  },
+  "position_before_race": {
+    "count": 1,
+    "funds": {
+      "balance": 200,
+      "equity": 199.9991,
+      "free_margin": 193.62059,
+      "margin_call_level": 100,
+      "margin_level": 3135.5144069696526,
+      "starting_balance": 200,
+      "stop_out_level": 50,
+      "unrealized_pnl": -0.0009000000000014552,
+      "used_margin": 6.37851
+    },
+    "positions": [
+      {
+        "algo_id": null,
+        "avg_entry_price": 63785.1,
+        "closed_at": null,
+        "comment": null,
+        "current_price": 63784.2,
+        "full_margin": 6.37851,
+        "group_id": null,
+        "margin_percent": 100,
+        "margin_used": 6.37851,
+        "market_order_id": "ord_01277feeabe2e4bbad",
+        "net_qty": 0.001,
+        "oco_key": null,
+        "opened_at": "2026-11-19T10:33:45.313475Z",
+        "position_id": "pos_a9e699fe2d4e98eafb",
+        "side": "BUY",
+        "source": null,
+        "status": "OPEN",
+        "strategy_name": null,
+        "symbol": "BINANCE:BTCUSDT.P",
+        "tag": null,
+        "trailing": null,
+        "unrealized_pnl": -0.0009000000000014552
+      }
+    ],
+    "success": true,
+    "total_unrealized_pnl": -0.0009000000000014552
+  },
+  "squareoff": {
+    "status_code": 200,
+    "data": {
+      "exit_price": 63784.2,
+      "market_order_id": "ord_01277feeabe2e4bbad",
+      "price_source": "live",
+      "realized_pnl": -0.0009000000000014552,
+      "success": true,
+      "symbol": "BINANCE:BTCUSDT.P"
+    }
+  },
+  "transfer": {
+    "status_code": 400,
+    "data": {
+      "error": "wallet must be client or ib"
+    }
+  },
+  "after_race": {
+    "count": 0,
+    "funds": {
+      "balance": 196.9991,
+      "equity": 196.9991,
+      "free_margin": 196.9991,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 200,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "wallet_history": {
+    "status_code": 200,
+    "data": {
+      "count": 0,
+      "history": [],
+      "success": true
+    }
+  },
+  "after_cleanup": {
+    "count": 0,
+    "funds": {
+      "balance": 196.9991,
+      "equity": 196.9991,
+      "free_margin": 196.9991,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 200,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "positions": [],
+    "success": true,
+    "total_unrealized_pnl": 0
+  },
+  "finished": "2026-11-19T10:33:49.972516+00:00"
+}

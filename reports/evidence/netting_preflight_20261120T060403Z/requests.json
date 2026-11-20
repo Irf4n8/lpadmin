@@ -1,0 +1,267 @@
+[
+  {
+    "time": "2026-11-20T06:04:04.442168+00:00",
+    "method": "GET",
+    "path": "/v1/oms/_instances",
+    "account": "master2@mailinator.com",
+    "broker_header": null,
+    "status_code": 200,
+    "data": {
+      "instances": [
+        {
+          "icon": "",
+          "live_adapter": false,
+          "mode": "hedging",
+          "name": "Paper (Hedging)",
+          "netting": false,
+          "real_money": false,
+          "slug": "paper",
+          "venue": "paper"
+        },
+        {
+          "icon": "",
+          "live_adapter": false,
+          "mode": "hedging",
+          "name": "Real (Hedging)",
+          "netting": false,
+          "real_money": true,
+          "slug": "real",
+          "venue": "paper"
+        }
+      ]
+    }
+  },
+  {
+    "time": "2026-11-20T06:04:04.685310+00:00",
+    "method": "GET",
+    "path": "/admin/api/instances",
+    "account": null,
+    "broker_header": null,
+    "status_code": 200,
+    "data": {
+      "instances": [
+        {
+          "broker": "paper",
+          "enabled": true,
+          "exists": true,
+          "icon": "",
+          "label": "Paper (Hedging)",
+          "mode": "hedging",
+          "name": "Paper (Hedging)",
+          "product": "papertrade_gross",
+          "real_money": false,
+          "slug": "paper",
+          "venue": "paper",
+          "visible": true
+        },
+        {
+          "broker": "real",
+          "enabled": true,
+          "exists": true,
+          "icon": "",
+          "label": "Real (Hedging)",
+          "mode": "hedging",
+          "name": "Real (Hedging)",
+          "product": "whitelabel_gross",
+          "real_money": true,
+          "slug": "real",
+          "venue": "paper",
+          "visible": true
+        },
+        {
+          "broker": "paper-net",
+          "enabled": true,
+          "exists": true,
+          "icon": "",
+          "label": "Paper (Netting)",
+          "mode": "netting",
+          "name": "Paper (Netting)",
+          "product": "papertrade_net",
+          "real_money": false,
+          "slug": "paper-net",
+          "venue": "paper",
+          "visible": true
+        },
+        {
+          "broker": "real-net",
+          "enabled": true,
+          "exists": true,
+          "icon": "",
+          "label": "Real (Netting)",
+          "mode": "netting",
+          "name": "Real (Netting)",
+          "product": "whitelabel_net",
+          "real_money": true,
+          "slug": "real-net",
+          "venue": "paper",
+          "visible": true
+        },
+        {
+          "broker": "binance",
+          "enabled": false,
+          "exists": false,
+          "icon": "",
+          "label": "Binance",
+          "mode": "netting",
+          "name": "Binance",
+          "product": "papertrade_gross",
+          "real_money": true,
+          "slug": "binance",
+          "venue": "binance",
+          "visible": false
+        },
+        {
+          "broker": "zerodha",
+          "enabled": false,
+          "exists": false,
+          "icon": "",
+          "label": "Zerodha",
+          "mode": "netting",
+          "name": "Zerodha",
+          "product": "papertrade_gross",
+          "real_money": true,
+          "slug": "zerodha",
+          "venue": "zerodha",
+          "visible": false
+        },
+        {
+          "broker": "coinbase",
+          "enabled": false,
+          "exists": false,
+          "icon": "",
+          "label": "Coinbase",
+          "mode": "hedging",
+          "name": "Coinbase",
+          "product": "papertrade_gross",
+          "real_money": false,
+          "slug": "coinbase",
+          "venue": "coinbase",
+          "visible": false
+        }
+      ]
+    }
+  },
+  {
+    "path": "/api/config",
+    "selected_nonsecret_fields": {
+      "oms_domain": "https://lpadmin.blackfx.com/v1/oms",
+      "engine_choice": {
+        "paper": true,
+        "real": true
+      }
+    }
+  },
+  {
+    "time": "2026-11-20T06:04:04.894013+00:00",
+    "method": "GET",
+    "path": "/v1/oms/real-net/positions",
+    "account": "master2@mailinator.com",
+    "broker_header": "real-net",
+    "status_code": 404,
+    "data": {
+      "error": "no such OMS instance: real-net"
+    }
+  },
+  {
+    "time": "2026-11-20T06:04:04.977585+00:00",
+    "method": "GET",
+    "path": "/v1/oms/real-net/orders",
+    "account": "master2@mailinator.com",
+    "broker_header": "real-net",
+    "status_code": 404,
+    "data": {
+      "error": "no such OMS instance: real-net"
+    }
+  },
+  {
+    "time": "2026-11-20T06:04:05.289969+00:00",
+    "method": "GET",
+    "path": "/v1/oms/real-net/positions",
+    "account": "f1@mailinator.com",
+    "broker_header": "real-net",
+    "status_code": 404,
+    "data": {
+      "error": "no such OMS instance: real-net"
+    }
+  },
+  {
+    "time": "2026-11-20T06:04:05.369729+00:00",
+    "method": "GET",
+    "path": "/v1/oms/real-net/orders",
+    "account": "f1@mailinator.com",
+    "broker_header": "real-net",
+    "status_code": 404,
+    "data": {
+      "error": "no such OMS instance: real-net"
+    }
+  },
+  {
+    "time": "2026-11-20T06:04:05.443604+00:00",
+    "method": "GET",
+    "path": "/v1/oms/paper-net/positions",
+    "account": "master2@mailinator.com",
+    "broker_header": "paper-net",
+    "status_code": 404,
+    "data": {
+      "error": "no such OMS instance: paper-net"
+    }
+  },
+  {
+    "time": "2026-11-20T06:04:05.498197+00:00",
+    "method": "GET",
+    "path": "/v1/oms/paper-net/orders",
+    "account": "master2@mailinator.com",
+    "broker_header": "paper-net",
+    "status_code": 404,
+    "data": {
+      "error": "no such OMS instance: paper-net"
+    }
+  },
+  {
+    "time": "2026-11-20T06:04:05.575702+00:00",
+    "method": "GET",
+    "path": "/v1/oms/paper-net/positions",
+    "account": "f1@mailinator.com",
+    "broker_header": "paper-net",
+    "status_code": 404,
+    "data": {
+      "error": "no such OMS instance: paper-net"
+    }
+  },
+  {
+    "time": "2026-11-20T06:04:05.627463+00:00",
+    "method": "GET",
+    "path": "/v1/oms/paper-net/orders",
+    "account": "f1@mailinator.com",
+    "broker_header": "paper-net",
+    "status_code": 404,
+    "data": {
+      "error": "no such OMS instance: paper-net"
+    }
+  },
+  {
+    "time": "2026-11-20T06:04:05.683919+00:00",
+    "method": "GET",
+    "path": "/v1/oms/real/positions",
+    "account": "master2@mailinator.com",
+    "broker_header": "real",
+    "status_code": 200,
+    "data": {
+      "count": 0,
+      "funds": {
+        "balance": 693.6513999999986,
+        "equity": 693.6513999999986,
+        "free_margin": 693.6513999999986,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 693.6513999999986,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "positions": [],
+      "success": true,
+      "total_unrealized_pnl": 0
+    }
+  }
+]

@@ -1,0 +1,245 @@
+N
+Default
+▾
+Watchlist
+W1
+W2
+W3
+W4
+W5
+Watchlist 1
+Columns
+Original
+Note
+No symbols yet — search above to add one
+Chart
+SAVE
+BTCUSDT.P
+1 Min
+Indicators
+	
+BINANCE:BTCUSDT.P
+|
+1m
+|
+O:
+61866
+H:
+61889
+L:
+61828.3
+C:
+61889
+61766.3
+61766.4
+S
+0.001
+B
+	
+
+	
+	
+Trades
+Trades
+All
+0
+Paper (Hedging)
+0
+Paper (Netting)
+0
+Positions
+Pending
+Orders
+History
+Funds
+	Symbol	Order ID	Qty.	Avg.	SL	TSL	TP	LTP	P&L	Time
+No positions found
+
+Paper (Hedging)
+Balance
+1,000,000.00
+Equity
+1,000,000.00
+Used margin
+0.00
+Free margin
+1,000,000.00
+Margin level
+N/A
+	P&L	+0.00	
+Copy trading
+Copy trading
+Standard
+Real (Hedging)
+Real (Hedging)
+Real (Netting)
+Copy managers
+My subscription1
+ctmaster
+1
+10.5k
+1
+100
+12.5k
+-82.00
+Follow
+masterlpcheck
+2
+215.99
+1
+1
+0.00
+1.00M
+Follow
+LPM
+3
+30.09
+1
+0
+0.33
+1.00M
+Follow
+sdv
+4
+0.18
+1
+108
+0.00
+63.9k
+Follow
+Devi
+5
+0.00
+1
+108
+0.00
+53.5k
+Follow
+lpadmin master
+5
+0.00
+1
+0
+0.00
+50.0k
+Follow
+masternet22
+5
+0.00
+0
+0
+0.00
+0.00
+Follow
+Netting QA Master
+5
+0.00
+0
+0
+0.00
+0.00
+Follow
+Netting QA Copy Master
+5
+0.00
+0
+0
+0.00
+0.00
+Edit
+copytradingmaster
+10
+-0.02
+1
+0
+0.02
+9,999.98
+Follow
+actmaster
+11
+-23.01
+1
+0
+23.01
+10.00M
+Follow
+testmastertt
+12
+-26.49
+1
+0
+26.49
+100.1k
+Follow
+master2
+13
+-48.13
+0
+10
+59.17
+100.00M
+Follow
+hmaster
+14
+-99.72
+0
+10
+99.72
+999.6k
+Follow
+masterct
+15
+-110.00
+1
+0
+110.00
+0.00
+Follow
+bttest
+16
+-235.34
+1
+1
+383.39
+9,775.14
+Follow
+lpadmin master M
+17
+-282.93
+2
+0
+282.96
+98.97M
+Follow
+Alpha Master Desk
+18
+-766.35
+0
+1
+766.35
+999.0k
+Follow
+Raj Test private
+19
+-1,163.46
+2
+42
+1,163.46
+11.6k
+Follow
+mammaster
+20
+-35.0k
+1
+0
+35.1k
+10.08M
+Follow
+mtm
+21
+-224.4k
+0
+0
+224.8k
+100.34M
+Follow

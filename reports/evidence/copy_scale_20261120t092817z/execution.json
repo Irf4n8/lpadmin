@@ -1,0 +1,8 @@
+{
+  "suite": "Isolated Copy Trading 100-follower scale",
+  "host": "https://lpadmin.blackfx.com",
+  "timestamp": "20261120t092817z",
+  "cases": [],
+  "cleanup_verified": false,
+  "evidence_directory": "/Users/irf4n/Copy Trading/lpadmin/reports/evidence/copy_scale_20261120t092817z"
+}

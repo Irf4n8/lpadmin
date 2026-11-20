@@ -1,0 +1,57 @@
+{
+  "restored": true,
+  "accounts": {
+    "netqa.20261120t053625z.master@mailinator.com": {
+      "ok": true,
+      "positions": 0,
+      "funds": {
+        "balance": 0,
+        "equity": 0,
+        "free_margin": 0,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 0,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "book": "b",
+      "active_follows": 0
+    },
+    "netqa.20261120t053625z.follower1@mailinator.com": {
+      "ok": true,
+      "positions": 0,
+      "funds": {
+        "balance": 0,
+        "equity": 0,
+        "free_margin": 0,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 0,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "book": "b",
+      "active_follows": 0
+    },
+    "netqa.20261120t053625z.follower2@mailinator.com": {
+      "ok": true,
+      "positions": 0,
+      "funds": {
+        "balance": 0,
+        "equity": 0,
+        "free_margin": 0,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 0,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "book": "b",
+      "active_follows": 0
+    }
+  },
+  "retained": "Fresh test accounts and master roles retained; newly created follower links ended. Existing accounts never changed."
+}

@@ -1,0 +1,822 @@
+{
+  "scope": "Every executed check has an existing source script. Planned manual/unexecuted cases are not claimed scripted or tested.",
+  "current_scope": "Copy Trading only; no MAM/PAMM product execution",
+  "entries": [
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-F004",
+      "status": "BLOCKED",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-F005",
+      "status": "BLOCKED",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-F006",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-F007",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-F008",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-F009",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-F010",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-F011",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-F012",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-F013",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt --extend-latest --only-groups focused",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-F014",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-F015",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-F017",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt --extend-latest --only-groups focused",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-F018",
+      "status": "BLOCKED",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-F019",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt --extend-latest --only-groups focused",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-F025",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-F030",
+      "status": "BLOCKED",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt --extend-latest --only-groups financial",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-C002",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-C003",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-C004",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-C007",
+      "status": "FAIL",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-C008",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-C014",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-C015",
+      "status": "BLOCKED",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-C016",
+      "status": "BLOCKED",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-R001",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-R002",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-R003",
+      "status": "BLOCKED",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-R004",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-R005",
+      "status": "BLOCKED",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-R008",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-R011",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt --extend-latest --only-groups focused",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-R018",
+      "status": "BLOCKED",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-R019",
+      "status": "FAIL",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-R020",
+      "status": "FAIL",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-R021",
+      "status": "BLOCKED",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-R023",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt --extend-latest --only-groups administrative",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-R025",
+      "status": "BLOCKED",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-R032",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-R049",
+      "status": "BLOCKED",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-R051",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-R053",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-R054",
+      "status": "BLOCKED",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt --extend-latest --only-groups administrative",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-R075",
+      "status": "BLOCKED",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-N003",
+      "status": "FAIL",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-N005",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt --extend-latest --only-groups focused",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-N006",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt --extend-latest --only-groups administrative",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-N008",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt --extend-latest --only-groups focused",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-N009",
+      "status": "FAIL",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt --extend-latest --only-groups administrative",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-N010",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-N011",
+      "status": "BLOCKED",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-N012",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-N014",
+      "status": "FAIL",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-P001",
+      "status": "BLOCKED",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt --extend-latest --only-groups financial",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-P002",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt --extend-latest --only-groups financial",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-P003",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt --extend-latest --only-groups financial",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading B-book matrix",
+      "tc_id": "CT-P009",
+      "status": "PASS",
+      "script": "test_suite/staging_master_spec_runner.py",
+      "command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Uses the originally configured test cohort; group/full-suite command includes this case. Partial evidence remains partial."
+    },
+    {
+      "scope": "Historical Copy Trading A-book routing",
+      "tc_id": "AB001",
+      "status": "PASS",
+      "script": "test_suite/a_book_staging_runner.py",
+      "command": ".venv/bin/python test_suite/a_book_staging_runner.py --confirm-staging-a-book --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Runs the A-book suite on the configured staging cohort; includes original-state restoration."
+    },
+    {
+      "scope": "Historical Copy Trading A-book routing",
+      "tc_id": "AB002",
+      "status": "PASS",
+      "script": "test_suite/a_book_staging_runner.py",
+      "command": ".venv/bin/python test_suite/a_book_staging_runner.py --confirm-staging-a-book --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Runs the A-book suite on the configured staging cohort; includes original-state restoration."
+    },
+    {
+      "scope": "Historical Copy Trading A-book routing",
+      "tc_id": "AB003",
+      "status": "PASS",
+      "script": "test_suite/a_book_staging_runner.py",
+      "command": ".venv/bin/python test_suite/a_book_staging_runner.py --confirm-staging-a-book --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Runs the A-book suite on the configured staging cohort; includes original-state restoration."
+    },
+    {
+      "scope": "Historical Copy Trading A-book routing",
+      "tc_id": "AB004",
+      "status": "PASS",
+      "script": "test_suite/a_book_staging_runner.py",
+      "command": ".venv/bin/python test_suite/a_book_staging_runner.py --confirm-staging-a-book --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Runs the A-book suite on the configured staging cohort; includes original-state restoration."
+    },
+    {
+      "scope": "Historical Copy Trading A-book routing",
+      "tc_id": "AB005",
+      "status": "PASS",
+      "script": "test_suite/a_book_staging_runner.py",
+      "command": ".venv/bin/python test_suite/a_book_staging_runner.py --confirm-staging-a-book --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Runs the A-book suite on the configured staging cohort; includes original-state restoration."
+    },
+    {
+      "scope": "Historical Copy Trading A-book routing",
+      "tc_id": "AB006",
+      "status": "PASS",
+      "script": "test_suite/a_book_staging_runner.py",
+      "command": ".venv/bin/python test_suite/a_book_staging_runner.py --confirm-staging-a-book --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Runs the A-book suite on the configured staging cohort; includes original-state restoration."
+    },
+    {
+      "scope": "Historical Copy Trading A-book routing",
+      "tc_id": "AB007",
+      "status": "PASS",
+      "script": "test_suite/a_book_staging_runner.py",
+      "command": ".venv/bin/python test_suite/a_book_staging_runner.py --confirm-staging-a-book --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Runs the A-book suite on the configured staging cohort; includes original-state restoration."
+    },
+    {
+      "scope": "Historical Copy Trading A-book routing",
+      "tc_id": "AB008",
+      "status": "PASS",
+      "script": "test_suite/a_book_staging_runner.py",
+      "command": ".venv/bin/python test_suite/a_book_staging_runner.py --confirm-staging-a-book --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Runs the A-book suite on the configured staging cohort; includes original-state restoration."
+    },
+    {
+      "scope": "Historical Copy Trading A-book routing",
+      "tc_id": "AB009",
+      "status": "PASS",
+      "script": "test_suite/a_book_staging_runner.py",
+      "command": ".venv/bin/python test_suite/a_book_staging_runner.py --confirm-staging-a-book --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Runs the A-book suite on the configured staging cohort; includes original-state restoration."
+    },
+    {
+      "scope": "Historical Copy Trading A-book routing",
+      "tc_id": "AB010",
+      "status": "PASS",
+      "script": "test_suite/a_book_staging_runner.py",
+      "command": ".venv/bin/python test_suite/a_book_staging_runner.py --confirm-staging-a-book --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Runs the A-book suite on the configured staging cohort; includes original-state restoration."
+    },
+    {
+      "scope": "Historical Copy Trading A-book routing",
+      "tc_id": "AB011",
+      "status": "PASS",
+      "script": "test_suite/a_book_staging_runner.py",
+      "command": ".venv/bin/python test_suite/a_book_staging_runner.py --confirm-staging-a-book --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Runs the A-book suite on the configured staging cohort; includes original-state restoration."
+    },
+    {
+      "scope": "Historical Copy Trading A-book routing",
+      "tc_id": "AB012",
+      "status": "PASS",
+      "script": "test_suite/a_book_staging_runner.py",
+      "command": ".venv/bin/python test_suite/a_book_staging_runner.py --confirm-staging-a-book --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Runs the A-book suite on the configured staging cohort; includes original-state restoration."
+    },
+    {
+      "scope": "Historical Copy Trading A-book routing",
+      "tc_id": "AB013",
+      "status": "PASS",
+      "script": "test_suite/a_book_staging_runner.py",
+      "command": ".venv/bin/python test_suite/a_book_staging_runner.py --confirm-staging-a-book --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Runs the A-book suite on the configured staging cohort; includes original-state restoration."
+    },
+    {
+      "scope": "Historical Copy Trading A-book routing",
+      "tc_id": "AB014",
+      "status": "PASS",
+      "script": "test_suite/a_book_staging_runner.py",
+      "command": ".venv/bin/python test_suite/a_book_staging_runner.py --confirm-staging-a-book --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Runs the A-book suite on the configured staging cohort; includes original-state restoration."
+    },
+    {
+      "scope": "Historical Copy Trading A-book routing",
+      "tc_id": "AB015",
+      "status": "PASS",
+      "script": "test_suite/a_book_staging_runner.py",
+      "command": ".venv/bin/python test_suite/a_book_staging_runner.py --confirm-staging-a-book --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Runs the A-book suite on the configured staging cohort; includes original-state restoration."
+    },
+    {
+      "scope": "Historical Copy Trading A-book routing",
+      "tc_id": "AB016",
+      "status": "PASS",
+      "script": "test_suite/a_book_staging_runner.py",
+      "command": ".venv/bin/python test_suite/a_book_staging_runner.py --confirm-staging-a-book --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Runs the A-book suite on the configured staging cohort; includes original-state restoration."
+    },
+    {
+      "scope": "Historical Copy Trading A-book routing",
+      "tc_id": "AB017",
+      "status": "BLOCKED",
+      "script": "test_suite/a_book_staging_runner.py",
+      "command": ".venv/bin/python test_suite/a_book_staging_runner.py --confirm-staging-a-book --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Runs the A-book suite on the configured staging cohort; includes original-state restoration."
+    },
+    {
+      "scope": "Historical Copy Trading A-book routing",
+      "tc_id": "AB018",
+      "status": "PASS",
+      "script": "test_suite/a_book_staging_runner.py",
+      "command": ".venv/bin/python test_suite/a_book_staging_runner.py --confirm-staging-a-book --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt",
+      "notes": "Runs the A-book suite on the configured staging cohort; includes original-state restoration."
+    },
+    {
+      "scope": "Copy Trading netting / fresh accounts",
+      "tc_id": "NT-B-N1",
+      "status": "PASS",
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books b --only N1 --recheck",
+      "notes": "Only fresh-account manifest; MAM/PAMM rejected by the case selector."
+    },
+    {
+      "scope": "Copy Trading netting / fresh accounts",
+      "tc_id": "NT-B-N2",
+      "status": "PASS",
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books b --only N2 --recheck",
+      "notes": "Only fresh-account manifest; MAM/PAMM rejected by the case selector."
+    },
+    {
+      "scope": "Copy Trading netting / fresh accounts",
+      "tc_id": "NT-B-N3",
+      "status": "PASS",
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books b --only N3 --recheck",
+      "notes": "Only fresh-account manifest; MAM/PAMM rejected by the case selector."
+    },
+    {
+      "scope": "Copy Trading netting / fresh accounts",
+      "tc_id": "NT-B-N4",
+      "status": "PASS",
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books b --only N4 --recheck",
+      "notes": "Only fresh-account manifest; MAM/PAMM rejected by the case selector."
+    },
+    {
+      "scope": "Copy Trading netting / fresh accounts",
+      "tc_id": "NT-B-N5",
+      "status": "FAIL",
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books b --only N5 --recheck",
+      "notes": "Only fresh-account manifest; MAM/PAMM rejected by the case selector."
+    },
+    {
+      "scope": "Copy Trading netting / fresh accounts",
+      "tc_id": "NT-B-P1",
+      "status": "FAIL",
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books b --only P1 --recheck",
+      "notes": "Only fresh-account manifest; MAM/PAMM rejected by the case selector."
+    },
+    {
+      "scope": "Copy Trading netting / fresh accounts",
+      "tc_id": "NT-B-C1",
+      "status": "PASS",
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books b --only C1 --recheck",
+      "notes": "Only fresh-account manifest; MAM/PAMM rejected by the case selector."
+    },
+    {
+      "scope": "Copy Trading netting / fresh accounts",
+      "tc_id": "NT-B-ISOLATION",
+      "status": "PASS",
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books b --only ISOLATION --recheck",
+      "notes": "Only fresh-account manifest; MAM/PAMM rejected by the case selector."
+    },
+    {
+      "scope": "Copy Trading netting / fresh accounts",
+      "tc_id": "NT-B-ROUTING",
+      "status": "PASS",
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books b --only ROUTING --recheck",
+      "notes": "Only fresh-account manifest; MAM/PAMM rejected by the case selector."
+    },
+    {
+      "scope": "Copy Trading netting / fresh accounts",
+      "tc_id": "NT-A-N1",
+      "status": "PASS",
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books a --only N1 --recheck",
+      "notes": "Only fresh-account manifest; MAM/PAMM rejected by the case selector."
+    },
+    {
+      "scope": "Copy Trading netting / fresh accounts",
+      "tc_id": "NT-A-N2",
+      "status": "PASS",
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books a --only N2 --recheck",
+      "notes": "Only fresh-account manifest; MAM/PAMM rejected by the case selector."
+    },
+    {
+      "scope": "Copy Trading netting / fresh accounts",
+      "tc_id": "NT-A-N3",
+      "status": "PASS",
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books a --only N3 --recheck",
+      "notes": "Only fresh-account manifest; MAM/PAMM rejected by the case selector."
+    },
+    {
+      "scope": "Copy Trading netting / fresh accounts",
+      "tc_id": "NT-A-N4",
+      "status": "PASS",
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books a --only N4 --recheck",
+      "notes": "Only fresh-account manifest; MAM/PAMM rejected by the case selector."
+    },
+    {
+      "scope": "Copy Trading netting / fresh accounts",
+      "tc_id": "NT-A-N5",
+      "status": "FAIL",
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books a --only N5 --recheck",
+      "notes": "Only fresh-account manifest; MAM/PAMM rejected by the case selector."
+    },
+    {
+      "scope": "Copy Trading netting / fresh accounts",
+      "tc_id": "NT-A-P1",
+      "status": "FAIL",
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books a --only P1 --recheck",
+      "notes": "Only fresh-account manifest; MAM/PAMM rejected by the case selector."
+    },
+    {
+      "scope": "Copy Trading netting / fresh accounts",
+      "tc_id": "NT-A-C1",
+      "status": "FAIL",
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books a --only C1 --recheck",
+      "notes": "Only fresh-account manifest; MAM/PAMM rejected by the case selector."
+    },
+    {
+      "scope": "Copy Trading netting / fresh accounts",
+      "tc_id": "NT-A-ISOLATION",
+      "status": "PASS",
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books a --only ISOLATION --recheck",
+      "notes": "Only fresh-account manifest; MAM/PAMM rejected by the case selector."
+    },
+    {
+      "scope": "Copy Trading netting / fresh accounts",
+      "tc_id": "NT-A-ROUTING",
+      "status": "PASS",
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json --books a --only ROUTING --recheck",
+      "notes": "Only fresh-account manifest; MAM/PAMM rejected by the case selector."
+    },
+    {
+      "scope": "Copy Trading netting / fresh accounts",
+      "tc_id": "NT-SETUP",
+      "status": "PASS",
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json",
+      "notes": "Only fresh-account manifest; MAM/PAMM rejected by the case selector."
+    },
+    {
+      "scope": "Copy Trading netting / fresh accounts",
+      "tc_id": "NT-RESTORE",
+      "status": "PASS",
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json",
+      "notes": "Only fresh-account manifest; MAM/PAMM rejected by the case selector."
+    },
+    {
+      "scope": "Copy Trading netting / fresh accounts",
+      "tc_id": "NT-LP",
+      "status": "BLOCKED",
+      "script": "test_suite/fresh_netting_staging_runner.py",
+      "command": ".venv/bin/python test_suite/fresh_netting_staging_runner.py --confirm-staging --accounts reports/netting_fresh_accounts.json",
+      "notes": "Only fresh-account manifest; MAM/PAMM rejected by the case selector."
+    },
+    {
+      "scope": "Local concurrency",
+      "tc_id": "RACE_001\u2013008",
+      "status": "PASS",
+      "script": "tests/test_concurrency.py",
+      "command": ".venv/bin/python -m pytest tests/test_concurrency.py -v",
+      "notes": "Offline/mocked; no product trades."
+    },
+    {
+      "scope": "Earlier live race suite",
+      "tc_id": "B1\u2013B11",
+      "status": "See archived evidence",
+      "script": "test_suite/breakpoint_race_runner.py",
+      "command": ".venv/bin/python test_suite/breakpoint_race_runner.py --end 6 --ramp 5,10,20 --i-understand-real-money",
+      "notes": "Historical configured-cohort Copy Trading suite; uses test trades, cleanup, link changes and margin probes."
+    },
+    {
+      "scope": "Earlier race follow-up",
+      "tc_id": "B1/B2/B7 follow-up",
+      "status": "See archived evidence",
+      "script": "scripts/staging_race_followup.py",
+      "command": ".venv/bin/python scripts/staging_race_followup.py",
+      "notes": "Historical configured cohort; .01-quantity follow-up and temporary follower funding."
+    },
+    {
+      "scope": "Earlier close accounting control",
+      "tc_id": "B1 sequential/concurrent control",
+      "status": "See archived evidence",
+      "script": "scripts/staging_close_control.py",
+      "command": ".venv/bin/python scripts/staging_close_control.py",
+      "notes": "Historical configured follower1; compares one sequential close against20 concurrent close requests."
+    },
+    {
+      "scope": "Fresh fixture provisioning",
+      "tc_id": "Fresh netting accounts",
+      "status": "Provisioned",
+      "script": "scripts/create_netting_test_accounts.py",
+      "command": ".venv/bin/python scripts/create_netting_test_accounts.py --resume",
+      "notes": "--resume fills missing roles in the retained manifest; without it a new fixture is created."
+    },
+    {
+      "scope": "Netting availability",
+      "tc_id": "Netting preflight",
+      "status": "See preflight evidence",
+      "script": "scripts/check_netting_staging.py",
+      "command": ".venv/bin/python scripts/check_netting_staging.py --fresh-accounts reports/netting_fresh_accounts.json",
+      "notes": "Read-only after provisioning; does not run functional trades."
+    }
+  ]
+}

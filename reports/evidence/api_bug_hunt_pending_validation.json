@@ -1,0 +1,132 @@
+{
+  "checks": [
+    {
+      "input": {
+        "symbol": "BINANCE:BTCUSDT.P",
+        "side": "BUY",
+        "type": "LIMIT",
+        "qty": 0.001,
+        "price": -1
+      },
+      "http": 400,
+      "response": {
+        "error": "price must be greater than zero for a LIMIT order"
+      }
+    },
+    {
+      "input": {
+        "symbol": "BINANCE:BTCUSDT.P",
+        "side": "BUY",
+        "type": "LIMIT",
+        "qty": 0.001,
+        "price": 0
+      },
+      "http": 400,
+      "response": {
+        "error": "price must be greater than zero for a LIMIT order"
+      }
+    },
+    {
+      "input": {
+        "symbol": "BINANCE:BTCUSDT.P",
+        "side": "BUY",
+        "type": "LIMIT",
+        "qty": 0.001,
+        "price": 1000
+      },
+      "http": 200,
+      "response": {
+        "order": {
+          "order_id": "ord_f902b6683fee934d41",
+          "market_order_id": "ord_f902b6683fee934d41",
+          "symbol": "BINANCE:BTCUSDT.P",
+          "side": "BUY",
+          "type": "LIMIT",
+          "state": "PENDING",
+          "requested_qty": 0.001,
+          "filled_qty": 0,
+          "price": 1000,
+          "created_at": "2026-11-19T09:54:46.494651453Z",
+          "updated_at": "2026-11-19T09:54:46.494651453Z"
+        },
+        "success": true
+      }
+    },
+    {
+      "patch": {
+        "qty": -0.001
+      },
+      "http": 400,
+      "response": {
+        "error": "qty must be a finite number greater than zero"
+      },
+      "readback": [
+        {
+          "order_id": "ord_f902b6683fee934d41",
+          "market_order_id": "ord_f902b6683fee934d41",
+          "symbol": "BINANCE:BTCUSDT.P",
+          "side": "BUY",
+          "type": "LIMIT",
+          "state": "PENDING",
+          "requested_qty": 0.001,
+          "filled_qty": 0,
+          "price": 1000,
+          "created_at": "2026-11-19T09:54:46.494678Z",
+          "updated_at": "2026-11-19T09:54:46.494678Z"
+        }
+      ]
+    },
+    {
+      "patch": {
+        "price": -5
+      },
+      "http": 400,
+      "response": {
+        "error": "price must be a finite number greater than zero"
+      },
+      "readback": [
+        {
+          "order_id": "ord_f902b6683fee934d41",
+          "market_order_id": "ord_f902b6683fee934d41",
+          "symbol": "BINANCE:BTCUSDT.P",
+          "side": "BUY",
+          "type": "LIMIT",
+          "state": "PENDING",
+          "requested_qty": 0.001,
+          "filled_qty": 0,
+          "price": 1000,
+          "created_at": "2026-11-19T09:54:46.494678Z",
+          "updated_at": "2026-11-19T09:54:46.494678Z"
+        }
+      ]
+    },
+    {
+      "patch": {
+        "price": 0
+      },
+      "http": 400,
+      "response": {
+        "error": "price must be a finite number greater than zero"
+      },
+      "readback": [
+        {
+          "order_id": "ord_f902b6683fee934d41",
+          "market_order_id": "ord_f902b6683fee934d41",
+          "symbol": "BINANCE:BTCUSDT.P",
+          "side": "BUY",
+          "type": "LIMIT",
+          "state": "PENDING",
+          "requested_qty": 0.001,
+          "filled_qty": 0,
+          "price": 1000,
+          "created_at": "2026-11-19T09:54:46.494678Z",
+          "updated_at": "2026-11-19T09:54:46.494678Z"
+        }
+      ]
+    }
+  ],
+  "cancel_http": [
+    200
+  ],
+  "post_positions": []
+}

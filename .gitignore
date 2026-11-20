@@ -59,3 +59,15 @@ reports/videos/
 scratch/
 scratch_*.log
 scratch_*.err
+
+# Large evidence request logs (raw API payloads - too large for GitHub)
+reports/evidence/**/requests.json
+reports/evidence/master_spec_*/requests.json
+reports/evidence/a_book_*/requests.json
+reports/evidence/fresh_netting_*/requests.json
+# Large zip archives
+reports/staging_master_test_report_*.zip
+# Node modules in outputs
+outputs/**/node_modules/
+# Env backup
+.env.bak_ctmaster

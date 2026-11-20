@@ -1,0 +1,50 @@
+{
+  "order_id": "ord_da6dd4b5b50901ea19",
+  "before": {
+    "order_id": "ord_da6dd4b5b50901ea19",
+    "market_order_id": "ord_da6dd4b5b50901ea19",
+    "symbol": "BINANCE:BTCUSDT.P",
+    "side": "BUY",
+    "type": "LIMIT",
+    "state": "PENDING",
+    "requested_qty": 0.001,
+    "filled_qty": 0,
+    "price": 1000,
+    "created_at": "2026-11-19T10:08:23.172283Z",
+    "updated_at": "2026-11-19T10:08:23.172283Z"
+  },
+  "request": {
+    "price": 1100,
+    "tp": "invalid"
+  },
+  "http": 200,
+  "response": {
+    "order": {
+      "order_id": "ord_da6dd4b5b50901ea19",
+      "market_order_id": "ord_da6dd4b5b50901ea19",
+      "symbol": "BINANCE:BTCUSDT.P",
+      "side": "BUY",
+      "type": "LIMIT",
+      "state": "PENDING",
+      "requested_qty": 0.001,
+      "filled_qty": 0,
+      "price": 1100,
+      "created_at": "2026-11-19T10:08:23.172283Z",
+      "updated_at": "2026-11-19T10:08:23.411348Z"
+    },
+    "success": true
+  },
+  "after": {
+    "order_id": "ord_da6dd4b5b50901ea19",
+    "market_order_id": "ord_da6dd4b5b50901ea19",
+    "symbol": "BINANCE:BTCUSDT.P",
+    "side": "BUY",
+    "type": "LIMIT",
+    "state": "PENDING",
+    "requested_qty": 0.001,
+    "filled_qty": 0,
+    "price": 1100,
+    "created_at": "2026-11-19T10:08:23.172283Z",
+    "updated_at": "2026-11-19T10:08:23.411348Z"
+  }
+}

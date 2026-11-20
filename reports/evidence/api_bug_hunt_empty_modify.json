@@ -1,0 +1,192 @@
+[
+  {
+    "body": {},
+    "http": 200,
+    "response": {
+      "order": {
+        "order_id": "ord_49b647d34197e4ae28",
+        "market_order_id": "ord_49b647d34197e4ae28",
+        "symbol": "BINANCE:BTCUSDT.P",
+        "side": "BUY",
+        "type": "LIMIT",
+        "state": "PENDING",
+        "requested_qty": 0.001,
+        "filled_qty": 0,
+        "price": 1000,
+        "created_at": "2026-11-19T10:22:43.548976Z",
+        "updated_at": "2026-11-19T10:22:43.677722Z"
+      },
+      "success": true
+    },
+    "before": {
+      "price": 1000,
+      "trigger_price": null,
+      "state": "PENDING"
+    },
+    "after": {
+      "price": 1000,
+      "trigger_price": null,
+      "state": "PENDING"
+    }
+  },
+  {
+    "body": {
+      "foo": "bar"
+    },
+    "http": 200,
+    "response": {
+      "order": {
+        "order_id": "ord_49b647d34197e4ae28",
+        "market_order_id": "ord_49b647d34197e4ae28",
+        "symbol": "BINANCE:BTCUSDT.P",
+        "side": "BUY",
+        "type": "LIMIT",
+        "state": "PENDING",
+        "requested_qty": 0.001,
+        "filled_qty": 0,
+        "price": 1000,
+        "created_at": "2026-11-19T10:22:43.548976Z",
+        "updated_at": "2026-11-19T10:22:43.866656Z"
+      },
+      "success": true
+    },
+    "before": {
+      "price": 1000,
+      "trigger_price": null,
+      "state": "PENDING"
+    },
+    "after": {
+      "price": 1000,
+      "trigger_price": null,
+      "state": "PENDING"
+    }
+  },
+  {
+    "body": {
+      "tp": null
+    },
+    "http": 200,
+    "response": {
+      "order": {
+        "order_id": "ord_49b647d34197e4ae28",
+        "market_order_id": "ord_49b647d34197e4ae28",
+        "symbol": "BINANCE:BTCUSDT.P",
+        "side": "BUY",
+        "type": "LIMIT",
+        "state": "PENDING",
+        "requested_qty": 0.001,
+        "filled_qty": 0,
+        "price": 1000,
+        "created_at": "2026-11-19T10:22:43.548976Z",
+        "updated_at": "2026-11-19T10:22:44.145482Z"
+      },
+      "success": true
+    },
+    "before": {
+      "price": 1000,
+      "trigger_price": null,
+      "state": "PENDING"
+    },
+    "after": {
+      "price": 1000,
+      "trigger_price": null,
+      "state": "PENDING"
+    }
+  },
+  {
+    "body": {
+      "sl": null
+    },
+    "http": 200,
+    "response": {
+      "order": {
+        "order_id": "ord_49b647d34197e4ae28",
+        "market_order_id": "ord_49b647d34197e4ae28",
+        "symbol": "BINANCE:BTCUSDT.P",
+        "side": "BUY",
+        "type": "LIMIT",
+        "state": "PENDING",
+        "requested_qty": 0.001,
+        "filled_qty": 0,
+        "price": 1000,
+        "created_at": "2026-11-19T10:22:43.548976Z",
+        "updated_at": "2026-11-19T10:22:44.323357Z"
+      },
+      "success": true
+    },
+    "before": {
+      "price": 1000,
+      "trigger_price": null,
+      "state": "PENDING"
+    },
+    "after": {
+      "price": 1000,
+      "trigger_price": null,
+      "state": "PENDING"
+    }
+  },
+  {
+    "body": {
+      "price": null
+    },
+    "http": 200,
+    "response": {
+      "order": {
+        "order_id": "ord_49b647d34197e4ae28",
+        "market_order_id": "ord_49b647d34197e4ae28",
+        "symbol": "BINANCE:BTCUSDT.P",
+        "side": "BUY",
+        "type": "LIMIT",
+        "state": "PENDING",
+        "requested_qty": 0.001,
+        "filled_qty": 0,
+        "price": 1000,
+        "created_at": "2026-11-19T10:22:43.548976Z",
+        "updated_at": "2026-11-19T10:22:44.634686Z"
+      },
+      "success": true
+    },
+    "before": {
+      "price": 1000,
+      "trigger_price": null,
+      "state": "PENDING"
+    },
+    "after": {
+      "price": 1000,
+      "trigger_price": null,
+      "state": "PENDING"
+    }
+  },
+  {
+    "body": {
+      "trigger_price": null
+    },
+    "http": 200,
+    "response": {
+      "order": {
+        "order_id": "ord_49b647d34197e4ae28",
+        "market_order_id": "ord_49b647d34197e4ae28",
+        "symbol": "BINANCE:BTCUSDT.P",
+        "side": "BUY",
+        "type": "LIMIT",
+        "state": "PENDING",
+        "requested_qty": 0.001,
+        "filled_qty": 0,
+        "price": 1000,
+        "created_at": "2026-11-19T10:22:43.548976Z",
+        "updated_at": "2026-11-19T10:22:44.892864Z"
+      },
+      "success": true
+    },
+    "before": {
+      "price": 1000,
+      "trigger_price": null,
+      "state": "PENDING"
+    },
+    "after": {
+      "price": 1000,
+      "trigger_price": null,
+      "state": "PENDING"
+    }
+  }
+]

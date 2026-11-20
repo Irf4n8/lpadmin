@@ -1,0 +1,76 @@
+[
+  {
+    "name": "multiplier_string",
+    "http": null,
+    "response": {
+      "error": "invalid JSON body"
+    },
+    "stored": {
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public"
+    }
+  },
+  {
+    "name": "multiplier_nan",
+    "http": null,
+    "response": "Out of range float values are not JSON compliant",
+    "stored": {
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public"
+    }
+  },
+  {
+    "name": "multiplier_inf",
+    "http": null,
+    "response": "Out of range float values are not JSON compliant",
+    "stored": {
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public"
+    }
+  },
+  {
+    "name": "multiplier_bool",
+    "http": null,
+    "response": {
+      "error": "invalid JSON body"
+    },
+    "stored": {
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public"
+    }
+  },
+  {
+    "name": "balance_extra",
+    "http": null,
+    "response": {
+      "error": "The multiplier can't be above 100."
+    },
+    "stored": {
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public"
+    }
+  },
+  {
+    "name": "equity_extra",
+    "http": null,
+    "response": {
+      "error": "The multiplier can't be above 100."
+    },
+    "stored": {
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public"
+    }
+  }
+]

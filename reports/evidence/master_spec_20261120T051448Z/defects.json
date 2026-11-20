@@ -1,0 +1,122 @@
+[
+  {
+    "tc_id": "CT-C007",
+    "description": "Set zero lot multiplier",
+    "preconditions": "Follower edits settings and inputs 0 as multiplier.",
+    "steps": "1. Submit multiplier = 0 in subscription settings.",
+    "expected": "Validation error displayed 'Multiplier must be greater than 0' or account enters Observation/Paper-copy mode without live executions.",
+    "priority": "P1",
+    "test_data": "Multiplier 0",
+    "actual": "HTTP 200; response={'follow': {'follow_id': 'cfl_12ae1508eb8f400949', 'master_client_id': 'mem_2cf075c020dcca6a05', 'follower_client_id': 'mem_8508bcb3bd695cf5e0', 'instance': 'real', 'method': 'multiplier', 'multiplier': 1, 'reverse': False, 'copy_mode': 'public', 'st",
+    "status": "FAIL",
+    "severity": "High",
+    "defect_id": "SPEC-C007",
+    "remarks": "",
+    "evidence": [
+      1829
+    ],
+    "finding_type": "Configuration validation defect",
+    "script": "test_suite/staging_master_spec_runner.py",
+    "reproduce_command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt"
+  },
+  {
+    "tc_id": "CT-R019",
+    "description": "Two subscription requests sent simultaneously",
+    "preconditions": "User double-clicks 'Subscribe' button or fires duplicate API calls.",
+    "steps": "1. Two POST /subscribe requests arrive at server within 1ms.",
+    "expected": "Database unique constraint on (master_id, follower_id) enforces exactly one active subscription; second request returns 409 Conflict.",
+    "priority": "P0",
+    "test_data": "Two simultaneous subscribe calls",
+    "actual": "HTTP=[200, 200]; active link rows=1",
+    "status": "FAIL",
+    "severity": "Low",
+    "defect_id": "SPEC-R019",
+    "remarks": "Specification explicitly requires duplicate HTTP 409. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document.",
+    "evidence": [
+      2929
+    ],
+    "finding_type": "API contract mismatch",
+    "script": "test_suite/staging_master_spec_runner.py",
+    "reproduce_command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt"
+  },
+  {
+    "tc_id": "CT-R020",
+    "description": "Two unsubscribe requests sent simultaneously",
+    "preconditions": "Duplicate unsubscribe requests sent.",
+    "steps": "1. Fire concurrent DELETE /subscribe.",
+    "expected": "First request executes; second returns idempotent success or 200 OK with status 'Already Unsubscribed'.",
+    "priority": "P1",
+    "test_data": "Two simultaneous unsubscribe calls",
+    "actual": "HTTP=[404, 200]; active link rows=0",
+    "status": "FAIL",
+    "severity": "Low",
+    "defect_id": "SPEC-R020",
+    "remarks": " Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document.",
+    "evidence": [
+      2932
+    ],
+    "finding_type": "API contract mismatch",
+    "script": "test_suite/staging_master_spec_runner.py",
+    "reproduce_command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt"
+  },
+  {
+    "tc_id": "CT-N003",
+    "description": "Invalid master account ID",
+    "preconditions": "Malicious or malformed API request.",
+    "steps": "1. POST /api/copy/subscribe with master_id='invalid_uuid_9999'.",
+    "expected": "Returns 404 Not Found with message 'Master trader strategy does not exist'.",
+    "priority": "P1",
+    "test_data": "Invalid master ID",
+    "actual": "HTTP 400; {'error': '{\"error\":\"that account is not an active copy master\"}\\n'}",
+    "status": "FAIL",
+    "severity": "Low",
+    "defect_id": "SPEC-N003",
+    "remarks": "Specification requires 404, not merely any 4xx. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document.",
+    "evidence": [
+      3362
+    ],
+    "finding_type": "API contract mismatch",
+    "script": "test_suite/staging_master_spec_runner.py",
+    "reproduce_command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt"
+  },
+  {
+    "tc_id": "CT-N009",
+    "description": "Follower account is read-only or disabled",
+    "preconditions": "Follower broker password set to Investor (read-only) or account suspended.",
+    "steps": "1. Master trades.",
+    "expected": "Broker returns 'Trade Disabled'; engine automatically pauses follower subscription and sends notification to update credentials.",
+    "priority": "P0",
+    "test_data": "Admin disables follower; valid master BUY while disabled",
+    "actual": "Admin acknowledged status=disabled (HTTP200); copied order ord_6b35d0522e9e37e8d3 FILLED 15.402ms after master ord_ffb6fad944430dd4cf. Test waited2s before restoring active status.",
+    "status": "FAIL",
+    "severity": "High",
+    "defect_id": "SPEC-N009",
+    "remarks": "Account active status restored and read back in fixture_after.json. Initial reproduction used the admin status acknowledgment; separate database flag verification was not performed.",
+    "evidence": [
+      5665
+    ],
+    "finding_type": "Disabled-member execution gating defect",
+    "script": "test_suite/staging_master_spec_runner.py",
+    "reproduce_command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt --extend-latest --only-groups administrative"
+  },
+  {
+    "tc_id": "CT-N014",
+    "description": "Invalid risk configuration saved",
+    "preconditions": "Follower inputs negative max drawdown (-20%) or text string in lot size.",
+    "steps": "1. Submit invalid payload.",
+    "expected": "Schema validation returns 422 Unprocessable Entity; previous valid settings retained unchanged.",
+    "priority": "P1",
+    "test_data": "multiplier=\"abc\"",
+    "actual": "Text multiplier HTTP=400; previous settings unchanged=True",
+    "status": "FAIL",
+    "severity": "Low",
+    "defect_id": "SPEC-N014",
+    "remarks": "Specification requires schema HTTP 422; applicable text-size input adaptation. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document. Safe rejection/final-state behavior observed; failure is the exact response contract specified in the supplied document.",
+    "evidence": [
+      3370
+    ],
+    "finding_type": "API contract mismatch",
+    "script": "test_suite/staging_master_spec_runner.py",
+    "reproduce_command": ".venv/bin/python test_suite/staging_master_spec_runner.py --confirm-staging --spec reports/evidence/master_spec_20261120T051448Z/master_specification_source.txt"
+  }
+]

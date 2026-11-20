@@ -1,0 +1,299 @@
+{
+  "master2@mailinator.com": {
+    "member_id": "mem_2cf075c020dcca6a05",
+    "funds": {
+      "balance": 687.6503999999986,
+      "equity": 687.6503999999986,
+      "free_margin": 687.6503999999986,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 693.6513999999986,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "status": "active"
+  },
+  "f1@mailinator.com": {
+    "member_id": "mem_8508bcb3bd695cf5e0",
+    "funds": {
+      "balance": 671.1031999999997,
+      "equity": 671.1031999999997,
+      "free_margin": 671.1031999999997,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 677.1041999999997,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "status": "active"
+  },
+  "f2@mailinator.com": {
+    "member_id": "mem_3f8f85f0f361e601b5",
+    "funds": {
+      "balance": 753.7520999999989,
+      "equity": 753.7520999999989,
+      "free_margin": 753.7520999999989,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 759.7530999999989,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "status": "active"
+  },
+  "f3@mailinator.com": {
+    "member_id": "mem_1524b83ee64d719af8",
+    "funds": {
+      "balance": 689.1523999999996,
+      "equity": 689.1523999999996,
+      "free_margin": 689.1523999999996,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 695.1533999999996,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "status": "active"
+  },
+  "f4@mailinator.com": {
+    "member_id": "mem_f9ba3b87048373f1e1",
+    "funds": {
+      "balance": 671.0273999999989,
+      "equity": 671.0273999999989,
+      "free_margin": 671.0273999999989,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 677.0283999999989,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "status": "active"
+  },
+  "f5@mailinator.com": {
+    "member_id": "mem_daf5bdd143790bc44c",
+    "funds": {
+      "balance": 689.1903999999997,
+      "equity": 689.1903999999997,
+      "free_margin": 689.1903999999997,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 695.1913999999997,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "status": "active"
+  },
+  "f6@mailinator.com": {
+    "member_id": "mem_23d1122db09c0a7b6d",
+    "funds": {
+      "balance": 688.4403999999985,
+      "equity": 688.4403999999985,
+      "free_margin": 688.4403999999985,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 694.4413999999985,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "status": "active"
+  },
+  "f7@mailinator.com": {
+    "member_id": "mem_362a74f36a61e2804f",
+    "funds": {
+      "balance": 688.0783999999995,
+      "equity": 688.0783999999995,
+      "free_margin": 688.0783999999995,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 694.0793999999995,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "status": "active"
+  },
+  "f8@mailinator.com": {
+    "member_id": "mem_f51edaf1a50473e92f",
+    "funds": {
+      "balance": 696.8773999999997,
+      "equity": 696.8773999999997,
+      "free_margin": 696.8773999999997,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 702.8783999999997,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "status": "active"
+  },
+  "f9@mailinator.com": {
+    "member_id": "mem_320cbcd937058f17b7",
+    "funds": {
+      "balance": 688.1013999999994,
+      "equity": 688.1013999999994,
+      "free_margin": 688.1013999999994,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 694.1023999999994,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "status": "active"
+  },
+  "f10@mailinator.com": {
+    "member_id": "mem_25c2d1523b5db6a2fc",
+    "funds": {
+      "balance": 688.1753999999993,
+      "equity": 688.1753999999993,
+      "free_margin": 688.1753999999993,
+      "margin_call_level": 100,
+      "margin_level": null,
+      "starting_balance": 694.1763999999993,
+      "stop_out_level": 50,
+      "unrealized_pnl": 0,
+      "used_margin": 0
+    },
+    "status": "active"
+  },
+  "links": [
+    {
+      "follow_id": "cfl_4919481a0511163d2b",
+      "master_client_id": "mem_2cf075c020dcca6a05",
+      "follower_client_id": "mem_25c2d1523b5db6a2fc",
+      "instance": "real",
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public",
+      "status": "active",
+      "created_at": "2026-11-18T09:20:04.724722Z",
+      "follower_name": "f10"
+    },
+    {
+      "follow_id": "cfl_cee82c2b5b98ce4edd",
+      "master_client_id": "mem_2cf075c020dcca6a05",
+      "follower_client_id": "mem_320cbcd937058f17b7",
+      "instance": "real",
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public",
+      "status": "active",
+      "created_at": "2026-11-18T09:20:04.348454Z",
+      "follower_name": "f9"
+    },
+    {
+      "follow_id": "cfl_15730e9b518335924a",
+      "master_client_id": "mem_2cf075c020dcca6a05",
+      "follower_client_id": "mem_f51edaf1a50473e92f",
+      "instance": "real",
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public",
+      "status": "active",
+      "created_at": "2026-11-18T09:20:03.632729Z",
+      "follower_name": "f8"
+    },
+    {
+      "follow_id": "cfl_fe02a25329df7c2380",
+      "master_client_id": "mem_2cf075c020dcca6a05",
+      "follower_client_id": "mem_362a74f36a61e2804f",
+      "instance": "real",
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public",
+      "status": "active",
+      "created_at": "2026-11-18T09:20:03.186742Z",
+      "follower_name": "f7"
+    },
+    {
+      "follow_id": "cfl_60c810a53952eb63a1",
+      "master_client_id": "mem_2cf075c020dcca6a05",
+      "follower_client_id": "mem_23d1122db09c0a7b6d",
+      "instance": "real",
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public",
+      "status": "active",
+      "created_at": "2026-11-18T09:20:02.614901Z",
+      "follower_name": "f6"
+    },
+    {
+      "follow_id": "cfl_7ae924b62473b8baca",
+      "master_client_id": "mem_2cf075c020dcca6a05",
+      "follower_client_id": "mem_daf5bdd143790bc44c",
+      "instance": "real",
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public",
+      "status": "active",
+      "created_at": "2026-11-18T09:20:02.267474Z",
+      "follower_name": "f5"
+    },
+    {
+      "follow_id": "cfl_761ade827eb5aa7e60",
+      "master_client_id": "mem_2cf075c020dcca6a05",
+      "follower_client_id": "mem_f9ba3b87048373f1e1",
+      "instance": "real",
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public",
+      "status": "active",
+      "created_at": "2026-11-18T09:20:01.93418Z",
+      "follower_name": "f4"
+    },
+    {
+      "follow_id": "cfl_47f9f90fe55d2e5a4f",
+      "master_client_id": "mem_2cf075c020dcca6a05",
+      "follower_client_id": "mem_1524b83ee64d719af8",
+      "instance": "real",
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public",
+      "status": "active",
+      "created_at": "2026-11-18T09:20:00.771823Z",
+      "follower_name": "f3"
+    },
+    {
+      "follow_id": "cfl_ef0e1b6dd51f8c89cf",
+      "master_client_id": "mem_2cf075c020dcca6a05",
+      "follower_client_id": "mem_3f8f85f0f361e601b5",
+      "instance": "real",
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public",
+      "status": "active",
+      "created_at": "2026-11-18T09:20:00.117177Z",
+      "follower_name": "f2"
+    },
+    {
+      "follow_id": "cfl_12ae1508eb8f400949",
+      "master_client_id": "mem_2cf075c020dcca6a05",
+      "follower_client_id": "mem_8508bcb3bd695cf5e0",
+      "instance": "real",
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public",
+      "status": "active",
+      "created_at": "2026-11-18T09:19:58.913781Z",
+      "follower_name": "f1"
+    }
+  ]
+}

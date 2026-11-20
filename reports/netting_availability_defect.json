@@ -1,0 +1,21 @@
+{
+  "id": "SPEC-NETTING-AVAILABILITY",
+  "serial": 36,
+  "date": "2026-11-20",
+  "module": "OMS / Netting availability",
+  "bug_found": "Admin lists enabled netting instances but runtime omits them and netting endpoints return404",
+  "description": "Both real-net and paper-net are enabled/visible/existing in admin, absent from user inventory, and return no such OMS instance for master/follower reads with explicit broker headers.",
+  "proof_img": "",
+  "proof_vid": "",
+  "type": "Bug",
+  "source_classification": "Netting staging preflight",
+  "status": "Open",
+  "verification": "Independently reproduced by read-only API probes",
+  "severity": "High",
+  "related_cases": [
+    "NT-ENV01",
+    "NT-ENV02",
+    "NT-ENV03"
+  ],
+  "remarks": "One availability/configuration defect, not three independent bugs. Twenty functional A/B netting checks are blocked. See netting report and API evidence."
+}

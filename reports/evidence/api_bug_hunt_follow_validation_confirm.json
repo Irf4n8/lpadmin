@@ -1,0 +1,202 @@
+[
+  {
+    "input": {
+      "master_client_id": "mem_a146c3d3a5976e1751",
+      "method": "bogus",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public"
+    },
+    "http": 400,
+    "response": {
+      "error": "method must be balance, equity or multiplier"
+    },
+    "stored": {
+      "follow_id": "cfl_c19b76fc9d3fef7ce3",
+      "master_client_id": "mem_a146c3d3a5976e1751",
+      "follower_client_id": "mem_0c954557eae4477b16",
+      "instance": "real-net",
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public",
+      "status": "active",
+      "created_at": "2026-11-19T07:58:31.490236Z"
+    }
+  },
+  {
+    "input": {
+      "master_client_id": "mem_a146c3d3a5976e1751",
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "bogus"
+    },
+    "http": 200,
+    "response": {
+      "follow": {
+        "follow_id": "cfl_c19b76fc9d3fef7ce3",
+        "master_client_id": "mem_a146c3d3a5976e1751",
+        "follower_client_id": "mem_0c954557eae4477b16",
+        "instance": "real-net",
+        "method": "multiplier",
+        "multiplier": 1,
+        "reverse": false,
+        "copy_mode": "public",
+        "status": "active",
+        "created_at": "2026-11-19T07:58:31.490236Z"
+      },
+      "success": true
+    },
+    "stored": {
+      "follow_id": "cfl_c19b76fc9d3fef7ce3",
+      "master_client_id": "mem_a146c3d3a5976e1751",
+      "follower_client_id": "mem_0c954557eae4477b16",
+      "instance": "real-net",
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public",
+      "status": "active",
+      "created_at": "2026-11-19T07:58:31.490236Z"
+    }
+  },
+  {
+    "input": {
+      "master_client_id": "mem_a146c3d3a5976e1751",
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": {
+        "x": 1
+      }
+    },
+    "http": 400,
+    "response": {
+      "error": "invalid JSON body"
+    },
+    "stored": {
+      "follow_id": "cfl_c19b76fc9d3fef7ce3",
+      "master_client_id": "mem_a146c3d3a5976e1751",
+      "follower_client_id": "mem_0c954557eae4477b16",
+      "instance": "real-net",
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public",
+      "status": "active",
+      "created_at": "2026-11-19T07:58:31.490236Z"
+    }
+  },
+  {
+    "input": {
+      "master_client_id": "mem_a146c3d3a5976e1751",
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "private"
+    },
+    "http": 200,
+    "response": {
+      "follow": {
+        "follow_id": "cfl_c19b76fc9d3fef7ce3",
+        "master_client_id": "mem_a146c3d3a5976e1751",
+        "follower_client_id": "mem_0c954557eae4477b16",
+        "instance": "real-net",
+        "method": "multiplier",
+        "multiplier": 1,
+        "reverse": false,
+        "copy_mode": "private",
+        "status": "active",
+        "created_at": "2026-11-19T07:58:31.490236Z"
+      },
+      "success": true
+    },
+    "stored": {
+      "follow_id": "cfl_c19b76fc9d3fef7ce3",
+      "master_client_id": "mem_a146c3d3a5976e1751",
+      "follower_client_id": "mem_0c954557eae4477b16",
+      "instance": "real-net",
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "private",
+      "status": "active",
+      "created_at": "2026-11-19T07:58:31.490236Z"
+    }
+  },
+  {
+    "input": {
+      "master_client_id": "mem_a146c3d3a5976e1751",
+      "method": "multiplier",
+      "multiplier": null,
+      "reverse": false,
+      "copy_mode": "public"
+    },
+    "http": 200,
+    "response": {
+      "follow": {
+        "follow_id": "cfl_c19b76fc9d3fef7ce3",
+        "master_client_id": "mem_a146c3d3a5976e1751",
+        "follower_client_id": "mem_0c954557eae4477b16",
+        "instance": "real-net",
+        "method": "multiplier",
+        "multiplier": 1,
+        "reverse": false,
+        "copy_mode": "public",
+        "status": "active",
+        "created_at": "2026-11-19T07:58:31.490236Z"
+      },
+      "success": true
+    },
+    "stored": {
+      "follow_id": "cfl_c19b76fc9d3fef7ce3",
+      "master_client_id": "mem_a146c3d3a5976e1751",
+      "follower_client_id": "mem_0c954557eae4477b16",
+      "instance": "real-net",
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public",
+      "status": "active",
+      "created_at": "2026-11-19T07:58:31.490236Z"
+    }
+  },
+  {
+    "input": {
+      "master_client_id": "mem_a146c3d3a5976e1751",
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": null,
+      "copy_mode": "public"
+    },
+    "http": 200,
+    "response": {
+      "follow": {
+        "follow_id": "cfl_c19b76fc9d3fef7ce3",
+        "master_client_id": "mem_a146c3d3a5976e1751",
+        "follower_client_id": "mem_0c954557eae4477b16",
+        "instance": "real-net",
+        "method": "multiplier",
+        "multiplier": 1,
+        "reverse": false,
+        "copy_mode": "public",
+        "status": "active",
+        "created_at": "2026-11-19T07:58:31.490236Z"
+      },
+      "success": true
+    },
+    "stored": {
+      "follow_id": "cfl_c19b76fc9d3fef7ce3",
+      "master_client_id": "mem_a146c3d3a5976e1751",
+      "follower_client_id": "mem_0c954557eae4477b16",
+      "instance": "real-net",
+      "method": "multiplier",
+      "multiplier": 1,
+      "reverse": false,
+      "copy_mode": "public",
+      "status": "active",
+      "created_at": "2026-11-19T07:58:31.490236Z"
+    }
+  }
+]

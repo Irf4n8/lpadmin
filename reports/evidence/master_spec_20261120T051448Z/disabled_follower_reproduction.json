@@ -1,0 +1,64 @@
+{
+  "admin_status_requests": [
+    {
+      "method": "POST",
+      "path": "/admin/api/members/mem_8508bcb3bd695cf5e0/status",
+      "payload": {
+        "status": "disabled"
+      },
+      "status": 200,
+      "elapsed_s": 0.354268,
+      "response": {
+        "status": "disabled",
+        "success": true
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/admin/api/members/mem_8508bcb3bd695cf5e0/status",
+      "payload": {
+        "status": "active"
+      },
+      "status": 200,
+      "elapsed_s": 0.080551,
+      "response": {
+        "status": "active",
+        "success": true
+      }
+    }
+  ],
+  "master": {
+    "order_id": "ord_ffb6fad944430dd4cf",
+    "market_order_id": "ord_ffb6fad944430dd4cf",
+    "symbol": "BINANCE:BTCUSDT.P",
+    "side": "BUY",
+    "type": "MARKET",
+    "state": "FILLED",
+    "requested_qty": 0.01,
+    "filled_qty": 0.01,
+    "avg_fill_price": 61475.8,
+    "copy_ref": "ord_ffb6fad944430dd4cf",
+    "copy_kind": "master",
+    "created_at": "2026-11-20T05:16:33.649101541Z",
+    "updated_at": "2026-11-20T05:16:33.649101541Z"
+  },
+  "child": {
+    "order_id": "ord_6b35d0522e9e37e8d3",
+    "market_order_id": "ord_6b35d0522e9e37e8d3",
+    "symbol": "BINANCE:BTCUSDT.P",
+    "side": "BUY",
+    "type": "MARKET",
+    "state": "FILLED",
+    "requested_qty": 0.01,
+    "filled_qty": 0.01,
+    "avg_fill_price": 61475.8,
+    "source": "copy",
+    "copy_ref": "-ord_ffb6fad944430dd4cf",
+    "copy_kind": "copy",
+    "created_at": "2026-11-20T05:16:33.664503Z",
+    "updated_at": "2026-11-20T05:16:33.664503Z",
+    "fee": 0
+  },
+  "copy_fill_delta_ms": 15.402000000000001,
+  "delay_before_reactivation_s": 2
+}
