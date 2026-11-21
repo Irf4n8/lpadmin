@@ -1,0 +1,23 @@
+{
+  "positions": {
+    "mamhm@mailinator.com": 0,
+    "mamhf1@mailinator.com": 0,
+    "mamhf2@mailinator.com": 0
+  },
+  "relationships": {
+    "mamhf1@mailinator.com": {
+      "method": "multiplier",
+      "multiplier": 1
+    },
+    "mamhf2@mailinator.com": {
+      "method": "multiplier",
+      "multiplier": 1
+    }
+  },
+  "master": {
+    "client_id": "mem_6cf38c1f751cbd1699",
+    "display_name": "mamhedgingmaster",
+    "share_percent": 50,
+    "status": "active"
+  }
+}

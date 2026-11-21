@@ -1,0 +1,144 @@
+{
+  "recorded_at": "2026-11-21T05:25:59.664938+00:00",
+  "positions": {
+    "mamhm@mailinator.com": {
+      "count": 0,
+      "funds": {
+        "balance": 9994.242899999983,
+        "equity": 9994.242899999983,
+        "free_margin": 9994.242899999983,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 10000,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "positions": [],
+      "success": true,
+      "total_unrealized_pnl": 0
+    },
+    "mamhf1@mailinator.com": {
+      "count": 0,
+      "funds": {
+        "balance": 4993.802999999999,
+        "equity": 4993.802999999999,
+        "free_margin": 4993.802999999999,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 5000,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "positions": [],
+      "success": true,
+      "total_unrealized_pnl": 0
+    },
+    "mamhf2@mailinator.com": {
+      "count": 0,
+      "funds": {
+        "balance": 4993.844199999999,
+        "equity": 4993.844199999999,
+        "free_margin": 4993.844199999999,
+        "margin_call_level": 100,
+        "margin_level": null,
+        "starting_balance": 5000,
+        "stop_out_level": 50,
+        "unrealized_pnl": 0,
+        "used_margin": 0
+      },
+      "positions": [],
+      "success": true,
+      "total_unrealized_pnl": 0
+    }
+  },
+  "relationships": {
+    "mamhm@mailinator.com": {
+      "follow_blocked_reason": "Master accounts can't follow another master.",
+      "followers": [
+        {
+          "follow_id": "mfl_fe7dfb09c4d0c17a2e",
+          "master_client_id": "mem_6cf38c1f751cbd1699",
+          "follower_client_id": "mem_5476acd67c0a8a60de",
+          "instance": "real",
+          "starting_balance": 4993.844199999999,
+          "share_percent": 50,
+          "method": "multiplier",
+          "multiplier": 1,
+          "status": "active",
+          "joined_at": "2026-11-21T05:25:58.749171Z",
+          "follower_name": "mamhf2"
+        },
+        {
+          "follow_id": "mfl_9e502cb5c04db85780",
+          "master_client_id": "mem_6cf38c1f751cbd1699",
+          "follower_client_id": "mem_bcb0386eac16dc47a6",
+          "instance": "real",
+          "starting_balance": 4993.802999999999,
+          "share_percent": 50,
+          "method": "multiplier",
+          "multiplier": 1,
+          "status": "active",
+          "joined_at": "2026-11-21T05:25:58.73421Z",
+          "follower_name": "mamhf1"
+        }
+      ],
+      "following": [],
+      "is_master": true,
+      "master": {
+        "client_id": "mem_6cf38c1f751cbd1699",
+        "display_name": "mamhedgingmaster",
+        "share_percent": 50,
+        "status": "active"
+      },
+      "master_blocked_reason": "",
+      "success": true
+    },
+    "mamhf1@mailinator.com": {
+      "follow_blocked_reason": "",
+      "followers": [],
+      "following": [
+        {
+          "follow_id": "mfl_9e502cb5c04db85780",
+          "master_client_id": "mem_6cf38c1f751cbd1699",
+          "follower_client_id": "mem_bcb0386eac16dc47a6",
+          "instance": "real",
+          "starting_balance": 4993.802999999999,
+          "share_percent": 50,
+          "method": "multiplier",
+          "multiplier": 1,
+          "status": "active",
+          "joined_at": "2026-11-21T05:25:58.73421Z"
+        }
+      ],
+      "is_master": false,
+      "master": null,
+      "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+      "success": true
+    },
+    "mamhf2@mailinator.com": {
+      "follow_blocked_reason": "",
+      "followers": [],
+      "following": [
+        {
+          "follow_id": "mfl_fe7dfb09c4d0c17a2e",
+          "master_client_id": "mem_6cf38c1f751cbd1699",
+          "follower_client_id": "mem_5476acd67c0a8a60de",
+          "instance": "real",
+          "starting_balance": 4993.844199999999,
+          "share_percent": 50,
+          "method": "multiplier",
+          "multiplier": 1,
+          "status": "active",
+          "joined_at": "2026-11-21T05:25:58.749171Z"
+        }
+      ],
+      "is_master": false,
+      "master": null,
+      "master_blocked_reason": "Accounts that have followed a master can't become a master, even after unfollowing.",
+      "success": true
+    }
+  },
+  "working_orders": {}
+}

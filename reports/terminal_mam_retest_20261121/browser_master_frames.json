@@ -1,0 +1,69 @@
+{
+  "frames": [
+    {
+      "url": "https://terminal.blacktrader.com/test/home/dashboard",
+      "body_prefix": "",
+      "paper_count": 0,
+      "buttons": [],
+      "selects": []
+    },
+    {
+      "url": "about:blank",
+      "body_prefix": "",
+      "paper_count": 0,
+      "buttons": [],
+      "selects": []
+    },
+    {
+      "url": "https://chartv2.blacktrader.com/?mode=iframeMode&brokerToken=[REDACTED]&userToken=[REDACTED]&tickUrl=wss%3A%2F%2Fterminal.blacktrader.com%2Ffeed%2Ftick&ohlcUrl=wss%3A%2F%2Fterminal.blacktrader.com%2Ffeed%2Fohlc&symbolUrl=https%3A%2F%2Fterminal.blacktrader.com%2Ffeed%2Fsymbol_list&theme=dark&screen=full",
+      "body_prefix": "BlackTrader\nM\nDefault\n\u25be\nWatchlist\nLoading Watchlist\u2026\nChart\nMAM\nMAM\nStandard\nMAM managers\nMy subscription2\n\nMaster accounts can't follow another master.\n\nNAME\tRANK\tGROWTH\tWEEKS\tFOLLOWERS\tDRAWDOWN\tFUND\tRISK\t\nBT Test 20% share\t1\t\n20.1k\n\t5\t0\t11.7k\t106.9k\t\n\tJoin\ntest 50% share\t2\t\n1,139.59\n\t6\t0\t1,212.75\t51.1k\t\n\tJoin\nmammaster100 50% share\t3\t\n1,109.41\n\t0\t1\t0.00\t10.2k\t\n\tJoin\nRaja Mouli 50% share\t4\t\n990.48\n\t3\t0\t4,633.46\t100.2k\t\n\tJoin\nRR_mam_test 50% share\t5\t\n747.44\n\t5\t0\t328.70\t100.7k\t\n\tJoin\nMam testQA 25% share\t6\t\n11.89\n\t11\t0\t0.00\t510.60\t\n\tJoin\nMAM master22 20% share\t7\t\n2.15\n\t0\t1\t0.00\t10.0k\t\n\tJoin\nMAM M 50% share\t8\t\n0.00\n\t3\t0\t0.00\t0.00\t\n\tJoin\nmam test same 20% share\t8\t\n0.00\n\t6\t0\t0.00\t43.00\t\n\tJoin\nmem_962824\u2026 20% share\t8\t\n0.00\n\t6\t0\t0.00\t0.00\t\n\tJoin\ntesting master 50% share\t8\t\n0.00\n\t5\t0\t0.00\t0.00\t\n\tJoin\ntrump 21% share\t8\t\n0.00\n\t13\t0\t0.00\t0.00\t\n\tJoin\niuuiui 20% share\t8\t\n0.00\n\t1\t0\t0.00\t50.0k\t\n\tJoin\nsigma aaaaa 10% share\t8\t\n0.00\n\t6\t0\t0.00\t0.00\t\n\tJoin\nfgfgfg 20% share\t8\t\n0.00\n\t6\t0\t0.00\t0.00\t\n\tJoin\nma",
+      "paper_count": 0,
+      "buttons": [
+        "M",
+        "Default\n\u25be",
+        "Add widget",
+        "Floating view \u2014 free-floating, overlapping windows",
+        "Comfortable view \u2014 restore panel spacing",
+        "Toggle theme",
+        "Watchlist",
+        "Chart",
+        "MAM",
+        "Refresh",
+        "MAM managers",
+        "My subscription2",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Join",
+        "Trades"
+      ],
+      "selects": []
+    }
+  ]
+}

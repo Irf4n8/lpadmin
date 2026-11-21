@@ -1,0 +1,246 @@
+[
+  {
+    "id": "PROD-AUTH-001",
+    "title": "Logout immediately invalidates the current OMS session",
+    "expected": "A logged-out session token must immediately return HTTP 401.",
+    "actual": {
+      "before": 200,
+      "logout": 204,
+      "after": 401
+    },
+    "status": "PASS",
+    "severity": "\u2014",
+    "defect_id": "\u2014",
+    "started_at": "2026-11-21T11:58:44.608810+00:00",
+    "finished_at": "2026-11-21T11:58:46.934670+00:00"
+  },
+  {
+    "id": "PROD-AUTH-002",
+    "title": "Logging out one device does not corrupt another valid session",
+    "expected": "Logout revokes only the selected session and does not terminate another valid login.",
+    "actual": {
+      "logged_out_session": 401,
+      "independent_session": 200
+    },
+    "status": "PASS",
+    "severity": "\u2014",
+    "defect_id": "\u2014",
+    "started_at": "2026-11-21T11:58:46.937203+00:00",
+    "finished_at": "2026-11-21T11:58:50.426949+00:00"
+  },
+  {
+    "id": "PROD-AUTH-003",
+    "title": "Trader token cannot access client-admin member data",
+    "expected": "A trader token must not authorize client-admin member APIs.",
+    "actual": {
+      "http": 401
+    },
+    "status": "PASS",
+    "severity": "\u2014",
+    "defect_id": "\u2014",
+    "started_at": "2026-11-21T11:58:50.428811+00:00",
+    "finished_at": "2026-11-21T11:58:51.016914+00:00"
+  },
+  {
+    "id": "PROD-MAM-VALID-001",
+    "title": "Reject an unknown MAM allocation method",
+    "expected": "Unknown allocation methods must be rejected and must not alter the active relationship.",
+    "actual": {
+      "http": 200,
+      "stored_method": "not_a_real_allocation_method",
+      "stored_multiplier": 1,
+      "relationship_unchanged": false
+    },
+    "status": "FAIL",
+    "severity": "High",
+    "defect_id": "TERM-MAM-003",
+    "started_at": "2026-11-21T11:58:51.018468+00:00",
+    "finished_at": "2026-11-21T11:58:53.331707+00:00"
+  },
+  {
+    "id": "PROD-MAM-VALID-ZERO",
+    "title": "Reject zero MAM multiplier",
+    "expected": "A multiplier less than or equal to zero must be rejected without silently changing it to another value.",
+    "actual": {
+      "submitted_multiplier": 0,
+      "http": 200,
+      "stored_method": "multiplier",
+      "stored_multiplier": 1,
+      "relationship_unchanged": true
+    },
+    "status": "FAIL",
+    "severity": "High",
+    "defect_id": "TERM-MAM-004",
+    "started_at": "2026-11-21T11:58:53.336376+00:00",
+    "finished_at": "2026-11-21T11:58:55.713319+00:00"
+  },
+  {
+    "id": "PROD-MAM-VALID-NEGATIVE",
+    "title": "Reject negative MAM multiplier",
+    "expected": "A multiplier less than or equal to zero must be rejected without silently changing it to another value.",
+    "actual": {
+      "submitted_multiplier": -5,
+      "http": 400,
+      "stored_method": "multiplier",
+      "stored_multiplier": 1,
+      "relationship_unchanged": true
+    },
+    "status": "PASS",
+    "severity": "\u2014",
+    "defect_id": "\u2014",
+    "started_at": "2026-11-21T11:58:55.714697+00:00",
+    "finished_at": "2026-11-21T11:58:58.037624+00:00"
+  },
+  {
+    "id": "PROD-MAM-VALID-TYPE",
+    "title": "Reject a nonnumeric MAM multiplier",
+    "expected": "A nonnumeric multiplier must be rejected without altering the relationship.",
+    "actual": {
+      "http": 400,
+      "stored_multiplier": 1,
+      "relationship_unchanged": true
+    },
+    "status": "PASS",
+    "severity": "\u2014",
+    "defect_id": "\u2014",
+    "started_at": "2026-11-21T11:58:58.040580+00:00",
+    "finished_at": "2026-11-21T11:59:00.366284+00:00"
+  },
+  {
+    "id": "PROD-MAM-FEE-001",
+    "title": "Reject manager performance-share values outside 0\u2013100",
+    "expected": "Performance-share values outside 0\u2013100 must be rejected without changing the saved fee.",
+    "actual": {
+      "attempts": [
+        {
+          "share_percent": -1,
+          "http": 400
+        },
+        {
+          "share_percent": 101,
+          "http": 400
+        }
+      ],
+      "stored_share_percent": 50
+    },
+    "status": "PASS",
+    "severity": "\u2014",
+    "defect_id": "\u2014",
+    "started_at": "2026-11-21T11:59:00.367685+00:00",
+    "finished_at": "2026-11-21T11:59:02.128201+00:00"
+  },
+  {
+    "id": "PROD-ORDER-IDEMPOTENCY-PENDING",
+    "title": "Concurrent retry cannot duplicate a pending MAM order",
+    "expected": "Two concurrent deliveries with the same request_id/group_id must produce exactly one master order and one child order per follower.",
+    "actual": {
+      "accepted_requests": 2,
+      "working_order_counts": {
+        "mamhm@mailinator.com": 2,
+        "mamhf1@mailinator.com": 2,
+        "mamhf2@mailinator.com": 2
+      },
+      "request_identity_reused": true
+    },
+    "status": "FAIL",
+    "severity": "Critical",
+    "defect_id": "TERM-MAM-002",
+    "started_at": "2026-11-21T11:59:02.129923+00:00",
+    "finished_at": "2026-11-21T11:59:12.298807+00:00"
+  },
+  {
+    "id": "PROD-WEB-CORS-001",
+    "title": "Arbitrary origins cannot make credentialed OMS requests",
+    "expected": "The API must not grant credentialed cross-origin access to an arbitrary origin.",
+    "actual": {
+      "http": 204,
+      "allow_origin": "*",
+      "allow_credentials": "",
+      "allow_headers": "Content-Type,Authorization,X-Broker-ID,x-token,x-user-id,X-Access-Token"
+    },
+    "status": "PASS",
+    "severity": "\u2014",
+    "defect_id": "\u2014",
+    "started_at": "2026-11-21T11:59:12.300168+00:00",
+    "finished_at": "2026-11-21T11:59:12.909145+00:00"
+  },
+  {
+    "id": "PROD-WEB-CACHE-001",
+    "title": "Authenticated financial data is marked no-store",
+    "expected": "Authenticated positions and balance data must return Cache-Control: no-store.",
+    "actual": {
+      "http": 200,
+      "response_headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "no-store"
+      }
+    },
+    "status": "PASS",
+    "severity": "\u2014",
+    "defect_id": "\u2014",
+    "started_at": "2026-11-21T11:59:12.910731+00:00",
+    "finished_at": "2026-11-21T11:59:13.518929+00:00"
+  },
+  {
+    "id": "PROD-WEB-FRAME-HEADERS",
+    "title": "Trading dashboard sends anti-framing headers",
+    "expected": "Trading pages must send X-Frame-Options or CSP frame-ancestors to prevent UI redressing.",
+    "actual": {
+      "http": 307,
+      "content_security_policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; frame-src https: http://localhost:* http://127.0.0.1:*; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self'",
+      "x_frame_options": "SAMEORIGIN",
+      "location": "/test/home/login"
+    },
+    "status": "PASS",
+    "severity": "\u2014",
+    "defect_id": "\u2014",
+    "started_at": "2026-11-21T11:59:13.520294+00:00",
+    "finished_at": "2026-11-21T11:59:14.115386+00:00"
+  },
+  {
+    "id": "PROD-WEB-CLICKJACK-001",
+    "title": "Authenticated dashboard cannot be framed by another origin",
+    "expected": "Case executes and returns a deterministic assertion.",
+    "actual": {
+      "error": "TimeoutError: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"button[type=\\\"submit\\\"]\")\n"
+    },
+    "status": "BLOCKED",
+    "severity": "\u2014",
+    "defect_id": "\u2014",
+    "started_at": "2026-11-21T11:59:14.116830+00:00",
+    "finished_at": "2026-11-21T11:59:55.008857+00:00"
+  },
+  {
+    "id": "PROD-FINAL-001",
+    "title": "Final cleanup leaves all accounts flat and follower settings restored",
+    "expected": "All three accounts are flat; both followers are active at multiplier 1; manager configuration is restored.",
+    "actual": {
+      "positions": {
+        "mamhm@mailinator.com": 0,
+        "mamhf1@mailinator.com": 0,
+        "mamhf2@mailinator.com": 0
+      },
+      "relationships": {
+        "mamhf1@mailinator.com": {
+          "method": "multiplier",
+          "multiplier": 1
+        },
+        "mamhf2@mailinator.com": {
+          "method": "multiplier",
+          "multiplier": 1
+        }
+      },
+      "master": {
+        "client_id": "mem_6cf38c1f751cbd1699",
+        "display_name": "mamhedgingmaster",
+        "share_percent": 50,
+        "status": "active"
+      }
+    },
+    "status": "PASS",
+    "severity": "\u2014",
+    "defect_id": "\u2014",
+    "started_at": "2026-11-21T12:00:07.054112+00:00",
+    "finished_at": "2026-11-21T12:00:07.054137+00:00"
+  }
+]

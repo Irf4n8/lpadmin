@@ -1,0 +1,118 @@
+{
+  "oms_requests": [
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/paper/info",
+      "method": "GET",
+      "has_authorization": false,
+      "has_cookie": false
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/paper/account",
+      "method": "GET",
+      "has_authorization": false,
+      "has_cookie": false
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/paper/positions",
+      "method": "GET",
+      "has_authorization": false,
+      "has_cookie": false
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/paper/mam/follows",
+      "method": "GET",
+      "has_authorization": false,
+      "has_cookie": false
+    }
+  ],
+  "auth_responses": [
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/paper/info",
+      "status": 200
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/paper/account",
+      "status": 401
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/paper/positions",
+      "status": 401
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/paper/mam/follows",
+      "status": 401
+    }
+  ],
+  "console_errors": [
+    "Failed to load resource: the server responded with a status of 401 ()",
+    "Failed to load resource: the server responded with a status of 401 ()",
+    "Failed to load resource: the server responded with a status of 401 ()"
+  ],
+  "before_click_url": "https://terminal.blacktrader.com/test/home",
+  "after_click_url": "https://terminal.blacktrader.com/test/home/login",
+  "local_storage_keys": [],
+  "session_storage_keys": [],
+  "cookie_names": [
+    "cf_clearance"
+  ],
+  "body_markers": {
+    "Paper Hedging": 0,
+    "MAM managers": 0,
+    "Master accounts can't follow another master": 0,
+    "No positions found": 0
+  },
+  "anonymous_fetch": {
+    "info": {
+      "status": 200,
+      "keys": [
+        "slug",
+        "name",
+        "product",
+        "mode",
+        "broker",
+        "enabled",
+        "visible",
+        "icon",
+        "real_money"
+      ],
+      "count": null,
+      "is_master": null,
+      "has_account": false,
+      "following_count": 0,
+      "followers_count": 0
+    },
+    "account": {
+      "status": 401,
+      "keys": [
+        "error"
+      ],
+      "count": null,
+      "is_master": null,
+      "has_account": false,
+      "following_count": 0,
+      "followers_count": 0
+    },
+    "positions": {
+      "status": 401,
+      "keys": [
+        "error"
+      ],
+      "count": null,
+      "is_master": null,
+      "has_account": false,
+      "following_count": 0,
+      "followers_count": 0
+    },
+    "mam/follows": {
+      "status": 401,
+      "keys": [
+        "error"
+      ],
+      "count": null,
+      "is_master": null,
+      "has_account": false,
+      "following_count": 0,
+      "followers_count": 0
+    }
+  }
+}

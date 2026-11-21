@@ -1,0 +1,2746 @@
+{
+  "info": {
+    "_postman_id": "terminal-blacktrader-full-v3-current-oms",
+    "name": "BlackTrader Terminal — Full API Collection (Current MAM + OMS)",
+    "description": "Updated for https://terminal.blacktrader.com/test on 2026-11-21.\n\nThe collection uses direct OMS login at /v1/oms/_auth/login, Real Hedging OMS routes, current MAM allocation fields, qty-based orders, /reduce partial closes, and sl/tp/trailing protection. The existing snake_case environment variable names are preserved. Run Auth Setup first. Trading requests create real-engine test exposure and may copy to active MAM followers; use dedicated test accounts and always run Teardown. Admin requests are optional and require separate admin credentials.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "0. Auth Setup",
+      "description": "Run this folder first. Trader login now returns the OMS bearer token directly; no separate browser-session or chart-token exchange is required.",
+      "item": [
+        {
+          "name": "Admin Login (optional)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/test/admin/api/login",
+            "description": "Optional client-admin login. Requires separate admin credentials; trader credentials cannot access this API.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{admin_email}}\",\n  \"password\": \"{{admin_password}}\",\n  \"remember\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Admin login returned 200', () => pm.response.to.have.status(200));",
+                  "if (j.token) pm.environment.set('admin_token', j.token);",
+                  "pm.test('Admin token returned', () => pm.expect(j.token).to.be.a('string').and.not.empty);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Master Trader Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/_auth/login",
+            "description": "Current terminal authentication endpoint. The returned OMS bearer token is used directly; no chart-token exchange is required.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{master_email}}\",\n  \"password\": \"{{master_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Master Trader Login: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Login succeeded and returned a token', () => { pm.expect(j.success).to.eql(true); pm.expect(j.token).to.be.a('string').and.not.empty; });",
+                  "if (j.token) { pm.environment.set('master_oms_token', j.token); }",
+                  "if (j.token) { pm.environment.set('master_token', j.token); }",
+                  "const memberId = j.member && (j.member.member_id || j.member.client_id || j.member.id);",
+                  "if (memberId) { pm.environment.set('master_client_id', memberId); }"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Master — Confirm Real Hedging",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/info",
+            "description": "Confirms that the authenticated token is bound to the Real Hedging engine."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j = pm.response.json();",
+                  "pm.test('Instance info returned', () => pm.response.to.have.status(200));",
+                  "pm.test('Real Hedging confirmed', () => { pm.expect(j.slug).to.eql('real'); pm.expect(j.mode).to.eql('hedging'); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 1 Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/_auth/login",
+            "description": "Current terminal authentication endpoint. The returned OMS bearer token is used directly; no chart-token exchange is required.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{follower1_email}}\",\n  \"password\": \"{{follower_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Follower 1 Login: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Login succeeded and returned a token', () => { pm.expect(j.success).to.eql(true); pm.expect(j.token).to.be.a('string').and.not.empty; });",
+                  "if (j.token) { pm.environment.set('follower1_oms_token', j.token); }",
+                  "if (j.token) { pm.environment.set('follower1_token', j.token); }",
+                  "const memberId = j.member && (j.member.member_id || j.member.client_id || j.member.id);",
+                  "if (memberId) { pm.environment.set('follower1_client_id', memberId); }"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 1 — Confirm Real Hedging",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower1_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/info",
+            "description": "Confirms that the authenticated token is bound to the Real Hedging engine."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j = pm.response.json();",
+                  "pm.test('Instance info returned', () => pm.response.to.have.status(200));",
+                  "pm.test('Real Hedging confirmed', () => { pm.expect(j.slug).to.eql('real'); pm.expect(j.mode).to.eql('hedging'); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 2 Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/_auth/login",
+            "description": "Current terminal authentication endpoint. The returned OMS bearer token is used directly; no chart-token exchange is required.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{follower2_email}}\",\n  \"password\": \"{{follower_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Follower 2 Login: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Login succeeded and returned a token', () => { pm.expect(j.success).to.eql(true); pm.expect(j.token).to.be.a('string').and.not.empty; });",
+                  "if (j.token) { pm.environment.set('follower2_oms_token', j.token); }",
+                  "if (j.token) { pm.environment.set('follower2_token', j.token); }",
+                  "const memberId = j.member && (j.member.member_id || j.member.client_id || j.member.id);",
+                  "if (memberId) { pm.environment.set('follower2_client_id', memberId); }"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 2 — Confirm Real Hedging",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower2_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/info",
+            "description": "Confirms that the authenticated token is bound to the Real Hedging engine."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j = pm.response.json();",
+                  "pm.test('Instance info returned', () => pm.response.to.have.status(200));",
+                  "pm.test('Real Hedging confirmed', () => { pm.expect(j.slug).to.eql('real'); pm.expect(j.mode).to.eql('hedging'); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1. Admin — Member Management (optional)",
+      "description": "These routes require an admin token. They are separate from trader authentication.",
+      "item": [
+        {
+          "name": "List Members",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": "{{base_url}}/test/admin/api/members?limit=50&offset=0",
+            "description": ""
+          }
+        },
+        {
+          "name": "Search Member by Email",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": "{{base_url}}/test/admin/api/members?email={{master_email}}",
+            "description": ""
+          }
+        },
+        {
+          "name": "Set Selected Member Balance",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": "{{base_url}}/test/admin/api/members/{{target_member_id}}/balance",
+            "description": "Admin-only Real Hedging balance change. Do not run while the member has open positions unless that race is the intended test.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"instance\": \"real\",\n  \"balance\": 10000,\n  \"force\": true,\n  \"remark\": \"Postman QA balance setup\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Admin balance request returned 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Balance update did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Set Master Balance to 10,000",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": "{{base_url}}/test/admin/api/members/{{master_client_id}}/balance",
+            "description": "Admin-only Real Hedging balance change. Do not run while the member has open positions unless that race is the intended test.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"instance\": \"real\",\n  \"balance\": 10000,\n  \"force\": true,\n  \"remark\": \"Postman QA master setup\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Admin balance request returned 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Balance update did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Set Follower 1 Balance to 5,000",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": "{{base_url}}/test/admin/api/members/{{follower1_client_id}}/balance",
+            "description": "Admin-only Real Hedging balance change. Do not run while the member has open positions unless that race is the intended test.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"instance\": \"real\",\n  \"balance\": 5000,\n  \"force\": true,\n  \"remark\": \"Postman QA follower setup\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Admin balance request returned 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Balance update did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Set Follower 2 Balance to 5,000",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": "{{base_url}}/test/admin/api/members/{{follower2_client_id}}/balance",
+            "description": "Admin-only Real Hedging balance change. Do not run while the member has open positions unless that race is the intended test.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"instance\": \"real\",\n  \"balance\": 5000,\n  \"force\": true,\n  \"remark\": \"Postman QA follower setup\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Admin balance request returned 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Balance update did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2. Account, Funds and History",
+      "description": "Read-only account state for the three scoped Real Hedging users.",
+      "item": [
+        {
+          "name": "Master — Positions and Funds",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/positions",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j = pm.response.json();",
+                  "pm.test('Positions and funds returned', () => { pm.response.to.have.status(200); pm.expect(j.positions).to.be.an('array'); pm.expect(j.funds).to.be.an('object'); });",
+                  "if (j.positions.length) {",
+                  "  const id = j.positions[0].market_order_id || j.positions[0].position_id || j.positions[0].id;",
+                  "  if (id) pm.environment.set('master_position_id', id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 1 — Positions and Funds",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower1_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/positions",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j = pm.response.json();",
+                  "pm.test('Positions and funds returned', () => { pm.response.to.have.status(200); pm.expect(j.positions).to.be.an('array'); pm.expect(j.funds).to.be.an('object'); });",
+                  "if (j.positions.length) {",
+                  "  const id = j.positions[0].market_order_id || j.positions[0].position_id || j.positions[0].id;",
+                  "  if (id) pm.environment.set('follower1_position_id', id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 2 — Positions and Funds",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower2_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/positions",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j = pm.response.json();",
+                  "pm.test('Positions and funds returned', () => { pm.response.to.have.status(200); pm.expect(j.positions).to.be.an('array'); pm.expect(j.funds).to.be.an('object'); });",
+                  "if (j.positions.length) {",
+                  "  const id = j.positions[0].market_order_id || j.positions[0].position_id || j.positions[0].id;",
+                  "  if (id) pm.environment.set('follower2_position_id', id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Master — Account Terms",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/account",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Account terms: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Master — Orders",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/orders",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Orders: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Master — Trading History",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/history?limit=50&offset=0",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('History: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3. MAM — Relationships, Allocation and Fees",
+      "description": "Current Real MAM routes. Balance and equity are method names; follower requests do not set the manager's share percentage.",
+      "item": [
+        {
+          "name": "Master — View Relationships",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/mam/follows",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Master relationships: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Master — View Profit Shares",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/mam/shares",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Profit shares: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Master — Update Display Name and Performance Share",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/mam/master",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"display_name\": \"{{manager_display_name}}\", \"share_percent\": {{manager_share_percent}}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Manager configuration: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 1 — Multiplier Allocation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower1_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/mam/follow",
+            "description": "Creates, reactivates, or updates the follower's MAM relationship using the current mam/follow contract.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"master_client_id\": \"{{master_client_id}}\",\n  \"method\": \"multiplier\",\n  \"multiplier\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Follower 1 — Multiplier Allocation: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 1 — Balance Allocation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower1_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/mam/follow",
+            "description": "Creates, reactivates, or updates the follower's MAM relationship using the current mam/follow contract.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"master_client_id\": \"{{master_client_id}}\",\n  \"method\": \"balance\",\n  \"multiplier\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Follower 1 — Balance Allocation: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 1 — Equity Allocation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower1_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/mam/follow",
+            "description": "Creates, reactivates, or updates the follower's MAM relationship using the current mam/follow contract.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"master_client_id\": \"{{master_client_id}}\",\n  \"method\": \"equity\",\n  \"multiplier\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Follower 1 — Equity Allocation: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 1 — Restore 1x Multiplier",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower1_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/mam/follow",
+            "description": "Creates, reactivates, or updates the follower's MAM relationship using the current mam/follow contract.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"master_client_id\": \"{{master_client_id}}\",\n  \"method\": \"multiplier\",\n  \"multiplier\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Follower 1 — Restore 1x Multiplier: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 2 — Set 2x Multiplier",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower2_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/mam/follow",
+            "description": "Creates, reactivates, or updates the follower's MAM relationship using the current mam/follow contract.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"master_client_id\": \"{{master_client_id}}\",\n  \"method\": \"multiplier\",\n  \"multiplier\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Follower 2 — Set 2x Multiplier: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 2 — Restore 1x Multiplier",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower2_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/mam/follow",
+            "description": "Creates, reactivates, or updates the follower's MAM relationship using the current mam/follow contract.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"master_client_id\": \"{{master_client_id}}\",\n  \"method\": \"multiplier\",\n  \"multiplier\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Follower 2 — Restore 1x Multiplier: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 1 — View Current Relationship",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower1_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/mam/follows",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Follower relationship: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 1 — Unfollow Master",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower1_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/mam/unfollow",
+            "description": "Ends the active relationship. The next request restores it so a full folder run finishes in a usable state.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"master_client_id\": \"{{master_client_id}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Unfollow: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 1 — Rejoin and Restore 1x Multiplier",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower1_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/mam/follow",
+            "description": "Creates, reactivates, or updates the follower's MAM relationship using the current mam/follow contract.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"master_client_id\": \"{{master_client_id}}\",\n  \"method\": \"multiplier\",\n  \"multiplier\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Follower 1 — Rejoin and Restore 1x Multiplier: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4. Orders — Market and Pending",
+      "description": "These requests place real-engine test orders and may copy them to active MAM followers. Use dedicated test accounts and run teardown afterward.",
+      "item": [
+        {
+          "name": "Place Market BUY",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/orders",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"symbol\": \"{{symbol}}\",\n  \"side\": \"BUY\",\n  \"qty\": 0.01,\n  \"type\": \"MARKET\",\n  \"request_id\": \"{{request_id}}\",\n  \"group_id\": \"{{group_id}}\",\n  \"source\": \"postman\",\n  \"tag\": \"TERMINAL_API_QA\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const suffix = Date.now() + '_' + Math.random().toString(16).slice(2);",
+                  "pm.collectionVariables.set('request_id', 'postman_req_' + suffix);",
+                  "pm.collectionVariables.set('group_id', 'postman_grp_' + suffix);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j = pm.response.json();",
+                  "pm.test('Market BUY: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Order accepted', () => pm.expect(j.success).to.eql(true));",
+                  "const p = j.position || {}; const o = j.order || {};",
+                  "const id = p.market_order_id || o.market_order_id || o.order_id || j.order_id;",
+                  "if (id) pm.environment.set('master_position_id', id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Place Market SELL",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/orders",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"symbol\": \"{{symbol}}\",\n  \"side\": \"SELL\",\n  \"qty\": 0.01,\n  \"type\": \"MARKET\",\n  \"request_id\": \"{{request_id}}\",\n  \"group_id\": \"{{group_id}}\",\n  \"source\": \"postman\",\n  \"tag\": \"TERMINAL_API_QA\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const suffix = Date.now() + '_' + Math.random().toString(16).slice(2);",
+                  "pm.collectionVariables.set('request_id', 'postman_req_' + suffix);",
+                  "pm.collectionVariables.set('group_id', 'postman_grp_' + suffix);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j = pm.response.json();",
+                  "pm.test('Market SELL: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Order accepted', () => pm.expect(j.success).to.eql(true));",
+                  "const p = j.position || {}; const o = j.order || {};",
+                  "const id = p.market_order_id || o.market_order_id || o.order_id || j.order_id;",
+                  "if (id) pm.environment.set('master_position_id', id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Place Market BUY with SL and TP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/orders",
+            "description": "Current protection fields are sl and tp. Set valid BLACK:BTCUSD levels in the environment before sending.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"symbol\":\"{{symbol}}\",\"side\":\"BUY\",\"qty\":0.01,\"type\":\"MARKET\",\"request_id\":\"{{request_id}}\",\"group_id\":\"{{group_id}}\",\"source\":\"postman\",\"tag\":\"TERMINAL_API_QA\",\"sl\":{{sl_price}},\"tp\":{{tp_price}}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const suffix = Date.now() + '_' + Math.random().toString(16).slice(2);",
+                  "pm.collectionVariables.set('request_id', 'postman_req_' + suffix);",
+                  "pm.collectionVariables.set('group_id', 'postman_grp_' + suffix);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j = pm.response.json();",
+                  "pm.test('Market BUY with protection: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Order accepted', () => pm.expect(j.success).to.eql(true));",
+                  "const p = j.position || {}; const o = j.order || {};",
+                  "const id = p.market_order_id || o.market_order_id || o.order_id || j.order_id;",
+                  "if (id) pm.environment.set('master_position_id', id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Place Pending BUY LIMIT",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/orders/pending",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"symbol\": \"{{symbol}}\",\n  \"side\": \"BUY\",\n  \"qty\": 0.01,\n  \"type\": \"LIMIT\",\n  \"request_id\": \"{{request_id}}\",\n  \"group_id\": \"{{group_id}}\",\n  \"source\": \"postman\",\n  \"tag\": \"TERMINAL_API_QA\",\n  \"price\": \"{{limit_price}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const suffix = Date.now() + '_' + Math.random().toString(16).slice(2);",
+                  "pm.collectionVariables.set('request_id', 'postman_req_' + suffix);",
+                  "pm.collectionVariables.set('group_id', 'postman_grp_' + suffix);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j = pm.response.json();",
+                  "pm.test('Pending LIMIT: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Pending order accepted', () => pm.expect(j.success).to.eql(true));",
+                  "const o = j.order || {}; const id = o.order_id || j.order_id;",
+                  "if (id) pm.environment.set('pending_order_id', id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Place Pending BUY STOP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/orders/pending",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"symbol\": \"{{symbol}}\",\n  \"side\": \"BUY\",\n  \"qty\": 0.01,\n  \"type\": \"STOP\",\n  \"request_id\": \"{{request_id}}\",\n  \"group_id\": \"{{group_id}}\",\n  \"source\": \"postman\",\n  \"tag\": \"TERMINAL_API_QA\",\n  \"trigger_price\": \"{{stop_price}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const suffix = Date.now() + '_' + Math.random().toString(16).slice(2);",
+                  "pm.collectionVariables.set('request_id', 'postman_req_' + suffix);",
+                  "pm.collectionVariables.set('group_id', 'postman_grp_' + suffix);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j = pm.response.json();",
+                  "pm.test('Pending STOP: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Pending order accepted', () => pm.expect(j.success).to.eql(true));",
+                  "const o = j.order || {}; const id = o.order_id || j.order_id;",
+                  "if (id) pm.environment.set('pending_order_id', id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Modify Saved Pending Order",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/orders/{{pending_order_id}}/modify",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price\": \"{{new_limit_price}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Modify pending order: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cancel Saved Pending Order",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/orders/{{pending_order_id}}",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Cancel pending order: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Trading History",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/history?limit=50&offset=0",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Trading history: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "5. Positions — Reduce, Protection and Close",
+      "description": "Uses market_order_id from the current positions response. Partial close is /reduce; protection uses sl, tp and trailing.",
+      "item": [
+        {
+          "name": "Refresh Master Position ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/positions",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j = pm.response.json();",
+                  "pm.test('Positions and funds returned', () => { pm.response.to.have.status(200); pm.expect(j.positions).to.be.an('array'); pm.expect(j.funds).to.be.an('object'); });",
+                  "if (j.positions.length) {",
+                  "  const id = j.positions[0].market_order_id || j.positions[0].position_id || j.positions[0].id;",
+                  "  if (id) pm.environment.set('master_position_id', id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Reduce Saved Position",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/positions/{{master_position_id}}/reduce",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"qty\": 0.005\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Reduce position: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Set or Update SL and TP",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/positions/{{master_position_id}}/protection",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"sl\":{{sl_price}},\"tp\":{{tp_price}}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Set protection: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Set Server Trailing Stop",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/positions/{{master_position_id}}/protection",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"trailing\": {\n    \"activation\": 200,\n    \"distance\": 100,\n    \"step\": 20\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Set trailing stop: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Remove SL and TP",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/positions/{{master_position_id}}/protection",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sl\": 0,\n  \"tp\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Remove protection: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Square Off Saved Position",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/positions/{{master_position_id}}/squareoff",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Square off: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "6. Teardown and Restore",
+      "description": "Run after trading. Relationship and trade cleanup use trader tokens. The final three balance requests are optional and require an admin token.",
+      "item": [
+        {
+          "name": "Restore Follower 1 to 1x Multiplier",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower1_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/mam/follow",
+            "description": "Creates, reactivates, or updates the follower's MAM relationship using the current mam/follow contract.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"master_client_id\": \"{{master_client_id}}\",\n  \"method\": \"multiplier\",\n  \"multiplier\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Restore Follower 1 to 1x Multiplier: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Restore Follower 2 to 1x Multiplier",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower2_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/mam/follow",
+            "description": "Creates, reactivates, or updates the follower's MAM relationship using the current mam/follow contract.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"master_client_id\": \"{{master_client_id}}\",\n  \"method\": \"multiplier\",\n  \"multiplier\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Restore Follower 2 to 1x Multiplier: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Master — Read Open Positions for Cleanup",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/positions",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j = pm.response.json(); pm.test('Positions read', () => pm.response.to.have.status(200));",
+                  "const ids = (j.positions || []).map(p => p.market_order_id || p.position_id || p.id).filter(Boolean);",
+                  "pm.collectionVariables.set('master_position_ids_json', JSON.stringify(ids));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Master — Bulk Square Off Open Positions",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/positions/bulk/squareoff",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"market_order_ids\": {{master_position_ids_json}}, \"source\": \"postman_cleanup\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const ids = JSON.parse(pm.collectionVariables.get('master_position_ids_json') || '[]');",
+                  "if (!ids.length) { pm.execution.skipRequest(); }"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Bulk squareoff: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Master — Read Working Orders for Cleanup",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/orders",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j = pm.response.json(); pm.test('Orders read', () => pm.response.to.have.status(200));",
+                  "const working = new Set(['PENDING', 'OPEN', 'NEW']);",
+                  "const ids = (j.orders || []).filter(o => working.has(o.state)).map(o => o.order_id).filter(Boolean);",
+                  "pm.collectionVariables.set('master_pending_ids_json', JSON.stringify(ids));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Master — Bulk Cancel Working Orders",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/orders/bulk/cancel",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"order_ids\": {{master_pending_ids_json}}, \"source\": \"postman_cleanup\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const ids = JSON.parse(pm.collectionVariables.get('master_pending_ids_json') || '[]');",
+                  "if (!ids.length) { pm.execution.skipRequest(); }"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Bulk cancel: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 1 — Read Open Positions for Cleanup",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower1_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/positions",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j = pm.response.json(); pm.test('Positions read', () => pm.response.to.have.status(200));",
+                  "const ids = (j.positions || []).map(p => p.market_order_id || p.position_id || p.id).filter(Boolean);",
+                  "pm.collectionVariables.set('follower1_position_ids_json', JSON.stringify(ids));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 1 — Bulk Square Off Open Positions",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower1_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/positions/bulk/squareoff",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"market_order_ids\": {{follower1_position_ids_json}}, \"source\": \"postman_cleanup\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const ids = JSON.parse(pm.collectionVariables.get('follower1_position_ids_json') || '[]');",
+                  "if (!ids.length) { pm.execution.skipRequest(); }"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Bulk squareoff: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 1 — Read Working Orders for Cleanup",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower1_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/orders",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j = pm.response.json(); pm.test('Orders read', () => pm.response.to.have.status(200));",
+                  "const working = new Set(['PENDING', 'OPEN', 'NEW']);",
+                  "const ids = (j.orders || []).filter(o => working.has(o.state)).map(o => o.order_id).filter(Boolean);",
+                  "pm.collectionVariables.set('follower1_pending_ids_json', JSON.stringify(ids));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 1 — Bulk Cancel Working Orders",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower1_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/orders/bulk/cancel",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"order_ids\": {{follower1_pending_ids_json}}, \"source\": \"postman_cleanup\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const ids = JSON.parse(pm.collectionVariables.get('follower1_pending_ids_json') || '[]');",
+                  "if (!ids.length) { pm.execution.skipRequest(); }"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Bulk cancel: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 2 — Read Open Positions for Cleanup",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower2_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/positions",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j = pm.response.json(); pm.test('Positions read', () => pm.response.to.have.status(200));",
+                  "const ids = (j.positions || []).map(p => p.market_order_id || p.position_id || p.id).filter(Boolean);",
+                  "pm.collectionVariables.set('follower2_position_ids_json', JSON.stringify(ids));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 2 — Bulk Square Off Open Positions",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower2_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/positions/bulk/squareoff",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"market_order_ids\": {{follower2_position_ids_json}}, \"source\": \"postman_cleanup\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const ids = JSON.parse(pm.collectionVariables.get('follower2_position_ids_json') || '[]');",
+                  "if (!ids.length) { pm.execution.skipRequest(); }"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Bulk squareoff: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 2 — Read Working Orders for Cleanup",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower2_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/orders",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j = pm.response.json(); pm.test('Orders read', () => pm.response.to.have.status(200));",
+                  "const working = new Set(['PENDING', 'OPEN', 'NEW']);",
+                  "const ids = (j.orders || []).filter(o => working.has(o.state)).map(o => o.order_id).filter(Boolean);",
+                  "pm.collectionVariables.set('follower2_pending_ids_json', JSON.stringify(ids));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Follower 2 — Bulk Cancel Working Orders",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower2_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/orders/bulk/cancel",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"order_ids\": {{follower2_pending_ids_json}}, \"source\": \"postman_cleanup\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const ids = JSON.parse(pm.collectionVariables.get('follower2_pending_ids_json') || '[]');",
+                  "if (!ids.length) { pm.execution.skipRequest(); }"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Bulk cancel: HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Operation did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Restore Master Balance to 10,000 (optional admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": "{{base_url}}/test/admin/api/members/{{master_client_id}}/balance",
+            "description": "Admin-only Real Hedging balance change. Do not run while the member has open positions unless that race is the intended test.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"instance\": \"real\",\n  \"balance\": 10000,\n  \"force\": true,\n  \"remark\": \"Postman QA restore\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Admin balance request returned 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Balance update did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Restore Follower 1 Balance to 5,000 (optional admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": "{{base_url}}/test/admin/api/members/{{follower1_client_id}}/balance",
+            "description": "Admin-only Real Hedging balance change. Do not run while the member has open positions unless that race is the intended test.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"instance\": \"real\",\n  \"balance\": 5000,\n  \"force\": true,\n  \"remark\": \"Postman QA restore\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Admin balance request returned 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Balance update did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Restore Follower 2 Balance to 5,000 (optional admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": "{{base_url}}/test/admin/api/members/{{follower2_client_id}}/balance",
+            "description": "Admin-only Real Hedging balance change. Do not run while the member has open positions unless that race is the intended test.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"instance\": \"real\",\n  \"balance\": 5000,\n  \"force\": true,\n  \"remark\": \"Postman QA restore\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('Admin balance request returned 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Balance update did not report failure', () => pm.expect(j.success).to.not.eql(false));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "7. Safe Negative and Authorization Checks",
+      "description": "Non-destructive validation checks. These replace stale bug-inducing requests that could leave invalid balances or exposure.",
+      "item": [
+        {
+          "name": "Invalid Password Is Rejected",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/_auth/login",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{master_email}}\",\n  \"password\": \"intentionally-wrong-password\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Invalid login rejected', () => pm.expect(pm.response.code).to.be.oneOf([400, 401, 403]));",
+                  "let j = {}; try { j = pm.response.json(); } catch (e) {}",
+                  "pm.test('No usable token issued', () => pm.expect(j.token).to.not.be.a('string'));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Protected Positions Reject Missing Token",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/test/v1/oms/real/positions",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Missing token rejected', () => pm.response.to.have.status(401));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Zero-Quantity Market Order Is Rejected",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{master_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/orders",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"symbol\": \"{{symbol}}\",\n  \"side\": \"BUY\",\n  \"qty\": 0,\n  \"type\": \"MARKET\",\n  \"source\": \"postman_negative\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Zero quantity rejected', () => pm.expect(pm.response.code).to.be.oneOf([400, 422]));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Unknown MAM Master Is Rejected",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{follower1_oms_token}}"
+              },
+              {
+                "key": "X-Broker-ID",
+                "value": "real"
+              }
+            ],
+            "url": "{{base_url}}/test/v1/oms/real/mam/follow",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"master_client_id\": \"mem_postman_does_not_exist\",\n  \"method\": \"multiplier\",\n  \"multiplier\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Unknown master rejected', () => pm.expect(pm.response.code).to.be.oneOf([400, 404]));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://terminal.blacktrader.com",
+      "type": "default"
+    },
+    {
+      "key": "manager_display_name",
+      "value": "mamhedgingmaster",
+      "type": "default"
+    },
+    {
+      "key": "manager_share_percent",
+      "value": "50",
+      "type": "default"
+    },
+    {
+      "key": "request_id",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "group_id",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "master_position_ids_json",
+      "value": "[]",
+      "type": "default"
+    },
+    {
+      "key": "follower1_position_ids_json",
+      "value": "[]",
+      "type": "default"
+    },
+    {
+      "key": "follower2_position_ids_json",
+      "value": "[]",
+      "type": "default"
+    },
+    {
+      "key": "master_pending_ids_json",
+      "value": "[]",
+      "type": "default"
+    },
+    {
+      "key": "follower1_pending_ids_json",
+      "value": "[]",
+      "type": "default"
+    },
+    {
+      "key": "follower2_pending_ids_json",
+      "value": "[]",
+      "type": "default"
+    }
+  ]
+}

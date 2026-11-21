@@ -1,0 +1,5518 @@
+[
+  {
+    "id": "TERM-AUTH-001",
+    "name": "Authenticate master and both followers on Real Hedging",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:22:46.297459+00:00",
+    "finished_at": "2026-11-21T05:22:46.297530+00:00",
+    "details": {
+      "accounts_authenticated": 3,
+      "instance_errors": {},
+      "expected": "All three accounts authenticate and report real/hedging."
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "TERM-STATE-001",
+    "name": "Verify all scoped accounts begin flat with no working orders",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:22:46.298773+00:00",
+    "finished_at": "2026-11-21T05:22:46.299022+00:00",
+    "details": {
+      "open_positions": {},
+      "working_orders": {},
+      "funds": {
+        "mamhm@mailinator.com": {
+          "balance": 9996.055499999986,
+          "equity": 9996.055499999986,
+          "free_margin": 9996.055499999986,
+          "margin_call_level": 100,
+          "margin_level": null,
+          "starting_balance": 10000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0,
+          "used_margin": 0
+        },
+        "mamhf1@mailinator.com": {
+          "balance": 4995.7686,
+          "equity": 4995.7686,
+          "free_margin": 4995.7686,
+          "margin_call_level": 100,
+          "margin_level": null,
+          "starting_balance": 5000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0,
+          "used_margin": 0
+        },
+        "mamhf2@mailinator.com": {
+          "balance": 4995.643000000002,
+          "equity": 4995.643000000002,
+          "free_margin": 4995.643000000002,
+          "margin_call_level": 100,
+          "margin_level": null,
+          "starting_balance": 5000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0,
+          "used_margin": 0
+        }
+      }
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "TERM-MAM-001",
+    "name": "Verify one manager and exactly two active follower relationships",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:22:46.300587+00:00",
+    "finished_at": "2026-11-21T05:22:46.300623+00:00",
+    "details": {
+      "master_configuration": {
+        "client_id": "mem_6cf38c1f751cbd1699",
+        "display_name": "mamhedgingmaster",
+        "share_percent": 50,
+        "status": "active"
+      },
+      "active_master_followers": [
+        {
+          "follow_id": "mfl_fe7dfb09c4d0c17a2e",
+          "master_client_id": "mem_6cf38c1f751cbd1699",
+          "follower_client_id": "mem_5476acd67c0a8a60de",
+          "instance": "real",
+          "starting_balance": 4995.643000000002,
+          "share_percent": 50,
+          "method": "multiplier",
+          "multiplier": 1,
+          "status": "active",
+          "joined_at": "2026-11-21T05:20:57.95312Z",
+          "follower_name": "mamhf2"
+        },
+        {
+          "follow_id": "mfl_9e502cb5c04db85780",
+          "master_client_id": "mem_6cf38c1f751cbd1699",
+          "follower_client_id": "mem_bcb0386eac16dc47a6",
+          "instance": "real",
+          "starting_balance": 4995.7686,
+          "share_percent": 50,
+          "method": "multiplier",
+          "multiplier": 1,
+          "status": "active",
+          "joined_at": "2026-11-21T05:20:57.932585Z",
+          "follower_name": "mamhf1"
+        }
+      ],
+      "follower_relationship_errors": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "TERM-MAM-HWM-BASELINE",
+    "name": "Record valid follower performance benchmarks and join metadata",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:22:46.302585+00:00",
+    "finished_at": "2026-11-21T05:22:46.302639+00:00",
+    "details": {
+      "observations": {
+        "mamhf1@mailinator.com": {
+          "mam_benchmark": 4995.7686,
+          "account_starting_balance": 5000,
+          "current_balance": 4995.7686,
+          "joined_at": "2026-11-21T05:20:57.932585Z"
+        },
+        "mamhf2@mailinator.com": {
+          "mam_benchmark": 4995.643000000002,
+          "account_starting_balance": 5000,
+          "current_balance": 4995.643000000002,
+          "joined_at": "2026-11-21T05:20:57.95312Z"
+        }
+      },
+      "invalid_benchmarks": {},
+      "expected": "Each active relationship exposes a finite positive benchmark. Preservation is tested separately across trading and active term edits."
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "TERM-MAM-HWM-TERMS-001",
+    "name": "Active multiplier changes preserve each follower's performance benchmark",
+    "status": "FAIL",
+    "started_at": "2026-11-21T05:22:47.137717+00:00",
+    "finished_at": "2026-11-21T05:22:49.162205+00:00",
+    "details": {
+      "before_links": {
+        "mamhf1@mailinator.com": {
+          "follow_id": "mfl_9e502cb5c04db85780",
+          "master_client_id": "mem_6cf38c1f751cbd1699",
+          "follower_client_id": "mem_bcb0386eac16dc47a6",
+          "instance": "real",
+          "starting_balance": 4995.7686,
+          "share_percent": 50,
+          "method": "multiplier",
+          "multiplier": 1,
+          "status": "active",
+          "joined_at": "2026-11-21T05:20:57.932585Z"
+        },
+        "mamhf2@mailinator.com": {
+          "follow_id": "mfl_fe7dfb09c4d0c17a2e",
+          "master_client_id": "mem_6cf38c1f751cbd1699",
+          "follower_client_id": "mem_5476acd67c0a8a60de",
+          "instance": "real",
+          "starting_balance": 4995.643000000002,
+          "share_percent": 50,
+          "method": "multiplier",
+          "multiplier": 1,
+          "status": "active",
+          "joined_at": "2026-11-21T05:20:57.95312Z"
+        }
+      },
+      "before_funds": {
+        "mamhf1@mailinator.com": {
+          "balance": 4995.7686,
+          "equity": 4995.7686,
+          "free_margin": 4995.7686,
+          "margin_call_level": 100,
+          "margin_level": null,
+          "starting_balance": 5000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0,
+          "used_margin": 0
+        },
+        "mamhf2@mailinator.com": {
+          "balance": 4995.643000000002,
+          "equity": 4995.643000000002,
+          "free_margin": 4995.643000000002,
+          "margin_call_level": 100,
+          "margin_level": null,
+          "starting_balance": 5000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0,
+          "used_margin": 0
+        }
+      },
+      "trade_cash_deltas": {
+        "mamhf1@mailinator.com": -0.035799999999653664,
+        "mamhf2@mailinator.com": -0.035799999999653664
+      },
+      "after_trade_links": {
+        "mamhf1@mailinator.com": {
+          "follow_id": "mfl_9e502cb5c04db85780",
+          "master_client_id": "mem_6cf38c1f751cbd1699",
+          "follower_client_id": "mem_bcb0386eac16dc47a6",
+          "instance": "real",
+          "starting_balance": 4995.7686,
+          "share_percent": 50,
+          "method": "multiplier",
+          "multiplier": 1,
+          "status": "active",
+          "joined_at": "2026-11-21T05:20:57.932585Z"
+        },
+        "mamhf2@mailinator.com": {
+          "follow_id": "mfl_fe7dfb09c4d0c17a2e",
+          "master_client_id": "mem_6cf38c1f751cbd1699",
+          "follower_client_id": "mem_5476acd67c0a8a60de",
+          "instance": "real",
+          "starting_balance": 4995.643000000002,
+          "share_percent": 50,
+          "method": "multiplier",
+          "multiplier": 1,
+          "status": "active",
+          "joined_at": "2026-11-21T05:20:57.95312Z"
+        }
+      },
+      "trade_preservation_errors": {},
+      "term_update_responses": [
+        {
+          "http": 200,
+          "body": {
+            "follow": {
+              "follow_id": "mfl_9e502cb5c04db85780",
+              "master_client_id": "mem_6cf38c1f751cbd1699",
+              "follower_client_id": "mem_bcb0386eac16dc47a6",
+              "instance": "real",
+              "starting_balance": 4995.732800000001,
+              "share_percent": 50,
+              "method": "multiplier",
+              "multiplier": 2,
+              "status": "active",
+              "joined_at": "2026-11-21T05:22:48.172538Z"
+            },
+            "success": true
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "follow": {
+              "follow_id": "mfl_fe7dfb09c4d0c17a2e",
+              "master_client_id": "mem_6cf38c1f751cbd1699",
+              "follower_client_id": "mem_5476acd67c0a8a60de",
+              "instance": "real",
+              "starting_balance": 4995.607200000002,
+              "share_percent": 50,
+              "method": "multiplier",
+              "multiplier": 0.5,
+              "status": "active",
+              "joined_at": "2026-11-21T05:22:48.250686Z"
+            },
+            "success": true
+          }
+        }
+      ],
+      "after_active_term_edit_links": {
+        "mamhf1@mailinator.com": {
+          "follow_id": "mfl_9e502cb5c04db85780",
+          "master_client_id": "mem_6cf38c1f751cbd1699",
+          "follower_client_id": "mem_bcb0386eac16dc47a6",
+          "instance": "real",
+          "starting_balance": 4995.732800000001,
+          "share_percent": 50,
+          "method": "multiplier",
+          "multiplier": 2,
+          "status": "active",
+          "joined_at": "2026-11-21T05:22:48.172538Z"
+        },
+        "mamhf2@mailinator.com": {
+          "follow_id": "mfl_fe7dfb09c4d0c17a2e",
+          "master_client_id": "mem_6cf38c1f751cbd1699",
+          "follower_client_id": "mem_5476acd67c0a8a60de",
+          "instance": "real",
+          "starting_balance": 4995.607200000002,
+          "share_percent": 50,
+          "method": "multiplier",
+          "multiplier": 0.5,
+          "status": "active",
+          "joined_at": "2026-11-21T05:22:48.250686Z"
+        }
+      },
+      "active_edit_benchmark_errors": {
+        "mamhf1@mailinator.com": {
+          "before_active_edit": 4995.7686,
+          "after_active_edit": 4995.732800000001,
+          "current_balance": 4995.732800000001
+        },
+        "mamhf2@mailinator.com": {
+          "before_active_edit": 4995.643000000002,
+          "after_active_edit": 4995.607200000002,
+          "current_balance": 4995.607200000002
+        }
+      },
+      "restore_responses": [
+        {
+          "http": 200,
+          "body": {
+            "follow": {
+              "follow_id": "mfl_9e502cb5c04db85780",
+              "master_client_id": "mem_6cf38c1f751cbd1699",
+              "follower_client_id": "mem_bcb0386eac16dc47a6",
+              "instance": "real",
+              "starting_balance": 4995.732800000001,
+              "share_percent": 50,
+              "method": "multiplier",
+              "multiplier": 1,
+              "status": "active",
+              "joined_at": "2026-11-21T05:22:49.001912Z"
+            },
+            "success": true
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "follow": {
+              "follow_id": "mfl_fe7dfb09c4d0c17a2e",
+              "master_client_id": "mem_6cf38c1f751cbd1699",
+              "follower_client_id": "mem_5476acd67c0a8a60de",
+              "instance": "real",
+              "starting_balance": 4995.607200000002,
+              "share_percent": 50,
+              "method": "multiplier",
+              "multiplier": 1,
+              "status": "active",
+              "joined_at": "2026-11-21T05:22:48.962519Z"
+            },
+            "success": true
+          }
+        }
+      ],
+      "restored_links": {
+        "mamhf1@mailinator.com": {
+          "follow_id": "mfl_9e502cb5c04db85780",
+          "master_client_id": "mem_6cf38c1f751cbd1699",
+          "follower_client_id": "mem_bcb0386eac16dc47a6",
+          "instance": "real",
+          "starting_balance": 4995.732800000001,
+          "share_percent": 50,
+          "method": "multiplier",
+          "multiplier": 1,
+          "status": "active",
+          "joined_at": "2026-11-21T05:22:49.001912Z"
+        },
+        "mamhf2@mailinator.com": {
+          "follow_id": "mfl_fe7dfb09c4d0c17a2e",
+          "master_client_id": "mem_6cf38c1f751cbd1699",
+          "follower_client_id": "mem_5476acd67c0a8a60de",
+          "instance": "real",
+          "starting_balance": 4995.607200000002,
+          "share_percent": 50,
+          "method": "multiplier",
+          "multiplier": 1,
+          "status": "active",
+          "joined_at": "2026-11-21T05:22:48.962519Z"
+        }
+      },
+      "expected": "Trading PnL and an active multiplier edit must not reset the relationship HWM; only a new/reactivated relationship or non-trading cash adjustment may change it."
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "TERM-WEB-HTTPS-001",
+    "name": "Terminal HTTPS entry route preserves HTTPS during redirect",
+    "status": "FAIL",
+    "started_at": "2026-11-21T05:22:50.680982+00:00",
+    "finished_at": "2026-11-21T05:22:51.293078+00:00",
+    "details": {
+      "http": 301,
+      "location": "http://terminal.blacktrader.com/test/home",
+      "strict_transport_security": "max-age=15552000",
+      "expected": "An HTTPS entry URL must not redirect users to an HTTP URL."
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "TERM-AUTH-NEG-001",
+    "name": "Invalid password is rejected without issuing a token",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:22:51.295268+00:00",
+    "finished_at": "2026-11-21T05:22:52.046877+00:00",
+    "details": {
+      "http": 401,
+      "response": {
+        "error": "invalid email or password"
+      }
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "TERM-MARKET-BUY",
+    "name": "BLACK BTCUSD BUY copies from one master to both followers and closes cleanly",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:22:52.049328+00:00",
+    "finished_at": "2026-11-21T05:22:52.406190+00:00",
+    "details": {
+      "master_order_id": "ord_4534c1b4ffd97ac91c",
+      "accounts_checked": 3,
+      "incorrect_positions": {},
+      "remaining_after_master_close": {},
+      "close": {
+        "http": 200,
+        "body": {
+          "exit_price": 56257.2,
+          "market_order_id": "ord_4534c1b4ffd97ac91c",
+          "price_source": "live",
+          "realized_pnl": -0.054200000000128055,
+          "success": true,
+          "symbol": "BLACK:BTCUSD"
+        }
+      }
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "TERM-MARKET-SELL",
+    "name": "BLACK BTCUSD SELL copies from one master to both followers and closes cleanly",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:22:52.407663+00:00",
+    "finished_at": "2026-11-21T05:22:52.812047+00:00",
+    "details": {
+      "master_order_id": "ord_1e2d91ac6e43931beb",
+      "accounts_checked": 3,
+      "incorrect_positions": {},
+      "remaining_after_master_close": {},
+      "close": {
+        "http": 200,
+        "body": {
+          "exit_price": 56257.68,
+          "market_order_id": "ord_1e2d91ac6e43931beb",
+          "price_source": "live",
+          "realized_pnl": 0.002599999999947613,
+          "success": true,
+          "symbol": "BLACK:BTCUSD"
+        }
+      }
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "TERM-ALLOC-001",
+    "name": "Multiplier allocation copies 0.5x and 2.0x quantities",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:22:53.718454+00:00",
+    "finished_at": "2026-11-21T05:22:58.512211+00:00",
+    "details": {
+      "expected_quantities": {
+        "mamhm@mailinator.com": 0.02,
+        "mamhf1@mailinator.com": 0.01,
+        "mamhf2@mailinator.com": 0.04
+      },
+      "actual_quantities": {
+        "mamhm@mailinator.com": [
+          0.02
+        ],
+        "mamhf1@mailinator.com": [
+          0.01
+        ],
+        "mamhf2@mailinator.com": [
+          0.04
+        ]
+      },
+      "errors": {},
+      "orphans": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "TERM-ALLOC-BALANCE",
+    "name": "Balance proportional allocation sizes both followers from committed funds",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:22:58.513900+00:00",
+    "finished_at": "2026-11-21T05:23:01.113269+00:00",
+    "details": {
+      "method": "balance",
+      "funds_snapshot": {
+        "mamhm@mailinator.com": {
+          "balance": 9995.937299999985,
+          "equity": 9995.937299999985,
+          "free_margin": 9995.937299999985,
+          "margin_call_level": 100,
+          "margin_level": null,
+          "starting_balance": 10000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0,
+          "used_margin": 0
+        },
+        "mamhf1@mailinator.com": {
+          "balance": 4995.6658,
+          "equity": 4995.6658,
+          "free_margin": 4995.6658,
+          "margin_call_level": 100,
+          "margin_level": null,
+          "starting_balance": 5000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0,
+          "used_margin": 0
+        },
+        "mamhf2@mailinator.com": {
+          "balance": 4995.4940000000015,
+          "equity": 4995.4940000000015,
+          "free_margin": 4995.4940000000015,
+          "margin_call_level": 100,
+          "margin_level": null,
+          "starting_balance": 5000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0,
+          "used_margin": 0
+        }
+      },
+      "expected_quantities": {
+        "mamhm@mailinator.com": 0.04,
+        "mamhf1@mailinator.com": 0.02,
+        "mamhf2@mailinator.com": 0.02
+      },
+      "actual_quantities": {
+        "mamhm@mailinator.com": [
+          0.04
+        ],
+        "mamhf1@mailinator.com": [
+          0.02
+        ],
+        "mamhf2@mailinator.com": [
+          0.02
+        ]
+      },
+      "errors": {},
+      "orphans": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "TERM-ALLOC-EQUITY",
+    "name": "Equity proportional allocation sizes both followers from committed funds",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:01.115133+00:00",
+    "finished_at": "2026-11-21T05:23:03.114154+00:00",
+    "details": {
+      "method": "equity",
+      "funds_snapshot": {
+        "mamhm@mailinator.com": {
+          "balance": 9995.443299999984,
+          "equity": 9995.443299999984,
+          "free_margin": 9995.443299999984,
+          "margin_call_level": 100,
+          "margin_level": null,
+          "starting_balance": 10000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0,
+          "used_margin": 0
+        },
+        "mamhf1@mailinator.com": {
+          "balance": 4995.4186,
+          "equity": 4995.4186,
+          "free_margin": 4995.4186,
+          "margin_call_level": 100,
+          "margin_level": null,
+          "starting_balance": 5000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0,
+          "used_margin": 0
+        },
+        "mamhf2@mailinator.com": {
+          "balance": 4995.247000000001,
+          "equity": 4995.247000000001,
+          "free_margin": 4995.247000000001,
+          "margin_call_level": 100,
+          "margin_level": null,
+          "starting_balance": 5000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0,
+          "used_margin": 0
+        }
+      },
+      "expected_quantities": {
+        "mamhm@mailinator.com": 0.04,
+        "mamhf1@mailinator.com": 0.02,
+        "mamhf2@mailinator.com": 0.02
+      },
+      "actual_quantities": {
+        "mamhm@mailinator.com": [
+          0.04
+        ],
+        "mamhf1@mailinator.com": [
+          0.02
+        ],
+        "mamhf2@mailinator.com": [
+          0.02
+        ]
+      },
+      "errors": {},
+      "orphans": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "TERM-LIFE-001",
+    "name": "Master partial close reduces both copied follower positions",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:06.588547+00:00",
+    "finished_at": "2026-11-21T05:23:09.130232+00:00",
+    "details": {
+      "reduce_response": {
+        "http": 200,
+        "body": {
+          "realized_pnl": -0.04959999999991851,
+          "remaining_qty": 0.02,
+          "success": true,
+          "symbol": "BLACK:BTCUSD"
+        }
+      },
+      "quantity_errors": {},
+      "orphans": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "TERM-LIFE-002",
+    "name": "Opposite hedged positions coexist and close independently",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:09.132117+00:00",
+    "finished_at": "2026-11-21T05:23:10.244475+00:00",
+    "details": {
+      "hedge_errors": {},
+      "selective_close_errors": {},
+      "orphans": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "TERM-LIFE-003",
+    "name": "Follower manual close does not close master or other follower",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:10.246248+00:00",
+    "finished_at": "2026-11-21T05:23:11.312079+00:00",
+    "details": {
+      "follower_close": {
+        "http": 200,
+        "body": {
+          "exit_price": 56213.17,
+          "market_order_id": "ord_1b4a03e7e4ba93f6ed",
+          "price_source": "live",
+          "realized_pnl": -0.10220000000001164,
+          "success": true,
+          "symbol": "BLACK:BTCUSD"
+        }
+      },
+      "isolation_errors": {},
+      "orphans": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "SIZE-LOT-RULE-0.01-0.25",
+    "name": "Copied new entry respects BLACK BTCUSD lot minimum and step",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:13.102896+00:00",
+    "finished_at": "2026-11-21T05:23:15.404538+00:00",
+    "details": {
+      "master_qty": 0.01,
+      "multiplier": 0.25,
+      "unrounded_product": 0.0025,
+      "child_positions": [
+        {
+          "algo_id": null,
+          "avg_entry_price": 56218.46,
+          "closed_at": null,
+          "comment": null,
+          "current_price": 56216.38,
+          "full_margin": 562.1846,
+          "group_id": "qa_d392f8ea094b42d1",
+          "margin_percent": 100,
+          "margin_used": 562.1846,
+          "market_order_id": "ord_742a1e5df09b00ae3a",
+          "net_qty": 0.01,
+          "oco_key": null,
+          "opened_at": "2026-11-21T05:23:13.594092Z",
+          "position_id": "pos_5a18e31473acd0ea71",
+          "side": "BUY",
+          "source": "mam",
+          "status": "OPEN",
+          "strategy_name": null,
+          "symbol": "BLACK:BTCUSD",
+          "tag": "QA_20261120",
+          "trailing": null,
+          "unrealized_pnl": -0.020800000000017464
+        }
+      ],
+      "invalid_entry_quantities": [],
+      "orphans": {},
+      "expected_child_quantity": 0.01,
+      "other_account_errors": {},
+      "oracle": "Regression of observed .01 minimum and nearest-step rounding; exactly one child required, no missing-copy pass"
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "SIZE-LOT-RULE-0.03-0.5",
+    "name": "Copied new entry respects BLACK BTCUSD lot minimum and step",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:15.405894+00:00",
+    "finished_at": "2026-11-21T05:23:18.047012+00:00",
+    "details": {
+      "master_qty": 0.03,
+      "multiplier": 0.5,
+      "unrounded_product": 0.015,
+      "child_positions": [
+        {
+          "algo_id": null,
+          "avg_entry_price": 56218.07,
+          "closed_at": null,
+          "comment": null,
+          "current_price": 56216.12,
+          "full_margin": 1124.3614,
+          "group_id": "qa_ecdbb2e839684192",
+          "margin_percent": 100,
+          "margin_used": 1124.3614,
+          "market_order_id": "ord_2e3cb7cbc94817e05e",
+          "net_qty": 0.02,
+          "oco_key": null,
+          "opened_at": "2026-11-21T05:23:15.955889Z",
+          "position_id": "pos_229918603e0d8494d9",
+          "side": "BUY",
+          "source": "mam",
+          "status": "OPEN",
+          "strategy_name": null,
+          "symbol": "BLACK:BTCUSD",
+          "tag": "QA_20261120",
+          "trailing": null,
+          "unrealized_pnl": -0.038999999999941797
+        }
+      ],
+      "invalid_entry_quantities": [],
+      "orphans": {},
+      "expected_child_quantity": 0.02,
+      "other_account_errors": {},
+      "oracle": "Regression of observed .01 minimum and nearest-step rounding; exactly one child required, no missing-copy pass"
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "SIZE-LOT-RULE-0.01-1.5",
+    "name": "Copied new entry respects BLACK BTCUSD lot minimum and step",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:18.048816+00:00",
+    "finished_at": "2026-11-21T05:23:21.010475+00:00",
+    "details": {
+      "master_qty": 0.01,
+      "multiplier": 1.5,
+      "unrounded_product": 0.015,
+      "child_positions": [
+        {
+          "algo_id": null,
+          "avg_entry_price": 56221.31,
+          "closed_at": null,
+          "comment": null,
+          "current_price": 56219.26,
+          "full_margin": 1124.4261999999999,
+          "group_id": "qa_f71f64d3e08048a0",
+          "margin_percent": 100,
+          "margin_used": 1124.4261999999999,
+          "market_order_id": "ord_48a8a432d8b2ec5f28",
+          "net_qty": 0.02,
+          "oco_key": null,
+          "opened_at": "2026-11-21T05:23:18.90826Z",
+          "position_id": "pos_b01c3ab7608d687dd4",
+          "side": "BUY",
+          "source": "mam",
+          "status": "OPEN",
+          "strategy_name": null,
+          "symbol": "BLACK:BTCUSD",
+          "tag": "QA_20261120",
+          "trailing": null,
+          "unrealized_pnl": -0.04099999999991269
+        }
+      ],
+      "invalid_entry_quantities": [],
+      "orphans": {},
+      "expected_child_quantity": 0.02,
+      "other_account_errors": {},
+      "oracle": "Regression of observed .01 minimum and nearest-step rounding; exactly one child required, no missing-copy pass"
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "SIZE-LOT-RULE-0.01-2.75",
+    "name": "Copied new entry respects BLACK BTCUSD lot minimum and step",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:21.012720+00:00",
+    "finished_at": "2026-11-21T05:23:24.262591+00:00",
+    "details": {
+      "master_qty": 0.01,
+      "multiplier": 2.75,
+      "unrounded_product": 0.0275,
+      "child_positions": [
+        {
+          "algo_id": null,
+          "avg_entry_price": 56233.93,
+          "closed_at": null,
+          "comment": null,
+          "current_price": 56236.53,
+          "full_margin": 1687.0179,
+          "group_id": "qa_8e01c731dd2d41ab",
+          "margin_percent": 100,
+          "margin_used": 1687.0179,
+          "market_order_id": "ord_4630c5afd3bea8398b",
+          "net_qty": 0.03,
+          "oco_key": null,
+          "opened_at": "2026-11-21T05:23:21.793293Z",
+          "position_id": "pos_f5824b413e3816a36c",
+          "side": "BUY",
+          "source": "mam",
+          "status": "OPEN",
+          "strategy_name": null,
+          "symbol": "BLACK:BTCUSD",
+          "tag": "QA_20261120",
+          "trailing": null,
+          "unrealized_pnl": 0.07799999999995634
+        }
+      ],
+      "invalid_entry_quantities": [],
+      "orphans": {},
+      "expected_child_quantity": 0.03,
+      "other_account_errors": {},
+      "oracle": "Regression of observed .01 minimum and nearest-step rounding; exactly one child required, no missing-copy pass"
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "PENDING-100-FANOUT-LIMIT",
+    "name": "Pending LIMIT tickets appear on all followers and cancel with master",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:26.915614+00:00",
+    "finished_at": "2026-11-21T05:23:29.405780+00:00",
+    "details": {
+      "placement": {
+        "http": 200,
+        "body": {
+          "order": {
+            "order_id": "ord_0bd33e4a53651fc460",
+            "market_order_id": "ord_0bd33e4a53651fc460",
+            "group_id": "qa_38d3fc59eeed4cdb",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "type": "LIMIT",
+            "state": "PENDING",
+            "requested_qty": 0.02,
+            "filled_qty": 0,
+            "price": 28125.9,
+            "source": "api",
+            "tag": "QA_20261120",
+            "copy_ref": "ord_0bd33e4a53651fc460",
+            "copy_kind": "master",
+            "created_at": "2026-11-21T05:23:26.966083043Z",
+            "updated_at": "2026-11-21T05:23:26.966083043Z"
+          },
+          "success": true
+        }
+      },
+      "before": {
+        "mamhm@mailinator.com": [
+          {
+            "order_id": "ord_0bd33e4a53651fc460",
+            "market_order_id": "ord_0bd33e4a53651fc460",
+            "group_id": "qa_38d3fc59eeed4cdb",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "type": "LIMIT",
+            "state": "PENDING",
+            "requested_qty": 0.02,
+            "filled_qty": 0,
+            "price": 28125.9,
+            "source": "api",
+            "tag": "QA_20261120",
+            "copy_ref": "ord_0bd33e4a53651fc460",
+            "copy_kind": "master",
+            "created_at": "2026-11-21T05:23:26.966136Z",
+            "updated_at": "2026-11-21T05:23:26.966136Z"
+          }
+        ],
+        "mamhf1@mailinator.com": [
+          {
+            "order_id": "ord_27be290b1f799375ec",
+            "market_order_id": "ord_27be290b1f799375ec",
+            "group_id": "qa_38d3fc59eeed4cdb",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "type": "LIMIT",
+            "state": "PENDING",
+            "requested_qty": 0.02,
+            "filled_qty": 0,
+            "price": 28125.9,
+            "source": "mam",
+            "tag": "QA_20261120",
+            "copy_ref": "-ord_0bd33e4a53651fc460",
+            "copy_kind": "mam",
+            "created_at": "2026-11-21T05:23:26.970339Z",
+            "updated_at": "2026-11-21T05:23:26.970339Z"
+          }
+        ],
+        "mamhf2@mailinator.com": [
+          {
+            "order_id": "ord_507a8ed1679c70fbe0",
+            "market_order_id": "ord_507a8ed1679c70fbe0",
+            "group_id": "qa_38d3fc59eeed4cdb",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "type": "LIMIT",
+            "state": "PENDING",
+            "requested_qty": 0.02,
+            "filled_qty": 0,
+            "price": 28125.9,
+            "source": "mam",
+            "tag": "QA_20261120",
+            "copy_ref": "-ord_0bd33e4a53651fc460",
+            "copy_kind": "mam",
+            "created_at": "2026-11-21T05:23:26.971701Z",
+            "updated_at": "2026-11-21T05:23:26.971701Z"
+          }
+        ]
+      },
+      "after": {
+        "mamhm@mailinator.com": [
+          {
+            "order_id": "ord_0bd33e4a53651fc460",
+            "market_order_id": "ord_0bd33e4a53651fc460",
+            "group_id": "qa_38d3fc59eeed4cdb",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "type": "LIMIT",
+            "state": "CANCELLED",
+            "requested_qty": 0.02,
+            "filled_qty": 0,
+            "price": 28125.9,
+            "source": "api",
+            "tag": "QA_20261120",
+            "copy_ref": "ord_0bd33e4a53651fc460",
+            "copy_kind": "master",
+            "created_at": "2026-11-21T05:23:26.966136Z",
+            "updated_at": "2026-11-21T05:23:28.134495Z"
+          }
+        ],
+        "mamhf1@mailinator.com": [
+          {
+            "order_id": "ord_27be290b1f799375ec",
+            "market_order_id": "ord_27be290b1f799375ec",
+            "group_id": "qa_38d3fc59eeed4cdb",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "type": "LIMIT",
+            "state": "CANCELLED",
+            "requested_qty": 0.02,
+            "filled_qty": 0,
+            "price": 28125.9,
+            "source": "mam",
+            "tag": "QA_20261120",
+            "copy_ref": "-ord_0bd33e4a53651fc460",
+            "copy_kind": "mam",
+            "created_at": "2026-11-21T05:23:26.970339Z",
+            "updated_at": "2026-11-21T05:23:28.139439Z"
+          }
+        ],
+        "mamhf2@mailinator.com": [
+          {
+            "order_id": "ord_507a8ed1679c70fbe0",
+            "market_order_id": "ord_507a8ed1679c70fbe0",
+            "group_id": "qa_38d3fc59eeed4cdb",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "type": "LIMIT",
+            "state": "CANCELLED",
+            "requested_qty": 0.02,
+            "filled_qty": 0,
+            "price": 28125.9,
+            "source": "mam",
+            "tag": "QA_20261120",
+            "copy_ref": "-ord_0bd33e4a53651fc460",
+            "copy_kind": "mam",
+            "created_at": "2026-11-21T05:23:26.971701Z",
+            "updated_at": "2026-11-21T05:23:28.142053Z"
+          }
+        ]
+      },
+      "missing_or_wrong_pending_children": {},
+      "still_working": {},
+      "positions": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "PENDING-100-FANOUT-STOP",
+    "name": "Pending STOP tickets appear on all followers and cancel with master",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:30.774706+00:00",
+    "finished_at": "2026-11-21T05:23:32.617264+00:00",
+    "details": {
+      "placement": {
+        "http": 200,
+        "body": {
+          "order": {
+            "order_id": "ord_47a9b9976603bae95d",
+            "market_order_id": "ord_47a9b9976603bae95d",
+            "group_id": "qa_5dc29fc0d3974ecb",
+            "symbol": "BLACK:BTCUSD",
+            "side": "SELL",
+            "type": "STOP",
+            "state": "PENDING",
+            "requested_qty": 0.02,
+            "filled_qty": 0,
+            "price": 28125.9,
+            "trigger_price": 28125.9,
+            "source": "api",
+            "tag": "QA_20261120",
+            "copy_ref": "ord_47a9b9976603bae95d",
+            "copy_kind": "master",
+            "created_at": "2026-11-21T05:23:30.777091543Z",
+            "updated_at": "2026-11-21T05:23:30.777091543Z"
+          },
+          "success": true
+        }
+      },
+      "before": {
+        "mamhm@mailinator.com": [
+          {
+            "order_id": "ord_47a9b9976603bae95d",
+            "market_order_id": "ord_47a9b9976603bae95d",
+            "group_id": "qa_5dc29fc0d3974ecb",
+            "symbol": "BLACK:BTCUSD",
+            "side": "SELL",
+            "type": "STOP",
+            "state": "PENDING",
+            "requested_qty": 0.02,
+            "filled_qty": 0,
+            "price": 28125.9,
+            "trigger_price": 28125.9,
+            "source": "api",
+            "tag": "QA_20261120",
+            "copy_ref": "ord_47a9b9976603bae95d",
+            "copy_kind": "master",
+            "created_at": "2026-11-21T05:23:30.777128Z",
+            "updated_at": "2026-11-21T05:23:30.777128Z"
+          }
+        ],
+        "mamhf1@mailinator.com": [
+          {
+            "order_id": "ord_1e00c2cd4cca2b2580",
+            "market_order_id": "ord_1e00c2cd4cca2b2580",
+            "group_id": "qa_5dc29fc0d3974ecb",
+            "symbol": "BLACK:BTCUSD",
+            "side": "SELL",
+            "type": "STOP",
+            "state": "PENDING",
+            "requested_qty": 0.02,
+            "filled_qty": 0,
+            "price": 28125.9,
+            "trigger_price": 28125.9,
+            "source": "mam",
+            "tag": "QA_20261120",
+            "copy_ref": "-ord_47a9b9976603bae95d",
+            "copy_kind": "mam",
+            "created_at": "2026-11-21T05:23:30.780974Z",
+            "updated_at": "2026-11-21T05:23:30.780974Z"
+          }
+        ],
+        "mamhf2@mailinator.com": [
+          {
+            "order_id": "ord_7e9eb98c709031de50",
+            "market_order_id": "ord_7e9eb98c709031de50",
+            "group_id": "qa_5dc29fc0d3974ecb",
+            "symbol": "BLACK:BTCUSD",
+            "side": "SELL",
+            "type": "STOP",
+            "state": "PENDING",
+            "requested_qty": 0.02,
+            "filled_qty": 0,
+            "price": 28125.9,
+            "trigger_price": 28125.9,
+            "source": "mam",
+            "tag": "QA_20261120",
+            "copy_ref": "-ord_47a9b9976603bae95d",
+            "copy_kind": "mam",
+            "created_at": "2026-11-21T05:23:30.782165Z",
+            "updated_at": "2026-11-21T05:23:30.782165Z"
+          }
+        ]
+      },
+      "after": {
+        "mamhm@mailinator.com": [
+          {
+            "order_id": "ord_47a9b9976603bae95d",
+            "market_order_id": "ord_47a9b9976603bae95d",
+            "group_id": "qa_5dc29fc0d3974ecb",
+            "symbol": "BLACK:BTCUSD",
+            "side": "SELL",
+            "type": "STOP",
+            "state": "CANCELLED",
+            "requested_qty": 0.02,
+            "filled_qty": 0,
+            "price": 28125.9,
+            "trigger_price": 28125.9,
+            "source": "api",
+            "tag": "QA_20261120",
+            "copy_ref": "ord_47a9b9976603bae95d",
+            "copy_kind": "master",
+            "created_at": "2026-11-21T05:23:30.777128Z",
+            "updated_at": "2026-11-21T05:23:31.921993Z"
+          }
+        ],
+        "mamhf1@mailinator.com": [
+          {
+            "order_id": "ord_1e00c2cd4cca2b2580",
+            "market_order_id": "ord_1e00c2cd4cca2b2580",
+            "group_id": "qa_5dc29fc0d3974ecb",
+            "symbol": "BLACK:BTCUSD",
+            "side": "SELL",
+            "type": "STOP",
+            "state": "CANCELLED",
+            "requested_qty": 0.02,
+            "filled_qty": 0,
+            "price": 28125.9,
+            "trigger_price": 28125.9,
+            "source": "mam",
+            "tag": "QA_20261120",
+            "copy_ref": "-ord_47a9b9976603bae95d",
+            "copy_kind": "mam",
+            "created_at": "2026-11-21T05:23:30.780974Z",
+            "updated_at": "2026-11-21T05:23:31.923898Z"
+          }
+        ],
+        "mamhf2@mailinator.com": [
+          {
+            "order_id": "ord_7e9eb98c709031de50",
+            "market_order_id": "ord_7e9eb98c709031de50",
+            "group_id": "qa_5dc29fc0d3974ecb",
+            "symbol": "BLACK:BTCUSD",
+            "side": "SELL",
+            "type": "STOP",
+            "state": "CANCELLED",
+            "requested_qty": 0.02,
+            "filled_qty": 0,
+            "price": 28125.9,
+            "trigger_price": 28125.9,
+            "source": "mam",
+            "tag": "QA_20261120",
+            "copy_ref": "-ord_47a9b9976603bae95d",
+            "copy_kind": "mam",
+            "created_at": "2026-11-21T05:23:30.782165Z",
+            "updated_at": "2026-11-21T05:23:31.925283Z"
+          }
+        ]
+      },
+      "missing_or_wrong_pending_children": {},
+      "still_working": {},
+      "positions": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "VALID-ZERO-QTY",
+    "name": "Reject invalid entry without master or follower exposure",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:34.614150+00:00",
+    "finished_at": "2026-11-21T05:23:34.755194+00:00",
+    "details": {
+      "response": {
+        "http": 400,
+        "body": {
+          "error": "symbol, side (BUY/SELL) and a positive qty are required"
+        }
+      },
+      "unexpected_positions": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "VALID-NEGATIVE-QTY",
+    "name": "Reject invalid entry without master or follower exposure",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:34.757447+00:00",
+    "finished_at": "2026-11-21T05:23:35.160979+00:00",
+    "details": {
+      "response": {
+        "http": 400,
+        "body": {
+          "error": "symbol, side (BUY/SELL) and a positive qty are required"
+        }
+      },
+      "unexpected_positions": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "VALID-BAD-SIDE",
+    "name": "Reject invalid entry without master or follower exposure",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:35.162925+00:00",
+    "finished_at": "2026-11-21T05:23:35.520949+00:00",
+    "details": {
+      "response": {
+        "http": 400,
+        "body": {
+          "error": "symbol, side (BUY/SELL) and a positive qty are required"
+        }
+      },
+      "unexpected_positions": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "VALID-BAD-SYMBOL",
+    "name": "Reject invalid entry without master or follower exposure",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:35.522603+00:00",
+    "finished_at": "2026-11-21T05:23:38.633963+00:00",
+    "details": {
+      "response": {
+        "http": 400,
+        "body": {
+          "error": "feed stale for BLACK:QA_NONEXISTENT (no live tick in 90s)",
+          "order": {
+            "order_id": "ord_553d5a12ec0d65017e",
+            "market_order_id": "ord_553d5a12ec0d65017e",
+            "symbol": "BLACK:QA_NONEXISTENT",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "REJECTED",
+            "reject_reason": "feed stale for BLACK:QA_NONEXISTENT (no live tick in 90s)",
+            "requested_qty": 0.02,
+            "filled_qty": 0,
+            "created_at": "2026-11-21T05:23:38.527972137Z",
+            "updated_at": "2026-11-21T05:23:38.527972137Z"
+          },
+          "order_id": "ord_553d5a12ec0d65017e"
+        }
+      },
+      "unexpected_positions": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "VALID-UNKNOWN-TYPE",
+    "name": "Reject invalid entry without master or follower exposure",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:38.635760+00:00",
+    "finished_at": "2026-11-21T05:23:38.774815+00:00",
+    "details": {
+      "response": {
+        "http": 400,
+        "body": {
+          "error": "type must be MARKET on this endpoint (LIMIT and STOP orders go to /orders/pending)"
+        }
+      },
+      "unexpected_positions": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "VALID-LIMIT-WRONG-ENDPOINT",
+    "name": "Reject invalid entry without master or follower exposure",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:38.776482+00:00",
+    "finished_at": "2026-11-21T05:23:38.910466+00:00",
+    "details": {
+      "response": {
+        "http": 400,
+        "body": {
+          "error": "this endpoint fills at MARKET; for a LIMIT order POST to /orders/pending"
+        }
+      },
+      "unexpected_positions": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "VALID-SUBMIN-LOT",
+    "name": "Reject invalid entry without master or follower exposure",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:38.913062+00:00",
+    "finished_at": "2026-11-21T05:23:39.020355+00:00",
+    "details": {
+      "response": {
+        "http": 400,
+        "body": {
+          "error": "BTCUSD trades in lots of 0.01, minimum 0.01.",
+          "order": {
+            "order_id": "ord_d37912b612436d6e5f",
+            "market_order_id": "ord_d37912b612436d6e5f",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "type": "MARKET",
+            "state": "REJECTED",
+            "reject_reason": "BTCUSD trades in lots of 0.01, minimum 0.01.",
+            "requested_qty": 0.001,
+            "filled_qty": 0,
+            "created_at": "2026-11-21T05:23:38.913169068Z",
+            "updated_at": "2026-11-21T05:23:38.913169068Z"
+          },
+          "order_id": "ord_d37912b612436d6e5f"
+        }
+      },
+      "unexpected_positions": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "AUTH-CROSS-ACCOUNT",
+    "name": "Follower cannot close/reduce/protect master-owned position",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:39.022451+00:00",
+    "finished_at": "2026-11-21T05:23:39.756063+00:00",
+    "details": {
+      "attempts": {
+        "squareoff": {
+          "http": 404,
+          "body": {
+            "error": "No open position for ord_4bc2d504cac5a367a7"
+          }
+        },
+        "reduce": {
+          "http": 404,
+          "body": {
+            "error": "No open position for ord_4bc2d504cac5a367a7"
+          }
+        },
+        "protection": {
+          "http": 404,
+          "body": {
+            "error": "open position not found"
+          }
+        }
+      },
+      "master_intact": true
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "ISOLATE-MANUAL-FOLLOWER",
+    "name": "Master close preserves follower independent opposite-side trade",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:40.567374+00:00",
+    "finished_at": "2026-11-21T05:23:42.026407+00:00",
+    "details": {
+      "independent_order": {
+        "http": 200,
+        "body": {
+          "order": {
+            "order_id": "ord_e8d049df19fa645762",
+            "market_order_id": "ord_e8d049df19fa645762",
+            "symbol": "BLACK:BTCUSD",
+            "side": "SELL",
+            "type": "MARKET",
+            "state": "FILLED",
+            "requested_qty": 0.02,
+            "filled_qty": 0.02,
+            "avg_fill_price": 56233.6,
+            "tag": "QA_INDEPENDENT",
+            "created_at": "2026-11-21T05:23:40.707901399Z",
+            "updated_at": "2026-11-21T05:23:40.707901399Z"
+          },
+          "position": {
+            "position_id": "pos_c85a9ab3a68b9984d3",
+            "market_order_id": "ord_e8d049df19fa645762",
+            "symbol": "BLACK:BTCUSD",
+            "side": "SELL",
+            "net_qty": 0.02,
+            "avg_entry_price": 56233.6,
+            "full_margin": 1124.672,
+            "margin_percent": 100,
+            "margin_used": 1124.672,
+            "entry_markup": 0,
+            "tag": "QA_INDEPENDENT",
+            "status": "OPEN",
+            "opened_at": "2026-11-21T05:23:40.707954Z"
+          },
+          "success": true
+        }
+      },
+      "remaining_follower_position": [
+        {
+          "algo_id": null,
+          "avg_entry_price": 56233.6,
+          "closed_at": null,
+          "comment": null,
+          "current_price": 56233.77,
+          "full_margin": 1124.672,
+          "group_id": null,
+          "margin_percent": 100,
+          "margin_used": 1124.672,
+          "market_order_id": "ord_e8d049df19fa645762",
+          "net_qty": 0.02,
+          "oco_key": null,
+          "opened_at": "2026-11-21T05:23:40.707954Z",
+          "position_id": "pos_c85a9ab3a68b9984d3",
+          "side": "SELL",
+          "source": null,
+          "status": "OPEN",
+          "strategy_name": null,
+          "symbol": "BLACK:BTCUSD",
+          "tag": "QA_INDEPENDENT",
+          "trailing": null,
+          "unrealized_pnl": -0.0033999999999650755
+        }
+      ],
+      "unexpected_accounts": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "MAM-SELF-FOLLOW",
+    "name": "MAM role and relationship validation: SELF-FOLLOW",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:44.858453+00:00",
+    "finished_at": "2026-11-21T05:23:45.117399+00:00",
+    "details": {
+      "response": {
+        "http": 400,
+        "body": {
+          "error": "Master accounts can't follow another master."
+        }
+      },
+      "relationship_unchanged": true
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "MAM-UNKNOWN-MASTER",
+    "name": "MAM role and relationship validation: UNKNOWN-MASTER",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:45.119074+00:00",
+    "finished_at": "2026-11-21T05:23:45.312835+00:00",
+    "details": {
+      "response": {
+        "http": 400,
+        "body": {
+          "error": "that account is not an active MAM master"
+        }
+      },
+      "relationship_unchanged": true
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "MAM-FOLLOWER-BECOME-MASTER",
+    "name": "MAM role and relationship validation: FOLLOWER-BECOME-MASTER",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:45.314529+00:00",
+    "finished_at": "2026-11-21T05:23:45.466045+00:00",
+    "details": {
+      "response": {
+        "http": 400,
+        "body": {
+          "error": "Accounts that have followed a master can't become a master, even after unfollowing."
+        }
+      },
+      "relationship_unchanged": true
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "MAM-FEE-CONFIG",
+    "name": "Change manager fee, read back, restore original fee",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:45.467452+00:00",
+    "finished_at": "2026-11-21T05:23:45.695526+00:00",
+    "details": {
+      "before": {
+        "client_id": "mem_6cf38c1f751cbd1699",
+        "display_name": "mamhedgingmaster",
+        "share_percent": 50,
+        "status": "active"
+      },
+      "after": {
+        "client_id": "mem_6cf38c1f751cbd1699",
+        "display_name": "mamhedgingmaster",
+        "share_percent": 20,
+        "status": "active"
+      },
+      "restore": {
+        "http": 200,
+        "body": {
+          "master": {
+            "client_id": "mem_6cf38c1f751cbd1699",
+            "display_name": "mamhedgingmaster",
+            "share_percent": 50,
+            "status": "active"
+          },
+          "success": true
+        }
+      }
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "MAM-UNFOLLOW-FLAT",
+    "name": "Unfollow flat account prevents new copies; other followers continue",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:45.697567+00:00",
+    "finished_at": "2026-11-21T05:23:48.993584+00:00",
+    "details": {
+      "leave": {
+        "http": 200,
+        "body": {
+          "follow_id": "mfl_9e502cb5c04db85780",
+          "success": true
+        }
+      },
+      "unexpected_fanout": {},
+      "orphans": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "MAM-JOIN-MIDTRADE",
+    "name": "New follower copies future orders without retroactively copying prior trade",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:50.032396+00:00",
+    "finished_at": "2026-11-21T05:23:56.900472+00:00",
+    "details": {
+      "before_join": {
+        "count": 0,
+        "funds": {
+          "balance": 4994.620500000002,
+          "equity": 4994.620500000002,
+          "free_margin": 4994.620500000002,
+          "margin_call_level": 100,
+          "margin_level": null,
+          "starting_balance": 5000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0,
+          "used_margin": 0
+        },
+        "positions": [],
+        "success": true,
+        "total_unrealized_pnl": 0
+      },
+      "immediately_after_join": {
+        "count": 0,
+        "funds": {
+          "balance": 4994.620500000002,
+          "equity": 4994.620500000002,
+          "free_margin": 4994.620500000002,
+          "margin_call_level": 100,
+          "margin_level": null,
+          "starting_balance": 5000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0,
+          "used_margin": 0
+        },
+        "positions": [],
+        "success": true,
+        "total_unrealized_pnl": 0
+      },
+      "after_new_trade": {
+        "count": 1,
+        "funds": {
+          "balance": 4994.620500000002,
+          "equity": 4994.436700000002,
+          "free_margin": 3869.5025000000023,
+          "margin_call_level": 100,
+          "margin_level": 443.9758965457715,
+          "starting_balance": 5000,
+          "stop_out_level": 50,
+          "unrealized_pnl": -0.18380000000004657,
+          "used_margin": 1124.9342
+        },
+        "positions": [
+          {
+            "algo_id": null,
+            "avg_entry_price": 56246.71,
+            "closed_at": null,
+            "comment": null,
+            "current_price": 56255.9,
+            "full_margin": 1124.9342,
+            "group_id": "qa_216ca38528c34ced",
+            "margin_percent": 100,
+            "margin_used": 1124.9342,
+            "market_order_id": "ord_2b93afcd4253a8eeb4",
+            "net_qty": 0.02,
+            "oco_key": null,
+            "opened_at": "2026-11-21T05:23:54.680657Z",
+            "position_id": "pos_349375fc838efdf044",
+            "side": "SELL",
+            "source": "mam",
+            "status": "OPEN",
+            "strategy_name": null,
+            "symbol": "BLACK:BTCUSD",
+            "tag": "QA_20261120",
+            "trailing": null,
+            "unrealized_pnl": -0.18380000000004657
+          }
+        ],
+        "success": true,
+        "total_unrealized_pnl": -0.18380000000004657
+      },
+      "orphans": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "MAM-MULTIPLIER-MIDTRADE",
+    "name": "Multiplier change affects future copies, not existing position size",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:23:58.458566+00:00",
+    "finished_at": "2026-11-21T05:24:03.034723+00:00",
+    "details": {
+      "old_position_after_multiplier_change": {
+        "count": 1,
+        "funds": {
+          "balance": 4994.418300000002,
+          "equity": 4994.4275000000025,
+          "free_margin": 3869.190700000003,
+          "margin_call_level": 100,
+          "margin_level": 443.85568442127055,
+          "starting_balance": 5000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0.009200000000128057,
+          "used_margin": 1125.2368
+        },
+        "positions": [
+          {
+            "algo_id": null,
+            "avg_entry_price": 56261.84,
+            "closed_at": null,
+            "comment": null,
+            "current_price": 56262.3,
+            "full_margin": 1125.2368,
+            "group_id": "qa_35310696590443e7",
+            "margin_percent": 100,
+            "margin_used": 1125.2368,
+            "market_order_id": "ord_aff37003d2556a8fde",
+            "net_qty": 0.02,
+            "oco_key": null,
+            "opened_at": "2026-11-21T05:23:59.253925Z",
+            "position_id": "pos_fbdb55ab353cd17dc0",
+            "side": "BUY",
+            "source": "mam",
+            "status": "OPEN",
+            "strategy_name": null,
+            "symbol": "BLACK:BTCUSD",
+            "tag": "QA_20261120",
+            "trailing": null,
+            "unrealized_pnl": 0.009200000000128057
+          }
+        ],
+        "success": true,
+        "total_unrealized_pnl": 0.009200000000128057
+      },
+      "new_position_sizes": [
+        [
+          "BUY",
+          0.02
+        ],
+        [
+          "SELL",
+          0.04
+        ]
+      ],
+      "orphans": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "RACE-UNFOLLOW-OPEN-1",
+    "name": "Concurrent master entry and follower unfollow produce no duplicate or malformed copy",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:24:05.117689+00:00",
+    "finished_at": "2026-11-21T05:24:11.083788+00:00",
+    "details": {
+      "responses": [
+        {
+          "http": 200,
+          "body": {
+            "order": {
+              "order_id": "ord_f4ab19483df94b992d",
+              "market_order_id": "ord_f4ab19483df94b992d",
+              "group_id": "qa_c832d963102b45e5",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "type": "MARKET",
+              "state": "FILLED",
+              "requested_qty": 0.02,
+              "filled_qty": 0.02,
+              "avg_fill_price": 56224.1,
+              "source": "api",
+              "tag": "QA_20261120",
+              "copy_ref": "ord_f4ab19483df94b992d",
+              "copy_kind": "master",
+              "created_at": "2026-11-21T05:24:06.466272786Z",
+              "updated_at": "2026-11-21T05:24:06.466272786Z"
+            },
+            "position": {
+              "position_id": "pos_72d6178ef52ff68b9b",
+              "market_order_id": "ord_f4ab19483df94b992d",
+              "group_id": "qa_c832d963102b45e5",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "net_qty": 0.02,
+              "avg_entry_price": 56224.1,
+              "full_margin": 1124.482,
+              "margin_percent": 100,
+              "margin_used": 1124.482,
+              "entry_markup": 0,
+              "tag": "QA_20261120",
+              "status": "OPEN",
+              "opened_at": "2026-11-21T05:24:06.466325Z"
+            },
+            "success": true
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "follow_id": "mfl_9e502cb5c04db85780",
+            "success": true
+          }
+        }
+      ],
+      "child_at_race_end": {
+        "count": 1,
+        "funds": {
+          "balance": 4994.394500000002,
+          "equity": 4994.737900000002,
+          "free_margin": 3870.255900000002,
+          "margin_call_level": 100,
+          "margin_level": 444.18122299867866,
+          "starting_balance": 5000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0.34339999999996507,
+          "used_margin": 1124.482
+        },
+        "positions": [
+          {
+            "algo_id": null,
+            "avg_entry_price": 56224.1,
+            "closed_at": null,
+            "comment": null,
+            "current_price": 56241.27,
+            "full_margin": 1124.482,
+            "group_id": "qa_c832d963102b45e5",
+            "margin_percent": 100,
+            "margin_used": 1124.482,
+            "market_order_id": "ord_4c5415aa762416c330",
+            "net_qty": 0.02,
+            "oco_key": null,
+            "opened_at": "2026-11-21T05:24:06.471715Z",
+            "position_id": "pos_9a2c09e121d2ad3275",
+            "side": "BUY",
+            "source": "mam",
+            "status": "OPEN",
+            "strategy_name": null,
+            "symbol": "BLACK:BTCUSD",
+            "tag": "QA_20261120",
+            "trailing": null,
+            "unrealized_pnl": 0.34339999999996507
+          }
+        ],
+        "success": true,
+        "total_unrealized_pnl": 0.34339999999996507
+      },
+      "child_after_master_close": {
+        "count": 0,
+        "funds": {
+          "balance": 4994.737900000002,
+          "equity": 4994.737900000002,
+          "free_margin": 4994.737900000002,
+          "margin_call_level": 100,
+          "margin_level": null,
+          "starting_balance": 5000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0,
+          "used_margin": 0
+        },
+        "positions": [],
+        "success": true,
+        "total_unrealized_pnl": 0
+      },
+      "assertion": "At most one correctly-sized child; retention after unfollow is recorded as behavior, not assumed forbidden"
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "RACE-UNFOLLOW-OPEN-2",
+    "name": "Concurrent master entry and follower unfollow produce no duplicate or malformed copy",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:24:11.086817+00:00",
+    "finished_at": "2026-11-21T05:24:17.226894+00:00",
+    "details": {
+      "responses": [
+        {
+          "http": 200,
+          "body": {
+            "order": {
+              "order_id": "ord_19d4c2af3fc60c4249",
+              "market_order_id": "ord_19d4c2af3fc60c4249",
+              "group_id": "qa_b1f56005a6dc4230",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "type": "MARKET",
+              "state": "FILLED",
+              "requested_qty": 0.02,
+              "filled_qty": 0.02,
+              "avg_fill_price": 56211.94,
+              "source": "api",
+              "tag": "QA_20261120",
+              "copy_ref": "ord_19d4c2af3fc60c4249",
+              "copy_kind": "master",
+              "created_at": "2026-11-21T05:24:12.293967297Z",
+              "updated_at": "2026-11-21T05:24:12.293967297Z"
+            },
+            "position": {
+              "position_id": "pos_cc0e580f5ac86a159a",
+              "market_order_id": "ord_19d4c2af3fc60c4249",
+              "group_id": "qa_b1f56005a6dc4230",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "net_qty": 0.02,
+              "avg_entry_price": 56211.94,
+              "full_margin": 1124.2388,
+              "margin_percent": 100,
+              "margin_used": 1124.2388,
+              "entry_markup": 0,
+              "tag": "QA_20261120",
+              "status": "OPEN",
+              "opened_at": "2026-11-21T05:24:12.294022Z"
+            },
+            "success": true
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "follow_id": "mfl_9e502cb5c04db85780",
+            "success": true
+          }
+        }
+      ],
+      "child_at_race_end": {
+        "count": 1,
+        "funds": {
+          "balance": 4994.737900000002,
+          "equity": 4994.746900000002,
+          "free_margin": 3870.508100000002,
+          "margin_call_level": 100,
+          "margin_level": 444.278110664745,
+          "starting_balance": 5000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0.008999999999941792,
+          "used_margin": 1124.2388
+        },
+        "positions": [
+          {
+            "algo_id": null,
+            "avg_entry_price": 56211.94,
+            "closed_at": null,
+            "comment": null,
+            "current_price": 56212.39,
+            "full_margin": 1124.2388,
+            "group_id": "qa_b1f56005a6dc4230",
+            "margin_percent": 100,
+            "margin_used": 1124.2388,
+            "market_order_id": "ord_14b02792ac0f228cc1",
+            "net_qty": 0.02,
+            "oco_key": null,
+            "opened_at": "2026-11-21T05:24:12.29924Z",
+            "position_id": "pos_0b750115847c60311c",
+            "side": "BUY",
+            "source": "mam",
+            "status": "OPEN",
+            "strategy_name": null,
+            "symbol": "BLACK:BTCUSD",
+            "tag": "QA_20261120",
+            "trailing": null,
+            "unrealized_pnl": 0.008999999999941792
+          }
+        ],
+        "success": true,
+        "total_unrealized_pnl": 0.008999999999941792
+      },
+      "child_after_master_close": {
+        "count": 0,
+        "funds": {
+          "balance": 4994.746900000002,
+          "equity": 4994.746900000002,
+          "free_margin": 4994.746900000002,
+          "margin_call_level": 100,
+          "margin_level": null,
+          "starting_balance": 5000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0,
+          "used_margin": 0
+        },
+        "positions": [],
+        "success": true,
+        "total_unrealized_pnl": 0
+      },
+      "assertion": "At most one correctly-sized child; retention after unfollow is recorded as behavior, not assumed forbidden"
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "RACE-UNFOLLOW-OPEN-3",
+    "name": "Concurrent master entry and follower unfollow produce no duplicate or malformed copy",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:24:17.229541+00:00",
+    "finished_at": "2026-11-21T05:24:23.398116+00:00",
+    "details": {
+      "responses": [
+        {
+          "http": 200,
+          "body": {
+            "order": {
+              "order_id": "ord_c2c526f06866571a13",
+              "market_order_id": "ord_c2c526f06866571a13",
+              "group_id": "qa_5b947ee9c5754f82",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "type": "MARKET",
+              "state": "FILLED",
+              "requested_qty": 0.02,
+              "filled_qty": 0.02,
+              "avg_fill_price": 56212.52,
+              "source": "api",
+              "tag": "QA_20261120",
+              "copy_ref": "ord_c2c526f06866571a13",
+              "copy_kind": "master",
+              "created_at": "2026-11-21T05:24:18.458830785Z",
+              "updated_at": "2026-11-21T05:24:18.458830785Z"
+            },
+            "position": {
+              "position_id": "pos_c26c5d475009c11904",
+              "market_order_id": "ord_c2c526f06866571a13",
+              "group_id": "qa_5b947ee9c5754f82",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "net_qty": 0.02,
+              "avg_entry_price": 56212.52,
+              "full_margin": 1124.2504,
+              "margin_percent": 100,
+              "margin_used": 1124.2504,
+              "entry_markup": 0,
+              "tag": "QA_20261120",
+              "status": "OPEN",
+              "opened_at": "2026-11-21T05:24:18.458885Z"
+            },
+            "success": true
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "follow_id": "mfl_9e502cb5c04db85780",
+            "success": true
+          }
+        }
+      ],
+      "child_at_race_end": {
+        "count": 0,
+        "funds": {
+          "balance": 4994.746900000002,
+          "equity": 4994.746900000002,
+          "free_margin": 4994.746900000002,
+          "margin_call_level": 100,
+          "margin_level": null,
+          "starting_balance": 5000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0,
+          "used_margin": 0
+        },
+        "positions": [],
+        "success": true,
+        "total_unrealized_pnl": 0
+      },
+      "child_after_master_close": {
+        "count": 0,
+        "funds": {
+          "balance": 4994.746900000002,
+          "equity": 4994.746900000002,
+          "free_margin": 4994.746900000002,
+          "margin_call_level": 100,
+          "margin_level": null,
+          "starting_balance": 5000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0,
+          "used_margin": 0
+        },
+        "positions": [],
+        "success": true,
+        "total_unrealized_pnl": 0
+      },
+      "assertion": "At most one correctly-sized child; retention after unfollow is recorded as behavior, not assumed forbidden"
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "LIFE-PROTECTION-RETEST",
+    "name": "Set and remove SL/TP across all 101 accounts using actual linkage field",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:24:24.299645+00:00",
+    "finished_at": "2026-11-21T05:24:27.575475+00:00",
+    "details": {
+      "supersedes": "LIFE-PROTECTION initial assertion used nonexistent parent_order_id; actual link field is market_order_id",
+      "incorrect_brackets": {},
+      "remaining_brackets_after_removal": {},
+      "bracket_evidence": {
+        "mamhm@mailinator.com": {
+          "market_order_id": "ord_1caa8cf923f27396b3",
+          "brackets": [
+            {
+              "order_id": "ord_f0275621c9bdf980fc",
+              "parent_order_id": "ord_1caa8cf923f27396b3",
+              "market_order_id": "ord_1caa8cf923f27396b3",
+              "group_id": "qa_5e3d349bcf154b24",
+              "symbol": "BLACK:BTCUSD",
+              "side": "SELL",
+              "type": "TP",
+              "state": "PENDING",
+              "requested_qty": 0.02,
+              "filled_qty": 0,
+              "trigger_price": 66165.01999999999,
+              "source": "algo_protection",
+              "tag": "QA_20261120",
+              "created_at": "2026-11-21T05:24:24.604894Z",
+              "updated_at": "2026-11-21T05:24:24.604894Z"
+            },
+            {
+              "order_id": "ord_519362093af4854a4d",
+              "parent_order_id": "ord_1caa8cf923f27396b3",
+              "market_order_id": "ord_1caa8cf923f27396b3",
+              "group_id": "qa_5e3d349bcf154b24",
+              "symbol": "BLACK:BTCUSD",
+              "side": "SELL",
+              "type": "SL",
+              "state": "PENDING",
+              "requested_qty": 0.02,
+              "filled_qty": 0,
+              "trigger_price": 46165.02,
+              "source": "algo_protection",
+              "tag": "QA_20261120",
+              "created_at": "2026-11-21T05:24:24.604894Z",
+              "updated_at": "2026-11-21T05:24:24.604894Z"
+            }
+          ]
+        },
+        "mamhf1@mailinator.com": {
+          "market_order_id": "ord_b3ae3a0cabcfbafcb5",
+          "brackets": [
+            {
+              "order_id": "ord_eb7cd2e6ad55aafa0c",
+              "market_order_id": "ord_b3ae3a0cabcfbafcb5",
+              "group_id": "qa_5e3d349bcf154b24",
+              "symbol": "BLACK:BTCUSD",
+              "side": "SELL",
+              "type": "TP",
+              "state": "PENDING",
+              "requested_qty": 0.02,
+              "filled_qty": 0,
+              "trigger_price": 66165.01999999999,
+              "source": "mam",
+              "tag": "QA_20261120",
+              "created_at": "2026-11-21T05:24:24.61191Z",
+              "updated_at": "2026-11-21T05:24:24.61191Z"
+            },
+            {
+              "order_id": "ord_7ff021c1ca77694109",
+              "market_order_id": "ord_b3ae3a0cabcfbafcb5",
+              "group_id": "qa_5e3d349bcf154b24",
+              "symbol": "BLACK:BTCUSD",
+              "side": "SELL",
+              "type": "SL",
+              "state": "PENDING",
+              "requested_qty": 0.02,
+              "filled_qty": 0,
+              "trigger_price": 46165.02,
+              "source": "mam",
+              "tag": "QA_20261120",
+              "created_at": "2026-11-21T05:24:24.607957Z",
+              "updated_at": "2026-11-21T05:24:24.607957Z"
+            }
+          ]
+        },
+        "mamhf2@mailinator.com": {
+          "market_order_id": "ord_e1dbb2024660ead117",
+          "brackets": [
+            {
+              "order_id": "ord_869b0290f51b85a11a",
+              "market_order_id": "ord_e1dbb2024660ead117",
+              "group_id": "qa_5e3d349bcf154b24",
+              "symbol": "BLACK:BTCUSD",
+              "side": "SELL",
+              "type": "TP",
+              "state": "PENDING",
+              "requested_qty": 0.02,
+              "filled_qty": 0,
+              "trigger_price": 66165.01999999999,
+              "source": "mam",
+              "tag": "QA_20261120",
+              "created_at": "2026-11-21T05:24:24.613811Z",
+              "updated_at": "2026-11-21T05:24:24.613811Z"
+            },
+            {
+              "order_id": "ord_6622858a7002b19c36",
+              "market_order_id": "ord_e1dbb2024660ead117",
+              "group_id": "qa_5e3d349bcf154b24",
+              "symbol": "BLACK:BTCUSD",
+              "side": "SELL",
+              "type": "SL",
+              "state": "PENDING",
+              "requested_qty": 0.02,
+              "filled_qty": 0,
+              "trigger_price": 46165.02,
+              "source": "mam",
+              "tag": "QA_20261120",
+              "created_at": "2026-11-21T05:24:24.609678Z",
+              "updated_at": "2026-11-21T05:24:24.609678Z"
+            }
+          ]
+        }
+      }
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "TERM-ACCOUNTING-001",
+    "name": "Reconcile copied-trade PnL, zero brokerage, shares and balances",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:24:29.464648+00:00",
+    "finished_at": "2026-11-21T05:24:30.963349+00:00",
+    "details": {
+      "errors": {},
+      "records": {
+        "mamhm@mailinator.com": {
+          "history": [
+            {
+              "history_id": 1000000005461,
+              "order_id": "ord_7ae06e31419682b475",
+              "position_id": "pos_97e8a5007e4666322c",
+              "group_id": "qa_03dc90311b9e4a5b",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "qty": 0.02,
+              "entry_price": 56169.95,
+              "exit_price": 56168.61,
+              "realized_pnl": -0.02679999999993015,
+              "executed_at": "2026-11-21T05:24:29.802763Z",
+              "exit_type": "MARKET",
+              "exit_source": "squareoff",
+              "entry_source": "api",
+              "entry_type": "MARKET",
+              "entry_copy_kind": "master",
+              "opened_at": "2026-11-21T05:24:29.629249Z"
+            }
+          ],
+          "brokerage_terms": {
+            "mode": "none",
+            "rates": {
+              "default": 0
+            },
+            "min": 0,
+            "max": 0
+          },
+          "brokerage": 0.0,
+          "shares": [],
+          "share_paid": 0,
+          "actual_balance_delta": -0.026799999999639113,
+          "expected_price_pnl": -0.02679999999993015,
+          "expected_balance_delta": -0.02679999999993015
+        },
+        "mamhf1@mailinator.com": {
+          "history": [
+            {
+              "history_id": 1000000005462,
+              "order_id": "ord_330a9879ceb6847416",
+              "position_id": "pos_f5302ddab72a058e30",
+              "group_id": "qa_03dc90311b9e4a5b",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "qty": 0.02,
+              "entry_price": 56169.95,
+              "exit_price": 56168.61,
+              "realized_pnl": -0.02679999999993015,
+              "executed_at": "2026-11-21T05:24:29.807539Z",
+              "exit_type": "MARKET",
+              "exit_source": "mam_close",
+              "entry_source": "mam",
+              "entry_type": "MARKET",
+              "entry_copy_kind": "mam",
+              "opened_at": "2026-11-21T05:24:29.634706Z"
+            }
+          ],
+          "brokerage_terms": {
+            "mode": "none",
+            "rates": {
+              "default": 0
+            },
+            "min": 0,
+            "max": 0
+          },
+          "brokerage": 0.0,
+          "shares": [
+            {
+              "above_hwm": false,
+              "at": "2026-11-21T05:24:29.81074Z",
+              "balance_before": 4994.718900000002,
+              "follow_id": "mfl_9e502cb5c04db85780",
+              "follower": "mem_bcb0386eac16dc47a6",
+              "follower_share": -0.03,
+              "instance": "real",
+              "master": "mem_6cf38c1f751cbd1699",
+              "master_share": 0,
+              "order_pnl": -0.02679999999993015,
+              "share_id": 5955,
+              "starting_balance": 4994.746900000002,
+              "trade_id": 1000000005462
+            }
+          ],
+          "share_paid": 0.0,
+          "actual_balance_delta": -0.026799999999639113,
+          "expected_price_pnl": -0.02679999999993015,
+          "expected_balance_delta": -0.02679999999993015
+        },
+        "mamhf2@mailinator.com": {
+          "history": [
+            {
+              "history_id": 1000000005463,
+              "order_id": "ord_0614f451011c5b4343",
+              "position_id": "pos_09ff25cec7d2909c94",
+              "group_id": "qa_03dc90311b9e4a5b",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "qty": 0.02,
+              "entry_price": 56169.95,
+              "exit_price": 56168.61,
+              "realized_pnl": -0.02679999999993015,
+              "executed_at": "2026-11-21T05:24:29.812122Z",
+              "exit_type": "MARKET",
+              "exit_source": "mam_close",
+              "entry_source": "mam",
+              "entry_type": "MARKET",
+              "entry_copy_kind": "mam",
+              "opened_at": "2026-11-21T05:24:29.637143Z"
+            }
+          ],
+          "brokerage_terms": {
+            "mode": "none",
+            "rates": {
+              "default": 0
+            },
+            "min": 0,
+            "max": 0
+          },
+          "brokerage": 0.0,
+          "shares": [
+            {
+              "above_hwm": false,
+              "at": "2026-11-21T05:24:29.815468Z",
+              "balance_before": 4994.533000000002,
+              "follow_id": "mfl_fe7dfb09c4d0c17a2e",
+              "follower": "mem_5476acd67c0a8a60de",
+              "follower_share": -0.03,
+              "instance": "real",
+              "master": "mem_6cf38c1f751cbd1699",
+              "master_share": 0,
+              "order_pnl": -0.02679999999993015,
+              "share_id": 5956,
+              "starting_balance": 4995.1698000000015,
+              "trade_id": 1000000005463
+            }
+          ],
+          "share_paid": 0.0,
+          "actual_balance_delta": -0.026799999999639113,
+          "expected_price_pnl": -0.02679999999993015,
+          "expected_balance_delta": -0.02679999999993015
+        }
+      },
+      "master_fee_receipts": 0.0,
+      "expected": "Price PnL, zero brokerage, MAM shares and resulting balance deltas reconcile for all three accounts."
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "RACE-CLOSE-1",
+    "name": "Five concurrent master closes: one history row, no orphan or reversed position",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:24:32.773422+00:00",
+    "finished_at": "2026-11-21T05:24:34.030636+00:00",
+    "details": {
+      "responses": [
+        {
+          "http": 404,
+          "body": {
+            "error": "No open position for ord_bf0a333cdb37d13e17"
+          }
+        },
+        {
+          "http": 404,
+          "body": {
+            "error": "No open position for ord_bf0a333cdb37d13e17"
+          }
+        },
+        {
+          "http": 404,
+          "body": {
+            "error": "No open position for ord_bf0a333cdb37d13e17"
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "exit_price": 56179.11,
+            "market_order_id": "ord_bf0a333cdb37d13e17",
+            "price_source": "live",
+            "realized_pnl": 0.16080000000016298,
+            "success": true,
+            "symbol": "BLACK:BTCUSD"
+          }
+        },
+        {
+          "http": 404,
+          "body": {
+            "error": "No open position for ord_bf0a333cdb37d13e17"
+          }
+        }
+      ],
+      "orphans": {},
+      "history_rows_per_account": {
+        "mamhm@mailinator.com": 1,
+        "mamhf1@mailinator.com": 1,
+        "mamhf2@mailinator.com": 1
+      },
+      "ledger": {
+        "mamhm@mailinator.com": [
+          {
+            "history_id": 1000000005464,
+            "order_id": "ord_32ac9592da078ce010",
+            "position_id": "pos_2174de0ede357a679f",
+            "group_id": "qa_0cdaa9c5ca334d09",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.04,
+            "entry_price": 56175.09,
+            "exit_price": 56179.11,
+            "realized_pnl": 0.16080000000016298,
+            "executed_at": "2026-11-21T05:24:33.566647Z",
+            "exit_type": "MARKET",
+            "exit_source": "squareoff",
+            "entry_source": "api",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "master",
+            "opened_at": "2026-11-21T05:24:32.783624Z"
+          }
+        ],
+        "mamhf1@mailinator.com": [
+          {
+            "history_id": 1000000005465,
+            "order_id": "ord_195b02ef774b970235",
+            "position_id": "pos_5e312c4e10028d262b",
+            "group_id": "qa_0cdaa9c5ca334d09",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.04,
+            "entry_price": 56175.09,
+            "exit_price": 56179.11,
+            "realized_pnl": 0.16080000000016298,
+            "executed_at": "2026-11-21T05:24:33.571983Z",
+            "exit_type": "MARKET",
+            "exit_source": "mam_close",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:32.789777Z"
+          }
+        ],
+        "mamhf2@mailinator.com": [
+          {
+            "history_id": 1000000005466,
+            "order_id": "ord_d6918620ce7dbcc601",
+            "position_id": "pos_399b6790165a4c343b",
+            "group_id": "qa_0cdaa9c5ca334d09",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.04,
+            "entry_price": 56175.09,
+            "exit_price": 56179.11,
+            "realized_pnl": 0.16080000000016298,
+            "executed_at": "2026-11-21T05:24:33.577719Z",
+            "exit_type": "MARKET",
+            "exit_source": "mam_close",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:32.792811Z"
+          }
+        ]
+      }
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "RACE-CLOSE-2",
+    "name": "Five concurrent master closes: one history row, no orphan or reversed position",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:24:35.039829+00:00",
+    "finished_at": "2026-11-21T05:24:37.346107+00:00",
+    "details": {
+      "responses": [
+        {
+          "http": 404,
+          "body": {
+            "error": "No open position for ord_fb08fb735465cfb3e8"
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "exit_price": 56195.09,
+            "market_order_id": "ord_fb08fb735465cfb3e8",
+            "price_source": "live",
+            "realized_pnl": 0.2219999999998254,
+            "success": true,
+            "symbol": "BLACK:BTCUSD"
+          }
+        },
+        {
+          "http": 404,
+          "body": {
+            "error": "No open position for ord_fb08fb735465cfb3e8"
+          }
+        },
+        {
+          "http": 404,
+          "body": {
+            "error": "No open position for ord_fb08fb735465cfb3e8"
+          }
+        },
+        {
+          "http": 404,
+          "body": {
+            "error": "No open position for ord_fb08fb735465cfb3e8"
+          }
+        }
+      ],
+      "orphans": {},
+      "history_rows_per_account": {
+        "mamhm@mailinator.com": 1,
+        "mamhf1@mailinator.com": 1,
+        "mamhf2@mailinator.com": 1
+      },
+      "ledger": {
+        "mamhm@mailinator.com": [
+          {
+            "history_id": 1000000005467,
+            "order_id": "ord_b205b5bdb60c3b7bef",
+            "position_id": "pos_e143fd4a0dde7687ab",
+            "group_id": "qa_a350316776f240ec",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.04,
+            "entry_price": 56189.54,
+            "exit_price": 56195.09,
+            "realized_pnl": 0.2219999999998254,
+            "executed_at": "2026-11-21T05:24:35.840057Z",
+            "exit_type": "MARKET",
+            "exit_source": "squareoff",
+            "entry_source": "api",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "master",
+            "opened_at": "2026-11-21T05:24:35.057084Z"
+          }
+        ],
+        "mamhf1@mailinator.com": [
+          {
+            "history_id": 1000000005468,
+            "order_id": "ord_8734b8b52dee537d54",
+            "position_id": "pos_404bb7985ed5b1afb5",
+            "group_id": "qa_a350316776f240ec",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.04,
+            "entry_price": 56189.54,
+            "exit_price": 56199.19,
+            "realized_pnl": 0.38600000000005824,
+            "executed_at": "2026-11-21T05:24:35.848121Z",
+            "exit_type": "MARKET",
+            "exit_source": "mam_close",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:35.063628Z"
+          }
+        ],
+        "mamhf2@mailinator.com": [
+          {
+            "history_id": 1000000005469,
+            "order_id": "ord_88f91f077ce19cf5ba",
+            "position_id": "pos_699592ff0dfe189212",
+            "group_id": "qa_a350316776f240ec",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.04,
+            "entry_price": 56189.54,
+            "exit_price": 56199.19,
+            "realized_pnl": 0.38600000000005824,
+            "executed_at": "2026-11-21T05:24:35.858044Z",
+            "exit_type": "MARKET",
+            "exit_source": "mam_close",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:35.066189Z"
+          }
+        ]
+      }
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "RACE-CLOSE-3",
+    "name": "Five concurrent master closes: one history row, no orphan or reversed position",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:24:38.552274+00:00",
+    "finished_at": "2026-11-21T05:24:39.747751+00:00",
+    "details": {
+      "responses": [
+        {
+          "http": 404,
+          "body": {
+            "error": "No open position for ord_0fa654d6d5b7163b7f"
+          }
+        },
+        {
+          "http": 404,
+          "body": {
+            "error": "No open position for ord_0fa654d6d5b7163b7f"
+          }
+        },
+        {
+          "http": 404,
+          "body": {
+            "error": "No open position for ord_0fa654d6d5b7163b7f"
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "exit_price": 56199.25,
+            "market_order_id": "ord_0fa654d6d5b7163b7f",
+            "price_source": "live",
+            "realized_pnl": -0.45679999999993015,
+            "success": true,
+            "symbol": "BLACK:BTCUSD"
+          }
+        },
+        {
+          "http": 404,
+          "body": {
+            "error": "No open position for ord_0fa654d6d5b7163b7f"
+          }
+        }
+      ],
+      "orphans": {},
+      "history_rows_per_account": {
+        "mamhm@mailinator.com": 1,
+        "mamhf1@mailinator.com": 1,
+        "mamhf2@mailinator.com": 1
+      },
+      "ledger": {
+        "mamhm@mailinator.com": [
+          {
+            "history_id": 1000000005470,
+            "order_id": "ord_04e318d0b6e82a3351",
+            "position_id": "pos_0c9fb44de4ab5e467a",
+            "group_id": "qa_4254f373be4f4576",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.04,
+            "entry_price": 56210.67,
+            "exit_price": 56199.25,
+            "realized_pnl": -0.45679999999993015,
+            "executed_at": "2026-11-21T05:24:39.354366Z",
+            "exit_type": "MARKET",
+            "exit_source": "squareoff",
+            "entry_source": "api",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "master",
+            "opened_at": "2026-11-21T05:24:38.567135Z"
+          }
+        ],
+        "mamhf1@mailinator.com": [
+          {
+            "history_id": 1000000005471,
+            "order_id": "ord_c078e9afdd51b27437",
+            "position_id": "pos_acf7f10006c3ba1c56",
+            "group_id": "qa_4254f373be4f4576",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.04,
+            "entry_price": 56210.67,
+            "exit_price": 56199.25,
+            "realized_pnl": -0.45679999999993015,
+            "executed_at": "2026-11-21T05:24:39.359051Z",
+            "exit_type": "MARKET",
+            "exit_source": "mam_close",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:38.572688Z"
+          }
+        ],
+        "mamhf2@mailinator.com": [
+          {
+            "history_id": 1000000005472,
+            "order_id": "ord_69b4993a7b702ab964",
+            "position_id": "pos_2eb4a41ef60443a53d",
+            "group_id": "qa_4254f373be4f4576",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.04,
+            "entry_price": 56210.67,
+            "exit_price": 56199.25,
+            "realized_pnl": -0.45679999999993015,
+            "executed_at": "2026-11-21T05:24:39.364018Z",
+            "exit_type": "MARKET",
+            "exit_source": "mam_close",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:38.574911Z"
+          }
+        ]
+      }
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "RACE-MASTER-CHILD-CLOSE",
+    "name": "Concurrent master and follower close: no double booking or orphan",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:24:40.735215+00:00",
+    "finished_at": "2026-11-21T05:24:41.867494+00:00",
+    "details": {
+      "responses": [
+        {
+          "http": 200,
+          "body": {
+            "exit_price": 56191.64,
+            "market_order_id": "ord_b3cbc1ab0da02ce2db",
+            "price_source": "live",
+            "realized_pnl": -0.19460000000006403,
+            "success": true,
+            "symbol": "BLACK:BTCUSD"
+          }
+        },
+        {
+          "http": 404,
+          "body": {
+            "error": "No open position for ord_7bfa31ec1dc03f824f"
+          }
+        }
+      ],
+      "orphans": {},
+      "follower_history": [
+        {
+          "history_id": 1000000005474,
+          "order_id": "ord_a5252f341c990755e0",
+          "position_id": "pos_f557c2f9f8231d8fc3",
+          "group_id": "qa_f0208ae319eb46e4",
+          "symbol": "BLACK:BTCUSD",
+          "side": "BUY",
+          "qty": 0.02,
+          "entry_price": 56201.37,
+          "exit_price": 56191.64,
+          "realized_pnl": -0.19460000000006403,
+          "executed_at": "2026-11-21T05:24:41.586071Z",
+          "exit_type": "MARKET",
+          "exit_source": "mam_close",
+          "entry_source": "mam",
+          "entry_type": "MARKET",
+          "entry_copy_kind": "mam",
+          "opened_at": "2026-11-21T05:24:40.744669Z"
+        }
+      ]
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "RACE-REDUCE-CLOSE",
+    "name": "Concurrent partial close and full close leave all accounts flat",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:24:43.041614+00:00",
+    "finished_at": "2026-11-21T05:24:43.902045+00:00",
+    "details": {
+      "responses": [
+        {
+          "http": 404,
+          "body": {
+            "error": "No open position for ord_96f7580dc012370c13"
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "exit_price": 56178.8,
+            "market_order_id": "ord_96f7580dc012370c13",
+            "price_source": "live",
+            "realized_pnl": -0.09359999999986031,
+            "success": true,
+            "symbol": "BLACK:BTCUSD"
+          }
+        }
+      ],
+      "orphans": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "RACE-MULTI-REDUCE-1",
+    "name": "Five reductions cannot close more than original .04 quantity",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:24:45.811480+00:00",
+    "finished_at": "2026-11-21T05:24:48.190333+00:00",
+    "details": {
+      "responses": [
+        {
+          "http": 404,
+          "body": {
+            "error": "No open position for ord_acba165bc354f30bd5"
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "realized_pnl": -0.02349999999998545,
+            "remaining_qty": 0.02,
+            "success": true,
+            "symbol": "BLACK:BTCUSD"
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "realized_pnl": -0.01989999999997963,
+            "remaining_qty": 0.03,
+            "success": true,
+            "symbol": "BLACK:BTCUSD"
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "realized_pnl": -0.02349999999998545,
+            "remaining_qty": 0.01,
+            "success": true,
+            "symbol": "BLACK:BTCUSD"
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "realized_pnl": -0.02349999999998545,
+            "remaining_qty": 0,
+            "success": true,
+            "symbol": "BLACK:BTCUSD"
+          }
+        }
+      ],
+      "quantity_errors": {},
+      "orphans": {},
+      "ledger": {
+        "mamhm@mailinator.com": [
+          {
+            "history_id": 1000000005488,
+            "order_id": "ord_1cc345362ef62427da",
+            "position_id": "pos_db165655f6f7d220d8",
+            "group_id": "qa_5fb12e1bae9e4d5b",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56180.88,
+            "exit_price": 56178.53,
+            "realized_pnl": -0.02349999999998545,
+            "executed_at": "2026-11-21T05:24:46.703277Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "api",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "master",
+            "opened_at": "2026-11-21T05:24:45.852431Z"
+          },
+          {
+            "history_id": 1000000005485,
+            "order_id": "ord_fd9f1defaee99edcce",
+            "position_id": "pos_db165655f6f7d220d8",
+            "group_id": "qa_5fb12e1bae9e4d5b",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56180.88,
+            "exit_price": 56178.53,
+            "realized_pnl": -0.02349999999998545,
+            "executed_at": "2026-11-21T05:24:46.671661Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "api",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "master",
+            "opened_at": "2026-11-21T05:24:45.852431Z"
+          },
+          {
+            "history_id": 1000000005482,
+            "order_id": "ord_67b4df38176cbfc191",
+            "position_id": "pos_db165655f6f7d220d8",
+            "group_id": "qa_5fb12e1bae9e4d5b",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56180.88,
+            "exit_price": 56178.53,
+            "realized_pnl": -0.02349999999998545,
+            "executed_at": "2026-11-21T05:24:46.657545Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "api",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "master",
+            "opened_at": "2026-11-21T05:24:45.852431Z"
+          },
+          {
+            "history_id": 1000000005479,
+            "order_id": "ord_25954be8240d39c3aa",
+            "position_id": "pos_db165655f6f7d220d8",
+            "group_id": "qa_5fb12e1bae9e4d5b",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56180.88,
+            "exit_price": 56178.89,
+            "realized_pnl": -0.01989999999997963,
+            "executed_at": "2026-11-21T05:24:46.637698Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "api",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "master",
+            "opened_at": "2026-11-21T05:24:45.852431Z"
+          }
+        ],
+        "mamhf1@mailinator.com": [
+          {
+            "history_id": 1000000005489,
+            "order_id": "ord_2604c5fb41c5ca663b",
+            "position_id": "pos_4d0bd1abfbacd38576",
+            "group_id": "qa_5fb12e1bae9e4d5b",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.009999999999999997,
+            "entry_price": 56180.88,
+            "exit_price": 56178.53,
+            "realized_pnl": -0.02349999999998544,
+            "executed_at": "2026-11-21T05:24:46.712656Z",
+            "exit_type": "MARKET",
+            "exit_source": "mam_close",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:45.858938Z"
+          },
+          {
+            "history_id": 1000000005486,
+            "order_id": "ord_ec5abe60d0f2fc703b",
+            "position_id": "pos_4d0bd1abfbacd38576",
+            "group_id": "qa_5fb12e1bae9e4d5b",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56180.88,
+            "exit_price": 56178.53,
+            "realized_pnl": -0.02349999999998545,
+            "executed_at": "2026-11-21T05:24:46.678616Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:45.858938Z"
+          },
+          {
+            "history_id": 1000000005483,
+            "order_id": "ord_40fffa0affae41bc8d",
+            "position_id": "pos_4d0bd1abfbacd38576",
+            "group_id": "qa_5fb12e1bae9e4d5b",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56180.88,
+            "exit_price": 56178.53,
+            "realized_pnl": -0.02349999999998545,
+            "executed_at": "2026-11-21T05:24:46.661936Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:45.858938Z"
+          },
+          {
+            "history_id": 1000000005480,
+            "order_id": "ord_8fa1cdbd8c0ea601c0",
+            "position_id": "pos_4d0bd1abfbacd38576",
+            "group_id": "qa_5fb12e1bae9e4d5b",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56180.88,
+            "exit_price": 56178.53,
+            "realized_pnl": -0.02349999999998545,
+            "executed_at": "2026-11-21T05:24:46.643058Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:45.858938Z"
+          }
+        ],
+        "mamhf2@mailinator.com": [
+          {
+            "history_id": 1000000005490,
+            "order_id": "ord_84e8d4a5e9936d60d6",
+            "position_id": "pos_b96bfb02c06a7d6ddb",
+            "group_id": "qa_5fb12e1bae9e4d5b",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.009999999999999997,
+            "entry_price": 56180.88,
+            "exit_price": 56178.53,
+            "realized_pnl": -0.02349999999998544,
+            "executed_at": "2026-11-21T05:24:46.719114Z",
+            "exit_type": "MARKET",
+            "exit_source": "mam_close",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:45.861865Z"
+          },
+          {
+            "history_id": 1000000005487,
+            "order_id": "ord_bc080f030c2b3cea59",
+            "position_id": "pos_b96bfb02c06a7d6ddb",
+            "group_id": "qa_5fb12e1bae9e4d5b",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56180.88,
+            "exit_price": 56178.53,
+            "realized_pnl": -0.02349999999998545,
+            "executed_at": "2026-11-21T05:24:46.690141Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:45.861865Z"
+          },
+          {
+            "history_id": 1000000005484,
+            "order_id": "ord_f877eafcbe1cfcb1ea",
+            "position_id": "pos_b96bfb02c06a7d6ddb",
+            "group_id": "qa_5fb12e1bae9e4d5b",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56180.88,
+            "exit_price": 56178.53,
+            "realized_pnl": -0.02349999999998545,
+            "executed_at": "2026-11-21T05:24:46.666584Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:45.861865Z"
+          },
+          {
+            "history_id": 1000000005481,
+            "order_id": "ord_60e487ec5983807a99",
+            "position_id": "pos_b96bfb02c06a7d6ddb",
+            "group_id": "qa_5fb12e1bae9e4d5b",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56180.88,
+            "exit_price": 56178.53,
+            "realized_pnl": -0.02349999999998545,
+            "executed_at": "2026-11-21T05:24:46.647822Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:45.861865Z"
+          }
+        ]
+      }
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "RACE-MULTI-REDUCE-2",
+    "name": "Five reductions cannot close more than original .04 quantity",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:24:49.150964+00:00",
+    "finished_at": "2026-11-21T05:24:50.329501+00:00",
+    "details": {
+      "responses": [
+        {
+          "http": 404,
+          "body": {
+            "error": "No open position for ord_b307eb49177756fdae"
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "realized_pnl": -0.02,
+            "remaining_qty": 0.02,
+            "success": true,
+            "symbol": "BLACK:BTCUSD"
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "realized_pnl": -0.02,
+            "remaining_qty": 0.03,
+            "success": true,
+            "symbol": "BLACK:BTCUSD"
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "realized_pnl": -0.02,
+            "remaining_qty": 0.01,
+            "success": true,
+            "symbol": "BLACK:BTCUSD"
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "realized_pnl": -0.02,
+            "remaining_qty": 0,
+            "success": true,
+            "symbol": "BLACK:BTCUSD"
+          }
+        }
+      ],
+      "quantity_errors": {},
+      "orphans": {},
+      "ledger": {
+        "mamhm@mailinator.com": [
+          {
+            "history_id": 1000000005500,
+            "order_id": "ord_7c175d31a1d7d442df",
+            "position_id": "pos_acc19409d990272aa8",
+            "group_id": "qa_5b4dd15c88614d9e",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56189.9,
+            "exit_price": 56187.9,
+            "realized_pnl": -0.02,
+            "executed_at": "2026-11-21T05:24:50.006306Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "api",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "master",
+            "opened_at": "2026-11-21T05:24:49.157136Z"
+          },
+          {
+            "history_id": 1000000005497,
+            "order_id": "ord_6b29b1a7562b1d4078",
+            "position_id": "pos_acc19409d990272aa8",
+            "group_id": "qa_5b4dd15c88614d9e",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56189.9,
+            "exit_price": 56187.9,
+            "realized_pnl": -0.02,
+            "executed_at": "2026-11-21T05:24:49.991965Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "api",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "master",
+            "opened_at": "2026-11-21T05:24:49.157136Z"
+          },
+          {
+            "history_id": 1000000005494,
+            "order_id": "ord_d1e575c4a6493637b5",
+            "position_id": "pos_acc19409d990272aa8",
+            "group_id": "qa_5b4dd15c88614d9e",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56189.9,
+            "exit_price": 56187.9,
+            "realized_pnl": -0.02,
+            "executed_at": "2026-11-21T05:24:49.977429Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "api",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "master",
+            "opened_at": "2026-11-21T05:24:49.157136Z"
+          },
+          {
+            "history_id": 1000000005491,
+            "order_id": "ord_945851c43193548fe5",
+            "position_id": "pos_acc19409d990272aa8",
+            "group_id": "qa_5b4dd15c88614d9e",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56189.9,
+            "exit_price": 56187.9,
+            "realized_pnl": -0.02,
+            "executed_at": "2026-11-21T05:24:49.962186Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "api",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "master",
+            "opened_at": "2026-11-21T05:24:49.157136Z"
+          }
+        ],
+        "mamhf1@mailinator.com": [
+          {
+            "history_id": 1000000005501,
+            "order_id": "ord_1657523573da93dc5f",
+            "position_id": "pos_7159679714d3232a9c",
+            "group_id": "qa_5b4dd15c88614d9e",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.009999999999999997,
+            "entry_price": 56189.9,
+            "exit_price": 56187.9,
+            "realized_pnl": -0.019999999999999993,
+            "executed_at": "2026-11-21T05:24:50.011132Z",
+            "exit_type": "MARKET",
+            "exit_source": "mam_close",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:49.162792Z"
+          },
+          {
+            "history_id": 1000000005498,
+            "order_id": "ord_02f9bef64d3e5ee85e",
+            "position_id": "pos_7159679714d3232a9c",
+            "group_id": "qa_5b4dd15c88614d9e",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56189.9,
+            "exit_price": 56187.9,
+            "realized_pnl": -0.02,
+            "executed_at": "2026-11-21T05:24:49.996559Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:49.162792Z"
+          },
+          {
+            "history_id": 1000000005495,
+            "order_id": "ord_52cf9e47679db421da",
+            "position_id": "pos_7159679714d3232a9c",
+            "group_id": "qa_5b4dd15c88614d9e",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56189.9,
+            "exit_price": 56187.9,
+            "realized_pnl": -0.02,
+            "executed_at": "2026-11-21T05:24:49.982362Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:49.162792Z"
+          },
+          {
+            "history_id": 1000000005492,
+            "order_id": "ord_16fff542837001bf3c",
+            "position_id": "pos_7159679714d3232a9c",
+            "group_id": "qa_5b4dd15c88614d9e",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56189.9,
+            "exit_price": 56187.9,
+            "realized_pnl": -0.02,
+            "executed_at": "2026-11-21T05:24:49.967096Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:49.162792Z"
+          }
+        ],
+        "mamhf2@mailinator.com": [
+          {
+            "history_id": 1000000005502,
+            "order_id": "ord_aa17e279da25113156",
+            "position_id": "pos_a920113ebc43ae5a82",
+            "group_id": "qa_5b4dd15c88614d9e",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.009999999999999997,
+            "entry_price": 56189.9,
+            "exit_price": 56187.9,
+            "realized_pnl": -0.019999999999999993,
+            "executed_at": "2026-11-21T05:24:50.015857Z",
+            "exit_type": "MARKET",
+            "exit_source": "mam_close",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:49.165351Z"
+          },
+          {
+            "history_id": 1000000005499,
+            "order_id": "ord_b55f1e401bcd9ec1c8",
+            "position_id": "pos_a920113ebc43ae5a82",
+            "group_id": "qa_5b4dd15c88614d9e",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56189.9,
+            "exit_price": 56187.9,
+            "realized_pnl": -0.02,
+            "executed_at": "2026-11-21T05:24:50.001312Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:49.165351Z"
+          },
+          {
+            "history_id": 1000000005496,
+            "order_id": "ord_c28256be14bcc78565",
+            "position_id": "pos_a920113ebc43ae5a82",
+            "group_id": "qa_5b4dd15c88614d9e",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56189.9,
+            "exit_price": 56187.9,
+            "realized_pnl": -0.02,
+            "executed_at": "2026-11-21T05:24:49.987291Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:49.165351Z"
+          },
+          {
+            "history_id": 1000000005493,
+            "order_id": "ord_0f2b0ef9d9785d4717",
+            "position_id": "pos_a920113ebc43ae5a82",
+            "group_id": "qa_5b4dd15c88614d9e",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56189.9,
+            "exit_price": 56187.9,
+            "realized_pnl": -0.02,
+            "executed_at": "2026-11-21T05:24:49.972294Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:49.165351Z"
+          }
+        ]
+      }
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "RACE-MULTI-REDUCE-3",
+    "name": "Five reductions cannot close more than original .04 quantity",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:24:51.291670+00:00",
+    "finished_at": "2026-11-21T05:24:52.528663+00:00",
+    "details": {
+      "responses": [
+        {
+          "http": 200,
+          "body": {
+            "realized_pnl": -0.05020000000004075,
+            "remaining_qty": 0,
+            "success": true,
+            "symbol": "BLACK:BTCUSD"
+          }
+        },
+        {
+          "http": 404,
+          "body": {
+            "error": "No open position for ord_112d7d4d57ac4b849f"
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "realized_pnl": -0.05020000000004075,
+            "remaining_qty": 0.01,
+            "success": true,
+            "symbol": "BLACK:BTCUSD"
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "realized_pnl": -0.05020000000004075,
+            "remaining_qty": 0.03,
+            "success": true,
+            "symbol": "BLACK:BTCUSD"
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "realized_pnl": -0.05020000000004075,
+            "remaining_qty": 0.02,
+            "success": true,
+            "symbol": "BLACK:BTCUSD"
+          }
+        }
+      ],
+      "quantity_errors": {},
+      "orphans": {},
+      "ledger": {
+        "mamhm@mailinator.com": [
+          {
+            "history_id": 1000000005512,
+            "order_id": "ord_91240de3782406f642",
+            "position_id": "pos_78beb51ffc4f89b284",
+            "group_id": "qa_ebc2f7e8cc334151",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56193.4,
+            "exit_price": 56188.38,
+            "realized_pnl": -0.05020000000004075,
+            "executed_at": "2026-11-21T05:24:52.197476Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "api",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "master",
+            "opened_at": "2026-11-21T05:24:51.341985Z"
+          },
+          {
+            "history_id": 1000000005509,
+            "order_id": "ord_d1af0d73aed3c10b2b",
+            "position_id": "pos_78beb51ffc4f89b284",
+            "group_id": "qa_ebc2f7e8cc334151",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56193.4,
+            "exit_price": 56188.38,
+            "realized_pnl": -0.05020000000004075,
+            "executed_at": "2026-11-21T05:24:52.183967Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "api",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "master",
+            "opened_at": "2026-11-21T05:24:51.341985Z"
+          },
+          {
+            "history_id": 1000000005506,
+            "order_id": "ord_27dd2971f4173a09d1",
+            "position_id": "pos_78beb51ffc4f89b284",
+            "group_id": "qa_ebc2f7e8cc334151",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56193.4,
+            "exit_price": 56188.38,
+            "realized_pnl": -0.05020000000004075,
+            "executed_at": "2026-11-21T05:24:52.169835Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "api",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "master",
+            "opened_at": "2026-11-21T05:24:51.341985Z"
+          },
+          {
+            "history_id": 1000000005503,
+            "order_id": "ord_0657a8bfdcb59deb91",
+            "position_id": "pos_78beb51ffc4f89b284",
+            "group_id": "qa_ebc2f7e8cc334151",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56193.4,
+            "exit_price": 56188.38,
+            "realized_pnl": -0.05020000000004075,
+            "executed_at": "2026-11-21T05:24:52.154521Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "api",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "master",
+            "opened_at": "2026-11-21T05:24:51.341985Z"
+          }
+        ],
+        "mamhf1@mailinator.com": [
+          {
+            "history_id": 1000000005513,
+            "order_id": "ord_3ed06974d75d98087f",
+            "position_id": "pos_a376cceded1f6248e2",
+            "group_id": "qa_ebc2f7e8cc334151",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.009999999999999997,
+            "entry_price": 56192.43,
+            "exit_price": 56188.38,
+            "realized_pnl": -0.04050000000002909,
+            "executed_at": "2026-11-21T05:24:52.202318Z",
+            "exit_type": "MARKET",
+            "exit_source": "mam_close",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:51.347466Z"
+          },
+          {
+            "history_id": 1000000005510,
+            "order_id": "ord_4cf054705f29ed5726",
+            "position_id": "pos_a376cceded1f6248e2",
+            "group_id": "qa_ebc2f7e8cc334151",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56192.43,
+            "exit_price": 56188.38,
+            "realized_pnl": -0.0405000000000291,
+            "executed_at": "2026-11-21T05:24:52.188506Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:51.347466Z"
+          },
+          {
+            "history_id": 1000000005507,
+            "order_id": "ord_e59769c336f701c59e",
+            "position_id": "pos_a376cceded1f6248e2",
+            "group_id": "qa_ebc2f7e8cc334151",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56192.43,
+            "exit_price": 56188.38,
+            "realized_pnl": -0.0405000000000291,
+            "executed_at": "2026-11-21T05:24:52.174093Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:51.347466Z"
+          },
+          {
+            "history_id": 1000000005504,
+            "order_id": "ord_dbb42f7bc6e64c6e4f",
+            "position_id": "pos_a376cceded1f6248e2",
+            "group_id": "qa_ebc2f7e8cc334151",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56192.43,
+            "exit_price": 56188.38,
+            "realized_pnl": -0.0405000000000291,
+            "executed_at": "2026-11-21T05:24:52.159365Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:51.347466Z"
+          }
+        ],
+        "mamhf2@mailinator.com": [
+          {
+            "history_id": 1000000005514,
+            "order_id": "ord_e3d33e995e66cc99c2",
+            "position_id": "pos_e47ea51acaf715297a",
+            "group_id": "qa_ebc2f7e8cc334151",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.009999999999999997,
+            "entry_price": 56192.43,
+            "exit_price": 56188.38,
+            "realized_pnl": -0.04050000000002909,
+            "executed_at": "2026-11-21T05:24:52.207287Z",
+            "exit_type": "MARKET",
+            "exit_source": "mam_close",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:51.350627Z"
+          },
+          {
+            "history_id": 1000000005511,
+            "order_id": "ord_05a49a446c8a035b82",
+            "position_id": "pos_e47ea51acaf715297a",
+            "group_id": "qa_ebc2f7e8cc334151",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56192.43,
+            "exit_price": 56188.38,
+            "realized_pnl": -0.0405000000000291,
+            "executed_at": "2026-11-21T05:24:52.192985Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:51.350627Z"
+          },
+          {
+            "history_id": 1000000005508,
+            "order_id": "ord_c4d1e6bbc1236926e5",
+            "position_id": "pos_e47ea51acaf715297a",
+            "group_id": "qa_ebc2f7e8cc334151",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56192.43,
+            "exit_price": 56188.38,
+            "realized_pnl": -0.0405000000000291,
+            "executed_at": "2026-11-21T05:24:52.178803Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:51.350627Z"
+          },
+          {
+            "history_id": 1000000005505,
+            "order_id": "ord_1c7455e2eca019e4ee",
+            "position_id": "pos_e47ea51acaf715297a",
+            "group_id": "qa_ebc2f7e8cc334151",
+            "symbol": "BLACK:BTCUSD",
+            "side": "BUY",
+            "qty": 0.01,
+            "entry_price": 56192.43,
+            "exit_price": 56188.38,
+            "realized_pnl": -0.0405000000000291,
+            "executed_at": "2026-11-21T05:24:52.164202Z",
+            "exit_type": "MARKET",
+            "exit_source": "reduce",
+            "entry_source": "mam",
+            "entry_type": "MARKET",
+            "entry_copy_kind": "mam",
+            "opened_at": "2026-11-21T05:24:51.350627Z"
+          }
+        ]
+      }
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "RACE-INDEPENDENT-SL-TP",
+    "name": "Concurrent independent bracket edits preserve both supplied fields",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:24:54.217513+00:00",
+    "finished_at": "2026-11-21T05:24:56.943929+00:00",
+    "details": {
+      "responses": [
+        {
+          "http": 200,
+          "body": {
+            "market_order_id": "ord_af8c3e8fa60b790e16",
+            "sl": 46189.95,
+            "success": true,
+            "tp": null,
+            "trailing": null
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "market_order_id": "ord_af8c3e8fa60b790e16",
+            "sl": null,
+            "success": true,
+            "tp": 66189.95,
+            "trailing": null
+          }
+        }
+      ],
+      "lost_updates": {},
+      "orphans": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "TERM-RACE-IDEMPOTENCY-CONCURRENT",
+    "name": "Concurrent retry of an identical master request cannot duplicate exposure",
+    "status": "FAIL",
+    "started_at": "2026-11-21T05:24:58.661418+00:00",
+    "finished_at": "2026-11-21T05:25:03.131050+00:00",
+    "details": {
+      "request_id": "terminal_retry_e0da9a409c614667",
+      "group_id": "terminal_group_bf5c765dfdeb463e",
+      "responses": [
+        {
+          "http": 200,
+          "body": {
+            "order": {
+              "order_id": "ord_f76de960b36d83db78",
+              "market_order_id": "ord_f76de960b36d83db78",
+              "group_id": "terminal_group_bf5c765dfdeb463e",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "type": "MARKET",
+              "state": "FILLED",
+              "requested_qty": 0.01,
+              "filled_qty": 0.01,
+              "avg_fill_price": 56193.88,
+              "source": "api",
+              "tag": "TERMINAL_MAM_QA",
+              "copy_ref": "ord_f76de960b36d83db78",
+              "copy_kind": "master",
+              "created_at": "2026-11-21T05:24:59.889341678Z",
+              "updated_at": "2026-11-21T05:24:59.889341678Z"
+            },
+            "position": {
+              "position_id": "pos_24aade805a15e4defc",
+              "market_order_id": "ord_f76de960b36d83db78",
+              "group_id": "terminal_group_bf5c765dfdeb463e",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "net_qty": 0.01,
+              "avg_entry_price": 56193.88,
+              "full_margin": 561.9388,
+              "margin_percent": 100,
+              "margin_used": 561.9388,
+              "entry_markup": 0,
+              "tag": "TERMINAL_MAM_QA",
+              "status": "OPEN",
+              "opened_at": "2026-11-21T05:24:59.889397Z"
+            },
+            "success": true
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "order": {
+              "order_id": "ord_a383d843e0ba1e3547",
+              "market_order_id": "ord_a383d843e0ba1e3547",
+              "group_id": "terminal_group_bf5c765dfdeb463e",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "type": "MARKET",
+              "state": "FILLED",
+              "requested_qty": 0.01,
+              "filled_qty": 0.01,
+              "avg_fill_price": 56194.05,
+              "source": "api",
+              "tag": "TERMINAL_MAM_QA",
+              "copy_ref": "ord_a383d843e0ba1e3547",
+              "copy_kind": "master",
+              "created_at": "2026-11-21T05:24:59.394635137Z",
+              "updated_at": "2026-11-21T05:24:59.394635137Z"
+            },
+            "position": {
+              "position_id": "pos_d0cd4f33bc4307b1b2",
+              "market_order_id": "ord_a383d843e0ba1e3547",
+              "group_id": "terminal_group_bf5c765dfdeb463e",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "net_qty": 0.01,
+              "avg_entry_price": 56194.05,
+              "full_margin": 561.9405,
+              "margin_percent": 100,
+              "margin_used": 561.9405,
+              "entry_markup": 0,
+              "tag": "TERMINAL_MAM_QA",
+              "status": "OPEN",
+              "opened_at": "2026-11-21T05:24:59.39469Z"
+            },
+            "success": true
+          }
+        }
+      ],
+      "accepted_requests": 2,
+      "position_counts": {
+        "mamhm@mailinator.com": 2,
+        "mamhf1@mailinator.com": 2,
+        "mamhf2@mailinator.com": 2
+      },
+      "incorrect_accounts": {
+        "mamhm@mailinator.com": [
+          {
+            "algo_id": null,
+            "avg_entry_price": 56193.88,
+            "closed_at": null,
+            "comment": null,
+            "current_price": 56199.54,
+            "full_margin": 561.9388,
+            "group_id": "terminal_group_bf5c765dfdeb463e",
+            "margin_percent": 100,
+            "margin_used": 561.9388,
+            "market_order_id": "ord_f76de960b36d83db78",
+            "net_qty": 0.01,
+            "oco_key": null,
+            "opened_at": "2026-11-21T05:24:59.889397Z",
+            "position_id": "pos_24aade805a15e4defc",
+            "side": "BUY",
+            "source": "api",
+            "status": "OPEN",
+            "strategy_name": null,
+            "symbol": "BLACK:BTCUSD",
+            "tag": "TERMINAL_MAM_QA",
+            "trailing": null,
+            "unrealized_pnl": 0.05660000000003493
+          },
+          {
+            "algo_id": null,
+            "avg_entry_price": 56194.05,
+            "closed_at": null,
+            "comment": null,
+            "current_price": 56199.54,
+            "full_margin": 561.9405,
+            "group_id": "terminal_group_bf5c765dfdeb463e",
+            "margin_percent": 100,
+            "margin_used": 561.9405,
+            "market_order_id": "ord_a383d843e0ba1e3547",
+            "net_qty": 0.01,
+            "oco_key": null,
+            "opened_at": "2026-11-21T05:24:59.39469Z",
+            "position_id": "pos_d0cd4f33bc4307b1b2",
+            "side": "BUY",
+            "source": "api",
+            "status": "OPEN",
+            "strategy_name": null,
+            "symbol": "BLACK:BTCUSD",
+            "tag": "TERMINAL_MAM_QA",
+            "trailing": null,
+            "unrealized_pnl": 0.05489999999997963
+          }
+        ],
+        "mamhf1@mailinator.com": [
+          {
+            "algo_id": null,
+            "avg_entry_price": 56193.88,
+            "closed_at": null,
+            "comment": null,
+            "current_price": 56199.54,
+            "full_margin": 561.9388,
+            "group_id": "terminal_group_bf5c765dfdeb463e",
+            "margin_percent": 100,
+            "margin_used": 561.9388,
+            "market_order_id": "ord_f7a0f2c8e06b743f21",
+            "net_qty": 0.01,
+            "oco_key": null,
+            "opened_at": "2026-11-21T05:24:59.895359Z",
+            "position_id": "pos_1cf3b6356fadf47401",
+            "side": "BUY",
+            "source": "mam",
+            "status": "OPEN",
+            "strategy_name": null,
+            "symbol": "BLACK:BTCUSD",
+            "tag": "TERMINAL_MAM_QA",
+            "trailing": null,
+            "unrealized_pnl": 0.05660000000003493
+          },
+          {
+            "algo_id": null,
+            "avg_entry_price": 56194.05,
+            "closed_at": null,
+            "comment": null,
+            "current_price": 56199.54,
+            "full_margin": 561.9405,
+            "group_id": "terminal_group_bf5c765dfdeb463e",
+            "margin_percent": 100,
+            "margin_used": 561.9405,
+            "market_order_id": "ord_a38c77ba163a89c6ae",
+            "net_qty": 0.01,
+            "oco_key": null,
+            "opened_at": "2026-11-21T05:24:59.400968Z",
+            "position_id": "pos_46f076d0b14e737367",
+            "side": "BUY",
+            "source": "mam",
+            "status": "OPEN",
+            "strategy_name": null,
+            "symbol": "BLACK:BTCUSD",
+            "tag": "TERMINAL_MAM_QA",
+            "trailing": null,
+            "unrealized_pnl": 0.05489999999997963
+          }
+        ],
+        "mamhf2@mailinator.com": [
+          {
+            "algo_id": null,
+            "avg_entry_price": 56193.88,
+            "closed_at": null,
+            "comment": null,
+            "current_price": 56199.54,
+            "full_margin": 561.9388,
+            "group_id": "terminal_group_bf5c765dfdeb463e",
+            "margin_percent": 100,
+            "margin_used": 561.9388,
+            "market_order_id": "ord_c062f62ee58ea6e9c9",
+            "net_qty": 0.01,
+            "oco_key": null,
+            "opened_at": "2026-11-21T05:24:59.898387Z",
+            "position_id": "pos_e8cf89012007080cc3",
+            "side": "BUY",
+            "source": "mam",
+            "status": "OPEN",
+            "strategy_name": null,
+            "symbol": "BLACK:BTCUSD",
+            "tag": "TERMINAL_MAM_QA",
+            "trailing": null,
+            "unrealized_pnl": 0.05660000000003493
+          },
+          {
+            "algo_id": null,
+            "avg_entry_price": 56194.05,
+            "closed_at": null,
+            "comment": null,
+            "current_price": 56199.54,
+            "full_margin": 561.9405,
+            "group_id": "terminal_group_bf5c765dfdeb463e",
+            "margin_percent": 100,
+            "margin_used": 561.9405,
+            "market_order_id": "ord_9015dacd64d54a74bf",
+            "net_qty": 0.01,
+            "oco_key": null,
+            "opened_at": "2026-11-21T05:24:59.40386Z",
+            "position_id": "pos_04d18aed6ee059a9fc",
+            "side": "BUY",
+            "source": "mam",
+            "status": "OPEN",
+            "strategy_name": null,
+            "symbol": "BLACK:BTCUSD",
+            "tag": "TERMINAL_MAM_QA",
+            "trailing": null,
+            "unrealized_pnl": 0.05489999999997963
+          }
+        ]
+      },
+      "expected": "A stable request_id/group_id must create one master execution and one child per follower."
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "TERM-RACE-IDEMPOTENCY-SEQUENTIAL",
+    "name": "Sequential retry of an identical master request cannot duplicate exposure",
+    "status": "FAIL",
+    "started_at": "2026-11-21T05:25:03.134109+00:00",
+    "finished_at": "2026-11-21T05:25:06.127309+00:00",
+    "details": {
+      "request_id": "terminal_retry_406fd7f8f65444b6",
+      "group_id": "terminal_group_8054eeb1d1944ecd",
+      "responses": [
+        {
+          "http": 200,
+          "body": {
+            "order": {
+              "order_id": "ord_4490458ddf1f0ef805",
+              "market_order_id": "ord_4490458ddf1f0ef805",
+              "group_id": "terminal_group_8054eeb1d1944ecd",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "type": "MARKET",
+              "state": "FILLED",
+              "requested_qty": 0.01,
+              "filled_qty": 0.01,
+              "avg_fill_price": 56190.64,
+              "source": "api",
+              "tag": "TERMINAL_MAM_QA",
+              "copy_ref": "ord_4490458ddf1f0ef805",
+              "copy_kind": "master",
+              "created_at": "2026-11-21T05:25:03.269713662Z",
+              "updated_at": "2026-11-21T05:25:03.269713662Z"
+            },
+            "position": {
+              "position_id": "pos_74f6d05130405195fc",
+              "market_order_id": "ord_4490458ddf1f0ef805",
+              "group_id": "terminal_group_8054eeb1d1944ecd",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "net_qty": 0.01,
+              "avg_entry_price": 56190.64,
+              "full_margin": 561.9064,
+              "margin_percent": 100,
+              "margin_used": 561.9064,
+              "entry_markup": 0,
+              "tag": "TERMINAL_MAM_QA",
+              "status": "OPEN",
+              "opened_at": "2026-11-21T05:25:03.269767Z"
+            },
+            "success": true
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "order": {
+              "order_id": "ord_90c130695b7ce60514",
+              "market_order_id": "ord_90c130695b7ce60514",
+              "group_id": "terminal_group_8054eeb1d1944ecd",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "type": "MARKET",
+              "state": "FILLED",
+              "requested_qty": 0.01,
+              "filled_qty": 0.01,
+              "avg_fill_price": 56189.72,
+              "source": "api",
+              "tag": "TERMINAL_MAM_QA",
+              "copy_ref": "ord_90c130695b7ce60514",
+              "copy_kind": "master",
+              "created_at": "2026-11-21T05:25:03.387502243Z",
+              "updated_at": "2026-11-21T05:25:03.387502243Z"
+            },
+            "position": {
+              "position_id": "pos_7f336893477cfc6343",
+              "market_order_id": "ord_90c130695b7ce60514",
+              "group_id": "terminal_group_8054eeb1d1944ecd",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "net_qty": 0.01,
+              "avg_entry_price": 56189.72,
+              "full_margin": 561.8972,
+              "margin_percent": 100,
+              "margin_used": 561.8972,
+              "entry_markup": 0,
+              "tag": "TERMINAL_MAM_QA",
+              "status": "OPEN",
+              "opened_at": "2026-11-21T05:25:03.387545Z"
+            },
+            "success": true
+          }
+        }
+      ],
+      "accepted_requests": 2,
+      "position_counts": {
+        "mamhm@mailinator.com": 2,
+        "mamhf1@mailinator.com": 2,
+        "mamhf2@mailinator.com": 2
+      },
+      "incorrect_accounts": {
+        "mamhm@mailinator.com": [
+          {
+            "algo_id": null,
+            "avg_entry_price": 56189.72,
+            "closed_at": null,
+            "comment": null,
+            "current_price": 56188.32,
+            "full_margin": 561.8972,
+            "group_id": "terminal_group_8054eeb1d1944ecd",
+            "margin_percent": 100,
+            "margin_used": 561.8972,
+            "market_order_id": "ord_90c130695b7ce60514",
+            "net_qty": 0.01,
+            "oco_key": null,
+            "opened_at": "2026-11-21T05:25:03.387545Z",
+            "position_id": "pos_7f336893477cfc6343",
+            "side": "BUY",
+            "source": "api",
+            "status": "OPEN",
+            "strategy_name": null,
+            "symbol": "BLACK:BTCUSD",
+            "tag": "TERMINAL_MAM_QA",
+            "trailing": null,
+            "unrealized_pnl": -0.014000000000014553
+          },
+          {
+            "algo_id": null,
+            "avg_entry_price": 56190.64,
+            "closed_at": null,
+            "comment": null,
+            "current_price": 56188.32,
+            "full_margin": 561.9064,
+            "group_id": "terminal_group_8054eeb1d1944ecd",
+            "margin_percent": 100,
+            "margin_used": 561.9064,
+            "market_order_id": "ord_4490458ddf1f0ef805",
+            "net_qty": 0.01,
+            "oco_key": null,
+            "opened_at": "2026-11-21T05:25:03.269767Z",
+            "position_id": "pos_74f6d05130405195fc",
+            "side": "BUY",
+            "source": "api",
+            "status": "OPEN",
+            "strategy_name": null,
+            "symbol": "BLACK:BTCUSD",
+            "tag": "TERMINAL_MAM_QA",
+            "trailing": null,
+            "unrealized_pnl": -0.02319999999999709
+          }
+        ],
+        "mamhf1@mailinator.com": [
+          {
+            "algo_id": null,
+            "avg_entry_price": 56189.72,
+            "closed_at": null,
+            "comment": null,
+            "current_price": 56188.32,
+            "full_margin": 561.8972,
+            "group_id": "terminal_group_8054eeb1d1944ecd",
+            "margin_percent": 100,
+            "margin_used": 561.8972,
+            "market_order_id": "ord_c743d5a0dcc1c0be9a",
+            "net_qty": 0.01,
+            "oco_key": null,
+            "opened_at": "2026-11-21T05:25:03.392756Z",
+            "position_id": "pos_e54de6d2f705d3f3cb",
+            "side": "BUY",
+            "source": "mam",
+            "status": "OPEN",
+            "strategy_name": null,
+            "symbol": "BLACK:BTCUSD",
+            "tag": "TERMINAL_MAM_QA",
+            "trailing": null,
+            "unrealized_pnl": -0.014000000000014553
+          },
+          {
+            "algo_id": null,
+            "avg_entry_price": 56190.64,
+            "closed_at": null,
+            "comment": null,
+            "current_price": 56188.32,
+            "full_margin": 561.9064,
+            "group_id": "terminal_group_8054eeb1d1944ecd",
+            "margin_percent": 100,
+            "margin_used": 561.9064,
+            "market_order_id": "ord_4db9acfcd9c2a2b04f",
+            "net_qty": 0.01,
+            "oco_key": null,
+            "opened_at": "2026-11-21T05:25:03.274925Z",
+            "position_id": "pos_1937b08c7d08060f45",
+            "side": "BUY",
+            "source": "mam",
+            "status": "OPEN",
+            "strategy_name": null,
+            "symbol": "BLACK:BTCUSD",
+            "tag": "TERMINAL_MAM_QA",
+            "trailing": null,
+            "unrealized_pnl": -0.02319999999999709
+          }
+        ],
+        "mamhf2@mailinator.com": [
+          {
+            "algo_id": null,
+            "avg_entry_price": 56189.72,
+            "closed_at": null,
+            "comment": null,
+            "current_price": 56188.32,
+            "full_margin": 561.8972,
+            "group_id": "terminal_group_8054eeb1d1944ecd",
+            "margin_percent": 100,
+            "margin_used": 561.8972,
+            "market_order_id": "ord_6e8440b24fda3f6ed8",
+            "net_qty": 0.01,
+            "oco_key": null,
+            "opened_at": "2026-11-21T05:25:03.395068Z",
+            "position_id": "pos_dba5c5970276bb6581",
+            "side": "BUY",
+            "source": "mam",
+            "status": "OPEN",
+            "strategy_name": null,
+            "symbol": "BLACK:BTCUSD",
+            "tag": "TERMINAL_MAM_QA",
+            "trailing": null,
+            "unrealized_pnl": -0.014000000000014553
+          },
+          {
+            "algo_id": null,
+            "avg_entry_price": 56190.64,
+            "closed_at": null,
+            "comment": null,
+            "current_price": 56188.32,
+            "full_margin": 561.9064,
+            "group_id": "terminal_group_8054eeb1d1944ecd",
+            "margin_percent": 100,
+            "margin_used": 561.9064,
+            "market_order_id": "ord_ea98f3b47a8cc2c543",
+            "net_qty": 0.01,
+            "oco_key": null,
+            "opened_at": "2026-11-21T05:25:03.277622Z",
+            "position_id": "pos_cedfea89494ad240c6",
+            "side": "BUY",
+            "source": "mam",
+            "status": "OPEN",
+            "strategy_name": null,
+            "symbol": "BLACK:BTCUSD",
+            "tag": "TERMINAL_MAM_QA",
+            "trailing": null,
+            "unrealized_pnl": -0.02319999999999709
+          }
+        ]
+      },
+      "expected": "A stable request_id/group_id must create one master execution and one child per follower."
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "TERM-RACE-RAPID-ROUNDTRIP-1",
+    "name": "Five simultaneous open/immediate-close sequences leave no late follower copies",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:25:07.897736+00:00",
+    "finished_at": "2026-11-21T05:25:10.518973+00:00",
+    "details": {
+      "attempts": [
+        {
+          "open": {
+            "http": 200,
+            "body": {
+              "order": {
+                "order_id": "ord_4b64e64ef9a34c7878",
+                "market_order_id": "ord_4b64e64ef9a34c7878",
+                "group_id": "qa_448bcbf357854e4a",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "type": "MARKET",
+                "state": "FILLED",
+                "requested_qty": 0.01,
+                "filled_qty": 0.01,
+                "avg_fill_price": 56206.66,
+                "source": "api",
+                "tag": "QA_20261120",
+                "copy_ref": "ord_4b64e64ef9a34c7878",
+                "copy_kind": "master",
+                "created_at": "2026-11-21T05:25:08.885441964Z",
+                "updated_at": "2026-11-21T05:25:08.885441964Z"
+              },
+              "position": {
+                "position_id": "pos_6d95aa0051d719a951",
+                "market_order_id": "ord_4b64e64ef9a34c7878",
+                "group_id": "qa_448bcbf357854e4a",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "net_qty": 0.01,
+                "avg_entry_price": 56206.66,
+                "full_margin": 562.0666,
+                "margin_percent": 100,
+                "margin_used": 562.0666,
+                "entry_markup": 0,
+                "tag": "QA_20261120",
+                "status": "OPEN",
+                "opened_at": "2026-11-21T05:25:08.885489Z"
+              },
+              "success": true
+            }
+          },
+          "close": {
+            "http": 200,
+            "body": {
+              "exit_price": 56204.27,
+              "market_order_id": "ord_4b64e64ef9a34c7878",
+              "price_source": "live",
+              "realized_pnl": -0.02390000000006694,
+              "success": true,
+              "symbol": "BLACK:BTCUSD"
+            }
+          }
+        },
+        {
+          "open": {
+            "http": 200,
+            "body": {
+              "order": {
+                "order_id": "ord_f5394c6e6c3b4942c3",
+                "market_order_id": "ord_f5394c6e6c3b4942c3",
+                "group_id": "qa_c71b8de628854271",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "type": "MARKET",
+                "state": "FILLED",
+                "requested_qty": 0.01,
+                "filled_qty": 0.01,
+                "avg_fill_price": 56198.74,
+                "source": "api",
+                "tag": "QA_20261120",
+                "copy_ref": "ord_f5394c6e6c3b4942c3",
+                "copy_kind": "master",
+                "created_at": "2026-11-21T05:25:08.451306393Z",
+                "updated_at": "2026-11-21T05:25:08.451306393Z"
+              },
+              "position": {
+                "position_id": "pos_cb87ae732a463b9c4d",
+                "market_order_id": "ord_f5394c6e6c3b4942c3",
+                "group_id": "qa_c71b8de628854271",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "net_qty": 0.01,
+                "avg_entry_price": 56198.74,
+                "full_margin": 561.9874,
+                "margin_percent": 100,
+                "margin_used": 561.9874,
+                "entry_markup": 0,
+                "tag": "QA_20261120",
+                "status": "OPEN",
+                "opened_at": "2026-11-21T05:25:08.451349Z"
+              },
+              "success": true
+            }
+          },
+          "close": {
+            "http": 200,
+            "body": {
+              "exit_price": 56204.28,
+              "market_order_id": "ord_f5394c6e6c3b4942c3",
+              "price_source": "live",
+              "realized_pnl": 0.055400000000008734,
+              "success": true,
+              "symbol": "BLACK:BTCUSD"
+            }
+          }
+        },
+        {
+          "open": {
+            "http": 200,
+            "body": {
+              "order": {
+                "order_id": "ord_51c1f4800b53b27460",
+                "market_order_id": "ord_51c1f4800b53b27460",
+                "group_id": "qa_1f7c1dcac2564f45",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "type": "MARKET",
+                "state": "FILLED",
+                "requested_qty": 0.01,
+                "filled_qty": 0.01,
+                "avg_fill_price": 56198.74,
+                "source": "api",
+                "tag": "QA_20261120",
+                "copy_ref": "ord_51c1f4800b53b27460",
+                "copy_kind": "master",
+                "created_at": "2026-11-21T05:25:08.439380811Z",
+                "updated_at": "2026-11-21T05:25:08.439380811Z"
+              },
+              "position": {
+                "position_id": "pos_29b64d438fbe9e9e08",
+                "market_order_id": "ord_51c1f4800b53b27460",
+                "group_id": "qa_1f7c1dcac2564f45",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "net_qty": 0.01,
+                "avg_entry_price": 56198.74,
+                "full_margin": 561.9874,
+                "margin_percent": 100,
+                "margin_used": 561.9874,
+                "entry_markup": 0,
+                "tag": "QA_20261120",
+                "status": "OPEN",
+                "opened_at": "2026-11-21T05:25:08.439455Z"
+              },
+              "success": true
+            }
+          },
+          "close": {
+            "http": 200,
+            "body": {
+              "exit_price": 56204.32,
+              "market_order_id": "ord_51c1f4800b53b27460",
+              "price_source": "live",
+              "realized_pnl": 0.05580000000001746,
+              "success": true,
+              "symbol": "BLACK:BTCUSD"
+            }
+          }
+        },
+        {
+          "open": {
+            "http": 200,
+            "body": {
+              "order": {
+                "order_id": "ord_39eaa7e826712da310",
+                "market_order_id": "ord_39eaa7e826712da310",
+                "group_id": "qa_0e0b45da699c4f62",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "type": "MARKET",
+                "state": "FILLED",
+                "requested_qty": 0.01,
+                "filled_qty": 0.01,
+                "avg_fill_price": 56199.81,
+                "source": "api",
+                "tag": "QA_20261120",
+                "copy_ref": "ord_39eaa7e826712da310",
+                "copy_kind": "master",
+                "created_at": "2026-11-21T05:25:08.471711485Z",
+                "updated_at": "2026-11-21T05:25:08.471711485Z"
+              },
+              "position": {
+                "position_id": "pos_bacee77af6ab98400b",
+                "market_order_id": "ord_39eaa7e826712da310",
+                "group_id": "qa_0e0b45da699c4f62",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "net_qty": 0.01,
+                "avg_entry_price": 56199.81,
+                "full_margin": 561.9981,
+                "margin_percent": 100,
+                "margin_used": 561.9981,
+                "entry_markup": 0,
+                "tag": "QA_20261120",
+                "status": "OPEN",
+                "opened_at": "2026-11-21T05:25:08.471758Z"
+              },
+              "success": true
+            }
+          },
+          "close": {
+            "http": 200,
+            "body": {
+              "exit_price": 56199.26,
+              "market_order_id": "ord_39eaa7e826712da310",
+              "price_source": "live",
+              "realized_pnl": -0.0054999999999563445,
+              "success": true,
+              "symbol": "BLACK:BTCUSD"
+            }
+          }
+        },
+        {
+          "open": {
+            "http": 200,
+            "body": {
+              "order": {
+                "order_id": "ord_ec9ba19352867b7ed1",
+                "market_order_id": "ord_ec9ba19352867b7ed1",
+                "group_id": "qa_a789a71c00db428a",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "type": "MARKET",
+                "state": "FILLED",
+                "requested_qty": 0.01,
+                "filled_qty": 0.01,
+                "avg_fill_price": 56198.74,
+                "source": "api",
+                "tag": "QA_20261120",
+                "copy_ref": "ord_ec9ba19352867b7ed1",
+                "copy_kind": "master",
+                "created_at": "2026-11-21T05:25:08.460703299Z",
+                "updated_at": "2026-11-21T05:25:08.460703299Z"
+              },
+              "position": {
+                "position_id": "pos_6bc054acef13d967c3",
+                "market_order_id": "ord_ec9ba19352867b7ed1",
+                "group_id": "qa_a789a71c00db428a",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "net_qty": 0.01,
+                "avg_entry_price": 56198.74,
+                "full_margin": 561.9874,
+                "margin_percent": 100,
+                "margin_used": 561.9874,
+                "entry_markup": 0,
+                "tag": "QA_20261120",
+                "status": "OPEN",
+                "opened_at": "2026-11-21T05:25:08.460735Z"
+              },
+              "success": true
+            }
+          },
+          "close": {
+            "http": 200,
+            "body": {
+              "exit_price": 56199.26,
+              "market_order_id": "ord_ec9ba19352867b7ed1",
+              "price_source": "live",
+              "realized_pnl": 0.005200000000040746,
+              "success": true,
+              "symbol": "BLACK:BTCUSD"
+            }
+          }
+        }
+      ],
+      "accepted": 5,
+      "closed": 5,
+      "orphan_positions": {},
+      "working_orders": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "TERM-RACE-RAPID-ROUNDTRIP-2",
+    "name": "Five simultaneous open/immediate-close sequences leave no late follower copies",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:25:11.377882+00:00",
+    "finished_at": "2026-11-21T05:25:13.542110+00:00",
+    "details": {
+      "attempts": [
+        {
+          "open": {
+            "http": 200,
+            "body": {
+              "order": {
+                "order_id": "ord_1b961046e7247fd09b",
+                "market_order_id": "ord_1b961046e7247fd09b",
+                "group_id": "qa_d5d216c4c3b24dd7",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "type": "MARKET",
+                "state": "FILLED",
+                "requested_qty": 0.01,
+                "filled_qty": 0.01,
+                "avg_fill_price": 56199.2,
+                "source": "api",
+                "tag": "QA_20261120",
+                "copy_ref": "ord_1b961046e7247fd09b",
+                "copy_kind": "master",
+                "created_at": "2026-11-21T05:25:11.906446106Z",
+                "updated_at": "2026-11-21T05:25:11.906446106Z"
+              },
+              "position": {
+                "position_id": "pos_280a9335a6a5de1320",
+                "market_order_id": "ord_1b961046e7247fd09b",
+                "group_id": "qa_d5d216c4c3b24dd7",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "net_qty": 0.01,
+                "avg_entry_price": 56199.2,
+                "full_margin": 561.992,
+                "margin_percent": 100,
+                "margin_used": 561.992,
+                "entry_markup": 0,
+                "tag": "QA_20261120",
+                "status": "OPEN",
+                "opened_at": "2026-11-21T05:25:11.90649Z"
+              },
+              "success": true
+            }
+          },
+          "close": {
+            "http": 200,
+            "body": {
+              "exit_price": 56197.5,
+              "market_order_id": "ord_1b961046e7247fd09b",
+              "price_source": "live",
+              "realized_pnl": -0.016999999999970896,
+              "success": true,
+              "symbol": "BLACK:BTCUSD"
+            }
+          }
+        },
+        {
+          "open": {
+            "http": 200,
+            "body": {
+              "order": {
+                "order_id": "ord_1eedde433105e0ea25",
+                "market_order_id": "ord_1eedde433105e0ea25",
+                "group_id": "qa_f1732a3377fd4b9f",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "type": "MARKET",
+                "state": "FILLED",
+                "requested_qty": 0.01,
+                "filled_qty": 0.01,
+                "avg_fill_price": 56199.2,
+                "source": "api",
+                "tag": "QA_20261120",
+                "copy_ref": "ord_1eedde433105e0ea25",
+                "copy_kind": "master",
+                "created_at": "2026-11-21T05:25:11.88511277Z",
+                "updated_at": "2026-11-21T05:25:11.88511277Z"
+              },
+              "position": {
+                "position_id": "pos_915759e44de27472c2",
+                "market_order_id": "ord_1eedde433105e0ea25",
+                "group_id": "qa_f1732a3377fd4b9f",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "net_qty": 0.01,
+                "avg_entry_price": 56199.2,
+                "full_margin": 561.992,
+                "margin_percent": 100,
+                "margin_used": 561.992,
+                "entry_markup": 0,
+                "tag": "QA_20261120",
+                "status": "OPEN",
+                "opened_at": "2026-11-21T05:25:11.885156Z"
+              },
+              "success": true
+            }
+          },
+          "close": {
+            "http": 200,
+            "body": {
+              "exit_price": 56197.76,
+              "market_order_id": "ord_1eedde433105e0ea25",
+              "price_source": "live",
+              "realized_pnl": -0.014399999999950524,
+              "success": true,
+              "symbol": "BLACK:BTCUSD"
+            }
+          }
+        },
+        {
+          "open": {
+            "http": 200,
+            "body": {
+              "order": {
+                "order_id": "ord_4ca403fae6b153d2dd",
+                "market_order_id": "ord_4ca403fae6b153d2dd",
+                "group_id": "qa_c26c20f806ac432f",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "type": "MARKET",
+                "state": "FILLED",
+                "requested_qty": 0.01,
+                "filled_qty": 0.01,
+                "avg_fill_price": 56199.2,
+                "source": "api",
+                "tag": "QA_20261120",
+                "copy_ref": "ord_4ca403fae6b153d2dd",
+                "copy_kind": "master",
+                "created_at": "2026-11-21T05:25:11.895916193Z",
+                "updated_at": "2026-11-21T05:25:11.895916193Z"
+              },
+              "position": {
+                "position_id": "pos_7920505c9555c883e9",
+                "market_order_id": "ord_4ca403fae6b153d2dd",
+                "group_id": "qa_c26c20f806ac432f",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "net_qty": 0.01,
+                "avg_entry_price": 56199.2,
+                "full_margin": 561.992,
+                "margin_percent": 100,
+                "margin_used": 561.992,
+                "entry_markup": 0,
+                "tag": "QA_20261120",
+                "status": "OPEN",
+                "opened_at": "2026-11-21T05:25:11.895988Z"
+              },
+              "success": true
+            }
+          },
+          "close": {
+            "http": 200,
+            "body": {
+              "exit_price": 56197.5,
+              "market_order_id": "ord_4ca403fae6b153d2dd",
+              "price_source": "live",
+              "realized_pnl": -0.016999999999970896,
+              "success": true,
+              "symbol": "BLACK:BTCUSD"
+            }
+          }
+        },
+        {
+          "open": {
+            "http": 200,
+            "body": {
+              "order": {
+                "order_id": "ord_88e6e205e4499c3eaa",
+                "market_order_id": "ord_88e6e205e4499c3eaa",
+                "group_id": "qa_d9d1608d9b894a1b",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "type": "MARKET",
+                "state": "FILLED",
+                "requested_qty": 0.01,
+                "filled_qty": 0.01,
+                "avg_fill_price": 56199.2,
+                "source": "api",
+                "tag": "QA_20261120",
+                "copy_ref": "ord_88e6e205e4499c3eaa",
+                "copy_kind": "master",
+                "created_at": "2026-11-21T05:25:11.868009949Z",
+                "updated_at": "2026-11-21T05:25:11.868009949Z"
+              },
+              "position": {
+                "position_id": "pos_11bda9b61c73b92032",
+                "market_order_id": "ord_88e6e205e4499c3eaa",
+                "group_id": "qa_d9d1608d9b894a1b",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "net_qty": 0.01,
+                "avg_entry_price": 56199.2,
+                "full_margin": 561.992,
+                "margin_percent": 100,
+                "margin_used": 561.992,
+                "entry_markup": 0,
+                "tag": "QA_20261120",
+                "status": "OPEN",
+                "opened_at": "2026-11-21T05:25:11.868269Z"
+              },
+              "success": true
+            }
+          },
+          "close": {
+            "http": 200,
+            "body": {
+              "exit_price": 56197.5,
+              "market_order_id": "ord_88e6e205e4499c3eaa",
+              "price_source": "live",
+              "realized_pnl": -0.016999999999970896,
+              "success": true,
+              "symbol": "BLACK:BTCUSD"
+            }
+          }
+        },
+        {
+          "open": {
+            "http": 200,
+            "body": {
+              "order": {
+                "order_id": "ord_898528774510d201dc",
+                "market_order_id": "ord_898528774510d201dc",
+                "group_id": "qa_b1d9d0938dbd4998",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "type": "MARKET",
+                "state": "FILLED",
+                "requested_qty": 0.01,
+                "filled_qty": 0.01,
+                "avg_fill_price": 56199.2,
+                "source": "api",
+                "tag": "QA_20261120",
+                "copy_ref": "ord_898528774510d201dc",
+                "copy_kind": "master",
+                "created_at": "2026-11-21T05:25:11.84295085Z",
+                "updated_at": "2026-11-21T05:25:11.84295085Z"
+              },
+              "position": {
+                "position_id": "pos_d487c310540d85dda8",
+                "market_order_id": "ord_898528774510d201dc",
+                "group_id": "qa_b1d9d0938dbd4998",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "net_qty": 0.01,
+                "avg_entry_price": 56199.2,
+                "full_margin": 561.992,
+                "margin_percent": 100,
+                "margin_used": 561.992,
+                "entry_markup": 0,
+                "tag": "QA_20261120",
+                "status": "OPEN",
+                "opened_at": "2026-11-21T05:25:11.843012Z"
+              },
+              "success": true
+            }
+          },
+          "close": {
+            "http": 200,
+            "body": {
+              "exit_price": 56197.76,
+              "market_order_id": "ord_898528774510d201dc",
+              "price_source": "live",
+              "realized_pnl": -0.014399999999950524,
+              "success": true,
+              "symbol": "BLACK:BTCUSD"
+            }
+          }
+        }
+      ],
+      "accepted": 5,
+      "closed": 5,
+      "orphan_positions": {},
+      "working_orders": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "TERM-RACE-RAPID-ROUNDTRIP-3",
+    "name": "Five simultaneous open/immediate-close sequences leave no late follower copies",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:25:14.408600+00:00",
+    "finished_at": "2026-11-21T05:25:16.280420+00:00",
+    "details": {
+      "attempts": [
+        {
+          "open": {
+            "http": 200,
+            "body": {
+              "order": {
+                "order_id": "ord_b5890b1916958301b7",
+                "market_order_id": "ord_b5890b1916958301b7",
+                "group_id": "qa_e330390b69c24f7b",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "type": "MARKET",
+                "state": "FILLED",
+                "requested_qty": 0.01,
+                "filled_qty": 0.01,
+                "avg_fill_price": 56206.3,
+                "source": "api",
+                "tag": "QA_20261120",
+                "copy_ref": "ord_b5890b1916958301b7",
+                "copy_kind": "master",
+                "created_at": "2026-11-21T05:25:14.839311926Z",
+                "updated_at": "2026-11-21T05:25:14.839311926Z"
+              },
+              "position": {
+                "position_id": "pos_43588cffa4d2b14802",
+                "market_order_id": "ord_b5890b1916958301b7",
+                "group_id": "qa_e330390b69c24f7b",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "net_qty": 0.01,
+                "avg_entry_price": 56206.3,
+                "full_margin": 562.063,
+                "margin_percent": 100,
+                "margin_used": 562.063,
+                "entry_markup": 0,
+                "tag": "QA_20261120",
+                "status": "OPEN",
+                "opened_at": "2026-11-21T05:25:14.839358Z"
+              },
+              "success": true
+            }
+          },
+          "close": {
+            "http": 200,
+            "body": {
+              "exit_price": 56204.34,
+              "market_order_id": "ord_b5890b1916958301b7",
+              "price_source": "live",
+              "realized_pnl": -0.019600000000064028,
+              "success": true,
+              "symbol": "BLACK:BTCUSD"
+            }
+          }
+        },
+        {
+          "open": {
+            "http": 200,
+            "body": {
+              "order": {
+                "order_id": "ord_86802f3d08e6a1347f",
+                "market_order_id": "ord_86802f3d08e6a1347f",
+                "group_id": "qa_f25f66540dbb4fac",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "type": "MARKET",
+                "state": "FILLED",
+                "requested_qty": 0.01,
+                "filled_qty": 0.01,
+                "avg_fill_price": 56206.3,
+                "source": "api",
+                "tag": "QA_20261120",
+                "copy_ref": "ord_86802f3d08e6a1347f",
+                "copy_kind": "master",
+                "created_at": "2026-11-21T05:25:14.826835276Z",
+                "updated_at": "2026-11-21T05:25:14.826835276Z"
+              },
+              "position": {
+                "position_id": "pos_ce8d91100b6d6c1f99",
+                "market_order_id": "ord_86802f3d08e6a1347f",
+                "group_id": "qa_f25f66540dbb4fac",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "net_qty": 0.01,
+                "avg_entry_price": 56206.3,
+                "full_margin": 562.063,
+                "margin_percent": 100,
+                "margin_used": 562.063,
+                "entry_markup": 0,
+                "tag": "QA_20261120",
+                "status": "OPEN",
+                "opened_at": "2026-11-21T05:25:14.826895Z"
+              },
+              "success": true
+            }
+          },
+          "close": {
+            "http": 200,
+            "body": {
+              "exit_price": 56204.34,
+              "market_order_id": "ord_86802f3d08e6a1347f",
+              "price_source": "live",
+              "realized_pnl": -0.019600000000064028,
+              "success": true,
+              "symbol": "BLACK:BTCUSD"
+            }
+          }
+        },
+        {
+          "open": {
+            "http": 200,
+            "body": {
+              "order": {
+                "order_id": "ord_dac2a3d45f28a7524f",
+                "market_order_id": "ord_dac2a3d45f28a7524f",
+                "group_id": "qa_f466a8189555489a",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "type": "MARKET",
+                "state": "FILLED",
+                "requested_qty": 0.01,
+                "filled_qty": 0.01,
+                "avg_fill_price": 56206.34,
+                "source": "api",
+                "tag": "QA_20261120",
+                "copy_ref": "ord_dac2a3d45f28a7524f",
+                "copy_kind": "master",
+                "created_at": "2026-11-21T05:25:14.847933462Z",
+                "updated_at": "2026-11-21T05:25:14.847933462Z"
+              },
+              "position": {
+                "position_id": "pos_678ea93a4fd86dda9f",
+                "market_order_id": "ord_dac2a3d45f28a7524f",
+                "group_id": "qa_f466a8189555489a",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "net_qty": 0.01,
+                "avg_entry_price": 56206.34,
+                "full_margin": 562.0634,
+                "margin_percent": 100,
+                "margin_used": 562.0634,
+                "entry_markup": 0,
+                "tag": "QA_20261120",
+                "status": "OPEN",
+                "opened_at": "2026-11-21T05:25:14.847967Z"
+              },
+              "success": true
+            }
+          },
+          "close": {
+            "http": 200,
+            "body": {
+              "exit_price": 56204.34,
+              "market_order_id": "ord_dac2a3d45f28a7524f",
+              "price_source": "live",
+              "realized_pnl": -0.02,
+              "success": true,
+              "symbol": "BLACK:BTCUSD"
+            }
+          }
+        },
+        {
+          "open": {
+            "http": 200,
+            "body": {
+              "order": {
+                "order_id": "ord_7cda7830ac39263dfa",
+                "market_order_id": "ord_7cda7830ac39263dfa",
+                "group_id": "qa_8318118806944721",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "type": "MARKET",
+                "state": "FILLED",
+                "requested_qty": 0.01,
+                "filled_qty": 0.01,
+                "avg_fill_price": 56206.34,
+                "source": "api",
+                "tag": "QA_20261120",
+                "copy_ref": "ord_7cda7830ac39263dfa",
+                "copy_kind": "master",
+                "created_at": "2026-11-21T05:25:14.856297097Z",
+                "updated_at": "2026-11-21T05:25:14.856297097Z"
+              },
+              "position": {
+                "position_id": "pos_22911de76ee8592315",
+                "market_order_id": "ord_7cda7830ac39263dfa",
+                "group_id": "qa_8318118806944721",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "net_qty": 0.01,
+                "avg_entry_price": 56206.34,
+                "full_margin": 562.0634,
+                "margin_percent": 100,
+                "margin_used": 562.0634,
+                "entry_markup": 0,
+                "tag": "QA_20261120",
+                "status": "OPEN",
+                "opened_at": "2026-11-21T05:25:14.856325Z"
+              },
+              "success": true
+            }
+          },
+          "close": {
+            "http": 200,
+            "body": {
+              "exit_price": 56205.12,
+              "market_order_id": "ord_7cda7830ac39263dfa",
+              "price_source": "live",
+              "realized_pnl": -0.012199999999938883,
+              "success": true,
+              "symbol": "BLACK:BTCUSD"
+            }
+          }
+        },
+        {
+          "open": {
+            "http": 200,
+            "body": {
+              "order": {
+                "order_id": "ord_cd28c5799e0ed93530",
+                "market_order_id": "ord_cd28c5799e0ed93530",
+                "group_id": "qa_f0b38123b5eb4369",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "type": "MARKET",
+                "state": "FILLED",
+                "requested_qty": 0.01,
+                "filled_qty": 0.01,
+                "avg_fill_price": 56206.34,
+                "source": "api",
+                "tag": "QA_20261120",
+                "copy_ref": "ord_cd28c5799e0ed93530",
+                "copy_kind": "master",
+                "created_at": "2026-11-21T05:25:14.864929798Z",
+                "updated_at": "2026-11-21T05:25:14.864929798Z"
+              },
+              "position": {
+                "position_id": "pos_d296b320338da0b9ea",
+                "market_order_id": "ord_cd28c5799e0ed93530",
+                "group_id": "qa_f0b38123b5eb4369",
+                "symbol": "BLACK:BTCUSD",
+                "side": "BUY",
+                "net_qty": 0.01,
+                "avg_entry_price": 56206.34,
+                "full_margin": 562.0634,
+                "margin_percent": 100,
+                "margin_used": 562.0634,
+                "entry_markup": 0,
+                "tag": "QA_20261120",
+                "status": "OPEN",
+                "opened_at": "2026-11-21T05:25:14.864972Z"
+              },
+              "success": true
+            }
+          },
+          "close": {
+            "http": 200,
+            "body": {
+              "exit_price": 56204.34,
+              "market_order_id": "ord_cd28c5799e0ed93530",
+              "price_source": "live",
+              "realized_pnl": -0.02,
+              "success": true,
+              "symbol": "BLACK:BTCUSD"
+            }
+          }
+        }
+      ],
+      "accepted": 5,
+      "closed": 5,
+      "orphan_positions": {},
+      "working_orders": {}
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "LOAD-FIVE-BURST",
+    "name": "Five concurrent entries -> 500 child positions -> concurrent parent closes",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:25:18.176064+00:00",
+    "finished_at": "2026-11-21T05:25:21.051590+00:00",
+    "details": {
+      "master_responses": [
+        {
+          "http": 200,
+          "body": {
+            "order": {
+              "order_id": "ord_2b1776cf41cfd1d4dd",
+              "market_order_id": "ord_2b1776cf41cfd1d4dd",
+              "group_id": "qa_16ba408775ac41f2",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "type": "MARKET",
+              "state": "FILLED",
+              "requested_qty": 0.01,
+              "filled_qty": 0.01,
+              "avg_fill_price": 56224.24,
+              "source": "api",
+              "tag": "QA_20261120",
+              "copy_ref": "ord_2b1776cf41cfd1d4dd",
+              "copy_kind": "master",
+              "created_at": "2026-11-21T05:25:18.677070696Z",
+              "updated_at": "2026-11-21T05:25:18.677070696Z"
+            },
+            "position": {
+              "position_id": "pos_35770d4198fa911b9a",
+              "market_order_id": "ord_2b1776cf41cfd1d4dd",
+              "group_id": "qa_16ba408775ac41f2",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "net_qty": 0.01,
+              "avg_entry_price": 56224.24,
+              "full_margin": 562.2424,
+              "margin_percent": 100,
+              "margin_used": 562.2424,
+              "entry_markup": 0,
+              "tag": "QA_20261120",
+              "status": "OPEN",
+              "opened_at": "2026-11-21T05:25:18.677108Z"
+            },
+            "success": true
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "order": {
+              "order_id": "ord_825f400f509ecf8b65",
+              "market_order_id": "ord_825f400f509ecf8b65",
+              "group_id": "qa_b33d97ea84c64c05",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "type": "MARKET",
+              "state": "FILLED",
+              "requested_qty": 0.01,
+              "filled_qty": 0.01,
+              "avg_fill_price": 56224.24,
+              "source": "api",
+              "tag": "QA_20261120",
+              "copy_ref": "ord_825f400f509ecf8b65",
+              "copy_kind": "master",
+              "created_at": "2026-11-21T05:25:18.668264766Z",
+              "updated_at": "2026-11-21T05:25:18.668264766Z"
+            },
+            "position": {
+              "position_id": "pos_4f24d554f6b76e996c",
+              "market_order_id": "ord_825f400f509ecf8b65",
+              "group_id": "qa_b33d97ea84c64c05",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "net_qty": 0.01,
+              "avg_entry_price": 56224.24,
+              "full_margin": 562.2424,
+              "margin_percent": 100,
+              "margin_used": 562.2424,
+              "entry_markup": 0,
+              "tag": "QA_20261120",
+              "status": "OPEN",
+              "opened_at": "2026-11-21T05:25:18.668311Z"
+            },
+            "success": true
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "order": {
+              "order_id": "ord_c77dec5f9521641934",
+              "market_order_id": "ord_c77dec5f9521641934",
+              "group_id": "qa_12cbe55fd4fc4648",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "type": "MARKET",
+              "state": "FILLED",
+              "requested_qty": 0.01,
+              "filled_qty": 0.01,
+              "avg_fill_price": 56224.08,
+              "source": "api",
+              "tag": "QA_20261120",
+              "copy_ref": "ord_c77dec5f9521641934",
+              "copy_kind": "master",
+              "created_at": "2026-11-21T05:25:19.393288893Z",
+              "updated_at": "2026-11-21T05:25:19.393288893Z"
+            },
+            "position": {
+              "position_id": "pos_874148fe8d4a2b0b6c",
+              "market_order_id": "ord_c77dec5f9521641934",
+              "group_id": "qa_12cbe55fd4fc4648",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "net_qty": 0.01,
+              "avg_entry_price": 56224.08,
+              "full_margin": 562.2408,
+              "margin_percent": 100,
+              "margin_used": 562.2408,
+              "entry_markup": 0,
+              "tag": "QA_20261120",
+              "status": "OPEN",
+              "opened_at": "2026-11-21T05:25:19.393322Z"
+            },
+            "success": true
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "order": {
+              "order_id": "ord_291ce0be0094f15e90",
+              "market_order_id": "ord_291ce0be0094f15e90",
+              "group_id": "qa_bbb6d270ce1843d1",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "type": "MARKET",
+              "state": "FILLED",
+              "requested_qty": 0.01,
+              "filled_qty": 0.01,
+              "avg_fill_price": 56224.08,
+              "source": "api",
+              "tag": "QA_20261120",
+              "copy_ref": "ord_291ce0be0094f15e90",
+              "copy_kind": "master",
+              "created_at": "2026-11-21T05:25:19.383637961Z",
+              "updated_at": "2026-11-21T05:25:19.383637961Z"
+            },
+            "position": {
+              "position_id": "pos_2cb0cf46fe39513348",
+              "market_order_id": "ord_291ce0be0094f15e90",
+              "group_id": "qa_bbb6d270ce1843d1",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "net_qty": 0.01,
+              "avg_entry_price": 56224.08,
+              "full_margin": 562.2408,
+              "margin_percent": 100,
+              "margin_used": 562.2408,
+              "entry_markup": 0,
+              "tag": "QA_20261120",
+              "status": "OPEN",
+              "opened_at": "2026-11-21T05:25:19.383695Z"
+            },
+            "success": true
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "order": {
+              "order_id": "ord_03993988c3cdd2f10e",
+              "market_order_id": "ord_03993988c3cdd2f10e",
+              "group_id": "qa_6e0a0f68f1614133",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "type": "MARKET",
+              "state": "FILLED",
+              "requested_qty": 0.01,
+              "filled_qty": 0.01,
+              "avg_fill_price": 56224.28,
+              "source": "api",
+              "tag": "QA_20261120",
+              "copy_ref": "ord_03993988c3cdd2f10e",
+              "copy_kind": "master",
+              "created_at": "2026-11-21T05:25:19.532154268Z",
+              "updated_at": "2026-11-21T05:25:19.532154268Z"
+            },
+            "position": {
+              "position_id": "pos_65f785ebe47df68811",
+              "market_order_id": "ord_03993988c3cdd2f10e",
+              "group_id": "qa_6e0a0f68f1614133",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "net_qty": 0.01,
+              "avg_entry_price": 56224.28,
+              "full_margin": 562.2428,
+              "margin_percent": 100,
+              "margin_used": 562.2428,
+              "entry_markup": 0,
+              "tag": "QA_20261120",
+              "status": "OPEN",
+              "opened_at": "2026-11-21T05:25:19.532218Z"
+            },
+            "success": true
+          }
+        }
+      ],
+      "fanout_errors": {},
+      "close_responses": [
+        {
+          "http": 200,
+          "body": {
+            "exit_price": 56228.85,
+            "market_order_id": "ord_2b1776cf41cfd1d4dd",
+            "price_source": "live",
+            "realized_pnl": 0.046100000000005824,
+            "success": true,
+            "symbol": "BLACK:BTCUSD"
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "exit_price": 56228.85,
+            "market_order_id": "ord_825f400f509ecf8b65",
+            "price_source": "live",
+            "realized_pnl": 0.046100000000005824,
+            "success": true,
+            "symbol": "BLACK:BTCUSD"
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "exit_price": 56228.85,
+            "market_order_id": "ord_c77dec5f9521641934",
+            "price_source": "live",
+            "realized_pnl": 0.04769999999996799,
+            "success": true,
+            "symbol": "BLACK:BTCUSD"
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "exit_price": 56228.85,
+            "market_order_id": "ord_291ce0be0094f15e90",
+            "price_source": "live",
+            "realized_pnl": 0.04769999999996799,
+            "success": true,
+            "symbol": "BLACK:BTCUSD"
+          }
+        },
+        {
+          "http": 200,
+          "body": {
+            "exit_price": 56228.85,
+            "market_order_id": "ord_03993988c3cdd2f10e",
+            "price_source": "live",
+            "realized_pnl": 0.04569999999999709,
+            "success": true,
+            "symbol": "BLACK:BTCUSD"
+          }
+        }
+      ],
+      "orphans": {},
+      "scope": "5 simultaneous master orders, 100 followers, 500 copied positions; not a 500-follower test"
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "TERM-FEE-HWM-001",
+    "name": "Live first-profit and subsequent above-HWM profit sharing",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:25:23.828071+00:00",
+    "finished_at": "2026-11-21T05:25:56.321384+00:00",
+    "details": {
+      "fresh_relationship": {
+        "follow_id": "mfl_9e502cb5c04db85780",
+        "master_client_id": "mem_6cf38c1f751cbd1699",
+        "follower_client_id": "mem_bcb0386eac16dc47a6",
+        "instance": "real",
+        "starting_balance": 4993.989699999999,
+        "share_percent": 50,
+        "method": "multiplier",
+        "multiplier": 1,
+        "status": "active",
+        "joined_at": "2026-11-21T05:25:23.439571Z"
+      },
+      "observations": [
+        {
+          "before": {
+            "balance": 4993.989699999999,
+            "equity": 4993.945499999999,
+            "free_margin": 4993.945499999999,
+            "margin_call_level": 100,
+            "margin_level": null,
+            "starting_balance": 5000,
+            "stop_out_level": 50,
+            "unrealized_pnl": -0.04419999999998259,
+            "used_margin": 0
+          },
+          "after": {
+            "balance": 4994.240599999999,
+            "equity": 4993.933899999999,
+            "free_margin": 4431.888499999999,
+            "margin_call_level": 100,
+            "margin_level": 888.5285601483437,
+            "starting_balance": 5000,
+            "stop_out_level": 50,
+            "unrealized_pnl": -0.30669999999998254,
+            "used_margin": 562.0454
+          },
+          "chosen_position": {
+            "algo_id": null,
+            "avg_entry_price": 56206.68,
+            "closed_at": null,
+            "comment": null,
+            "current_price": 56232.93,
+            "full_margin": 562.0668000000001,
+            "group_id": "qa_c2677ec4dac74c63",
+            "margin_percent": 100,
+            "margin_used": 562.0668000000001,
+            "market_order_id": "ord_e200752fbec9bd410f",
+            "net_qty": 0.01,
+            "oco_key": null,
+            "opened_at": "2026-11-21T05:25:23.966017Z",
+            "position_id": "pos_f7d56c90ecbdb63b95",
+            "side": "BUY",
+            "source": "mam",
+            "status": "OPEN",
+            "strategy_name": null,
+            "symbol": "BLACK:BTCUSD",
+            "tag": "QA_20261120",
+            "trailing": null,
+            "unrealized_pnl": 0.2625
+          },
+          "close": {
+            "http": 200,
+            "body": {
+              "exit_price": 56232.44,
+              "market_order_id": "ord_3ce880b3ce6caf0bef",
+              "price_source": "live",
+              "realized_pnl": 0.2531000000000495,
+              "success": true,
+              "symbol": "BLACK:BTCUSD"
+            }
+          },
+          "history": [
+            {
+              "history_id": 1000000005592,
+              "order_id": "ord_fc0ed1a35c2a017205",
+              "position_id": "pos_f7d56c90ecbdb63b95",
+              "group_id": "qa_c2677ec4dac74c63",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "qty": 0.01,
+              "entry_price": 56206.68,
+              "exit_price": 56231.77,
+              "realized_pnl": 0.2508999999999651,
+              "executed_at": "2026-11-21T05:25:54.546116Z",
+              "exit_type": "MARKET",
+              "exit_source": "mam_close",
+              "entry_source": "mam",
+              "entry_type": "MARKET",
+              "entry_copy_kind": "mam",
+              "opened_at": "2026-11-21T05:25:23.966017Z"
+            }
+          ],
+          "shares": [
+            {
+              "above_hwm": false,
+              "at": "2026-11-21T05:25:54.549996Z",
+              "balance_before": 4993.989699999999,
+              "follow_id": "mfl_9e502cb5c04db85780",
+              "follower": "mem_bcb0386eac16dc47a6",
+              "follower_share": 0.25,
+              "instance": "real",
+              "master": "mem_6cf38c1f751cbd1699",
+              "master_share": 0,
+              "order_pnl": 0.2508999999999651,
+              "share_id": 6042,
+              "starting_balance": 4993.989699999999,
+              "trade_id": 1000000005592
+            }
+          ]
+        },
+        {
+          "before": {
+            "balance": 4994.240599999999,
+            "equity": 4993.936599999999,
+            "free_margin": 4431.891199999999,
+            "margin_call_level": 100,
+            "margin_level": 888.5290405365829,
+            "starting_balance": 5000,
+            "stop_out_level": 50,
+            "unrealized_pnl": -0.3040000000000146,
+            "used_margin": 562.0454
+          },
+          "after": {
+            "balance": 4994.368999999999,
+            "equity": 4993.8049999999985,
+            "free_margin": 3869.7141999999985,
+            "margin_call_level": 100,
+            "margin_level": 444.252813028983,
+            "starting_balance": 5000,
+            "stop_out_level": 50,
+            "unrealized_pnl": -0.5639999999999418,
+            "used_margin": 1124.0908
+          },
+          "chosen_position": {
+            "algo_id": null,
+            "avg_entry_price": 56206.82,
+            "closed_at": null,
+            "comment": null,
+            "current_price": 56232.93,
+            "full_margin": 562.0682,
+            "group_id": "qa_3c7d1140cebb4349",
+            "margin_percent": 100,
+            "margin_used": 562.0682,
+            "market_order_id": "ord_a11bb03761f34caba2",
+            "net_qty": 0.01,
+            "oco_key": null,
+            "opened_at": "2026-11-21T05:25:24.086129Z",
+            "position_id": "pos_835f5e140566af1dd4",
+            "side": "BUY",
+            "source": "mam",
+            "status": "OPEN",
+            "strategy_name": null,
+            "symbol": "BLACK:BTCUSD",
+            "tag": "QA_20261120",
+            "trailing": null,
+            "unrealized_pnl": 0.2611000000000058
+          },
+          "close": {
+            "http": 200,
+            "body": {
+              "exit_price": 56232.66,
+              "market_order_id": "ord_f0c9fdc7354cbe6e30",
+              "price_source": "live",
+              "realized_pnl": 0.2584000000000378,
+              "success": true,
+              "symbol": "BLACK:BTCUSD"
+            }
+          },
+          "history": [
+            {
+              "history_id": 1000000005595,
+              "order_id": "ord_717d31b5b88c879430",
+              "position_id": "pos_835f5e140566af1dd4",
+              "group_id": "qa_3c7d1140cebb4349",
+              "symbol": "BLACK:BTCUSD",
+              "side": "BUY",
+              "qty": 0.01,
+              "entry_price": 56206.82,
+              "exit_price": 56232.66,
+              "realized_pnl": 0.2584000000000378,
+              "executed_at": "2026-11-21T05:25:55.406791Z",
+              "exit_type": "MARKET",
+              "exit_source": "mam_close",
+              "entry_source": "mam",
+              "entry_type": "MARKET",
+              "entry_copy_kind": "mam",
+              "opened_at": "2026-11-21T05:25:24.086129Z"
+            }
+          ],
+          "shares": [
+            {
+              "above_hwm": true,
+              "at": "2026-11-21T05:25:55.412472Z",
+              "balance_before": 4994.240599999999,
+              "follow_id": "mfl_9e502cb5c04db85780",
+              "follower": "mem_bcb0386eac16dc47a6",
+              "follower_share": 0.13,
+              "instance": "real",
+              "master": "mem_6cf38c1f751cbd1699",
+              "master_share": 0.13,
+              "order_pnl": 0.2584000000000378,
+              "share_id": 6044,
+              "starting_balance": 4993.989699999999,
+              "trade_id": 1000000005595
+            }
+          ]
+        }
+      ],
+      "errors": [],
+      "confirmed_rule": "First profit crossing benchmark: zero manager share. Later profit starting above benchmark: configured 50 percent share."
+    },
+    "trace": "http_052243.jsonl.gz"
+  },
+  {
+    "id": "TERM-FINAL-001",
+    "name": "Final cleanup leaves all accounts flat and both followers active at multiplier one",
+    "status": "PASS",
+    "started_at": "2026-11-21T05:25:59.665614+00:00",
+    "finished_at": "2026-11-21T05:25:59.665626+00:00",
+    "details": {
+      "working_orders": {},
+      "relationship_errors": {},
+      "position_errors": {},
+      "final_funds": {
+        "mamhm@mailinator.com": {
+          "balance": 9994.242899999983,
+          "equity": 9994.242899999983,
+          "free_margin": 9994.242899999983,
+          "margin_call_level": 100,
+          "margin_level": null,
+          "starting_balance": 10000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0,
+          "used_margin": 0
+        },
+        "mamhf1@mailinator.com": {
+          "balance": 4993.802999999999,
+          "equity": 4993.802999999999,
+          "free_margin": 4993.802999999999,
+          "margin_call_level": 100,
+          "margin_level": null,
+          "starting_balance": 5000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0,
+          "used_margin": 0
+        },
+        "mamhf2@mailinator.com": {
+          "balance": 4993.844199999999,
+          "equity": 4993.844199999999,
+          "free_margin": 4993.844199999999,
+          "margin_call_level": 100,
+          "margin_level": null,
+          "starting_balance": 5000,
+          "stop_out_level": 50,
+          "unrealized_pnl": 0,
+          "used_margin": 0
+        }
+      },
+      "snapshot": "final_state.json"
+    },
+    "trace": "http_052243.jsonl.gz"
+  }
+]

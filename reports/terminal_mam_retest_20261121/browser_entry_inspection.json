@@ -1,0 +1,23 @@
+{
+  "url": "https://terminal.blacktrader.com/test",
+  "console_errors": [],
+  "request_failures": [],
+  "responses": [
+    {
+      "url": "https://terminal.blacktrader.com/test",
+      "status": 301
+    },
+    {
+      "url": "http://terminal.blacktrader.com/test/home",
+      "status": 307
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/home",
+      "status": 200
+    }
+  ],
+  "final_url": "https://terminal.blacktrader.com/test/home",
+  "title": "BlackTrader \u2014 trade",
+  "document_http": 200,
+  "body_text": "BlackTrader\nLog in\nOpen an account\nLIVE MARKETS\nTrade the markets with BlackTrader\n\nProfessional charting, strategy automation and live order management \u2014 in your browser, on one account.\n\nOpen an account\nI already have one\nReal-time\nstreaming prices and P&L\nOne account\nchart, orders and funds together\nAny device\ndesktop, tablet and mobile\nCharts built for traders\n\nMulti-chart layouts, indicators and drawing tools that save with your account and follow you to any device.\n\nAutomate your strategy\n\nWrite and run strategies against live prices, with baskets, brackets and group-level targets handled for you.\n\nOrders and funds in one place\n\nLive positions, balance, used and free margin \u2014 the same numbers the risk engine works from, updated as the market moves.\n\nBlackTrader\nTrading involves risk. Only trade with capital you can afford to lose."
+}

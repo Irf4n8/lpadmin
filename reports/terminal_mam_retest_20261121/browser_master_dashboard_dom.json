@@ -1,0 +1,89 @@
+{
+  "account": "mamhm@mailinator.com",
+  "oms_responses": [
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/_instances",
+      "status": 200
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/_licence",
+      "status": 200
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/_accounts",
+      "status": 200
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/_auth/me",
+      "status": 200
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/_auth/me",
+      "status": 200
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/paper/copy/follows",
+      "status": 200
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/paper/pamm/follows",
+      "status": 200
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/paper/mam/follows",
+      "status": 200
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/paper/alerts/events",
+      "status": 200
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/paper/all_open",
+      "status": 200
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/paper/health",
+      "status": 200
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/paper/account",
+      "status": 200
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/paper/ws-ticket",
+      "status": 200
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/real/mam/masters",
+      "status": 200
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/real/mam/follows",
+      "status": 200
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/paper/market/extremes",
+      "status": 200
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/paper/orders",
+      "status": 200
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/paper/history",
+      "status": 200
+    },
+    {
+      "url": "https://terminal.blacktrader.com/test/v1/oms/real/mam/shares",
+      "status": 200
+    }
+  ],
+  "console_errors": [],
+  "final_url": "https://terminal.blacktrader.com/test/home/dashboard",
+  "local_storage_keys": [],
+  "paper_text_count": 0,
+  "paper_elements": [],
+  "comboboxes": [],
+  "selects": [],
+  "buttons": []
+}
